@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Title>NetFabric.Numerics</Title>
+    <TargetFrameworks>net7.0</TargetFrameworks>
+    <Description></Description>
+    <Version>1.0.0-beta01</Version>
+    <Copyright>Copyright © Antão Almada 2023</Copyright>
+    <Authors>Antão Almada</Authors>
+    <Company>NetFabric</Company>
+    <PackageIcon>Icon.png</PackageIcon>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageTags>math, numerics</PackageTags>
+    <PackageReleaseNotes>
+      First release.
+    </PackageReleaseNotes>
+    <RootNamespace>NetFabric</RootNamespace>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <DefineConstants>CONTRACTS_FULL</DefineConstants>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\Icon.png" Pack="true" PackagePath="" />
+    <None Include="..\LICENSE" Pack="true" PackagePath="" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+</Project>
