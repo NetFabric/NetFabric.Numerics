@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33626.354
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetFabric.Numerics", "NetFabric.Numerics.csproj", "{5ABF6511-3127-48D3-9C96-2BBC74FD5296}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetFabric.Numerics.2D", "..\NetFabric.Numerics.2D\NetFabric.Numerics.2D.csproj", "{FA9D31AB-5FF1-4671-ACDA-B29460603A98}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetFabric.Numerics.3D", "..\NetFabric.Numerics.3D\NetFabric.Numerics.3D.csproj", "{00FF5107-0CB2-4DF3-9E97-D3BA47F77469}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetFabric.Numerics.Angle", "..\NetFabric.Numerics.Angle\NetFabric.Numerics.Angle.csproj", "{5474AAAF-6B97-4077-9228-1F3A60649BEF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetFabric.Numerics.Geography", "..\NetFabric.Numerics.Geography\NetFabric.Numerics.Geography.csproj", "{29731F8A-F270-44E9-BC4F-BB995D79F678}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetFabric.Numerics.Angle.UnitTests", "..\NetFabric.Numerics.Angle.UnitTests\NetFabric.Numerics.Angle.UnitTests.csproj", "{E90F13FF-3870-496F-B445-67434575CF75}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5ABF6511-3127-48D3-9C96-2BBC74FD5296}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5ABF6511-3127-48D3-9C96-2BBC74FD5296}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5ABF6511-3127-48D3-9C96-2BBC74FD5296}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5ABF6511-3127-48D3-9C96-2BBC74FD5296}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA9D31AB-5FF1-4671-ACDA-B29460603A98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA9D31AB-5FF1-4671-ACDA-B29460603A98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA9D31AB-5FF1-4671-ACDA-B29460603A98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA9D31AB-5FF1-4671-ACDA-B29460603A98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00FF5107-0CB2-4DF3-9E97-D3BA47F77469}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00FF5107-0CB2-4DF3-9E97-D3BA47F77469}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00FF5107-0CB2-4DF3-9E97-D3BA47F77469}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00FF5107-0CB2-4DF3-9E97-D3BA47F77469}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5474AAAF-6B97-4077-9228-1F3A60649BEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5474AAAF-6B97-4077-9228-1F3A60649BEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5474AAAF-6B97-4077-9228-1F3A60649BEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5474AAAF-6B97-4077-9228-1F3A60649BEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29731F8A-F270-44E9-BC4F-BB995D79F678}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29731F8A-F270-44E9-BC4F-BB995D79F678}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29731F8A-F270-44E9-BC4F-BB995D79F678}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29731F8A-F270-44E9-BC4F-BB995D79F678}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E90F13FF-3870-496F-B445-67434575CF75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E90F13FF-3870-496F-B445-67434575CF75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E90F13FF-3870-496F-B445-67434575CF75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E90F13FF-3870-496F-B445-67434575CF75}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AACC30AE-BE57-461F-817B-2AE0F001A33F}
+	EndGlobalSection
+EndGlobal

@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Title>NetFabric.Numerics</Title>
+    <Title>NetFabric.Numerics.Angle</Title>
     <TargetFrameworks>net7.0</TargetFrameworks>
     <Description></Description>
     <Version>1.0.0-beta01</Version>
@@ -23,15 +23,6 @@
   <PropertyGroup Condition="'$(Configuration)'=='Release'">
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="NetFabric.Numerics.Angle.UnitTests\**" />
-    <Compile Remove="NetFabric.Numerics.UnitTests\**" />
-    <EmbeddedResource Remove="NetFabric.Numerics.Angle.UnitTests\**" />
-    <EmbeddedResource Remove="NetFabric.Numerics.UnitTests\**" />
-    <None Remove="NetFabric.Numerics.Angle.UnitTests\**" />
-    <None Remove="NetFabric.Numerics.UnitTests\**" />
-  </ItemGroup>
 
   <ItemGroup>
     <None Include="..\Icon.png" Pack="true" PackagePath="" />

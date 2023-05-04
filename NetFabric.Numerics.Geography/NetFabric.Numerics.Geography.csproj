@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Title>NetFabric.Numerics</Title>
+    <Title>NetFabric.Numerics.Geography</Title>
     <TargetFrameworks>net7.0</TargetFrameworks>
     <Description></Description>
     <Version>1.0.0-beta01</Version>
@@ -25,17 +25,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="NetFabric.Numerics.Angle.UnitTests\**" />
-    <Compile Remove="NetFabric.Numerics.UnitTests\**" />
-    <EmbeddedResource Remove="NetFabric.Numerics.Angle.UnitTests\**" />
-    <EmbeddedResource Remove="NetFabric.Numerics.UnitTests\**" />
-    <None Remove="NetFabric.Numerics.Angle.UnitTests\**" />
-    <None Remove="NetFabric.Numerics.UnitTests\**" />
+    <None Include="..\Icon.png" Pack="true" PackagePath="" />
+    <None Include="..\LICENSE" Pack="true" PackagePath="" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="..\Icon.png" Pack="true" PackagePath="" />
-    <None Include="..\LICENSE" Pack="true" PackagePath="" />
+    <ProjectReference Include="..\NetFabric.Numerics\NetFabric.Numerics.csproj" />
+    <ProjectReference Include="..\NetFabric.Numerics.Angle\NetFabric.Numerics.Angle.csproj" />
   </ItemGroup>
 
   <ItemGroup>
