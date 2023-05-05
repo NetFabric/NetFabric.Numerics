@@ -13,7 +13,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetFabric.Numerics.Angle", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetFabric.Numerics.Geography", "..\NetFabric.Numerics.Geography\NetFabric.Numerics.Geography.csproj", "{29731F8A-F270-44E9-BC4F-BB995D79F678}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetFabric.Numerics.Angle.UnitTests", "..\NetFabric.Numerics.Angle.UnitTests\NetFabric.Numerics.Angle.UnitTests.csproj", "{E90F13FF-3870-496F-B445-67434575CF75}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetFabric.Numerics.Angle.UnitTests", "..\NetFabric.Numerics.Angle.UnitTests\NetFabric.Numerics.Angle.UnitTests.csproj", "{E90F13FF-3870-496F-B445-67434575CF75}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D9B0D462-F9EB-497E-B80C-317290BA6800}"
+	ProjectSection(SolutionItems) = preProject
+		..\.gitignore = ..\.gitignore
+		..\Icon.png = ..\Icon.png
+		..\LICENSE = ..\LICENSE
+		..\README.md = ..\README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

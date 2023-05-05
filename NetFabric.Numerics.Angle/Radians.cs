@@ -1,185 +1,188 @@
 using System;
+using System.Diagnostics;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 
-namespace NetFabric.Numerics.Angle;
+namespace NetFabric.Numerics;
 
-public readonly record struct Radians<TRadians>(TRadians Value) 
-    : IAngle<Radians<TRadians>>
-    where TRadians: 
+[DebuggerDisplay("{Value} radians")]
+[DebuggerTypeProxy(typeof(RadiansDebugView<>))]
+public readonly record struct Radians<T>(T Value) 
+    : IAngle<Radians<T>>,
+      IMultiplyOperators<Radians<T>, T, Radians<T>>,
+      IDivisionOperators<Radians<T>, T, Radians<T>>
+    where T : 
         struct, 
-        IFloatingPoint<TRadians>,
-        IMinMaxValue<TRadians>
+        IFloatingPoint<T>,
+        IMinMaxValue<T>
 {
-    static TRadians Reduce(TRadians degrees) =>
-        Utils.Reduce(degrees, Full.Value);
+    static T Reduce(T degrees) 
+        => Utils.Reduce(degrees, Full.Value);
 
-    static Quadrant GetQuadrant(TRadians degrees) =>
-        Utils.GetQuadrant(degrees, Right.Value, Straight.Value, Full.Value);
+    static Quadrant GetQuadrant(T degrees) 
+        => Utils.GetQuadrant(degrees, Right.Value, Straight.Value, Full.Value);
 
-    static TRadians GetReference(TRadians degrees) =>
-        Utils.GetReference(degrees, Right.Value, Straight.Value, Full.Value);
+    static T GetReference(T degrees) 
+        => Utils.GetReference(degrees, Right.Value, Straight.Value, Full.Value);
+
+    static Radians<T> IAngle<Radians<T>>.Abs(Radians<T> angle)
+        => new(T.Abs(angle.Value));
+
+    static int IAngle<Radians<T>>.Sign(Radians<T> angle)
+        => T.Sign(angle.Value);
+
+    static Radians<T> IAngle<Radians<T>>.Lerp<TFactor>(Radians<T> a1, Radians<T> a2, TFactor t)
+        => new(Utils.Lerp(a1.Value, a2.Value, t));
 
     #region constants
 
     /// <summary>
     /// Represents the zero angle value (0 radians). This field is read-only.
     /// </summary>
-    public static readonly Radians<TRadians> Zero = new(TRadians.Zero);
+    public static readonly Radians<T> Zero = new(T.Zero);
 
     /// <summary>
     /// Represents the golden angle value. This field is read-only.
     /// </summary>
-    public static readonly Radians<TRadians> Golden = new(TRadians.CreateChecked(Math.PI * (3.0 - Math.Sqrt(5.0))));
+    public static readonly Radians<T> Golden = new(T.CreateChecked(Math.PI * (3.0 - Math.Sqrt(5.0))));
 
     /// <summary>
     /// Represents the right angle value (PI/2 radians). This field is read-only.
     /// </summary>
-    public static readonly Radians<TRadians> Right = new(TRadians.CreateChecked(Math.PI / 2.0));
+    public static readonly Radians<T> Right = new(T.CreateChecked(Math.PI / 2.0));
 
     /// <summary>
     /// Represents the straight angle value (PI radians). This field is read-only.
     /// </summary>
-    public static readonly Radians<TRadians> Straight = new(TRadians.CreateChecked(Math.PI));
+    public static readonly Radians<T> Straight = new(T.CreateChecked(Math.PI));
 
     /// <summary>
     /// Represents the full angle value (PI*2 radians). This field is read-only.
     /// </summary>
-    public static readonly Radians<TRadians> Full = new(TRadians.CreateChecked(Math.PI * 2.0));
+    public static readonly Radians<T> Full = new(T.CreateChecked(Math.PI * 2.0));
 
     /// <summary>
     /// Represents the minimum angle value. This field is read-only.
     /// </summary>
-    public static readonly Radians<TRadians> MinValue = new(TRadians.MinValue);
+    public static readonly Radians<T> MinValue = new(T.MinValue);
 
     /// <summary>
     /// Represents the maximum angle value. This field is read-only.
     /// </summary>
-    public static readonly Radians<TRadians> MaxValue = new(TRadians.MaxValue);
+    public static readonly Radians<T> MaxValue = new(T.MaxValue);
 
-    static Radians<TRadians> IAngle<Radians<TRadians>>.Right => Right;
-    static Radians<TRadians> IAngle<Radians<TRadians>>.Straight => Straight;
-    static Radians<TRadians> IAngle<Radians<TRadians>>.Full => Full;
+    static Radians<T> IAdditiveIdentity<Radians<T>, Radians<T>>.AdditiveIdentity
+        => new(T.AdditiveIdentity);
+    static Radians<T> IMultiplicativeIdentity<Radians<T>, Radians<T>>.MultiplicativeIdentity
+        => new(T.MultiplicativeIdentity);
 
-    static Radians<TRadians> IMinMaxValue<Radians<TRadians>>.MinValue => MinValue;
-    static Radians<TRadians> IMinMaxValue<Radians<TRadians>>.MaxValue => MaxValue;
+    static Radians<T> IAngle<Radians<T>>.Right 
+        => Right;
+    static Radians<T> IAngle<Radians<T>>.Straight 
+        => Straight;
+    static Radians<T> IAngle<Radians<T>>.Full 
+        => Full;
+
+    static Radians<T> IMinMaxValue<Radians<T>>.MinValue 
+        => MinValue;
+    static Radians<T> IMinMaxValue<Radians<T>>.MaxValue 
+        => MaxValue;
 
     #endregion
 
     #region comparison
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public readonly int CompareTo(Radians<TRadians> other) =>
-        Value.CompareTo(other.Value);
+    public readonly int CompareTo(Radians<T> other) 
+        => Value.CompareTo(other.Value);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public readonly int ReducedCompareTo(Radians<TRadians> other) =>
-        Reduce(Value).CompareTo(Reduce(other.Value));
+    public readonly int ReducedCompareTo(Radians<T> other) 
+        => Reduce(Value).CompareTo(Reduce(other.Value));
 
-    public static bool operator <(Radians<TRadians> left, Radians<TRadians> right) =>
-        left.CompareTo(right) < 0;
+    public static bool operator <(Radians<T> left, Radians<T> right) 
+        => left.CompareTo(right) < 0;
 
-    public static bool operator <=(Radians<TRadians> left, Radians<TRadians> right) =>
-        left.CompareTo(right) <= 0;
+    public static bool operator <=(Radians<T> left, Radians<T> right) 
+        => left.CompareTo(right) <= 0;
 
-    public static bool operator >(Radians<TRadians> left, Radians<TRadians> right) =>
-        left.CompareTo(right) > 0;
+    public static bool operator >(Radians<T> left, Radians<T> right) 
+        => left.CompareTo(right) > 0;
 
-    public static bool operator >=(Radians<TRadians> left, Radians<TRadians> right) =>
-        left.CompareTo(right) >= 0;        
+    public static bool operator >=(Radians<T> left, Radians<T> right) 
+        => left.CompareTo(right) >= 0;        
 
     readonly int IComparable.CompareTo(object? obj) 
         => obj switch
         {
             null => 1,
-            Radians<TRadians> other => CompareTo(other),
-            _ => Throw.ArgumentException<int>($"Argument must be of type {nameof(Radians<TRadians>)}.", nameof(obj)),
+            Radians<T> other => CompareTo(other),
+            _ => Throw.ArgumentException<int>($"Argument must be of type {nameof(Radians<T>)}.", nameof(obj)),
         };
 
     #endregion
 
     #region addition
 
-    public static Radians<TRadians> operator +(Radians<TRadians> value) =>
-        new(+value.Value);
+    public static Radians<T> operator +(Radians<T> value) 
+        => new(+value.Value);
 
-    public static Radians<TRadians> operator +(Radians<TRadians> left, Radians<TRadians> right) => 
-        new (left.Value + right.Value);
-
-    public static Radians<TRadians> AdditiveIdentity => new (TRadians.AdditiveIdentity);
+    public static Radians<T> operator +(Radians<T> left, Radians<T> right) 
+        => new (left.Value + right.Value);
 
     #endregion
 
     #region subtraction
 
-    public static Radians<TRadians> operator -(Radians<TRadians> value) =>
-        new(-value.Value);
+    public static Radians<T> operator -(Radians<T> value) 
+        => new(-value.Value);
 
-    public static Radians<TRadians> operator -(Radians<TRadians> left, Radians<TRadians> right) => 
-        new (left.Value - right.Value);
+    public static Radians<T> operator -(Radians<T> left, Radians<T> right) 
+        => new (left.Value - right.Value);
 
     #endregion
-}
 
-public static partial class Angle
-{
-    #region trigonometry
+    #region multiplication
 
-    public static Radians<TRadians> Acos<TRadians>(TRadians cos)
-        where TRadians : struct, IFloatingPoint<TRadians>, IMinMaxValue<TRadians>
-        => new(TRadians.CreateChecked(Math.Acos(double.CreateChecked(cos))));
+    public static Radians<T> operator *(Radians<T> left, T right)
+        => new(left.Value * right);
 
-    public static Radians<TRadians> Acos<TCos, TRadians>(TCos cos) 
-        where TRadians: struct, IFloatingPoint<TRadians>, IMinMaxValue<TRadians>
-        where TCos: IFloatingPoint<TCos>
-        => new (TRadians.CreateChecked(Math.Acos(double.CreateChecked(cos))));
+    public static Radians<T> operator *(T left, Radians<T> right)
+        => new(left * right.Value);
 
-    public static Radians<TRadians> Asin<TRadians>(TRadians sin)
-    where TRadians : struct, IFloatingPoint<TRadians>, IMinMaxValue<TRadians>
-    => new(TRadians.CreateChecked(Math.Asin(double.CreateChecked(sin))));
+    #endregion
 
-    public static Radians<TRadians> Asin<TSin, TRadians>(TSin sin)
-        where TRadians : struct, IFloatingPoint<TRadians>, IMinMaxValue<TRadians>
-        where TSin : IFloatingPoint<TSin>
-        => new(TRadians.CreateChecked(Math.Asin(double.CreateChecked(sin))));
+    #region division
 
-    public static Radians<TRadians> Atan<TRadians>(TRadians tan)
-    where TRadians : struct, IFloatingPoint<TRadians>, IMinMaxValue<TRadians>
-    => new(TRadians.CreateChecked(Math.Atan(double.CreateChecked(tan))));
+    public static Radians<T> operator /(Radians<T> left, T right)
+        => new(left.Value / right);
 
-    public static Radians<TRadians> Atan<TTan, TRadians>(TTan tan)
-        where TRadians : struct, IFloatingPoint<TRadians>, IMinMaxValue<TRadians>
-        where TTan : IFloatingPoint<TTan>
-        => new(TRadians.CreateChecked(Math.Atan(double.CreateChecked(tan))));
+    public static Radians<T> operator %(Radians<T> left, Radians<T> right)
+        => new(left.Value % right.Value);
 
-    public static Radians<TRadians> Atan2<TRadians>(TRadians x, TRadians y)
-    where TRadians : struct, IFloatingPoint<TRadians>, IMinMaxValue<TRadians>
-    => new(TRadians.CreateChecked(Math.Atan2(double.CreateChecked(x), double.CreateChecked(y))));
+    #endregion
 
-    public static Radians<TRadians> Atan2<TTan, TRadians>(TTan x, TTan y)
-        where TRadians : struct, IFloatingPoint<TRadians>, IMinMaxValue<TRadians>
-        where TTan : IFloatingPoint<TTan>
-        => new(TRadians.CreateChecked(Math.Atan2(double.CreateChecked(x), double.CreateChecked(y))));
+    #region conversions
 
-    public static double Cos<TRadians>(Radians<TRadians> radians)
-        where TRadians: struct, IFloatingPoint<TRadians>, IMinMaxValue<TRadians>
-        => Math.Cos(double.CreateChecked(radians.Value));
+    static readonly T DegreesInRadians = T.CreateChecked(180.0 / Math.PI);
+    static readonly T GradiansInRadians = T.CreateChecked(200.0 / Math.PI);
+    static readonly T RevolutionsInRadians = T.CreateChecked(0.5 / Math.PI);
 
-    public static double Cosh<TRadians>(Radians<TRadians> radians)
-        where TRadians : struct, IFloatingPoint<TRadians>, IMinMaxValue<TRadians>
-        => Math.Cosh(double.CreateChecked(radians.Value));
+    public Degrees<T> ToDegrees<T>()
+        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
+        => new(T.CreateChecked(Value * DegreesInRadians));
 
-    public static double Sin<TRadians>(Radians<TRadians> radians)
-        where TRadians : struct, IFloatingPoint<TRadians>, IMinMaxValue<TRadians>
-        => Math.Sin(double.CreateChecked(radians.Value));
+    public Radians<T> ToRadians<T>()
+        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
+        => new(T.CreateChecked(Value));
 
-    public static double Sinh<TRadians>(Radians<TRadians> radians)
-        where TRadians : struct, IFloatingPoint<TRadians>, IMinMaxValue<TRadians>
-        => Math.Sinh(double.CreateChecked(radians.Value));
+    public Gradians<T> ToGradians<T>()
+        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
+        => new(T.CreateChecked(Value * GradiansInRadians));
 
-    public static double Tan<TRadians>(Radians<TRadians> radians)
-        where TRadians : struct, IFloatingPoint<TRadians>, IMinMaxValue<TRadians>
-        => Math.Tan(double.CreateChecked(radians.Value));
+    public Revolutions<T> ToRevolutions<T>()
+        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
+        => new(T.CreateChecked(Value * RevolutionsInRadians));
 
     #endregion
 }

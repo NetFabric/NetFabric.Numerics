@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Numerics;
 
 namespace NetFabric.Numerics.Polar;
@@ -8,16 +9,21 @@ public class CoordinateSystem<TAngle, TRadius>
     where TAngle: struct, IAngle<TAngle>
     where TRadius: struct, IFloatingPoint<TRadius>
 {
-    static readonly Lazy<CoordinateSystem<TAngle, TRadius>> instance = new (() => new CoordinateSystem<TAngle, TRadius>());
+    static readonly Lazy<CoordinateSystem<TAngle, TRadius>> instance 
+        = new (() => new CoordinateSystem<TAngle, TRadius>());
 
-    CoordinateSystem() {}
+    CoordinateSystem() 
+    {}
 
-    public static CoordinateSystem<TAngle, TRadius> Instance => instance.Value;
+    public static CoordinateSystem<TAngle, TRadius> Instance 
+        => instance.Value;
 
-    static readonly Lazy<Coordinate[]> coordinates = new (() => new[] {
-        new Coordinate("Azimuth", typeof(TAngle)), 
-        new Coordinate("Radius", typeof(TAngle)),
-    });
+    static readonly Lazy<Coordinate[]> coordinates 
+        = new (() => new[] {
+            new Coordinate("Azimuth", typeof(TAngle)), 
+            new Coordinate("Radius", typeof(TAngle)),
+        });
 
-    public Coordinate[] Coordinates => coordinates.Value;
+    public IReadOnlyCollection<Coordinate> Coordinates 
+        => coordinates.Value;
 }

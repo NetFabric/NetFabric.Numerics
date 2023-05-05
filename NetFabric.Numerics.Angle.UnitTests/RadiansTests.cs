@@ -1,50 +1,89 @@
-﻿using FluentAssertions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using FluentAssertions;
 
-namespace NetFabric.Numerics.Angle.UnitTests;
+namespace NetFabric.Numerics.UnitTests;
 
 public class RadiansTests
 {
-    public static TheoryData<Radians<double>> TrigonometryDoubleData = new()
-    {
-        -Radians<double>.Full,
-        -Radians<double>.Straight,
-        -Radians<double>.Right,
-        Radians<double>.Zero,
-        Radians<double>.Right,
-        Radians<double>.Straight,
-        Radians<double>.Full,
-    };
+    public static TheoryData<Radians<double>, Radians<float>> ToRadiansData => new()
+        {
+            { Radians<double>.Zero, Radians<float>.Zero },
+            { Radians<double>.Right, Radians<float>.Right },
+            { Radians<double>.Straight, Radians<float>.Straight },
+            { Radians<double>.Full, Radians<float>.Full },
+        };
 
     [Theory]
-    [MemberData(nameof(TrigonometryDoubleData))]
-    public void Cos_Should_Succeed(Radians<double> angle)
+    [MemberData(nameof(ToRadiansData))]
+    public void ToRadians_Should_Succeed(Radians<double> angle, Radians<float> expected)
     {
         // arrange
-        var expected = Math.Cos(angle.Value);
 
         // act
-        var result = Angle.Cos(angle);
+        var result = angle.ToRadians<float>();
 
         // assert
         result.Should().Be(expected);
     }
 
+    public static TheoryData<Radians<double>, Degrees<float>> ToDegreesData => new()
+        {
+            { Radians<double>.Zero, Degrees<float>.Zero },
+            { Radians<double>.Right, Degrees<float>.Right },
+            { Radians<double>.Straight, Degrees<float>.Straight },
+            { Radians<double>.Full, Degrees<float>.Full },
+        };
+
     [Theory]
-    [MemberData(nameof(TrigonometryDoubleData))]
-    public void ACos_Should_Succeed(Radians<double> angle)
+    [MemberData(nameof(ToDegreesData))]
+    public void ToDegrees_Should_Succeed(Radians<double> angle, Degrees<float> expected)
     {
         // arrange
-        var cos = Math.Cos(angle.Value);
-        var expected = new Radians<double>(Math.Acos(cos));
 
         // act
-        var result = Angle.Acos(cos);
+        var result = angle.ToDegrees<float>();
+
+        // assert
+        result.Should().Be(expected);
+    }
+
+    public static TheoryData<Radians<double>, Gradians<float>> ToGradiansData => new()
+        {
+            { Radians<double>.Zero, Gradians<float>.Zero },
+            { Radians<double>.Right, Gradians<float>.Right },
+            { Radians<double>.Straight, Gradians<float>.Straight },
+            { Radians<double>.Full, Gradians<float>.Full },
+        };
+
+    [Theory]
+    [MemberData(nameof(ToGradiansData))]
+    public void ToGradians_Should_Succeed(Radians<double> angle, Gradians<float> expected)
+    {
+        // arrange
+
+        // act
+        var result = angle.ToGradians<float>();
+
+        // assert
+        result.Should().Be(expected);
+    }
+
+    public static TheoryData<Radians<double>, Revolutions<float>> ToRevolutionsData => new()
+        {
+            { Radians<double>.Zero, Revolutions<float>.Zero },
+            { Radians<double>.Right, Revolutions<float>.Right },
+            { Radians<double>.Straight, Revolutions<float>.Straight },
+            { Radians<double>.Full, Revolutions<float>.Full },
+        };
+
+    [Theory]
+    [MemberData(nameof(ToRevolutionsData))]
+    public void ToRevolutions_Should_Succeed(Radians<double> angle, Revolutions<float> expected)
+    {
+        // arrange
+
+        // act
+        var result = angle.ToRevolutions<float>();
 
         // assert
         result.Should().Be(expected);

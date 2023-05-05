@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Numerics;
 
 namespace NetFabric.Numerics.Cartesian2;
@@ -7,16 +8,21 @@ public class CoordinateSystem<T>
     : ICoordinateSystem
     where T: struct, INumber<T>
 {
-    static readonly Lazy<CoordinateSystem<T>> instance = new (() => new CoordinateSystem<T>());
+    static readonly Lazy<CoordinateSystem<T>> instance 
+        = new (() => new CoordinateSystem<T>());
 
-    CoordinateSystem() {}
+    CoordinateSystem() 
+    {}
 
-    public static CoordinateSystem<T> Instance => instance.Value;
+    public static CoordinateSystem<T> Instance 
+        => instance.Value;
 
-    static readonly Lazy<Coordinate[]> coordinates = new (() => new[] {
-        new Coordinate("X", typeof(T)), 
-        new Coordinate("Y", typeof(T)),
-    });
+    static readonly Lazy<Coordinate[]> coordinates 
+        = new (() => new[] {
+            new Coordinate("X", typeof(T)), 
+            new Coordinate("Y", typeof(T)),
+        });
 
-    public Coordinate[] Coordinates => coordinates.Value;
+    public IReadOnlyCollection<Coordinate> Coordinates 
+        => coordinates.Value;
 }
