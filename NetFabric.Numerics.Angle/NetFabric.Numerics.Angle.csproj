@@ -3,7 +3,11 @@
   <PropertyGroup>
     <Title>NetFabric.Numerics.Angle</Title>
     <TargetFrameworks>net7.0</TargetFrameworks>
-    <Description></Description>
+    <Description>
+      A strongly-typed representation of an angle.
+      The explicit declaration of the units in creation and reading methods, reduces the tipical confusion when dealing with angles.
+      Includes conversion, linear interpolation, reduction, reference angle, comparison, classification, trigonometry and algebra operations.
+    </Description>
     <Version>1.0.0-beta01</Version>
     <Copyright>Copyright © Antão Almada 2023</Copyright>
     <Authors>Antão Almada</Authors>

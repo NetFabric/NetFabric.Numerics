@@ -9,12 +9,20 @@ namespace NetFabric.Numerics;
 public interface IVector<TSelf>
     : IEquatable<TSelf>,
       IEqualityOperators<TSelf, TSelf, bool>,
+      IComparable,
+      IComparisonOperators<TSelf, TSelf, bool>,
+      IAdditiveIdentity<TSelf, TSelf>,
+      IUnaryPlusOperators<TSelf, TSelf>,
       IAdditionOperators<TSelf, TSelf, TSelf>,
-      IAdditiveIdentity<TSelf, TSelf>
-    where TSelf: IVector<TSelf>?
+      IUnaryNegationOperators<TSelf, TSelf>,
+      ISubtractionOperators<TSelf, TSelf, TSelf>,
+      IMinMaxValue<TSelf>
+    where TSelf : IVector<TSelf>?
 {
+    static abstract TSelf Zero { get; }
+
     /// <summary>
-    /// Gets a coordinate system of the vector.
+    /// Gets the coordinate system of the vector.
     /// </summary>
     /// <value>The coordinate system of the vector.</value>
     ICoordinateSystem CoordinateSystem { get; }

@@ -8,9 +8,12 @@ namespace NetFabric.Numerics;
 /// </summary>
 public interface IPoint<TSelf>
     : IEquatable<TSelf>,
-      IEqualityOperators<TSelf, TSelf, bool>
-    where TSelf: IPoint<TSelf>?
+      IEqualityOperators<TSelf, TSelf, bool>,
+      IMinMaxValue<TSelf>
+    where TSelf : IPoint<TSelf>?
 {
+    static abstract TSelf Zero { get; }
+
     /// <summary>
     /// Gets a coordinate system of the point.
     /// </summary>

@@ -1,0 +1,63 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33626.354
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D9B0D462-F9EB-497E-B80C-317290BA6800}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		Icon.png = Icon.png
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetFabric.Numerics", "NetFabric.Numerics\NetFabric.Numerics.csproj", "{D8BED120-6AAA-48F0-BAA4-B99F7C30649A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetFabric.Numerics.Angle", "NetFabric.Numerics.Angle\NetFabric.Numerics.Angle.csproj", "{0C0F361A-21D2-4B55-AED3-0110CE6942E2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetFabric.Numerics.Angle.UnitTests", "NetFabric.Numerics.Angle.UnitTests\NetFabric.Numerics.Angle.UnitTests.csproj", "{733CD53C-5D03-4F81-9B29-BC0DEA7CEDEE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetFabric.Numerics.Geography", "NetFabric.Numerics.Geography\NetFabric.Numerics.Geography.csproj", "{15A8F4EB-A445-47DC-B1F1-31F99F1D03FA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetFabric.Numerics.Geography.UnitTests", "NetFabric.Numerics.Geography.UnitTests\NetFabric.Numerics.Geography.UnitTests.csproj", "{515E1F00-56FB-4747-B4E9-4336D889D007}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetFabric.Numerics.UnitTests", "NetFabric.Numerics.UnitTests\NetFabric.Numerics.UnitTests.csproj", "{B0C27AE4-9330-4FC7-B7F6-AADB335A6906}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D8BED120-6AAA-48F0-BAA4-B99F7C30649A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8BED120-6AAA-48F0-BAA4-B99F7C30649A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8BED120-6AAA-48F0-BAA4-B99F7C30649A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8BED120-6AAA-48F0-BAA4-B99F7C30649A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C0F361A-21D2-4B55-AED3-0110CE6942E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C0F361A-21D2-4B55-AED3-0110CE6942E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C0F361A-21D2-4B55-AED3-0110CE6942E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C0F361A-21D2-4B55-AED3-0110CE6942E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{733CD53C-5D03-4F81-9B29-BC0DEA7CEDEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{733CD53C-5D03-4F81-9B29-BC0DEA7CEDEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{733CD53C-5D03-4F81-9B29-BC0DEA7CEDEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{733CD53C-5D03-4F81-9B29-BC0DEA7CEDEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15A8F4EB-A445-47DC-B1F1-31F99F1D03FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15A8F4EB-A445-47DC-B1F1-31F99F1D03FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15A8F4EB-A445-47DC-B1F1-31F99F1D03FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15A8F4EB-A445-47DC-B1F1-31F99F1D03FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{515E1F00-56FB-4747-B4E9-4336D889D007}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{515E1F00-56FB-4747-B4E9-4336D889D007}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{515E1F00-56FB-4747-B4E9-4336D889D007}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{515E1F00-56FB-4747-B4E9-4336D889D007}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0C27AE4-9330-4FC7-B7F6-AADB335A6906}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0C27AE4-9330-4FC7-B7F6-AADB335A6906}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0C27AE4-9330-4FC7-B7F6-AADB335A6906}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0C27AE4-9330-4FC7-B7F6-AADB335A6906}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AACC30AE-BE57-461F-817B-2AE0F001A33F}
+	EndGlobalSection
+EndGlobal

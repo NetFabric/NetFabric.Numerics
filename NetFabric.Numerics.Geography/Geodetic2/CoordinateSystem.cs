@@ -1,21 +1,22 @@
-using System;
+using System.Collections.Generic;
+using System.Numerics;
 
-namespace NetFabric.Numerics.Geography.Geodetic;
+namespace NetFabric.Numerics.Geography.Geodetic2;
 
-public class CoordinateSystem<TAngle>
-    : ICoordinateSystem
-    where TAngle: struct, IAngle<TAngle>
+public readonly record struct CoordinateSystem<TDatum, TAngle>
+    : IGeodeticCoordinateSystem<TDatum>
+    where TDatum : IDatum<TDatum>
+    where TAngle : struct, IFloatingPoint<TAngle>, IMinMaxValue<TAngle>
 {
-    static readonly Lazy<CoordinateSystem<TAngle>> instance = new (() => new CoordinateSystem<TAngle>());
+    public Datum<TDatum> Datum 
+        => new();
 
-    CoordinateSystem() {}
+    static readonly Coordinate[] coordinates 
+        = new[] {
+            new Coordinate("Latitude", typeof(Angle<Degrees, TAngle>)), 
+            new Coordinate("Longitude", typeof(Angle<Degrees, TAngle>)),
+        };
 
-    public static CoordinateSystem<TAngle> Instance => instance.Value;
-
-    static readonly Lazy<Coordinate[]> coordinates = new (() => new[] {
-        new Coordinate("Latitude", typeof(TAngle)), 
-        new Coordinate("Longitude", typeof(TAngle)),
-    });
-
-    public Coordinate[] Coordinates => coordinates.Value;
+    public IReadOnlyCollection<Coordinate> Coordinates 
+        => coordinates;
 }

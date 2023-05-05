@@ -1,25 +1,55 @@
 using System;
 using System.Numerics;
 
-namespace NetFabric.Numerics.Geography.Geodetic;
+namespace NetFabric.Numerics.Geography.Geodetic3;
 
-public readonly record struct Point<TAngle, THeight>(TAngle Latitude, TAngle Longitude, THeight Height) 
-    : IPoint<Point<TAngle, THeight>>
-    where TAngle: struct, IAngle<TAngle>
-    where THeight: struct, INumber<THeight>
+public readonly record struct Point<TDatum, TAngle, THeight>(Angle<Degrees, TAngle> Latitude, Angle<Degrees, TAngle> Longitude, THeight Height) 
+    : IPoint<Point<TDatum, TAngle, THeight>>
+    where TDatum : IDatum<TDatum>
+    where TAngle : struct, IFloatingPoint<TAngle>, IMinMaxValue<TAngle>
+    where THeight : struct, INumber<THeight>, IMinMaxValue<THeight>
 {
-    public TAngle Latitude { get; } = Latitude >= -TAngle.Right && Latitude <= TAngle.Right
+    public Angle<Degrees, TAngle> Latitude { get; } = Latitude >= -Angle<Degrees, TAngle>.Right && Latitude <= Angle<Degrees, TAngle>.Right
         ? Latitude 
         : throw new ArgumentOutOfRangeException(nameof(Latitude), Latitude, "Latitude must be >= -90.0º and <= 90.0º");
 
-    public TAngle Longitude { get; } = Longitude > -TAngle.Straight && Longitude <= TAngle.Straight
+    public Angle<Degrees, TAngle> Longitude { get; } = Longitude > -Angle<Degrees, TAngle>.Straight && Longitude <= Angle<Degrees, TAngle>.Straight
         ? Longitude 
         : throw new ArgumentOutOfRangeException(nameof(Longitude), Longitude, "Longitude must be > -180.0º and <= 180.0º");
 
-    public CoordinateSystem<TAngle, THeight> CoordinateSystem => CoordinateSystem<TAngle, THeight>.Instance;
-    ICoordinateSystem IPoint<Point<TAngle, THeight>>.CoordinateSystem => CoordinateSystem;
+    #region constants
 
-    object IPoint<Point<TAngle, THeight>>.this[int index] 
+    public static readonly Point<TDatum, TAngle, THeight> Zero 
+        = new(Angle<Degrees, TAngle>.Zero, Angle<Degrees, TAngle>.Zero, THeight.Zero);
+
+    static Point<TDatum, TAngle, THeight> IPoint<Point<TDatum, TAngle, THeight>>.Zero
+        => Zero;
+
+    /// <summary>
+    /// Represents the minimum value. This field is read-only.
+    /// </summary>
+    public static readonly Point<TDatum, TAngle, THeight> MinValue 
+        = new(Angle<Degrees, TAngle>.MinValue, Angle<Degrees, TAngle>.MinValue, THeight.MinValue);
+
+    /// <summary>
+    /// Represents the maximum value. This field is read-only.
+    /// </summary>
+    public static readonly Point<TDatum, TAngle, THeight> MaxValue 
+        = new(Angle<Degrees, TAngle>.MaxValue, Angle<Degrees, TAngle>.MaxValue, THeight.MaxValue);
+
+    static Point<TDatum, TAngle, THeight> IMinMaxValue<Point<TDatum, TAngle, THeight>>.MinValue
+        => MinValue;
+    static Point<TDatum, TAngle, THeight> IMinMaxValue<Point<TDatum, TAngle, THeight>>.MaxValue
+        => MaxValue;
+
+    #endregion
+
+    public CoordinateSystem<TDatum, TAngle, THeight> CoordinateSystem 
+        => new();
+    ICoordinateSystem IPoint<Point<TDatum, TAngle, THeight>>.CoordinateSystem 
+        => CoordinateSystem;
+
+    object IPoint<Point<TDatum, TAngle, THeight>>.this[int index] 
         => index switch
         {
             0 => Latitude,
