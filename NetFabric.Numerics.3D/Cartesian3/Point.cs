@@ -7,6 +7,11 @@ public readonly record struct Point<T>(T X, T Y, T Z)
     : IPoint<Point<T>>
     where T: struct, INumber<T>
 {
+    public static readonly Point<T> Zero = new(T.Zero, T.Zero, T.Zero);
+
+    static Point<T> IPoint<Point<T>>.Zero
+        => Zero;
+
     public CoordinateSystem<T> CoordinateSystem 
         => CoordinateSystem<T>.Instance;
     ICoordinateSystem IPoint<Point<T>>.CoordinateSystem 

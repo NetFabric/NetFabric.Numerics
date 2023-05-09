@@ -16,15 +16,6 @@ public readonly record struct Revolutions<T>(T Value)
         IFloatingPoint<T>, 
         IMinMaxValue<T>
 {
-    static T Reduce(T degrees) 
-        => Utils.Reduce(degrees, Full.Value);
-
-    static Quadrant GetQuadrant(T degrees) 
-        => Utils.GetQuadrant(degrees, Right.Value, Straight.Value, Full.Value);
-
-    static T GetReference(T degrees) 
-        => Utils.GetReference(degrees, Right.Value, Straight.Value, Full.Value);
-
     static Revolutions<T> IAngle<Revolutions<T>>.Abs(Revolutions<T> angle)
         => new(T.Abs(angle.Value));
 
@@ -74,7 +65,9 @@ public readonly record struct Revolutions<T>(T Value)
     static Revolutions<T> AdditiveIdentity
         => new(T.AdditiveIdentity);
 
-    static Revolutions<T> IAngle<Revolutions<T>>.Right 
+    static Revolutions<T> IAngle<Revolutions<T>>.Zero 
+        => Zero;
+    static Revolutions<T> IAngle<Revolutions<T>>.Right
         => Right;
     static Revolutions<T> IAngle<Revolutions<T>>.Straight 
         => Straight;
@@ -95,8 +88,8 @@ public readonly record struct Revolutions<T>(T Value)
         => Value.CompareTo(other.Value);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public readonly int ReducedCompareTo(Revolutions<T> other) 
-        => Reduce(Value).CompareTo(Reduce(other.Value));
+    public readonly int ReducedCompareTo(Revolutions<T> other)
+        => Angle.Reduce(this).CompareTo(Angle.Reduce(other));
 
     public static bool operator <(Revolutions<T> left, Revolutions<T> right) 
         => left.CompareTo(right) < 0;

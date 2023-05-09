@@ -1,6 +1,7 @@
 ﻿using System.Numerics;
 using System;
 using System.Reflection.Metadata;
+using System.Runtime.CompilerServices;
 
 namespace NetFabric.Numerics;
 
@@ -18,6 +19,34 @@ public static class Angle
         return reduced < TAngle.AdditiveIdentity 
             ? reduced + TAngle.Full
             : reduced;
+    }
+
+    public static TAngle GetReference<TAngle>(TAngle angle)
+        where TAngle : struct, IAngle<TAngle>
+    {
+        var reduced = Reduce(angle);
+        var quadrant = GetQuadrant(reduced);
+        return quadrant switch
+        {
+            Quadrant.First => reduced,
+            Quadrant.Second => TAngle.Straight - reduced,
+            Quadrant.Third => reduced - TAngle.Straight,
+            Quadrant.Fourth => TAngle.Full - reduced,
+            _ => Throw.InvalidOperationException<TAngle>(),
+        };
+    }
+
+    public static Quadrant GetQuadrant<TAngle>(TAngle angle)
+        where TAngle : struct, IAngle<TAngle>
+    {
+        var reduced = Reduce(angle);
+        return reduced < TAngle.Right
+            ? Quadrant.First
+            : reduced < TAngle.Straight
+                ? Quadrant.Second
+                : reduced < TAngle.Straight + TAngle.Right
+                    ? Quadrant.Third
+                    : Quadrant.Fourth;
     }
 
     /// <summary>

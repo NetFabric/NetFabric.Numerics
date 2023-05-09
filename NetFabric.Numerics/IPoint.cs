@@ -11,6 +11,8 @@ public interface IPoint<TSelf>
       IEqualityOperators<TSelf, TSelf, bool>
     where TSelf: IPoint<TSelf>?
 {
+    public static abstract TSelf Zero { get; }
+
     /// <summary>
     /// Gets a coordinate system of the point.
     /// </summary>

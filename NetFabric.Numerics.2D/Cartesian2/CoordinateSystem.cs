@@ -17,12 +17,12 @@ public class CoordinateSystem<T>
     public static CoordinateSystem<T> Instance 
         => instance.Value;
 
-    static readonly Lazy<Coordinate[]> coordinates 
-        = new (() => new[] {
+    static readonly Coordinate[] coordinates 
+        = new[] {
             new Coordinate("X", typeof(T)), 
             new Coordinate("Y", typeof(T)),
-        });
+        };
 
-    public IReadOnlyCollection<Coordinate> Coordinates 
-        => coordinates.Value;
+    public IReadOnlyCollection<Coordinate> Coordinates
+        => coordinates;
 }

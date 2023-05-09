@@ -8,6 +8,11 @@ public readonly record struct Point<TAngle, TRadius>(TAngle Azimuth, TRadius Rad
     where TAngle: struct, IAngle<TAngle>
     where TRadius: struct, IFloatingPoint<TRadius>
 {
+    public static readonly Point<TAngle, TRadius> Zero = new(TAngle.Zero, TRadius.Zero);
+
+    static Point<TAngle, TRadius> IPoint<Point<TAngle, TRadius>>.Zero
+        => Zero;
+
     public CoordinateSystem<TAngle, TRadius> CoordinateSystem 
         => CoordinateSystem<TAngle, TRadius>.Instance;
     ICoordinateSystem IPoint<Point<TAngle, TRadius>>.CoordinateSystem 

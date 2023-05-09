@@ -16,15 +16,6 @@ public readonly record struct Radians<T>(T Value)
         IFloatingPoint<T>,
         IMinMaxValue<T>
 {
-    static T Reduce(T degrees) 
-        => Utils.Reduce(degrees, Full.Value);
-
-    static Quadrant GetQuadrant(T degrees) 
-        => Utils.GetQuadrant(degrees, Right.Value, Straight.Value, Full.Value);
-
-    static T GetReference(T degrees) 
-        => Utils.GetReference(degrees, Right.Value, Straight.Value, Full.Value);
-
     static Radians<T> IAngle<Radians<T>>.Abs(Radians<T> angle)
         => new(T.Abs(angle.Value));
 
@@ -76,7 +67,9 @@ public readonly record struct Radians<T>(T Value)
     static Radians<T> IMultiplicativeIdentity<Radians<T>, Radians<T>>.MultiplicativeIdentity
         => new(T.MultiplicativeIdentity);
 
-    static Radians<T> IAngle<Radians<T>>.Right 
+    static Radians<T> IAngle<Radians<T>>.Zero 
+        => Zero;
+    static Radians<T> IAngle<Radians<T>>.Right
         => Right;
     static Radians<T> IAngle<Radians<T>>.Straight 
         => Straight;
@@ -98,7 +91,7 @@ public readonly record struct Radians<T>(T Value)
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public readonly int ReducedCompareTo(Radians<T> other) 
-        => Reduce(Value).CompareTo(Reduce(other.Value));
+        => Angle.Reduce(this).CompareTo(Angle.Reduce(other));
 
     public static bool operator <(Radians<T> left, Radians<T> right) 
         => left.CompareTo(right) < 0;

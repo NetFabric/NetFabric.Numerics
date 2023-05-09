@@ -18,13 +18,13 @@ public class CoordinateSystem<TAngle, THeight>
     public static CoordinateSystem<TAngle, THeight> Instance 
         => instance.Value;
 
-    static readonly Lazy<Coordinate[]> coordinates 
-        = new (() => new[] {
+    static readonly Coordinate[] coordinates 
+        = new[] {
             new Coordinate("Latitude", typeof(TAngle)), 
             new Coordinate("Longitude", typeof(TAngle)),
             new Coordinate("Height", typeof(THeight)),
-        });
+        };
 
     public IReadOnlyCollection<Coordinate> Coordinates 
-        => coordinates.Value;
+        => coordinates;
 }

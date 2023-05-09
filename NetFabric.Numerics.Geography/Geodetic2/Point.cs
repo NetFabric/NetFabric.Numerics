@@ -15,6 +15,11 @@ public readonly record struct Point<TAngle>(TAngle Latitude, TAngle Longitude)
         ? Longitude 
         : throw new ArgumentOutOfRangeException(nameof(Longitude), Longitude, "Longitude must be > -180.0º and <= 180.0º");
 
+    public static readonly Point<TAngle> Zero = new(TAngle.Zero, TAngle.Zero);
+
+    static Point<TAngle> IPoint<Point<TAngle>>.Zero
+        => Zero;
+
     public CoordinateSystem<TAngle> CoordinateSystem 
         => CoordinateSystem<TAngle>.Instance;
     ICoordinateSystem IPoint<Point<TAngle>>.CoordinateSystem 

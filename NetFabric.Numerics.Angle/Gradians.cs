@@ -16,15 +16,6 @@ public readonly record struct Gradians<T>(T Value)
         IFloatingPoint<T>,
         IMinMaxValue<T>
 {
-    static T Reduce(T degrees) 
-        => Utils.Reduce(degrees, Full.Value);
-
-    static Quadrant GetQuadrant(T degrees) 
-        => Utils.GetQuadrant(degrees, Right.Value, Straight.Value, Full.Value);
-
-    static T GetReference(T degrees) 
-        => Utils.GetReference(degrees, Right.Value, Straight.Value, Full.Value);
-
     static Gradians<T> IAngle<Gradians<T>>.Abs(Gradians<T> angle)
         => new(T.Abs(angle.Value));
 
@@ -71,7 +62,9 @@ public readonly record struct Gradians<T>(T Value)
     static Gradians<T> IMultiplicativeIdentity<Gradians<T>, Gradians<T>>.MultiplicativeIdentity
         => new(T.MultiplicativeIdentity);
 
-    static Gradians<T> IAngle<Gradians<T>>.Right 
+    static Gradians<T> IAngle<Gradians<T>>.Zero 
+        => Zero;
+    static Gradians<T> IAngle<Gradians<T>>.Right
         => Right;
     static Gradians<T> IAngle<Gradians<T>>.Straight 
         => Straight;
@@ -93,7 +86,7 @@ public readonly record struct Gradians<T>(T Value)
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public readonly int ReducedCompareTo(Gradians<T> other) 
-        => Reduce(Value).CompareTo(Reduce(other.Value));
+        => Angle.Reduce(this).CompareTo(Angle.Reduce(other));
 
     public static bool operator <(Gradians<T> left, Gradians<T> right) 
         => left.CompareTo(right) < 0;

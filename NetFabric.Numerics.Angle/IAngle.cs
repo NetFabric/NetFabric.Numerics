@@ -21,6 +21,7 @@ public interface IAngle<TSelf>
       IModulusOperators<TSelf, TSelf, TSelf>
     where TSelf: IAngle<TSelf>?
 {
+    static abstract TSelf Zero { get; }
     static abstract TSelf Right { get; }
     static abstract TSelf Straight { get; }
     static abstract TSelf Full { get; }

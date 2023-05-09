@@ -17,40 +17,31 @@ public readonly record struct Degrees<T>(T Value)
         IMinMaxValue<T>
 {
     /// <summary>
-    /// Gets the value of the current Angle structure expressed in degrees and minutes.
+    /// Gets the value of the current Angle structure expressed in Degrees and minutes.
     /// </summary>
     public (TDegrees Degrees, TMinutes Minutes) AsDegreesMinutes<TDegrees, TMinutes>()
         where TDegrees: IBinaryInteger<TDegrees>
         where TMinutes: IFloatingPoint<TMinutes>
     {
-        var degrees = TDegrees.CreateChecked(Value);
-        var minutes = TMinutes.CreateChecked(Math.Abs(double.CreateChecked(Value) - double.CreateChecked(degrees)) * 60.0);
-        return (degrees, minutes);
+        var Degrees = TDegrees.CreateChecked(Value);
+        var minutes = TMinutes.CreateChecked(Math.Abs(double.CreateChecked(Value) - double.CreateChecked(Degrees)) * 60.0);
+        return (Degrees, minutes);
     }
 
     /// <summary>
-    /// Gets the value of the current Angle structure expressed in degrees, minutes and seconds.
+    /// Gets the value of the current Angle structure expressed in Degrees, minutes and seconds.
     /// </summary>
     public (TDegrees Degrees, TMinutes Minutes, TSeconds Seconds) AsDegreesMinutesSeconds<TDegrees, TMinutes, TSeconds>()
     where TDegrees : IBinaryInteger<TDegrees>
     where TMinutes : IBinaryInteger<TMinutes>
     where TSeconds : IFloatingPoint<TSeconds>
     {
-        var degrees = TDegrees.CreateChecked(Value);
-        var decimalMinutes = Math.Abs(double.CreateChecked(Value) - double.CreateChecked(degrees)) * 60.0;
+        var Degrees = TDegrees.CreateChecked(Value);
+        var decimalMinutes = Math.Abs(double.CreateChecked(Value) - double.CreateChecked(Degrees)) * 60.0;
         var minutes = TMinutes.CreateChecked(decimalMinutes);
         var seconds = TSeconds.CreateChecked((decimalMinutes - double.CreateChecked(minutes)) * 60.0);
-        return (degrees, minutes, seconds);
+        return (Degrees, minutes, seconds);
     }
-
-    static T Reduce(T degrees) 
-        => Utils.Reduce(degrees, Full.Value);
-
-    static Quadrant GetQuadrant(T degrees) 
-        => Utils.GetQuadrant(degrees, Right.Value, Straight.Value, Full.Value);
-
-    static T GetReference(T degrees) 
-        => Utils.GetReference(degrees, Right.Value, Straight.Value, Full.Value);
 
     static Degrees<T> IAngle<Degrees<T>>.Abs(Degrees<T> angle)
         => new(T.Abs(angle.Value));
@@ -64,22 +55,22 @@ public readonly record struct Degrees<T>(T Value)
     #region constants
 
     /// <summary>
-    /// Represents the zero angle value (0 degrees). This field is read-only.
+    /// Represents the zero angle value (0 Degrees). This field is read-only.
     /// </summary>
     public static readonly Degrees<T> Zero = new(T.Zero);
 
     /// <summary>
-    /// Represents the right angle value (90 degrees). This field is read-only.
+    /// Represents the right angle value (90 Degrees). This field is read-only.
     /// </summary>
     public static readonly Degrees<T> Right = new(T.CreateChecked(90.0));
 
     /// <summary>
-    /// Represents the straight angle value (180 degrees). This field is read-only.
+    /// Represents the straight angle value (180 Degrees). This field is read-only.
     /// </summary>
     public static readonly Degrees<T> Straight = new(T.CreateChecked(180.0));
 
     /// <summary>
-    /// Represents the full angle value (360 degrees). This field is read-only.
+    /// Represents the full angle value (360 Degrees). This field is read-only.
     /// </summary>
     public static readonly Degrees<T> Full = new(T.CreateChecked(360.0));
 
@@ -101,7 +92,9 @@ public readonly record struct Degrees<T>(T Value)
     static Degrees<T> AdditiveIdentity
         => new(T.AdditiveIdentity);
 
-    static Degrees<T> IAngle<Degrees<T>>.Right 
+    static Degrees<T> IAngle<Degrees<T>>.Zero 
+        => Zero;
+    static Degrees<T> IAngle<Degrees<T>>.Right
         => Right;
     static Degrees<T> IAngle<Degrees<T>>.Straight 
         => Straight;
@@ -122,7 +115,7 @@ public readonly record struct Degrees<T>(T Value)
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public readonly int ReducedCompareTo(Degrees<T> other) 
-        => Reduce(Value).CompareTo(Reduce(other.Value));
+        => Angle.Reduce(this).CompareTo(Angle.Reduce(other));
 
     public static bool operator <(Degrees<T> left, Degrees<T> right) 
         => left.CompareTo(right) < 0;

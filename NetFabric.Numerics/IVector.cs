@@ -9,8 +9,8 @@ namespace NetFabric.Numerics;
 public interface IVector<TSelf>
     : IEquatable<TSelf>,
       IEqualityOperators<TSelf, TSelf, bool>,
-      IAdditionOperators<TSelf, TSelf, TSelf>,
-      IAdditiveIdentity<TSelf, TSelf>
+      IAdditiveIdentity<TSelf, TSelf>,
+      IAdditionOperators<TSelf, TSelf, TSelf>
     where TSelf: IVector<TSelf>?
 {
     /// <summary>
