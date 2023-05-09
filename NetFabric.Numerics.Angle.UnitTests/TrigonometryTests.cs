@@ -4,20 +4,20 @@ namespace NetFabric.Numerics.UnitTests;
 
 public class TrigonometryTests
 {
-    public static TheoryData<Radians<double>> TrigonometryDoubleData = new()
+    public static TheoryData<Angle<Radians, double>> TrigonometryDoubleData = new()
     {
-        -Radians<double>.Full,
-        -Radians<double>.Straight,
-        -Radians<double>.Right,
-        Radians<double>.Zero,
-        Radians<double>.Right,
-        Radians<double>.Straight,
-        Radians<double>.Full,
+        -Angle<Radians, double>.Full,
+        -Angle<Radians, double>.Straight,
+        -Angle<Radians, double>.Right,
+        Angle<Radians, double>.Zero,
+        Angle<Radians, double>.Right,
+        Angle<Radians, double>.Straight,
+        Angle<Radians, double>.Full,
     };
 
     [Theory]
     [MemberData(nameof(TrigonometryDoubleData))]
-    public void Cos_Double_Should_Succeed(Radians<double> angle)
+    public void Cos_Double_Should_Succeed(Angle<Radians, double> angle)
     {
         // arrange
         var expected = Math.Cos(angle.Value);
@@ -31,11 +31,11 @@ public class TrigonometryTests
 
     [Theory]
     [MemberData(nameof(TrigonometryDoubleData))]
-    public void ACos_Double_Should_Succeed(Radians<double> angle)
+    public void ACos_Double_Should_Succeed(Angle<Radians, double> angle)
     {
         // arrange
         var cos = Math.Cos(angle.Value);
-        var expected = new Radians<double>(Math.Acos(cos));
+        var expected = new Angle<Radians, double>(Math.Acos(cos));
 
         // act
         var result = Angle.Acos(cos);
@@ -44,20 +44,20 @@ public class TrigonometryTests
         result.Should().Be(expected);
     }
 
-    public static TheoryData<Radians<float>> TrigonometryFloatData = new()
+    public static TheoryData<Angle<Radians, float>> TrigonometryFloatData = new()
     {
-        -Radians<float>.Full,
-        -Radians<float>.Straight,
-        -Radians<float>.Right,
-        Radians<float>.Zero,
-        Radians<float>.Right,
-        Radians<float>.Straight,
-        Radians<float>.Full,
+        -Angle<Radians, float>.Full,
+        -Angle<Radians, float>.Straight,
+        -Angle<Radians, float>.Right,
+        Angle<Radians, float>.Zero,
+        Angle<Radians, float>.Right,
+        Angle<Radians, float>.Straight,
+        Angle<Radians, float>.Full,
     };
 
     [Theory]
     [MemberData(nameof(TrigonometryFloatData))]
-    public void Cos_Float_Should_Succeed(Radians<float> angle)
+    public void Cos_Float_Should_Succeed(Angle<Radians, float> angle)
     {
         // arrange
         var expected = Math.Cos(angle.Value);
@@ -71,11 +71,11 @@ public class TrigonometryTests
 
     [Theory]
     [MemberData(nameof(TrigonometryFloatData))]
-    public void ACos_Float_Should_Succeed(Radians<float> angle)
+    public void ACos_Float_Should_Succeed(Angle<Radians, float> angle)
     {
         // arrange
         var cos = Math.Cos(angle.Value);
-        var expected = new Radians<float>((float)Math.Acos(cos));
+        var expected = new Angle<Radians, float>((float)Math.Acos(cos));
 
         // act
         var result = Angle.Acos<double, float>(cos);

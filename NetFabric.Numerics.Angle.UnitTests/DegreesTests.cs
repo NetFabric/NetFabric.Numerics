@@ -5,87 +5,93 @@ namespace NetFabric.Numerics.UnitTests;
 
 public class DegreesTests
 {
-    public static TheoryData<Degrees<double>, Radians<float>> ToRadiansData => new()
+   public static TheoryData<Angle<Degrees, double>, Angle<Degrees, float>> ToDegreesData => new()
         {
-            { Degrees<double>.Zero, Radians<float>.Zero },
-            { Degrees<double>.Right, Radians<float>.Right },
-            { Degrees<double>.Straight, Radians<float>.Straight },
-            { Degrees<double>.Full, Radians<float>.Full },
-        };
-
-    [Theory]
-    [MemberData(nameof(ToRadiansData))]
-    public void ToRadians_Should_Succeed(Degrees<double> angle, Radians<float> expected)
-    {
-        // arrange
-
-        // act
-        var result = angle.ToRadians<float>();
-
-        // assert
-        result.Should().Be(expected);
-    }
-
-    public static TheoryData<Degrees<double>, Degrees<float>> ToDegreesData => new()
-        {
-            { Degrees<double>.Zero, Degrees<float>.Zero },
-            { Degrees<double>.Right, Degrees<float>.Right },
-            { Degrees<double>.Straight, Degrees<float>.Straight },
-            { Degrees<double>.Full, Degrees<float>.Full },
+            { Angle<Degrees, double>.Zero, Angle<Degrees, float>.Zero },
+            { Angle<Degrees, double>.Right, Angle<Degrees, float>.Right },
+            { Angle<Degrees, double>.Straight, Angle<Degrees, float>.Straight },
+            { Angle<Degrees, double>.Full, Angle<Degrees, float>.Full },
         };
 
     [Theory]
     [MemberData(nameof(ToDegreesData))]
-    public void ToDegrees_Should_Succeed(Degrees<double> angle, Degrees<float> expected)
+    public void ToDegrees_Should_Succeed(Angle<Degrees, double> angle, Angle<Degrees, float> expected)
     {
         // arrange
 
         // act
-        var result = angle.ToDegrees<float>();
+        var result = Angle.ToDegrees<double, float>(angle);
 
         // assert
         result.Should().Be(expected);
     }
 
-    public static TheoryData<Degrees<double>, Gradians<float>> ToGradiansData => new()
+    public static TheoryData<Angle<Degrees, double>, Angle<Radians, double>, Angle<Radians, float>> ToRadiansData => new()
         {
-            { Degrees<double>.Zero, Gradians<float>.Zero },
-            { Degrees<double>.Right, Gradians<float>.Right },
-            { Degrees<double>.Straight, Gradians<float>.Straight },
-            { Degrees<double>.Full, Gradians<float>.Full },
+            { Angle<Degrees, double>.Zero, Angle<Radians, double>.Zero, Angle<Radians, float>.Zero },
+            { Angle<Degrees, double>.Right, Angle<Radians, double>.Right, Angle<Radians, float>.Right },
+            { Angle<Degrees, double>.Straight, Angle<Radians, double>.Straight, Angle<Radians, float>.Straight },
+            { Angle<Degrees, double>.Full, Angle<Radians, double>.Full, Angle<Radians, float>.Full },
+        };
+
+    [Theory]
+    [MemberData(nameof(ToRadiansData))]
+    public void ToRadians_Should_Succeed(Angle<Degrees, double> angle, Angle<Radians, double> expectedDouble, Angle<Radians, float> expectedFloat)
+    {
+        // arrange
+
+        // act
+        var resultDouble = Angle.ToRadians(angle);
+        var resultFloat = Angle.ToRadians<double, float>(angle);
+
+        // assert
+        resultDouble.Should().Be(expectedDouble);
+        resultFloat.Should().Be(expectedFloat);
+    }
+
+     public static TheoryData<Angle<Degrees, double>, Angle<Gradians, double>, Angle<Gradians, float>> ToGradiansData => new()
+        {
+            { Angle<Degrees, double>.Zero, Angle<Gradians, double>.Zero, Angle<Gradians, float>.Zero },
+            { Angle<Degrees, double>.Right, Angle<Gradians, double>.Right, Angle<Gradians, float>.Right },
+            { Angle<Degrees, double>.Straight, Angle<Gradians, double>.Straight, Angle<Gradians, float>.Straight },
+            { Angle<Degrees, double>.Full, Angle<Gradians, double>.Full, Angle<Gradians, float>.Full },
         };
 
     [Theory]
     [MemberData(nameof(ToGradiansData))]
-    public void ToGradians_Should_Succeed(Degrees<double> angle, Gradians<float> expected)
+    public void ToGradians_Should_Succeed(Angle<Degrees, double> angle, Angle<Gradians, double> expectedDouble, Angle<Gradians, float> expectedFloat)
     {
         // arrange
 
         // act
-        var result = angle.ToGradians<float>();
+        var resultDouble = Angle.ToGradians(angle);
+        var resultFloat = Angle.ToGradians<double, float>(angle);
 
         // assert
-        result.Should().Be(expected);
+        resultDouble.Should().Be(expectedDouble);
+        resultFloat.Should().Be(expectedFloat);
     }
 
-    public static TheoryData<Degrees<double>, Revolutions<float>> ToRevolutionsData => new()
+    public static TheoryData<Angle<Degrees, double>, Angle<Revolutions, double>, Angle<Revolutions, float>> ToRevolutionsData => new()
         {
-            { Degrees<double>.Zero, Revolutions<float>.Zero },
-            { Degrees<double>.Right, Revolutions<float>.Right },
-            { Degrees<double>.Straight, Revolutions<float>.Straight },
-            { Degrees<double>.Full, Revolutions<float>.Full },
+            { Angle<Degrees, double>.Zero, Angle<Revolutions, double>.Zero, Angle<Revolutions, float>.Zero },
+            { Angle<Degrees, double>.Right, Angle<Revolutions, double>.Right, Angle<Revolutions, float>.Right },
+            { Angle<Degrees, double>.Straight, Angle<Revolutions, double>.Straight, Angle<Revolutions, float>.Straight },
+            { Angle<Degrees, double>.Full, Angle<Revolutions, double>.Full, Angle<Revolutions, float>.Full },
         };
 
     [Theory]
     [MemberData(nameof(ToRevolutionsData))]
-    public void ToRevolutions_Should_Succeed(Degrees<double> angle, Revolutions<float> expected)
+    public void ToRevolutions_Should_Succeed(Angle<Degrees, double> angle, Angle<Revolutions, double> expectedDouble, Angle<Revolutions, float> expectedFloat)
     {
         // arrange
 
         // act
-        var result = angle.ToRevolutions<float>();
+        var resultDouble = Angle.ToRevolutions(angle);
+        var resultFloat = Angle.ToRevolutions<double, float>(angle);
 
         // assert
-        result.Should().Be(expected);
+        resultDouble.Should().Be(expectedDouble);
+        resultFloat.Should().Be(expectedFloat);
     }
 }
