@@ -1,5 +1,6 @@
 using System;
 using System.Numerics;
+using System.Runtime.CompilerServices;
 
 namespace NetFabric.Numerics.Cartesian3;
 
@@ -35,6 +36,26 @@ public readonly record struct Point<T>(T X, T Y, T Z)
         => new();
     ICoordinateSystem IPoint<Point<T>>.CoordinateSystem 
         => CoordinateSystem;
+
+    #region addition
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static Point<T> operator +(Point<T> left, Vector<T> right)
+        => new(left.X + right.X, left.Y + right.Y, left.Z + right.Z);
+
+    #endregion
+
+    #region subtraction
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static Point<T> operator -(Point<T> left, Vector<T> right)
+        => new(left.X - right.X, left.Y - right.Y, left.Z - right.Z);
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static Vector<T> operator +(Point<T> left, Point<T> right)
+        => new(left.X - right.X, left.Y - right.Y, left.Z - right.Z);
+
+    #endregion
 
     object IPoint<Point<T>>.this[int index] 
         => index switch
