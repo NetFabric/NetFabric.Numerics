@@ -66,11 +66,18 @@ var nad1927ConusPoint = new Point<NAD1927CONUS, double>(new(0.0), new(0.0));
 // supports any floating point precision
 var doublePrecisionPoint = new Point<WGS84, double>(new(0.0), new(0.0));
 var singlePrecisionPoint = new Point<WGS84, float>(new(0.0), new(0.0));
+
+// supports minutes and seconds
+var minutesPoint = new Point<WGS84, double>(Angle.FromDegreesMinutes(0, 0.0), Angle.FromDegreesMinutes(0, 0.0));
+var minutesSecondsPoint = new Point<WGS84, double>(Angle.FromDegreesMinutesSeconds(0, 0, 0.0), Angle.FromDegreesMinutesSeconds(0, 0, 0.0));
+
+var (degreesLatitude, minutesLatitude) = Angle.ToDegreesMinutes(wgs84Point.Latitude);
+var (degreesLatitude, minutesLatitude, secondsLatitude) = Angle.ToDegreesMinutesSeconds(wgs84Point.Latitude);
 ```
 
 The use of generics prevents the use of incompatible types when coding. Overloaded operators and other functions only support compatible types. 
 
-Conversion function can be used:
+Conversion functions can be used:
 
 ``` csharp
 using NetFabric.Numerics;
