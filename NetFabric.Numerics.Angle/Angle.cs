@@ -1,5 +1,6 @@
 ﻿using System.Numerics;
 using System;
+using System.Collections.Generic;
 
 namespace NetFabric.Numerics;
 
@@ -432,6 +433,54 @@ public static class Angle
         where TFrom : struct, IFloatingPoint<TFrom>, IMinMaxValue<TFrom>
         where TTo : struct, IFloatingPoint<TTo>, IMinMaxValue<TTo>
         => new(TTo.CreateChecked(angle.Value));
+
+    #endregion
+
+    #region collections
+
+    public static Angle<TUnits, T> Sum<TUnits, T>(this IEnumerable<Angle<TUnits, T>> source)
+        where TUnits : IAngleUnits<TUnits>
+        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
+    {
+        var sum = T.Zero;
+        foreach (var angle in source)
+        {
+            checked { sum += angle.Value; }
+        }
+        return new Angle<TUnits, T>(sum);
+    }
+
+    public static Angle<TUnits, T> Sum<TUnits, T>(this Angle<TUnits, T>[] source)
+        where TUnits : IAngleUnits<TUnits>
+        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
+        => source.AsSpan().Sum();
+
+    public static Angle<TUnits, T> Sum<TUnits, T>(this Memory<Angle<TUnits, T>> source)
+        where TUnits : IAngleUnits<TUnits>
+        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
+        => source.Span.Sum();
+
+    public static Angle<TUnits, T> Sum<TUnits, T>(this ReadOnlyMemory<Angle<TUnits, T>> source)
+        where TUnits : IAngleUnits<TUnits>
+        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
+        => source.Span.Sum();
+
+    public static Angle<TUnits, T> Sum<TUnits, T>(this Span<Angle<TUnits, T>> source)
+        where TUnits : IAngleUnits<TUnits>
+        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
+        => ((ReadOnlySpan<Angle<TUnits, T>>)source).Sum();
+
+    public static Angle<TUnits, T> Sum<TUnits, T>(this ReadOnlySpan<Angle<TUnits, T>> source)
+        where TUnits : IAngleUnits<TUnits>
+        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
+    {
+        var sum = T.Zero;
+        foreach (var angle in source)
+        {
+            checked { sum += angle.Value; }
+        }
+        return new Angle<TUnits, T>(sum);
+    }
 
     #endregion
 }
