@@ -260,6 +260,30 @@ public static class Angle
         where TRevolutions : struct, IFloatingPoint<TRevolutions>, IMinMaxValue<TRevolutions>
         => new(TRevolutions.CreateChecked(angle.Value * TDegrees.CreateChecked(RevolutionsInDegrees)));
 
+    public static Angle<Degrees, T> ToDegrees<T>(int degrees, double minutes)
+        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
+    {
+        if (minutes < 0.0 || minutes >= 60.0)
+            Throw.ArgumentOutOfRangeException(nameof(minutes), minutes, "Argument must be positive and less than 60.");
+
+        return degrees < 0 
+            ? new(T.CreateChecked(degrees - (minutes / 60.0)))
+            : new(T.CreateChecked(degrees + (minutes / 60.0)));
+    }
+
+    public static Angle<Degrees, T> ToDegrees<T>(int degrees, int minutes, double seconds)
+        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
+    {
+        if (minutes < 0.0 || minutes >= 60.0)
+            Throw.ArgumentOutOfRangeException(nameof(minutes), minutes, "Argument must be positive and less than 60.");
+        if (seconds < 0.0 || seconds >= 60.0)
+            Throw.ArgumentOutOfRangeException(nameof(seconds), seconds, "Argument must be positive and less than 60.");
+
+        return degrees < 0
+            ? new(T.CreateChecked(degrees - (minutes / 60.0) - (seconds / 3600.0)))
+            : new(T.CreateChecked(degrees + (minutes / 60.0) + (seconds / 3600.0)));
+    }
+
     /// <summary>
     /// Gets the value of the angle expressed in Degrees and minutes.
     /// </summary>
