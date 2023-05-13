@@ -5,24 +5,39 @@ namespace NetFabric.Numerics.Benchmarks;
 
 public class SumBenchmarks
 {
-    static readonly Angle<Degrees, double>[] source 
-        = Enumerable.Range(0, 360)
-        .Select(value => new Angle<Degrees, double>(value))
-        .ToArray();
+    Angle<Degrees, double>[] array;
+    IEnumerable<Angle<Degrees, double>> enumerable;
+
+    [GlobalSetup]
+    public void GlobalSetup()
+    {
+        enumerable = GetEnumerable();
+        array = enumerable.ToArray();
+    }
 
     [Benchmark(Baseline = true)]
     public Angle<Degrees, double> LinqArray()
-        => new(source.Sum(angle => angle.Value));
+        => new(array.Sum(angle => angle.Value));
 
     [Benchmark]
     public Angle<Degrees, double> LinqEnumerable()
-        => new(source.AsEnumerable().Sum(angle => angle.Value));
+        => new(enumerable.Sum(angle => angle.Value));
 
     [Benchmark]
     public Angle<Degrees, double> AngleArray()
-        => source.Sum();
+        => array.Sum();
+
+    [Benchmark]
+    public Angle<Degrees, double> AngleSpan()
+        => array.AsSpan().Sum();
 
     [Benchmark]
     public Angle<Degrees, double> AngleEnumerable()
-        => source.Sum();
+        => array.Sum();
+
+    static IEnumerable<Angle<Degrees, double>> GetEnumerable()
+    {
+        for (var value = 0; value < 360; value++)
+            yield return new Angle<Degrees, double>(value);
+    }
 }

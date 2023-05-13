@@ -436,7 +436,7 @@ public static class Angle
 
     #endregion
 
-    #region collections
+    #region sum
 
     public static Angle<TUnits, T> Sum<TUnits, T>(this IEnumerable<Angle<TUnits, T>> source)
         where TUnits : IAngleUnits<TUnits>
@@ -480,6 +480,64 @@ public static class Angle
             checked { sum += angle.Value; }
         }
         return new Angle<TUnits, T>(sum);
+    }
+
+    #endregion
+
+    #region average
+
+    public static Angle<TUnits, T>? Average<TUnits, T>(this IEnumerable<Angle<TUnits, T>> source)
+        where TUnits : IAngleUnits<TUnits>
+        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
+    {
+        var sum = T.Zero;
+        var count = T.Zero;
+        foreach (var angle in source)
+        {
+            checked 
+            { 
+                sum += angle.Value;
+                count++;
+            }
+        }
+        return new Angle<TUnits, T>(sum / count);
+    }
+
+    public static Angle<TUnits, T>? Average<TUnits, T>(this Angle<TUnits, T>[] source)
+        where TUnits : IAngleUnits<TUnits>
+        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
+        => source.AsSpan().Sum();
+
+    public static Angle<TUnits, T>? Average<TUnits, T>(this Memory<Angle<TUnits, T>> source)
+        where TUnits : IAngleUnits<TUnits>
+        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
+        => source.Span.Sum();
+
+    public static Angle<TUnits, T>? Average<TUnits, T>(this ReadOnlyMemory<Angle<TUnits, T>> source)
+        where TUnits : IAngleUnits<TUnits>
+        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
+        => source.Span.Sum();
+
+    public static Angle<TUnits, T>? Average<TUnits, T>(this Span<Angle<TUnits, T>> source)
+        where TUnits : IAngleUnits<TUnits>
+        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
+        => ((ReadOnlySpan<Angle<TUnits, T>>)source).Sum();
+
+    public static Angle<TUnits, T>? Average<TUnits, T>(this ReadOnlySpan<Angle<TUnits, T>> source)
+        where TUnits : IAngleUnits<TUnits>
+        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
+    {
+        var sum = T.Zero;
+        var count = T.Zero;
+        foreach (var angle in source)
+        {
+            checked
+            {
+                sum += angle.Value;
+                count++;
+            }
+        }
+        return new Angle<TUnits, T>(sum / count);
     }
 
     #endregion
