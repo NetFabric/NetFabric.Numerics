@@ -6,9 +6,6 @@ namespace NetFabric.Numerics.UnitTests;
 public class LerpTests
 {
     static readonly Angle<Degrees, double> AcuteDegrees = Angle<Degrees, double>.Right / 2.0;
-    static readonly Angle<Radians, double> AcuteRadians = Angle<Radians, double>.Right / 2.0;
-    static readonly Angle<Gradians, double> AcuteGradians = Angle<Gradians, double>.Right / 2.0;
-    static readonly Angle<Revolutions, double> AcuteRevolutions = Angle<Revolutions, double>.Right / 2.0;
 
     public static TheoryData<Angle<Degrees, double>, Angle<Degrees, double>, float, Angle<Degrees, double>> LerpDegreesData => new()
     {

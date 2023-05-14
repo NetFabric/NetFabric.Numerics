@@ -7,20 +7,70 @@ namespace NetFabric.Numerics;
 public static class Angle
 {
     /// <summary>
-    /// Reduce an angle to positive and less than one revolution.
+    /// Gets the reduced angle of an angle.
     /// </summary>
-    /// <param name="angle">Source angle.</param>
-    /// <returns>The reduced angle.</returns>
+    /// <typeparam name="TUnits">The angle units of <paramref name="angle"/> and the reduced angle.</typeparam>
+    /// <typeparam name="T">The floating point type used internally by the angles.</typeparam>
+    /// <param name="angle">The angle to get the reduced angle from.</param>
+    /// <remarks>
+    /// A reduced angle is an angle that is within one full revolution (360 degrees or 2π radians) 
+    /// and is expressed as an angle between 0 and 360 degrees or between 0 and 2π radians. In 
+    /// other words, a reduced angle is an angle that has been simplified by subtracting or adding
+    /// multiples of 360 degrees or 2π radians until it falls within this range. Reduced angles 
+    /// are commonly used in trigonometry to simplify calculations and to find the primary 
+    /// solution of trigonometric equations.
+    /// </remarks>
+    /// <returns>The reduced angle of <paramref name="angle"/>.</returns>
     public static Angle<TUnits, T> Reduce<TUnits, T>(Angle<TUnits, T> angle)
         where TUnits : IAngleUnits<TUnits>
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => new(Utils.Reduce(angle));
 
+    /// <summary>
+    /// Gets the reference angle of an angle
+    /// </summary>
+    /// <typeparam name="TUnits">The angle units of <paramref name="angle"/> and the reference angle.</typeparam>
+    /// <typeparam name="T">The floating point type used internally by the angles.</typeparam>
+    /// <param name="angle">The angle to get the reference angle from.</param>
+    /// <remarks>
+    /// A reference angle is the positive acute angle formed between the terminal side of an angle 
+    /// in standard position (i.e., starting from the positive x-axis) and the x-axis. It is always 
+    /// measured in a counterclockwise direction and has the same trigonometric function values 
+    /// (sine, cosine, tangent, etc.) as the original angle or its coterminal angles. Reference 
+    /// angles are often used to simplify calculations involving trigonometric functions and to 
+    /// find the general solutions of trigonometric equations.
+    /// </remarks>
+    /// <returns>The reference angle of <paramref name="angle"/>.</returns>
     public static Angle<TUnits, T> GetReference<TUnits, T>(Angle<TUnits, T> angle)
         where TUnits : IAngleUnits<TUnits>
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => new(Utils.GetReference(angle));
 
+    /// <summary>
+    /// Gets the quadrant of an angle.
+    /// </summary>
+    /// <typeparam name="TUnits">The angle units of <paramref name="angle"/>.</typeparam>
+    /// <typeparam name="T">The floating point type used internally by the angles.</typeparam>
+    /// <param name="angle"></param>
+    /// <remarks>
+    /// The quadrant of an angle is a region of the coordinate plane that is determined by the signs
+    /// of the x and y coordinates of a point on the terminal side of the angle in standard position
+    /// (i.e., starting from the positive x-axis). There are four quadrants in the coordinate plane,
+    /// numbered counterclockwise from <see cref="Quadrant.First" /> to <see cref="Quadrant.Fourth" />. 
+    /// <see cref="Quadrant.First" /> is where both x and y coordinates are positive, 
+    /// <see cref="Quadrant.Second" /> is where x is negative and y is positive, 
+    /// <see cref="Quadrant.Third" /> is where both x and y coordinates are negative, and 
+    /// <see cref="Quadrant.Fourth" /> is where x is positive and y is negative. 
+    /// The quadrant of an angle is used to determine the sign of its trigonometric 
+    /// functions (sine, cosine, tangent, etc.) and to locate its reference angle.
+    /// A quadrantal angle is an angle whose terminal side lies on one of the coordinate axes 
+    /// (i.e., the x-axis or the y-axis) in standard position. Quadrantal angles have a measure
+    /// of 0 degrees, 90 degrees, 180 degrees, or 270 degrees, or an equivalent radian measure. 
+    /// In other words, they are angles that are exact multiples of 90 degrees or π/2 radians. 
+    /// Quadrantal angles have special properties in trigonometry, such as having a sine or cosine 
+    /// value of 1 or -1, and are often used in solving problems involving trigonometric functions.
+    /// </remarks>
+    /// <returns>The quadrant of <paramref name="angle"/>.</returns>
     public static Quadrant GetQuadrant<TUnits, T>(Angle<TUnits, T> angle)
         where TUnits : IAngleUnits<TUnits>
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
