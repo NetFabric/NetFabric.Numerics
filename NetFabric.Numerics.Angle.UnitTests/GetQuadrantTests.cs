@@ -27,6 +27,7 @@ public class GetQuadrantTests
 
             {-Angle<Degrees, double>.Full, Quadrant.PositiveX},
             {-Angle<Degrees, double>.Full + AcuteDegrees, Quadrant.First},
+            {-Angle<Degrees, double>.Full - AcuteDegrees, Quadrant.Fourth},
         };
 
     [Theory]

@@ -438,9 +438,9 @@ public static class Angle
         where TDegrees : IBinaryInteger<TDegrees>
         where TMinutes : IFloatingPoint<TMinutes>
     {
-       var Degrees = TDegrees.CreateChecked(angle.Value);
-       var minutes = TMinutes.CreateChecked(Math.Abs(double.CreateChecked(angle.Value) - double.CreateChecked(Degrees)) * 60.0);
-       return (Degrees, minutes);
+       var degrees = TDegrees.CreateChecked(angle.Value);
+       var minutes = TMinutes.CreateChecked(Math.Abs(double.CreateChecked(angle.Value) - double.CreateChecked(degrees)) * 60.0);
+       return (degrees, minutes);
     }
 
     /// <summary>
@@ -452,11 +452,11 @@ public static class Angle
         where TMinutes : IBinaryInteger<TMinutes>
         where TSeconds : IFloatingPoint<TSeconds>
     {
-       var Degrees = TDegrees.CreateChecked(angle.Value);
-       var decimalMinutes = Math.Abs(double.CreateChecked(angle.Value) - double.CreateChecked(Degrees)) * 60.0;
+       var degrees = TDegrees.CreateChecked(angle.Value);
+       var decimalMinutes = Math.Abs(double.CreateChecked(angle.Value) - double.CreateChecked(degrees)) * 60.0;
        var minutes = TMinutes.CreateChecked(decimalMinutes);
        var seconds = TSeconds.CreateChecked((decimalMinutes - double.CreateChecked(minutes)) * 60.0);
-       return (Degrees, minutes, seconds);
+       return (degrees, minutes, seconds);
     }
 
     #endregion

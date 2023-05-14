@@ -131,7 +131,7 @@ public readonly record struct Vector<T>(T X, T Y)
 public static class Vector
 {
 
-    public static Vector<T> Normalized<T>(Vector<T> vector)
+    public static Vector<T> Normalize<T>(Vector<T> vector)
         where T : struct, INumber<T>, IMinMaxValue<T>
     {
         double length = vector.Length;
