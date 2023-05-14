@@ -24,6 +24,7 @@ public readonly record struct Vector<T>(T X, T Y, T Z)
     #region constants
 
     public static readonly Vector<T> Zero = new(T.Zero, T.Zero, T.Zero);
+    public static readonly Vector<T> Unit = new(T.One, T.One, T.One);
 
     static Vector<T> IVector<Vector<T>>.Zero
         => Zero;
