@@ -75,4 +75,27 @@ public static class Point
     public static double SquareOfDistance<T>(Point<T> from, Point<T> to)
         where T : struct, INumber<T>, IMinMaxValue<T>
         => Math.Pow(double.CreateChecked(to.X - from.X), 2.0) + Math.Pow(double.CreateChecked(to.Y - from.Y), 2.0);
+
+    /// <summary>
+    /// Gets the Manhattan distance between two points.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="from"></param>
+    /// <param name="to"></param>
+    /// <remarks>
+    /// <para>
+    /// The term "Manhattan Distance" comes from the idea of measuring the distance a taxi 
+    /// would have to travel along a grid of city blocks (which are typically arranged in 
+    /// a rectangular or square grid pattern) to reach the destination point from the 
+    /// starting point. 
+    /// </para>
+    /// <para>
+    /// The Manhattan distance between two points, (x1, y1) and (x2, y2), is defined as the 
+    /// sum of the absolute differences of their coordinates along each dimension.
+    /// </para>
+    /// </remarks>
+    /// <returns>The Manhattan distance between two points.</returns>
+    public static T ManhattanDistance<T>(Point<T> from, Point<T> to)
+        where T : struct, INumber<T>, IMinMaxValue<T>
+        => T.Abs(to.X - from.X) + T.Abs(to.Y - from.Y);
 }
