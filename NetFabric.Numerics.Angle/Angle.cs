@@ -184,7 +184,7 @@ public static class Angle
     public static bool IsZero<TUnits, T>(Angle<TUnits, T> angle)
         where TUnits : IAngleUnits<TUnits>
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => angle % Angle<TUnits, T>.Full == Angle<TUnits, T>.Zero;
+        => angle % Angle<TUnits, T>.Full.Value == Angle<TUnits, T>.Zero;
 
     /// <summary>
     /// Indicates whether the specified angle is acute when reduced.
@@ -299,72 +299,316 @@ public static class Angle
     #region trigonometry
 
     /// <summary>
-    /// Returns the shortest angle whose cosine is <paramref name="cos"/>
+    /// Calculates the arc cosine (inverse cosine) of an angle.
     /// </summary>
-    /// <typeparam name="TRadians">The floating point type used internally by <paramref name="cos"/>.</typeparam>
-    /// <param name="cos"></param>
+    /// <typeparam name="TRadians">The floating point type used internally by the returned angle.</typeparam>
+    /// <param name="cos">The cosine value of the angle.</param>
+    /// <exception cref="System.ArgumentOutOfRangeException">
+    /// Thrown when the provided <paramref name="sin"/> value is outside the range [-1, 1].
+    /// </exception>
+    /// <returns>The angle in radians whose cosine is equal to the given value.</returns>
     /// <remarks>
-    /// The acos function is a mathematical function that returns the inverse cosine (cos⁻¹) of a 
-    /// given value. In other words, it returns the angle in radians whose cosine is equal to the
-    /// specified value. The input value must be between -1 and 1, inclusive, and the output value 
-    /// will always be in the range of 0 to π radians or 0 to 180 degrees. 
+    /// <para>
+    /// The arc cosine function calculates the angle whose cosine is equal to the given <paramref name="cos"/> value.
+    /// It returns an angle between 0 and π (180 degrees) in radians.
+    /// The resulting angle represents the measure of the arc whose cosine is equal to the given <paramref name="cos"/> value.
+    /// For example, if the <paramref name="cos"/> value is 0.5, the resulting angle would be approximately 60 degrees.
+    /// </para>
+    /// <para>
+    /// This method calls into the underlying C runtime, and the exact result or valid input range may differ between different operating systems or architectures.
+    /// </para>
     /// </remarks>
-    /// <returns>The shortest angle whose cosine is <paramref name="cos"/></returns>
     public static Angle<Radians, TRadians> Acos<TRadians>(TRadians cos)
         where TRadians : struct, IFloatingPoint<TRadians>, IMinMaxValue<TRadians>
-        => new(TRadians.CreateChecked(Math.Acos(double.CreateChecked(cos))));
+        =>  cos < -TRadians.One || cos > TRadians.One
+            ? Throw.ArgumentOutOfRangeException<Angle<Radians, TRadians>>(nameof(cos), cos, "The cosine value must be in the range [-1, 1].")
+            : new(TRadians.CreateChecked(Math.Acos(double.CreateChecked(cos))));
 
+    /// <summary>
+    /// Calculates the arc cosine (inverse cosine) of an angle.
+    /// </summary>
+    /// <typeparam name="TCos">The floating point type of <paramref name="cos"/>.</typeparam>
+    /// <typeparam name="TRadians">The floating point type used internally by the returned angle.</typeparam>
+    /// <param name="cos">The cosine value of the angle.</param>
+    /// <exception cref="System.ArgumentOutOfRangeException">
+    /// Thrown when the provided <paramref name="cos"/> value is outside the range [-1, 1].
+    /// </exception>
+    /// <returns>The angle in radians whose cosine is equal to the given value.</returns>
+    /// <remarks>
+    /// <para>
+    /// The arc cosine function calculates the angle whose cosine is equal to the given <paramref name="cos"/> value.
+    /// The resulting angle represents the measure of the arc whose cosine is equal to the given <paramref name="cos"/> value.
+    /// For example, if the <paramref name="cos"/> value is 0.5, the resulting angle would be approximately 60 degrees.
+    /// </para>
+    /// <para>
+    /// This method calls into the underlying C runtime, and the exact result or valid input range may differ between different operating systems or architectures.
+    /// </para>
+    /// </remarks>
     public static Angle<Radians, TRadians> Acos<TCos, TRadians>(TCos cos)
         where TRadians : struct, IFloatingPoint<TRadians>, IMinMaxValue<TRadians>
         where TCos : struct, IFloatingPoint<TCos>
-        => new(TRadians.CreateChecked(Math.Acos(double.CreateChecked(cos))));
+        => cos < -TCos.One || cos > TCos.One
+            ? Throw.ArgumentOutOfRangeException<Angle<Radians, TRadians>>(nameof(cos), cos, "The cosine value must be in the range [-1, 1].")
+            : new(TRadians.CreateChecked(Math.Acos(double.CreateChecked(cos))));
 
+    /// <summary>
+    /// Calculates the arc sine (inverse sine) of an angle.
+    /// </summary>
+    /// <typeparam name="TRadians">The floating point type used internally by the returned angle.</typeparam>
+    /// <param name="sin">The sine value of the angle.</param>
+    /// <exception cref="System.ArgumentOutOfRangeException">
+    /// Thrown when the provided <paramref name="sin"/> value is outside the range [-1, 1].
+    /// </exception>
+    /// <returns>The angle in radians whose sine is equal to the given value.</returns>
+    /// <remarks>
+    /// <para>
+    /// The arc sine function calculates the angle whose sine is equal to the given <paramref name="sin"/> value.
+    /// It returns an angle between -π/2 (-90 degrees) and π/2 (90 degrees) in radians.
+    /// The resulting angle represents the measure of the arc whose sine is equal to the given <paramref name="sin"/> value.
+    /// For example, if the <paramref name="sin"/> value is 0.5, the resulting angle would be approximately 30 degrees.
+    /// </para>
+    /// <para>
+    /// This method calls into the underlying C runtime, and the exact result or valid input range may differ between different operating systems or architectures.
+    /// </para>
+    /// </remarks>
     public static Angle<Radians, TRadians> Asin<TRadians>(TRadians sin)
         where TRadians : struct, IFloatingPoint<TRadians>, IMinMaxValue<TRadians>
-        => new(TRadians.CreateChecked(Math.Asin(double.CreateChecked(sin))));
+        => sin < -TRadians.One || sin > TRadians.One
+            ? Throw.ArgumentOutOfRangeException<Angle<Radians, TRadians>>(nameof(sin), sin, "The sine value must be in the range [-1, 1].")
+            : new(TRadians.CreateChecked(Math.Asin(double.CreateChecked(sin))));
 
+    /// <summary>
+    /// Calculates the arc sine (inverse sine) of an angle.
+    /// </summary>
+    /// <typeparam name="TSin">The floating point type of <paramref name="sin"/>.</typeparam>
+    /// <typeparam name="TRadians">The floating point type used internally by the returned angle.</typeparam>
+    /// <param name="sin">The sine value of the angle.</param>
+    /// <exception cref="System.ArgumentOutOfRangeException">
+    /// Thrown when the provided <paramref name="sin"/> value is outside the range [-1, 1].
+    /// </exception>
+    /// <returns>The angle in radians whose sine is equal to the given value.</returns>
+    /// <remarks>
+    /// <para>
+    /// The arc sine function calculates the angle whose sine is equal to the given <paramref name="sin"/> value.
+    /// It returns an angle between -π/2 (-90 degrees) and π/2 (90 degrees) in radians.
+    /// The resulting angle represents the measure of the arc whose sine is equal to the given <paramref name="sin"/> value.
+    /// For example, if the <paramref name="sin"/> value is 0.5, the resulting angle would be approximately 30 degrees.
+    /// </para>
+    /// <para>
+    /// This method calls into the underlying C runtime, and the exact result or valid input range may differ between different operating systems or architectures.
+    /// </para>
+    /// </remarks>
     public static Angle<Radians, TRadians> Asin<TSin, TRadians>(TSin sin)
         where TRadians : struct, IFloatingPoint<TRadians>, IMinMaxValue<TRadians>
         where TSin : struct, IFloatingPoint<TSin>
-        => new(TRadians.CreateChecked(Math.Asin(double.CreateChecked(sin))));
+        => sin < -TSin.One || sin > TSin.One
+            ? Throw.ArgumentOutOfRangeException<Angle<Radians, TRadians>>(nameof(sin), sin, "The sine value must be in the range [-1, 1].")
+            : new(TRadians.CreateChecked(Math.Asin(double.CreateChecked(sin))));
 
+    /// <summary>
+    /// Calculates the arc tangent (inverse tangent) of an angle.
+    /// </summary>
+    /// <typeparam name="TRadians">The floating point type used internally by the returned angle.</typeparam>
+    /// <param name="tan">The tangent value of the angle.</param>
+    /// <returns>The angle in radians whose tangent is equal to the given value.</returns>
+    /// <remarks>
+    /// <para>
+    /// The arc tangent function calculates the angle whose tangent is equal to the given <paramref name="tan"/> value.
+    /// It returns an angle between -π/2 (-90 degrees) and π/2 (90 degrees) in radians.
+    /// The resulting angle represents the measure of the arc whose tangent is equal to the given <paramref name="tan"/> value.
+    /// </para>
+    /// <para>
+    /// This method calls into the underlying C runtime, and the exact result or valid input range may differ between different operating systems or architectures.
+    /// </para>
+    /// </remarks>
     public static Angle<Radians, TRadians> Atan<TRadians>(TRadians tan)
         where TRadians : struct, IFloatingPoint<TRadians>, IMinMaxValue<TRadians>
         => new(TRadians.CreateChecked(Math.Atan(double.CreateChecked(tan))));
 
+    /// <summary>
+    /// Calculates the arc tangent (inverse tangent) of an angle.
+    /// </summary>
+    /// <typeparam name="TTan">The floating point type of <paramref name="tan"/>.</typeparam>
+    /// <typeparam name="TRadians">The floating point type used internally by the returned angle.</typeparam>
+    /// <param name="tan">The tangent value of the angle.</param>
+    /// <returns>The angle in radians whose tangent is equal to the given value.</returns>
+    /// <remarks>
+    /// <para>
+    /// The arc tangent function calculates the angle whose tangent is equal to the given <paramref name="tan"/> value.
+    /// It returns an angle between -π/2 (-90 degrees) and π/2 (90 degrees) in radians.
+    /// The resulting angle represents the measure of the arc whose tangent is equal to the given <paramref name="tan"/> value.
+    /// </para>
+    /// <para>
+    /// This method calls into the underlying C runtime, and the exact result or valid input range may differ between different operating systems or architectures.
+    /// </para>
+    /// </remarks>
     public static Angle<Radians, TRadians> Atan<TTan, TRadians>(TTan tan)
         where TRadians : struct, IFloatingPoint<TRadians>, IMinMaxValue<TRadians>
         where TTan : struct, IFloatingPoint<TTan>
         => new(TRadians.CreateChecked(Math.Atan(double.CreateChecked(tan))));
 
+    /// <summary>
+    /// Calculates the arc tangent (inverse tangent) of the ratio of two specified numbers.
+    /// </summary>
+    /// <typeparam name="TRadians">The floating point type used internally by the returned angle.</typeparam>
+    /// <param name="y">The y-coordinate of the point.</param>
+    /// <param name="x">The x-coordinate of the point.</param>
+    /// <returns>The angle whose tangent is equal to the ratio <paramref name="y"/> / <paramref name="x"/>.</returns>
+    /// <remarks>
+    /// <para>
+    /// The arc tangent function calculates the angle whose tangent is equal to the ratio of <paramref name="y"/> and <paramref name="x"/>.
+    /// It returns an angle between -π and π (-180 degrees and 180 degrees) in radians.
+    /// The resulting angle represents the measure of the arc whose tangent is equal to the ratio <paramref name="y"/> / <paramref name="x"/>.
+    /// </para>
+    /// <para>
+    /// This method calls into the underlying C runtime, and the exact result or valid input range may differ between different operating systems or architectures.
+    /// </para>
+    /// </remarks>
     public static Angle<Radians, TRadians> Atan2<TRadians>(TRadians x, TRadians y)
         where TRadians : struct, IFloatingPoint<TRadians>, IMinMaxValue<TRadians>
         => new(TRadians.CreateChecked(Math.Atan2(double.CreateChecked(x), double.CreateChecked(y))));
 
-    public static Angle<Radians, TRadians> Atan2<TTan, TRadians>(TTan x, TTan y)
+    /// <summary>
+    /// Calculates the arc tangent (inverse tangent) of the ratio of two specified numbers.
+    /// </summary>
+    /// <typeparam name="T">The floating point type of the parameters.</typeparam>
+    /// <typeparam name="TRadians">The floating point type used internally by the returned angle.</typeparam>
+    /// <param name="y">The y-coordinate of the point.</param>
+    /// <param name="x">The x-coordinate of the point.</param>
+    /// <returns>The angle whose tangent is equal to the ratio <paramref name="y"/> / <paramref name="x"/>.</returns>
+    /// <remarks>
+    /// <para>
+    /// The arc tangent function calculates the angle whose tangent is equal to the ratio of <paramref name="y"/> and <paramref name="x"/>.
+    /// It returns an angle between -π and π (-180 degrees and 180 degrees) in radians.
+    /// The resulting angle represents the measure of the arc whose tangent is equal to the ratio <paramref name="y"/> / <paramref name="x"/>.
+    /// </para>
+    /// <para>
+    /// This method calls into the underlying C runtime, and the exact result or valid input range may differ between different operating systems or architectures.
+    /// </para>
+    /// </remarks>
+    public static Angle<Radians, TRadians> Atan2<T, TRadians>(T x, T y)
         where TRadians : struct, IFloatingPoint<TRadians>, IMinMaxValue<TRadians>
-        where TTan : struct, IFloatingPoint<TTan>
+        where T : struct, IFloatingPoint<T>
         => new(TRadians.CreateChecked(Math.Atan2(double.CreateChecked(x), double.CreateChecked(y))));
 
+    /// <summary>
+    /// Calculates the cosine of an angle.
+    /// </summary>
+    /// <typeparam name="TRadians">The floating point type used internally by <paramref name="angle"/>.</typeparam>
+    /// <param name="angle">The angle in radians.</param>
+    /// <returns>The cosine of the given angle.</returns>
+    /// <remarks>
+    /// <para>
+    /// The cosine function calculates the ratio of the adjacent side to the hypotenuse of a right triangle
+    /// with the given <paramref name="angle"/>.
+    /// The returned value ranges between -1 and 1, where -1 represents a 180-degree angle (π radians)
+    /// and 1 represents a 0-degree angle (0 radians).
+    /// </para>
+    /// <para>
+    /// This method calls into the underlying C runtime, and the exact result or valid input range may differ between different operating systems or architectures.
+    /// </para>
+    /// </remarks>
     public static double Cos<TRadians>(Angle<Radians, TRadians> angle)
         where TRadians : struct, IFloatingPoint<TRadians>, IMinMaxValue<TRadians>
         => Math.Cos(double.CreateChecked(angle.Value));
 
+    /// <summary>
+    /// Calculates the hyperbolic cosine of an angle.
+    /// </summary>
+    /// <typeparam name="TRadians">The floating point type used internally by <paramref name="angle"/>.</typeparam>
+    /// <param name="angle">The angle in radians.</param>
+    /// <returns>The hyperbolic cosine of the given angle.</returns>
+    /// <remarks>
+    /// <para>
+    /// The hyperbolic cosine function calculates the ratio (e^<paramref name="angle"/> + e^(-<paramref name="angle"/>)) / 2,
+    /// where e is Euler's number (approximately 2.71828).
+    /// </para>
+    /// <para>
+    /// This method calls into the underlying C runtime, and the exact result or valid input range may differ between different operating systems or architectures.
+    /// </para>
+    /// </remarks>
     public static double Cosh<TRadians>(Angle<Radians, TRadians> angle)
         where TRadians : struct, IFloatingPoint<TRadians>, IMinMaxValue<TRadians>
         => Math.Cosh(double.CreateChecked(angle.Value));
 
+    /// <summary>
+    /// Calculates the sine of an angle.
+    /// </summary>
+    /// <typeparam name="TRadians">The floating point type used internally by <paramref name="angle"/>.</typeparam>
+    /// <param name="angle">The angle in radians.</param>
+    /// <returns>The sine of the given angle.</returns>
+    /// <remarks>
+    /// <para>
+    /// The sine function calculates the ratio of the opposite side to the hypotenuse of a right triangle
+    /// with the given <paramref name="angle"/>.
+    /// The returned value ranges between -1 and 1, where -1 represents a 270-degree angle (-3π/2 radians)
+    /// and 1 represents a 90-degree angle (π/2 radians).
+    /// </para>
+    /// <para>
+    /// This method calls into the underlying C runtime, and the exact result or valid input range may differ between different operating systems or architectures.
+    /// </para>
+    /// </remarks>
     public static double Sin<TRadians>(Angle<Radians, TRadians> angle)
         where TRadians : struct, IFloatingPoint<TRadians>, IMinMaxValue<TRadians>
         => Math.Sin(double.CreateChecked(angle.Value));
 
+    /// <summary>
+    /// Calculates the hyperbolic sine of an angle.
+    /// </summary>
+    /// <typeparam name="TRadians">The floating point type used internally by <paramref name="angle"/>.</typeparam>
+    /// <param name="angle">The angle in radians.</param>
+    /// <returns>The hyperbolic sine of the given angle.</returns>
+    /// <remarks>
+    /// <para>
+    /// The hyperbolic sine function calculates the ratio (e^<paramref name="angle"/> - e^(-<paramref name="angle"/>)) / 2,
+    /// where e is Euler's number (approximately 2.71828).
+    /// </para>
+    /// <para>
+    /// This method calls into the underlying C runtime, and the exact result or valid input range may differ between different operating systems or architectures.
+    /// </para>
+    /// </remarks>
     public static double Sinh<TRadians>(Angle<Radians, TRadians> angle)
         where TRadians : struct, IFloatingPoint<TRadians>, IMinMaxValue<TRadians>
         => Math.Sinh(double.CreateChecked(angle.Value));
 
+    /// <summary>
+    /// Calculates the tangent of an angle.
+    /// </summary>
+    /// <typeparam name="TRadians">The floating point type used internally by <paramref name="angle"/>.</typeparam>
+    /// <param name="angle">The angle in radians.</param>
+    /// <returns>The tangent of the given angle.</returns>
+    /// <remarks>
+    /// <para>
+    /// The tangent function calculates the ratio of the sine of the angle to the cosine of the angle.
+    /// It represents the slope of the line tangent to the unit circle at the given <paramref name="angle"/>.
+    /// The returned value can range from negative infinity to positive infinity.
+    /// </para>
+    /// <para>
+    /// This method calls into the underlying C runtime, and the exact result or valid input range may differ between different operating systems or architectures.
+    /// </para>
+    /// </remarks>
     public static double Tan<TRadians>(Angle<Radians, TRadians> angle)
         where TRadians : struct, IFloatingPoint<TRadians>, IMinMaxValue<TRadians>
         => Math.Tan(double.CreateChecked(angle.Value));
+
+    /// <summary>
+    /// Calculates the hyperbolic tangent of an angle.
+    /// </summary>
+    /// <param name="angle">The angle in radians.</param>
+    /// <returns>The hyperbolic tangent of the given angle.</returns>
+    /// <remarks>
+    /// <para>
+    /// The hyperbolic tangent function calculates the ratio (e^<paramref name="angle"/> - e^(-<paramref name="angle"/>)) /
+    /// (e^<paramref name="angle"/> + e^(-<paramref name="angle"/>)), where e is Euler's number (approximately 2.71828).
+    /// The returned value represents the hyperbolic tangent of the given <paramref name="angle"/>.
+    /// </para>
+    /// <para>
+    /// This method calls into the underlying C runtime, and the exact result or valid input range may differ between different operating systems or architectures.
+    /// </para>
+    /// </remarks>
+    public static double Tanh<TRadians>(Angle<Radians, TRadians> angle)
+        where TRadians : struct, IFloatingPoint<TRadians>, IMinMaxValue<TRadians>
+        => Math.Tanh(double.CreateChecked(angle.Value));
 
     #endregion
 
@@ -583,6 +827,15 @@ public static class Angle
 
     #region sum
 
+    /// <summary>
+    /// Calculates the sum of a collection of angles.
+    /// </summary>
+    /// <param name="source">The enumerable collection of angles.</param>
+    /// <returns>The sum of the angles in the collection.</returns>
+    /// <remarks>
+    /// The sum of angles is computed by adding all the angles in the given <paramref name="source"/> collection.
+    /// The resulting angle is the cumulative sum of all the angles in radians.
+    /// </remarks>
     public static Angle<TUnits, T> Sum<TUnits, T>(this IEnumerable<Angle<TUnits, T>> source)
         where TUnits : IAngleUnits<TUnits>
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
@@ -595,26 +848,71 @@ public static class Angle
         return new Angle<TUnits, T>(sum);
     }
 
+    /// <summary>
+    /// Calculates the sum of a collection of angles.
+    /// </summary>
+    /// <param name="source">The array collection of angles.</param>
+    /// <returns>The sum of the angles in the collection.</returns>
+    /// <remarks>
+    /// The sum of angles is computed by adding all the angles in the given <paramref name="source"/> collection.
+    /// The resulting angle is the cumulative sum of all the angles in radians.
+    /// </remarks>
     public static Angle<TUnits, T> Sum<TUnits, T>(this Angle<TUnits, T>[] source)
         where TUnits : IAngleUnits<TUnits>
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => source.AsSpan().Sum();
 
+    /// <summary>
+    /// Calculates the sum of a collection of angles.
+    /// </summary>
+    /// <param name="source">The <see cref="Memory{T}"/> collection of angles.</param>
+    /// <returns>The sum of the angles in the collection.</returns>
+    /// <remarks>
+    /// The sum of angles is computed by adding all the angles in the given <paramref name="source"/> collection.
+    /// The resulting angle is the cumulative sum of all the angles in radians.
+    /// </remarks>
     public static Angle<TUnits, T> Sum<TUnits, T>(this Memory<Angle<TUnits, T>> source)
         where TUnits : IAngleUnits<TUnits>
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => source.Span.Sum();
 
+    /// <summary>
+    /// Calculates the sum of a collection of angles.
+    /// </summary>
+    /// <param name="source">The <see cref="ReadOnlyMemory{T}"/> collection of angles.</param>
+    /// <returns>The sum of the angles in the collection.</returns>
+    /// <remarks>
+    /// The sum of angles is computed by adding all the angles in the given <paramref name="source"/> collection.
+    /// The resulting angle is the cumulative sum of all the angles in radians.
+    /// </remarks>
     public static Angle<TUnits, T> Sum<TUnits, T>(this ReadOnlyMemory<Angle<TUnits, T>> source)
         where TUnits : IAngleUnits<TUnits>
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => source.Span.Sum();
 
+    /// <summary>
+    /// Calculates the sum of a collection of angles.
+    /// </summary>
+    /// <param name="source">The <see cref="Span{T}"/> collection of angles.</param>
+    /// <returns>The sum of the angles in the collection.</returns>
+    /// <remarks>
+    /// The sum of angles is computed by adding all the angles in the given <paramref name="source"/> collection.
+    /// The resulting angle is the cumulative sum of all the angles in radians.
+    /// </remarks>
     public static Angle<TUnits, T> Sum<TUnits, T>(this Span<Angle<TUnits, T>> source)
         where TUnits : IAngleUnits<TUnits>
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => ((ReadOnlySpan<Angle<TUnits, T>>)source).Sum();
 
+    /// <summary>
+    /// Calculates the sum of a collection of angles.
+    /// </summary>
+    /// <param name="source">The <see cref="ReadOnlySpan{T}"/> collection of angles.</param>
+    /// <returns>The sum of the angles in the collection.</returns>
+    /// <remarks>
+    /// The sum of angles is computed by adding all the angles in the given <paramref name="source"/> collection.
+    /// The resulting angle is the cumulative sum of all the angles in radians.
+    /// </remarks>
     public static Angle<TUnits, T> Sum<TUnits, T>(this ReadOnlySpan<Angle<TUnits, T>> source)
         where TUnits : IAngleUnits<TUnits>
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
@@ -631,6 +929,16 @@ public static class Angle
 
     #region average
 
+    /// <summary>
+    /// Calculates the average of an collection of angles.
+    /// </summary>
+    /// <param name="source">The enumerable of angles.</param>
+    /// <returns>The average angle in the collection, or null if the collection is empty.</returns>
+    /// <remarks>
+    /// The average angle is computed by summing all the angles in the given <paramref name="source"/> collection and dividing the sum by the count of angles.
+    /// If the array is empty, the method returns null to indicate that there are no angles to compute the average from.
+    /// The resulting angle represents the average value of all the angles.
+    /// </remarks>
     public static Angle<TUnits, T>? Average<TUnits, T>(this IEnumerable<Angle<TUnits, T>> source)
         where TUnits : IAngleUnits<TUnits>
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
@@ -645,29 +953,81 @@ public static class Angle
                 count++;
             }
         }
-        return new Angle<TUnits, T>(sum / count);
+        return T.IsZero(count) 
+            ? null 
+            : new Angle<TUnits, T>(sum / count);
     }
 
+    /// <summary>
+    /// Calculates the average of an collection of angles.
+    /// </summary>
+    /// <param name="source">The array of angles.</param>
+    /// <returns>The average angle in the collection, or null if the collection is empty.</returns>
+    /// <remarks>
+    /// The average angle is computed by summing all the angles in the given <paramref name="source"/> collection and dividing the sum by the count of angles.
+    /// If the array is empty, the method returns null to indicate that there are no angles to compute the average from.
+    /// The resulting angle represents the average value of all the angles.
+    /// </remarks>
     public static Angle<TUnits, T>? Average<TUnits, T>(this Angle<TUnits, T>[] source)
         where TUnits : IAngleUnits<TUnits>
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => source.AsSpan().Sum();
 
+    /// <summary>
+    /// Calculates the average of an collection of angles.
+    /// </summary>
+    /// <param name="source">The <see cref="Memory{T}"/> of angles.</param>
+    /// <returns>The average angle in the collection, or null if the collection is empty.</returns>
+    /// <remarks>
+    /// The average angle is computed by summing all the angles in the given <paramref name="source"/> collection and dividing the sum by the count of angles.
+    /// If the array is empty, the method returns null to indicate that there are no angles to compute the average from.
+    /// The resulting angle represents the average value of all the angles.
+    /// </remarks>
     public static Angle<TUnits, T>? Average<TUnits, T>(this Memory<Angle<TUnits, T>> source)
         where TUnits : IAngleUnits<TUnits>
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => source.Span.Sum();
 
+    /// <summary>
+    /// Calculates the average of an collection of angles.
+    /// </summary>
+    /// <param name="source">The <see cref="ReadOnlyMemory{T}"/> of angles.</param>
+    /// <returns>The average angle in the collection, or null if the collection is empty.</returns>
+    /// <remarks>
+    /// The average angle is computed by summing all the angles in the given <paramref name="source"/> collection and dividing the sum by the count of angles.
+    /// If the array is empty, the method returns null to indicate that there are no angles to compute the average from.
+    /// The resulting angle represents the average value of all the angles.
+    /// </remarks>
     public static Angle<TUnits, T>? Average<TUnits, T>(this ReadOnlyMemory<Angle<TUnits, T>> source)
         where TUnits : IAngleUnits<TUnits>
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => source.Span.Sum();
 
+    /// <summary>
+    /// Calculates the average of an collection of angles.
+    /// </summary>
+    /// <param name="source">The <see cref="Span{T}"/> of angles.</param>
+    /// <returns>The average angle in the collection, or null if the collection is empty.</returns>
+    /// <remarks>
+    /// The average angle is computed by summing all the angles in the given <paramref name="source"/> collection and dividing the sum by the count of angles.
+    /// If the array is empty, the method returns null to indicate that there are no angles to compute the average from.
+    /// The resulting angle represents the average value of all the angles.
+    /// </remarks>
     public static Angle<TUnits, T>? Average<TUnits, T>(this Span<Angle<TUnits, T>> source)
         where TUnits : IAngleUnits<TUnits>
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => ((ReadOnlySpan<Angle<TUnits, T>>)source).Sum();
 
+    /// <summary>
+    /// Calculates the average of an collection of angles.
+    /// </summary>
+    /// <param name="source">The <see cref="ReadOnlySpan{T}"/> of angles.</param>
+    /// <returns>The average angle in the collection, or null if the collection is empty.</returns>
+    /// <remarks>
+    /// The average angle is computed by summing all the angles in the given <paramref name="source"/> collection and dividing the sum by the count of angles.
+    /// If the array is empty, the method returns null to indicate that there are no angles to compute the average from.
+    /// The resulting angle represents the average value of all the angles.
+    /// </remarks>
     public static Angle<TUnits, T>? Average<TUnits, T>(this ReadOnlySpan<Angle<TUnits, T>> source)
         where TUnits : IAngleUnits<TUnits>
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
@@ -682,7 +1042,9 @@ public static class Angle
                 count++;
             }
         }
-        return new Angle<TUnits, T>(sum / count);
+        return T.IsZero(count)
+            ? null
+            : new Angle<TUnits, T>(sum / count);
     }
 
     #endregion

@@ -10,7 +10,7 @@
     <Company>NetFabric</Company>
     <PackageIcon>Icon.png</PackageIcon>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <PackageTags>math, numerics</PackageTags>
+    <PackageTags>math, numerics, vector, cartesian, polar, spherical</PackageTags>
     <PackageReleaseNotes>
       First release.
     </PackageReleaseNotes>

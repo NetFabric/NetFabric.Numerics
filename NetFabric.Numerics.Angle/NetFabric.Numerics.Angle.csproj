@@ -14,7 +14,7 @@
     <Company>NetFabric</Company>
     <PackageIcon>Icon.png</PackageIcon>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <PackageTags>math, numerics</PackageTags>
+    <PackageTags>math, numerics, angle, trigonometry, degrees, radians, gradians, revolutions</PackageTags>
     <PackageReleaseNotes>
       First release.
     </PackageReleaseNotes>
