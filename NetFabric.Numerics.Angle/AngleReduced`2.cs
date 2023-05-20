@@ -1,81 +1,48 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 
 namespace NetFabric.Numerics;
 
-[DebuggerTypeProxy(typeof(AngleDebugView<,>))]
-public struct Angle<TUnits, T>
-    : IEquatable<Angle<TUnits, T>>,
-      IEqualityOperators<Angle<TUnits, T>, Angle<TUnits, T>, bool>,
+//[DebuggerTypeProxy(typeof(AngleDebugView<,>))]
+public struct AngleReduced<TUnits, T>
+    : IEquatable<AngleReduced<TUnits, T>>,
+      IEqualityOperators<AngleReduced<TUnits, T>, AngleReduced<TUnits, T>, bool>,
       IComparable,
-      IComparisonOperators<Angle<TUnits, T>, Angle<TUnits, T>, bool>,
-      IAdditiveIdentity<Angle<TUnits, T>, Angle<TUnits, T>>,
-      IMultiplicativeIdentity<Angle<TUnits, T>, Angle<TUnits, T>>,
-      IUnaryPlusOperators<Angle<TUnits, T>, Angle<TUnits, T>>,
-      IAdditionOperators<Angle<TUnits, T>, Angle<TUnits, T>, Angle<TUnits, T>>,
-      IAdditionOperators<Angle<TUnits, T>, AngleReduced<TUnits, T>, Angle<TUnits, T>>,
-      IUnaryNegationOperators<Angle<TUnits, T>, Angle<TUnits, T>>,
-      ISubtractionOperators<Angle<TUnits, T>, Angle<TUnits, T>, Angle<TUnits, T>>,
-      ISubtractionOperators<Angle<TUnits, T>, AngleReduced<TUnits, T>, Angle<TUnits, T>>,
-      IDivisionOperators<Angle<TUnits, T>, T, Angle<TUnits, T>>,
-      IModulusOperators<Angle<TUnits, T>, T, Angle<TUnits, T>>,
-      IMinMaxValue<Angle<TUnits, T>>
+      IComparisonOperators<AngleReduced<TUnits, T>, AngleReduced<TUnits, T>, bool>,
+      IUnaryPlusOperators<AngleReduced<TUnits, T>, AngleReduced<TUnits, T>>,
+      IAdditionOperators<AngleReduced<TUnits, T>, AngleReduced<TUnits, T>, Angle<TUnits, T>>,
+      IAdditionOperators<AngleReduced<TUnits, T>, Angle<TUnits, T>, Angle<TUnits, T>>,
+      IUnaryNegationOperators<AngleReduced<TUnits, T>, Angle<TUnits, T>>,
+      ISubtractionOperators<AngleReduced<TUnits, T>, AngleReduced<TUnits, T>, Angle<TUnits, T>>,
+      ISubtractionOperators<AngleReduced<TUnits, T>, Angle<TUnits, T>, Angle<TUnits, T>>,
+      IDivisionOperators<AngleReduced<TUnits, T>, T, Angle<TUnits, T>>,
+      IModulusOperators<AngleReduced<TUnits, T>, T, Angle<TUnits, T>>,
+      IMinMaxValue<AngleReduced<TUnits, T>>
     where TUnits : IAngleUnits<TUnits>
     where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
 {
     public T Value { get; }
 
-    public Angle(T value)
+    public AngleReduced(T value)
     {
-        Value = value; 
+        if(value < T.Zero || value >= T.CreateChecked(TUnits.Full))
+            Throw.ArgumentOutOfRangeException(nameof(value), value, "Value must be greater or equal to Zero and less than Full.");
+        Value = value;
     }
 
-    #region constants
-
     /// <summary>
-    /// Represents the zero angle value (0 Degrees). This field is read-only.
+    /// Implicitly converts an <see cref="Angle{TUnits, T}"/> to a <see cref="AngleReduced{TUnits, T}"/>.
     /// </summary>
-    public static readonly AngleReduced<TUnits, T> Zero = new(T.Zero);
-
-    /// <summary>
-    /// Represents the right angle value (90 Degrees). This field is read-only.
-    /// </summary>
-    public static readonly AngleReduced<TUnits, T> Right = new(T.CreateChecked(TUnits.Right));
-
-    /// <summary>
-    /// Represents the straight angle value (180 Degrees). This field is read-only.
-    /// </summary>
-    public static readonly AngleReduced<TUnits, T> Straight = new(T.CreateChecked(TUnits.Straight));
-
-    /// <summary>
-    /// Represents the full angle value (360 Degrees). This field is read-only.
-    /// </summary>
-    public static readonly Angle<TUnits, T> Full = new(T.CreateChecked(TUnits.Full));
-
-    /// <summary>
-    /// Represents the minimum angle value. This field is read-only.
-    /// </summary>
-    public static readonly Angle<TUnits, T> MinValue = new(T.MinValue);
-
-    /// <summary>
-    /// Represents the maximum angle value. This field is read-only.
-    /// </summary>
-    public static readonly Angle<TUnits, T> MaxValue = new(T.MaxValue);
-
-    static Angle<TUnits, T> IAdditiveIdentity<Angle<TUnits, T>, Angle<TUnits, T>>.AdditiveIdentity
-        => new(T.AdditiveIdentity);
-    static Angle<TUnits, T> IMultiplicativeIdentity<Angle<TUnits, T>, Angle<TUnits, T>>.MultiplicativeIdentity
-        => new(T.MultiplicativeIdentity);
-    
-    static Angle<TUnits, T> IMinMaxValue<Angle<TUnits, T>>.MinValue 
-        => MinValue;
-    static Angle<TUnits, T> IMinMaxValue<Angle<TUnits, T>>.MaxValue 
-        => MaxValue;
-
-    #endregion
+    /// <param name="angle">The angle to convert.</param>
+    /// <returns>A <see cref="AngleReduced{TUnits, T}"/> representing the same angle value as the input <see cref="Angle{TUnits, T}"/>.</returns>
+    /// <remarks>
+    /// This implicit conversion allows for seamless conversion from an <see cref="Angle{TUnits, T}"/> to a <see cref="AngleReduced{TUnits, T}"/>.
+    /// The resulting <see cref="AngleReduced{TUnits, T}"/> will have the same angle value as the input <see cref="Angle{TUnits, T}"/>.
+    /// </remarks>
+    public static implicit operator Angle<TUnits, T>(AngleReduced<TUnits, T> angle)
+        => new(angle.Value);
 
     #region equality
 
@@ -88,7 +55,7 @@ public struct Angle<TUnits, T>
     /// <remarks>
     /// The method compares the numerical values of the <paramref name="left"/> and <paramref name="right"/> angles to determine their equality.
     /// </remarks>
-    public static bool operator ==(Angle<TUnits, T> left, Angle<TUnits, T> right)
+    public static bool operator ==(AngleReduced<TUnits, T> left, AngleReduced<TUnits, T> right)
         => left.Equals(right);
 
     /// <summary>
@@ -100,7 +67,7 @@ public struct Angle<TUnits, T>
     /// <remarks>
     /// The method compares the numerical values of the <paramref name="left"/> and <paramref name="right"/> angles to determine their equality.
     /// </remarks>
-    public static bool operator !=(Angle<TUnits, T> left, Angle<TUnits, T> right)
+    public static bool operator !=(AngleReduced<TUnits, T> left, AngleReduced<TUnits, T> right)
         => !left.Equals(right);
 
     /// <summary>
@@ -111,7 +78,7 @@ public struct Angle<TUnits, T>
     => EqualityComparer<T>.Default.GetHashCode(Value);
 
     /// <summary>
-    /// Indicates whether the current <see cref="Angle{TUnits, T}"/> instance is equal to another <see cref="Angle{TUnits, T}"/> instance.
+    /// Indicates whether the current <see cref="AngleReduced{TUnits, T}"/> instance is equal to another <see cref="Angle{TUnits, T}"/> instance.
     /// </summary>
     /// <param name="other">An <see cref="Angle{TUnits, T}"/> value to compare to this instance.</param>
     /// <returns>true if <paramref name="other"/> has the same value as this instance; otherwise, false.</returns>
@@ -119,7 +86,7 @@ public struct Angle<TUnits, T>
         => EqualityComparer<T>.Default.Equals(Value, other.Value);
 
     /// <summary>
-    /// Indicates whether the current <see cref="Angle{TUnits, T}"/> instance is equal to another <see cref="AngleReduced{TUnits, T}"/> instance.
+    /// Indicates whether the current <see cref="AngleReduced{TUnits, T}"/> instance is equal to another <see cref="AngleReduced{TUnits, T}"/> instance.
     /// </summary>
     /// <param name="other">An <see cref="AngleReduced{TUnits, T}"/> value to compare to this instance.</param>
     /// <returns>true if <paramref name="other"/> has the same value as this instance; otherwise, false.</returns>
@@ -144,39 +111,53 @@ public struct Angle<TUnits, T>
 
     #endregion
 
-    #region comparison
+    #region constants
 
     /// <summary>
-    /// Compares the current <see cref="Angle{TUnits, T}"/> instance to another <see cref="Angle{TUnits, T}"/> instance.
+    /// Represents the minimum angle value. This field is read-only.
     /// </summary>
-    /// <param name="other"></param>
-    /// <returns></returns>
+    public static readonly AngleReduced<TUnits, T> MinValue = new(T.Zero);
+
+    /// <summary>
+    /// Represents the maximum angle value. This field is read-only.
+    /// </summary>
+    public static readonly AngleReduced<TUnits, T> MaxValue = new(T.CreateChecked(TUnits.Full - double.Epsilon));
+    
+    static AngleReduced<TUnits, T> IMinMaxValue<AngleReduced<TUnits, T>>.MinValue 
+        => MinValue;
+    static AngleReduced<TUnits, T> IMinMaxValue<AngleReduced<TUnits, T>>.MaxValue 
+        => MaxValue;
+
+    #endregion
+
+    #region comparison
+
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public readonly int CompareTo(Angle<TUnits, T> other) 
+    public readonly int CompareTo(AngleReduced<TUnits, T> other)
         => Value.CompareTo(other.Value);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool operator <(Angle<TUnits, T> left, Angle<TUnits, T> right) 
+    public static bool operator <(AngleReduced<TUnits, T> left, AngleReduced<TUnits, T> right)
         => left.CompareTo(right) < 0;
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool operator <=(Angle<TUnits, T> left, Angle<TUnits, T> right) 
+    public static bool operator <=(AngleReduced<TUnits, T> left, AngleReduced<TUnits, T> right)
         => left.CompareTo(right) <= 0;
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool operator >(Angle<TUnits, T> left, Angle<TUnits, T> right) 
+    public static bool operator >(AngleReduced<TUnits, T> left, AngleReduced<TUnits, T> right)
         => left.CompareTo(right) > 0;
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool operator >=(Angle<TUnits, T> left, Angle<TUnits, T> right) 
-        => left.CompareTo(right) >= 0;        
+    public static bool operator >=(AngleReduced<TUnits, T> left, AngleReduced<TUnits, T> right)
+        => left.CompareTo(right) >= 0;
 
-    readonly int IComparable.CompareTo(object? obj) 
+    readonly int IComparable.CompareTo(object? obj)
         => obj switch
         {
             null => 1,
-            Angle<TUnits, T> other => CompareTo(other),
-            _ => Throw.ArgumentException<int>($"Argument must be of type {nameof(Angle<TUnits, T>)}.", nameof(obj)),
+            AngleReduced<TUnits, T> other => CompareTo(other),
+            _ => Throw.ArgumentException<int>($"Argument must be of type {nameof(AngleReduced<TUnits, T>)}.", nameof(obj)),
         };
 
     #endregion
@@ -197,7 +178,7 @@ public struct Angle<TUnits, T>
     /// doesn't change the direction of rotation.
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Angle<TUnits, T> operator +(Angle<TUnits, T> right) 
+    public static AngleReduced<TUnits, T> operator +(AngleReduced<TUnits, T> right)
         => right;
 
     /// <summary>
@@ -217,8 +198,9 @@ public struct Angle<TUnits, T>
     /// smaller angle from the larger angle, resulting in a new angle that represents the difference in rotation.
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Angle<TUnits, T> operator +(Angle<TUnits, T> left, Angle<TUnits, T> right) 
-        => new (left.Value + right.Value);
+    public static Angle<TUnits, T> operator +(AngleReduced<TUnits, T> left, AngleReduced<TUnits, T> right)
+        => new(left.Value + right.Value);
+
 
     /// <summary>
     /// Addition operator for two angles.
@@ -237,7 +219,7 @@ public struct Angle<TUnits, T>
     /// smaller angle from the larger angle, resulting in a new angle that represents the difference in rotation.
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Angle<TUnits, T> operator +(Angle<TUnits, T> left, AngleReduced<TUnits, T> right)
+    public static Angle<TUnits, T> operator +(AngleReduced<TUnits, T> left, Angle<TUnits, T> right)
         => new(left.Value + right.Value);
 
     #endregion
@@ -259,7 +241,7 @@ public struct Angle<TUnits, T>
     /// in the clockwise direction, the resulting angle would be 90 degrees in the counterclockwise direction.
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Angle<TUnits, T> operator -(Angle<TUnits, T> right) 
+    public static Angle<TUnits, T> operator -(AngleReduced<TUnits, T> right)
         => new(-right.Value);
 
     /// <summary>
@@ -279,8 +261,8 @@ public struct Angle<TUnits, T>
     /// Subtracting angles in the opposite direction will produce a new angle that represents the difference in rotation.
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Angle<TUnits, T> operator -(Angle<TUnits, T> left, Angle<TUnits, T> right) 
-        => new (left.Value - right.Value);
+    public static Angle<TUnits, T> operator -(AngleReduced<TUnits, T> left, AngleReduced<TUnits, T> right)
+        => new(left.Value - right.Value);
 
     /// <summary>
     /// Subtraction operator for two angles.
@@ -299,7 +281,7 @@ public struct Angle<TUnits, T>
     /// Subtracting angles in the opposite direction will produce a new angle that represents the difference in rotation.
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Angle<TUnits, T> operator -(Angle<TUnits, T> left, AngleReduced<TUnits, T> right)
+    public static Angle<TUnits, T> operator -(AngleReduced<TUnits, T> left, Angle<TUnits, T> right)
         => new(left.Value - right.Value);
 
     #endregion
@@ -321,7 +303,7 @@ public struct Angle<TUnits, T>
     /// direction of rotation.
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Angle<TUnits, T> operator *(T left, Angle<TUnits, T> right)
+    public static Angle<TUnits, T> operator *(T left, AngleReduced<TUnits, T> right)
         => new(left * right.Value);
 
     #endregion
@@ -343,7 +325,7 @@ public struct Angle<TUnits, T>
     /// effectively reduces the magnitude of the angle by dividing it by the number.
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Angle<TUnits, T> operator /(Angle<TUnits, T> left, T right)
+    public static Angle<TUnits, T> operator /(AngleReduced<TUnits, T> left, T right)
         => new(left.Value / right);
 
     /// <summary>
@@ -362,7 +344,7 @@ public struct Angle<TUnits, T>
     /// because the division results in an exact quotient without any leftover angle.
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Angle<TUnits, T> operator %(Angle<TUnits, T> left, T right)
+    public static Angle<TUnits, T> operator %(AngleReduced<TUnits, T> left, T right)
         => new(left.Value % right);
 
     #endregion

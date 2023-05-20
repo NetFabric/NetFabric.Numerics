@@ -22,7 +22,7 @@ public class MathBenchmarks
     [Benchmark]
     public Angle<Radians, double> Angle()
     {
-        var sum = Angle<Radians, double>.Zero;
+        Angle<Radians, double> sum = Angle<Radians, double>.Zero;
         for(var counter = 0; counter < COUNT; counter++)
         {
             sum += RadiansPI;

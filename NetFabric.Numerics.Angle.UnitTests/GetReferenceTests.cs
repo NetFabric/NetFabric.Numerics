@@ -5,28 +5,17 @@ namespace NetFabric.Numerics.UnitTests;
 
 public class GetReferenceTests
 {
-    static readonly Angle<Degrees, double> AcuteDegrees = Angle<Degrees, double>.Right / 4.0;
-
-    public static TheoryData<Angle<Degrees, double>, Angle<Degrees, double>> GetReferenceDegreesData => new()
+    public static TheoryData<AngleReduced<Degrees, double>, AngleReduced<Degrees, double>> GetReferenceDegreesData
+        => new()
         {
-            {Angle<Degrees, double>.Zero, Angle<Degrees, double>.Zero},
-            {Angle<Degrees, double>.Zero + AcuteDegrees, AcuteDegrees},
-            {Angle<Degrees, double>.Right - AcuteDegrees, Angle<Degrees, double>.Right - AcuteDegrees},
-            {Angle<Degrees, double>.Right, Angle<Degrees, double>.Right},
-            {Angle<Degrees, double>.Right + AcuteDegrees, Angle<Degrees, double>.Right - AcuteDegrees},
-            {Angle<Degrees, double>.Straight - AcuteDegrees, AcuteDegrees},
-            {Angle<Degrees, double>.Straight, Angle<Degrees, double>.Zero},
-            {Angle<Degrees, double>.Straight + AcuteDegrees, AcuteDegrees},
-            {Angle<Degrees, double>.Straight + Angle<Degrees, double>.Right - AcuteDegrees, Angle<Degrees, double>.Right - AcuteDegrees},
-            {Angle<Degrees, double>.Straight + Angle<Degrees, double>.Right, Angle<Degrees, double>.Right},
-            {Angle<Degrees, double>.Straight + Angle<Degrees, double>.Right + AcuteDegrees, Angle<Degrees, double>.Right - AcuteDegrees},
-            {Angle<Degrees, double>.Full - AcuteDegrees, AcuteDegrees},
-
-            {Angle<Degrees, double>.Full, Angle<Degrees, double>.Zero},
-            {Angle<Degrees, double>.Full + AcuteDegrees, AcuteDegrees},
-
-            {-Angle<Degrees, double>.Full, Angle<Degrees, double>.Zero},
-            {-Angle<Degrees, double>.Full + AcuteDegrees, AcuteDegrees},
+            {new AngleReduced<Degrees, double>(0.0), new AngleReduced<Degrees, double>(0.0)},
+            {new AngleReduced<Degrees, double>(45.0), new AngleReduced<Degrees, double>(45.0)},
+            {new AngleReduced<Degrees, double>(90.0), new AngleReduced<Degrees, double>(90.0)},
+            {new AngleReduced<Degrees, double>(135.0), new AngleReduced<Degrees, double>(45.0)},
+            {new AngleReduced<Degrees, double>(180.0), new AngleReduced<Degrees, double>(0.0)},
+            {new AngleReduced<Degrees, double>(225.0), new AngleReduced<Degrees, double>(45.0)},
+            {new AngleReduced<Degrees, double>(270.0), new AngleReduced<Degrees, double>(90.0)},
+            {new AngleReduced<Degrees, double>(315.0), new AngleReduced<Degrees, double>(45.0)},
         };
 
     [Theory]
@@ -34,9 +23,10 @@ public class GetReferenceTests
     public void GetReference_Degrees_Should_Succeed(Angle<Degrees, double> angle, Angle<Degrees, double> expected)
     {
         // arrange
+        var reduced = Angle.Reduce(angle);
 
         // act
-        var result = Angle.GetReference(angle);
+        var result = Angle.GetReference(reduced);
 
         // assert
         result.Should().Be(expected);

@@ -5,34 +5,24 @@ namespace NetFabric.Numerics.UnitTests;
 
 public class GetQuadrantTests
 {
-    static readonly Angle<Degrees, double> AcuteDegrees = Angle<Degrees, double>.Right / 4.0;
+    static readonly double AcuteDegrees = Angle<Degrees, double>.Right.Value / 4.0;
 
-    public static TheoryData<Angle<Degrees, double>, Quadrant> GetQuadrantDegreesData => new()
+    public static TheoryData<AngleReduced<Degrees, double>, Quadrant> GetQuadrantDegreesData 
+        => new()
         {
-            {Angle<Degrees, double>.Zero, Quadrant.PositiveX},
-            {Angle<Degrees, double>.Zero + AcuteDegrees, Quadrant.First},
-            {Angle<Degrees, double>.Right - AcuteDegrees, Quadrant.First},
-            {Angle<Degrees, double>.Right, Quadrant.PositiveY},
-            {Angle<Degrees, double>.Right + AcuteDegrees, Quadrant.Second},
-            {Angle<Degrees, double>.Straight - AcuteDegrees, Quadrant.Second},
-            {Angle<Degrees, double>.Straight, Quadrant.NegativeX},
-            {Angle<Degrees, double>.Straight + AcuteDegrees, Quadrant.Third},
-            {Angle<Degrees, double>.Straight + Angle<Degrees, double>.Right - AcuteDegrees, Quadrant.Third},
-            {Angle<Degrees, double>.Straight + Angle<Degrees, double>.Right, Quadrant.NegativeY},
-            {Angle<Degrees, double>.Straight + Angle<Degrees, double>.Right + AcuteDegrees, Quadrant.Fourth},
-            {Angle<Degrees, double>.Full - AcuteDegrees, Quadrant.Fourth},
-
-            {Angle<Degrees, double>.Full, Quadrant.PositiveX},
-            {Angle<Degrees, double>.Full + AcuteDegrees, Quadrant.First},
-
-            {-Angle<Degrees, double>.Full, Quadrant.PositiveX},
-            {-Angle<Degrees, double>.Full + AcuteDegrees, Quadrant.First},
-            {-Angle<Degrees, double>.Full - AcuteDegrees, Quadrant.Fourth},
+            {new AngleReduced<Degrees, double>(0.0), Quadrant.PositiveX},
+            {new AngleReduced<Degrees, double>(45.0), Quadrant.First},
+            {new AngleReduced<Degrees, double>(90.0), Quadrant.PositiveY},
+            {new AngleReduced<Degrees, double>(135.0), Quadrant.Second},
+            {new AngleReduced<Degrees, double>(180.0), Quadrant.NegativeX},
+            {new AngleReduced<Degrees, double>(225.0), Quadrant.Third},
+            {new AngleReduced<Degrees, double>(270.0), Quadrant.NegativeY},
+            {new AngleReduced<Degrees, double>(315.0), Quadrant.Fourth},
         };
 
     [Theory]
     [MemberData(nameof(GetQuadrantDegreesData))]
-    public void GetQuadrant_Degrees_Should_Succeed(Angle<Degrees, double> angle, Quadrant expected)
+    public void GetQuadrant_Degrees_Should_Succeed(AngleReduced<Degrees, double> angle, Quadrant expected)
     {
         // arrange
 

@@ -16,43 +16,43 @@ namespace NetFabric.Numerics
                 : reduced + Angle<TUnits, T>.Full.Value;
         }   
                 
-        public static Quadrant GetQuadrant<TUnits, T>(Angle<TUnits, T> angle, out T reduced)
+        public static Quadrant GetQuadrant<TUnits, T>(AngleReduced<TUnits, T> angle)
             where TUnits : IAngleUnits<TUnits>
             where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         {
-            reduced = Reduce(angle);
-            if(reduced == Angle<TUnits, T>.Zero.Value)
+            var value = angle.Value;
+            if(value == Angle<TUnits, T>.Zero.Value)
                 return Quadrant.PositiveX;
-            if (reduced < Angle<TUnits, T>.Right.Value)
+            if (value < Angle<TUnits, T>.Right.Value)
                 return Quadrant.First;
-            if (reduced == Angle<TUnits, T>.Right.Value)
+            if (value == Angle<TUnits, T>.Right.Value)
                 return Quadrant.PositiveY;
-            if (reduced < Angle<TUnits, T>.Straight.Value)
+            if (value < Angle<TUnits, T>.Straight.Value)
                 return Quadrant.Second;
-            if (reduced == Angle<TUnits, T>.Straight.Value)
+            if (value == Angle<TUnits, T>.Straight.Value)
                 return Quadrant.NegativeX;
-            if (reduced < Angle<TUnits, T>.Straight.Value + Angle<TUnits, T>.Right.Value)
+            if (value < Angle<TUnits, T>.Straight.Value + Angle<TUnits, T>.Right.Value)
                 return Quadrant.Third;
-            if (reduced == Angle<TUnits, T>.Straight.Value + Angle<TUnits, T>.Right.Value)
+            if (value == Angle<TUnits, T>.Straight.Value + Angle<TUnits, T>.Right.Value)
                 return Quadrant.NegativeY;
             return Quadrant.Fourth;
         }
 
-        public static T GetReference<TUnits, T>(Angle<TUnits, T> angle)
+        public static T GetReference<TUnits, T>(AngleReduced<TUnits, T> angle)
             where TUnits : IAngleUnits<TUnits>
             where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         {
-            var quadrant = GetQuadrant(angle, out var reduced);
+            var quadrant = GetQuadrant(angle);
             return quadrant switch
             {
                 Quadrant.PositiveX => Angle<TUnits, T>.Zero.Value,
-                Quadrant.First => reduced,
+                Quadrant.First => angle.Value,
                 Quadrant.PositiveY => Angle<TUnits, T>.Right.Value,
-                Quadrant.Second => Angle<TUnits, T>.Straight.Value - reduced,
+                Quadrant.Second => Angle<TUnits, T>.Straight.Value - angle.Value,
                 Quadrant.NegativeX => Angle<TUnits, T>.Zero.Value,
-                Quadrant.Third => reduced - Angle<TUnits, T>.Straight.Value,
+                Quadrant.Third => angle.Value - Angle<TUnits, T>.Straight.Value,
                 Quadrant.NegativeY => Angle<TUnits, T>.Right.Value,
-                Quadrant.Fourth => Angle<TUnits, T>.Full.Value - reduced,
+                Quadrant.Fourth => Angle<TUnits, T>.Full.Value - angle.Value,
                 _ => Throw.InvalidOperationException<T>(),
             };
         }

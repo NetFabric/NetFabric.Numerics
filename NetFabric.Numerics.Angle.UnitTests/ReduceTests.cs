@@ -1,11 +1,12 @@
 ﻿using FluentAssertions;
-using System.Diagnostics.CodeAnalysis;
 
 namespace NetFabric.Numerics.UnitTests;
 
 public class ReduceTests
 {
-    public static TheoryData<Angle<Degrees, double>, Angle<Degrees, double>> CompareReducedData => new()
+    static readonly Angle<Degrees, double> AcuteDegrees = Angle<Degrees, double>.Right / 4.0;
+
+    public static TheoryData<Angle<Degrees, double>, Angle<Degrees, double>> ReduceData => new()
         {
             { Angle<Degrees, double>.Zero, Angle<Degrees, double>.Zero },
             { Angle<Degrees, double>.Right, Angle<Degrees, double>.Right },
@@ -15,17 +16,17 @@ public class ReduceTests
             { Angle<Degrees, double>.Right + Angle<Degrees, double>.Full, Angle<Degrees, double>.Right },
             { Angle<Degrees, double>.Straight + Angle<Degrees, double>.Full, Angle<Degrees, double>.Straight },
 
-            { new Angle<Degrees, double>(10.0) + Angle<Degrees, double>.Full, new Angle<Degrees, double>(10.0) },
-            { new Angle<Degrees, double>(10.0) - Angle<Degrees, double>.Full, new Angle<Degrees, double>(10.0) },
-            { new Angle<Degrees, double>(-10.0) + Angle<Degrees, double>.Full, Angle<Degrees, double>.Full - new Angle<Degrees, double>(10.0) },
+            { AcuteDegrees + Angle<Degrees, double>.Full, AcuteDegrees },
+            { AcuteDegrees - Angle<Degrees, double>.Full, AcuteDegrees },
+            { -AcuteDegrees + Angle<Degrees, double>.Full, Angle<Degrees, double>.Full - AcuteDegrees },
 
-            { new Angle<Degrees, double>(10.0) + (2 * Angle<Degrees, double>.Full), new Angle<Degrees, double>(10.0) },
-            { new Angle<Degrees, double>(10.0) - (2 * Angle<Degrees, double>.Full), new Angle<Degrees, double>(10.0) },
-            { new Angle<Degrees, double>(-10.0) + (2 * Angle<Degrees, double>.Full), Angle<Degrees, double>.Full - new Angle<Degrees, double>(10.0) },
+            { AcuteDegrees + (2 * Angle<Degrees, double>.Full), AcuteDegrees },
+            { AcuteDegrees - (2 * Angle<Degrees, double>.Full), AcuteDegrees },
+            { -AcuteDegrees + (2 * Angle<Degrees, double>.Full), Angle<Degrees, double>.Full - AcuteDegrees },
         };
 
     [Theory]
-    [MemberData(nameof(CompareReducedData))]
+    [MemberData(nameof(ReduceData))]
     public void Reduce_Should_Succeed(Angle<Degrees, double> angle, Angle<Degrees, double> expected)
     {
         // arrange

@@ -1,3 +1,4 @@
+using NetFabric.Numerics.Geography.Geodetic2;
 using System;
 using System.Numerics;
 
@@ -9,13 +10,15 @@ public readonly record struct Point<TDatum, TAngle, THeight>(Angle<Degrees, TAng
     where TAngle : struct, IFloatingPoint<TAngle>, IMinMaxValue<TAngle>
     where THeight : struct, INumber<THeight>, IMinMaxValue<THeight>
 {
-    public Angle<Degrees, TAngle> Latitude { get; } = Latitude >= -Angle<Degrees, TAngle>.Right && Latitude <= Angle<Degrees, TAngle>.Right
-        ? Latitude 
-        : throw new ArgumentOutOfRangeException(nameof(Latitude), Latitude, "Latitude must be >= -90.0º and <= 90.0º");
+    public Angle<Degrees, TAngle> Latitude { get; }
+        = Latitude.Value >= TAngle.CreateChecked(-Degrees.Right) && Latitude.Value <= TAngle.CreateChecked(Degrees.Right)
+            ? Latitude
+            : throw new ArgumentOutOfRangeException(nameof(Latitude), Latitude, "Latitude must be >= -90.0º and <= 90.0º");
 
-    public Angle<Degrees, TAngle> Longitude { get; } = Longitude > -Angle<Degrees, TAngle>.Straight && Longitude <= Angle<Degrees, TAngle>.Straight
-        ? Longitude 
-        : throw new ArgumentOutOfRangeException(nameof(Longitude), Longitude, "Longitude must be > -180.0º and <= 180.0º");
+    public Angle<Degrees, TAngle> Longitude { get; }
+        = Longitude.Value > TAngle.CreateChecked(-Degrees.Straight) && Longitude.Value <= TAngle.CreateChecked(Degrees.Straight)
+            ? Longitude
+            : throw new ArgumentOutOfRangeException(nameof(Longitude), Longitude, "Longitude must be > -180.0º and <= 180.0º");
 
     #region constants
 
@@ -28,14 +31,14 @@ public readonly record struct Point<TDatum, TAngle, THeight>(Angle<Degrees, TAng
     /// <summary>
     /// Represents the minimum value. This field is read-only.
     /// </summary>
-    public static readonly Point<TDatum, TAngle, THeight> MinValue 
-        = new(Angle<Degrees, TAngle>.MinValue, Angle<Degrees, TAngle>.MinValue, THeight.MinValue);
+    public static readonly Point<TDatum, TAngle, THeight> MinValue
+        = new(-Angle<Degrees, TAngle>.Right, new(TAngle.CreateTruncating(-Degrees.Straight + double.Epsilon)), THeight.MinValue);
 
     /// <summary>
     /// Represents the maximum value. This field is read-only.
     /// </summary>
-    public static readonly Point<TDatum, TAngle, THeight> MaxValue 
-        = new(Angle<Degrees, TAngle>.MaxValue, Angle<Degrees, TAngle>.MaxValue, THeight.MaxValue);
+    public static readonly Point<TDatum, TAngle, THeight> MaxValue
+        = new(Angle<Degrees, TAngle>.Right, Angle<Degrees, TAngle>.Straight, THeight.MinValue);
 
     static Point<TDatum, TAngle, THeight> IMinMaxValue<Point<TDatum, TAngle, THeight>>.MinValue
         => MinValue;
