@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 
 namespace NetFabric.Numerics;
 
-//[DebuggerTypeProxy(typeof(AngleDebugView<,>))]
+[DebuggerTypeProxy(typeof(AngleReducedDebugView<,>))]
 public struct AngleReduced<TUnits, T>
     : IEquatable<AngleReduced<TUnits, T>>,
       IEqualityOperators<AngleReduced<TUnits, T>, AngleReduced<TUnits, T>, bool>,
@@ -356,6 +357,6 @@ public struct AngleReduced<TUnits, T>
     /// <remarks>
     /// The string representation of the angle includes the numerical value followed by the unit of measurement (e.g., º, rad, grad, or rev).
     /// </remarks>
-    public override string ToString()
+    public override readonly string ToString()
         => $"{Value}{TUnits.Symbol}";
 }

@@ -14,11 +14,6 @@ namespace NetFabric
             this.angle = angle;
         }
 
-        public AngleDebugView(AngleReduced<TUnits, T> angle)
-        {
-            this.angle = angle;
-        }
-
         public string? Degrees
             => ToDegrees()?.ToString();
 

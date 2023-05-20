@@ -374,6 +374,7 @@ public struct Angle<TUnits, T>
     /// <remarks>
     /// The string representation of the angle includes the numerical value followed by the unit of measurement (e.g., º, rad, grad, or rev).
     /// </remarks>
-    public override string ToString()
+    public override readonly string ToString()
         => $"{Value}{TUnits.Symbol}";
+
 }
