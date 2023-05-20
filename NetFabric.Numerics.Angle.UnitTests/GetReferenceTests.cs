@@ -20,13 +20,12 @@ public class GetReferenceTests
 
     [Theory]
     [MemberData(nameof(GetReferenceDegreesData))]
-    public void GetReference_Degrees_Should_Succeed(Angle<Degrees, double> angle, Angle<Degrees, double> expected)
+    public void GetReference_Degrees_Should_Succeed(AngleReduced<Degrees, double> angle, AngleReduced<Degrees, double> expected)
     {
         // arrange
-        var reduced = Angle.Reduce(angle);
 
         // act
-        var result = Angle.GetReference(reduced);
+        var result = Angle.GetReference(angle);
 
         // assert
         result.Should().Be(expected);
