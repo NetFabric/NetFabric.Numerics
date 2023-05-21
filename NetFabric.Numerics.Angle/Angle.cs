@@ -221,7 +221,7 @@ public static partial class Angle
     public static bool IsAcute<TUnits, T>(AngleReduced<TUnits, T> angle)
         where TUnits : IAngleUnits<TUnits>
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => angle.Value > T.Zero && angle.Value < Angle<TUnits, T>.Right.Value;
+        => angle.Value > Angle<TUnits, T>.Zero.Value && angle.Value < Angle<TUnits, T>.Right.Value;
 
     /// <summary>
     /// Indicates whether the specified angle is right.

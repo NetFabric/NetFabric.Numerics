@@ -6,6 +6,31 @@ using System.Runtime.CompilerServices;
 
 namespace NetFabric.Numerics;
 
+/// <summary>
+/// Represents an angle value of type <typeparamref name="T"/> in the specified angle measurement units <typeparamref name="TUnits"/>.
+/// </summary>
+/// <typeparam name="TUnits">The type representing the angle measurement units.</typeparam>
+/// <typeparam name="T">The underlying numeric type of the angle value.</typeparam>
+/// <remarks>
+/// <para>
+/// The <see cref="Angle{TUnits,T}"/> struct provides a generic representation of an angle value with a specific numeric type and measurement units.
+/// It allows you to work with angles in a type-safe manner and perform angle-related operations using the specified measurement units.
+/// The angle measurement units are defined by the type <typeparamref name="TUnits"/>, while the underlying numeric value of the angle is of type <typeparamref name="T"/>.
+/// </para>
+/// <para>
+/// The struct supports various mathematical operations such as addition, subtraction, multiplication, division, and trigonometric functions,
+/// which can be performed on angles of the same measurement units.
+/// </para>
+/// <para>
+/// To create an instance of the <see cref="Angle{TUnits,T}"/> struct, you can use the provided constructors or explicit conversions from other angle types.
+/// </para>
+/// <para>
+/// Note that the <see cref="Angle{TUnits,T}"/> struct is an immutable value type, meaning that its properties cannot be modified after creation.
+/// </para>
+/// <para>
+/// Examples of angle measurement units include <see cref="Degrees"/>, <see cref="Radians"/>, <see cref="Gradians"/>, and <see cref="Revolutions"/>.
+/// </para>
+/// </remarks>
 [DebuggerTypeProxy(typeof(AngleDebugView<,>))]
 public struct Angle<TUnits, T>
     : IEquatable<Angle<TUnits, T>>,
@@ -38,7 +63,7 @@ public struct Angle<TUnits, T>
     /// <summary>
     /// Represents the zero angle value (0 Degrees). This field is read-only.
     /// </summary>
-    public static readonly AngleReduced<TUnits, T> Zero = new(T.Zero);
+    public static readonly AngleReduced<TUnits, T> Zero = new(T.CreateChecked(TUnits.Zero));
 
     /// <summary>
     /// Represents the right angle value (90 Degrees). This field is read-only.

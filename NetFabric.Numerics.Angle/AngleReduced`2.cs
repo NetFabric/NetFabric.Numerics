@@ -6,6 +6,34 @@ using System.Runtime.CompilerServices;
 
 namespace NetFabric.Numerics;
 
+/// <summary>
+/// Represents a reduced angle value of type <typeparamref name="T"/> in the specified angle measurement units <typeparamref name="TUnits"/>.
+/// </summary>
+/// <typeparam name="TUnits">The type representing the angle measurement units.</typeparam>
+/// <typeparam name="T">The underlying numeric type of the reduced angle value.</typeparam>
+/// <remarks>
+/// <para>
+/// The <see cref="AngleReduced{TUnits,T}"/> struct provides a generic representation of a reduced angle value with a specific numeric type and measurement units.
+/// Unlike the <see cref="Angle{TUnits,T}"/> struct, which allows any angle value, the <see cref="AngleReduced{TUnits,T}"/> struct represents angles in their reduced form.
+/// This means that the angle value is always within a specific range, between <see cref="TUnits.Zero"/> and <see cref="TUnits.Full"/>.
+/// </para>
+/// <para>
+/// The struct supports various mathematical operations such as addition, subtraction, multiplication, division, and trigonometric functions,
+/// which can be performed on reduced angles of the same measurement units.
+/// </para>
+/// <para>
+/// To create an instance of the <see cref="AngleReduced{TUnits,T}"/> struct, you can use the provided constructors or explicit conversions from other angle types.
+/// </para>
+/// <para>
+/// The <see cref="AngleReduced{TUnits,T}"/> struct can be implicitly converted to <see cref="Angle{TUnits,T}"/>.
+/// </para>
+/// <para>
+/// Note that the <see cref="AngleReduced{TUnits,T}"/> struct is an immutable value type, meaning that its properties cannot be modified after creation.
+/// </para>
+/// <para>
+/// Examples of angle measurement units include <see cref="Degrees"/>, <see cref="Radians"/>, <see cref="Gradians"/>, and <see cref="Revolutions"/>.
+/// </para>
+/// </remarks>
 [DebuggerTypeProxy(typeof(AngleReducedDebugView<,>))]
 public struct AngleReduced<TUnits, T>
     : IEquatable<AngleReduced<TUnits, T>>,
@@ -28,7 +56,7 @@ public struct AngleReduced<TUnits, T>
 
     public AngleReduced(T value)
     {
-        if(value < T.Zero || value >= T.CreateChecked(TUnits.Full))
+        if(value < T.CreateSaturating(TUnits.Zero) || value >= T.CreateSaturating(TUnits.Full))
             Throw.ArgumentOutOfRangeException(nameof(value), value, "Value must be greater or equal to Zero and less than Full.");
         Value = value;
     }
