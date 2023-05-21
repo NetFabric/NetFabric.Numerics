@@ -2,9 +2,17 @@
 
 NetFabric.Numerics provides strongly-typed implementations of multiple coordinate systems, i.e. cartesian, polar, spherical, and geodetic.
 
-WARNING: NetFabric.Numerics makes use of [generic math](https://learn.microsoft.com/en-us/dotnet/standard/generics/math) features only available in .NET 7 and C# 11.
+> WARNING: 
+> `NetFabric.Numerics.Angle` makes use of [generic math](https://learn.microsoft.com/en-us/dotnet/standard/generics/math) features only available in .NET 7 and C# 11.
 
-This is currently a proof of concept. Please use the "discussions" in this repository for feedback and suggestions. 
+Please use the "discussions" in this repository for feedback and suggestions. 
+
+## Installation
+
+This repository is published over three NuGet packages:
+- [NetFabric.Numerics.Angle](https://www.nuget.org/packages/NetFabric.Numerics.Angle/) - provides strongly-typed angle implementations.
+- [NetFabric.Numerics](https://www.nuget.org/packages/NetFabric.Numerics/) - provides strongly-typed cartesian and polar coordinate implementations.
+- [NetFabric.Numerics.Geography](https://www.nuget.org/packages/NetFabric.Numerics.Geography/) - provides strongly-typed geodetic coordinate implementations.
 
 ## Strongly-typed
 
