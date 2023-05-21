@@ -1,4 +1,6 @@
-﻿namespace NetFabric.Numerics;
+﻿using System.Runtime.InteropServices;
+
+namespace NetFabric.Numerics;
 
 public static partial class Angle
 {
@@ -103,20 +105,8 @@ public static partial class Angle
     /// </remarks>
     public static Angle<TUnits, T>? Average<TUnits, T>(this ReadOnlySpan<Angle<TUnits, T>> source)
         where TUnits : IAngleUnits<TUnits>
-        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-    {
-        var sum = T.Zero;
-        var count = T.Zero;
-        foreach (var angle in source)
-        {
-            checked
-            {
-                sum += angle.Value;
-                count++;
-            }
-        }
-        return T.IsZero(count)
+        where T : struct, IFloatingPoint<T>, IMinMaxValue<T> 
+        => source.Length == 0
             ? null
-            : new Angle<TUnits, T>(sum / count);
-    }
+            : Sum(source) / T.CreateChecked(source.Length);
 }

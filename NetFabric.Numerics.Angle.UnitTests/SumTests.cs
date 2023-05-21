@@ -6,6 +6,7 @@ public class SumTests
         => new()
         {
             {Array.Empty<Angle<Degrees, double>>(), new Angle<Degrees, double>(0)},
+            {new Angle<Degrees, double>[] { new(1.0) }, new Angle<Degrees, double>(1.0)},
             {new Angle<Degrees, double>[] { new(1.0), new(11.0) }, new Angle<Degrees, double>(12.0)},
             {new Angle<Degrees, double>[] { new(1.0), new(-11.0) }, new Angle<Degrees, double>(-10.0)},
             { Enumerable.Range(0, 1_000).Select(value => new Angle<Degrees, double>(1.0)).ToArray(), new Angle<Degrees, double>(1_000.0)},
@@ -21,7 +22,7 @@ public class SumTests
         var result = source.AsEnumerable().Sum();
 
         // assert
-        result.Value.Should().Be(expected.Value);
+        result.Should().Be(expected);
     }
 
     [Theory]
@@ -34,6 +35,6 @@ public class SumTests
         var result = source.Sum();
 
         // assert
-        result.Value.Should().Be(expected.Value);
+        result.Should().Be(expected);
     }
 }

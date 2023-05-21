@@ -16,6 +16,7 @@ This library provides:
 - Angle reduction (`Reduce`, `GetQuadrant`, `GetReference`)
 - Angle classification (`IsZero`, `IsAcute`, `IsRight`, `IsObtuse`, `IsStraight`, `IsReflex`, `IsOblique`, `AreComplementary`, `AreSupplementary`)
 - Angle linear interpolation (`Lerp`)
+- Optimized angle collection operations (`Sum`, `Average`)
 - Angle parsing (from string)
 - Angle formatting (to string)
 
@@ -44,6 +45,13 @@ These methods are only available for `AngleReduced<TUnits, T>`. If you need to c
 
 These methods are only available for angles in radians. If you need to use them with angles in degrees, gradians, or revolutions, you can use the `Angle.ToRadians()` method to convert them to radians.
 
+## Collections support
+
+`NetFabric.Numerics.Angle` provides optimized operations on collections of angles: `Sum`, `Average`.
+
+These operations are available for `IEnumerable<Angle<TUnits, T>>`, arrays, `Memory<Angle<TUnits, T>>`, `ReadOnlyMemory<Angle<TUnits, T>>`, `Span<Angle<TUnits, T>>`, and `ReadOnlySpan<Angle<TUnits, T>>`.
+
+These operations use SIMD instructions when available.
 
 
 
