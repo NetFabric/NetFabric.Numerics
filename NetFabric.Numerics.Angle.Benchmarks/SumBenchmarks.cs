@@ -1,7 +1,4 @@
-﻿using System.Linq;
-using BenchmarkDotNet.Attributes;
-using BenchmarkDotNet.Columns;
-using BenchmarkDotNet.Configs;
+﻿using BenchmarkDotNet.Attributes;
 
 namespace NetFabric.Numerics.Benchmarks;
 

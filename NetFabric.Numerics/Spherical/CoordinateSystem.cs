@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using System.Numerics;
-
 namespace NetFabric.Numerics.Spherical;
 
 public readonly record struct CoordinateSystem<TAngleUnits, TAngle, TRadius>

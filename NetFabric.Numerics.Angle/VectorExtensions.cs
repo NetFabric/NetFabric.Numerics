@@ -1,7 +1,4 @@
-﻿using System.Numerics;
-using System.Runtime.CompilerServices;
-
-namespace NetFabric.Numerics;
+﻿namespace NetFabric.Numerics;
 
 static class VectorExtensions
 {

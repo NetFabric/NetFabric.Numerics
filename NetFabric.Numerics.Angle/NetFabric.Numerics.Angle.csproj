@@ -3,6 +3,8 @@
   <PropertyGroup>
     <Title>NetFabric.Numerics.Angle</Title>
     <TargetFrameworks>net7.0</TargetFrameworks>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
     <Description>
       A strongly-typed representation of an angle.
       The explicit declaration of the units in creation and reading methods, reduces the tipical confusion when dealing with angles.
@@ -20,9 +22,12 @@
     </PackageReleaseNotes>
     <RootNamespace>NetFabric</RootNamespace>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    <DefineConstants>CONTRACTS_FULL</DefineConstants>
-    <Nullable>enable</Nullable>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Using Include="System.Numerics" />
+    <Using Include="System.Runtime.CompilerServices" />
+  </ItemGroup>
 
   <PropertyGroup Condition="'$(Configuration)'=='Release'">
     <GenerateDocumentationFile>true</GenerateDocumentationFile>

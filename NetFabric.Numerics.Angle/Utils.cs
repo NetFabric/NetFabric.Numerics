@@ -1,6 +1,3 @@
-using System.Numerics;
-using System.Runtime.CompilerServices;
-
 namespace NetFabric.Numerics
 {
     static class Utils

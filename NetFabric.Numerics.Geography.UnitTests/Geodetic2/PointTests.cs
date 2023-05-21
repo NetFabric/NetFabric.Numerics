@@ -1,6 +1,4 @@
-﻿using FluentAssertions;
-
-namespace NetFabric.Numerics.Geography.Geodetic2.UnitTests;
+﻿namespace NetFabric.Numerics.Geography.Geodetic2.UnitTests;
 
 public class PointTests
 {

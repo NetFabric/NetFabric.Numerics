@@ -1,7 +1,3 @@
-using System;
-using System.Numerics;
-using System.Runtime.CompilerServices;
-
 namespace NetFabric.Numerics.Cartesian2;
 
 public readonly record struct Point<T>(T X, T Y) 

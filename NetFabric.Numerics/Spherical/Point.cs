@@ -1,6 +1,3 @@
-using System;
-using System.Numerics;
-
 namespace NetFabric.Numerics.Spherical;
 
 public readonly record struct Point<TAngleUnits, TAngle, TRadius>(Angle<TAngleUnits, TAngle> Azimuth, Angle<TAngleUnits, TAngle> Zenith, TRadius Radius) 

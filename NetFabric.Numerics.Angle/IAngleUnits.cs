@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace NetFabric.Numerics;
+﻿namespace NetFabric.Numerics;
 
 public interface IAngleUnits<TSelf>
     where TSelf: IAngleUnits<TSelf>

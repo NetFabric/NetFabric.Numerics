@@ -1,6 +1,3 @@
-using System;
-using System.Numerics;
-
 namespace NetFabric.Numerics.Polar;
 
 public readonly record struct Point<TAngleUnits, TAngle, TRadius>(Angle<TAngleUnits, TAngle> Azimuth, TRadius Radius) 

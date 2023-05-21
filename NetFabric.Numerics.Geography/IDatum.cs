@@ -1,6 +1,4 @@
-﻿using static System.Runtime.InteropServices.JavaScript.JSType;
-
-namespace NetFabric.Numerics.Geography;
+﻿namespace NetFabric.Numerics.Geography;
 
 /// <summary>
 /// Represents a geodetic datum.

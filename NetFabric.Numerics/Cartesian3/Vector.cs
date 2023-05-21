@@ -1,7 +1,3 @@
-using System;
-using System.Numerics;
-using System.Runtime.CompilerServices;
-
 namespace NetFabric.Numerics.Cartesian3;
 
 public readonly record struct Vector<T>(T X, T Y, T Z) 

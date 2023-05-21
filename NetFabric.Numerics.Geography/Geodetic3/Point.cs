@@ -1,5 +1,3 @@
-using NetFabric.Numerics.Geography.Geodetic2;
-using System;
 using System.Numerics;
 
 namespace NetFabric.Numerics.Geography.Geodetic3;

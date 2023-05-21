@@ -1,6 +1,4 @@
-﻿﻿using System;
-
-namespace NetFabric.Numerics.Geography;
+﻿namespace NetFabric.Numerics.Geography;
 
 /// <summary>
 /// Summary description for Ellipsoid.

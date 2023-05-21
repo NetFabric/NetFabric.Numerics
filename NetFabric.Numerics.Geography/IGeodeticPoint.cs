@@ -1,6 +1,4 @@
-﻿using NetFabric.Numerics.Geography;
-
-namespace NetFabric.Numerics;
+﻿namespace NetFabric.Numerics.Geography;
 
 /// <summary>
 /// Represents a point in a geodetic coordinate system.

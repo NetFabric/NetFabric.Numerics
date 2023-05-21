@@ -1,8 +1,4 @@
-﻿using System.Numerics;
-using System;
-using System.Collections.Generic;
-
-namespace NetFabric.Numerics;
+﻿namespace NetFabric.Numerics;
 
 public static partial class Angle
 {

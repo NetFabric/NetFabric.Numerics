@@ -1,7 +1,4 @@
-﻿
-using FluentAssertions;
-
-namespace NetFabric.Numerics.UnitTests;
+﻿namespace NetFabric.Numerics.UnitTests;
 
 public class ToDegreesTests
 {

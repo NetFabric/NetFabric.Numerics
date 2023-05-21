@@ -1,5 +1,3 @@
-using System;
-
 namespace NetFabric.Numerics;
 
 static class Throw

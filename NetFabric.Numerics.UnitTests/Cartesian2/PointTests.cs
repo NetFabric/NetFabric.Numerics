@@ -1,5 +1,3 @@
-using FluentAssertions;
-
 namespace NetFabric.Numerics.Cartesian2.UnitTests;
 
 public class PointTests

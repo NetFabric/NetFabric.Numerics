@@ -3,6 +3,8 @@
   <PropertyGroup>
     <Title>NetFabric.Numerics</Title>
     <TargetFrameworks>net7.0</TargetFrameworks>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
     <Description></Description>
     <Version>1.0.0-beta01</Version>
     <Copyright>Copyright © Antão Almada 2023</Copyright>
@@ -16,9 +18,12 @@
     </PackageReleaseNotes>
     <RootNamespace>NetFabric</RootNamespace>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    <DefineConstants>CONTRACTS_FULL</DefineConstants>
-    <Nullable>enable</Nullable>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Using Include="System.Numerics" />
+    <Using Include="System.Runtime.CompilerServices" />
+  </ItemGroup>
 
   <PropertyGroup Condition="'$(Configuration)'=='Release'">
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
