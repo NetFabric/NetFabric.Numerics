@@ -1,7 +1,4 @@
 using System.Diagnostics;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
 
 namespace NetFabric.Numerics;
 
@@ -35,7 +32,7 @@ namespace NetFabric.Numerics;
 /// </remarks>
 [DebuggerDisplay("{Value}")]
 [DebuggerTypeProxy(typeof(AngleReducedDebugView<,>))]
-public struct AngleReduced<TUnits, T>
+public readonly struct AngleReduced<TUnits, T>
     : IEquatable<AngleReduced<TUnits, T>>,
       IEqualityOperators<AngleReduced<TUnits, T>, AngleReduced<TUnits, T>, bool>,
       IComparable,
