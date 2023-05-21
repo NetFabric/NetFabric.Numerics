@@ -1,107 +1,100 @@
 # NetFabric.Numerics
 
-NetFabric.Numerics provides strongly-typed implementations of multiple coordinate systems, i.e. cartesian, polar, spherical, and geodetic.
+Welcome to the documentation for **NetFabric.Numerics**, a powerful C# library that provides strongly-typed implementations of multiple coordinate systems, including cartesian, polar, spherical, and geodetic. Whether you're working with angles, points, or geographic coordinates, this library has you covered!
 
-> WARNING: 
-> `NetFabric.Numerics.Angle` makes use of [generic math](https://learn.microsoft.com/en-us/dotnet/standard/generics/math) features only available in .NET 7 and C# 11.
-
-Please use the "discussions" in this repository for feedback and suggestions. 
+> **Note:** The `NetFabric.Numerics.Angle` class in this library utilizes advanced generic math features, which are only available in .NET 7 and C# 11. Make sure you are using a compatible version of the framework before using this library.
 
 ## Installation
 
-This repository is published over three NuGet packages:
-- [NetFabric.Numerics.Angle](https://www.nuget.org/packages/NetFabric.Numerics.Angle/) - provides strongly-typed angle implementations.
-- [NetFabric.Numerics](https://www.nuget.org/packages/NetFabric.Numerics/) - provides strongly-typed cartesian and polar coordinate implementations.
-- [NetFabric.Numerics.Geography](https://www.nuget.org/packages/NetFabric.Numerics.Geography/) - provides strongly-typed geodetic coordinate implementations.
+To get started with **NetFabric.Numerics**, you need to install the library's NuGet packages. The library is divided into three packages, each serving a specific purpose:
 
-## Strongly-typed
+- [NetFabric.Numerics.Angle](https://www.nuget.org/packages/NetFabric.Numerics.Angle/): Provides strongly-typed angle implementations.
+- [NetFabric.Numerics](https://www.nuget.org/packages/NetFabric.Numerics/): Provides strongly-typed cartesian and polar coordinate implementations.
+- [NetFabric.Numerics.Geography](https://www.nuget.org/packages/NetFabric.Numerics.Geography/): Provides strongly-typed geodetic coordinate implementations.
 
-NetFabric.Numerics makes strong use of generics to make it fully strongly-typed. 
+Make sure to include the appropriate package(s) in your project, depending on your specific needs.
 
-The generics can be used to specify the data type used internally:
+## Strongly-Typed Approach
+
+**NetFabric.Numerics** embraces a strongly-typed approach, leveraging the power of generics to ensure type safety and flexibility. By utilizing generics, you can specify both the data type used internally and the features of the coordinate system.
+
+Let's take a look at some examples to illustrate this:
+
+### Strongly-Typed Points
+
+When working with points in different coordinate systems, **NetFabric.Numerics** allows you to specify the data type used internally. Here's an example:
 
 ``` csharp
 using NetFabric.Numerics.Cartesian2;
 
-var integerPoint = new Point<int>(0, 0);
-var doublePrecisionPoint = new Point<double>(0.0, 0.0);
-var singlePrecisionPoint = new Point<float>(0.0, 0.0);
+var integerPoint = new Point<int>(0, 0);                      // Point using integers
+var doublePrecisionPoint = new Point<double>(0.0, 0.0);       // Point using double precision
+var singlePrecisionPoint = new Point<float>(0.0, 0.0);        // Point using single precision
 ```
 
-The generics can also be used to specify coordinate system features:
+By specifying the desired data type, you have control over the precision and memory usage of your points.
 
-Angles
+## Strongly-Typed Angles ##
+
+**NetFabric.Numerics** also supports strongly-typed angles, with support for various units of measurement. Here's an example:
+
 ``` csharp
 using NetFabric.Numerics;
 
-// supports multiple units: degrees, radians, gradians, and revolutions
-var degreesAngle = new Angle<Degrees, double>(0.0);
-var radiansAngle = new Angle<Radians, double>(0.0);
-var gradiansAngle = new Angle<Gradians, double>(0.0);
-var revolutionsAngle = new Angle<Revolutions, double>(0.0);
+var degreesAngle = new Angle<Degrees, double>(0.0);            // Angle using degrees
+var radiansAngle = new Angle<Radians, double>(0.0);            // Angle using radians
+var gradiansAngle = new Angle<Gradians, double>(0.0);          // Angle using gradians
+var revolutionsAngle = new Angle<Revolutions, double>(0.0);    // Angle using revolutions
 
-// supports any floating point precision
-var doublePrecisionAngle = new Angle<Degrees, double>(0.0);
-var singlePrecisionAngle = new Angle<Degrees, float>(0.0);
+var doublePrecisionAngle = new Angle<Degrees, double>(0.0);    // Angle with double precision
+var singlePrecisionAngle = new Angle<Degrees, float>(0.0);     // Angle with single precision
 ```
 
-Polar coordinates
+You can choose the unit of measurement for your angles and specify the desired precision.
+
+## Strongly-Typed Polar Coordinates ##
+
+**NetFabric.Numerics** provides strongly-typed polar coordinate implementations. Here's an example:
+
 ``` csharp
 using NetFabric.Numerics.Polar;
 
-// supports multiple units: degrees, radians, gradians, and revolutions
-var degreesPoint = new Point<Degrees, double, double>(0.0, 0.0);
-var radiansPoint = new Point<Radians, double, double>(0.0, 0.0);
-var gradiansPoint = new Point<Gradians, double, double>(0.0, 0.0);
-var revolutionsPoint = new Point<Revolutions, double, double>(0.0, 0.0);
+var degreesPoint = new Point<Degrees, double, double>(0.0, 0.0);            // Polar point using degrees
+var radiansPoint = new Point<Radians, double, double>(0.0, 0.0);            // Polar point using radians
+var gradiansPoint = new Point<Gradians, double, double>(0.0, 0.0);          // Polar point using gradians
+var revolutionsPoint = new Point<Revolutions, double, double>(0.0, 0.0);    // Polar point using revolutions
 
-// supports any floating point precision for azimuth and radius
-var doublePrecisionPoint = new Point<Degrees, double, double>(0.0, 0.0);
-var singlePrecisionPoint = new Point<Degrees, float, float>(0.0, 0.0)
-var mixedPrecisionPoint = new Point<Degrees, float, double>(0.0, 0.0)
+var doublePrecisionPoint = new Point<Degrees, double, double>(0.0, 0.0);    // Polar point with double precision
+var singlePrecisionPoint = new Point<Degrees, float, float>(0.0, 0.0);      // Polar point with single precision
+var mixedPrecisionPoint = new Point<Degrees, float, double>(0.0, 0.0);      // Polar point with mixed precision
 ```
 
-Geodetic coordinates (latitude and longitude)
+With **NetFabric.Numerics**, you can work with polar coordinates using different units of measurement and specify the desired precision for the azimuth and radius.
+
+## Strongly-Typed Geodetic Coordinates ##
+
+**NetFabric.Numerics** also supports strongly-typed geodetic coordinate implementations, specifically latitude and longitude. Here's an example:
+
 ``` csharp
 using NetFabric.Numerics.Geography.Geodetic2;
 
-// supports definition of datum
-var wgs84Point = new Point<WGS84, double>(new(0.0), new(0.0));
-var wgs1972Point = new Point<WGS1972, double>(new(0.0), new(0.0));
-var nad83Point = new Point<NAD83, double>(new(0.0), new(0.0));
-var nad1927ConusPoint = new Point<NAD1927CONUS, double>(new(0.0), new(0.0));
+var wgs84Point = new Point<WGS84, double>(new Latitude(0.0), new Longitude(0.0));                    // Geodetic point using WGS84 datum
+var wgs1972Point = new Point<WGS1972, double>(new Latitude(0.0), new Longitude(0.0));                // Geodetic point using WGS1972 datum
+var nad83Point = new Point<NAD83, double>(new Latitude(0.0), new Longitude(0.0));                    // Geodetic point using NAD83 datum
+var nad1927ConusPoint = new Point<NAD1927CONUS, double>(new Latitude(0.0), new Longitude(0.0));      // Geodetic point using NAD1927CONUS datum
 
-// supports any floating point precision
-var doublePrecisionPoint = new Point<WGS84, double>(new(0.0), new(0.0));
-var singlePrecisionPoint = new Point<WGS84, float>(new(0.0), new(0.0));
+var doublePrecisionPoint = new Point<WGS84, double>(new Latitude(0.0), new Longitude(0.0));          // Geodetic point with double precision
+var singlePrecisionPoint = new Point<WGS84, float>(new Latitude(0.0), new Longitude(0.0));           // Geodetic point with single precision
 
-// supports minutes and seconds
-var minutesPoint = new Point<WGS84, double>(Angle.FromDegreesMinutes(0, 0.0), Angle.FromDegreesMinutes(0, 0.0));
-var minutesSecondsPoint = new Point<WGS84, double>(Angle.FromDegreesMinutesSeconds(0, 0, 0.0), Angle.FromDegreesMinutesSeconds(0, 0, 0.0));
+var minutesPoint = new Point<WGS84, double>(Angle.FromDegreesMinutes(0, 0.0), Angle.FromDegreesMinutes(0, 0.0));                          // Geodetic point using minutes
+var minutesSecondsPoint = new Point<WGS84, double>(Angle.FromDegreesMinutesSeconds(0, 0, 0.0), Angle.FromDegreesMinutesSeconds(0, 0, 0.0));  // Geodetic point using minutes and seconds
 
-var (degreesLatitude, minutesLatitude) = Angle.ToDegreesMinutes(wgs84Point.Latitude);
-var (degreesLatitude, minutesLatitude, secondsLatitude) = Angle.ToDegreesMinutesSeconds(wgs84Point.Latitude);
+var (degreesLatitude, minutesLatitude) = Angle.ToDegreesMinutes(wgs84Point.Latitude);                                             // Convert latitude to degrees and minutes
+var (degreesLatitude, minutesLatitude, secondsLatitude) = Angle.ToDegreesMinutesSeconds(wgs84Point.Latitude);                     // Convert latitude to degrees, minutes, and seconds
 ```
 
-The use of generics prevents the use of incompatible types when coding. Overloaded operators and other functions only support compatible types. 
+**NetFabric.Numerics** enables you to work with geodetic coordinates using various datums, allowing you to specify the desired precision and units of measurement for latitude and longitude.
 
-Conversion functions can be used:
+## Conclusion ##
 
-``` csharp
-using NetFabric.Numerics;
-
-var doublePrecisionDegreesAngle = new Angle<Degrees, double>(0.0);
-
-// convert precision
-var singlePrecisionDegreesAngle = Angle.ToDegrees<double, float>(doublePrecisionDegreesAngle);
-
-// convert units
-var doublePrecisionRadiansAngle = Angle.ToRadians(doublePrecisionDegreesAngle);
-
-// convert units and precision
-var singlePrecisionRadiansAngle = Angle.ToRadians<double, float>(doublePrecisionDegreesAngle);
-```
-
-
-
-
+**NetFabric.Numerics** provides a comprehensive set of strongly-typed implementations for different coordinate systems, offering flexibility, type safety, and precise control over precision and units of measurement. Whether you're working with points, angles, or geodetic coordinates, this library simplifies your code and ensures accuracy in your calculations. Explore the library's packages and unleash the power of strongly-typed numerical computations in your C# projects!
