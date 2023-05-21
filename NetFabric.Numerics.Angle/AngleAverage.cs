@@ -1,6 +1,4 @@
-﻿using System.Runtime.InteropServices;
-
-namespace NetFabric.Numerics;
+﻿namespace NetFabric.Numerics;
 
 public static partial class Angle
 {

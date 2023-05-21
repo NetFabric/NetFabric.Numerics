@@ -1,4 +1,7 @@
 using System.Diagnostics;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 
 namespace NetFabric.Numerics;
 
@@ -30,6 +33,7 @@ namespace NetFabric.Numerics;
 /// Examples of angle measurement units include <see cref="Degrees"/>, <see cref="Radians"/>, <see cref="Gradians"/>, and <see cref="Revolutions"/>.
 /// </para>
 /// </remarks>
+[DebuggerDisplay("{Value}")]
 [DebuggerTypeProxy(typeof(AngleReducedDebugView<,>))]
 public struct AngleReduced<TUnits, T>
     : IEquatable<AngleReduced<TUnits, T>>,
@@ -44,7 +48,11 @@ public struct AngleReduced<TUnits, T>
       ISubtractionOperators<AngleReduced<TUnits, T>, Angle<TUnits, T>, Angle<TUnits, T>>,
       IDivisionOperators<AngleReduced<TUnits, T>, T, Angle<TUnits, T>>,
       IModulusOperators<AngleReduced<TUnits, T>, T, Angle<TUnits, T>>,
-      IMinMaxValue<AngleReduced<TUnits, T>>
+      IMinMaxValue<AngleReduced<TUnits, T>>,
+      ISpanFormattable
+#if NET8_0_OR_GREATER
+      ,IUtf8SpanFormattable
+#endif
     where TUnits : IAngleUnits<TUnits>
     where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
 {
@@ -381,6 +389,44 @@ public struct AngleReduced<TUnits, T>
     /// <remarks>
     /// The string representation of the angle includes the numerical value followed by the unit of measurement (e.g., º, rad, grad, or rev).
     /// </remarks>
-    public override readonly string ToString()
-        => $"{Value}{TUnits.Symbol}";
+    public override readonly string? ToString()
+        => Value.ToString();
+
+    /// <summary>Tries to format the value of the current instance into the provided span of characters.</summary>
+    /// <param name="destination">When this method returns, this instance's value formatted as a span of characters.</param>
+    /// <param name="charsWritten">When this method returns, the number of characters that were written in <paramref name="destination"/>.</param>
+    /// <param name="format">A span containing the characters that represent a standard or custom format string that defines the acceptable format for <paramref name="destination"/>.</param>
+    /// <param name="provider">An optional object that supplies culture-specific formatting information for <paramref name="destination"/>.</param>
+    /// <returns><see langword="true"/> if the formatting was successful; otherwise, <see langword="false"/>.</returns>
+    /// <remarks>
+    /// An implementation of this interface should produce the same string of characters as an implementation of <see cref="IFormattable.ToString(string?, IFormatProvider?)"/>
+    /// on the same type.
+    /// TryFormat should return false only if there is not enough space in the destination buffer. Any other failures should throw an exception.
+    /// </remarks>
+    public readonly bool TryFormat(Span<char> destination, out int charsWritten, ReadOnlySpan<char> format, IFormatProvider? provider)
+        => Value.TryFormat(destination, out charsWritten, format, provider);
+
+#if NET8_0_OR_GREATER
+    /// <summary>Tries to format the value of the current instance as UTF8 into the provided span of bytes.</summary>
+    /// <param name="utf8Destination">When this method returns, this instance's value formatted as a span of bytes.</param>
+    /// <param name="bytesWritten">When this method returns, the number of bytes that were written in <paramref name="utf8Destination"/>.</param>
+    /// <param name="format">A span containing the characters that represent a standard or custom format string that defines the acceptable format for <paramref name="utf8Destination"/>.</param>
+    /// <param name="provider">An optional object that supplies culture-specific formatting information for <paramref name="utf8Destination"/>.</param>
+    /// <returns><see langword="true"/> if the formatting was successful; otherwise, <see langword="false"/>.</returns>
+    /// <remarks>
+    /// An implementation of this interface should produce the same string of characters as an implementation of <see cref="IFormattable.ToString"/> or <see cref="ISpanFormattable.TryFormat"/>
+    /// on the same type. TryFormat should return false only if there is not enough space in the destination buffer; any other failures should throw an exception.
+    /// </remarks>
+    public readonly bool TryFormat(Span<byte> destination, out int charsWritten, ReadOnlySpan<char> format, IFormatProvider? provider)
+        => Value.TryFormat(destination, out charsWritten, format, provider);
+#endif
+
+    /// <summary>
+    /// Returns a string representation of the current angle using the specified format.
+    /// </summary>
+    /// <param name="format"></param>
+    /// <param name="formatProvider"></param>
+    /// <returns></returns>
+    public readonly string ToString(string? format, IFormatProvider? formatProvider)
+        => Value.ToString(format, formatProvider);
 }

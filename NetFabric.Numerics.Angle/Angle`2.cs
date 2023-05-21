@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 
 namespace NetFabric.Numerics;
 
@@ -27,8 +28,9 @@ namespace NetFabric.Numerics;
 /// Examples of angle measurement units include <see cref="Degrees"/>, <see cref="Radians"/>, <see cref="Gradians"/>, and <see cref="Revolutions"/>.
 /// </para>
 /// </remarks>
+[DebuggerDisplay("{Value}")]
 [DebuggerTypeProxy(typeof(AngleDebugView<,>))]
-public struct Angle<TUnits, T>
+public readonly struct Angle<TUnits, T>
     : IEquatable<Angle<TUnits, T>>,
       IEqualityOperators<Angle<TUnits, T>, Angle<TUnits, T>, bool>,
       IComparable,
@@ -43,7 +45,12 @@ public struct Angle<TUnits, T>
       ISubtractionOperators<Angle<TUnits, T>, AngleReduced<TUnits, T>, Angle<TUnits, T>>,
       IDivisionOperators<Angle<TUnits, T>, T, Angle<TUnits, T>>,
       IModulusOperators<Angle<TUnits, T>, T, Angle<TUnits, T>>,
-      IMinMaxValue<Angle<TUnits, T>>
+      IMinMaxValue<Angle<TUnits, T>>,
+      ISpanFormattable,
+      ISpanParsable<Angle<TUnits, T>>
+#if NET8_0_OR_GREATER
+      ,IUtf8SpanFormattable
+#endif
     where TUnits : IAngleUnits<TUnits>
     where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
 {
@@ -395,7 +402,102 @@ public struct Angle<TUnits, T>
     /// <remarks>
     /// The string representation of the angle includes the numerical value followed by the unit of measurement (e.g., º, rad, grad, or rev).
     /// </remarks>
-    public override readonly string ToString()
-        => $"{Value}{TUnits.Symbol}";
+    public override readonly string? ToString()
+        => Value.ToString();
 
+    /// <summary>Tries to format the value of the current instance into the provided span of characters.</summary>
+    /// <param name="destination">When this method returns, this instance's value formatted as a span of characters.</param>
+    /// <param name="charsWritten">When this method returns, the number of characters that were written in <paramref name="destination"/>.</param>
+    /// <param name="format">A span containing the characters that represent a standard or custom format string that defines the acceptable format for <paramref name="destination"/>.</param>
+    /// <param name="provider">An optional object that supplies culture-specific formatting information for <paramref name="destination"/>.</param>
+    /// <returns><see langword="true"/> if the formatting was successful; otherwise, <see langword="false"/>.</returns>
+    /// <remarks>
+    /// An implementation of this interface should produce the same string of characters as an implementation of <see cref="IFormattable.ToString(string?, IFormatProvider?)"/>
+    /// on the same type.
+    /// TryFormat should return false only if there is not enough space in the destination buffer. Any other failures should throw an exception.
+    /// </remarks>
+    public readonly bool TryFormat(Span<char> destination, out int charsWritten, ReadOnlySpan<char> format, IFormatProvider? provider)
+        => Value.TryFormat(destination, out charsWritten, format, provider);
+
+#if NET8_0_OR_GREATER
+    /// <summary>Tries to format the value of the current instance as UTF8 into the provided span of bytes.</summary>
+    /// <param name="utf8Destination">When this method returns, this instance's value formatted as a span of bytes.</param>
+    /// <param name="bytesWritten">When this method returns, the number of bytes that were written in <paramref name="utf8Destination"/>.</param>
+    /// <param name="format">A span containing the characters that represent a standard or custom format string that defines the acceptable format for <paramref name="utf8Destination"/>.</param>
+    /// <param name="provider">An optional object that supplies culture-specific formatting information for <paramref name="utf8Destination"/>.</param>
+    /// <returns><see langword="true"/> if the formatting was successful; otherwise, <see langword="false"/>.</returns>
+    /// <remarks>
+    /// An implementation of this interface should produce the same string of characters as an implementation of <see cref="IFormattable.ToString"/> or <see cref="ISpanFormattable.TryFormat"/>
+    /// on the same type. TryFormat should return false only if there is not enough space in the destination buffer; any other failures should throw an exception.
+    /// </remarks>
+    public readonly bool TryFormat(Span<byte> destination, out int charsWritten, ReadOnlySpan<char> format, IFormatProvider? provider)
+        => Value.TryFormat(destination, out charsWritten, format, provider);
+#endif
+
+    /// <summary>
+    /// Returns a string representation of the current angle using the specified format.
+    /// </summary>
+    /// <param name="format"></param>
+    /// <param name="formatProvider"></param>
+    /// <returns></returns>
+    public readonly string ToString(string? format, IFormatProvider? formatProvider)
+        => Value.ToString(format, formatProvider);
+
+    /// <summary>
+    /// Parses a string into an angle.
+    /// </summary>
+    /// <param name="s">The string to parse.</param>
+    /// <param name="provider">An object that provides culture-specific formatting information about s.</param>
+    /// <returns>The result of parsing <paramref name="s"/>.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="s"/> is <see langword="null"/>.</exception>
+    /// <exception cref="FormatException"><paramref name="s"/> is not in the correct format.</exception>
+    /// <exception cref="OverflowException"><paramref name="s"/> represents a number less than <see cref="Angle{TUnits,T}.MinValue"/> or greater than <see cref="Angle{TUnits,T}.MaxValue"/>.</exception>
+    public static Angle<TUnits, T> Parse(string s, IFormatProvider? provider)
+        => new(T.Parse(s, provider));
+
+    /// <summary>
+    /// Tries to parse a string into an angle.
+    /// </summary>
+    /// <param name="s">The string to parse.</param>
+    /// <param name="provider">An object that provides culture-specific formatting information about <paramref name="s"/>.</param>
+    /// <param name="result">When this method returns, contains the result of successfully parsing <paramref name="s"/> or an undefined value on failure.</param>
+    /// <returns>true if <paramref name="s"/> was successfully parsed; otherwise, false.</returns>
+    public static bool TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider, [MaybeNullWhen(false)] out Angle<TUnits, T> result)
+    {
+        if (T.TryParse(s, provider, out var value))
+        {
+            result = new(value);
+            return true;
+        }
+
+        result = default;
+        return false;
+    }
+
+    /// <summary>
+    /// Parses a span of characters into an angle.
+    /// </summary>
+    /// <param name="s">The span of characters to parse.</param>
+    /// <param name="provider">An object that provides culture-specific formatting information about <paramref name="s"/>.</param>
+    /// <returns>The result of parsing <paramref name="s"/>.</returns>
+    public static Angle<TUnits, T> Parse(ReadOnlySpan<char> s, IFormatProvider? provider)
+        => new(T.Parse(s, provider));
+
+    /// <summary>
+    /// Tries to parse a span of characters into an angle.
+    /// </summary>
+    /// <param name="s">The span of characters to parse.</param>
+    /// <param name="provider">An object that provides culture-specific formatting information about <paramref name="s"/>.</param>
+    /// <param name="result">When this method returns, contains the result of successfully parsing <paramref name="s"/>, or an undefined value on failure.</param>
+    /// <returns> true if <paramref name="s"/> was successfully parsed; otherwise, false.</returns>
+    public static bool TryParse(ReadOnlySpan<char> s, IFormatProvider? provider, [MaybeNullWhen(false)] out Angle<TUnits, T> result)
+    {
+        if(T.TryParse(s, provider, out var value)) {             
+            result = new(value);
+            return true;
+        }
+
+        result = default;
+        return false;
+    }
 }
