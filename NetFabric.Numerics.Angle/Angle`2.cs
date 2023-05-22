@@ -54,6 +54,9 @@ public readonly struct Angle<TUnits, T>
     where TUnits : IAngleUnits<TUnits>
     where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
 {
+    /// <summary>
+    /// Gets the angle value.
+    /// </summary>
     public T Value { get; }
 
     public Angle(T value)

@@ -53,6 +53,9 @@ public readonly struct AngleReduced<TUnits, T>
     where TUnits : IAngleUnits<TUnits>
     where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
 {
+    /// <summary>
+    /// Gets the angle value.
+    /// </summary>
     public T Value { get; }
 
     public AngleReduced(T value)

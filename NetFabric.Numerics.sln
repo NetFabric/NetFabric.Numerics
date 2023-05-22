@@ -6,6 +6,8 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D9B0D462-F9EB-497E-B80C-317290BA6800}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		.github\workflows\docs.yml = .github\workflows\docs.yml
+		.github\workflows\dotnet.yml = .github\workflows\dotnet.yml
 		Icon.png = Icon.png
 		LICENSE = LICENSE
 		README.md = README.md
@@ -23,7 +25,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetFabric.Numerics.Geograph
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetFabric.Numerics.UnitTests", "NetFabric.Numerics.UnitTests\NetFabric.Numerics.UnitTests.csproj", "{B0C27AE4-9330-4FC7-B7F6-AADB335A6906}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetFabric.Numerics.Angle.Benchmarks", "NetFabric.Numerics.Angle.Benchmarks\NetFabric.Numerics.Angle.Benchmarks.csproj", "{BBF7BACC-F1B5-40F0-B240-C80139950C4F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetFabric.Numerics.Angle.Benchmarks", "NetFabric.Numerics.Angle.Benchmarks\NetFabric.Numerics.Angle.Benchmarks.csproj", "{BBF7BACC-F1B5-40F0-B240-C80139950C4F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
