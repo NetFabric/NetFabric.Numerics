@@ -6,19 +6,53 @@
 > `NetFabric.Numerics.Angle` makes use of [generic math](https://learn.microsoft.com/en-us/dotnet/standard/generics/math) features only available in .NET 7 and C# 11.
 > For older versions of .NET, please use [NetFabric.Angle](https://github.com/NetFabric/NetFabric.Angle) instead.
 
-This library provides:
-- Floating point precision (`float`, `double`, and `decimal`)
-- Angle units (`Degrees`, `Radians`, `Gradians`, and `Revolutions`)
-- Angle operations (addition, subtraction, multiplication, division, and remainder)
-- Angle comparison (equality, greater than, greater than or equal, less than, less than or equal, and compare)
-- Angle conversions (to degrees, to radians, to gradians, and to revolutions)
-- Angle trigonometry (`Sin`, `Cos`, `Tan`, `Sec`, `Csc`, `Cot`, `Sinh`, `Cosh`, `Tanh`, `Sech`, `Csch`, `Coth`, `Asin`, `Acos`, `Atan`, `Acot`, `Asec`, `Acsc`)
-- Angle reduction (`Reduce`, `GetQuadrant`, `GetReference`)
-- Angle classification (`IsZero`, `IsAcute`, `IsRight`, `IsObtuse`, `IsStraight`, `IsReflex`, `IsOblique`, `AreComplementary`, `AreSupplementary`)
-- Angle linear interpolation (`Lerp`)
-- Optimized angle collection operations (`Sum`, `Average`)
-- Angle parsing (from string)
-- Angle formatting (to string)
+``` csharp
+using NetFabric.Numerics.Angle;
+
+// Create angles
+var degreesAngle = new Angle<Degrees, double>(45.0);
+var radiansAngle = new Angle<Radians, float>(1.57f);
+var gradiansAngle = new Angle<Gradians, decimal>(200.0m);
+var revolutionsAngle = new Angle<Revolutions, double>(0.25);
+
+// Perform angle operations
+var sum = degreesAngle + Angle.ToDegrees<float, double>(radiansAngle);
+var difference = Angle.ToRadians<decimal, float>(gradiansAngle) - Angle.ToRadians<double, float>(revolutionsAngle);
+var product = 2.0 * degreesAngle;
+var quotient = gradiansAngle / 100.0m;
+var remainder = degreesAngle % 180.0;
+
+// Compare angles
+var areEqual = degreesAngle.Equals(Angle.ToDegrees<float, double>(radiansAngle));
+var isGreater = gradiansAngle > Angle.ToGradians<double, decimal>(revolutionsAngle);
+
+// Convert angles
+var convertedToRadians = Angle.ToRadians<double, float>(degreesAngle);
+var convertedToDegrees = Angle.ToDegrees<float, double>(radiansAngle);
+var convertedToRevolution = Angle.ToDegrees(degreesAngle);
+
+// Perform trigonometric calculations
+var sineValue = Angle.Sin(radiansAngle);
+var cosineValue = Angle.Cos(degreesAngle);
+var tangentValue = Angle.Tan(radiansAngle);
+var arcsineRadiansAngle = Angle.Asin(180.0);
+
+// Reduce angles
+var reducedAngle = Angle.Reduce(degreesAngle);
+var quadrant = Angle.GetQuadrant(reducedAngle);
+
+// Classify angles
+var isZeroAngle = Angle.IsZero(reducedAngle);
+var isAcuteAngle = Angle.IsAcute(reducedAngle);
+var isRightAngle = Angle.IsRight(reducedAngle);
+var isObtuseAngle = Angle.IsObtuse(reducedAngle);
+var isStraightAngle = Angle.IsStraight(reducedAngle);
+
+// Calculate collection operations
+var angleCollection = new List<Angle<Degrees, double>> { degreesAngle, Angle.ToDegrees<float, double>(radiansAngle), Angle.ToDegrees<decimal, double>(gradiansAngle) };
+var collectionSum = angleCollection.Sum();
+var collectionAverage = angleCollection.Average();
+```
 
 ## Angle<TUnits, T> and AngleReduced<TUnits, T>
 
@@ -51,11 +85,4 @@ These methods are only available for angles in radians. If you need to use them 
 
 These operations are available for `IEnumerable<Angle<TUnits, T>>`, arrays, `Memory<Angle<TUnits, T>>`, `ReadOnlyMemory<Angle<TUnits, T>>`, `Span<Angle<TUnits, T>>`, and `ReadOnlySpan<Angle<TUnits, T>>`.
 
-These operations use SIMD instructions when available.
-
-
-
-
-
-
-
+These operations use SIMD instructions when available, ensuring high-performance calculations.

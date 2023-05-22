@@ -4,7 +4,7 @@ public class LerpTests
 {
     static readonly Angle<Degrees, double> AcuteDegrees = Angle<Degrees, double>.Right / 2.0;
 
-    public static TheoryData<Angle<Degrees, double>, Angle<Degrees, double>, float, Angle<Degrees, double>> LerpDegreesData => new()
+    public static TheoryData<Angle<Degrees, double>, Angle<Degrees, double>, float, Angle<Degrees, double>> LerpData => new()
     {
             {AcuteDegrees, Angle<Degrees, double>.Right + AcuteDegrees, -0.5f, Angle<Degrees, double>.Zero},
             {AcuteDegrees, Angle<Degrees, double>.Right + AcuteDegrees, 0.0f, AcuteDegrees},
@@ -26,8 +26,8 @@ public class LerpTests
         };
 
     [Theory]
-    [MemberData(nameof(LerpDegreesData))]
-    public void Lerp_Degrees_Should_Succeed(Angle<Degrees, double> a1, Angle<Degrees, double> a2, float t, Angle<Degrees, double> expected)
+    [MemberData(nameof(LerpData))]
+    public void Lerp_Should_Succeed(Angle<Degrees, double> a1, Angle<Degrees, double> a2, float t, Angle<Degrees, double> expected)
     {
         // arrange
 

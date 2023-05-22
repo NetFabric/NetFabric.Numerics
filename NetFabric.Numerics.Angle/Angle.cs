@@ -1,5 +1,29 @@
 ﻿namespace NetFabric.Numerics;
 
+/// <summary>
+/// Provides static operations and utility methods for instances of type <see cref="Angle{TUnits,T}"/> 
+/// and <see cref="AngleReduced{TUnits,T}"/>.
+/// </summary>
+/// <remarks>
+/// <para>
+/// The <see cref="Angle"/> static class contains various static operations and utility methods that can 
+/// be used with instances of the <see cref="Angle{TUnits,T}"/> and <see cref="AngleReduced{TUnits,T}"/> structs.
+/// These methods enable you to perform common angle-related operations, such as trigonometric functions, 
+/// conversions, and classification.
+/// </para>
+/// <para>
+/// The static methods in this class are designed to work with instances of the <see cref="Angle{TUnits,T}"/> 
+/// and <see cref="AngleReduced{TUnits,T}"/> structs, ensuring type safety and correct unit conversions.
+/// </para>
+/// <para>
+/// You can use the static methods in the <see cref="Angle"/> class to perform operations on angles of the same 
+/// measurement units, or convert between different measurement units using the provided conversion methods.
+/// </para>
+/// <para>
+/// Note that all the methods in the <see cref="Angle"/> class are static, and they do not modify the original 
+/// angle instances. Instead, they return new angle instances with the desired results.
+/// </para>
+/// </remarks>
 public static partial class Angle
 {
     /// <summary>
@@ -213,7 +237,9 @@ public static partial class Angle
     /// It is formed by the intersection of two straight lines or line segments that do not 
     /// create a right angle. 
     /// </remarks>
-    /// <returns>true if the reduction of the absolute angle is greater than zero and less than 90 degrees; otherwise false.</returns>
+    /// <returns>true if the reduction of the absolute angle is greater than zero and less than 90 degrees; 
+    /// otherwise false.
+    /// </returns>
     public static bool IsAcute<TUnits, T>(AngleReduced<TUnits, T> angle)
         where TUnits : IAngleUnits<TUnits>
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
@@ -247,7 +273,10 @@ public static partial class Angle
     /// than 180 degrees (π radians). It is formed by the intersection of two straight lines or line 
     /// segments that create a turn greater than a right angle. 
     /// </remarks>
-    /// <returns>true if the reduction of the absolute angle is greater than 90 degrees and less than 180 degrees; otherwise false.</returns>
+    /// <returns>
+    /// true if the reduction of the absolute angle is greater than 90 degrees and less than 
+    /// 180 degrees; otherwise false.
+    /// </returns>
     public static bool IsObtuse<TUnits, T>(AngleReduced<TUnits, T> angle)
         where TUnits : IAngleUnits<TUnits>
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
@@ -281,7 +310,10 @@ public static partial class Angle
     /// 360 degrees (2π radians). It is formed by the intersection of two straight lines or line segments 
     /// that create a turn greater than a straight angle. 
     /// </remarks>
-    /// <returns>true if the reduction of the absolute angle is greater than 180 degrees and less than 360 degrees; otherwise false.</returns>
+    /// <returns>
+    /// true if the reduction of the absolute angle is greater than 180 degrees and less than 
+    /// 360 degrees; otherwise false.
+    /// </returns>
     public static bool IsReflex<TUnits, T>(AngleReduced<TUnits, T> angle)
         where TUnits : IAngleUnits<TUnits>
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
@@ -312,7 +344,8 @@ public static partial class Angle
     /// <returns>True if the two angles are complementary, false otherwise.</returns>
     /// <remarks>
     /// Two angles are considered complementary if their sum equals a right angle (90 degrees or π/2 radians).
-    /// The method compares the sum of the <paramref name="first"/> and <paramref name="second"/> angles with a right angle value to determine if they are complementary.
+    /// The method compares the sum of the <paramref name="first"/> and <paramref name="second"/> angles with 
+    /// a right angle value to determine if they are complementary.
     /// </remarks>
     public static bool AreComplementary<TUnits, T>(AngleReduced<TUnits, T> first, AngleReduced<TUnits, T> second)
         where TUnits : IAngleUnits<TUnits>
@@ -327,7 +360,8 @@ public static partial class Angle
     /// <returns>True if the two angles are supplementary, false otherwise.</returns>
     /// <remarks>
     /// Two angles are considered supplementary if their sum equals a straight angle (180 degrees or π radians).
-    /// The method compares the sum of the <paramref name="first"/> and <paramref name="second"/> angles with a straight angle value to determine if they are supplementary.
+    /// The method compares the sum of the <paramref name="first"/> and <paramref name="second"/> angles with 
+    /// a straight angle value to determine if they are supplementary.
     /// </remarks>
     public static bool AreSupplementary<TUnits, T>(AngleReduced<TUnits, T> first, AngleReduced<TUnits, T> second)
         where TUnits : IAngleUnits<TUnits>
