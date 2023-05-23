@@ -30,9 +30,7 @@ jobs:
         dotnet-version: 7.0.x
 
     - name: Setup DocFX
-      uses: crazy-max/ghaction-chocolatey@v1
-      with:
-        args: install docfx
+      run: dotnet tool update -g docfx
 
     - name: DocFX Build
       working-directory: docs
