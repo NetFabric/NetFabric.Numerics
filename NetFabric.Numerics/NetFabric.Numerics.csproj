@@ -13,6 +13,7 @@
     <PackageIcon>Icon.png</PackageIcon>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageTags>math, numerics, vector, cartesian, polar, spherical</PackageTags>
+    <PackageProjectUrl>https://netfabric.github.io/NetFabric.Numerics/</PackageProjectUrl>
     <PackageReleaseNotes>
       First release.
     </PackageReleaseNotes>

@@ -17,6 +17,7 @@
     <PackageIcon>Icon.png</PackageIcon>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageTags>math, numerics, angle, trigonometry, degrees, radians, gradians, revolutions</PackageTags>
+    <PackageProjectUrl>https://netfabric.github.io/NetFabric.Numerics/</PackageProjectUrl>
     <PackageReleaseNotes>
       First release.
     </PackageReleaseNotes>

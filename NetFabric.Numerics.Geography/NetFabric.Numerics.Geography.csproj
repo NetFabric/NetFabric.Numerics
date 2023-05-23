@@ -12,7 +12,8 @@
     <Company>NetFabric</Company>
     <PackageIcon>Icon.png</PackageIcon>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <PackageTags>math, numerics</PackageTags>
+    <PackageTags>math, numerics, geodetic, geography, latlon, latitude, longitude, datum, utm, wgs84</PackageTags>
+    <PackageProjectUrl>https://netfabric.github.io/NetFabric.Numerics/</PackageProjectUrl>
     <PackageReleaseNotes>
       First release.
     </PackageReleaseNotes>
