@@ -1,18 +1,22 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Title>NetFabric.Numerics</Title>
+    <Title>NetFabric.Numerics.Angle</Title>
     <TargetFrameworks>net7.0</TargetFrameworks>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <Description></Description>
+    <Description>
+      A strongly-typed representation of an angle.
+      The explicit declaration of the units in creation and reading methods, reduces the tipical confusion when dealing with angles.
+      Includes conversion, linear interpolation, reduction, reference angle, comparison, classification, trigonometry and algebra operations.
+    </Description>
     <Version>1.0.0-beta01</Version>
     <Copyright>Copyright © Antão Almada 2023</Copyright>
     <Authors>Antão Almada</Authors>
     <Company>NetFabric</Company>
     <PackageIcon>Icon.png</PackageIcon>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <PackageTags>math, numerics, vector, cartesian, polar, spherical</PackageTags>
+    <PackageTags>math, numerics, angle, trigonometry, degrees, radians, gradians, revolutions</PackageTags>
     <PackageProjectUrl>https://netfabric.github.io/NetFabric.Numerics/</PackageProjectUrl>
     <PackageReleaseNotes>
       First release.
@@ -31,17 +35,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="NetFabric.Numerics.Angle.UnitTests\**" />
-    <Compile Remove="NetFabric.Numerics.UnitTests\**" />
-    <EmbeddedResource Remove="NetFabric.Numerics.Angle.UnitTests\**" />
-    <EmbeddedResource Remove="NetFabric.Numerics.UnitTests\**" />
-    <None Remove="NetFabric.Numerics.Angle.UnitTests\**" />
-    <None Remove="NetFabric.Numerics.UnitTests\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="..\Icon.png" Pack="true" PackagePath="" />
-    <None Include="..\LICENSE" Pack="true" PackagePath="" />
+    <None Include="..\..\Icon.png" Pack="true" PackagePath="" />
+    <None Include="..\..\LICENSE" Pack="true" PackagePath="" />
   </ItemGroup>
 
   <ItemGroup>
@@ -49,10 +44,6 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\NetFabric.Numerics.Angle\NetFabric.Numerics.Angle.csproj" />
   </ItemGroup>
 
 </Project>
