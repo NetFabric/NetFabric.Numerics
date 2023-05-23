@@ -51,6 +51,12 @@
       }
     ],
     "output": "_site",
+    "globalMetadata": {
+      "_appTitle": "NetFabric.Numerics",
+      "_appLogoPath": "images/Logo.png",
+      "_appFaviconPath": "images/Logo.png",
+      "_appFooter": "Copyright (c) 2023 Antão Almada"
+    },
     "globalMetadataFiles": [],
     "fileMetadataFiles": [],
     "template": [
