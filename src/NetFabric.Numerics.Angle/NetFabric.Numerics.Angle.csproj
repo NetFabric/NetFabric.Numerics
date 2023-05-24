@@ -10,16 +10,17 @@
       The explicit declaration of the units in creation and reading methods, reduces the tipical confusion when dealing with angles.
       Includes conversion, linear interpolation, reduction, reference angle, comparison, classification, trigonometry and algebra operations.
     </Description>
-    <Version>1.0.0-beta01</Version>
+    <Version>1.0.0-beta03</Version>
     <Copyright>Copyright © Antão Almada 2023</Copyright>
     <Authors>Antão Almada</Authors>
     <Company>NetFabric</Company>
     <PackageIcon>Icon.png</PackageIcon>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageTags>math, numerics, angle, trigonometry, degrees, radians, gradians, revolutions</PackageTags>
     <PackageProjectUrl>https://netfabric.github.io/NetFabric.Numerics/</PackageProjectUrl>
     <PackageReleaseNotes>
-      First release.
+      Improve documentation.
     </PackageReleaseNotes>
     <RootNamespace>NetFabric</RootNamespace>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
@@ -37,6 +38,7 @@
   <ItemGroup>
     <None Include="..\..\Icon.png" Pack="true" PackagePath="" />
     <None Include="..\..\LICENSE" Pack="true" PackagePath="" />
+    <None Include=".\README.md" Pack="true" PackagePath="" />
   </ItemGroup>
 
   <ItemGroup>

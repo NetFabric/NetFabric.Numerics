@@ -121,26 +121,28 @@ public static partial class Angle
         => Utils.GetQuadrant(angle);
 
     /// <summary>
-    /// Returns the absolute value of <paramref name="angle" />.
+    /// Returns the absolute value of the specified angle.
     /// </summary>
-    /// <param name="angle">The angle for which to get its absolute value.</param>
     /// <typeparam name="TUnits">The angle units of <paramref name="angle"/>.</typeparam>
     /// <typeparam name="T">The floating point type used internally by <paramref name="angle"/>.</typeparam>
-    /// <param name="angle">The angle for which to get its absolute value.</param>
+    /// <param name="angle">The angle.</param>
+    /// <returns>The absolute value of the angle.</returns>
     /// <remarks>
-    /// The absolute value of an angle is the smallest angle that can be added or subtracted from 
-    /// the original angle to bring it within the range of -π to π radians (or -180 to 180 degrees). 
-    /// It is a non-negative value that represents the distance between the angle and zero on the 
-    /// number line. The notation used to denote the absolute value of an angle is two vertical 
-    /// bars enclosing the angle, like this: |θ|.
-    /// </remarks>
-    /// <returns>
-    /// The absolute values of <paramref name="angle" />.
-    /// </returns>
+    /// <para>
+    /// The <see cref="Abs"/> method returns the absolute value of the angle, which is the non-negative value 
+    /// representing the magnitude of the angle without considering its sign.
+    /// </para>
+    /// <para>
+    /// If the input angle is positive or zero, the method returns the same angle. If the input angle is 
+    /// negative, the method returns the angle with its sign reversed, resulting in a positive angle with the same magnitude.
+    /// </para>
+    /// </remarks>    
     public static Angle<TUnits, T> Abs<TUnits, T>(Angle<TUnits, T> angle)
         where TUnits : IAngleUnits<TUnits>
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => new(T.Abs(angle.Value));
+        => T.Sign(angle.Value) >= 0
+            ? angle
+            : new(-angle.Value);
 
     /// <summary>
     /// Returns a value indicating the sign of <paramref name="angle" />.
