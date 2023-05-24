@@ -26,7 +26,7 @@ public interface ICoordinateSystem {
     /// containing the information for each coordinate.
     /// </para>
     /// <para>
-    /// The number of coordinates in the coordinate system can be obtained by accessing the <see cref="Count"/> property.
+    /// The number of coordinates in the coordinate system can be obtained by accessing the <see cref="IReadOnlyCollection{Coordinate}.Count"/> property.
     /// </para>
     /// </remarks>
     IReadOnlyCollection<Coordinate> Coordinates { get; }
