@@ -9,16 +9,40 @@ public readonly record struct Vector<T>(T X, T Y)
     ICoordinateSystem IVector<Vector<T>>.CoordinateSystem 
         => CoordinateSystem;
 
+    /// <summary>
+    /// Calculates the length (magnitude) of the vector.
+    /// </summary>
+    /// <returns>The length of the vector.</returns>
+    /// <remarks>
+    /// <para>
+    /// The length is calculated as the Euclidean distance in the 2D Cartesian coordinate system.
+    /// </para>
+    /// </remarks>
     public double Length
-        => Math.Sqrt(this.SquareOfLength);
+        => Math.Sqrt(double.CreateChecked(SquareOfLength));
 
-    public double SquareOfLength
-        => Math.Pow(double.CreateChecked(this.X), 2.0) + Math.Pow(double.CreateChecked(this.Y), 2.0);
+    /// <summary>
+    /// Calculates the square of the length (magnitude) of the vector.
+    /// </summary>
+    /// <returns>The square of the length of the vector.</returns>
+    /// <remarks>
+    /// <para>
+    /// The square of the length is calculated as the Euclidean distance in the 2D Cartesian coordinate system.
+    /// </para>
+    /// <para>
+    /// Note that the square of the length is returned instead of the actual length to avoid the need for
+    /// taking the square root, which can be a computationally expensive operation.
+    /// </para>
+    /// </remarks>
+    public T SquareOfLength
+        => Utils.Pow2(X) + Utils.Pow2(Y);
 
     #region constants
 
+    /// <summary>
+    /// Represents a vector whose 2 coordinates are equal to zero. This field is read-only.
+    /// </summary>
     public static readonly Vector<T> Zero = new(T.Zero, T.Zero);
-    public static readonly Vector<T> Unit = new(T.One, T.One);
 
     static Vector<T> IVector<Vector<T>>.Zero
         => Zero;

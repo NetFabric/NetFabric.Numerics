@@ -16,6 +16,9 @@ public interface IVector<TSelf>
       IMinMaxValue<TSelf>
     where TSelf : IVector<TSelf>?
 {
+    /// <summary>
+    /// Represents the vector with zero length. This field is read-only.
+    /// </summary>
     static abstract TSelf Zero { get; }
 
     /// <summary>
@@ -25,9 +28,17 @@ public interface IVector<TSelf>
     ICoordinateSystem CoordinateSystem { get; }
 
     /// <summary>
-    /// Gets a coordinate of the vector.
+    /// Gets the value for a given coordinate of the vector.
     /// </summary>
     /// <param name="index">The index of the coordinate to get the value.</param>
     /// <value>The value of the coordinate indexed by index.</value>
+    /// <remarks>
+    /// <para>
+    /// The maximum value for the index is the number of coordinates minus one.
+    /// </para>
+    /// <para>
+    /// The number of coordinates can be obtained from the <see cref="ICoordinateSystem.Coordinates"/> property.
+    /// </para>
+    /// </remarks>
     object this[int index] { get; }
 }

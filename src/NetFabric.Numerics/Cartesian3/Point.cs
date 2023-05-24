@@ -65,15 +65,46 @@ public readonly record struct Point<T>(T X, T Y, T Z)
 
 public static class Point
 {
+    /// <summary>
+    /// Calculates the distance between two points.
+    /// </summary>
+    /// <param name="from">The starting point.</param>
+    /// <param name="to">The target point.</param>
+    /// <returns>The distance between the two points.</returns>
+    /// <remarks>
+    /// <para>
+    /// The <see cref="Distance"/> method calculates the distance between two points specified by the <paramref name="from"/> and <paramref name="to"/> parameters.
+    /// </para>
+    /// <para>
+    /// The distance is calculated as the Euclidean distance in the 3D Cartesian coordinate system.
+    /// </para>
+    /// </remarks>
     public static double Distance<T>(Point<T> from, Point<T> to)
         where T : struct, INumber<T>, IMinMaxValue<T>
-        => Math.Sqrt(SquareOfDistance(from, to));
+        => Math.Sqrt(double.CreateChecked(SquareOfDistance(from, to)));
 
-    public static double SquareOfDistance<T>(Point<T> from, Point<T> to)
+    /// <summary>
+    /// Calculates the square of the distance between two points.
+    /// </summary>
+    /// <param name="from">The starting point.</param>
+    /// <param name="to">The target point.</param>
+    /// <returns>The square of the distance between the two points.</returns>
+    /// <remarks>
+    /// <para>
+    /// The <see cref="SquareOfDistance"/> method calculates the square of the distance between two points
+    /// specified by the <paramref name="from"/> and <paramref name="to"/> parameters.
+    /// </para>
+    /// <para>
+    /// The distance is calculated as the Euclidean distance in the 3D Cartesian coordinate system.
+    /// </para>
+    /// <para>
+    /// Note that the square of the distance is returned instead of the actual distance to avoid the need for
+    /// taking the square root, which can be a computationally expensive operation.
+    /// </para>
+    /// </remarks>
+    public static T SquareOfDistance<T>(Point<T> from, Point<T> to)
         where T : struct, INumber<T>, IMinMaxValue<T>
-        => Math.Pow(double.CreateChecked(to.X - from.X), 2.0) + 
-            Math.Pow(double.CreateChecked(to.Y - from.Y), 2.0) +
-            Math.Pow(double.CreateChecked(to.Z - from.Z), 2.0);
+        => Utils.Pow2(to.X - from.X) + Utils.Pow2(to.Y - from.Y) + Utils.Pow2(to.Z - from.Z);
 
     /// <summary>
     /// Gets the Manhattan distance between two points.
