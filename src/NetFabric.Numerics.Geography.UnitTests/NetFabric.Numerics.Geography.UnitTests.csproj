@@ -7,10 +7,12 @@
 
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
+    <RootNamespace>NetFabric.Numerics.Geography.UnitTests</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
     <Using Include="FluentAssertions" />
+    <Using Include="Xunit" />
   </ItemGroup>
 
   <ItemGroup>

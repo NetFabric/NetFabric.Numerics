@@ -40,6 +40,6 @@ public readonly record struct Point<TAngleUnits, TAngle, TRadius>(Angle<TAngleUn
         {
             0 => Azimuth,
             1 => Radius,
-            _ => throw new ArgumentOutOfRangeException(nameof(index), index, "index out of range")
+            _ => Throw.ArgumentOutOfRangeException<object>(nameof(index), index, "index out of range")
         };
 }

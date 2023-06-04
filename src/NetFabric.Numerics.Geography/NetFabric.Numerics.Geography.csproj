@@ -17,7 +17,7 @@
     <PackageReleaseNotes>
       First release.
     </PackageReleaseNotes>
-    <RootNamespace>NetFabric</RootNamespace>
+    <RootNamespace>NetFabric.Numerics.Geography</RootNamespace>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
   </PropertyGroup>
 

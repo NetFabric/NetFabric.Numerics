@@ -14,3 +14,14 @@ To get started with **NetFabric.Numerics**, you need to install the library's Nu
 - [NetFabric.Numerics.Geography](https://www.nuget.org/packages/NetFabric.Numerics.Geography/): Provides strongly-typed geodetic coordinate implementations.
 
 Make sure to include the appropriate package(s) in your project, depending on your specific needs.
+
+## Credits
+
+The following open-source projects are used to build and test this project:
+
+- [.NET](https://github.com/dotnet)
+- [Fluent Assertions](https://github.com/fluentassertions/fluentassertions)
+
+## License
+
+This project is licensed under the MIT license. See the [LICENSE](https://github.com/NetFabric/NetFabric.Numerics/blob/main/README.md) file for more info.

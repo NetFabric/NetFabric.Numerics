@@ -145,7 +145,7 @@ public readonly record struct Vector<T>(T X, T Y, T Z)
             0 => X,
             1 => Y,
             2 => Z,
-            _ => throw new ArgumentOutOfRangeException(nameof(index), index, "index out of range")
+            _ => Throw.ArgumentOutOfRangeException<object>(nameof(index), index, "index out of range")
         };
 }
 

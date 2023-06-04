@@ -29,5 +29,5 @@ public interface ICoordinateSystem {
     /// The number of coordinates in the coordinate system can be obtained by accessing the <see cref="IReadOnlyCollection{Coordinate}.Count"/> property.
     /// </para>
     /// </remarks>
-    IReadOnlyCollection<Coordinate> Coordinates { get; }
+    ReadOnlyMemory<Coordinate> Coordinates { get; }
 }

@@ -8,10 +8,12 @@
 
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
+    <RootNamespace>NetFabric.Numerics.UnitsTests</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
     <Using Include="FluentAssertions" />
+    <Using Include="Xunit" />
   </ItemGroup>
 
   <ItemGroup>

@@ -6,12 +6,12 @@ public readonly record struct CoordinateSystem<TAngleUnits, TAngle, TRadius>
     where TAngle : struct, IFloatingPoint<TAngle>, IMinMaxValue<TAngle>
     where TRadius: struct, IFloatingPoint<TRadius>
 {
-    static readonly Coordinate[] coordinates 
-        = new[] {
+    static readonly ReadOnlyMemory<Coordinate> coordinates 
+        = new(new[] {
             new Coordinate("Azimuth", typeof(Angle<TAngleUnits, TAngle>)), 
             new Coordinate("Radius", typeof(TRadius)),
-        };
+        });
 
-    public IReadOnlyCollection<Coordinate> Coordinates 
+    public ReadOnlyMemory<Coordinate> Coordinates 
         => coordinates;
 }

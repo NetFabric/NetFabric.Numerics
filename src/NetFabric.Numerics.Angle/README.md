@@ -87,3 +87,14 @@ These methods are only available for angles in radians. When using an angle on a
 These operations are available for `IEnumerable<Angle<TUnits, T>>`, `Angle<TUnits, T>[]`, `Memory<Angle<TUnits, T>>`, `ReadOnlyMemory<Angle<TUnits, T>>`, `Span<Angle<TUnits, T>>`, and `ReadOnlySpan<Angle<TUnits, T>>`.
 
 These operations use SIMD instructions when available, ensuring high-performance calculations.
+
+## Credits
+
+The following open-source projects are used to build and test this project:
+
+- [.NET](https://github.com/dotnet)
+- [Fluent Assertions](https://github.com/fluentassertions/fluentassertions)
+
+## License
+
+This project is licensed under the MIT license. See the [LICENSE](https://github.com/NetFabric/NetFabric.Numerics/blob/main/README.md) file for more info.

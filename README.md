@@ -95,6 +95,13 @@ var (degreesLatitude, minutesLatitude, secondsLatitude) = Angle.ToDegreesMinutes
 
 **NetFabric.Numerics** enables you to work with geodetic coordinates using various datums, allowing you to specify the desired precision and units of measurement for latitude and longitude.
 
-## Conclusion ##
+## Credits
 
-**NetFabric.Numerics** provides a comprehensive set of strongly-typed implementations for different coordinate systems, offering flexibility, type safety, and precise control over precision and units of measurement. Whether you're working with points, angles, or geodetic coordinates, this library simplifies your code and ensures accuracy in your calculations. Explore the library's packages and unleash the power of strongly-typed numerical computations in your C# projects!
+The following open-source projects are used to build and test this project:
+
+- [.NET](https://github.com/dotnet)
+- [Fluent Assertions](https://github.com/fluentassertions/fluentassertions)
+
+## License
+
+This project is licensed under the MIT license. See the [LICENSE](LICENSE) file for more info.

@@ -10,12 +10,12 @@ public readonly record struct Point<TDatum, TAngle>(Angle<Degrees, TAngle> Latit
     public Angle<Degrees, TAngle> Latitude { get; } 
         = Latitude.Value >= TAngle.CreateChecked(-Degrees.Right) && Latitude.Value <= TAngle.CreateChecked(Degrees.Right)
             ? Latitude
-            : throw new ArgumentOutOfRangeException(nameof(Latitude), Latitude, "Latitude must be >= -90.0º and <= 90.0º");
+            : Throw.ArgumentOutOfRangeException<Angle<Degrees, TAngle>>(nameof(Latitude), Latitude, "Latitude must be >= -90.0º and <= 90.0º");
 
     public Angle<Degrees, TAngle> Longitude { get; } 
         = Longitude.Value > TAngle.CreateChecked(-Degrees.Straight) && Longitude.Value <= TAngle.CreateChecked(Degrees.Straight)
             ? Longitude
-            : throw new ArgumentOutOfRangeException(nameof(Longitude), Longitude, "Longitude must be > -180.0º and <= 180.0º");
+            : Throw.ArgumentOutOfRangeException<Angle<Degrees, TAngle>>(nameof(Longitude), Longitude, "Longitude must be > -180.0º and <= 180.0º");
 
     #region constants
 
@@ -54,6 +54,6 @@ public readonly record struct Point<TDatum, TAngle>(Angle<Degrees, TAngle> Latit
         {
             0 => Latitude,
             1 => Longitude,
-            _ => throw new ArgumentOutOfRangeException(nameof(index), index, "index out of range")
+            _ => Throw.ArgumentOutOfRangeException<object>(nameof(index), index, "index out of range")
         };
 }
