@@ -1,5 +1,6 @@
 namespace NetFabric.Numerics.Spherical;
 
+[System.Diagnostics.DebuggerDisplay("Azimuth = {Azimuth}, Zenith = {Zenith}, Radius = {Radius}")]
 public readonly record struct Point<TAngleUnits, TAngle, TRadius>(Angle<TAngleUnits, TAngle> Azimuth, Angle<TAngleUnits, TAngle> Zenith, TRadius Radius) 
     : IPoint<Point<TAngleUnits, TAngle, TRadius>>
     where TAngleUnits : struct, IAngleUnits<TAngleUnits>

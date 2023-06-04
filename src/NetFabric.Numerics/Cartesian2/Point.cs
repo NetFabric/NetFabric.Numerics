@@ -1,5 +1,6 @@
 namespace NetFabric.Numerics.Cartesian2;
 
+[System.Diagnostics.DebuggerDisplay("X = {X}, Y = {Y}")]
 public readonly record struct Point<T>(T X, T Y) 
     : IPoint<Point<T>>
     where T: struct, INumber<T>, IMinMaxValue<T>
@@ -62,6 +63,9 @@ public readonly record struct Point<T>(T X, T Y)
         };
 }
 
+/// <summary>
+/// Provides static methods for point operations.
+/// </summary>
 public static class Point
 {
     /// <summary>
@@ -80,7 +84,7 @@ public static class Point
     /// </remarks>
     public static double Distance<T>(Point<T> from, Point<T> to)
         where T : struct, INumber<T>, IMinMaxValue<T>
-        => Math.Sqrt(double.CreateChecked(SquareOfDistance(from, to)));
+        => Math.Sqrt(double.CreateChecked(DistanceSquared(from, to)));
 
     /// <summary>
     /// Calculates the square of the distance between two points.
@@ -90,7 +94,7 @@ public static class Point
     /// <returns>The square of the distance between the two points.</returns>
     /// <remarks>
     /// <para>
-    /// The <see cref="SquareOfDistance"/> method calculates the square of the distance between two points
+    /// The <see cref="DistanceSquared"/> method calculates the square of the distance between two points
     /// specified by the <paramref name="from"/> and <paramref name="to"/> parameters.
     /// </para>
     /// <para>
@@ -101,7 +105,7 @@ public static class Point
     /// taking the square root, which can be a computationally expensive operation.
     /// </para>
     /// </remarks>
-    public static T SquareOfDistance<T>(Point<T> from, Point<T> to)
+    public static T DistanceSquared<T>(Point<T> from, Point<T> to)
         where T : struct, INumber<T>, IMinMaxValue<T>
         => Utils.Pow2(to.X - from.X) + Utils.Pow2(to.Y - from.Y);
 

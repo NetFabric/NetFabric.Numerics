@@ -1,5 +1,6 @@
 namespace NetFabric.Numerics.Polar;
 
+[System.Diagnostics.DebuggerDisplay("Azimuth = {Azimuth}, Radius = {Radius}")]
 public readonly record struct Point<TAngleUnits, TAngle, TRadius>(Angle<TAngleUnits, TAngle> Azimuth, TRadius Radius) 
     : IPoint<Point<TAngleUnits, TAngle, TRadius>>
     where TAngleUnits : struct, IAngleUnits<TAngleUnits>

@@ -2,6 +2,7 @@ using System.Numerics;
 
 namespace NetFabric.Numerics.Geography.Geodetic3;
 
+[System.Diagnostics.DebuggerDisplay("Latitude = {Latitude}, Longitude = {Longitude}, Height = {Height}")]
 public readonly record struct Point<TDatum, TAngle, THeight>(Angle<Degrees, TAngle> Latitude, Angle<Degrees, TAngle> Longitude, THeight Height) 
     : IPoint<Point<TDatum, TAngle, THeight>>
     where TDatum : IDatum<TDatum>
@@ -11,12 +12,12 @@ public readonly record struct Point<TDatum, TAngle, THeight>(Angle<Degrees, TAng
     public Angle<Degrees, TAngle> Latitude { get; }
         = Latitude.Value >= TAngle.CreateChecked(-Degrees.Right) && Latitude.Value <= TAngle.CreateChecked(Degrees.Right)
             ? Latitude
-            : throw new ArgumentOutOfRangeException(nameof(Latitude), Latitude, "Latitude must be >= -90.0º and <= 90.0º");
+            : Throw.ArgumentOutOfRangeException<Angle<Degrees, TAngle>>(nameof(Latitude), Latitude, "Latitude must be >= -90.0º and <= 90.0º");
 
     public Angle<Degrees, TAngle> Longitude { get; }
         = Longitude.Value > TAngle.CreateChecked(-Degrees.Straight) && Longitude.Value <= TAngle.CreateChecked(Degrees.Straight)
             ? Longitude
-            : throw new ArgumentOutOfRangeException(nameof(Longitude), Longitude, "Longitude must be > -180.0º and <= 180.0º");
+            : Throw.ArgumentOutOfRangeException<Angle<Degrees, TAngle>>(nameof(Longitude), Longitude, "Longitude must be > -180.0º and <= 180.0º");
 
     #region constants
 
@@ -56,6 +57,6 @@ public readonly record struct Point<TDatum, TAngle, THeight>(Angle<Degrees, TAng
             0 => Latitude,
             1 => Longitude,
             2 => Height,
-            _ => throw new ArgumentOutOfRangeException(nameof(index), index, "index out of range")
+            _ => Throw.ArgumentOutOfRangeException<object>(nameof(index), index, "index out of range")
         };
 }
