@@ -1,5 +1,12 @@
 namespace NetFabric.Numerics.Cartesian3;
 
+/// <summary>
+/// Represents a point as an immutable struct.
+/// </summary>
+/// <typeparam name="T">The type of the point coordinates.</typeparam>
+/// <param name="X">The X coordinate.</param>
+/// <param name="Y">The X coordinate.</param>
+/// <param name="Z">The X coordinate.</param>
 [System.Diagnostics.DebuggerDisplay("X = {X}, Y = {Y}, Z = {Z}")]
 public readonly record struct Point<T>(T X, T Y, T Z) 
     : IPoint<Point<T>>
@@ -29,6 +36,9 @@ public readonly record struct Point<T>(T X, T Y, T Z)
 
     #endregion
 
+    /// <summary>
+    /// Gets the coordinate system.
+    /// </summary>
     public CoordinateSystem<T> CoordinateSystem 
         => new();
     ICoordinateSystem IPoint<Point<T>>.CoordinateSystem 
@@ -37,7 +47,7 @@ public readonly record struct Point<T>(T X, T Y, T Z)
     #region addition
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Point<T> operator +(Point<T> left, Vector<T> right)
+    public static Point<T> operator +(in Point<T> left, in Vector<T> right)
         => new(left.X + right.X, left.Y + right.Y, left.Z + right.Z);
 
     #endregion
@@ -45,11 +55,11 @@ public readonly record struct Point<T>(T X, T Y, T Z)
     #region subtraction
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Point<T> operator -(Point<T> left, Vector<T> right)
+    public static Point<T> operator -(in Point<T> left, in Vector<T> right)
         => new(left.X - right.X, left.Y - right.Y, left.Z - right.Z);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Vector<T> operator +(Point<T> left, Point<T> right)
+    public static Vector<T> operator -(in Point<T> left, in Point<T> right)
         => new(left.X - right.X, left.Y - right.Y, left.Z - right.Z);
 
     #endregion
@@ -70,6 +80,29 @@ public readonly record struct Point<T>(T X, T Y, T Z)
 public static class Point
 {
     /// <summary>
+    /// Converts a <see cref="Point{TFrom}"/> to a <see cref="Point{TTo}"/>.
+    /// </summary>
+    /// <typeparam name="TFrom">The type of the components of the source point.</typeparam>
+    /// <typeparam name="TTo">The type of the components of the target point.</typeparam>
+    /// <param name="point">The source point to convert.</param>
+    /// <exception cref="NotSupportedException"><typeparamref name="TTo" /> is not supported.</exception>
+    /// <exception cref="OverflowException"><paramref name="point" /> is not representable by <typeparamref name="TFrom" />.</exception>
+    /// <returns>The converted <see cref="Point{TTo}"/>.</returns>
+    /// <remarks>
+    /// This method performs a conversion from a <see cref="Point{TFrom}"/> to a <see cref="Point{TTo}"/>.
+    /// It converts each component of the source point to the target type and constructs a new point with
+    /// the converted components in the order x, y, z.
+    /// </remarks>
+    public static Point<TTo> Convert<TFrom, TTo>(in Point<TFrom> point)
+        where TFrom : struct, IFloatingPoint<TFrom>, IMinMaxValue<TFrom>
+        where TTo : struct, IFloatingPoint<TTo>, IMinMaxValue<TTo>
+        => new(
+            TTo.CreateChecked(point.X),
+            TTo.CreateChecked(point.Y),
+            TTo.CreateChecked(point.Z)
+        );
+
+    /// <summary>
     /// Calculates the distance between two points.
     /// </summary>
     /// <param name="from">The starting point.</param>
@@ -83,7 +116,7 @@ public static class Point
     /// The distance is calculated as the Euclidean distance in the 3D Cartesian coordinate system.
     /// </para>
     /// </remarks>
-    public static double Distance<T>(Point<T> from, Point<T> to)
+    public static double Distance<T>(in Point<T> from, in Point<T> to)
         where T : struct, INumber<T>, IMinMaxValue<T>
         => Math.Sqrt(double.CreateChecked(DistanceSquared(from, to)));
 
@@ -106,7 +139,7 @@ public static class Point
     /// taking the square root, which can be a computationally expensive operation.
     /// </para>
     /// </remarks>
-    public static T DistanceSquared<T>(Point<T> from, Point<T> to)
+    public static T DistanceSquared<T>(in Point<T> from, in Point<T> to)
         where T : struct, INumber<T>, IMinMaxValue<T>
         => Utils.Pow2(to.X - from.X) + Utils.Pow2(to.Y - from.Y) + Utils.Pow2(to.Z - from.Z);
 
@@ -129,7 +162,7 @@ public static class Point
     /// </para>
     /// </remarks>
     /// <returns>The Manhattan distance between two points.</returns>
-    public static T ManhattanDistance<T>(Point<T> from, Point<T> to)
+    public static T ManhattanDistance<T>(in Point<T> from, in Point<T> to)
         where T : struct, INumber<T>, IMinMaxValue<T>
         => T.Abs(to.X - from.X) + T.Abs(to.Y - from.Y) + T.Abs(to.Z - from.Z);
 
