@@ -1,7 +1,15 @@
 namespace NetFabric.Numerics.Polar;
 
+/// <summary>
+/// Represents a point as an immutable struct.
+/// </summary>
+/// <typeparam name="TAngleUnits">The angle units used for the azimuth coordinate.</typeparam>
+/// <typeparam name="TAngle">The type used by the angle of the azimuth coordinate.</typeparam>
+/// <typeparam name="TRadius">The type of the radius coordinate.</typeparam>
+/// <param name="Azimuth">The azimuth coordinate.</param>
+/// <param name="Radius">The radius coordinate.</param>
 [System.Diagnostics.DebuggerDisplay("Azimuth = {Azimuth}, Radius = {Radius}")]
-public readonly record struct Point<TAngleUnits, TAngle, TRadius>(Angle<TAngleUnits, TAngle> Azimuth, TRadius Radius) 
+public readonly record struct Point<TAngleUnits, TAngle, TRadius>(Angle<TAngleUnits, TAngle> Azimuth, TRadius Radius)
     : IPoint<Point<TAngleUnits, TAngle, TRadius>>
     where TAngleUnits : struct, IAngleUnits<TAngleUnits>
     where TAngle : struct, IFloatingPoint<TAngle>, IMinMaxValue<TAngle>
@@ -31,12 +39,15 @@ public readonly record struct Point<TAngleUnits, TAngle, TRadius>(Angle<TAngleUn
 
     #endregion
 
-    public CoordinateSystem<TAngleUnits, TAngle, TRadius> CoordinateSystem 
+    /// <summary>
+    /// Gets the coordinate system.
+    /// </summary>
+    public CoordinateSystem<TAngleUnits, TAngle, TRadius> CoordinateSystem
         => new();
-    ICoordinateSystem IPoint<Point<TAngleUnits, TAngle, TRadius>>.CoordinateSystem 
+    ICoordinateSystem IPoint<Point<TAngleUnits, TAngle, TRadius>>.CoordinateSystem
         => CoordinateSystem;
 
-    object IPoint<Point<TAngleUnits, TAngle, TRadius>>.this[int index] 
+    object IPoint<Point<TAngleUnits, TAngle, TRadius>>.this[int index]
         => index switch
         {
             0 => Azimuth,

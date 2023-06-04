@@ -1,10 +1,19 @@
 namespace NetFabric.Numerics.Cartesian3;
 
+/// <summary>
+/// Represents a vector as an immutable struct.
+/// <typeparam name="T">The type of the vector coordinates.</typeparam>
+/// <param name="X">The X coordinate.</param>
+/// <param name="Y">The X coordinate.</param>
+/// <param name="Z">The X coordinate.</param>
 [System.Diagnostics.DebuggerDisplay("X = {X}, Y = {Y}, Z = {Z}")]
 public readonly record struct Vector<T>(T X, T Y, T Z) 
     : IVector<Vector<T>>
     where T: struct, INumber<T>, IMinMaxValue<T>
 {
+    /// <summary>
+    /// Gets the coordinate system.
+    /// </summary>
     public CoordinateSystem<T> CoordinateSystem 
         => new();
     ICoordinateSystem IVector<Vector<T>>.CoordinateSystem 
@@ -20,7 +29,7 @@ public readonly record struct Vector<T>(T X, T Y, T Z)
     /// </para>
     /// </remarks>
     public double Length
-        => Math.Sqrt(double.CreateChecked(SquareOfLength));
+        => Math.Sqrt(double.CreateChecked(LengthSquared));
 
     /// <summary>
     /// Calculates the square of the length (magnitude) of the vector.
@@ -35,7 +44,7 @@ public readonly record struct Vector<T>(T X, T Y, T Z)
     /// taking the square root, which can be a computationally expensive operation.
     /// </para>
     /// </remarks>
-    public T SquareOfLength
+    public T LengthSquared
         => Utils.Pow2(X) + Utils.Pow2(Y) + Utils.Pow2(Z);
 
     #region constants
@@ -87,7 +96,7 @@ public readonly record struct Vector<T>(T X, T Y, T Z)
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public readonly int CompareTo(Vector<T> other)
-        => this.SquareOfLength.CompareTo(other.SquareOfLength);
+        => this.LengthSquared.CompareTo(other.LengthSquared);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool operator <(Vector<T> left, Vector<T> right)
@@ -119,7 +128,7 @@ public readonly record struct Vector<T>(T X, T Y, T Z)
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector<T> operator +(Vector<T> right)
-        => new (+right.X, +right.Y, +right.Z);
+        => right;
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector<T> operator +(Vector<T> left, Vector<T> right)
@@ -194,7 +203,7 @@ public static class Vector
     /// This method is useful when you want to restrict a 3D vector to a certain range for each component.
     /// </para>
     /// </remarks>
-    public static Vector<T> Clamp<T>(Vector<T> vector, Vector<T> min, Vector<T> max)
+    public static Vector<T> Clamp<T>(in Vector<T> vector, in Vector<T> min, in Vector<T> max)
     where T : struct, INumber<T>, IMinMaxValue<T>
         => new(T.Clamp(vector.X, min.X, max.X), T.Clamp(vector.Y, min.Y, max.Y), T.Clamp(vector.Z, min.Z, max.Z));
 
@@ -219,7 +228,7 @@ public static class Vector
     /// the method will return the zero vector itself, as it cannot be normalized.
     /// </para>
     /// </remarks>
-    public static Vector<T> Normalize<T>(Vector<T> vector)
+    public static Vector<T> Normalize<T>(in Vector<T> vector)
         where T : struct, INumber<T>, IMinMaxValue<T>
     {
         var length = T.CreateChecked(vector.Length);
@@ -234,7 +243,7 @@ public static class Vector
     /// <param name="left">A vector.</param>
     /// <param name="right">A vector.</param>
     /// <returns>The dot product.</returns>
-    public static T DotProduct<T>(Vector<T> left, Vector<T> right)
+    public static T DotProduct<T>(in Vector<T> left, in Vector<T> right)
         where T : struct, INumber<T>, IMinMaxValue<T>
         => (left.X * right.X) + (left.Y * right.Y) + (left.Z * right.Z);
 
@@ -245,7 +254,7 @@ public static class Vector
     /// <param name="left">A vector.</param>
     /// <param name="right">A vector.</param>
     /// <returns>The cross products.</returns>
-    public static Vector<T> CrossProduct<T>(Vector<T> left, Vector<T> right)
+    public static Vector<T> CrossProduct<T>(in Vector<T> left, in Vector<T> right)
         where T : struct, INumber<T>, IMinMaxValue<T>
         => new((left.Y * right.Z) - (left.Z * right.Y),
                 (left.Z * right.X) - (left.X * right.Z),
@@ -258,7 +267,7 @@ public static class Vector
     /// <param name="to">The vector where the angle measurement stops at.</param>
     /// <returns>The angle between two vectors.</returns>
     /// <remarks>The angle signal is determined by the right-hand rule.</remarks>
-    public static Angle<Radians, TAngle> Angle<T, TAngle>(Vector<T> from, Vector<T> to)
+    public static Angle<Radians, TAngle> Angle<T, TAngle>(in Vector<T> from, in Vector<T> to)
         where T : struct, INumber<T>, IMinMaxValue<T>
         where TAngle : struct, IFloatingPoint<TAngle>, IMinMaxValue<TAngle>
         => new(TAngle.CreateChecked(Math.Acos(double.CreateChecked(DotProduct(from, to)) / (from.Length * to.Length))));

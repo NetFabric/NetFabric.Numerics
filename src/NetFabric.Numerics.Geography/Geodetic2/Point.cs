@@ -45,6 +45,9 @@ public readonly record struct Point<TDatum, TAngle>(Angle<Degrees, TAngle> Latit
 
     #endregion
 
+    /// <summary>
+    /// Gets the coordinate system.
+    /// </summary>
     public CoordinateSystem<TDatum, TAngle> CoordinateSystem 
         => new();
     ICoordinateSystem IPoint<Point<TDatum, TAngle>>.CoordinateSystem 

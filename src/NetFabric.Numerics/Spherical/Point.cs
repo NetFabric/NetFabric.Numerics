@@ -1,5 +1,14 @@
 namespace NetFabric.Numerics.Spherical;
 
+/// <summary>
+/// Represents a point as an immutable struct.
+/// </summary>
+/// <typeparam name="TAngleUnits">The angle units used for the azimuth and zenith coordinates.</typeparam>
+/// <typeparam name="TAngle">The type used by the angle of the azimuth and zenith coordinates.</typeparam>
+/// <typeparam name="TRadius">The type of the radius coordinate.</typeparam>
+/// <param name="Azimuth">The azimuth coordinate.</param>
+/// <param name="Zenith">The zenith coordinate.</param>
+/// <param name="Radius">The radius coordinate.</param>
 [System.Diagnostics.DebuggerDisplay("Azimuth = {Azimuth}, Zenith = {Zenith}, Radius = {Radius}")]
 public readonly record struct Point<TAngleUnits, TAngle, TRadius>(Angle<TAngleUnits, TAngle> Azimuth, Angle<TAngleUnits, TAngle> Zenith, TRadius Radius) 
     : IPoint<Point<TAngleUnits, TAngle, TRadius>>
@@ -31,6 +40,9 @@ public readonly record struct Point<TAngleUnits, TAngle, TRadius>(Angle<TAngleUn
 
     #endregion
 
+    /// <summary>
+    /// Gets the coordinate system.
+    /// </summary>
     public CoordinateSystem<TAngleUnits, TAngle, TRadius> CoordinateSystem 
         => new();
     ICoordinateSystem IPoint<Point<TAngleUnits, TAngle, TRadius>>.CoordinateSystem 

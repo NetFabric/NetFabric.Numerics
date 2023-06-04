@@ -15,7 +15,9 @@
     <PackageTags>math, numerics, vector, cartesian, polar, spherical</PackageTags>
     <PackageProjectUrl>https://netfabric.github.io/NetFabric.Numerics/</PackageProjectUrl>
     <PackageReleaseNotes>
-      First release.
+      Add type conversion methods.
+      Add Quaternion.
+      Add documentation.
     </PackageReleaseNotes>
     <RootNamespace>NetFabric.Numerics</RootNamespace>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
