@@ -79,6 +79,35 @@ public readonly record struct Point<T>(T X, T Y, T Z)
 /// </summary>
 public static class Point
 {
+
+    /// <summary>
+    /// Applies a quaternion to a 3-dimensional point.
+    /// </summary>
+    /// <typeparam name="T">The underlying numeric type of the quaternion and point coordinates.</typeparam>
+    /// <param name="quaternion">The quaternion to apply.</param>
+    /// <param name="point">The 3-dimensional point to transform.</param>
+    /// <returns>The transformed 3-dimensional point.</returns>
+    /// <remarks>
+    /// <para>
+    /// The <paramref name="quaternion"/> is not required to be a unit quaternion.
+    /// </para>
+    /// <para>
+    /// The point coordinates type must be a floating point.
+    /// </para>
+    /// <para>
+    /// The transformation is applied by multiplying the point with the quaternion,
+    /// resulting in a new 3-dimensional point that represents the original point
+    /// after being transformed by the quaternion.
+    /// </para>
+    /// </remarks>
+    public static Point<T> Apply<T>(Quaternion<T> quaternion, Point<T> point)
+        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
+        => new (
+            (quaternion.W * point.X) + (quaternion.Y * point.Z) - (quaternion.Z * point.Y),
+            (quaternion.W * point.Y) + (quaternion.Z * point.X) - (quaternion.X * point.Z),
+            (quaternion.W * point.Z) + (quaternion.X * point.Y) - (quaternion.Y * point.X)
+        );
+
     /// <summary>
     /// Converts a <see cref="Point{TFrom}"/> to a <see cref="Point{TTo}"/>.
     /// </summary>

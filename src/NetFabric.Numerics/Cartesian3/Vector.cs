@@ -180,6 +180,34 @@ public readonly record struct Vector<T>(T X, T Y, T Z)
 public static class Vector
 {
     /// <summary>
+    /// Applies a quaternion to a 3-dimensional vector.
+    /// </summary>
+    /// <typeparam name="T">The underlying numeric type of the quaternion and vector coordinates.</typeparam>
+    /// <param name="quaternion">The quaternion to apply.</param>
+    /// <param name="vector">The 3-dimensional vector to transform.</param>
+    /// <returns>The transformed 3-dimensional vector.</returns>
+    /// <remarks>
+    /// <para>
+    /// The <paramref name="quaternion"/> is not required to be a unit quaternion.
+    /// </para>
+    /// <para>
+    /// The vector coordinates type must be a floating point.
+    /// </para>
+    /// <para>
+    /// The transformation is applied by multiplying the vector with the quaternion,
+    /// resulting in a new 3-dimensional vector that represents the original vector
+    /// after being transformed by the quaternion.
+    /// </para>
+    /// </remarks>
+    public static Vector<T> Apply<T>(Quaternion<T> quaternion, Vector<T> vector)
+        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
+        => new(
+            (quaternion.W * vector.X) + (quaternion.Y * vector.Z) - (quaternion.Z * vector.Y),
+            (quaternion.W * vector.Y) + (quaternion.Z * vector.X) - (quaternion.X * vector.Z),
+            (quaternion.W * vector.Z) + (quaternion.X * vector.Y) - (quaternion.Y * vector.X)
+        );
+
+    /// <summary>
     /// Returns a new vector that is clamped within the specified minimum and maximum values for each component.
     /// </summary>
     /// <param name="vector">The vector to clamp.</param>
