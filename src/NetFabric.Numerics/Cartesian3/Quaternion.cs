@@ -239,6 +239,7 @@ public static class Quaternion
     ///   This method checks whether the given <paramref name="quaternion"/> has the components (0, 0, 0, 1)
     ///   to determine if it is an identity quaternion.
     /// </remarks>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool IsIdentity<T>(in Quaternion<T> quaternion)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => quaternion == Quaternion<T>.Identity;
@@ -375,6 +376,7 @@ public static class Quaternion
     /// The norm of a quaternion is the square root of the sum of the squares of its components: √(x^2 + y^2 + z^2 + w^2).
     /// </para>
     /// </remarks>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static double Norm<T>(in Quaternion<T> quaternion)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => Math.Sqrt(double.CreateChecked(NormSquared(quaternion)));
@@ -408,6 +410,7 @@ public static class Quaternion
     /// while keeping the scalar part (W) unchanged. The conjugate is useful in various quaternion operations,
     /// such as quaternion multiplication and division.
     /// </remarks>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Quaternion<T> Conjugate<T>(in Quaternion<T> quaternion)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => new(-quaternion.X, -quaternion.Y, -quaternion.Z, quaternion.W);
@@ -447,6 +450,8 @@ public static class Quaternion
             quaternion.W * reciprocalNormSquared);
     }
 
+    // Slerp and Lerp based on: https://blog.magnum.graphics/backstage/the-unnecessarily-short-ways-to-do-a-quaternion-slerp/
+
     /// <summary>
     /// Calculates the dot product of two quaternions.
     /// </summary>
@@ -463,9 +468,145 @@ public static class Quaternion
     /// The dot product can be useful for various quaternion operations, such as determining if two quaternions
     /// are parallel or perpendicular to each other.
     /// </remarks>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static T DotProduct<T>(in Quaternion<T> left, in Quaternion<T> right)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => (left.X * right.X) + (left.Y * right.Y) + (left.Z * right.Z) + (left.W * right.W);
+
+    /// <summary>
+    /// Performs linear interpolation (LERP) between two quaternions.
+    /// </summary>
+    /// <typeparam name="T">The underlying numeric type of the quaternion coordinates.</typeparam>
+    /// <param name="start">The starting quaternion, returned when <paramref name="factor"/> is 0.</param>
+    /// <param name="end">The ending quaternion, returned when <paramref name="factor"/> is 1.</param>
+    /// <param name="factor">The interpolation factor, ranging from 0 to 1.</param>
+    /// <returns>The interpolated quaternion.</returns>
+    /// <remarks>
+    /// This method performs linear interpolation between the start and end quaternions using the given factor.
+    /// The interpolation is performed in a straight line and does not consider the shortest path between the quaternions.
+    /// The resulting interpolated quaternion may not be normalized. If normalization is desired, call the
+    /// <see cref="Quaternion.Normalize"/> method on the result.
+    /// </remarks>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static Quaternion<T> Lerp<T>(in Quaternion<T> start, in Quaternion<T> end, T factor)
+        where T : struct, IFloatingPoint<T>, IMinMaxValue<T> 
+        => (start * (T.One - factor)) + (end * factor);
+
+    /// <summary>
+    /// Performs linear interpolation (LERP) between two quaternions using the shortest path.
+    /// </summary>
+    /// <typeparam name="T">The underlying numeric type of the quaternion coordinates.</typeparam>
+    /// <param name="start">The starting quaternion, returned when <paramref name="factor"/> is 0.</param>
+    /// <param name="end">The ending quaternion, returned when <paramref name="factor"/> is 1.</param>
+    /// <param name="factor">The interpolation factor, ranging from 0 to 1.</param>
+    /// <returns>The interpolated quaternion.</returns>
+    /// <remarks>
+    /// This method performs linear interpolation between the start and end quaternions using the given factor.
+    /// The interpolation is performed along the shortest path on the quaternion unit sphere, ensuring smooth
+    /// and continuous rotations. The resulting interpolated quaternion may not be normalized. If normalization
+    /// is desired, call the <see cref="Quaternion.Normalize"/> method on the result.
+    /// </remarks>
+    public static Quaternion<T> LerpShortestPath<T>(in Quaternion<T> start, in Quaternion<T> end, T factor)
+        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
+        => (T.Sign(DotProduct(start, end)) < 0)
+            ? (start * (T.One - factor)) - (end * factor)
+            : (start * (T.One - factor)) + (end * factor);
+
+    /// <summary>
+    /// Interpolates between two quaternions using spherical linear interpolation (SLERP).
+    /// </summary>
+    /// <typeparam name="T">The numeric type of the quaternion components.</typeparam>
+    /// <param name="start">The starting quaternion.</param>
+    /// <param name="end">The ending quaternion.</param>
+    /// <param name="factor">The interpolation factor, where 0 returns the start quaternion and 1 returns the end quaternion.</param>
+    /// <returns>The interpolated quaternion.</returns>
+    /// <remarks>
+    /// The method performs spherical linear interpolation (SLERP) between the start and end quaternions
+    /// using the provided interpolation factor. The resulting quaternion represents an intermediate rotation
+    /// between the two input quaternions. 
+    /// </remarks>
+    public static Quaternion<T> Slerp<T>(in Quaternion<T> start, in Quaternion<T> end, T factor)
+        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
+    {
+        // Ensure the quaternions are normalized
+        var startNormalized = Normalize(start);
+        var endNormalized = Normalize(end);
+
+        // Calculate the dot product between the quaternions
+        var dot = DotProduct(startNormalized, endNormalized);
+
+        // Clamp the dot product to ensure valid interpolation
+        dot = T.Clamp(dot, T.Zero, T.One);
+
+        // Calculate the angle between the quaternions
+        var theta = Math.Acos(double.CreateSaturating(dot));
+
+        // Perform the spherical linear interpolation
+        var doubleFactor = double.CreateChecked(factor);
+        var sinTheta = Math.Sin(theta);
+        if (sinTheta < double.Epsilon)
+        {
+            // Start and end quaternions are parallel or antiparallel
+            // Return either the start or end quaternion
+            return startNormalized;
+        }
+
+        return
+            (startNormalized * T.CreateChecked(Math.Sin((1.0 - doubleFactor) * theta) / sinTheta)) +
+            (endNormalized * T.CreateChecked(Math.Sin(doubleFactor * theta) / sinTheta));
+    }
+
+    /// <summary>
+    /// Interpolates between two quaternions using spherical linear interpolation (SLERP) using the shortest path.
+    /// </summary>
+    /// <typeparam name="T">The numeric type of the quaternion components.</typeparam>
+    /// <param name="start">The starting quaternion.</param>
+    /// <param name="end">The ending quaternion.</param>
+    /// <param name="factor">The interpolation factor, where 0 returns the start quaternion and 1 returns the end quaternion.</param>
+    /// <returns>The interpolated quaternion.</returns>
+    /// <remarks>
+    /// The method performs spherical linear interpolation (SLERP) between the start and end quaternions
+    /// using the provided interpolation factor. The resulting quaternion represents an intermediate rotation
+    /// between the two input quaternions. The interpolation is always performed along the shortest path
+    /// on the surface of the unit sphere.
+    /// </remarks>
+    public static Quaternion<T> SlerpShortestPath<T>(in Quaternion<T> start, in Quaternion<T> end, T factor)
+        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
+    {
+        // Ensure the quaternions are normalized
+        var startNormalized = Normalize(start);
+        var endNormalized = Normalize(end);
+
+        // Calculate the dot product between the quaternions
+        var dot = DotProduct(startNormalized, endNormalized);
+
+        // Adjust the end quaternion to take the shortest path
+        if (T.Sign(dot) < 0)
+        {
+            dot = -dot;
+            startNormalized = -startNormalized;
+        }
+
+        // Clamp the dot product to ensure valid interpolation
+        dot = T.Clamp(dot, T.Zero, T.One);
+
+        // Calculate the angle between the quaternions
+        var theta = Math.Acos(double.CreateSaturating(dot));
+
+        // Perform the spherical linear interpolation
+        var doubleFactor = double.CreateChecked(factor);
+        var sinTheta = Math.Sin(theta);
+        if (sinTheta < double.Epsilon)
+        {
+            // Start and end quaternions are parallel or antiparallel
+            // Return either the start or end quaternion
+            return startNormalized;
+        }
+
+        return
+            (startNormalized * T.CreateChecked(Math.Sin((1.0 - doubleFactor) * theta) / sinTheta)) + 
+            (endNormalized * T.CreateChecked(Math.Sin(doubleFactor * theta) / sinTheta));
+    }
 
 }
 
