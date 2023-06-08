@@ -440,7 +440,7 @@ public static class Quaternion
     {
         var normSquared = NormSquared(quaternion);
         if (normSquared == T.Zero)
-            Throw.InvalidOperationException<Quaternion<T>>(); //("Cannot calculate the inverse of a zero quaternion.");
+            Throw.InvalidOperationException<Quaternion<T>>("Cannot calculate the inverse of a zero quaternion.");
 
         var reciprocalNormSquared = T.CreateChecked(T.One / normSquared);
         return new(
