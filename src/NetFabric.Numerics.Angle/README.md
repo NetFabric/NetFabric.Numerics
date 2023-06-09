@@ -27,9 +27,11 @@ var areEqual = degreesAngle.Equals(Angle.ToDegrees<float, double>(radiansAngle))
 var isGreater = gradiansAngle > Angle.ToGradians<double, decimal>(revolutionsAngle);
 
 // Convert angles
-var convertedToRadians = Angle.ToRadians<double, float>(degreesAngle);
-var convertedToDegrees = Angle.ToDegrees<float, double>(radiansAngle);
+var convertedToRadians = Angle.ToRadians(degreesAngle);
+var convertedToDegrees = Angle.ToDegrees(radiansAngle);
 var convertedToRevolution = Angle.ToRevolution(degreesAngle);
+
+var convertToFloat = Angle<Degrees, float>.CreateChecked(degreesAngle); // throws if value is out of range
 
 // Perform trigonometric calculations
 var sineValue = Angle.Sin(radiansAngle);
