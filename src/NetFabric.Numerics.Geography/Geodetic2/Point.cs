@@ -18,6 +18,54 @@ public readonly record struct Point<TDatum, TAngle>(Angle<Degrees, TAngle> Latit
             ? Longitude
             : Throw.ArgumentOutOfRangeException<Angle<Degrees, TAngle>>(nameof(Longitude), Longitude, "Longitude must be > -180.0º and <= 180.0º");
 
+    /// <summary>
+    /// Creates an instance of the current type from a value, 
+    /// throwing an overflow exception for any values that fall outside the representable range of the current type.
+    /// </summary>
+    /// <typeparam name="TAngleOther">The type of the components of <paramref name="point"/>.</typeparam>
+    /// <param name="point">The value which is used to create the instance of <see cref="Point{TDatum, TAngle}"/></param>
+    /// <returns>An instance of <see cref="Point{TDatum, TAngle}"/> created from <paramref name="point" />.</returns>
+    /// <exception cref="NotSupportedException"><typeparamref name="TAngleOther" /> is not supported.</exception>
+    /// <exception cref="OverflowException"><paramref name="point" /> is not representable by <see cref="Point{TDatum, TAngle}"/>.</exception>
+    public static Point<TDatum, TAngle> CreateChecked<TAngleOther>(in Point<TDatum, TAngleOther> point)
+        where TAngleOther : struct, IFloatingPoint<TAngleOther>, IMinMaxValue<TAngleOther>
+        => new(
+            Angle<Degrees, TAngle>.CreateChecked(point.Latitude),
+            Angle<Degrees, TAngle>.CreateChecked(point.Longitude)
+        );
+
+    /// <summary>
+    /// Creates an instance of the current type from a value, 
+    /// saturating any values that fall outside the representable range of the current type.
+    /// </summary>
+    /// <typeparam name="TAngleOther">The type of the components of <paramref name="point"/>.</typeparam>
+    /// <param name="point">The value which is used to create the instance of <see cref="Point{TDatum, TAngle}"/></param>
+    /// <returns>An instance of <see cref="Point{TDatum, TAngle}"/> created from <paramref name="point" />.</returns>
+    /// <exception cref="NotSupportedException"><typeparamref name="TAngleOther" /> is not supported.</exception>
+    /// <exception cref="OverflowException"><paramref name="point" /> is not representable by <see cref="Point{TDatum, TAngle}"/>.</exception>
+    public static Point<TDatum, TAngle> CreateSaturating<TAngleOther>(in Point<TDatum, TAngleOther> point)
+        where TAngleOther : struct, IFloatingPoint<TAngleOther>, IMinMaxValue<TAngleOther>
+        => new(
+            Angle<Degrees, TAngle>.CreateSaturating(point.Latitude),
+            Angle<Degrees, TAngle>.CreateSaturating(point.Longitude)
+        );
+
+    /// <summary>
+    /// Creates an instance of the current type from a value, 
+    /// truncating any values that fall outside the representable range of the current type.
+    /// </summary>
+    /// <typeparam name="TAngleOther">The type of the components of <paramref name="point"/>.</typeparam>
+    /// <param name="point">The value which is used to create the instance of <see cref="Point{TDatum, TAngle}"/></param>
+    /// <returns>An instance of <see cref="Point{TDatum, TAngleT}"/> created from <paramref name="point" />.</returns>
+    /// <exception cref="NotSupportedException"><typeparamref name="TAngleOther" /> is not supported.</exception>
+    /// <exception cref="OverflowException"><paramref name="point" /> is not representable by <see cref="Point{TDatum, TAngle}"/>.</exception>
+    public static Point<TDatum, TAngle> CreateTruncating<TAngleOther>(in Point<TDatum, TAngleOther> point)
+        where TAngleOther : struct, IFloatingPoint<TAngleOther>, IMinMaxValue<TAngleOther>
+        => new(
+            Angle<Degrees, TAngle>.CreateTruncating(point.Latitude),
+            Angle<Degrees, TAngle>.CreateTruncating(point.Longitude)
+        );
+
     #region constants
 
     public static readonly Point<TDatum, TAngle> Zero

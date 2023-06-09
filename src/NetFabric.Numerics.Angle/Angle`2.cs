@@ -55,14 +55,57 @@ public readonly struct Angle<TUnits, T>
     where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
 {
     /// <summary>
-    /// Gets the angle value.
+    /// Gets angle measurement in the units specified by <typeparamref name="TUnits"/>.
     /// </summary>
     public T Value { get; }
 
+    /// <summary>
+    /// Creates an instance of the current type from a value.
+    /// </summary>
+    /// <param name="value">The angle measurement in the units specified by <typeparamref name="TUnits"/>.</param>
     public Angle(T value)
     {
         Value = value; 
     }
+
+    /// <summary>
+    /// Creates an instance of the current type from a value, 
+    /// throwing an overflow exception for any values that fall outside the representable range of the current type.
+    /// </summary>
+    /// <typeparam name="TOther">The type of the components of <paramref name="angle"/>.</typeparam>
+    /// <param name="angle">The value which is used to create the instance of <see cref="Angle{TUnits, T}"/></param>
+    /// <returns>An instance of <see cref="Angle{TUnits, T}"/> created from <paramref name="angle" />.</returns>
+    /// <exception cref="NotSupportedException"><typeparamref name="TOther" /> is not supported.</exception>
+    /// <exception cref="OverflowException"><paramref name="angle" /> is not representable by <see cref="Angle{TUnits, T}"/>.</exception>
+    public static Angle<TUnits, T> CreateChecked<TOther>(in Angle<TUnits, TOther> angle)
+        where TOther : struct, IFloatingPoint<TOther>, IMinMaxValue<TOther>
+        => new(T.CreateChecked(angle.Value));
+
+    /// <summary>
+    /// Creates an instance of the current type from a value, 
+    /// saturating any values that fall outside the representable range of the current type.
+    /// </summary>
+    /// <typeparam name="TOther">The type of the components of <paramref name="angle"/>.</typeparam>
+    /// <param name="angle">The value which is used to create the instance of <see cref="Angle{TUnits, T}"/></param>
+    /// <returns>An instance of <see cref="Angle{TUnits, T}"/> created from <paramref name="angle" />.</returns>
+    /// <exception cref="NotSupportedException"><typeparamref name="TOther" /> is not supported.</exception>
+    /// <exception cref="OverflowException"><paramref name="angle" /> is not representable by <see cref="Angle{TUnits, T}"/>.</exception>
+    public static Angle<TUnits, T> CreateSaturating<TOther>(in Angle<TUnits, TOther> angle)
+        where TOther : struct, IFloatingPoint<TOther>, IMinMaxValue<TOther>
+        => new(T.CreateSaturating(angle.Value));
+
+    /// <summary>
+    /// Creates an instance of the current type from a value, 
+    /// truncating any values that fall outside the representable range of the current type.
+    /// </summary>
+    /// <typeparam name="TOther">The type of the components of <paramref name="angle"/>.</typeparam>
+    /// <param name="angle">The value which is used to create the instance of <see cref="Angle{TUnits, T}"/></param>
+    /// <returns>An instance of <see cref="Angle{TUnits, T}"/> created from <paramref name="angle" />.</returns>
+    /// <exception cref="NotSupportedException"><typeparamref name="TOther" /> is not supported.</exception>
+    /// <exception cref="OverflowException"><paramref name="angle" /> is not representable by <see cref="Angle{TUnits, T}"/>.</exception>
+    public static Angle<TUnits, T> CreateTruncating<TOther>(in Angle<TUnits, TOther> angle)
+        where TOther : struct, IFloatingPoint<TOther>, IMinMaxValue<TOther>
+        => new(T.CreateTruncating(angle.Value));
 
     #region constants
 

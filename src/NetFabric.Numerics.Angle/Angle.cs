@@ -182,11 +182,14 @@ public static partial class Angle
     /// </para>
     /// </remarks>
     /// <returns>The result of the linear interpolation.</returns>
-    public static Angle<TUnits, T> Lerp<TUnits, T, TFactor>(Angle<TUnits, T> a1, Angle<TUnits, T> a2, TFactor t)
+    public static Angle<TUnits, T> Lerp<TUnits, T>(Angle<TUnits, T> a1, Angle<TUnits, T> a2, T t)
         where TUnits : IAngleUnits<TUnits>
-        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        where TFactor : struct, IFloatingPoint<TFactor>
-        => new(Utils.Lerp(a1.Value, a2.Value, t));
+        where T : struct, IFloatingPointIeee754<T>, IMinMaxValue<T>
+#if NET8_0_OR_GREATER
+        => new(T.Lerp(a1.Value, a2.Value, t)); 
+#else
+        => new(Utils.Lerp(a1.Value, a2.Value, t)); 
+#endif
 
     /// <summary>
     /// Returns the smallest of two angles.

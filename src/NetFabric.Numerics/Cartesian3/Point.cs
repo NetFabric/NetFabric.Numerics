@@ -44,6 +44,57 @@ public readonly record struct Point<T>(T X, T Y, T Z)
     ICoordinateSystem IPoint<Point<T>>.CoordinateSystem 
         => CoordinateSystem;
 
+    /// <summary>
+    /// Creates an instance of the current type from a value, 
+    /// throwing an overflow exception for any values that fall outside the representable range of the current type.
+    /// </summary>
+    /// <typeparam name="TOther">The type of the components of <paramref name="point"/>.</typeparam>
+    /// <param name="point">The value which is used to create the instance of <see cref="Point{T}"/></param>
+    /// <returns>An instance of <see cref="Point{T}"/> created from <paramref name="point" />.</returns>
+    /// <exception cref="NotSupportedException"><typeparamref name="TOther" /> is not supported.</exception>
+    /// <exception cref="OverflowException"><paramref name="point" /> is not representable by <see cref="Point{T}"/>.</exception>
+    public static Point<T> CreateChecked<TOther>(in Point<TOther> point)
+        where TOther : struct, INumber<TOther>, IMinMaxValue<TOther>
+        => new(
+            T.CreateChecked(point.X),
+            T.CreateChecked(point.Y),
+            T.CreateChecked(point.Z)
+        );
+
+    /// <summary>
+    /// Creates an instance of the current type from a value, 
+    /// saturating any values that fall outside the representable range of the current type.
+    /// </summary>
+    /// <typeparam name="TOther">The type of the components of <paramref name="point"/>.</typeparam>
+    /// <param name="point">The value which is used to create the instance of <see cref="Point{T}"/></param>
+    /// <returns>An instance of <see cref="Point{T}"/> created from <paramref name="point" />.</returns>
+    /// <exception cref="NotSupportedException"><typeparamref name="TOther" /> is not supported.</exception>
+    /// <exception cref="OverflowException"><paramref name="point" /> is not representable by <see cref="Point{T}"/>.</exception>
+    public static Point<T> CreateSaturating<TOther>(in Point<TOther> point)
+        where TOther : struct, INumber<TOther>, IMinMaxValue<TOther>
+        => new(
+            T.CreateSaturating(point.X),
+            T.CreateSaturating(point.Y),
+            T.CreateSaturating(point.Z)
+        );
+
+    /// <summary>
+    /// Creates an instance of the current type from a value, 
+    /// truncating any values that fall outside the representable range of the current type.
+    /// </summary>
+    /// <typeparam name="TOther">The type of the components of <paramref name="point"/>.</typeparam>
+    /// <param name="point">The value which is used to create the instance of <see cref="Point{T}"/></param>
+    /// <returns>An instance of <see cref="Point{T}"/> created from <paramref name="point" />.</returns>
+    /// <exception cref="NotSupportedException"><typeparamref name="TOther" /> is not supported.</exception>
+    /// <exception cref="OverflowException"><paramref name="point" /> is not representable by <see cref="Point{T}"/>.</exception>
+    public static Point<T> CreateTruncating<TOther>(in Point<TOther> point)
+        where TOther : struct, INumber<TOther>, IMinMaxValue<TOther>
+        => new(
+            T.CreateTruncating(point.X),
+            T.CreateTruncating(point.Y),
+            T.CreateTruncating(point.Z)
+        );
+
     #region addition
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -106,29 +157,6 @@ public static class Point
             (quaternion.W * point.X) + (quaternion.Y * point.Z) - (quaternion.Z * point.Y),
             (quaternion.W * point.Y) + (quaternion.Z * point.X) - (quaternion.X * point.Z),
             (quaternion.W * point.Z) + (quaternion.X * point.Y) - (quaternion.Y * point.X)
-        );
-
-    /// <summary>
-    /// Converts a <see cref="Point{TFrom}"/> to a <see cref="Point{TTo}"/>.
-    /// </summary>
-    /// <typeparam name="TFrom">The type of the components of the source point.</typeparam>
-    /// <typeparam name="TTo">The type of the components of the target point.</typeparam>
-    /// <param name="point">The source point to convert.</param>
-    /// <exception cref="NotSupportedException"><typeparamref name="TTo" /> is not supported.</exception>
-    /// <exception cref="OverflowException"><paramref name="point" /> is not representable by <typeparamref name="TFrom" />.</exception>
-    /// <returns>The converted <see cref="Point{TTo}"/>.</returns>
-    /// <remarks>
-    /// This method performs a conversion from a <see cref="Point{TFrom}"/> to a <see cref="Point{TTo}"/>.
-    /// It converts each component of the source point to the target type and constructs a new point with
-    /// the converted components in the order x, y, z.
-    /// </remarks>
-    public static Point<TTo> Convert<TFrom, TTo>(in Point<TFrom> point)
-        where TFrom : struct, IFloatingPoint<TFrom>, IMinMaxValue<TFrom>
-        where TTo : struct, IFloatingPoint<TTo>, IMinMaxValue<TTo>
-        => new(
-            TTo.CreateChecked(point.X),
-            TTo.CreateChecked(point.Y),
-            TTo.CreateChecked(point.Z)
         );
 
     /// <summary>

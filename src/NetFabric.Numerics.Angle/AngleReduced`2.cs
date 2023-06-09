@@ -54,16 +54,57 @@ public readonly struct AngleReduced<TUnits, T>
     where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
 {
     /// <summary>
-    /// Gets the angle value.
+    /// Gets angle measurement in the units specified by <typeparamref name="TUnits"/>.
     /// </summary>
     public T Value { get; }
 
+    /// <summary>
+    /// Creates an instance of the current type from a value.
+    /// </summary>
+    /// <param name="value">The angle measurement in the units specified by <typeparamref name="TUnits"/>.</param>
     public AngleReduced(T value)
     {
-        if(value < T.CreateSaturating(TUnits.Zero) || value >= T.CreateSaturating(TUnits.Full))
-            Throw.ArgumentOutOfRangeException(nameof(value), value, "Value must be greater or equal to Zero and less than Full.");
         Value = value;
     }
+
+    /// <summary>
+    /// Creates an instance of the current type from a value, 
+    /// throwing an overflow exception for any values that fall outside the representable range of the current type.
+    /// </summary>
+    /// <typeparam name="TOther">The type of the components of <paramref name="angle"/>.</typeparam>
+    /// <param name="angle">The value which is used to create the instance of <see cref="Angle{TUnits, T}"/></param>
+    /// <returns>An instance of <see cref="Angle{TUnits, T}"/> created from <paramref name="angle" />.</returns>
+    /// <exception cref="NotSupportedException"><typeparamref name="TOther" /> is not supported.</exception>
+    /// <exception cref="OverflowException"><paramref name="angle" /> is not representable by <see cref="Angle{TUnits, T}"/>.</exception>
+    public static AngleReduced<TUnits, T> CreateChecked<TOther>(in AngleReduced<TUnits, TOther> angle)
+        where TOther : struct, IFloatingPoint<TOther>, IMinMaxValue<TOther>
+        => new(T.CreateChecked(angle.Value));
+
+    /// <summary>
+    /// Creates an instance of the current type from a value, 
+    /// saturating any values that fall outside the representable range of the current type.
+    /// </summary>
+    /// <typeparam name="TOther">The type of the components of <paramref name="angle"/>.</typeparam>
+    /// <param name="angle">The value which is used to create the instance of <see cref="Angle{TUnits, T}"/></param>
+    /// <returns>An instance of <see cref="Angle{TUnits, T}"/> created from <paramref name="angle" />.</returns>
+    /// <exception cref="NotSupportedException"><typeparamref name="TOther" /> is not supported.</exception>
+    /// <exception cref="OverflowException"><paramref name="angle" /> is not representable by <see cref="Angle{TUnits, T}"/>.</exception>
+    public static AngleReduced<TUnits, T> CreateSaturating<TOther>(in AngleReduced<TUnits, TOther> angle)
+        where TOther : struct, IFloatingPoint<TOther>, IMinMaxValue<TOther>
+        => new(T.CreateSaturating(angle.Value));
+
+    /// <summary>
+    /// Creates an instance of the current type from a value, 
+    /// truncating any values that fall outside the representable range of the current type.
+    /// </summary>
+    /// <typeparam name="TOther">The type of the components of <paramref name="angle"/>.</typeparam>
+    /// <param name="angle">The value which is used to create the instance of <see cref="Angle{TUnits, T}"/></param>
+    /// <returns>An instance of <see cref="Angle{TUnits, T}"/> created from <paramref name="angle" />.</returns>
+    /// <exception cref="NotSupportedException"><typeparamref name="TOther" /> is not supported.</exception>
+    /// <exception cref="OverflowException"><paramref name="angle" /> is not representable by <see cref="Angle{TUnits, T}"/>.</exception>
+    public static AngleReduced<TUnits, T> CreateTruncating<TOther>(in AngleReduced<TUnits, TOther> angle)
+        where TOther : struct, IFloatingPoint<TOther>, IMinMaxValue<TOther>
+        => new(T.CreateTruncating(angle.Value));
 
     /// <summary>
     /// Implicitly converts an <see cref="Angle{TUnits, T}"/> to a <see cref="AngleReduced{TUnits, T}"/>.

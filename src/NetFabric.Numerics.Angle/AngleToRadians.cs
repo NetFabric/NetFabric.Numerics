@@ -4,48 +4,32 @@ public static partial class Angle
 {
     #region from degrees
 
+    static class RadiansInDegrees<T>
+        where T : struct, IFloatingPoint<T>
+    {
+        public static readonly T Value = T.CreateChecked(Radians.Full) / T.CreateChecked(Degrees.Full);
+    }
+
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    static TTo DegreesToRadians<TFrom, TTo>(TFrom value)
-        where TFrom : struct, IFloatingPoint<TFrom>
-        where TTo : struct, IFloatingPoint<TTo>, IMinMaxValue<TTo>
-        => TTo.CreateChecked(double.CreateChecked(value) * Math.PI / 180.0);
-
-    public static Angle<Radians, TTo> ToRadians<TFrom, TTo>(Angle<Degrees, TFrom> angle)
-        where TFrom : struct, IFloatingPoint<TFrom>, IMinMaxValue<TFrom>
-        where TTo : struct, IFloatingPoint<TTo>, IMinMaxValue<TTo>
-        => new(DegreesToRadians<TFrom, TTo>(angle.Value));
-
     public static Angle<Radians, T> ToRadians<T>(Angle<Degrees, T> angle)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => ToRadians<T, T>(angle);
+        => new(angle.Value * RadiansInDegrees<T>.Value);
 
-    public static AngleReduced<Radians, TTo> ToRadians<TFrom, TTo>(AngleReduced<Degrees, TFrom> angle)
-        where TFrom : struct, IFloatingPoint<TFrom>, IMinMaxValue<TFrom>
-        where TTo : struct, IFloatingPoint<TTo>, IMinMaxValue<TTo>
-        => new(DegreesToRadians<TFrom, TTo>(angle.Value));
-
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static AngleReduced<Radians, T> ToRadians<T>(AngleReduced<Degrees, T> angle)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => ToRadians<T, T>(angle);
+        => new(angle.Value * RadiansInDegrees<T>.Value);
 
     #endregion
 
     #region from radians
 
-    public static Angle<Radians, TTo> ToRadians<TFrom, TTo>(Angle<Radians, TFrom> angle)
-        where TFrom : struct, IFloatingPoint<TFrom>, IMinMaxValue<TFrom>
-        where TTo : struct, IFloatingPoint<TTo>, IMinMaxValue<TTo>
-        => new(TTo.CreateChecked(angle.Value));
-
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Angle<Radians, T> ToRadians<T>(Angle<Radians, T> angle)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => angle;
 
-    public static AngleReduced<Radians, TTo> ToRadians<TFrom, TTo>(AngleReduced<Radians, TFrom> angle)
-        where TFrom : struct, IFloatingPoint<TFrom>, IMinMaxValue<TFrom>
-        where TTo : struct, IFloatingPoint<TTo>, IMinMaxValue<TTo>
-        => new(TTo.CreateChecked(angle.Value));
-
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static AngleReduced<Radians, T> ToRadians<T>(AngleReduced<Radians, T> angle)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => angle;
@@ -54,57 +38,41 @@ public static partial class Angle
 
     #region from gradians
 
+    static class RadiansInGradians<T>
+        where T : struct, IFloatingPoint<T>
+    {
+        public static readonly T Value = T.CreateChecked(Radians.Full) / T.CreateChecked(Gradians.Full);
+    }
+
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    static TTo GradiansToRadians<TFrom, TTo>(TFrom value)
-        where TFrom : struct, IFloatingPoint<TFrom>
-        where TTo : struct, IFloatingPoint<TTo>, IMinMaxValue<TTo>
-        => TTo.CreateChecked(double.CreateChecked(value) * Math.PI / 200.0);
-
-    public static Angle<Radians, TTo> ToRadians<TFrom, TTo>(Angle<Gradians, TFrom> angle)
-        where TFrom : struct, IFloatingPoint<TFrom>, IMinMaxValue<TFrom>
-        where TTo : struct, IFloatingPoint<TTo>, IMinMaxValue<TTo>
-        => new(GradiansToRadians<TFrom, TTo>(angle.Value));
-
     public static Angle<Radians, T> ToRadians<T>(Angle<Gradians, T> angle)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => ToRadians<T, T>(angle);
+        => new(angle.Value * RadiansInGradians<T>.Value);
 
-    public static AngleReduced<Radians, TTo> ToRadians<TFrom, TTo>(AngleReduced<Gradians, TFrom> angle)
-        where TFrom : struct, IFloatingPoint<TFrom>, IMinMaxValue<TFrom>
-        where TTo : struct, IFloatingPoint<TTo>, IMinMaxValue<TTo>
-        => new(GradiansToRadians<TFrom, TTo>(angle.Value));
-
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static AngleReduced<Radians, T> ToRadians<T>(AngleReduced<Gradians, T> angle)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => ToRadians<T, T>(angle);
+        => new(angle.Value * RadiansInGradians<T>.Value);
 
     #endregion
 
     #region from revolutions
 
+    static class RadiansInRevolutions<T>
+        where T : struct, IFloatingPoint<T>
+    {
+        public static readonly T Value = T.CreateChecked(Radians.Full) / T.CreateChecked(Revolutions.Full);
+    }
+
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    static TTo RevolutionsToRadians<TFrom, TTo>(TFrom value)
-        where TFrom : struct, IFloatingPoint<TFrom>
-        where TTo : struct, IFloatingPoint<TTo>, IMinMaxValue<TTo>
-        => TTo.CreateChecked(double.CreateChecked(value) * Math.PI / 0.5);
-
-    public static Angle<Radians, TTo> ToRadians<TFrom, TTo>(Angle<Revolutions, TFrom> angle)
-        where TFrom : struct, IFloatingPoint<TFrom>, IMinMaxValue<TFrom>
-        where TTo : struct, IFloatingPoint<TTo>, IMinMaxValue<TTo>
-        => new(RevolutionsToRadians<TFrom, TTo>(angle.Value));
-
     public static Angle<Radians, T> ToRadians<T>(Angle<Revolutions, T> angle)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => ToRadians<T, T>(angle);
+        => new(angle.Value * RadiansInRevolutions<T>.Value);
 
-    public static AngleReduced<Radians, TTo> ToRadians<TFrom, TTo>(AngleReduced<Revolutions, TFrom> angle)
-        where TFrom : struct, IFloatingPoint<TFrom>, IMinMaxValue<TFrom>
-        where TTo : struct, IFloatingPoint<TTo>, IMinMaxValue<TTo>
-        => new(RevolutionsToRadians<TFrom, TTo>(angle.Value));
-
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static AngleReduced<Radians, T> ToRadians<T>(AngleReduced<Revolutions, T> angle)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => ToRadians<T, T>(angle);
+        => new(angle.Value * RadiansInRevolutions<T>.Value);
 
     #endregion
 }

@@ -20,6 +20,57 @@ public readonly record struct Vector<T>(T X, T Y, T Z)
         => CoordinateSystem;
 
     /// <summary>
+    /// Creates an instance of the current type from a value, 
+    /// throwing an overflow exception for any values that fall outside the representable range of the current type.
+    /// </summary>
+    /// <typeparam name="TOther">The type of the components of <paramref name="vector"/>.</typeparam>
+    /// <param name="vector">The value which is used to create the instance of <see cref="Vector{T}"/></param>
+    /// <returns>An instance of <see cref="Vector{T}"/> created from <paramref name="vector" />.</returns>
+    /// <exception cref="NotSupportedException"><typeparamref name="TOther" /> is not supported.</exception>
+    /// <exception cref="OverflowException"><paramref name="vector" /> is not representable by <see cref="Vector{T}"/>.</exception>
+    public static Vector<T> CreateChecked<TOther>(in Vector<TOther> vector)
+        where TOther : struct, INumber<TOther>, IMinMaxValue<TOther>
+        => new(
+            T.CreateChecked(vector.X),
+            T.CreateChecked(vector.Y),
+            T.CreateChecked(vector.Z)
+        );
+
+    /// <summary>
+    /// Creates an instance of the current type from a value, 
+    /// saturating any values that fall outside the representable range of the current type.
+    /// </summary>
+    /// <typeparam name="TOther">The type of the components of <paramref name="vector"/>.</typeparam>
+    /// <param name="vector">The value which is used to create the instance of <see cref="Vector{T}"/></param>
+    /// <returns>An instance of <see cref="Vector{T}"/> created from <paramref name="vector" />.</returns>
+    /// <exception cref="NotSupportedException"><typeparamref name="TOther" /> is not supported.</exception>
+    /// <exception cref="OverflowException"><paramref name="vector" /> is not representable by <see cref="Vector{T}"/>.</exception>
+    public static Vector<T> CreateSaturating<TOther>(in Vector<TOther> vector)
+        where TOther : struct, INumber<TOther>, IMinMaxValue<TOther>
+        => new(
+            T.CreateSaturating(vector.X),
+            T.CreateSaturating(vector.Y),
+            T.CreateSaturating(vector.Z)
+        );
+
+    /// <summary>
+    /// Creates an instance of the current type from a value, 
+    /// truncating any values that fall outside the representable range of the current type.
+    /// </summary>
+    /// <typeparam name="TOther">The type of the components of <paramref name="vector"/>.</typeparam>
+    /// <param name="vector">The value which is used to create the instance of <see cref="Vector{T}"/></param>
+    /// <returns>An instance of <see cref="Vector{T}"/> created from <paramref name="vector" />.</returns>
+    /// <exception cref="NotSupportedException"><typeparamref name="TOther" /> is not supported.</exception>
+    /// <exception cref="OverflowException"><paramref name="vector" /> is not representable by <see cref="Vector{T}"/>.</exception>
+    public static Vector<T> CreateTruncating<TOther>(in Vector<TOther> vector)
+        where TOther : struct, INumber<TOther>, IMinMaxValue<TOther>
+        => new(
+            T.CreateTruncating(vector.X),
+            T.CreateTruncating(vector.Y),
+            T.CreateTruncating(vector.Z)
+        );
+
+    /// <summary>
     /// Calculates the length (magnitude) of the vector.
     /// </summary>
     /// <returns>The length of the vector.</returns>

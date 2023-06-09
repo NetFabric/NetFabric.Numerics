@@ -54,10 +54,12 @@ namespace NetFabric.Numerics
             };
         }
 
+#if !NET8_0_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static T Lerp<T, TFactor>(T a1, T a2, TFactor t)
-            where T : struct, IFloatingPoint<T>
-            where TFactor : struct, IFloatingPoint<TFactor>
-            => T.CreateChecked(((TFactor.One - t) * TFactor.CreateChecked(a1)) + (t * TFactor.CreateChecked(a2)));
+        public static T Lerp<T, TFactor>(T a1, T a2, TFactor factor)
+            where T : struct, IAdditionOperators<T, T, T>, IMultiplyOperators<T, TFactor, T> 
+            where TFactor : struct, INumberBase<TFactor>
+            => (a1 * (TFactor.One - factor)) + (a2 * factor);
+#endif
     }
 }

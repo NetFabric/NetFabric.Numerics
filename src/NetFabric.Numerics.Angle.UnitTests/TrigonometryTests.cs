@@ -58,25 +58,10 @@ public class TrigonometryTests
     public void Cos_Float_Should_Succeed(Angle<Radians, float> angle)
     {
         // arrange
-        var expected = Math.Cos(angle.Value);
+        var expected = (float)Math.Cos(angle.Value);
 
         // act
         var result = Angle.Cos(angle);
-
-        // assert
-        result.Should().Be(expected);
-    }
-
-    [Theory]
-    [MemberData(nameof(TrigonometryFloatData))]
-    public void ACos_Float_Should_Succeed(Angle<Radians, float> angle)
-    {
-        // arrange
-        var cos = Math.Cos(angle.Value);
-        var expected = new Angle<Radians, float>((float)Math.Acos(cos));
-
-        // act
-        var result = Angle.Acos<double, float>(cos);
 
         // assert
         result.Should().Be(expected);

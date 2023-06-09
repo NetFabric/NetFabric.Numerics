@@ -2,107 +2,95 @@
 
 public class ToDegreesReducedTests
 {
-    public static TheoryData<AngleReduced<Degrees, double>, AngleReduced<Degrees, double>, AngleReduced<Degrees, float>> DegreesToDegreesData 
+    public static TheoryData<AngleReduced<Degrees, double>, AngleReduced<Degrees, double>> DegreesToDegreesData 
         => new()
         {
-            { Angle<Degrees, double>.Zero, Angle<Degrees, double>.Zero, Angle<Degrees, float>.Zero },
-            { Angle<Degrees, double>.Right, Angle<Degrees, double>.Right, Angle<Degrees, float>.Right },
-            { Angle<Degrees, double>.Straight, Angle<Degrees, double>.Straight, Angle<Degrees, float>.Straight },
+            { Angle<Degrees, double>.Zero, Angle<Degrees, double>.Zero },
+            { Angle<Degrees, double>.Right, Angle<Degrees, double>.Right },
+            { Angle<Degrees, double>.Straight, Angle<Degrees, double>.Straight },
         };
 
     [Theory]
     [MemberData(nameof(DegreesToDegreesData))]
     public void ToDegrees_From_Degrees_Should_Succeed(
         AngleReduced<Degrees, double> angle, 
-        AngleReduced<Degrees, double> expectedDouble, 
-        AngleReduced<Degrees, float> expectedFloat)
+        AngleReduced<Degrees, double> expected)
     {
         // arrange
 
         // act
-        var resultDouble = Angle.ToDegrees(angle);
-        var resultFloat = Angle.ToDegrees<double, float>(angle);
+        var result = Angle.ToDegrees(angle);
 
         // assert
-        resultDouble.Should().Be(expectedDouble);
-        resultFloat.Should().Be(expectedFloat);
+        result.Should().Be(expected);
     }
 
-    public static TheoryData<AngleReduced<Radians, double>, AngleReduced<Degrees, double>, AngleReduced<Degrees, float>> RadiansToDegreesData 
+    public static TheoryData<AngleReduced<Radians, double>, AngleReduced<Degrees, double>> RadiansToDegreesData 
         => new()
         {
-            { Angle<Radians, double>.Zero, Angle<Degrees, double>.Zero, Angle<Degrees, float>.Zero },
-            { Angle<Radians, double>.Right, Angle<Degrees, double>.Right, Angle<Degrees, float>.Right },
-            { Angle<Radians, double>.Straight, Angle<Degrees, double>.Straight, Angle<Degrees, float>.Straight },
+            { Angle<Radians, double>.Zero, Angle<Degrees, double>.Zero },
+            { Angle<Radians, double>.Right, Angle<Degrees, double>.Right },
+            { Angle<Radians, double>.Straight, Angle<Degrees, double>.Straight },
         };
 
     [Theory]
     [MemberData(nameof(RadiansToDegreesData))]
     public void ToDegrees_From_Radians_Should_Succeed(
         AngleReduced<Radians, double> angle, 
-        AngleReduced<Degrees, double> expectedDouble, 
-        AngleReduced<Degrees, float> expectedFloat)
+        AngleReduced<Degrees, double> expected)
     {
         // arrange
 
         // act
-        var resultDouble = Angle.ToDegrees(angle);
-        var resultFloat = Angle.ToDegrees<double, float>(angle);
+        var result = Angle.ToDegrees(angle);
 
         // assert
-        resultDouble.Should().Be(expectedDouble);
-        resultFloat.Should().Be(expectedFloat);
+        result.Should().Be(expected);
     }
 
-    public static TheoryData<AngleReduced<Gradians, double>, AngleReduced<Degrees, double>, AngleReduced<Degrees, float>> GradiansToDegreesData 
+    public static TheoryData<AngleReduced<Gradians, double>, AngleReduced<Degrees, double>> GradiansToDegreesData 
         => new()
         {
-            { Angle<Gradians, double>.Zero, Angle<Degrees, double>.Zero, Angle<Degrees, float>.Zero },
-            { Angle<Gradians, double>.Right, Angle<Degrees, double>.Right, Angle<Degrees, float>.Right },
-            { Angle<Gradians, double>.Straight, Angle<Degrees, double>.Straight, Angle<Degrees, float>.Straight },
+            { Angle<Gradians, double>.Zero, Angle<Degrees, double>.Zero },
+            { Angle<Gradians, double>.Right, Angle<Degrees, double>.Right },
+            { Angle<Gradians, double>.Straight, Angle<Degrees, double>.Straight },
         };
 
     [Theory]
     [MemberData(nameof(GradiansToDegreesData))]
     public void ToDegrees_From_Gradians_Should_Succeed(
         AngleReduced<Gradians, double> angle, 
-        AngleReduced<Degrees, double> expectedDouble, 
-        AngleReduced<Degrees, float> expectedFloat)
+        AngleReduced<Degrees, double> expected)
     {
         // arrange
 
         // act
-        var resultDouble = Angle.ToDegrees(angle);
-        var resultFloat = Angle.ToDegrees<double, float>(angle);
+        var result = Angle.ToDegrees(angle);
 
         // assert
-        resultDouble.Should().Be(expectedDouble);
-        resultFloat.Should().Be(expectedFloat);
+        result.Should().Be(expected);
     }
 
-    public static TheoryData<AngleReduced<Revolutions, double>, AngleReduced<Degrees, double>, AngleReduced<Degrees, float>> RevolutionsToDegreesData 
+    public static TheoryData<AngleReduced<Revolutions, double>, AngleReduced<Degrees, double>> RevolutionsToDegreesData 
         => new()
         {
-            { Angle<Revolutions, double>.Zero, Angle<Degrees, double>.Zero, Angle<Degrees, float>.Zero },
-            { Angle<Revolutions, double>.Right, Angle<Degrees, double>.Right, Angle<Degrees, float>.Right },
-            { Angle<Revolutions, double>.Straight, Angle<Degrees, double>.Straight, Angle<Degrees, float>.Straight },
+            { Angle<Revolutions, double>.Zero, Angle<Degrees, double>.Zero },
+            { Angle<Revolutions, double>.Right, Angle<Degrees, double>.Right },
+            { Angle<Revolutions, double>.Straight, Angle<Degrees, double>.Straight },
         };
 
     [Theory]
     [MemberData(nameof(RevolutionsToDegreesData))]
     public void ToDegrees_From_Revolutions_Should_Succeed(
         AngleReduced<Revolutions, double> angle, 
-        AngleReduced<Degrees, double> expectedDouble, 
-        AngleReduced<Degrees, float> expectedFloat)
+        AngleReduced<Degrees, double> expected)
     {
         // arrange
 
         // act
-        var resultDouble = Angle.ToDegrees(angle);
-        var resultFloat = Angle.ToDegrees<double, float>(angle);
+        var result = Angle.ToDegrees(angle);
 
         // assert
-        resultDouble.Should().Be(expectedDouble);
-        resultFloat.Should().Be(expectedFloat);
+        result.Should().Be(expected);
     }
 }

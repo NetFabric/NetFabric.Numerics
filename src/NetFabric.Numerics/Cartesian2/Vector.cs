@@ -20,32 +20,52 @@ public readonly record struct Vector<T>(T X, T Y)
         => CoordinateSystem;
 
     /// <summary>
-    /// Calculates the length (magnitude) of the vector.
+    /// Creates an instance of the current type from a value, 
+    /// throwing an overflow exception for any values that fall outside the representable range of the current type.
     /// </summary>
-    /// <returns>The length of the vector.</returns>
-    /// <remarks>
-    /// <para>
-    /// The length is calculated as the Euclidean distance in the 2D Cartesian coordinate system.
-    /// </para>
-    /// </remarks>
-    public double Length
-        => Math.Sqrt(double.CreateChecked(LengthSquared));
+    /// <typeparam name="TOther">The type of the components of <paramref name="vector"/>.</typeparam>
+    /// <param name="vector">The value which is used to create the instance of <see cref="Vector{T}"/></param>
+    /// <returns>An instance of <see cref="Vector{T}"/> created from <paramref name="vector" />.</returns>
+    /// <exception cref="NotSupportedException"><typeparamref name="TOther" /> is not supported.</exception>
+    /// <exception cref="OverflowException"><paramref name="vector" /> is not representable by <see cref="Vector{T}"/>.</exception>
+    public static Vector<T> CreateChecked<TOther>(in Vector<TOther> vector)
+        where TOther : struct, INumber<TOther>, IMinMaxValue<TOther>
+        => new(
+            T.CreateChecked(vector.X),
+            T.CreateChecked(vector.Y)
+        );
 
     /// <summary>
-    /// Calculates the square of the length (magnitude) of the vector.
+    /// Creates an instance of the current type from a value, 
+    /// saturating any values that fall outside the representable range of the current type.
     /// </summary>
-    /// <returns>The square of the length of the vector.</returns>
-    /// <remarks>
-    /// <para>
-    /// The square of the length is calculated as the Euclidean distance in the 2D Cartesian coordinate system.
-    /// </para>
-    /// <para>
-    /// Note that the square of the length is returned instead of the actual length to avoid the need for
-    /// taking the square root, which can be a computationally expensive operation.
-    /// </para>
-    /// </remarks>
-    public T LengthSquared
-        => Utils.Pow2(X) + Utils.Pow2(Y);
+    /// <typeparam name="TOther">The type of the components of <paramref name="vector"/>.</typeparam>
+    /// <param name="vector">The value which is used to create the instance of <see cref="Vector{T}"/></param>
+    /// <returns>An instance of <see cref="Vector{T}"/> created from <paramref name="vector" />.</returns>
+    /// <exception cref="NotSupportedException"><typeparamref name="TOther" /> is not supported.</exception>
+    /// <exception cref="OverflowException"><paramref name="vector" /> is not representable by <see cref="Vector{T}"/>.</exception>
+    public static Vector<T> CreateSaturating<TOther>(in Vector<TOther> vector)
+        where TOther : struct, INumber<TOther>, IMinMaxValue<TOther>
+        => new(
+            T.CreateSaturating(vector.X),
+            T.CreateSaturating(vector.Y)
+        );
+
+    /// <summary>
+    /// Creates an instance of the current type from a value, 
+    /// truncating any values that fall outside the representable range of the current type.
+    /// </summary>
+    /// <typeparam name="TOther">The type of the components of <paramref name="vector"/>.</typeparam>
+    /// <param name="vector">The value which is used to create the instance of <see cref="Vector{T}"/></param>
+    /// <returns>An instance of <see cref="Vector{T}"/> created from <paramref name="vector" />.</returns>
+    /// <exception cref="NotSupportedException"><typeparamref name="TOther" /> is not supported.</exception>
+    /// <exception cref="OverflowException"><paramref name="vector" /> is not representable by <see cref="Vector{T}"/>.</exception>
+    public static Vector<T> CreateTruncating<TOther>(in Vector<TOther> vector)
+        where TOther : struct, INumber<TOther>, IMinMaxValue<TOther>
+        => new(
+            T.CreateTruncating(vector.X),
+            T.CreateTruncating(vector.Y)
+        );
 
     #region constants
 
@@ -91,7 +111,7 @@ public readonly record struct Vector<T>(T X, T Y)
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public readonly int CompareTo(in Vector<T> other)
-        => LengthSquared.CompareTo(other.LengthSquared);
+        => Vector.LengthSquared(this).CompareTo(Vector.LengthSquared(other));
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool operator <(Vector<T> left, Vector<T> right)
@@ -174,28 +194,6 @@ public readonly record struct Vector<T>(T X, T Y)
 public static class Vector
 {
     /// <summary>
-    /// Converts a <see cref="Vector{TFrom}"/> to a <see cref="Vector{TTo}"/>.
-    /// </summary>
-    /// <typeparam name="TFrom">The type of the components of the source vector.</typeparam>
-    /// <typeparam name="TTo">The type of the components of the target vector.</typeparam>
-    /// <param name="vector">The source vector to convert.</param>
-    /// <exception cref="NotSupportedException"><typeparamref name="TTo" /> is not supported.</exception>
-    /// <exception cref="OverflowException"><paramref name="vector" /> is not representable by <typeparamref name="TFrom" />.</exception>
-    /// <returns>The converted <see cref="Vector{TTo}"/>.</returns>
-    /// <remarks>
-    /// This method performs a conversion from a <see cref="Vector{TFrom}"/> to a <see cref="Vector{TTo}"/>.
-    /// It converts each component of the source vector to the target type and constructs a new vector with
-    /// the converted components in the order x, y.
-    /// </remarks>
-    public static Vector<TTo> Convert<TFrom, TTo>(in Vector<TFrom> vector)
-        where TFrom : struct, IFloatingPoint<TFrom>, IMinMaxValue<TFrom>
-        where TTo : struct, IFloatingPoint<TTo>, IMinMaxValue<TTo>
-        => new(
-            TTo.CreateChecked(vector.X),
-            TTo.CreateChecked(vector.Y)
-        );
-
-    /// <summary>
     /// Returns a new vector that is clamped within the specified minimum and maximum values for each component.
     /// </summary>
     /// <param name="vector">The vector to clamp.</param>
@@ -224,6 +222,36 @@ public static class Vector
         => new(T.Clamp(vector.X, min.X, max.X), T.Clamp(vector.Y, min.Y, max.Y));
 
     /// <summary>
+    /// Calculates the length (magnitude) of the vector.
+    /// </summary>
+    /// <returns>The length of the vector.</returns>
+    /// <remarks>
+    /// <para>
+    /// The length is calculated as the Euclidean distance in the 2D Cartesian coordinate system.
+    /// </para>
+    /// </remarks>
+    public static T Length<T>(in Vector<T> vector)
+        where T : struct, INumber<T>, IMinMaxValue<T>, IRootFunctions<T>
+        => T.Sqrt(LengthSquared(vector));
+
+    /// <summary>
+    /// Calculates the square of the length (magnitude) of the vector.
+    /// </summary>
+    /// <returns>The square of the length of the vector.</returns>
+    /// <remarks>
+    /// <para>
+    /// The square of the length is calculated as the Euclidean distance in the 2D Cartesian coordinate system.
+    /// </para>
+    /// <para>
+    /// Note that the square of the length is returned instead of the actual length to avoid the need for
+    /// taking the square root, which can be a computationally expensive operation.
+    /// </para>
+    /// </remarks>
+    public static T LengthSquared<T>(in Vector<T> vector)
+        where T : struct, INumber<T>, IMinMaxValue<T>
+        => Utils.Pow2(vector.X) + Utils.Pow2(vector.Y);
+
+    /// <summary>
     /// Returns a new vector that represents the normalized form of the specified vector.
     /// </summary>
     /// <param name="vector">The vector to normalize.</param>
@@ -245,9 +273,9 @@ public static class Vector
     /// </para>
     /// </remarks>
     public static Vector<T> Normalize<T>(in Vector<T> vector)
-        where T : struct, INumber<T>, IMinMaxValue<T>
+        where T : struct, INumber<T>, IMinMaxValue<T>, IRootFunctions<T>
     {
-        var length = T.CreateChecked(vector.Length);
+        var length = Length(vector);
         return length != T.Zero
             ? new(vector.X / length, vector.Y / length)
             : Vector<T>.Zero;
@@ -281,13 +309,12 @@ public static class Vector
     /// <param name="to">The vector where the angle measurement stops at.</param>
     /// <returns>The angle between two vectors.</returns>
     /// <remarks>The angle signal is determined by the right-hand rule.</remarks>
-    public static Angle<Radians, TAngle> Angle<T, TAngle>(in Vector<T> from, in Vector<T> to)
-        where T : struct, INumber<T>, IMinMaxValue<T>
-        where TAngle : struct, IFloatingPoint<TAngle>, IMinMaxValue<TAngle>
+    public static Angle<Radians, T> Angle<T, TAngle>(in Vector<T> from, in Vector<T> to)
+        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>, IRootFunctions<T>, ITrigonometricFunctions<T>
     {
-        var radians = Math.Acos(double.CreateChecked(DotProduct(from, to)) / (from.Length * to.Length));
+        var radians = T.Acos(DotProduct(from, to) / (Length(from) * Length(to)));
         return T.Sign(CrossProduct(from, to)) < 0 
-            ? new(TAngle.CreateChecked(-radians))
-            : new(TAngle.CreateChecked(radians));
+            ? new(-radians)
+            : new(radians);
     }
 }

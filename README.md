@@ -27,9 +27,13 @@ When working with points in different coordinate systems, **NetFabric.Numerics**
 ``` csharp
 using NetFabric.Numerics.Cartesian2;
 
-var integerPoint = new Point<int>(0, 0);                      // Point using integers
-var doublePrecisionPoint = new Point<double>(0.0, 0.0);       // Point using double precision
-var singlePrecisionPoint = new Point<float>(0.0, 0.0);        // Point using single precision
+var integerPoint = new Point<int>(0, 0);                // Point using integers
+var doublePrecisionPoint = new Point<double>(0.0, 0.0); // Point using double precision
+var singlePrecisionPoint = new Point<float>(0.0, 0.0);  // Point using single precision
+
+var checkedConversion = Point<float>.CreateChecked(doublePrecisionPoint);      // Throws if overflow occurs
+var saturatedConversion = Point<float>.CreateSaturating(doublePrecisionPoint); // Saturates if overflow occurs
+var truncatedConversion = Point<float>.CreateTruncating(doublePrecisionPoint); // Truncates if overflow occurs
 ```
 
 By specifying the desired data type, you have control over the precision and memory usage of your points.

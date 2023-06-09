@@ -10,7 +10,7 @@
       The explicit declaration of the units in creation and reading methods, reduces the tipical confusion when dealing with angles.
       Includes conversion, linear interpolation, reduction, reference angle, comparison, classification, trigonometry and algebra operations.
     </Description>
-    <Version>1.0.0-beta03</Version>
+    <Version>1.0.0-beta04</Version>
     <Copyright>Copyright © Antão Almada 2023</Copyright>
     <Authors>Antão Almada</Authors>
     <Company>NetFabric</Company>
@@ -20,7 +20,8 @@
     <PackageTags>math, numerics, angle, trigonometry, degrees, radians, gradians, revolutions</PackageTags>
     <PackageProjectUrl>https://netfabric.github.io/NetFabric.Numerics/</PackageProjectUrl>
     <PackageReleaseNotes>
-      Improve documentation.
+      Add type conversion methods.
+      Use math specific the internal types.
     </PackageReleaseNotes>
     <RootNamespace>NetFabric.Numerics</RootNamespace>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>

@@ -6,7 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <Description></Description>
-    <Version>1.0.0-beta01</Version>
+    <Version>1.0.0-beta02</Version>
     <Copyright>Copyright © Antão Almada 2023</Copyright>
     <Authors>Antão Almada</Authors>
     <Company>NetFabric</Company>
@@ -15,7 +15,8 @@
     <PackageTags>math, numerics, geodetic, geography, latlon, latitude, longitude, datum, utm, wgs84</PackageTags>
     <PackageProjectUrl>https://netfabric.github.io/NetFabric.Numerics/</PackageProjectUrl>
     <PackageReleaseNotes>
-      First release.
+      Add type conversion methods.
+      Use math specific the internal types.
     </PackageReleaseNotes>
     <RootNamespace>NetFabric.Numerics.Geography</RootNamespace>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>

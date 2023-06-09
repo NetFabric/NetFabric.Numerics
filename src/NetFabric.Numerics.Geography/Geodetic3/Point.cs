@@ -1,3 +1,4 @@
+using NetFabric.Numerics.Geography.Geodetic2;
 using System.Numerics;
 
 namespace NetFabric.Numerics.Geography.Geodetic3;
@@ -18,6 +19,63 @@ public readonly record struct Point<TDatum, TAngle, THeight>(Angle<Degrees, TAng
         = Longitude.Value > TAngle.CreateChecked(-Degrees.Straight) && Longitude.Value <= TAngle.CreateChecked(Degrees.Straight)
             ? Longitude
             : Throw.ArgumentOutOfRangeException<Angle<Degrees, TAngle>>(nameof(Longitude), Longitude, "Longitude must be > -180.0º and <= 180.0º");
+
+    /// <summary>
+    /// Creates an instance of the current type from a value, 
+    /// throwing an overflow exception for any values that fall outside the representable range of the current type.
+    /// </summary>
+    /// <typeparam name="TAngleOther">The type of the latitude and longitude components of <paramref name="point"/>.</typeparam>
+    /// <typeparam name="THeightOther">The type of the height components of <paramref name="point"/>.</typeparam>
+    /// <param name="point">The value which is used to create the instance of <see cref="Point{TDatum, TAngle, THeight}"/></param>
+    /// <returns>An instance of <see cref="Point{TDatum, TAngle, THeight}"/> created from <paramref name="point" />.</returns>
+    /// <exception cref="NotSupportedException"><typeparamref name="TAngleOther" /> is not supported.</exception>
+    /// <exception cref="OverflowException"><paramref name="point" /> is not representable by <see cref="Point{TDatum, TAngle, THeight}"/>.</exception>
+    public static Point<TDatum, TAngle, THeight> CreateChecked<TAngleOther, THeightOther>(in Point<TDatum, TAngleOther, THeightOther> point)
+        where TAngleOther : struct, IFloatingPoint<TAngleOther>, IMinMaxValue<TAngleOther>
+        where THeightOther : struct, INumber<THeightOther>, IMinMaxValue<THeightOther>
+        => new(
+            Angle<Degrees, TAngle>.CreateChecked(point.Latitude),
+            Angle<Degrees, TAngle>.CreateChecked(point.Longitude),
+            THeight.CreateChecked(point.Height)
+        );
+
+    /// <summary>
+    /// Creates an instance of the current type from a value, 
+    /// saturating any values that fall outside the representable range of the current type.
+    /// </summary>
+    /// <typeparam name="TAngleOther">The type of the latitude and longitude components of <paramref name="point"/>.</typeparam>
+    /// <typeparam name="THeightOther">The type of the height components of <paramref name="point"/>.</typeparam>
+    /// <param name="point">The value which is used to create the instance of <see cref="Point{TDatum, TAngle, THeight}"/></param>
+    /// <returns>An instance of <see cref="Point{TDatum, TAngle, THeight}"/> created from <paramref name="point" />.</returns>
+    /// <exception cref="NotSupportedException"><typeparamref name="TAngleOther" /> is not supported.</exception>
+    /// <exception cref="OverflowException"><paramref name="point" /> is not representable by <see cref="Point{TDatum, TAngle, THeight}"/>.</exception>
+    public static Point<TDatum, TAngle, THeight> CreateSaturating<TAngleOther, THeightOther>(in Point<TDatum, TAngleOther, THeightOther> point)
+        where TAngleOther : struct, IFloatingPoint<TAngleOther>, IMinMaxValue<TAngleOther>
+        where THeightOther : struct, INumber<THeightOther>, IMinMaxValue<THeightOther>
+        => new(
+            Angle<Degrees, TAngle>.CreateSaturating(point.Latitude),
+            Angle<Degrees, TAngle>.CreateSaturating(point.Longitude),
+            THeight.CreateSaturating(point.Height)
+        );
+
+    /// <summary>
+    /// Creates an instance of the current type from a value, 
+    /// truncating any values that fall outside the representable range of the current type.
+    /// </summary>
+    /// <typeparam name="TAngleOther">The type of the latitude and longitude components of <paramref name="point"/>.</typeparam>
+    /// <typeparam name="THeightOther">The type of the height components of <paramref name="point"/>.</typeparam>
+    /// <param name="point">The value which is used to create the instance of <see cref="Point{TDatum, TAngle, THeight}"/></param>
+    /// <returns>An instance of <see cref="Point{TDatum, TAngleT}"/> created from <paramref name="point" />.</returns>
+    /// <exception cref="NotSupportedException"><typeparamref name="TAngleOther" /> is not supported.</exception>
+    /// <exception cref="OverflowException"><paramref name="point" /> is not representable by <see cref="Point{TDatum, TAngle, THeight}"/>.</exception>
+    public static Point<TDatum, TAngle, THeight> CreateTruncating<TAngleOther, THeightOther>(in Point<TDatum, TAngleOther, THeightOther> point)
+        where TAngleOther : struct, IFloatingPoint<TAngleOther>, IMinMaxValue<TAngleOther>
+        where THeightOther : struct, INumber<THeightOther>, IMinMaxValue<THeightOther>
+        => new(
+            Angle<Degrees, TAngle>.CreateTruncating(point.Latitude),
+            Angle<Degrees, TAngle>.CreateTruncating(point.Longitude),
+            THeight.CreateTruncating(point.Height)
+        );
 
     #region constants
 

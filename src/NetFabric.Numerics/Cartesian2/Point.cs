@@ -43,6 +43,54 @@ public readonly record struct Point<T>(T X, T Y)
     ICoordinateSystem IPoint<Point<T>>.CoordinateSystem 
         => CoordinateSystem;
 
+    /// <summary>
+    /// Creates an instance of the current type from a value, 
+    /// throwing an overflow exception for any values that fall outside the representable range of the current type.
+    /// </summary>
+    /// <typeparam name="TOther">The type of the components of <paramref name="point"/>.</typeparam>
+    /// <param name="point">The value which is used to create the instance of <see cref="Point{T}"/></param>
+    /// <returns>An instance of <see cref="Point{T}"/> created from <paramref name="point" />.</returns>
+    /// <exception cref="NotSupportedException"><typeparamref name="TOther" /> is not supported.</exception>
+    /// <exception cref="OverflowException"><paramref name="point" /> is not representable by <see cref="Point{T}"/>.</exception>
+    public static Point<T> CreateChecked<TOther>(in Point<TOther> point)
+        where TOther : struct, INumber<TOther>, IMinMaxValue<TOther>
+        => new(
+            T.CreateChecked(point.X),
+            T.CreateChecked(point.Y)
+        );
+
+    /// <summary>
+    /// Creates an instance of the current type from a value, 
+    /// saturating any values that fall outside the representable range of the current type.
+    /// </summary>
+    /// <typeparam name="TOther">The type of the components of <paramref name="point"/>.</typeparam>
+    /// <param name="point">The value which is used to create the instance of <see cref="Point{T}"/></param>
+    /// <returns>An instance of <see cref="Point{T}"/> created from <paramref name="point" />.</returns>
+    /// <exception cref="NotSupportedException"><typeparamref name="TOther" /> is not supported.</exception>
+    /// <exception cref="OverflowException"><paramref name="point" /> is not representable by <see cref="Point{T}"/>.</exception>
+    public static Point<T> CreateSaturating<TOther>(in Point<TOther> point)
+        where TOther : struct, INumber<TOther>, IMinMaxValue<TOther>
+        => new(
+            T.CreateSaturating(point.X),
+            T.CreateSaturating(point.Y)
+        );
+
+    /// <summary>
+    /// Creates an instance of the current type from a value, 
+    /// truncating any values that fall outside the representable range of the current type.
+    /// </summary>
+    /// <typeparam name="TOther">The type of the components of <paramref name="point"/>.</typeparam>
+    /// <param name="point">The value which is used to create the instance of <see cref="Point{T}"/></param>
+    /// <returns>An instance of <see cref="Point{T}"/> created from <paramref name="point" />.</returns>
+    /// <exception cref="NotSupportedException"><typeparamref name="TOther" /> is not supported.</exception>
+    /// <exception cref="OverflowException"><paramref name="point" /> is not representable by <see cref="Point{T}"/>.</exception>
+    public static Point<T> CreateTruncating<TOther>(in Point<TOther> point)
+        where TOther : struct, INumber<TOther>, IMinMaxValue<TOther>
+        => new(
+            T.CreateTruncating(point.X),
+            T.CreateTruncating(point.Y)
+        );
+
     #region addition
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -78,26 +126,6 @@ public readonly record struct Point<T>(T X, T Y)
 public static class Point
 {
     /// <summary>
-    /// Converts a <see cref="Point{TFrom}"/> to a <see cref="Point{TTo}"/>.
-    /// </summary>
-    /// <typeparam name="TFrom">The type of the components of the source point.</typeparam>
-    /// <typeparam name="TTo">The type of the components of the target point.</typeparam>
-    /// <param name="point">The source point to convert.</param>
-    /// <returns>The converted <see cref="Point{TTo}"/>.</returns>
-    /// <remarks>
-    /// This method performs a conversion from a <see cref="Point{TFrom}"/> to a <see cref="Point{TTo}"/>.
-    /// It converts each component of the source point to the target type and constructs a new point with
-    /// the converted components in the order x, y.
-    /// </remarks>
-    public static Point<TTo> Convert<TFrom, TTo>(in Point<TFrom> point)
-        where TFrom : struct, IFloatingPoint<TFrom>, IMinMaxValue<TFrom>
-        where TTo : struct, IFloatingPoint<TTo>, IMinMaxValue<TTo>
-        => new(
-            TTo.CreateChecked(point.X),
-            TTo.CreateChecked(point.Y)
-        );
-
-    /// <summary>
     /// Calculates the distance between two points.
     /// </summary>
     /// <param name="from">The starting point.</param>
@@ -111,9 +139,9 @@ public static class Point
     /// The distance is calculated as the Euclidean distance in the 2D Cartesian coordinate system.
     /// </para>
     /// </remarks>
-    public static double Distance<T>(in Point<T> from, in Point<T> to)
-        where T : struct, INumber<T>, IMinMaxValue<T>
-        => Math.Sqrt(double.CreateChecked(DistanceSquared(from, to)));
+    public static T Distance<T>(in Point<T> from, in Point<T> to)
+        where T : struct, INumber<T>, IMinMaxValue<T>, IRootFunctions<T>
+        => T.Sqrt(DistanceSquared(from, to));
 
     /// <summary>
     /// Calculates the square of the distance between two points.

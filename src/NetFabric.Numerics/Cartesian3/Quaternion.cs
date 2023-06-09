@@ -50,12 +50,12 @@ public readonly record struct Quaternion<T>(T X, T Y, T Z, T W)
         => Identity;
 
     /// <summary>
-    /// Represents the minimum right. This field is read-only.
+    /// Represents the minimum quaternion value. This field is read-only.
     /// </summary>
     public static readonly Quaternion<T> MinValue = new(T.MinValue, T.MinValue, T.MinValue, T.MinValue);
 
     /// <summary>
-    /// Represents the maximum right. This field is read-only.
+    /// Represents the maximum quaternion value. This field is read-only.
     /// </summary>
     public static readonly Quaternion<T> MaxValue = new(T.MaxValue, T.MaxValue, T.MaxValue, T.MaxValue);
 
@@ -63,6 +63,64 @@ public readonly record struct Quaternion<T>(T X, T Y, T Z, T W)
         => MinValue;
     static Quaternion<T> IMinMaxValue<Quaternion<T>>.MaxValue
         => MaxValue;
+
+    #endregion
+
+    #region conversion
+
+    /// <summary>
+    /// Creates an instance of the current type from a value, 
+    /// throwing an overflow exception for any values that fall outside the representable range of the current type.
+    /// </summary>
+    /// <typeparam name="TOther">The type of the components of <paramref name="quaternion"/>.</typeparam>
+    /// <param name="quaternion">The value which is used to create the instance of <see cref="Quaternion{T}"/></param>
+    /// <returns>An instance of <see cref="Quaternion{T}"/> created from <paramref name="quaternion" />.</returns>
+    /// <exception cref="NotSupportedException"><typeparamref name="TOther" /> is not supported.</exception>
+    /// <exception cref="OverflowException"><paramref name="quaternion" /> is not representable by <see cref="Quaternion{T}"/>.</exception>
+    public static Quaternion<T> CreateChecked<TOther>(in Quaternion<TOther> quaternion)
+        where TOther : struct, IFloatingPoint<TOther>, IMinMaxValue<TOther>
+        => new(
+            T.CreateChecked(quaternion.X),
+            T.CreateChecked(quaternion.Y),
+            T.CreateChecked(quaternion.Z),
+            T.CreateChecked(quaternion.W)
+        );
+
+    /// <summary>
+    /// Creates an instance of the current type from a value, 
+    /// saturating any values that fall outside the representable range of the current type.
+    /// </summary>
+    /// <typeparam name="TOther">The type of the components of <paramref name="quaternion"/>.</typeparam>
+    /// <param name="quaternion">The value which is used to create the instance of <see cref="Quaternion{T}"/></param>
+    /// <returns>An instance of <see cref="Quaternion{T}"/> created from <paramref name="quaternion" />.</returns>
+    /// <exception cref="NotSupportedException"><typeparamref name="TOther" /> is not supported.</exception>
+    /// <exception cref="OverflowException"><paramref name="quaternion" /> is not representable by <see cref="Quaternion{T}"/>.</exception>
+    public static Quaternion<T> CreateSaturating<TOther>(in Quaternion<TOther> quaternion)
+        where TOther : struct, IFloatingPoint<TOther>, IMinMaxValue<TOther>
+        => new(
+            T.CreateSaturating(quaternion.X),
+            T.CreateSaturating(quaternion.Y),
+            T.CreateSaturating(quaternion.Z),
+            T.CreateSaturating(quaternion.W)
+        );
+
+    /// <summary>
+    /// Creates an instance of the current type from a value, 
+    /// truncating any values that fall outside the representable range of the current type.
+    /// </summary>
+    /// <typeparam name="TOther">The type of the components of <paramref name="quaternion"/>.</typeparam>
+    /// <param name="quaternion">The value which is used to create the instance of <see cref="Quaternion{T}"/></param>
+    /// <returns>An instance of <see cref="Quaternion{T}"/> created from <paramref name="quaternion" />.</returns>
+    /// <exception cref="NotSupportedException"><typeparamref name="TOther" /> is not supported.</exception>
+    /// <exception cref="OverflowException"><paramref name="quaternion" /> is not representable by <see cref="Quaternion{T}"/>.</exception>
+    public static Quaternion<T> CreateTruncating<TOther>(in Quaternion<TOther> quaternion)
+        where TOther : struct, IFloatingPoint<TOther>, IMinMaxValue<TOther>
+        => new(
+            T.CreateTruncating(quaternion.X),
+            T.CreateTruncating(quaternion.Y),
+            T.CreateTruncating(quaternion.Z),
+            T.CreateTruncating(quaternion.W)
+        );
 
     #endregion
 
@@ -180,12 +238,12 @@ public readonly record struct Quaternion<T>(T X, T Y, T Z, T W)
     /// <summary>
     /// Multiplies a quaternion by a numeric value.
     /// </summary>
-    /// <param name="quaternion">The quaternion operand.</param>
-    /// <param name="scalar">The numeric value to multiply the quaternion by.</param>
+    /// <param name="left">The quaternion operand.</param>
+    /// <param name="right">The numeric value to multiply the quaternion by.</param>
     /// <returns>The result of multiplying the quaternion by the numeric value.</returns>
     /// <remarks>
     /// <para>
-    /// The operator multiplies a quaternion <paramref name="quaternion"/> by a numeric value <paramref name="scalar"/>
+    /// The operator multiplies a quaternion <paramref name="left"/> by a numeric value <paramref name="right"/>
     /// to produce a new quaternion where each component of the quaternion is multiplied by the scalar value.
     /// </para>
     /// <para>
@@ -193,12 +251,12 @@ public readonly record struct Quaternion<T>(T X, T Y, T Z, T W)
     /// </para>
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Quaternion<T> operator *(Quaternion<T> quaternion, T scalar) 
+    public static Quaternion<T> operator *(Quaternion<T> left, T right) 
         => new(
-            quaternion.X * scalar,
-            quaternion.Y * scalar,
-            quaternion.Z * scalar,
-            quaternion.W * scalar);
+            left.X * right,
+            left.Y * right,
+            left.Z * right,
+            left.W * right);
 
     /// <summary>
     /// Divides a quaternion by another quaternion.
@@ -245,30 +303,6 @@ public static class Quaternion
         => quaternion == Quaternion<T>.Identity;
 
     /// <summary>
-    /// Converts a <see cref="Quaternion{TFrom}"/> to a <see cref="Quaternion{TTo}"/>.
-    /// </summary>
-    /// <typeparam name="TFrom">The type of the components of the source quaternion.</typeparam>
-    /// <typeparam name="TTo">The type of the components of the target quaternion.</typeparam>
-    /// <param name="quaternion">The source quaternion to convert.</param>
-    /// <exception cref="NotSupportedException"><typeparamref name="TTo" /> is not supported.</exception>
-    /// <exception cref="OverflowException"><paramref name="quaternion" /> is not representable by <typeparamref name="TFrom" />.</exception>
-    /// <returns>The converted <see cref="Quaternion{TTo}"/>.</returns>
-    /// <remarks>
-    /// This method performs a conversion from a <see cref="Quaternion{TFrom}"/> to a <see cref="Quaternion{TTo}"/>.
-    /// It converts each component of the source quaternion to the target type and constructs a new quaternion with
-    /// the converted components in the order x, y, z, w.
-    /// </remarks>
-    public static Quaternion<TTo> Convert<TFrom, TTo>(in Quaternion<TFrom> quaternion)
-        where TFrom : struct, IFloatingPoint<TFrom>, IMinMaxValue<TFrom>
-        where TTo : struct, IFloatingPoint<TTo>, IMinMaxValue<TTo>
-        => new(
-            TTo.CreateChecked(quaternion.X),
-            TTo.CreateChecked(quaternion.Y),
-            TTo.CreateChecked(quaternion.Z),
-            TTo.CreateChecked(quaternion.W)
-        );
-
-    /// <summary>
     /// Creates a quaternion representing a rotation around a specified axis by the given angle.
     /// </summary>
     /// <typeparam name="T">The numeric type of the quaternion's components.</typeparam>
@@ -290,11 +324,11 @@ public static class Quaternion
     /// </para>
     /// </remarks>
     public static Quaternion<T> FromAxisAngle<T>(in Vector<T> axis, Angle<Radians, T> angle)
-        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
+        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>, ITrigonometricFunctions<T>
     {
-        var halfAngle = angle / T.CreateChecked(2.0);
-        var sin = T.CreateChecked(Angle.Sin(halfAngle));
-        var cos = T.CreateChecked(Angle.Cos(halfAngle));
+        var halfAngle = angle / (T.One + T.One);
+        var sin = Angle.Sin(halfAngle);
+        var cos = Angle.Cos(halfAngle);
         return new(
             axis.X * sin,
             axis.Y * sin,
@@ -314,7 +348,7 @@ public static class Quaternion
     public static Quaternion<double> FromYawPitchRoll<T>(Angle<Radians, T> yaw, Angle<Radians, T> pitch, Angle<Radians, T> roll)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
     {
-        var half = T.CreateSaturating(0.5);
+        var half = T.CreateChecked(0.5);
         var halfYaw = double.CreateChecked(yaw.Value * half);
         var halfPitch = double.CreateChecked(pitch.Value * half);
         var halfRoll = double.CreateChecked(roll.Value * half);
@@ -539,10 +573,9 @@ public static class Quaternion
         dot = T.Clamp(dot, T.Zero, T.One);
 
         // Calculate the angle between the quaternions
-        var theta = Math.Acos(double.CreateSaturating(dot));
+        var theta = Math.Acos(double.CreateChecked(dot));
 
         // Perform the spherical linear interpolation
-        var doubleFactor = double.CreateChecked(factor);
         var sinTheta = Math.Sin(theta);
         if (sinTheta < double.Epsilon)
         {
@@ -551,6 +584,7 @@ public static class Quaternion
             return startNormalized;
         }
 
+        var doubleFactor = double.CreateChecked(factor);
         return
             (startNormalized * T.CreateChecked(Math.Sin((1.0 - doubleFactor) * theta) / sinTheta)) +
             (endNormalized * T.CreateChecked(Math.Sin(doubleFactor * theta) / sinTheta));
@@ -591,10 +625,9 @@ public static class Quaternion
         dot = T.Clamp(dot, T.Zero, T.One);
 
         // Calculate the angle between the quaternions
-        var theta = Math.Acos(double.CreateSaturating(dot));
+        var theta = Math.Acos(double.CreateChecked(dot));
 
         // Perform the spherical linear interpolation
-        var doubleFactor = double.CreateChecked(factor);
         var sinTheta = Math.Sin(theta);
         if (sinTheta < double.Epsilon)
         {
@@ -603,6 +636,7 @@ public static class Quaternion
             return startNormalized;
         }
 
+        var doubleFactor = double.CreateChecked(factor);
         return
             (startNormalized * T.CreateChecked(Math.Sin((1.0 - doubleFactor) * theta) / sinTheta)) + 
             (endNormalized * T.CreateChecked(Math.Sin(doubleFactor * theta) / sinTheta));
