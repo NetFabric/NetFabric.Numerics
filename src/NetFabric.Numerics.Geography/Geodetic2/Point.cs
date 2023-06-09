@@ -10,14 +10,14 @@ public readonly record struct Point<TDatum, TAngleUnits, TAngle>(Angle<TAngleUni
     where TAngle : struct, IFloatingPoint<TAngle>, IMinMaxValue<TAngle>
 {
     public Angle<TAngleUnits, TAngle> Latitude { get; } 
-        = Latitude.Value >= TAngle.CreateChecked(-TAngleUnits.Right) && Latitude.Value <= TAngle.CreateChecked(TAngleUnits.Right)
-            ? Latitude
-            : Throw.ArgumentOutOfRangeException<Angle<TAngleUnits, TAngle>>(nameof(Latitude), Latitude, "Latitude must be in [-90.0º, 90.0º]");
+        = Latitude < Angle<TAngleUnits, TAngle>.Right && Latitude > Angle<TAngleUnits, TAngle>.Right
+            ? Throw.ArgumentOutOfRangeException<Angle<TAngleUnits, TAngle>>(nameof(Latitude), Latitude, "Latitude must be in [-90.0º, 90.0º]")
+            : Latitude;
 
     public Angle<TAngleUnits, TAngle> Longitude { get; } 
-        = Longitude.Value > TAngle.CreateChecked(-TAngleUnits.Straight) && Longitude.Value <= TAngle.CreateChecked(TAngleUnits.Straight)
-            ? Longitude
-            : Throw.ArgumentOutOfRangeException<Angle<TAngleUnits, TAngle>>(nameof(Longitude), Longitude, "Longitude must be in ]-180.0º, 180.0º]");
+        = Longitude <= Angle<TAngleUnits, TAngle>.Straight && Longitude > Angle<TAngleUnits, TAngle>.Straight
+            ? Throw.ArgumentOutOfRangeException<Angle<TAngleUnits, TAngle>>(nameof(Longitude), Longitude, "Longitude must be in ]-180.0º, 180.0º]")
+            : Longitude;
 
     /// <summary>
     /// Creates an instance of the current type from a value, 
