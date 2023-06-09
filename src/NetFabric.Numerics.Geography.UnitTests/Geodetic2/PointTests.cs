@@ -8,7 +8,7 @@ public class PointTests
         // arrange
 
         // act
-        var result = Point<WGS84, double>.Zero;
+        var result = Point<WGS84, Degrees, double>.Zero;
 
         // assert
         result.Latitude.Should().Be(Angle<Degrees, double>.Zero);
@@ -21,7 +21,7 @@ public class PointTests
         // arrange
 
         // act
-        var result = Point<WGS84, double>.Zero.CoordinateSystem;
+        var result = Point<WGS84, Degrees, double>.Zero.CoordinateSystem;
 
         // assert
         result.Datum.Name.Should().Be("WGS 84");

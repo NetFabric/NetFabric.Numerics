@@ -36,7 +36,7 @@ public interface IAngleUnits<TSelf>
 /// <summary>
 /// Defines the units of an angle in degrees.
 /// </summary>
-public class Degrees
+public struct Degrees
     : IAngleUnits<Degrees>
 {
     /// <summary>
@@ -68,7 +68,7 @@ public class Degrees
 /// <summary>
 /// Defines the units of an angle in radians.
 /// </summary>
-public class Radians
+public struct Radians
     : IAngleUnits<Radians>
 {
     /// <summary>
@@ -100,7 +100,7 @@ public class Radians
 /// <summary>
 /// Defines the units of an angle in gradians.
 /// </summary>
-public class Gradians
+public struct Gradians
     : IAngleUnits<Gradians>
 {
     /// <summary>
@@ -132,7 +132,7 @@ public class Gradians
 /// <summary>
 /// Defines the units of an angle in revolutions.
 /// </summary>
-public class Revolutions
+public struct Revolutions
     : IAngleUnits<Revolutions>
 {
     /// <summary>

@@ -82,16 +82,16 @@ With **NetFabric.Numerics**, you can work with polar coordinates using different
 ``` csharp
 using NetFabric.Numerics.Geography.Geodetic2;
 
-var wgs84Point = new Point<WGS84, double>(new Angle<Degrees, double>(0.0), new Angle<Degrees, double>(0.0));                    // Geodetic point using WGS84 datum
-var wgs1972Point = new Point<WGS1972, double>(new Angle<Degrees, double>(0.0), new Angle<Degrees, double>(0.0));                // Geodetic point using WGS1972 datum
-var nad83Point = new Point<NAD83, double>(new Angle<Degrees, double>(0.0), new Angle<Degrees, double>(0.0));                    // Geodetic point using NAD83 datum
-var nad1927ConusPoint = new Point<NAD1927CONUS, double>(new Angle<Degrees, double>(0.0), new Angle<Degrees, double>(0.0));      // Geodetic point using NAD1927CONUS datum
+var wgs84Point = new Point<WGS84, Degrees, double>(new(0.0), new(0.0));                    // Geodetic point using WGS84 datum
+var wgs1972Point = new Point<WGS1972, Degrees, double>(new(0.0), new(0.0));                // Geodetic point using WGS1972 datum
+var nad83Point = new Point<NAD83, Degrees, double>(new(0.0), new(0.0));                    // Geodetic point using NAD83 datum
+var nad1927ConusPoint = new Point<NAD1927CONUS, Degrees, double>(new(0.0), new(0.0));      // Geodetic point using NAD1927CONUS datum
 
-var doublePrecisionPoint = new Point<WGS84, double>(new Angle<Degrees, double>(0.0), new Angle<Degrees, double>(0.0));          // Geodetic point with double precision
-var singlePrecisionPoint = new Point<WGS84, float>(new Angle<Degrees, double>(0.0), new Angle<Degrees, double>(0.0));           // Geodetic point with single precision
+var doublePrecisionPoint = new Point<WGS84, Degrees, double>(new(0.0), new(0.0));          // Geodetic point with double precision
+var singlePrecisionPoint = new Point<WGS84, Degrees, float>(new(0.0), new(0.0));           // Geodetic point with single precision
 
-var minutesPoint = new Point<WGS84, double>(Angle.FromDegreesMinutes(0, 0.0), Angle.FromDegreesMinutes(0, 0.0));                          // Geodetic point using minutes
-var minutesSecondsPoint = new Point<WGS84, double>(Angle.FromDegreesMinutesSeconds(0, 0, 0.0), Angle.FromDegreesMinutesSeconds(0, 0, 0.0));  // Geodetic point using minutes and seconds
+var minutesPoint = new Point<WGS84, Degrees, double>(Angle.FromDegreesMinutes(0, 0.0), Angle.FromDegreesMinutes(0, 0.0));                          // Geodetic point using minutes
+var minutesSecondsPoint = new Point<WGS84, Degrees, double>(Angle.FromDegreesMinutesSeconds(0, 0, 0.0), Angle.FromDegreesMinutesSeconds(0, 0, 0.0));  // Geodetic point using minutes and seconds
 
 var (degreesLatitude, minutesLatitude) = Angle.ToDegreesMinutes(wgs84Point.Latitude);                                             // Convert latitude to degrees and minutes
 var (degreesLatitude, minutesLatitude, secondsLatitude) = Angle.ToDegreesMinutesSeconds(wgs84Point.Latitude);                     // Convert latitude to degrees, minutes, and seconds
@@ -104,7 +104,11 @@ var (degreesLatitude, minutesLatitude, secondsLatitude) = Angle.ToDegreesMinutes
 The following open-source projects are used to build and test this project:
 
 - [.NET](https://github.com/dotnet)
+- [BenchmarkDotNet](https://github.com/dotnet/BenchmarkDotNet)
+- [coverlet](https://github.com/coverlet-coverage/coverlet)
 - [Fluent Assertions](https://github.com/fluentassertions/fluentassertions)
+- [NetFabric.Hyperlinq.Analyzer](https://github.com/NetFabric/NetFabric.Hyperlinq.Analyzer)
+- [xUnit](https://github.com/xunit/xunit)
 
 ## License
 

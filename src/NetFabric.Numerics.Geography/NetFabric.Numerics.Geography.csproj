@@ -15,6 +15,7 @@
     <PackageTags>math, numerics, geodetic, geography, latlon, latitude, longitude, datum, utm, wgs84</PackageTags>
     <PackageProjectUrl>https://netfabric.github.io/NetFabric.Numerics/</PackageProjectUrl>
     <PackageReleaseNotes>
+      Allow angle units other than degrees.
       Add type conversion methods.
       Use math specific the internal types.
     </PackageReleaseNotes>
