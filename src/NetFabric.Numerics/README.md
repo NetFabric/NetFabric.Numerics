@@ -1,10 +1,10 @@
 ﻿# NetFabric.Numerics
 
-**NetFabric.Numerics.Angle** provides strongly-typed implementations for cartesian and polar coordinates, and operations for 2D and 3D vectors and quaternions.
+**NetFabric.Numerics** provides strongly-typed implementations for cartesian and polar coordinates, and operations for 2D and 3D vectors and quaternions.
 
 > WARNING: 
 > **NetFabric.Numerics** makes use of [generic math](https://learn.microsoft.com/en-us/dotnet/standard/generics/math) features only available in .NET 7 and C# 11.
-> For older versions of .NET, please use [NetFabric.Angle](https://github.com/NetFabric/NetFabric.Angle) instead.
+> Make sure you are using a compatible version of the framework before using this library.
 
 ``` csharp
 using NetFabric.Numerics;

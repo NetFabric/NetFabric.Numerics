@@ -4,6 +4,7 @@
 
 > WARNING: 
 > **NetFabric.Numerics.Angle** makes use of [generic math](https://learn.microsoft.com/en-us/dotnet/standard/generics/math) features only available in .NET 7 and C# 11.
+> Make sure you are using a compatible version of the framework before using this library.
 > For older versions of .NET, please use [NetFabric.Angle](https://github.com/NetFabric/NetFabric.Angle) instead.
 
 ``` csharp
@@ -37,7 +38,7 @@ var convertToFloat = Angle<Degrees, float>.CreateChecked(degreesAngle); // throw
 var sineValue = Angle.Sin(radiansAngle);
 var cosineValue = Angle.Cos(Angle.ToRadians(degreesAngle));
 var tangentValue = Angle.Tan(radiansAngle);
-var arcsineRadiansAngle = Angle.Asin(180.0);
+var arcsineRadiansAngle = Angle.Asin(sineValue);
 
 // Reduce angles
 var reducedAngle = Angle.Reduce(degreesAngle);

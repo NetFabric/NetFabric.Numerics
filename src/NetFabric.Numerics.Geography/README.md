@@ -4,7 +4,7 @@
 
 > WARNING: 
 > **NetFabric.Numerics.Geography** makes use of [generic math](https://learn.microsoft.com/en-us/dotnet/standard/generics/math) features only available in .NET 7 and C# 11.
-> For older versions of .NET, please use [NetFabric.Angle](https://github.com/NetFabric/NetFabric.Angle) instead.
+> Make sure you are using a compatible version of the framework before using this library.
 
 ``` csharp
 using NetFabric.Numerics.Geography.Geodetic2;
