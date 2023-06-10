@@ -6,19 +6,17 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <Description></Description>
-    <Version>1.0.0-beta02</Version>
+    <Version>1.0.0-beta03</Version>
     <Copyright>Copyright © Antão Almada 2023</Copyright>
     <Authors>Antão Almada</Authors>
     <Company>NetFabric</Company>
     <PackageIcon>Icon.png</PackageIcon>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageTags>math, numerics, vector, cartesian, polar, spherical</PackageTags>
     <PackageProjectUrl>https://netfabric.github.io/NetFabric.Numerics/</PackageProjectUrl>
     <PackageReleaseNotes>
-      Add type conversion methods.
-      Add Quaternion.
-      Add documentation.
-      Use math specific the internal types.
+      Add README.
     </PackageReleaseNotes>
     <RootNamespace>NetFabric.Numerics</RootNamespace>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
@@ -46,6 +44,7 @@
   <ItemGroup>
     <None Include="..\..\Icon.png" Pack="true" PackagePath="" />
     <None Include="..\..\LICENSE" Pack="true" PackagePath="" />
+    <None Include=".\README.md" Pack="true" PackagePath="" />
   </ItemGroup>
 
   <ItemGroup>

@@ -50,6 +50,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "namespaces", "namespaces", 
 		docs\namespaces\NetFabric.Numerics.md = docs\namespaces\NetFabric.Numerics.md
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Api", "Api", "{83BDB68A-4F4B-4D7D-A7C7-55CC9F03657B}"
+	ProjectSection(SolutionItems) = preProject
+		docs\api\index.md = docs\api\index.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -91,6 +96,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{A04C4E36-5F33-43F8-A7EE-15D81C7F8A58} = {762517CA-3F22-4DC6-955C-4F4FC69EB670}
 		{BA0837F2-730C-4537-B08B-5FFD2D91AF30} = {762517CA-3F22-4DC6-955C-4F4FC69EB670}
+		{83BDB68A-4F4B-4D7D-A7C7-55CC9F03657B} = {762517CA-3F22-4DC6-955C-4F4FC69EB670}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AACC30AE-BE57-461F-817B-2AE0F001A33F}

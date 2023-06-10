@@ -20,7 +20,11 @@ Make sure to include the appropriate package(s) in your project, depending on yo
 The following open-source projects are used to build and test this project:
 
 - [.NET](https://github.com/dotnet)
+- [BenchmarkDotNet](https://github.com/dotnet/BenchmarkDotNet)
+- [coverlet](https://github.com/coverlet-coverage/coverlet)
 - [Fluent Assertions](https://github.com/fluentassertions/fluentassertions)
+- [NetFabric.Hyperlinq.Analyzer](https://github.com/NetFabric/NetFabric.Hyperlinq.Analyzer)
+- [xUnit](https://github.com/xunit/xunit)
 
 ## License
 
