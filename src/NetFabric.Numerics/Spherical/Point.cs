@@ -114,3 +114,32 @@ public readonly record struct Point<TAngleUnits, TAngle, TRadius>(Angle<TAngleUn
             _ => Throw.ArgumentOutOfRangeException<object>(nameof(index), index, "index out of range")
         };
 }
+
+/// <summary>
+/// Provides static methods for point operations.
+/// </summary>
+public static class Point
+{
+    /// <summary>
+    /// Converts a point in spherical coordinates to cartesian 3D coordinates.
+    /// </summary>
+    /// <param name="point">The point in spherical coordinates to convert.</param>
+    /// <returns>The cartesian 3D coordinates representing the point.</returns>
+    public static Cartesian3.Point<T> ConvertToCartesian<TAngle, TRadius, T>(Point<Radians, TAngle, TRadius> point)
+        where TAngle : struct, IFloatingPoint<TAngle>, IMinMaxValue<TAngle>, ITrigonometricFunctions<TAngle>
+        where TRadius : struct, IFloatingPoint<TRadius>, IMinMaxValue<TRadius>
+        where T : struct, INumber<T>, IMinMaxValue<T>
+    {
+        var sinAzimuth = Angle.Sin(point.Azimuth);
+        var cosAzimuth = Angle.Cos(point.Azimuth);
+        var sinZenith = Angle.Sin(point.Zenith);
+        var cosZenith = Angle.Cos(point.Zenith);
+
+        var x = T.CreateChecked(point.Radius * TRadius.CreateChecked(sinZenith * cosAzimuth));
+        var y = T.CreateChecked(point.Radius * TRadius.CreateChecked(sinZenith * sinAzimuth));
+        var z = T.CreateChecked(point.Radius * TRadius.CreateChecked(cosZenith));
+
+        return new(x, y, z);
+    }
+
+}

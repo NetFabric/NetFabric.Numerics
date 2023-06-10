@@ -96,7 +96,7 @@ public static partial class Angle
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Angle<Radians, T> Atan2<T>(T x, T y)
-        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>, IFloatingPointIeee754<T>
+        where T : struct, IFloatingPointIeee754<T>, IMinMaxValue<T>
         => new(T.Atan2(x, y));
 
     /// <summary>
@@ -116,7 +116,7 @@ public static partial class Angle
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Angle<Radians, T> Acot<T>(T cot)
-    where T : struct, IFloatingPoint<T>, IMinMaxValue<T>, IFloatingPointIeee754<T>
+    where T : struct, IFloatingPointIeee754<T>, IMinMaxValue<T>
         => new(T.Atan2(T.One, cot));
 
     /// <summary>

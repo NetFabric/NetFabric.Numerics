@@ -109,3 +109,25 @@ public readonly record struct Point<TAngleUnits, TAngle, TRadius>(Angle<TAngleUn
             _ => Throw.ArgumentOutOfRangeException<object>(nameof(index), index, "index out of range")
         };
 }
+
+/// <summary>
+/// Provides static methods for point operations.
+/// </summary>
+public static class Point
+{
+    /// <summary>
+    /// Converts a point in polar coordinates to cartesian 2D coordinates.
+    /// </summary>
+    /// <param name="point">The point in polar coordinates to convert.</param>
+    /// <returns>The cartesian 2D coordinates representing the point.</returns>
+    public static Cartesian2.Point<T> ConvertToCartesian<TAngle, TRadius, T>(Point<Radians, TAngle, TRadius> point)
+        where TAngle : struct, IFloatingPoint<TAngle>, IMinMaxValue<TAngle>, ITrigonometricFunctions<TAngle>
+        where TRadius : struct, IFloatingPoint<TRadius>, IMinMaxValue<TRadius>
+        where T : struct, INumber<T>, IMinMaxValue<T>
+    {
+        var x = T.CreateChecked(point.Radius * TRadius.CreateChecked(Angle.Cos(point.Azimuth)));
+        var y = T.CreateChecked(point.Radius * TRadius.CreateChecked(Angle.Sin(point.Azimuth)));
+
+        return new(x, y);
+    }
+}

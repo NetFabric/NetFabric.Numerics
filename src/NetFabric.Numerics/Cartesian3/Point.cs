@@ -223,4 +223,23 @@ public static class Point
         where T : struct, INumber<T>, IMinMaxValue<T>
         => T.Abs(to.X - from.X) + T.Abs(to.Y - from.Y) + T.Abs(to.Z - from.Z);
 
+    /// <summary>
+    /// Converts a cartesian 3D point to spherical coordinates.
+    /// </summary>
+    /// <typeparam name="T">The type of the point coordinates.</typeparam>
+    /// <typeparam name="TAngle">The type of the azimuth and zenith coordinates.</typeparam>
+    /// <typeparam name="TRadius">The type of the radius coordinate.</typeparam>
+    /// <param name="point">The cartesian 3D point to convert.</param>
+    /// <returns>The spherical coordinates representing the point.</returns>
+    public static Spherical.Point<Radians, TAngle, TRadius> ConvertToSpherical<T, TAngle, TRadius>(Point<T> point)
+        where T : struct, INumber<T>, IMinMaxValue<T>
+        where TAngle : struct, IFloatingPointIeee754<TAngle>, IMinMaxValue<TAngle>
+        where TRadius : struct, IFloatingPoint<TRadius>, IMinMaxValue<TRadius>, IRootFunctions<TRadius>
+    {
+        var azimuth = Angle.Atan2(TAngle.CreateChecked(point.Y), TAngle.CreateChecked(point.X));
+        var radius = TRadius.Sqrt(TRadius.CreateChecked(Utils.Pow2(point.X) + Utils.Pow2(point.Y) + Utils.Pow2(point.Z)));
+        var zenith = Angle.Acos(TAngle.CreateChecked(TRadius.CreateChecked(point.Z) / radius));
+
+        return new(azimuth, zenith, radius);
+    }
 }

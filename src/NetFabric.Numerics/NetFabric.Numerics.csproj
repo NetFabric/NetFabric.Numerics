@@ -16,7 +16,7 @@
     <PackageTags>math, numerics, vector, cartesian, polar, spherical</PackageTags>
     <PackageProjectUrl>https://netfabric.github.io/NetFabric.Numerics/</PackageProjectUrl>
     <PackageReleaseNotes>
-      Add README.
+      Add conversion between cartesian, polar and spherical coordinates.
     </PackageReleaseNotes>
     <RootNamespace>NetFabric.Numerics</RootNamespace>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
