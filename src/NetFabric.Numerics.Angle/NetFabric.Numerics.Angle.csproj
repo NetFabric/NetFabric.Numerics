@@ -20,8 +20,7 @@
     <PackageTags>math, numerics, angle, trigonometry, degrees, radians, gradians, revolutions</PackageTags>
     <PackageProjectUrl>https://netfabric.github.io/NetFabric.Numerics/</PackageProjectUrl>
     <PackageReleaseNotes>
-      Add type conversion methods.
-      Use math specific the internal types.
+      Fix README.
     </PackageReleaseNotes>
     <RootNamespace>NetFabric.Numerics</RootNamespace>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>

@@ -226,10 +226,10 @@ public static partial class Angle
     /// <typeparam name="T">The floating point type used internally by <paramref name="angle"/>.</typeparam>
     /// <param name="angle">Source angle.</param>
     /// <returns>true if the reduction of the absolute angle is zero; otherwise false.</returns>
-    public static bool IsZero<TUnits, T>(Angle<TUnits, T> angle)
+    public static bool IsZero<TUnits, T>(AngleReduced<TUnits, T> angle)
         where TUnits : IAngleUnits<TUnits>
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => angle % Angle<TUnits, T>.Full.Value == Angle<TUnits, T>.Zero;
+        => angle == Angle<TUnits, T>.Zero;
 
     /// <summary>
     /// Indicates whether the specified angle is acute.

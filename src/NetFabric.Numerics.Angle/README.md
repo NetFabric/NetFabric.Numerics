@@ -11,37 +11,45 @@
 using NetFabric.Numerics.Angle;
 
 // Create angles
-var degreesAngle = new Angle<Degrees, double>(45.0);
-var radiansAngle = new Angle<Radians, float>(1.57f);
-var gradiansAngle = new Angle<Gradians, decimal>(200.0m);
-var revolutionsAngle = new Angle<Revolutions, double>(0.25);
+var degreesDoubleAngle = new Angle<Degrees, double>(45.0);
+var radiansFloatAngle = new Angle<Radians, float>(1.57f);
+var gradiansDecimalAngle = new Angle<Gradians, decimal>(200.0m);
+var revolutionsDoubleAngle = new Angle<Revolutions, Half>((Half)0.25);
+
+// Constants
+var zeroDegreesDoubleAngle = Angle<Degrees, double>.Zero; // 0.0 degrees
+var rightDegreesFloatAngle = Angle<Degrees, float>.Right; // 90.0f degrees
+var straightRadiansDecimalAngle = Angle<Radians, decimal>.Straight; // π radians
+var fullRevolutionsHalfAngle = Angle<Revolutions, Half>.Full; // 1 revolution
 
 // Perform angle operations
-var sum = degreesAngle + Angle.ToDegrees<float, double>(radiansAngle);
-var difference = Angle.ToRadians<decimal, float>(gradiansAngle) - Angle.ToRadians<double, float>(revolutionsAngle);
-var product = 2.0 * degreesAngle;
-var quotient = gradiansAngle / 100.0m;
-var remainder = degreesAngle % 180.0;
+var sum = degreesDoubleAngle + Angle<Degrees, double>.Right;
+var difference = gradiansDecimalAngle - Angle<Gradians, decimal>.Right;
+var product = 2.0 * degreesDoubleAngle;
+var quotient = gradiansDecimalAngle / 100.0m;
+var remainder = degreesDoubleAngle % 180.0;
 
 // Compare angles
-var areEqual = degreesAngle.Equals(Angle.ToDegrees<float, double>(radiansAngle));
-var isGreater = gradiansAngle > Angle.ToGradians<double, decimal>(revolutionsAngle);
+var areEqual = degreesDoubleAngle.Equals(Angle.ToDegrees(revolutionsDoubleAngle));
+var isGreater = gradiansDecimalAngle > Angle<Gradians, decimal>.Right;
 
 // Convert angles
-var convertedToRadians = Angle.ToRadians(degreesAngle);
-var convertedToDegrees = Angle.ToDegrees(radiansAngle);
-var convertedToRevolution = Angle.ToRevolution(degreesAngle);
+var convertedToRadians = Angle.ToRadians(degreesDoubleAngle);
+var convertedToDegrees = Angle.ToDegrees(radiansFloatAngle);
+var convertedToRevolution = Angle.ToRevolutions(degreesDoubleAngle);
 
-var convertToFloat = Angle<Degrees, float>.CreateChecked(degreesAngle); // throws if value is out of range
+var convertToFloatChecked = Angle<Degrees, float>.CreateChecked(degreesDoubleAngle); // throws if value is out of range
+var convertToFloatSaturating = Angle<Degrees, float>.CreateSaturating(degreesDoubleAngle); // saturates if value is out of range
+var convertToFloatTruncating = Angle<Degrees, float>.CreateTruncating(degreesDoubleAngle); // truncates if value is out of range
 
 // Perform trigonometric calculations
-var sineValue = Angle.Sin(radiansAngle);
-var cosineValue = Angle.Cos(Angle.ToRadians(degreesAngle));
-var tangentValue = Angle.Tan(radiansAngle);
+var sineValue = Angle.Sin(radiansFloatAngle);
+var cosineValue = Angle.Cos(Angle.ToRadians(degreesDoubleAngle));
+var tangentValue = Angle.Tan(radiansFloatAngle);
 var arcsineRadiansAngle = Angle.Asin(sineValue);
 
 // Reduce angles
-var reducedAngle = Angle.Reduce(degreesAngle);
+var reducedAngle = Angle.Reduce(degreesDoubleAngle);
 var quadrant = Angle.GetQuadrant(reducedAngle);
 var reference = Angle.GetReference(reducedAngle);
 
@@ -53,12 +61,12 @@ var isObtuseAngle = Angle.IsObtuse(reducedAngle);
 var isStraightAngle = Angle.IsStraight(reducedAngle);
 
 // Calculate collection operations
-var angleCollection = new List<Angle<Degrees, double>> { degreesAngle, Angle.ToDegrees<float, double>(radiansAngle), Angle.ToDegrees<decimal, double>(gradiansAngle) };
+var angleCollection = new[] { degreesDoubleAngle, Angle<Degrees, double>.Right, Angle<Degrees, double>.Straight };
 var collectionSum = angleCollection.Sum();
 var collectionAverage = angleCollection.Average();
 ```
 
-## Angle<TUnits, T> and AngleReduced<TUnits, T>
+## Angle<TUnits, T> vs. AngleReduced<TUnits, T>
 
 - `Angle<TUnits, T>` represents an angle as a value of type `T` in the specified `TUnits` unit. 
 - `AngleReduced<TUnits, T>` represents an angle as a value of type `T` in the specified `TUnits` unit, reduced to the range `[TUnits.Zero, TUnits.Full[`.
@@ -89,7 +97,7 @@ These methods are only available for angles in radians. When using an angle on a
 
 These operations are available for `IEnumerable<Angle<TUnits, T>>`, `Angle<TUnits, T>[]`, `Memory<Angle<TUnits, T>>`, `ReadOnlyMemory<Angle<TUnits, T>>`, `Span<Angle<TUnits, T>>`, and `ReadOnlySpan<Angle<TUnits, T>>`.
 
-These operations use SIMD instructions when available, ensuring high-performance calculations.
+These operations use SIMD instructions when possible, ensuring high-performance calculations.
 
 ## Credits
 
