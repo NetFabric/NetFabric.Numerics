@@ -1,3 +1,5 @@
+using System.Numerics;
+
 namespace NetFabric.Numerics.Cartesian2;
 
 /// <summary>
@@ -196,6 +198,7 @@ public static class Vector
     /// <summary>
     /// Returns a new vector that is clamped within the specified minimum and maximum values for each component.
     /// </summary>
+    /// <typeparam name="T">The numeric type used internally by <paramref name="vector"/>, <paramref name="min"/> and <paramref name="max"/>.</typeparam>
     /// <param name="vector">The vector to clamp.</param>
     /// <param name="min">The minimum values for each component.</param>
     /// <param name="max">The maximum values for each component.</param>
@@ -224,6 +227,7 @@ public static class Vector
     /// <summary>
     /// Calculates the magnitude (length) of the vector.
     /// </summary>
+    /// <typeparam name="T">The numeric type used internally by <paramref name="vector"/>.</typeparam>
     /// <returns>The magnitude of the vector.</returns>
     /// <remarks>
     /// <para>
@@ -235,8 +239,25 @@ public static class Vector
         => T.Sqrt(MagnitudeSquared(vector));
 
     /// <summary>
+    /// Calculates the magnitude (length) of the vector.
+    /// </summary>
+    /// <typeparam name="T">The numeric type used internally by <paramref name="vector"/>.</typeparam>
+    /// <typeparam name="TOut">The numeric type used for the magnitude.</typeparam>
+    /// <returns>The magnitude of the vector.</returns>
+    /// <remarks>
+    /// <para>
+    /// The magnitude is calculated as the Euclidean distance in the 2D Cartesian coordinate system.
+    /// </para>
+    /// </remarks>
+    public static TOut Magnitude<T, TOut>(in Vector<T> vector)
+        where T : struct, INumber<T>, IMinMaxValue<T>
+        where TOut : struct, INumber<TOut>, IRootFunctions<TOut>
+        => TOut.Sqrt(TOut.CreateChecked(MagnitudeSquared(vector)));
+
+    /// <summary>
     /// Calculates the square of the magnitude (length) of the vector.
     /// </summary>
+    /// <typeparam name="T">The numeric type used internally by <paramref name="vector"/>.</typeparam>
     /// <returns>The square of the magnitude of the vector.</returns>
     /// <remarks>
     /// <para>
@@ -254,6 +275,7 @@ public static class Vector
     /// <summary>
     /// Returns a new vector that represents the normalized form of the specified vector.
     /// </summary>
+    /// <typeparam name="T">The numeric type used internally by <paramref name="vector"/>.</typeparam>
     /// <param name="vector">The vector to normalize.</param>
     /// <returns>
     /// A new vector that represents the normalized form of the specified vector.
@@ -284,6 +306,7 @@ public static class Vector
     /// <summary>
     /// Calculates the dot product.
     /// </summary>
+    /// <typeparam name="T">The numeric type used internally by <paramref name="left"/> and <paramref left="to"/>.</typeparam>
     /// <param name="left">A vector.</param>
     /// <param name="right">A vector.</param>
     /// <returns>The dot product.</returns>
@@ -295,6 +318,7 @@ public static class Vector
     /// <summary>
     /// Calculates the cross product magnitude.
     /// </summary>
+    /// <typeparam name="T">The numeric type used internally by <paramref name="left"/> and <paramref left="to"/>.</typeparam>
     /// <param name="left">A vector.</param>
     /// <param name="right">A vector.</param>
     /// <returns>The magnitude of the cross products.</returns>
@@ -303,18 +327,37 @@ public static class Vector
         => (left.X * right.X) - (left.Y * right.Y);
 
     /// <summary>
-    /// Gets the angle between two vectors.
+    /// Gets the smallest angle between two vectors.
     /// </summary>
+    /// <typeparam name="T">The numeric type used internally by <paramref name="from"/> and <paramref name="to"/>.</typeparam>
+    /// <typeparam name="TAngle">The floating point type used internally by the returned angle.</typeparam>
     /// <param name="from">The vector where the angle measurement starts at.</param>
     /// <param name="to">The vector where the angle measurement stops at.</param>
     /// <returns>The angle between two vectors.</returns>
-    /// <remarks>The angle signal is determined by the right-hand rule.</remarks>
-    public static Angle<Radians, T> Angle<T, TAngle>(in Vector<T> from, in Vector<T> to)
-        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>, IRootFunctions<T>, ITrigonometricFunctions<T>
+    /// <remarks>The angle is always less than 180 degrees.</remarks>
+    public static AngleReduced<Radians, TAngle> Angle<T, TAngle>(in Vector<T> from, in Vector<T> to)
+        where T : struct, INumber<T>, IMinMaxValue<T>
+        where TAngle : struct, IFloatingPoint<TAngle>, IMinMaxValue<TAngle>, ITrigonometricFunctions<TAngle>, IRootFunctions<TAngle>
     {
-        var radians = T.Acos(DotProduct(from, to) / (Magnitude(from) * Magnitude(to)));
-        return T.Sign(CrossProduct(from, to)) < 0 
-            ? new(-radians)
-            : new(radians);
+        var dotProduct = DotProduct(in from, in to);
+        return new(TAngle.Acos(TAngle.CreateChecked(dotProduct) / (Magnitude<T, TAngle>(in from) * Magnitude<T, TAngle>(in to))));
+    }
+
+    /// <summary>
+    /// Gets the angle between two vectors.
+    /// </summary>
+    /// <typeparam name="T">The numeric type used internally by <paramref name="from"/> and <paramref name="to"/>.</typeparam>
+    /// <typeparam name="TAngle">The floating point type used internally by the returned angle.</typeparam>
+    /// <param name="from">The vector where the angle measurement starts at.</param>
+    /// <param name="to">The vector where the angle measurement stops at.</param>
+    /// <returns>The angle between two vectors.</returns>
+    /// <remarks>The angle signal is determined by the right-hand rule and it value between -180 and 180 degrees.</remarks>
+    public static Angle<Radians, TAngle> AngleSigned<T, TAngle>(in Vector<T> from, in Vector<T> to)
+        where T : struct, INumber<T>, IMinMaxValue<T>
+        where TAngle : struct, IFloatingPointIeee754<TAngle>, IMinMaxValue<TAngle>
+    {
+        var dotProduct = DotProduct(in from, in to);
+        var crossProduct = CrossProduct(in from, in to);
+        return new(TAngle.Atan2(TAngle.CreateChecked(crossProduct), TAngle.CreateChecked(dotProduct)));
     }
 }

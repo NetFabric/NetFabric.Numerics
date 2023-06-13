@@ -11,7 +11,7 @@ public class PointTests
         var result = Point<double>.Zero.CoordinateSystem;
 
         // assert
-        //result.Coordinates.Span[0].Should().Equal(new Coordinate("X", typeof(double)));
-        //result.Coordinates.Span[1].Should().Equal(new Coordinate("Y", typeof(double)));
+        result.Coordinates[0].Should().Be(new Coordinate("X", typeof(double)));
+        result.Coordinates[1].Should().Be(new Coordinate("Y", typeof(double)));
     }
 }

@@ -70,34 +70,6 @@ public readonly record struct Vector<T>(T X, T Y, T Z)
             T.CreateTruncating(vector.Z)
         );
 
-    /// <summary>
-    /// Calculates the magnitude (length) of the vector.
-    /// </summary>
-    /// <returns>The magnitude of the vector.</returns>
-    /// <remarks>
-    /// <para>
-    /// The magnitude is calculated as the Euclidean distance in the 2D Cartesian coordinate system.
-    /// </para>
-    /// </remarks>
-    public double Magnitude
-        => Math.Sqrt(double.CreateChecked(MagnitudeSquared));
-
-    /// <summary>
-    /// Calculates the square of the magnitude (length) of the vector.
-    /// </summary>
-    /// <returns>The square of the magnitude of the vector.</returns>
-    /// <remarks>
-    /// <para>
-    /// The square of the magnitude is calculated as the Euclidean distance in the 2D Cartesian coordinate system.
-    /// </para>
-    /// <para>
-    /// Note that the square of the magnitude is returned instead of the actual magnitude to avoid the need for
-    /// taking the square root, which can be a computationally expensive operation.
-    /// </para>
-    /// </remarks>
-    public T MagnitudeSquared
-        => Utils.Pow2(X) + Utils.Pow2(Y) + Utils.Pow2(Z);
-
     #region constants
 
     /// <summary>
@@ -147,7 +119,7 @@ public readonly record struct Vector<T>(T X, T Y, T Z)
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public readonly int CompareTo(Vector<T> other)
-        => this.MagnitudeSquared.CompareTo(other.MagnitudeSquared);
+        => Vector.MagnitudeSquared(this).CompareTo(Vector.MagnitudeSquared(other));
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool operator <(Vector<T> left, Vector<T> right)
@@ -287,6 +259,54 @@ public static class Vector
         => new(T.Clamp(vector.X, min.X, max.X), T.Clamp(vector.Y, min.Y, max.Y), T.Clamp(vector.Z, min.Z, max.Z));
 
     /// <summary>
+    /// Calculates the magnitude (length) of the vector.
+    /// </summary>
+    /// <typeparam name="T">The numeric type used internally by <paramref name="vector"/>.</typeparam>
+    /// <returns>The magnitude of the vector.</returns>
+    /// <remarks>
+    /// <para>
+    /// The magnitude is calculated as the Euclidean distance in the 2D Cartesian coordinate system.
+    /// </para>
+    /// </remarks>
+    public static T Magnitude<T>(in Vector<T> vector)
+        where T : struct, INumber<T>, IMinMaxValue<T>, IRootFunctions<T>
+        => T.Sqrt(MagnitudeSquared(vector));
+
+    /// <summary>
+    /// Calculates the magnitude (length) of the vector.
+    /// </summary>
+    /// <typeparam name="T">The numeric type used internally by <paramref name="vector"/>.</typeparam>
+    /// <typeparam name="TOut">The numeric type used for the magnitude.</typeparam>
+    /// <returns>The magnitude of the vector.</returns>
+    /// <remarks>
+    /// <para>
+    /// The magnitude is calculated as the Euclidean distance in the 2D Cartesian coordinate system.
+    /// </para>
+    /// </remarks>
+    public static TOut Magnitude<T, TOut>(in Vector<T> vector)
+        where T : struct, INumber<T>, IMinMaxValue<T>
+        where TOut : struct, INumber<TOut>, IRootFunctions<TOut>
+        => TOut.Sqrt(TOut.CreateChecked(MagnitudeSquared(vector)));
+
+    /// <summary>
+    /// Calculates the square of the magnitude (length) of the vector.
+    /// </summary>
+    /// <typeparam name="T">The numeric type used internally by <paramref name="vector"/>.</typeparam>
+    /// <returns>The square of the magnitude of the vector.</returns>
+    /// <remarks>
+    /// <para>
+    /// The square of the magnitude is calculated as the Euclidean distance in the 2D Cartesian coordinate system.
+    /// </para>
+    /// <para>
+    /// Note that the square of the magnitude is returned instead of the actual magnitude to avoid the need for
+    /// taking the square root, which can be a computationally expensive operation.
+    /// </para>
+    /// </remarks>
+    public static T MagnitudeSquared<T>(in Vector<T> vector)
+        where T : struct, INumber<T>, IMinMaxValue<T>
+        => Utils.Pow2(vector.X) + Utils.Pow2(vector.Y);
+
+    /// <summary>
     /// Returns a new vector that represents the normalized form of the specified vector.
     /// </summary>
     /// <param name="vector">The vector to normalize.</param>
@@ -308,9 +328,9 @@ public static class Vector
     /// </para>
     /// </remarks>
     public static Vector<T> Normalize<T>(in Vector<T> vector)
-        where T : struct, INumber<T>, IMinMaxValue<T>
+        where T : struct, INumber<T>, IMinMaxValue<T>, IRootFunctions<T>
     {
-        var length = T.CreateChecked(vector.Magnitude);
+        var length = T.CreateChecked(Vector.Magnitude(vector));
         return length != T.Zero
             ? new(vector.X / length, vector.Y / length, vector.Z / length)
             : Vector<T>.Zero;
@@ -340,14 +360,16 @@ public static class Vector
                 (left.X * right.Y) - (left.Y * right.X));
 
     /// <summary>
-    /// Gets the angle between two vectors.
+    /// Gets the smallest angle between two vectors.
     /// </summary>
+    /// <typeparam name="T">The numeric type used internally by <paramref name="from"/> and <paramref name="to"/>.</typeparam>
+    /// <typeparam name="TAngle">The floating point type used internally by the returned angle.</typeparam>
     /// <param name="from">The vector where the angle measurement starts at.</param>
     /// <param name="to">The vector where the angle measurement stops at.</param>
     /// <returns>The angle between two vectors.</returns>
-    /// <remarks>The angle signal is determined by the right-hand rule.</remarks>
-    public static Angle<Radians, TAngle> Angle<T, TAngle>(in Vector<T> from, in Vector<T> to)
+    /// <remarks>The angle is always less than 180 degrees.</remarks>
+    public static AngleReduced<Radians, TAngle> Angle<T, TAngle>(in Vector<T> from, in Vector<T> to)
         where T : struct, INumber<T>, IMinMaxValue<T>
-        where TAngle : struct, IFloatingPoint<TAngle>, IMinMaxValue<TAngle>
-        => new(TAngle.CreateChecked(Math.Acos(double.CreateChecked(DotProduct(from, to)) / (from.Magnitude * to.Magnitude))));
+        where TAngle : struct, IFloatingPoint<TAngle>, IMinMaxValue<TAngle>, ITrigonometricFunctions<TAngle>, IRootFunctions<TAngle>
+        => new(TAngle.Acos(TAngle.CreateChecked(DotProduct(in from, in to)) / (Magnitude<T, TAngle>(in from) * Magnitude<T, TAngle>(in to))));
 }
