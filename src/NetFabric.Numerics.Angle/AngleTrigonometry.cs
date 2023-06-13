@@ -243,6 +243,23 @@ public static partial class Angle
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>, IHyperbolicFunctions<T>
         => T.Sinh(angle.Value);
 
+
+    /// <summary>
+    /// Calculates the sine and the cosine of an angle.
+    /// </summary>
+    /// <typeparam name="T">The floating point type used internally by <paramref name="angle"/>.</typeparam>
+    /// <param name="angle">The angle in radians.</param>
+    /// <returns>A tuple containing the sine and the cosine of the given angle.</returns>
+    /// <remarks>
+    /// <para>
+    /// This method calls into the underlying C runtime, and the exact result or valid input range may differ between different operating systems or architectures.
+    /// </para>
+    /// </remarks>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static (T Sin, T Cos) SinCos<T>(Angle<Radians, T> angle)
+        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>, ITrigonometricFunctions<T>
+        => T.SinCos(angle.Value);
+
     /// <summary>
     /// Calculates the tangent of an angle.
     /// </summary>
