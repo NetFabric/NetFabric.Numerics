@@ -136,7 +136,7 @@ public static class Point
     /// sphere, also known as the great-circle distance.
     /// </para>
     /// </remarks>
-    public static TAngle DistanceSpherical<TDatum, TAngle>(Point<TDatum, Radians, TAngle> from, Point<TDatum, Radians, TAngle> to)
+    public static TAngle DistanceSphere<TDatum, TAngle>(Point<TDatum, Radians, TAngle> from, Point<TDatum, Radians, TAngle> to)
         where TDatum : IDatum<TDatum>
         where TAngle : struct, IFloatingPointIeee754<TAngle>, IMinMaxValue<TAngle>
     {
