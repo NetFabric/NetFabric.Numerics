@@ -11,12 +11,12 @@ public readonly record struct CoordinateSystem<TDatum, TAngle>
     public Datum<TDatum> Datum 
         => new();
 
-    static readonly ReadOnlyMemory<Coordinate> coordinates 
-        = new(new[] {
+    static readonly IReadOnlyList<Coordinate> coordinates 
+        = new[] {
             new Coordinate("Latitude", typeof(Angle<Degrees, TAngle>)), 
             new Coordinate("Longitude", typeof(Angle<Degrees, TAngle>)),
-        });
+        };
 
-    public ReadOnlyMemory<Coordinate> Coordinates 
+    public IReadOnlyList<Coordinate> Coordinates 
         => coordinates;
 }

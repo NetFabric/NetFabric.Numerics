@@ -17,6 +17,9 @@ public static partial class Angle
         where TUnits : IAngleUnits<TUnits>
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
     {
+        if(Utils.TryGetSpan(source, out var span))
+            return span.Sum();
+
         var sum = T.Zero;
         foreach (var angle in source)
         {
@@ -56,7 +59,7 @@ public static partial class Angle
     /// <summary>
     /// Calculates the sum of a collection of angles.
     /// </summary>
-    /// <param name="source">The <see cref="ReadOnlyMemory{T}"/> collection of angles.</param>
+    /// <param name="source">The <see cref="IReadOnlyList{T}"/> collection of angles.</param>
     /// <returns>The sum of the angles in the collection.</returns>
     /// <remarks>
     /// The sum of angles is computed by adding all the angles in the given <paramref name="source"/> collection.
@@ -94,30 +97,23 @@ public static partial class Angle
         where TUnits : IAngleUnits<TUnits>
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
     {
-        return Vector.IsHardwareAccelerated && source.Length > Vector<T>.Count * 2 
-            ? new(AcceleratedSum(source)) 
-            : new(RegularSum(source));
-
-        static T RegularSum(ReadOnlySpan<Angle<TUnits, T>> source)
-        {
-            var sum = T.Zero;
-            foreach (var angle in source)
-            {
-                checked { sum += angle.Value; }
-            }
-            return sum;
-        }
-
-        static T AcceleratedSum(ReadOnlySpan<Angle<TUnits, T>> source)
+        var sum = T.Zero;
+        if(Vector.IsHardwareAccelerated && source.Length > Vector<T>.Count * 2)
         {
             var vectors = MemoryMarshal.Cast<Angle<TUnits, T>, Vector<T>>(source);
-            var sum = Vector<T>.Zero;
+            var sumVector = Vector<T>.Zero;
 
-            foreach (var vector in vectors)
-                sum += vector;
+            foreach (ref readonly var vector in vectors)
+                sumVector += vector;
 
+            sum = sumVector.SumItems();
             var remainder = source.Length % Vector<T>.Count;
-            return sum.SumVectorItems() + RegularSum(source[^remainder..]);
+            source = source[^remainder..];
         }
+        foreach (ref readonly var angle in source)
+        {
+            checked { sum += angle.Value; }
+        }
+        return new(sum);
     }
 }

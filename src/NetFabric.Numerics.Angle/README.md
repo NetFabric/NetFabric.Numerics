@@ -14,7 +14,7 @@ using NetFabric.Numerics.Angle;
 var degreesDoubleAngle = new Angle<Degrees, double>(45.0);
 var radiansFloatAngle = new Angle<Radians, float>(1.57f);
 var gradiansDecimalAngle = new Angle<Gradians, decimal>(200.0m);
-var revolutionsDoubleAngle = new Angle<Revolutions, Half>((Half)0.25);
+var revolutionsHalfAngle = new Angle<Revolutions, Half>((Half)0.25);
 
 // Constants
 var zeroDegreesDoubleAngle = Angle<Degrees, double>.Zero; // 0.0 degrees
@@ -30,7 +30,7 @@ var quotient = gradiansDecimalAngle / 100.0m;
 var remainder = degreesDoubleAngle % 180.0;
 
 // Compare angles
-var areEqual = degreesDoubleAngle.Equals(Angle.ToDegrees(revolutionsDoubleAngle));
+var areEqual = degreesDoubleAngle.Equals(Angle<Gradians, double>.Right);
 var isGreater = gradiansDecimalAngle > Angle<Gradians, decimal>.Right;
 
 // Convert angles
@@ -46,7 +46,7 @@ var convertToFloatTruncating = Angle<Degrees, float>.CreateTruncating(degreesDou
 var sineValue = Angle.Sin(radiansFloatAngle);
 var cosineValue = Angle.Cos(Angle.ToRadians(degreesDoubleAngle));
 var tangentValue = Angle.Tan(radiansFloatAngle);
-var arcsineRadiansAngle = Angle.Asin(sineValue);
+var arcSineRadiansAngle = Angle.Asin(sineValue);
 
 // Reduce angles
 var reducedAngle = Angle.Reduce(degreesDoubleAngle);
@@ -70,7 +70,7 @@ var collectionAverage = angleCollection.Average();
 
 - `Angle<TUnits, T>` represents an angle as a value of type `T` in the specified `TUnits` unit. 
 - `AngleReduced<TUnits, T>` represents an angle as a value of type `T` in the specified `TUnits` unit, reduced to the range `[TUnits.Zero, TUnits.Full[`.
-- The `T` type can be any of the following types: `float`, `double`, `decimal`, or any other implementation of `IFloatingPoint<TSelf>`.
+- The `T` type can be any of the following types: `Half`, `float`, `double`, `decimal`, or any other implementation of `IFloatingPoint<TSelf>`.
 - The `TUnits` type can be any of the following types: `Degrees`, `Radians`, `Gradians`, `Revolutions`, or any other implementation of `IAngleUnits<TSelf>`.
 
 `Angle<TUnits, T>` can represent any angle value in the range `[T.MinValue, T.MaxValue]` in the specified `TUnits` unit. Some operations require the angle to be reduced to `[TUnits.Zero, TUnits.Full[`. 
@@ -95,7 +95,7 @@ These methods are only available for angles in radians. When using an angle on a
 
 **NetFabric.Numerics.Angle** provides optimized operations on collections of angles: `Sum`, `Average`.
 
-These operations are available for `IEnumerable<Angle<TUnits, T>>`, `Angle<TUnits, T>[]`, `Memory<Angle<TUnits, T>>`, `ReadOnlyMemory<Angle<TUnits, T>>`, `Span<Angle<TUnits, T>>`, and `ReadOnlySpan<Angle<TUnits, T>>`.
+These operations are available for `IEnumerable<Angle<TUnits, T>>`, `Angle<TUnits, T>[]`, `Memory<Angle<TUnits, T>>`, `IReadOnlyList<Angle<TUnits, T>>`, `Span<Angle<TUnits, T>>`, and `ReadOnlySpan<Angle<TUnits, T>>`.
 
 These operations use SIMD instructions when possible, ensuring high-performance calculations.
 

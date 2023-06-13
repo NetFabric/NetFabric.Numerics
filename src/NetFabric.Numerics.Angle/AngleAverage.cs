@@ -64,7 +64,7 @@ public static partial class Angle
     /// <summary>
     /// Calculates the average of an collection of angles.
     /// </summary>
-    /// <param name="source">The <see cref="ReadOnlyMemory{T}"/> of angles.</param>
+    /// <param name="source">The <see cref="IReadOnlyList{T}"/> of angles.</param>
     /// <returns>The average angle in the collection, or null if the collection is empty.</returns>
     /// <remarks>
     /// The average angle is computed by summing all the angles in the given <paramref name="source"/> collection and dividing the sum by the count of angles.

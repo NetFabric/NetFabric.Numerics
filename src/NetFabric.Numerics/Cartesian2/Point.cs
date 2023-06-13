@@ -199,7 +199,7 @@ public static class Point
     /// <typeparam name="TRadius">The type of the radius coordinate.</typeparam>
     /// <param name="point">The cartesian 2D point to convert.</param>
     /// <returns>The polar coordinates representing the point.</returns>
-    public static Polar.Point<Radians, TAngle, TRadius> ConvertToPolar<T, TAngle, TRadius>(Point<T> point)
+    public static Polar.Point<Radians, TAngle, TRadius> ToPolar<T, TAngle, TRadius>(Point<T> point)
         where T : struct, INumber<T>, IMinMaxValue<T>
         where TAngle : struct, IFloatingPointIeee754<TAngle>, IMinMaxValue<TAngle>
         where TRadius : struct, IFloatingPoint<TRadius>, IMinMaxValue<TRadius>, IRootFunctions<TRadius>
