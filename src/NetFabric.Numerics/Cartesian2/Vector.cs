@@ -111,7 +111,7 @@ public readonly record struct Vector<T>(T X, T Y)
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public readonly int CompareTo(in Vector<T> other)
-        => Vector.LengthSquared(this).CompareTo(Vector.LengthSquared(other));
+        => Vector.MagnitudeSquared(this).CompareTo(Vector.MagnitudeSquared(other));
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool operator <(Vector<T> left, Vector<T> right)
@@ -222,32 +222,32 @@ public static class Vector
         => new(T.Clamp(vector.X, min.X, max.X), T.Clamp(vector.Y, min.Y, max.Y));
 
     /// <summary>
-    /// Calculates the length (magnitude) of the vector.
+    /// Calculates the magnitude (length) of the vector.
     /// </summary>
-    /// <returns>The length of the vector.</returns>
+    /// <returns>The magnitude of the vector.</returns>
     /// <remarks>
     /// <para>
-    /// The length is calculated as the Euclidean distance in the 2D Cartesian coordinate system.
+    /// The magnitude is calculated as the Euclidean distance in the 2D Cartesian coordinate system.
     /// </para>
     /// </remarks>
-    public static T Length<T>(in Vector<T> vector)
+    public static T Magnitude<T>(in Vector<T> vector)
         where T : struct, INumber<T>, IMinMaxValue<T>, IRootFunctions<T>
-        => T.Sqrt(LengthSquared(vector));
+        => T.Sqrt(MagnitudeSquared(vector));
 
     /// <summary>
-    /// Calculates the square of the length (magnitude) of the vector.
+    /// Calculates the square of the magnitude (length) of the vector.
     /// </summary>
-    /// <returns>The square of the length of the vector.</returns>
+    /// <returns>The square of the magnitude of the vector.</returns>
     /// <remarks>
     /// <para>
-    /// The square of the length is calculated as the Euclidean distance in the 2D Cartesian coordinate system.
+    /// The square of the magnitude is calculated as the Euclidean distance in the 2D Cartesian coordinate system.
     /// </para>
     /// <para>
-    /// Note that the square of the length is returned instead of the actual length to avoid the need for
+    /// Note that the square of the magnitude is returned instead of the actual magnitude to avoid the need for
     /// taking the square root, which can be a computationally expensive operation.
     /// </para>
     /// </remarks>
-    public static T LengthSquared<T>(in Vector<T> vector)
+    public static T MagnitudeSquared<T>(in Vector<T> vector)
         where T : struct, INumber<T>, IMinMaxValue<T>
         => Utils.Pow2(vector.X) + Utils.Pow2(vector.Y);
 
@@ -275,7 +275,7 @@ public static class Vector
     public static Vector<T> Normalize<T>(in Vector<T> vector)
         where T : struct, INumber<T>, IMinMaxValue<T>, IRootFunctions<T>
     {
-        var length = Length(vector);
+        var length = Magnitude(vector);
         return length != T.Zero
             ? new(vector.X / length, vector.Y / length)
             : Vector<T>.Zero;
@@ -312,7 +312,7 @@ public static class Vector
     public static Angle<Radians, T> Angle<T, TAngle>(in Vector<T> from, in Vector<T> to)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>, IRootFunctions<T>, ITrigonometricFunctions<T>
     {
-        var radians = T.Acos(DotProduct(from, to) / (Length(from) * Length(to)));
+        var radians = T.Acos(DotProduct(from, to) / (Magnitude(from) * Magnitude(to)));
         return T.Sign(CrossProduct(from, to)) < 0 
             ? new(-radians)
             : new(radians);
