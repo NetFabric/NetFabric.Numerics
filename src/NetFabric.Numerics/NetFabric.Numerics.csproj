@@ -13,10 +13,10 @@
     <PackageIcon>Icon.png</PackageIcon>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageTags>math, numerics, vector, cartesian, polar, spherical</PackageTags>
+    <PackageTags>math, numerics, vector, quaternion, cartesian, polar, spherical</PackageTags>
     <PackageProjectUrl>https://netfabric.github.io/NetFabric.Numerics/</PackageProjectUrl>
     <PackageReleaseNotes>
-      Add conversion between cartesian, polar and spherical coordinates.
+      Add Angle and AngleSigned between two cartesian vectors.
     </PackageReleaseNotes>
     <RootNamespace>NetFabric.Numerics</RootNamespace>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>

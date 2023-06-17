@@ -28,7 +28,7 @@ var point3DDouble = new Cartesian3.Point<double>(10.0, 20.0, 30.0);
 var pointSphericalDegreesFloat = new Spherical.Point<Degrees, float, float>(
     Angle<Degrees, float>.Zero, // 0 degrees azimuth
     Angle<Degrees, float>.Right, // 90 degrees zenith
-    10.0f); // 90 degrees
+    10.0f); // radius
 
 // Create quaternions
 var quaternionFloat = new Cartesian3.Quaternion<float>(1.0f, 2.0f, 3.0f, 4.0f);
