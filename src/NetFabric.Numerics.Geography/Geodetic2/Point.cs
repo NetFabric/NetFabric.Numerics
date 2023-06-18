@@ -148,7 +148,7 @@ public static class Point
                    Angle.Sin(halfLongitudeDifference) * Angle.Sin(halfLongitudeDifference));
         var c = TAngle.CreateChecked(2) * Angle.Atan2(TAngle.Sqrt(a), TAngle.Sqrt(TAngle.One - a));
 
-        return TAngle.CreateChecked(MedianRadius(TDatum.Ellipsoid)) * c.Value;
+        return TAngle.CreateChecked(Ellipsoid.ArithmeticMeanRadius(TDatum.Ellipsoid)) * c.Value;
     }
 
     /// <summary>
