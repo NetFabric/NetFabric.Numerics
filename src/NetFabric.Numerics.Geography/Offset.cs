@@ -1,6 +1,9 @@
-﻿namespace NetFabric.Numerics.Geography;
+﻿using System.Numerics;
 
-public readonly record struct Offset(Cartesian3.Point<double> XYZOffset, double RX, double RY, double RZ, double SC)
+namespace NetFabric.Numerics.Geography;
+
+public readonly record struct Offset<T>(Cartesian3.Point<T> XYZOffset, T RX, T RY, T RZ, T SC)
+    where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
 {
-    public static readonly Offset Zero = new(new(0.0, 0.0, 0.0), 0.0, 0.0, 0.0, 0.0);
+    public static readonly Offset<T> Zero = new(new(T.Zero, T.Zero, T.Zero), T.Zero, T.Zero, T.Zero, T.Zero);
 }

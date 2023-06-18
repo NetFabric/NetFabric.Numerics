@@ -5,8 +5,8 @@ public readonly record struct Datum<TDatum>
 {
     public string Name 
         => TDatum.Name;
-    public Offset Offset 
+    public Offset<double> Offset 
         => TDatum.Offset;
-    public Ellipsoid Ellipsoid 
+    public Ellipsoid<double> Ellipsoid 
         => TDatum.Ellipsoid;
 }
