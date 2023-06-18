@@ -149,15 +149,6 @@ public static class Point
         var c = TAngle.CreateChecked(2) * Angle.Atan2(TAngle.Sqrt(a), TAngle.Sqrt(TAngle.One - a));
 
         return TAngle.CreateChecked(MedianRadius(TDatum.Ellipsoid)) * c.Value;
-
-        static double MedianRadius(Ellipsoid ellipsoid)
-        {
-            var semiMajorAxis = ellipsoid.EquatorialRadius;
-            var flatteningInverse = 1.0 / ellipsoid.Flattening;
-            var semiMinorAxis = semiMajorAxis * (1 - flatteningInverse);
-
-            return double.Sqrt(semiMajorAxis * semiMinorAxis);
-        }
     }
 
     /// <summary>
@@ -193,16 +184,14 @@ public static class Point
                    Angle.Sin(halfLongitudeDifference) * Angle.Sin(halfLongitudeDifference));
         var c = TAngle.CreateChecked(2) * Angle.Atan2(TAngle.Sqrt(a), TAngle.Sqrt(TAngle.One - a));
 
-        var semiMajorAxis = TDatum.Ellipsoid.EquatorialRadius;
-        var flatteningInverse = 1.0 / TDatum.Ellipsoid.Flattening;
-        var semiMinorAxis = semiMajorAxis * (1 - flatteningInverse);
+        var semiMajorAxis = TAngle.CreateChecked(TDatum.Ellipsoid.EquatorialRadius);
+        var flatteningInverse = TAngle.CreateChecked(1.0 / TDatum.Ellipsoid.Flattening);
+        var semiMinorAxis = semiMajorAxis * (TAngle.One - flatteningInverse);
 
         var uSquared = TAngle.CreateChecked(((semiMajorAxis * semiMajorAxis) - (semiMinorAxis * semiMinorAxis)) / (semiMinorAxis * semiMinorAxis));
 
-        var sinU1 = Angle.Sin(from.Latitude);
-        var cosU1 = Angle.Cos(from.Latitude);
-        var sinU2 = Angle.Sin(to.Latitude);
-        var cosU2 = Angle.Cos(to.Latitude);
+        var (sinU1, cosU1) = Angle.SinCos(from.Latitude);
+        var (sinU2, cosU2) = Angle.SinCos(to.Latitude);
 
         var lambda = longitudeDifference;
 
@@ -212,11 +201,11 @@ public static class Point
         Angle<Radians, TAngle> sigma;
         TAngle cosSigma, sinSigma, cos2SigmaM, sinSigmaPrev;
         TAngle sigmaP = TAngle.Zero;
+        TAngle two = TAngle.One + TAngle.One;
 
         do
         {
-            sinLambda = Angle.Sin(lambda);
-            cosLambda = Angle.Cos(lambda);
+            (sinLambda, cosLambda) = Angle.SinCos(lambda);
             sinSigma = TAngle.Sqrt((cosU2 * sinLambda * (cosU2 * sinLambda)) +
                 (((cosU1 * sinU2) - (sinU1 * cosU2 * cosLambda)) * ((cosU1 * sinU2) - (sinU1 * cosU2 * cosLambda))));
 
@@ -227,13 +216,13 @@ public static class Point
             sigma = Angle.Atan2(sinSigma, cosSigma);
             sinSigmaPrev = sinSigma;
 
-            cos2SigmaM = cosSigma - (TAngle.CreateChecked(2) * sinU1 * sinU2 / ((cosU1 * cosU2) + (sinU1 * sinU2)));
+            cos2SigmaM = cosSigma - (two * sinU1 * sinU2 / ((cosU1 * cosU2) + (sinU1 * sinU2)));
 
             var cSquared = uSquared * cosSigma * cosSigma;
             var lambdaP = lambda;
-            lambda = longitudeDifference + ((1 - cSquared) * uSquared * sinSigma *
+            lambda = longitudeDifference + ((TAngle.One - cSquared) * uSquared * sinSigma *
                 (sigma + (uSquared * sinSigmaPrev * (cos2SigmaM +
-                (uSquared * cosSigma * (-1 + (2 * cos2SigmaM * cos2SigmaM)))))));
+                (uSquared * cosSigma * (-TAngle.One + (two * cos2SigmaM * cos2SigmaM)))))));
         }
         while (TAngle.Abs((lambda - lambdaP) / lambda) > 1e-12 && --iterationLimit > 0);
 
