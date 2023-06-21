@@ -4,16 +4,10 @@ namespace NetFabric.Numerics;
 /// Represents a point in a coordinate system.
 /// </summary>
 public interface IPoint<TSelf>
-    : IEquatable<TSelf>,
-      IEqualityOperators<TSelf, TSelf, bool>,
+    : INumericBase<TSelf>,
       IMinMaxValue<TSelf>
-    where TSelf : IPoint<TSelf>?
+    where TSelf : struct, IPoint<TSelf>?
 {
-    /// <summary>
-    /// Represents the point with all coordinates as zero. This field is read-only.
-    /// </summary>
-    static abstract TSelf Zero { get; }
-
     /// <summary>
     /// Gets a coordinate system of the point.
     /// </summary>

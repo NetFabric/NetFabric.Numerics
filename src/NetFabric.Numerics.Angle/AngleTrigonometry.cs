@@ -23,10 +23,10 @@ public static partial class Angle
     /// </para>
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Angle<Radians, T> Acos<T>(T cos)
+    public static AngleReduced<Radians, T> Acos<T>(T cos)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>, ITrigonometricFunctions<T>
         =>  cos < -T.One || cos > T.One
-            ? Throw.ArgumentOutOfRangeException<Angle<Radians, T>>(nameof(cos), cos, "The cosine value must be in the range [-1, 1].")
+            ? Throw.ArgumentOutOfRangeException<AngleReduced<Radians, T>>(nameof(cos), cos, "The cosine value must be in the range [-1, 1].")
             : new(T.Acos(cos));
 
     /// <summary>
@@ -115,7 +115,7 @@ public static partial class Angle
     /// </para>
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Angle<Radians, T> Acot<T>(T cot)
+    public static AngleReduced<Radians, T> Acot<T>(T cot)
     where T : struct, IFloatingPointIeee754<T>, IMinMaxValue<T>
         => new(T.Atan2(T.One, cot));
 
@@ -135,7 +135,7 @@ public static partial class Angle
     /// </para>
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Angle<Radians, T> Asec<T>(T sec)
+    public static AngleReduced<Radians, T> Asec<T>(T sec)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>, ITrigonometricFunctions<T>
         => new(T.Acos(T.One / sec));
 

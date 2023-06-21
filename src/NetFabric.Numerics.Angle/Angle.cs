@@ -41,6 +41,7 @@ public static partial class Angle
     /// solution of trigonometric equations.
     /// </remarks>
     /// <returns>The reduced angle of <paramref name="angle"/>.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static AngleReduced<TUnits, T> Reduce<TUnits, T>(Angle<TUnits, T> angle)
         where TUnits : IAngleUnits<TUnits>
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
@@ -61,6 +62,7 @@ public static partial class Angle
     /// solution of trigonometric equations.
     /// </remarks>
     /// <returns>The reduced angle of <paramref name="angle"/>.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static AngleReduced<TUnits, T> Reduce<TUnits, T>(AngleReduced<TUnits, T> angle)
         where TUnits : IAngleUnits<TUnits>
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
@@ -81,6 +83,7 @@ public static partial class Angle
     /// find the general solutions of trigonometric equations.
     /// </remarks>
     /// <returns>The reference angle of <paramref name="angle"/>.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Angle<TUnits, T> GetReference<TUnits, T>(AngleReduced<TUnits, T> angle)
         where TUnits : IAngleUnits<TUnits>
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
@@ -115,6 +118,7 @@ public static partial class Angle
     /// </para>
     /// </remarks>
     /// <returns>The quadrant of <paramref name="angle"/>.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Quadrant GetQuadrant<TUnits, T>(AngleReduced<TUnits, T> angle)
         where TUnits : IAngleUnits<TUnits>
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
@@ -151,6 +155,7 @@ public static partial class Angle
     /// <typeparam name="T">The floating point type used internally by <paramref name="angle"/>.</typeparam>
     /// <param name="angle">Source angle.</param>
     /// <returns>A number that indicates the sign of value, -1 if value is less than zero, 0 if value equal to zero, 1 if value is grater than zero.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static int Sign<TUnits, T>(Angle<TUnits, T> angle)
         where TUnits : IAngleUnits<TUnits>
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
@@ -182,13 +187,14 @@ public static partial class Angle
     /// </para>
     /// </remarks>
     /// <returns>The result of the linear interpolation.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Angle<TUnits, T> Lerp<TUnits, T>(Angle<TUnits, T> a1, Angle<TUnits, T> a2, T t)
         where TUnits : IAngleUnits<TUnits>
         where T : struct, IFloatingPointIeee754<T>, IMinMaxValue<T>
 #if NET8_0_OR_GREATER
         => new(T.Lerp(a1.Value, a2.Value, t)); 
 #else
-        => new(Utils.Lerp(a1.Value, a2.Value, t)); 
+        => new(Utils.Lerp(a1.Value, a2.Value, t));
 #endif
 
     /// <summary>
@@ -199,6 +205,7 @@ public static partial class Angle
     /// <param name="left">The first of two angles to compare.</param>
     /// <param name="right">The second of two angles to compare.</param>
     /// <returns>The smallest of the two angles.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Angle<TUnits, T> Min<TUnits, T>(Angle<TUnits, T> left, Angle<TUnits, T> right)
         where TUnits : IAngleUnits<TUnits>
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
@@ -212,6 +219,7 @@ public static partial class Angle
     /// <param name="left">The first of two angles to compare.</param>
     /// <param name="right">The second of two angles to compare.</param>
     /// <returns>The largest of the two angles.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Angle<TUnits, T> Max<TUnits, T>(Angle<TUnits, T> left, Angle<TUnits, T> right)
         where TUnits : IAngleUnits<TUnits>
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
@@ -226,7 +234,8 @@ public static partial class Angle
     /// <typeparam name="T">The floating point type used internally by <paramref name="angle"/>.</typeparam>
     /// <param name="angle">Source angle.</param>
     /// <returns>true if the reduction of the absolute angle is zero; otherwise false.</returns>
-    public static bool IsZero<TUnits, T>(AngleReduced<TUnits, T> angle)
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static bool IsZero<TUnits, T>(Angle<TUnits, T> angle)
         where TUnits : IAngleUnits<TUnits>
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => angle == Angle<TUnits, T>.Zero;

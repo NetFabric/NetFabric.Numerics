@@ -15,7 +15,7 @@ public class VectorTests
         result.Coordinates[1].Should().Be(new Coordinate("Y", typeof(double)));
     }
 
-    public static TheoryData<Vector<int>, Vector<int>, Angle<Radians, double>> AngleData => new()
+    public static TheoryData<Vector2<int>, Vector2<int>, Angle<Radians, double>> AngleData => new()
     {
         {new(1, 0), new (1, 1), Angle<Radians, double>.Right / 2.0},
         {new(1, 0), new (0, 1), Angle<Radians, double>.Right},
@@ -28,13 +28,13 @@ public class VectorTests
 
     [Theory]
     [MemberData(nameof(AngleData))]
-    public void Angle_Should_Succeed(Vector<int> from, Vector<int> to, Angle<Radians, double> expected)
+    public void Angle_Should_Succeed(Vector2<int> from, Vector2<int> to, Angle<Radians, double> expected)
     {
         // arrange
 
         // act
-        var result = Vector.Angle<int, double>(from, to);
-        var resultSigned = Vector.AngleSigned<int, double>(from, to);
+        var result = Vector2.Angle<int, double>(from, to);
+        var resultSigned = Vector2.AngleSigned<int, double>(from, to);
 
         // assert
         result.Value.Should().BeApproximately(double.Abs(expected.Value), 0.00001);

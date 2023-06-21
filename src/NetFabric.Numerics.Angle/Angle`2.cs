@@ -31,21 +31,13 @@ namespace NetFabric.Numerics;
 [DebuggerDisplay("{Value}")]
 [DebuggerTypeProxy(typeof(AngleDebugView<,>))]
 public readonly struct Angle<TUnits, T>
-    : IEquatable<Angle<TUnits, T>>,
-      IEqualityOperators<Angle<TUnits, T>, Angle<TUnits, T>, bool>,
-      IComparable,
-      IComparisonOperators<Angle<TUnits, T>, Angle<TUnits, T>, bool>,
-      IAdditiveIdentity<Angle<TUnits, T>, Angle<TUnits, T>>,
-      IMultiplicativeIdentity<Angle<TUnits, T>, Angle<TUnits, T>>,
+    : IAngle<Angle<TUnits, T>, T>,
       IUnaryPlusOperators<Angle<TUnits, T>, Angle<TUnits, T>>,
-      IAdditionOperators<Angle<TUnits, T>, Angle<TUnits, T>, Angle<TUnits, T>>,
-      IAdditionOperators<Angle<TUnits, T>, AngleReduced<TUnits, T>, Angle<TUnits, T>>,
       IUnaryNegationOperators<Angle<TUnits, T>, Angle<TUnits, T>>,
+      IAdditionOperators<Angle<TUnits, T>, Angle<TUnits, T>, Angle<TUnits, T>>,
       ISubtractionOperators<Angle<TUnits, T>, Angle<TUnits, T>, Angle<TUnits, T>>,
-      ISubtractionOperators<Angle<TUnits, T>, AngleReduced<TUnits, T>, Angle<TUnits, T>>,
       IDivisionOperators<Angle<TUnits, T>, T, Angle<TUnits, T>>,
       IModulusOperators<Angle<TUnits, T>, T, Angle<TUnits, T>>,
-      IMinMaxValue<Angle<TUnits, T>>,
       ISpanFormattable,
       ISpanParsable<Angle<TUnits, T>>
     where TUnits : IAngleUnits<TUnits>
