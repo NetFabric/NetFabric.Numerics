@@ -323,7 +323,7 @@ public static class Quaternion
     /// If the axis vector is not normalized, unexpected results may occur.
     /// </para>
     /// </remarks>
-    public static Quaternion<T> FromAxisAngle<T>(in Vector<T> axis, Angle<Radians, T> angle)
+    public static Quaternion<T> FromAxisAngle<T>(in Vector3<T> axis, Angle<Radians, T> angle)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>, ITrigonometricFunctions<T>
     {
         var halfAngle = angle / (T.One + T.One);

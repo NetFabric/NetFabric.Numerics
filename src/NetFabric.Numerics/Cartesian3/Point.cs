@@ -16,7 +16,7 @@ public readonly record struct Point<T>(T X, T Y, T Z)
 
     public static readonly Point<T> Zero = new(T.Zero, T.Zero, T.Zero);
 
-    static Point<T> IPoint<Point<T>>.Zero
+    static Point<T> INumericBase<Point<T>>.Zero
         => Zero;
 
     /// <summary>
@@ -98,7 +98,7 @@ public readonly record struct Point<T>(T X, T Y, T Z)
     #region addition
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Point<T> operator +(in Point<T> left, in Vector<T> right)
+    public static Point<T> operator +(in Point<T> left, in Vector3<T> right)
         => new(left.X + right.X, left.Y + right.Y, left.Z + right.Z);
 
     #endregion
@@ -106,11 +106,11 @@ public readonly record struct Point<T>(T X, T Y, T Z)
     #region subtraction
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Point<T> operator -(in Point<T> left, in Vector<T> right)
+    public static Point<T> operator -(in Point<T> left, in Vector3<T> right)
         => new(left.X - right.X, left.Y - right.Y, left.Z - right.Z);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Vector<T> operator -(in Point<T> left, in Point<T> right)
+    public static Vector3<T> operator -(in Point<T> left, in Point<T> right)
         => new(left.X - right.X, left.Y - right.Y, left.Z - right.Z);
 
     #endregion

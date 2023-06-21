@@ -192,25 +192,25 @@ public class QuaternionTests
         result.Should().Be(value);
     }
 
-    public static TheoryData<Vector<float>, Angle<Radians, float>> FromAxisAngleData
+    public static TheoryData<Vector3<float>, Angle<Radians, float>> FromAxisAngleData
         => new()
         {
-                {Vector<float>.UnitX, Angle<Radians, float>.Zero},
-                {Vector<float>.UnitX, Angle<Radians, float>.Right},
-                {Vector<float>.UnitX, -Angle<Radians, float>.Right},
+                {Vector3<float>.UnitX, Angle<Radians, float>.Zero},
+                {Vector3<float>.UnitX, Angle<Radians, float>.Right},
+                {Vector3<float>.UnitX, -Angle<Radians, float>.Right},
 
-                {Vector<float>.UnitY, Angle<Radians, float>.Zero},
-                {Vector<float>.UnitY, Angle<Radians, float>.Right},
-                {Vector<float>.UnitY, -Angle<Radians, float>.Right},
+                {Vector3<float>.UnitY, Angle<Radians, float>.Zero},
+                {Vector3<float>.UnitY, Angle<Radians, float>.Right},
+                {Vector3<float>.UnitY, -Angle<Radians, float>.Right},
 
-                {Vector<float>.UnitZ, Angle<Radians, float>.Zero},
-                {Vector<float>.UnitZ, Angle<Radians, float>.Right},
-                {Vector<float>.UnitZ, -Angle<Radians, float>.Right},
+                {Vector3<float>.UnitZ, Angle<Radians, float>.Zero},
+                {Vector3<float>.UnitZ, Angle<Radians, float>.Right},
+                {Vector3<float>.UnitZ, -Angle<Radians, float>.Right},
         };
 
     [Theory]
     [MemberData(nameof(FromAxisAngleData))]
-    public void FromAxisAngle_Should_Succeed(Vector<float> axis, Angle<Radians, float> angle)
+    public void FromAxisAngle_Should_Succeed(Vector3<float> axis, Angle<Radians, float> angle)
     {
         // arrange
         var expected = System.Numerics.Quaternion.CreateFromAxisAngle(new System.Numerics.Vector3(axis.X, axis.Y, axis.Z), angle.Value);

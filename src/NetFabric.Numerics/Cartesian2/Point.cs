@@ -15,7 +15,7 @@ public readonly record struct Point<T>(T X, T Y)
 
     public static readonly Point<T> Zero = new(T.Zero, T.Zero);
 
-    static Point<T> IPoint<Point<T>>.Zero
+    static Point<T> INumericBase<Point<T>>.Zero
         => Zero;
 
     /// <summary>
@@ -52,7 +52,7 @@ public readonly record struct Point<T>(T X, T Y)
     /// <returns>An instance of <see cref="Point{T}"/> created from <paramref name="point" />.</returns>
     /// <exception cref="NotSupportedException"><typeparamref name="TOther" /> is not supported.</exception>
     /// <exception cref="OverflowException"><paramref name="point" /> is not representable by <see cref="Point{T}"/>.</exception>
-    public static Point<T> CreateChecked<TOther>(in Point<TOther> point)
+    public static Point<T> CreateChecked<TOther>(Point<TOther> point)
         where TOther : struct, INumber<TOther>, IMinMaxValue<TOther>
         => new(
             T.CreateChecked(point.X),
@@ -68,7 +68,7 @@ public readonly record struct Point<T>(T X, T Y)
     /// <returns>An instance of <see cref="Point{T}"/> created from <paramref name="point" />.</returns>
     /// <exception cref="NotSupportedException"><typeparamref name="TOther" /> is not supported.</exception>
     /// <exception cref="OverflowException"><paramref name="point" /> is not representable by <see cref="Point{T}"/>.</exception>
-    public static Point<T> CreateSaturating<TOther>(in Point<TOther> point)
+    public static Point<T> CreateSaturating<TOther>(Point<TOther> point)
         where TOther : struct, INumber<TOther>, IMinMaxValue<TOther>
         => new(
             T.CreateSaturating(point.X),
@@ -84,7 +84,7 @@ public readonly record struct Point<T>(T X, T Y)
     /// <returns>An instance of <see cref="Point{T}"/> created from <paramref name="point" />.</returns>
     /// <exception cref="NotSupportedException"><typeparamref name="TOther" /> is not supported.</exception>
     /// <exception cref="OverflowException"><paramref name="point" /> is not representable by <see cref="Point{T}"/>.</exception>
-    public static Point<T> CreateTruncating<TOther>(in Point<TOther> point)
+    public static Point<T> CreateTruncating<TOther>(Point<TOther> point)
         where TOther : struct, INumber<TOther>, IMinMaxValue<TOther>
         => new(
             T.CreateTruncating(point.X),
@@ -94,7 +94,7 @@ public readonly record struct Point<T>(T X, T Y)
     #region addition
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Point<T> operator +(in Point<T> left, in Vector<T> right)
+    public static Point<T> operator +(in Point<T> left, in Vector2<T> right)
         => new(left.X + right.X, left.Y + right.Y);
 
     #endregion
@@ -102,11 +102,11 @@ public readonly record struct Point<T>(T X, T Y)
     #region subtraction
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Point<T> operator -(in Point<T> left, in Vector<T> right)
+    public static Point<T> operator -(in Point<T> left, in Vector2<T> right)
         => new(left.X - right.X, left.Y - right.Y);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Vector<T> operator -(in Point<T> left, in Point<T> right)
+    public static Vector2<T> operator -(in Point<T> left, in Point<T> right)
         => new(left.X - right.X, left.Y - right.Y);
 
     #endregion

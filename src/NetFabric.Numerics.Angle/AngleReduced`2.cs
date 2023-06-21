@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 
 namespace NetFabric.Numerics;
 
@@ -33,20 +34,13 @@ namespace NetFabric.Numerics;
 [DebuggerDisplay("{Value}")]
 [DebuggerTypeProxy(typeof(AngleReducedDebugView<,>))]
 public readonly struct AngleReduced<TUnits, T>
-    : IEquatable<AngleReduced<TUnits, T>>,
-      IEqualityOperators<AngleReduced<TUnits, T>, AngleReduced<TUnits, T>, bool>,
-      IComparable,
-      IComparisonOperators<AngleReduced<TUnits, T>, AngleReduced<TUnits, T>, bool>,
+    : IAngle<AngleReduced<TUnits, T>, T>,
       IUnaryPlusOperators<AngleReduced<TUnits, T>, AngleReduced<TUnits, T>>,
-      IAdditionOperators<AngleReduced<TUnits, T>, AngleReduced<TUnits, T>, Angle<TUnits, T>>,
-      IAdditionOperators<AngleReduced<TUnits, T>, Angle<TUnits, T>, Angle<TUnits, T>>,
       IUnaryNegationOperators<AngleReduced<TUnits, T>, Angle<TUnits, T>>,
-      ISubtractionOperators<AngleReduced<TUnits, T>, AngleReduced<TUnits, T>, Angle<TUnits, T>>,
+      IAdditionOperators<AngleReduced<TUnits, T>, Angle<TUnits, T>, Angle<TUnits, T>>,
       ISubtractionOperators<AngleReduced<TUnits, T>, Angle<TUnits, T>, Angle<TUnits, T>>,
       IDivisionOperators<AngleReduced<TUnits, T>, T, Angle<TUnits, T>>,
-      IModulusOperators<AngleReduced<TUnits, T>, T, Angle<TUnits, T>>,
-      IMinMaxValue<AngleReduced<TUnits, T>>,
-      ISpanFormattable
+      IModulusOperators<AngleReduced<TUnits, T>, T, Angle<TUnits, T>>
     where TUnits : IAngleUnits<TUnits>
     where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
 {
@@ -193,7 +187,12 @@ public readonly struct AngleReduced<TUnits, T>
     /// Represents the maximum angle value. This field is read-only.
     /// </summary>
     public static readonly AngleReduced<TUnits, T> MaxValue = new(T.CreateChecked(TUnits.Full - double.Epsilon));
-    
+
+    static AngleReduced<TUnits, T> IAdditiveIdentity<AngleReduced<TUnits, T>, AngleReduced<TUnits, T>>.AdditiveIdentity
+        => new(T.AdditiveIdentity);
+    static AngleReduced<TUnits, T> IMultiplicativeIdentity<AngleReduced<TUnits, T>, AngleReduced<TUnits, T>>.MultiplicativeIdentity
+        => new(T.MultiplicativeIdentity);
+
     static AngleReduced<TUnits, T> IMinMaxValue<AngleReduced<TUnits, T>>.MinValue 
         => MinValue;
     static AngleReduced<TUnits, T> IMinMaxValue<AngleReduced<TUnits, T>>.MaxValue 

@@ -20,7 +20,7 @@ public readonly record struct Point<TAngleUnits, TAngle, TRadius>(Angle<TAngleUn
 
     public static readonly Point<TAngleUnits, TAngle, TRadius> Zero = new(Angle<TAngleUnits, TAngle>.Zero, Angle<TAngleUnits, TAngle>.Zero, TRadius.Zero);
 
-    static Point<TAngleUnits, TAngle, TRadius> IPoint<Point<TAngleUnits, TAngle, TRadius>>.Zero
+    static Point<TAngleUnits, TAngle, TRadius> INumericBase<Point<TAngleUnits, TAngle, TRadius>>.Zero
         => Zero;
 
     /// <summary>
