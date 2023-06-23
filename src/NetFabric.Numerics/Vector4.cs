@@ -1,17 +1,57 @@
-﻿namespace NetFabric.Numerics;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
+using System.Numerics;
+
+namespace NetFabric.Numerics;
 
 /// <summary>
 /// Represents a vector as an immutable struct.
+/// </summary>
 /// <typeparam name="T">The type of the vector coordinates.</typeparam>
 /// <param name="X">The X coordinate.</param>
 /// <param name="Y">The X coordinate.</param>
 /// <param name="Z">The X coordinate.</param>
 /// <param name="W">The W coordinate.</param>
 [System.Diagnostics.DebuggerDisplay("X = {X}, Y = {Y}, Z = {Z}, W = {W}")]
-public readonly record struct Vector4<T>(T X, T Y, T Z, T W)
+public readonly struct Vector4<T>
     : IVector<Vector4<T>, T>
     where T : struct, INumber<T>, IMinMaxValue<T>
 {
+    /// <summary>
+    /// Gets the X coordinate. This field is read-only.
+    /// </summary>
+    public readonly T X;
+
+    /// <summary>
+    /// Gets the Y coordinate. This field is read-only.
+    /// </summary>
+    public readonly T Y;
+
+    /// <summary>
+    /// Gets the Z coordinate. This field is read-only.
+    /// </summary>
+    public readonly T Z;
+
+    /// <summary>
+    /// Gets the W coordinate. This field is read-only.
+    /// </summary>
+    public readonly T W;
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Vector4{T}"/> struct.
+    /// </summary>
+    /// <param name="x">The X coordinate.</param>
+    /// <param name="y">The Y coordinate.</param>
+    /// <param name="z">The Z coordinate.</param>
+    /// <param name="w">The W coordinate.</param>
+    public Vector4(T x, T y, T z, T w)
+    {
+        X = x;
+        Y = y;
+        Z = z;
+        W = w;
+    }
+
     /// <summary>
     /// Creates an instance of the current type from a value, 
     /// throwing an overflow exception for any values that fall outside the representable range of the current type.
@@ -68,8 +108,10 @@ public readonly record struct Vector4<T>(T X, T Y, T Z, T W)
 
     #region constants
 
-    int IVector<Vector4<T>, T>.Dimension
-        => 4;
+    const int count = 4;
+
+    int IVector<Vector4<T>, T>.Count
+        => count;
 
     /// <summary>
     /// Represents a vector whose coordinates are equal to zero. This field is read-only.
@@ -77,6 +119,9 @@ public readonly record struct Vector4<T>(T X, T Y, T Z, T W)
     public static readonly Vector4<T> Zero = new(T.Zero, T.Zero, T.Zero, T.Zero);
 
     static Vector4<T> INumericBase<Vector4<T>>.Zero
+        => Zero;
+
+    static Vector4<T> IAdditiveIdentity<Vector4<T>, Vector4<T>>.AdditiveIdentity
         => Zero;
 
     /// <summary>
@@ -109,13 +154,64 @@ public readonly record struct Vector4<T>(T X, T Y, T Z, T W)
     /// </summary>
     public static readonly Vector4<T> MaxValue = new(T.MaxValue, T.MaxValue, T.MaxValue, T.MaxValue);
 
-    static Vector4<T> IAdditiveIdentity<Vector4<T>, Vector4<T>>.AdditiveIdentity
-        => new(T.AdditiveIdentity, T.AdditiveIdentity, T.AdditiveIdentity, T.AdditiveIdentity);
-
     static Vector4<T> IMinMaxValue<Vector4<T>>.MinValue
         => MinValue;
     static Vector4<T> IMinMaxValue<Vector4<T>>.MaxValue
         => MaxValue;
+
+    #endregion
+
+    #region equality
+
+    /// <summary>
+    /// Indicates whether two <see cref="Vector4{T}"/> instances are equal.
+    /// </summary>
+    /// <param name="left">The first vector to compare.</param>
+    /// <param name="right">The second vector to compare.</param>
+    /// <returns>true if the two vectors are equal, false otherwise.</returns>
+    /// <remarks>
+    /// The method compares the numerical values of the <paramref name="left"/> and <paramref name="right"/> vectors to determine their equality.
+    /// </remarks>
+    public static bool operator ==(Vector4<T> left, Vector4<T> right)
+        => left.Equals(right);
+
+    /// <summary>
+    /// Indicates whether two <see cref="Vector4{T}"/> instances are not equal.
+    /// </summary>
+    /// <param name="left">The first vector to compare.</param>
+    /// <param name="right">The second vector to compare.</param>
+    /// <returns>true if the two vectors are equal, false otherwise.returns>
+    /// <remarks>
+    /// The method compares the numerical values of the <paramref name="left"/> and <paramref name="right"/> vectors to determine their equality.
+    /// </remarks>
+    public static bool operator !=(Vector4<T> left, Vector4<T> right)
+        => !left.Equals(right);
+
+    /// <inheritdoc/>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public override int GetHashCode()
+        => HashCode.Combine(X, Y, Z, W);
+
+    /// <summary>
+    /// Determines whether the current vector is equal to another vector.
+    /// </summary>
+    /// <param name="other">The vector to compare with the current vector.</param>
+    /// <returns><c>true</c> if the current vector is equal to the other vector; otherwise, <c>false</c>.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public bool Equals(Vector4<T> other)
+        => EqualityComparer<T>.Default.Equals(X, other.X) &&
+        EqualityComparer<T>.Default.Equals(Y, other.Y) &&
+        EqualityComparer<T>.Default.Equals(Z, other.Z) &&
+        EqualityComparer<T>.Default.Equals(W, other.W);
+
+    /// <inheritdoc/>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public override bool Equals([NotNullWhen(true)] object? obj)
+        => obj switch
+        {
+            Vector4<T> vector => Equals(vector),
+            _ => false
+        };
 
     #endregion
 
@@ -344,14 +440,46 @@ public readonly record struct Vector4<T>(T X, T Y, T Z, T W)
     /// </para>
     /// </remarks>
     public T this[int index]
-        => index switch
-        {
-            0 => X,
-            1 => Y,
-            2 => Z,
-            3 => W,
-            _ => Throw.ArgumentOutOfRangeException<T>(nameof(index), index, "index out of range")
-        };
+    {
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        get => (uint)index >= count
+             ? Throw.ArgumentOutOfRangeException<T>(nameof(index), index)
+             : Unsafe.Add(ref Unsafe.AsRef(in X), index);
+    }
+
+    /// <summary>
+    /// Deconstructs the vector into its individual components.
+    /// </summary>
+    /// <param name="X">The output parameter to store the X component of the vector.</param>
+    /// <param name="Y">The output parameter to store the Y component of the vector.</param>
+    /// <param name="Z">The output parameter to store the Z component of the vector.</param>
+    /// <param name="W">The output parameter to store the W component of the vector.</param>
+    public void Deconstruct(out T X, out T Y, out T Z, out T W)
+    {
+        X = this.X;
+        Y = this.Y;
+        Z = this.Z;
+        W = this.W;
+    }
+
+    /// <summary>
+    /// Converts the vector to its string representation.
+    /// </summary>
+    /// <returns>A string representation of the vector.</returns>
+    public readonly override string ToString()
+        => ToString(null);
+
+    /// <summary>
+    /// Converts the vector to its string representation using the specified format and format provider.
+    /// </summary>
+    /// <param name="format">The format specifier to apply to the vector's components. If null, the default format will be used.</param>
+    /// <param name="formatProvider">The format provider to use for culture-specific formatting. If null, the current culture will be used.</param>
+    /// <returns>A string representation of the vector.</returns>
+    public readonly string ToString([StringSyntax(StringSyntaxAttribute.NumericFormat)] string? format, IFormatProvider? formatProvider = default)
+    {
+        var separator = NumberFormatInfo.GetInstance(formatProvider).NumberGroupSeparator;
+        return $"<{X.ToString(format, formatProvider)}{separator} {Y.ToString(format, formatProvider)}{separator} {Z.ToString(format, formatProvider)}{separator} {W.ToString(format, formatProvider)}>";
+    }
 }
 
 /// <summary>
@@ -383,6 +511,67 @@ public static class Vector4
     public static bool IsZero<T>(in Vector4<T> vector, T tolerance)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => AreApproximatelyEqual(vector, Vector4<T>.Zero, tolerance);
+
+    /// <summary>
+    /// Determines whether any component of the specified <see cref="Vector4{T}"/> is NaN (Not-a-Number).
+    /// </summary>
+    /// <typeparam name="T">The type of the vector's components.</typeparam>
+    /// <param name="vector">The <see cref="Vector4{T}"/> to check for NaN values.</param>
+    /// <returns>
+    /// <c>true</c> if any component of the vector is NaN; otherwise, <c>false</c>.
+    /// </returns>
+    public static bool IsNaN<T>(in Vector4<T> vector)
+        where T : struct, INumber<T>, IMinMaxValue<T>
+        => T.IsNaN(vector.X) || T.IsNaN(vector.Y) || T.IsNaN(vector.Z) || T.IsNaN(vector.W);
+
+    /// <summary>
+    /// Determines whether any component of the specified <see cref="Vector4{T}"/> is positive or negative infinity.
+    /// </summary>
+    /// <typeparam name="T">The type of the vector's components.</typeparam>
+    /// <param name="vector">The <see cref="Vector4{T}"/> to check for infinity values.</param>
+    /// <returns>
+    /// <c>true</c> if any component of the vector is positive or negative infinity; otherwise, <c>false</c>.
+    /// </returns>
+    public static bool IsInfinity<T>(in Vector4<T> vector)
+        where T : struct, INumber<T>, IMinMaxValue<T>
+        => T.IsInfinity(vector.X) || T.IsInfinity(vector.Y) || T.IsInfinity(vector.Z) || T.IsInfinity(vector.W);
+
+    /// <summary>
+    /// Determines whether all components of the specified <see cref="Vector4{T}"/> are finite numbers (not NaN, infinity, or negative infinity).
+    /// </summary>
+    /// <typeparam name="T">The type of the vector's components.</typeparam>
+    /// <param name="vector">The <see cref="Vector4{T}"/> to check for finite values.</param>
+    /// <returns>
+    /// <c>true</c> if all components of the vector are finite numbers; otherwise, <c>false</c>.
+    /// </returns>
+    public static bool IsFinite<T>(in Vector4<T> vector)
+        where T : struct, INumber<T>, IMinMaxValue<T>
+        => T.IsFinite(vector.X) && T.IsFinite(vector.Y) && T.IsFinite(vector.Z) && T.IsFinite(vector.W);
+
+    /// <summary>
+    /// Determines whether the specified <see cref="Vector4{T}"/> is a normalized vector.
+    /// </summary>
+    /// <typeparam name="T">The type of the vector's components.</typeparam>
+    /// <param name="vector">The <see cref="Vector4{T}"/> to check for normalization.</param>
+    /// <returns>
+    /// <c>true</c> if the vector is normalized (its magnitude is 1); otherwise, <c>false</c>.
+    /// </returns>
+    public static bool IsNormalized<T>(in Vector4<T> vector)
+        where T : struct, INumber<T>, IMinMaxValue<T>
+        => Vector4.MagnitudeSquared(vector) == T.One;
+
+    /// <summary>
+    /// Determines whether the specified <see cref="Vector4{T}"/> is a normalized vector within the specified tolerance.
+    /// </summary>
+    /// <typeparam name="T">The type of the vector's components.</typeparam>
+    /// <param name="vector">The <see cref="Vector4{T}"/> to check for normalization.</param>
+    /// <param name="tolerance">The tolerance used for the comparison.</param>
+    /// <returns>
+    /// <c>true</c> if the vector is normalized (its magnitude is within the specified tolerance of 1); otherwise, <c>false</c>.
+    /// </returns>
+    public static bool IsNormalized<T>(in Vector4<T> vector, T tolerance)
+        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
+        => Utils.AreApproximatelyEqual(Vector4.MagnitudeSquared(vector), T.One, tolerance);
 
     /// <summary>
     /// Checks if two floating-point values are approximately equal within the specified tolerance.
@@ -475,7 +664,7 @@ public static class Vector4
     /// </remarks>
     public static Vector4<T> Subtract<T>(in Vector4<T> left, in Vector4<T> right)
         where T : struct, INumber<T>, IMinMaxValue<T>
-        => new(left.X - right.X, left.Y - right.Y, left.Z - right.Z, left.W - right.w);
+        => new(left.X - right.X, left.Y - right.Y, left.Z - right.Z, left.W - right.W);
 
     /// <summary>
     /// Multiplies a scalar value with each coordinate of the input Vector4 and returns the result as a new Vector4.
@@ -539,6 +728,24 @@ public static class Vector4
     public static Vector4<T> Clamp<T>(in Vector4<T> vector, in Vector4<T> min, in Vector4<T> max)
     where T : struct, INumber<T>, IMinMaxValue<T>
         => new(T.Clamp(vector.X, min.X, max.X), T.Clamp(vector.Y, min.Y, max.Y), T.Clamp(vector.Z, min.Z, max.Z), T.Clamp(vector.W, min.W, max.W));
+
+    /// <summary>
+    /// Performs linear interpolation between two vectors.
+    /// </summary>
+    /// <typeparam name="T">The type of the vector components.</typeparam>
+    /// <param name="start">The starting vector.</param>
+    /// <param name="end">The ending vector.</param>
+    /// <param name="factor">The interpolation factor. Should be between 0 and 1.</param>
+    /// <returns>A new vector that represents the interpolated value.</returns>
+    /// <remarks>
+    /// This method performs linear interpolation between the start and end vectors using the specified factor.
+    /// The factor should be a value between 0 and 1, where 0 represents the start vector and 1 represents the end vector.
+    /// The resulting vector is calculated by multiplying the start vector by (1 - factor), multiplying the end vector by factor,
+    /// and then adding the two resulting vectors together.
+    /// </remarks>
+    public static Vector4<T> Lerp<T>(in Vector4<T> start, in Vector4<T> end, T factor)
+        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
+        => (start * (T.One - factor)) + (end * factor);
 
     /// <summary>
     /// Calculates the magnitude (length) of the vector.

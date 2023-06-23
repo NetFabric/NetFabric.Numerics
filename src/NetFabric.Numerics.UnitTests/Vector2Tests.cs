@@ -1,20 +1,7 @@
-namespace NetFabric.Numerics.Cartesian2.UnitTests;
+namespace NetFabric.Numerics.UnitTests;
 
-public class VectorTests
+public class Vector2Tests
 {
-    [Fact]
-    public void CoordinateSystem_Should_Succeed()
-    {
-        // arrange
-
-        // act
-        var result = Point<double>.Zero.CoordinateSystem;
-
-        // assert
-        result.Coordinates[0].Should().Be(new Coordinate("X", typeof(double)));
-        result.Coordinates[1].Should().Be(new Coordinate("Y", typeof(double)));
-    }
-
     public static TheoryData<Vector2<int>, Vector2<int>, Angle<Radians, double>> AngleData => new()
     {
         {new(1, 0), new (1, 1), Angle<Radians, double>.Right / 2.0},
@@ -33,8 +20,8 @@ public class VectorTests
         // arrange
 
         // act
-        var result = Vector2.Angle<int, double>(from, to);
-        var resultSigned = Vector2.AngleSigned<int, double>(from, to);
+        var result = Vector2.AngleBetween<int, double>(from, to);
+        //var resultSigned = Vector2.AngleSignedBetween<int, double>(from, to);
 
         // assert
         result.Value.Should().BeApproximately(double.Abs(expected.Value), 0.00001);

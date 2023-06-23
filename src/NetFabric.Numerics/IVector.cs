@@ -25,10 +25,10 @@ public interface IVector<TSelf, T>
     /// Gets the number of coordinates/dimensions of the vector.
     /// </summary>
     /// <remarks>
-    /// The <see cref="Dimension"/> property represents the size or number of coordinates in the vector.
+    /// The <see cref="Count"/> property represents the size or number of coordinates in the vector.
     /// The value of this property will depend on the specific implementation of the Vector type.
     /// </remarks>
-    int Dimension { get; }
+    int Count { get; }
 
     /// <summary>
     /// Gets the value for a given coordinate of the vector.

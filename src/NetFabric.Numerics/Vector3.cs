@@ -1,16 +1,48 @@
+using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
+
 namespace NetFabric.Numerics;
 
 /// <summary>
 /// Represents a vector as an immutable struct.
+/// </summary>  
 /// <typeparam name="T">The type of the vector coordinates.</typeparam>
 /// <param name="X">The X coordinate.</param>
 /// <param name="Y">The X coordinate.</param>
 /// <param name="Z">The X coordinate.</param>
 [System.Diagnostics.DebuggerDisplay("X = {X}, Y = {Y}, Z = {Z}")]
-public readonly record struct Vector3<T>(T X, T Y, T Z)
+public readonly struct Vector3<T>
     : IVector<Vector3<T>, T>
     where T : struct, INumber<T>, IMinMaxValue<T>
 {
+    /// <summary>
+    /// Gets the X coordinate. This field is read-only.
+    /// </summary>
+    public readonly T X;
+
+    /// <summary>
+    /// Gets the Y coordinate. This field is read-only.
+    /// </summary>
+    public readonly T Y;
+
+    /// <summary>
+    /// Gets the Z coordinate. This field is read-only.
+    /// </summary>
+    public readonly T Z;
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Vector3{T}"/> struct.
+    /// </summary>
+    /// <param name="x">The X coordinate.</param>
+    /// <param name="y">The Y coordinate.</param>
+    /// <param name="z">The Z coordinate.</param>
+    public Vector3(T x, T y, T z)
+    {
+        X = x;
+        Y = y;
+        Z = z;
+    }
+
     /// <summary>
     /// Creates an instance of the current type from a value, 
     /// throwing an overflow exception for any values that fall outside the representable range of the current type.
@@ -64,8 +96,10 @@ public readonly record struct Vector3<T>(T X, T Y, T Z)
 
     #region constants
 
-    int IVector<Vector3<T>, T>.Dimension
-        => 3;
+    const int count = 3;
+
+    int IVector<Vector3<T>, T>.Count
+        => count;
 
     /// <summary>
     /// Represents a vector whose coordinates are equal to zero. This field is read-only.
@@ -73,6 +107,9 @@ public readonly record struct Vector3<T>(T X, T Y, T Z)
     public static readonly Vector3<T> Zero = new(T.Zero, T.Zero, T.Zero);
 
     static Vector3<T> INumericBase<Vector3<T>>.Zero
+        => Zero;
+
+    static Vector3<T> IAdditiveIdentity<Vector3<T>, Vector3<T>>.AdditiveIdentity
         => Zero;
 
     /// <summary>
@@ -105,13 +142,63 @@ public readonly record struct Vector3<T>(T X, T Y, T Z)
     /// </summary>
     public static readonly Vector3<T> MaxValue = new(T.MaxValue, T.MaxValue, T.MaxValue);
 
-    static Vector3<T> IAdditiveIdentity<Vector3<T>, Vector3<T>>.AdditiveIdentity
-        => new(T.AdditiveIdentity, T.AdditiveIdentity, T.AdditiveIdentity);
-
     static Vector3<T> IMinMaxValue<Vector3<T>>.MinValue
         => MinValue;
     static Vector3<T> IMinMaxValue<Vector3<T>>.MaxValue
         => MaxValue;
+
+    #endregion
+
+    #region equality
+
+    /// <summary>
+    /// Indicates whether two <see cref="Vector3{T}"/> instances are equal.
+    /// </summary>
+    /// <param name="left">The first vector to compare.</param>
+    /// <param name="right">The second vector to compare.</param>
+    /// <returns>true if the two vectors are equal, false otherwise.</returns>
+    /// <remarks>
+    /// The method compares the numerical values of the <paramref name="left"/> and <paramref name="right"/> vectors to determine their equality.
+    /// </remarks>
+    public static bool operator ==(Vector3<T> left, Vector3<T> right)
+        => left.Equals(right);
+
+    /// <summary>
+    /// Indicates whether two <see cref="Vector3{T}"/> instances are not equal.
+    /// </summary>
+    /// <param name="left">The first vector to compare.</param>
+    /// <param name="right">The second vector to compare.</param>
+    /// <returns>true if the two vectors are equal, false otherwise.returns>
+    /// <remarks>
+    /// The method compares the numerical values of the <paramref name="left"/> and <paramref name="right"/> vectors to determine their equality.
+    /// </remarks>
+    public static bool operator !=(Vector3<T> left, Vector3<T> right)
+        => !left.Equals(right);
+
+    /// <inheritdoc/>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public override int GetHashCode()
+        => HashCode.Combine(X, Y, Z);
+
+    /// <summary>
+    /// Determines whether the current vector is equal to another vector.
+    /// </summary>
+    /// <param name="other">The vector to compare with the current vector.</param>
+    /// <returns><c>true</c> if the current vector is equal to the other vector; otherwise, <c>false</c>.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public bool Equals(Vector3<T> other)
+        => EqualityComparer<T>.Default.Equals(X, other.X) &&
+        EqualityComparer<T>.Default.Equals(Y, other.Y) &&
+        EqualityComparer<T>.Default.Equals(Z, other.Z);
+
+    /// <inheritdoc/>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public override bool Equals([NotNullWhen(true)] object? obj)
+        => obj switch
+        {
+            Vector3<T> vector => Equals(vector),
+            _ => false
+        };
 
     #endregion
 
@@ -318,9 +405,6 @@ public readonly record struct Vector3<T>(T X, T Y, T Z)
 
     #endregion
 
-    int IVector<Vector3<T>, T>.Dimension
-        => 3;
-
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     static T IVector<Vector3<T>, T>.MagnitudeSquared(in Vector3<T> vector)
         => Vector3.MagnitudeSquared(in vector);
@@ -343,13 +427,44 @@ public readonly record struct Vector3<T>(T X, T Y, T Z)
     /// </para>
     /// </remarks>
     public T this[int index]
-        => index switch
-        {
-            0 => X,
-            1 => Y,
-            2 => Z,
-            _ => Throw.ArgumentOutOfRangeException<T>(nameof(index), index, "index out of range")
-        };
+    {
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        get => (uint)index >= count
+             ? Throw.ArgumentOutOfRangeException<T>(nameof(index), index)
+             : Unsafe.Add(ref Unsafe.AsRef(in X), index);
+    }
+
+    /// <summary>
+    /// Deconstructs the vector into its individual components.
+    /// </summary>
+    /// <param name="X">The output parameter to store the X component of the vector.</param>
+    /// <param name="Y">The output parameter to store the Y component of the vector.</param>
+    /// <param name="Z">The output parameter to store the Z component of the vector.</param>
+    public void Deconstruct(out T X, out T Y, out T Z)
+    {
+        X = this.X;
+        Y = this.Y;
+        Z = this.Z;
+    }
+
+    /// <summary>
+    /// Converts the vector to its string representation.
+    /// </summary>
+    /// <returns>A string representation of the vector.</returns>
+    public readonly override string ToString()
+        => ToString(null);
+
+    /// <summary>
+    /// Converts the vector to its string representation using the specified format and format provider.
+    /// </summary>
+    /// <param name="format">The format specifier to apply to the vector's components. If null, the default format will be used.</param>
+    /// <param name="formatProvider">The format provider to use for culture-specific formatting. If null, the current culture will be used.</param>
+    /// <returns>A string representation of the vector.</returns>
+    public readonly string ToString([StringSyntax(StringSyntaxAttribute.NumericFormat)] string? format, IFormatProvider? formatProvider = default)
+    {
+        var separator = NumberFormatInfo.GetInstance(formatProvider).NumberGroupSeparator;
+        return $"<{X.ToString(format, formatProvider)}{separator} {Y.ToString(format, formatProvider)}{separator} {Z.ToString(format, formatProvider)}>";
+    }
 }
 
 /// <summary>
@@ -381,6 +496,67 @@ public static class Vector3
     public static bool IsZero<T>(in Vector3<T> vector, T tolerance)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => AreApproximatelyEqual(vector, Vector3<T>.Zero, tolerance);
+
+    /// <summary>
+    /// Determines whether any component of the specified <see cref="Vector3{T}"/> is NaN (Not-a-Number).
+    /// </summary>
+    /// <typeparam name="T">The type of the vector's components.</typeparam>
+    /// <param name="vector">The <see cref="Vector3{T}"/> to check for NaN values.</param>
+    /// <returns>
+    /// <c>true</c> if any component of the vector is NaN; otherwise, <c>false</c>.
+    /// </returns>
+    public static bool IsNaN<T>(in Vector3<T> vector)
+        where T : struct, INumber<T>, IMinMaxValue<T>
+        => T.IsNaN(vector.X) || T.IsNaN(vector.Y) || T.IsNaN(vector.Z);
+
+    /// <summary>
+    /// Determines whether any component of the specified <see cref="Vector3{T}"/> is positive or negative infinity.
+    /// </summary>
+    /// <typeparam name="T">The type of the vector's components.</typeparam>
+    /// <param name="vector">The <see cref="Vector3{T}"/> to check for infinity values.</param>
+    /// <returns>
+    /// <c>true</c> if any component of the vector is positive or negative infinity; otherwise, <c>false</c>.
+    /// </returns>
+    public static bool IsInfinity<T>(in Vector3<T> vector)
+        where T : struct, INumber<T>, IMinMaxValue<T>
+        => T.IsInfinity(vector.X) || T.IsInfinity(vector.Y) || T.IsInfinity(vector.Z);
+
+    /// <summary>
+    /// Determines whether all components of the specified <see cref="Vector3{T}"/> are finite numbers (not NaN, infinity, or negative infinity).
+    /// </summary>
+    /// <typeparam name="T">The type of the vector's components.</typeparam>
+    /// <param name="vector">The <see cref="Vector3{T}"/> to check for finite values.</param>
+    /// <returns>
+    /// <c>true</c> if all components of the vector are finite numbers; otherwise, <c>false</c>.
+    /// </returns>
+    public static bool IsFinite<T>(in Vector3<T> vector)
+        where T : struct, INumber<T>, IMinMaxValue<T>
+        => T.IsFinite(vector.X) && T.IsFinite(vector.Y) && T.IsFinite(vector.Z);
+
+    /// <summary>
+    /// Determines whether the specified <see cref="Vector3{T}"/> is a normalized vector.
+    /// </summary>
+    /// <typeparam name="T">The type of the vector's components.</typeparam>
+    /// <param name="vector">The <see cref="Vector3{T}"/> to check for normalization.</param>
+    /// <returns>
+    /// <c>true</c> if the vector is normalized (its magnitude is 1); otherwise, <c>false</c>.
+    /// </returns>
+    public static bool IsNormalized<T>(in Vector3<T> vector)
+        where T : struct, INumber<T>, IMinMaxValue<T>
+        => Vector3.MagnitudeSquared(vector) == T.One;
+
+    /// <summary>
+    /// Determines whether the specified <see cref="Vector3{T}"/> is a normalized vector within the specified tolerance.
+    /// </summary>
+    /// <typeparam name="T">The type of the vector's components.</typeparam>
+    /// <param name="vector">The <see cref="Vector3{T}"/> to check for normalization.</param>
+    /// <param name="tolerance">The tolerance used for the comparison.</param>
+    /// <returns>
+    /// <c>true</c> if the vector is normalized (its magnitude is within the specified tolerance of 1); otherwise, <c>false</c>.
+    /// </returns>
+    public static bool IsNormalized<T>(in Vector3<T> vector, T tolerance)
+        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
+        => Utils.AreApproximatelyEqual(Vector3.MagnitudeSquared(vector), T.One, tolerance);
 
     /// <summary>
     /// Checks if two floating-point values are approximately equal within the specified tolerance.
@@ -536,6 +712,24 @@ public static class Vector3
     public static Vector3<T> Clamp<T>(in Vector3<T> vector, in Vector3<T> min, in Vector3<T> max)
     where T : struct, INumber<T>, IMinMaxValue<T>
         => new(T.Clamp(vector.X, min.X, max.X), T.Clamp(vector.Y, min.Y, max.Y), T.Clamp(vector.Z, min.Z, max.Z));
+
+    /// <summary>
+    /// Performs linear interpolation between two vectors.
+    /// </summary>
+    /// <typeparam name="T">The type of the vector components.</typeparam>
+    /// <param name="start">The starting vector.</param>
+    /// <param name="end">The ending vector.</param>
+    /// <param name="factor">The interpolation factor. Should be between 0 and 1.</param>
+    /// <returns>A new vector that represents the interpolated value.</returns>
+    /// <remarks>
+    /// This method performs linear interpolation between the start and end vectors using the specified factor.
+    /// The factor should be a value between 0 and 1, where 0 represents the start vector and 1 represents the end vector.
+    /// The resulting vector is calculated by multiplying the start vector by (1 - factor), multiplying the end vector by factor,
+    /// and then adding the two resulting vectors together.
+    /// </remarks>
+    public static Vector3<T> Lerp<T>(in Vector3<T> start, in Vector3<T> end, T factor)
+        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
+        => (start * (T.One - factor)) + (end * factor);
 
     /// <summary>
     /// Calculates the magnitude (length) of the vector.

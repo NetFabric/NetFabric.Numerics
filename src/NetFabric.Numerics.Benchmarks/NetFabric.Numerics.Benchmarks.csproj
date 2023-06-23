@@ -6,7 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <IsPackable>false</IsPackable>
-    <RootNamespace>NetFabric.Numerics</RootNamespace>
+    <RootNamespace>NetFabric.Numerics.Benchmarks</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

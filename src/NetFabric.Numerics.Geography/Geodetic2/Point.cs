@@ -72,7 +72,7 @@ public readonly record struct Point<TDatum, TAngleUnits, T>(Angle<TAngleUnits, T
     public static readonly Point<TDatum, TAngleUnits, T> Zero
         = new(Angle<TAngleUnits, T>.Zero, Angle<TAngleUnits, T>.Zero);
 
-    static Point<TDatum, TAngleUnits, T> IPoint<Point<TDatum, TAngleUnits, T>>.Zero
+    static Point<TDatum, TAngleUnits, T> INumericBase<Point<TDatum, TAngleUnits, T>>.Zero
         => Zero;
 
     /// <summary>
