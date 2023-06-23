@@ -1,7 +1,4 @@
-﻿using FluentAssertions;
-using Newtonsoft.Json.Linq;
-
-namespace NetFabric.Numerics.Cartesian3.UnitsTests;
+﻿namespace NetFabric.Numerics.Cartesian3.UnitsTests;
 
 public class QuaternionTests
 {

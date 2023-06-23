@@ -5,7 +5,7 @@
 /// </summary>
 public interface IGeodeticPoint<TSelf, TDatum>
     : IPoint<TSelf>
-    where TSelf : IPoint<TSelf>?
+    where TSelf : struct, IPoint<TSelf>?
     where TDatum : IDatum<TDatum>
 {
 

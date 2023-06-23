@@ -1,15 +1,40 @@
+using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
+
 namespace NetFabric.Numerics;
 
 /// <summary>
 /// Represents a vector as an immutable struct.
+/// </summary>  
 /// <typeparam name="T">The type of the vector coordinates.</typeparam>
 /// <param name="X">The X coordinate.</param>
 /// <param name="Y">The X coordinate.</param>
 [System.Diagnostics.DebuggerDisplay("X = {X}, Y = {Y}")]
-public readonly record struct Vector2<T>(T X, T Y)
+public readonly struct Vector2<T>
     : IVector<Vector2<T>, T>
     where T : struct, INumber<T>, IMinMaxValue<T>
 {
+    /// <summary>
+    /// Gets the X coordinate. This field is read-only.
+    /// </summary>
+    public readonly T X;
+
+    /// <summary>
+    /// Gets the Y coordinate. This field is read-only.
+    /// </summary>
+    public readonly T Y;
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Vector2{T}"/> struct.
+    /// </summary>
+    /// <param name="x">The X coordinate.</param>
+    /// <param name="y">The Y coordinate.</param>
+    public Vector2(T x, T y)
+    {
+        X = x;
+        Y = y;
+    }    
+    
     /// <summary>
     /// Creates an instance of the current type from a value, 
     /// throwing an overflow exception for any values that fall outside the representable range of the current type.
@@ -60,8 +85,10 @@ public readonly record struct Vector2<T>(T X, T Y)
 
     #region constants
 
-    int IVector<Vector2<T>, T>.Dimension
-        => 2;
+    const int count = 2;
+
+    int IVector<Vector2<T>, T>.Count
+        => count;
 
     /// <summary>
     /// Represents a vector whose coordinates are equal to zero. This field is read-only.
@@ -69,6 +96,9 @@ public readonly record struct Vector2<T>(T X, T Y)
     public static readonly Vector2<T> Zero = new(T.Zero, T.Zero);
 
     static Vector2<T> INumericBase<Vector2<T>>.Zero
+        => Zero;
+
+    static Vector2<T> IAdditiveIdentity<Vector2<T>, Vector2<T>>.AdditiveIdentity
         => Zero;
 
     /// <summary>
@@ -101,13 +131,62 @@ public readonly record struct Vector2<T>(T X, T Y)
     /// </summary>
     public static readonly Vector2<T> MaxValue = new(T.MaxValue, T.MaxValue);
 
-    static Vector2<T> IAdditiveIdentity<Vector2<T>, Vector2<T>>.AdditiveIdentity
-        => new(T.AdditiveIdentity, T.AdditiveIdentity);
-
     static Vector2<T> IMinMaxValue<Vector2<T>>.MinValue
         => MinValue;
     static Vector2<T> IMinMaxValue<Vector2<T>>.MaxValue
         => MaxValue;
+
+    #endregion
+
+    #region equality
+
+    /// <summary>
+    /// Indicates whether two <see cref="Vector2{T}"/> instances are equal.
+    /// </summary>
+    /// <param name="left">The first vector to compare.</param>
+    /// <param name="right">The second vector to compare.</param>
+    /// <returns>true if the two vectors are equal, false otherwise.</returns>
+    /// <remarks>
+    /// The method compares the numerical values of the <paramref name="left"/> and <paramref name="right"/> vectors to determine their equality.
+    /// </remarks>
+    public static bool operator ==(Vector2<T> left, Vector2<T> right)
+        => left.Equals(right);
+
+    /// <summary>
+    /// Indicates whether two <see cref="Vector2{T}"/> instances are not equal.
+    /// </summary>
+    /// <param name="left">The first vector to compare.</param>
+    /// <param name="right">The second vector to compare.</param>
+    /// <returns>true if the two vectors are equal, false otherwise.returns>
+    /// <remarks>
+    /// The method compares the numerical values of the <paramref name="left"/> and <paramref name="right"/> vectors to determine their equality.
+    /// </remarks>
+    public static bool operator !=(Vector2<T> left, Vector2<T> right)
+        => !left.Equals(right);
+
+    /// <inheritdoc/>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public override int GetHashCode()
+        => HashCode.Combine(X, Y);
+
+    /// <summary>
+    /// Determines whether the current vector is equal to another vector.
+    /// </summary>
+    /// <param name="other">The vector to compare with the current vector.</param>
+    /// <returns><c>true</c> if the current vector is equal to the other vector; otherwise, <c>false</c>.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public bool Equals(Vector2<T> other)
+        => EqualityComparer<T>.Default.Equals(X, other.X) &&
+        EqualityComparer<T>.Default.Equals(Y, other.Y);
+
+    /// <inheritdoc/>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public override bool Equals([NotNullWhen(true)] object? obj)
+        => obj switch
+        {
+            Vector2<T> vector => Equals(vector),
+            _ => false
+        };
 
     #endregion
 
@@ -336,13 +415,42 @@ public readonly record struct Vector2<T>(T X, T Y)
     /// </para>
     /// </remarks>
     public T this[int index]
-        => index switch
-        {
-            0 => X,
-            1 => Y,
-            2 => Z,
-            _ => Throw.ArgumentOutOfRangeException<T>(nameof(index), index, "index out of range")
-        };
+    {
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        get => (uint)index >= count
+             ? Throw.ArgumentOutOfRangeException<T>(nameof(index), index)
+             : Unsafe.Add(ref Unsafe.AsRef(in X), index);
+    }
+
+    /// <summary>
+    /// Deconstructs the vector into its individual components.
+    /// </summary>
+    /// <param name="X">The output parameter to store the X component of the vector.</param>
+    /// <param name="Y">The output parameter to store the Y component of the vector.</param>
+    public void Deconstruct(out T X, out T Y)
+    {
+        X = this.X;
+        Y = this.Y;
+    }
+
+    /// <summary>
+    /// Converts the vector to its string representation.
+    /// </summary>
+    /// <returns>A string representation of the vector.</returns>
+    public readonly override string ToString()
+        => ToString(null);
+
+    /// <summary>
+    /// Converts the vector to its string representation using the specified format and format provider.
+    /// </summary>
+    /// <param name="format">The format specifier to apply to the vector's components. If null, the default format will be used.</param>
+    /// <param name="formatProvider">The format provider to use for culture-specific formatting. If null, the current culture will be used.</param>
+    /// <returns>A string representation of the vector.</returns>
+    public readonly string ToString([StringSyntax(StringSyntaxAttribute.NumericFormat)] string? format, IFormatProvider? formatProvider = default)
+    {
+        var separator = NumberFormatInfo.GetInstance(formatProvider).NumberGroupSeparator;
+        return $"<{X.ToString(format, formatProvider)}{separator} {Y.ToString(format, formatProvider)}>";
+    }
 }
 
 /// <summary>
@@ -376,6 +484,67 @@ public static class Vector2
         => AreApproximatelyEqual(vector, Vector2<T>.Zero, tolerance);
 
     /// <summary>
+    /// Determines whether any component of the specified <see cref="Vector2{T}"/> is NaN (Not-a-Number).
+    /// </summary>
+    /// <typeparam name="T">The type of the vector's components.</typeparam>
+    /// <param name="vector">The <see cref="Vector2{T}"/> to check for NaN values.</param>
+    /// <returns>
+    /// <c>true</c> if any component of the vector is NaN; otherwise, <c>false</c>.
+    /// </returns>
+    public static bool IsNaN<T>(in Vector2<T> vector)
+        where T : struct, INumber<T>, IMinMaxValue<T>
+        => T.IsNaN(vector.X) || T.IsNaN(vector.Y);
+
+    /// <summary>
+    /// Determines whether any component of the specified <see cref="Vector2{T}"/> is positive or negative infinity.
+    /// </summary>
+    /// <typeparam name="T">The type of the vector's components.</typeparam>
+    /// <param name="vector">The <see cref="Vector2{T}"/> to check for infinity values.</param>
+    /// <returns>
+    /// <c>true</c> if any component of the vector is positive or negative infinity; otherwise, <c>false</c>.
+    /// </returns>
+    public static bool IsInfinity<T>(in Vector2<T> vector)
+        where T : struct, INumber<T>, IMinMaxValue<T>
+        => T.IsInfinity(vector.X) || T.IsInfinity(vector.Y);
+
+    /// <summary>
+    /// Determines whether all components of the specified <see cref="Vector2{T}"/> are finite numbers (not NaN, infinity, or negative infinity).
+    /// </summary>
+    /// <typeparam name="T">The type of the vector's components.</typeparam>
+    /// <param name="vector">The <see cref="Vector2{T}"/> to check for finite values.</param>
+    /// <returns>
+    /// <c>true</c> if all components of the vector are finite numbers; otherwise, <c>false</c>.
+    /// </returns>
+    public static bool IsFinite<T>(in Vector2<T> vector)
+        where T : struct, INumber<T>, IMinMaxValue<T>
+        => T.IsFinite(vector.X) && T.IsFinite(vector.Y);
+
+    /// <summary>
+    /// Determines whether the specified <see cref="Vector2{T}"/> is a normalized vector.
+    /// </summary>
+    /// <typeparam name="T">The type of the vector's components.</typeparam>
+    /// <param name="vector">The <see cref="Vector2{T}"/> to check for normalization.</param>
+    /// <returns>
+    /// <c>true</c> if the vector is normalized (its magnitude is 1); otherwise, <c>false</c>.
+    /// </returns>
+    public static bool IsNormalized<T>(in Vector2<T> vector)
+        where T : struct, INumber<T>, IMinMaxValue<T>
+        => Vector2.MagnitudeSquared(vector) == T.One;
+
+    /// <summary>
+    /// Determines whether the specified <see cref="Vector2{T}"/> is a normalized vector within the specified tolerance.
+    /// </summary>
+    /// <typeparam name="T">The type of the vector's components.</typeparam>
+    /// <param name="vector">The <see cref="Vector2{T}"/> to check for normalization.</param>
+    /// <param name="tolerance">The tolerance used for the comparison.</param>
+    /// <returns>
+    /// <c>true</c> if the vector is normalized (its magnitude is within the specified tolerance of 1); otherwise, <c>false</c>.
+    /// </returns>
+    public static bool IsNormalized<T>(in Vector2<T> vector, T tolerance)
+        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
+        => Utils.AreApproximatelyEqual(Vector2.MagnitudeSquared(vector), T.One, tolerance);
+
+    /// <summary>
     /// Checks if two floating-point values are approximately equal within the specified tolerance.
     /// </summary>
     /// <typeparam name="T">The numeric type used internally by <paramref name="vector"/>.</typeparam>
@@ -390,8 +559,7 @@ public static class Vector2
     public static bool AreApproximatelyEqual<T>(in Vector2<T> a, in Vector2<T> b, T tolerance)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => Utils.AreApproximatelyEqual(a.X, b.X, tolerance) &&
-            Utils.AreApproximatelyEqual(a.Y, b.Y, tolerance) &&
-            Utils.AreApproximatelyEqual(a.Z, b.Z, tolerance);
+            Utils.AreApproximatelyEqual(a.Y, b.Y, tolerance);
 
     /// <summary>
     /// Compares two Vector2 instances and returns an indication of their relative values.
@@ -531,6 +699,24 @@ public static class Vector2
         => new(T.Clamp(vector.X, min.X, max.X), T.Clamp(vector.Y, min.Y, max.Y));
 
     /// <summary>
+    /// Performs linear interpolation between two vectors.
+    /// </summary>
+    /// <typeparam name="T">The type of the vector components.</typeparam>
+    /// <param name="start">The starting vector.</param>
+    /// <param name="end">The ending vector.</param>
+    /// <param name="factor">The interpolation factor. Should be between 0 and 1.</param>
+    /// <returns>A new vector that represents the interpolated value.</returns>
+    /// <remarks>
+    /// This method performs linear interpolation between the start and end vectors using the specified factor.
+    /// The factor should be a value between 0 and 1, where 0 represents the start vector and 1 represents the end vector.
+    /// The resulting vector is calculated by multiplying the start vector by (1 - factor), multiplying the end vector by factor,
+    /// and then adding the two resulting vectors together.
+    /// </remarks>
+    public static Vector2<T> Lerp<T>(in Vector2<T> start, in Vector2<T> end, T factor)
+        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
+        => (start * (T.One - factor)) + (end * factor);
+
+    /// <summary>
     /// Calculates the magnitude (length) of the vector.
     /// </summary>
     /// <typeparam name="T">The numeric type used internally by <paramref name="vector"/>.</typeparam>
@@ -616,7 +802,7 @@ public static class Vector2
     /// <returns>The dot product.</returns>
     public static T Dot<T>(in Vector2<T> left, in Vector2<T> right)
         where T : struct, INumber<T>, IMinMaxValue<T>
-        => (left.X * right.X) + (left.Y * right.Y) + (left.Z * right.Z);
+        => (left.X * right.X) + (left.Y * right.Y);
 
     /// <summary>
     /// Calculates the cross product magnitude.
@@ -641,4 +827,22 @@ public static class Vector2
         where T : struct, INumber<T>, IMinMaxValue<T>
         where TAngle : struct, IFloatingPoint<TAngle>, IMinMaxValue<TAngle>, ITrigonometricFunctions<TAngle>, IRootFunctions<TAngle>
         => Angle.Acos(TAngle.CreateChecked(Dot(in from, in to)) / (Magnitude<T, TAngle>(in from) * Magnitude<T, TAngle>(in to)));
+
+    ///// <summary>
+    ///// Gets the angle between two vectors.
+    ///// </summary>
+    ///// <typeparam name="T">The numeric type used internally by <paramref name="from"/> and <paramref name="to"/>.</typeparam>
+    ///// <typeparam name="TAngle">The floating point type used internally by the returned angle.</typeparam>
+    ///// <param name="from">The vector where the angle measurement starts at.</param>
+    ///// <param name="to">The vector where the angle measurement stops at.</param>
+    ///// <returns>The angle between two vectors.</returns>
+    ///// <remarks>The angle signal is determined by the right-hand rule and it value between -180 and 180 degrees.</remarks>
+    //public static Angle<Radians, TAngle> AngleSignedBetween<T, TAngle>(in Vector2<T> from, in Vector2<T> to)
+    //    where T : struct, INumber<T>, IMinMaxValue<T>
+    //    where TAngle : struct, IFloatingPointIeee754<TAngle>, IMinMaxValue<TAngle>
+    //{
+    //    var dot = Dot<T>(in from, in to);
+    //    var cross = Cross(in from, in to);
+    //    return Angle.Atan2(TAngle.CreateChecked(cross), TAngle.CreateChecked(dot));
+    //}
 }
