@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
-using System.Numerics;
+using System.Runtime.Intrinsics;
 
 namespace NetFabric.Numerics;
 
@@ -199,10 +199,90 @@ public readonly struct Vector4<T>
     /// <returns><c>true</c> if the current vector is equal to the other vector; otherwise, <c>false</c>.</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public bool Equals(Vector4<T> other)
-        => EqualityComparer<T>.Default.Equals(X, other.X) &&
-        EqualityComparer<T>.Default.Equals(Y, other.Y) &&
-        EqualityComparer<T>.Default.Equals(Z, other.Z) &&
-        EqualityComparer<T>.Default.Equals(W, other.W);
+    {
+        if (typeof(T) == typeof(ushort))
+        {
+            if (Vector64.IsHardwareAccelerated)
+                return Vector64.Create((ushort)(object)X, (ushort)(object)Y, (ushort)(object)Z, (ushort)(object)W)
+                    .Equals(Vector64.Create((ushort)(object)other.X, (ushort)(object)other.Y, (ushort)(object)other.Z, (ushort)(object)other.W));
+
+            if (Vector128.IsHardwareAccelerated)
+                return Vector128.Create((ushort)(object)X, (ushort)(object)Y, (ushort)(object)Z, (ushort)(object)W, 0, 0, 0, 0)
+                    .Equals(Vector128.Create((ushort)(object)other.X, (ushort)(object)other.Y, (ushort)(object)other.Z, (ushort)(object)other.W, 0, 0, 0, 0));
+        }
+
+        if (typeof(T) == typeof(short))
+        {
+            if (Vector64.IsHardwareAccelerated)
+                return Vector64.Create((short)(object)X, (short)(object)Y, (short)(object)Z, (short)(object)W)
+                    .Equals(Vector64.Create((short)(object)other.X, (short)(object)other.Y, (short)(object)other.Z, (short)(object)other.W));
+
+            if (Vector128.IsHardwareAccelerated)
+                return Vector128.Create((short)(object)X, (short)(object)Y, (short)(object)Z, (short)(object)W, 0, 0, 0, 0)
+                    .Equals(Vector128.Create((short)(object)other.X, (short)(object)other.Y, (short)(object)other.Z, (short)(object)other.W, 0, 0, 0, 0));
+        }
+
+        //if (typeof(T) == typeof(Half))
+        //{
+        //    if (Vector64.IsHardwareAccelerated)
+        //        return Vector64.Create((Half)(object)X, (Half)(object)Y, (Half)(object)Z, (Half)(object)W)
+        //            .Equals(Vector64.Create((Half)(object)other.X, (Half)(object)other.Y, (Half)(object)other.Z, (Half)(object)other.W));
+
+        //    if (Vector128.IsHardwareAccelerated)
+        //        return Vector128.Create((Half)(object)X, (Half)(object)Y, (Half)(object)Z, (Half)(object)W, 0, 0, 0, 0)
+        //            .Equals(Vector128.Create((Half)(object)other.X, (Half)(object)other.Y, (Half)(object)other.Z, (Half)(object)other.W, 0, 0, 0, 0));
+        //}
+
+        if (typeof(T) == typeof(uint))
+        {
+            if (Vector128.IsHardwareAccelerated)
+                return Vector128.Create((uint)(object)X, (uint)(object)Y, (uint)(object)Z, (uint)(object)W)
+                    .Equals(Vector128.Create((uint)(object)other.X, (uint)(object)other.Y, (uint)(object)other.Z, (uint)(object)other.W));
+        }
+
+        if (typeof(T) == typeof(int))
+        {
+            if (Vector128.IsHardwareAccelerated)
+                return Vector128.Create((int)(object)X, (int)(object)Y, (int)(object)Z, (int)(object)W)
+                    .Equals(Vector128.Create((int)(object)other.X, (int)(object)other.Y, (int)(object)other.Z, (int)(object)other.W));
+        }
+
+        if (typeof(T) == typeof(float))
+        {
+            if (Vector128.IsHardwareAccelerated)
+                return Vector128.Create((float)(object)X, (float)(object)Y, (float)(object)Z, (float)(object)W)
+                    .Equals(Vector128.Create((float)(object)other.X, (float)(object)other.Y, (float)(object)other.Z, (float)(object)other.W));
+        }
+
+        if (typeof(T) == typeof(ulong))
+        {
+            if (Vector256.IsHardwareAccelerated)
+                return Vector256.Create((ulong)(object)X, (ulong)(object)Y, (ulong)(object)Z, (ulong)(object)W)
+                    .Equals(Vector256.Create((ulong)(object)other.X, (ulong)(object)other.Y, (ulong)(object)other.Z, (ulong)(object)other.W));
+        }
+
+        if (typeof(T) == typeof(long))
+        {
+            if (Vector256.IsHardwareAccelerated)
+                return Vector256.Create((long)(object)X, (long)(object)Y, (long)(object)Z, (long)(object)W)
+                    .Equals(Vector256.Create((long)(object)other.X, (long)(object)other.Y, (long)(object)other.Z, (long)(object)other.W));
+        }
+
+        if (typeof(T) == typeof(double))
+        {
+            if (Vector256.IsHardwareAccelerated)
+                return Vector256.Create((double)(object)X, (double)(object)Y, (double)(object)Z, (double)(object)W)
+                    .Equals(Vector256.Create((double)(object)other.X, (double)(object)other.Y, (double)(object)other.Z, (double)(object)other.W));
+        }
+
+        return SoftwareFallback(in this, other);
+
+        static bool SoftwareFallback(in Vector4<T> self, Vector4<T> other)
+            => EqualityComparer<T>.Default.Equals(self.X, other.X) &&
+                EqualityComparer<T>.Default.Equals(self.Y, other.Y) &&
+                EqualityComparer<T>.Default.Equals(self.Z, other.Z) &&
+                EqualityComparer<T>.Default.Equals(self.W, other.W);
+    }
 
     /// <inheritdoc/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -358,7 +438,7 @@ public readonly struct Vector4<T>
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector4<T> operator -(Vector4<T> right)
-        => Vector4.Negate(in right);
+        => new(-right.X, -right.Y, -right.Z, -right.W);
 
     /// <summary>
     /// Subtracts the components of the second <see cref="Vector4{T}"/> from the corresponding components of the first <see cref="Vector4{T}"/>.
@@ -628,7 +708,7 @@ public static class Vector4
     /// direction as the input vector. The input vector remains unchanged.
     /// </remarks>
     public static Vector4<T> Negate<T>(in Vector4<T> right)
-        where T : struct, INumber<T>, IMinMaxValue<T>
+        where T : struct, INumber<T>, IMinMaxValue<T>, ISignedNumber<T>
         => new(-right.X, -right.Y, -right.Z, -right.W);
 
     /// <summary>

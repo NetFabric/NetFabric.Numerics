@@ -17,6 +17,8 @@
     <PackageProjectUrl>https://netfabric.github.io/NetFabric.Numerics/</PackageProjectUrl>
     <PackageReleaseNotes>
       Add Angle and AngleSigned between two cartesian vectors.
+      Add Matrix4x4.
+      Use SIMD.
     </PackageReleaseNotes>
     <RootNamespace>NetFabric.Numerics</RootNamespace>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>

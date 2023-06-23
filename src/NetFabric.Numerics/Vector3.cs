@@ -1,5 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
+using System.Runtime.Intrinsics;
 
 namespace NetFabric.Numerics;
 
@@ -187,9 +188,89 @@ public readonly struct Vector3<T>
     /// <returns><c>true</c> if the current vector is equal to the other vector; otherwise, <c>false</c>.</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public bool Equals(Vector3<T> other)
-        => EqualityComparer<T>.Default.Equals(X, other.X) &&
-        EqualityComparer<T>.Default.Equals(Y, other.Y) &&
-        EqualityComparer<T>.Default.Equals(Z, other.Z);
+    {
+        if (typeof(T) == typeof(ushort))
+        {
+            if (Vector64.IsHardwareAccelerated)
+                return Vector64.Create((ushort)(object)X, (ushort)(object)Y, (ushort)(object)Z, 0)
+                    .Equals(Vector64.Create((ushort)(object)other.X, (ushort)(object)other.Y, (ushort)(object)other.Z, 0));
+
+            if (Vector128.IsHardwareAccelerated)
+                return Vector128.Create((ushort)(object)X, (ushort)(object)Y, (ushort)(object)Z, 0, 0, 0, 0, 0)
+                    .Equals(Vector128.Create((ushort)(object)other.X, (ushort)(object)other.Y, (ushort)(object)other.Z, 0, 0, 0, 0, 0));
+        }
+
+        if (typeof(T) == typeof(short))
+        {
+            if (Vector64.IsHardwareAccelerated)
+                return Vector64.Create((short)(object)X, (short)(object)Y, (short)(object)Z, 0)
+                    .Equals(Vector64.Create((short)(object)other.X, (short)(object)other.Y, (short)(object)other.Z, 0));
+
+            if (Vector128.IsHardwareAccelerated)
+                return Vector128.Create((short)(object)X, (short)(object)Y, (short)(object)Z, 0, 0, 0, 0, 0)
+                    .Equals(Vector128.Create((short)(object)other.X, (short)(object)other.Y, (short)(object)other.Z, 0, 0, 0, 0, 0));
+        }
+
+        //if (typeof(T) == typeof(Half))
+        //{
+        //    if (Vector64.IsHardwareAccelerated)
+        //        return Vector64.Create((Half)(object)X, (Half)(object)Y, (Half)(object)Z, 0)
+        //            .Equals(Vector64.Create((Half)(object)other.X, (Half)(object)other.Y, (Half)(object)other.Z, 0));
+
+        //    if (Vector128.IsHardwareAccelerated)
+        //        return Vector128.Create((Half)(object)X, (Half)(object)Y, (Half)(object)Z, 0, 0, 0, 0, 0)
+        //            .Equals(Vector128.Create((Half)(object)other.X, (Half)(object)other.Y, (Half)(object)other.Z, 0, 0, 0, 0, 0));
+        //}
+
+        if (typeof(T) == typeof(uint))
+        {
+            if (Vector128.IsHardwareAccelerated)
+                return Vector128.Create((uint)(object)X, (uint)(object)Y, (uint)(object)Z, 0)
+                    .Equals(Vector128.Create((uint)(object)other.X, (uint)(object)other.Y, (uint)(object)other.Z, 0));
+        }
+
+        if (typeof(T) == typeof(int))
+        {
+            if (Vector128.IsHardwareAccelerated)
+                return Vector128.Create((int)(object)X, (int)(object)Y, (int)(object)Z, 0)
+                    .Equals(Vector128.Create((int)(object)other.X, (int)(object)other.Y, (int)(object)other.Z, 0));
+        }
+
+        if (typeof(T) == typeof(float))
+        {
+            if (Vector128.IsHardwareAccelerated)
+                return Vector128.Create((float)(object)X, (float)(object)Y, (float)(object)Z, 0)
+                    .Equals(Vector128.Create((float)(object)other.X, (float)(object)other.Y, (float)(object)other.Z, 0));
+        }
+
+        if (typeof(T) == typeof(ulong))
+        {
+            if (Vector256.IsHardwareAccelerated)
+                return Vector256.Create((ulong)(object)X, (ulong)(object)Y, (ulong)(object)Z, 0)
+                    .Equals(Vector256.Create((ulong)(object)other.X, (ulong)(object)other.Y, (ulong)(object)other.Z, 0));
+        }
+
+        if (typeof(T) == typeof(long))
+        {
+            if (Vector256.IsHardwareAccelerated)
+                return Vector256.Create((long)(object)X, (long)(object)Y, (long)(object)Z, 0)
+                    .Equals(Vector256.Create((long)(object)other.X, (long)(object)other.Y, (long)(object)other.Z, 0));
+        }
+
+        if (typeof(T) == typeof(double))
+        {
+            if (Vector256.IsHardwareAccelerated)
+                return Vector256.Create((double)(object)X, (double)(object)Y, (double)(object)Z, 0)
+                    .Equals(Vector256.Create((double)(object)other.X, (double)(object)other.Y, (double)(object)other.Z, 0));
+        }
+
+        return SoftwareFallback(in this, other);
+
+        static bool SoftwareFallback(in Vector3<T> self, Vector3<T> other)
+            => EqualityComparer<T>.Default.Equals(self.X, other.X) &&
+                EqualityComparer<T>.Default.Equals(self.Y, other.Y) &&
+                EqualityComparer<T>.Default.Equals(self.Z, other.Z);
+    }
 
     /// <inheritdoc/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -345,7 +426,7 @@ public readonly struct Vector3<T>
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector3<T> operator -(Vector3<T> right)
-        => Vector3.Negate(in right);
+        => new(-right.X, -right.Y, -right.Z);
 
     /// <summary>
     /// Subtracts the components of the second <see cref="Vector3{T}"/> from the corresponding components of the first <see cref="Vector3{T}"/>.
@@ -612,7 +693,7 @@ public static class Vector3
     /// direction as the input vector. The input vector remains unchanged.
     /// </remarks>
     public static Vector3<T> Negate<T>(in Vector3<T> right)
-        where T : struct, INumber<T>, IMinMaxValue<T>
+        where T : struct, INumber<T>, IMinMaxValue<T>, ISignedNumber<T>
         => new(-right.X, -right.Y, -right.Z);
 
     /// <summary>

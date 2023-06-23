@@ -16,6 +16,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\NetFabric.Numerics.Angle\NetFabric.Numerics.Angle.csproj" />
+    <ProjectReference Include="..\NetFabric.Numerics.Geography\NetFabric.Numerics.Geography.csproj" />
+    <ProjectReference Include="..\NetFabric.Numerics\NetFabric.Numerics.csproj" />
   </ItemGroup>
 
 </Project>

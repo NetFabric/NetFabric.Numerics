@@ -1,5 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
+using System.Runtime.Intrinsics;
 
 namespace NetFabric.Numerics;
 
@@ -176,8 +177,58 @@ public readonly struct Vector2<T>
     /// <returns><c>true</c> if the current vector is equal to the other vector; otherwise, <c>false</c>.</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public bool Equals(Vector2<T> other)
-        => EqualityComparer<T>.Default.Equals(X, other.X) &&
-        EqualityComparer<T>.Default.Equals(Y, other.Y);
+    {
+        if (typeof(T) == typeof(uint))
+        {
+            if (Vector64.IsHardwareAccelerated)
+                return ((Vector2<uint>)(object)this).AsVector64().Equals(((Vector2<uint>)(object)other).AsVector64());
+
+            if (Vector128.IsHardwareAccelerated)
+                return ((Vector2<uint>)(object)this).AsVector128().Equals(((Vector2<uint>)(object)other).AsVector128());
+        }
+
+        if (typeof(T) == typeof(int))
+        {
+            if (Vector64.IsHardwareAccelerated)
+                return ((Vector2<int>)(object)this).AsVector64().Equals(((Vector2<int>)(object)other).AsVector64());
+
+            if (Vector128.IsHardwareAccelerated)
+                return ((Vector2<int>)(object)this).AsVector128().Equals(((Vector2<int>)(object)other).AsVector128());
+        }
+
+        if (typeof(T) == typeof(float))
+        {
+            if (Vector64.IsHardwareAccelerated)
+                return ((Vector2<float>)(object)this).AsVector64().Equals(((Vector2<float>)(object)other).AsVector64());
+
+            if (Vector128.IsHardwareAccelerated)
+                return ((Vector2<float>)(object)this).AsVector128().Equals(((Vector2<float>)(object)other).AsVector128());
+        }
+
+        if (typeof(T) == typeof(ulong))
+        {
+            if (Vector128.IsHardwareAccelerated)
+                return ((Vector2<ulong>)(object)this).AsVector128().Equals(((Vector2<ulong>)(object)other).AsVector128());
+        }
+
+        if (typeof(T) == typeof(long))
+        {
+            if (Vector128.IsHardwareAccelerated)
+                return ((Vector2<long>)(object)this).AsVector128().Equals(((Vector2<long>)(object)other).AsVector128());
+        }
+
+        if (typeof(T) == typeof(double))
+        {
+            if (Vector128.IsHardwareAccelerated)
+                return ((Vector2<double>)(object)this).AsVector128().Equals(((Vector2<double>)(object)other).AsVector128());
+        }
+
+        return SoftwareFallback(in this, other);
+
+        static bool SoftwareFallback(in Vector2<T> self, Vector2<T> other)
+            => EqualityComparer<T>.Default.Equals(self.X, other.X) &&
+                EqualityComparer<T>.Default.Equals(self.Y, other.Y);
+    }
 
     /// <inheritdoc/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -333,7 +384,7 @@ public readonly struct Vector2<T>
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector2<T> operator -(Vector2<T> right)
-        => Vector2.Negate(in right);
+        => new(-right.X, -right.Y);
 
     /// <summary>
     /// Subtracts the components of the second <see cref="Vector2{T}"/> from the corresponding components of the first <see cref="Vector2{T}"/>.
@@ -597,7 +648,7 @@ public static class Vector2
     /// direction as the input vector. The input vector remains unchanged.
     /// </remarks>
     public static Vector2<T> Negate<T>(in Vector2<T> right)
-        where T : struct, INumber<T>, IMinMaxValue<T>
+        where T : struct, INumber<T>, IMinMaxValue<T>, ISignedNumber<T>
         => new(-right.X, -right.Y);
 
     /// <summary>
