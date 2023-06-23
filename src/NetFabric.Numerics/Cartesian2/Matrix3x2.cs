@@ -1,6 +1,4 @@
-﻿using NetFabric.Numerics.Cartesian3;
-
-namespace NetFabric.Numerics.Cartesian2;
+﻿namespace NetFabric.Numerics.Cartesian2;
 
 public readonly record struct Matrix3x2<T>(
     T M11, T M12, 

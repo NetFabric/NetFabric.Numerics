@@ -1,16 +1,29 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using BenchmarkDotNet.Attributes;
+using BenchmarkDotNet.Configs;
 using System.Numerics;
 using System.Runtime.CompilerServices;
-using System.Runtime.Intrinsics;
-using BenchmarkDotNet.Attributes;
 
 namespace NetFabric.Numerics.Benchmarks;
 
+[GroupBenchmarksBy(BenchmarkLogicalGroupRule.ByCategory)]   
+[CategoriesColumn]
 public class EqualsBenchmarks
 {
-    Vector4Struct<int>[]? intVectors;
-    Vector4Struct<float>[]? floatVectors;
-    Vector4Struct<double>[]? doubleVectors;
+    BaselineVector2<int>[]? baselineVector2Ints;
+    BaselineVector2<float>[]? baselineVector2Floats;
+    BaselineVector2<double>[]? baselineVector2Doubles;
+    NetFabric.Numerics.Vector2<int>[]? netfabricVector2Ints;
+    NetFabric.Numerics.Vector2<float>[]? netfabricVector2Floats;
+    NetFabric.Numerics.Vector2<double>[]? netfabricVector2Doubles;
+    System.Numerics.Vector2[]? systemVector2s;
+
+    BaselineVector4<int>[]? baselineVector4Ints;
+    BaselineVector4<float>[]? baselineVector4Floats;
+    BaselineVector4<double>[]? baselineVector4Doubles;
+    NetFabric.Numerics.Vector4<int>[]? netfabricVector4Ints;
+    NetFabric.Numerics.Vector4<float>[]? netfabricVector4Floats;
+    NetFabric.Numerics.Vector4<double>[]? netfabricVector4Doubles;
+    System.Numerics.Vector4[]? systemVector4s;
 
     [Params(1_000)]
     public int Count { get; set; }
@@ -18,51 +31,252 @@ public class EqualsBenchmarks
     [GlobalSetup]
     public void GlobalSetup()
     {
-        var random = new Random();
+        var random = new Random(0);
 
-        intVectors = new Vector4Struct<int>[Count];
-        for (var index = 0; index < Count; index++)
-            intVectors[index] = new Vector4Struct<int>(random.Next(), random.Next(), random.Next(), random.Next());
+        baselineVector2Ints = new BaselineVector2<int>[Count];
+        baselineVector2Floats = new BaselineVector2<float>[Count];
+        baselineVector2Doubles = new BaselineVector2<double>[Count];
+        netfabricVector2Ints = new NetFabric.Numerics.Vector2<int>[Count];
+        netfabricVector2Floats = new NetFabric.Numerics.Vector2<float>[Count];
+        netfabricVector2Doubles = new NetFabric.Numerics.Vector2<double>[Count];
+        systemVector2s = new System.Numerics.Vector2[Count];
 
-        floatVectors = new Vector4Struct<float>[Count];
-        for (var index = 0; index < Count; index++)
-            floatVectors[index] = new Vector4Struct<float>((float)random.NextDouble(), (float)random.NextDouble(), (float)random.NextDouble(), (float)random.NextDouble());
+        baselineVector4Ints = new BaselineVector4<int>[Count];
+        baselineVector4Floats = new BaselineVector4<float>[Count];
+        baselineVector4Doubles = new BaselineVector4<double>[Count];
+        netfabricVector4Ints = new NetFabric.Numerics.Vector4<int>[Count];
+        netfabricVector4Floats = new NetFabric.Numerics.Vector4<float>[Count];
+        netfabricVector4Doubles = new NetFabric.Numerics.Vector4<double>[Count];
+        systemVector4s = new System.Numerics.Vector4[Count];
 
-        doubleVectors = new Vector4Struct<double>[Count];
         for (var index = 0; index < Count; index++)
-            doubleVectors[index] = new Vector4Struct<double>(random.NextDouble(), random.NextDouble(), random.NextDouble(), random.NextDouble());
+        {
+            var x = random.Next();
+            var y = random.Next();
+            var z = random.Next();
+            var w = random.Next();
+
+            baselineVector2Ints[index] = new BaselineVector2<int>(x, y);
+            baselineVector2Floats[index] = new BaselineVector2<float>(x, y);
+            baselineVector2Doubles[index] = new BaselineVector2<double>(x, y);
+            netfabricVector2Ints[index] = new NetFabric.Numerics.Vector2<int>(x, y);
+            netfabricVector2Floats[index] = new NetFabric.Numerics.Vector2<float>(x, y);
+            netfabricVector2Doubles[index] = new NetFabric.Numerics.Vector2<double>(x, y);
+            systemVector2s[index] = new System.Numerics.Vector2(x, y);
+
+            baselineVector4Ints[index] = new BaselineVector4<int>(x, y, z, w);
+            baselineVector4Floats[index] = new BaselineVector4<float>(x, y, z, w);
+            baselineVector4Doubles[index] = new BaselineVector4<double>(x, y, z, w);
+            netfabricVector4Ints[index] = new NetFabric.Numerics.Vector4<int>(x, y, z, w);
+            netfabricVector4Floats[index] = new NetFabric.Numerics.Vector4<float>(x, y, z, w);
+            netfabricVector4Doubles[index] = new NetFabric.Numerics.Vector4<double>(x, y, z, w);
+            systemVector4s[index] = new System.Numerics.Vector4(x, y, z, w);
+        }
     }
 
+    [BenchmarkCategory("Vector2", "Int")]
     [Benchmark(Baseline = true)]
-    public bool IntDefault()
+    public bool Vector2IntBaseline()
     {
-        var reference = new Vector4Struct<int>(1, 1, 1, 1);
+        var reference = new BaselineVector2<int>(1, 1);
         var equal = false;
-        foreach (var comparer in intVectors!)
-            equal = equal && comparer.EqualsDefault(reference);
+        foreach (var value in baselineVector2Ints!)
+            equal = equal && value.Equals(reference);
         return equal;
     }
 
+    [BenchmarkCategory("Vector2", "Int")]
     [Benchmark]
-    public bool IntAccelerated()
+    public bool Vector2IntNetFabric()
     {
-        var reference = new Vector4Struct<int>(1, 1, 1, 1);
+        var reference = new NetFabric.Numerics.Vector2<int>(1, 1);
         var equal = false;
-        foreach (var comparer in intVectors!)
-            equal = equal && comparer.EqualsAccelerated(reference);
+        foreach (var value in netfabricVector2Ints!)
+            equal = equal && value.Equals(reference);
         return equal;
     }
+
+    [BenchmarkCategory("Vector2", "Float")]
+    [Benchmark(Baseline = true)]
+    public bool Vector2FloatBaseline()
+    {
+        var reference = new BaselineVector2<float>(1.0f, 1.0f);
+        var equal = false;
+        foreach (var value in baselineVector2Floats!)
+            equal = equal && value.Equals(reference);
+        return equal;
+    }
+
+    [BenchmarkCategory("Vector2", "Float")]
+    [Benchmark]
+    public bool Vector2FloatNetFabric()
+    {
+        var reference = new NetFabric.Numerics.Vector2<float>(1.0f, 1.0f);
+        var equal = false;
+        foreach (var value in netfabricVector2Floats!)
+            equal = equal && value.Equals(reference);
+        return equal;
+    }
+
+    [BenchmarkCategory("Vector2", "Float")]
+    [Benchmark]
+    public bool Vector2FloatSystem()
+    {
+        var reference = new System.Numerics.Vector2(1.0f, 1.0f);
+        var equal = false;
+        foreach (var value in systemVector2s!)
+            equal = equal && value.Equals(reference);
+        return equal;
+    }
+
+    [BenchmarkCategory("Vector2", "Double")]
+    [Benchmark(Baseline = true)]
+    public bool Vector2DoubleBaseline()
+    {
+        var reference = new BaselineVector2<double>(1.0, 1.0);
+        var equal = false;
+        foreach (var value in baselineVector2Doubles!)
+            equal = equal && value.Equals(reference);
+        return equal;
+    }
+
+    [BenchmarkCategory("Vector2", "Double")]
+    [Benchmark]
+    public bool Vector2DoubleNetFabric()
+    {
+        var reference = new NetFabric.Numerics.Vector2<double>(1.0, 1.0);
+        var equal = false;
+        foreach (var value in netfabricVector2Doubles!)
+            equal = equal && value.Equals(reference);
+        return equal;
+    }
+
+    //[BenchmarkCategory("Vector4", "Int")]
+    //[Benchmark(Baseline = true)]
+    //public bool Vector4IntBaseline()
+    //{
+    //    var reference = new BaselineVector4<int>(1, 1, 1, 1);
+    //    var equal = false;
+    //    foreach (var value in baselineVector4Ints!)
+    //        equal = equal && value.Equals(reference);
+    //    return equal;
+    //}
+
+    //[BenchmarkCategory("Vector4", "Int")]
+    //[Benchmark]
+    //public bool Vector4IntNetFabric()
+    //{
+    //    var reference = new NetFabric.Numerics.Vector4<int>(1, 1, 1, 1);
+    //    var equal = false;
+    //    foreach (var value in netfabricVector4Ints!)
+    //        equal = equal && value.Equals(reference);
+    //    return equal;
+    //}
+
+    //[BenchmarkCategory("Vector4", "Float")]
+    //[Benchmark(Baseline = true)]
+    //public bool Vector4FloatBaseline()
+    //{
+    //    var reference = new BaselineVector4<float>(1.0f, 1.0f, 1.0f, 1.0f);
+    //    var equal = false;
+    //    foreach (var value in baselineVector4Floats!)
+    //        equal = equal && value.Equals(reference);
+    //    return equal;
+    //}
+
+    //[BenchmarkCategory("Vector4", "Float")]
+    //[Benchmark]
+    //public bool Vector4FloatNetFabric()
+    //{
+    //    var reference = new NetFabric.Numerics.Vector4<float>(1.0f, 1.0f, 1.0f, 1.0f);
+    //    var equal = false;
+    //    foreach (var value in netfabricVector4Floats!)
+    //        equal = equal && value.Equals(reference);
+    //    return equal;
+    //}
+
+    //[BenchmarkCategory("Vector4", "Float")]
+    //[Benchmark]
+    //public bool Vector4FloatSystem()
+    //{
+    //    var reference = new System.Numerics.Vector4(1.0f, 1.0f, 1.0f, 1.0f);
+    //    var equal = false;
+    //    foreach (var value in systemVector4s!)
+    //        equal = equal && value.Equals(reference);
+    //    return equal;
+    //}
+
+    //[BenchmarkCategory("Vector4", "Double")]
+    //[Benchmark(Baseline = true)]
+    //public bool Vector4DoubleBaseline()
+    //{
+    //    var reference = new BaselineVector4<double>(1.0, 1.0, 1.0, 1.0);
+    //    var equal = false;
+    //    foreach (var value in baselineVector4Doubles!)
+    //        equal = equal && value.Equals(reference);
+    //    return equal;
+    //}
+
+    //[BenchmarkCategory("Vector4", "Double")]
+    //[Benchmark]
+    //public bool Vector4DoubleNetFabric()
+    //{
+    //    var reference = new NetFabric.Numerics.Vector4<double>(1.0, 1.0, 1.0, 1.0);
+    //    var equal = false;
+    //    foreach (var value in netfabricVector4Doubles!)
+    //        equal = equal && value.Equals(reference);
+    //    return equal;
+    //}
 }
 
-struct Vector4Struct<T>
+readonly struct BaselineVector2<T>
     where T : struct, INumber<T>
 {
-    public T X;
-    public T Y;
-    public T Z;
-    public T W;
+    public readonly T X;
+    public readonly T Y;
 
-    public Vector4Struct(T x, T y, T z, T w)
+    public BaselineVector2(T x, T y)
+    {
+        X = x;
+        Y = y;
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public bool Equals(BaselineVector2<T> other)
+        => EqualityComparer<T>.Default.Equals(X, other.X) &&
+        EqualityComparer<T>.Default.Equals(Y, other.Y);
+}
+
+readonly struct BaselineVector3<T>
+    where T : struct, INumber<T>
+{
+    public readonly T X;
+    public readonly T Y;
+    public readonly T Z;
+
+    public BaselineVector3(T x, T y, T z)
+    {
+        X = x;
+        Y = y;
+        Z = z;
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public bool Equals(BaselineVector3<T> other)
+        => EqualityComparer<T>.Default.Equals(X, other.X) &&
+        EqualityComparer<T>.Default.Equals(Y, other.Y) &&
+        EqualityComparer<T>.Default.Equals(Z, other.Z);
+}
+
+readonly struct BaselineVector4<T>
+    where T : struct, INumber<T>
+{
+    public readonly T X;
+    public readonly T Y;
+    public readonly T Z;
+    public readonly T W;
+
+    public BaselineVector4(T x, T y, T z, T w)
     {
         X = x;
         Y = y;
@@ -70,39 +284,10 @@ struct Vector4Struct<T>
         W = w;
     }
 
-    /// <summary>
-    /// Determines whether the current vector is equal to another vector.
-    /// </summary>
-    /// <param name="other">The vector to compare with the current vector.</param>
-    /// <returns><c>true</c> if the current vector is equal to the other vector; otherwise, <c>false</c>.</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public bool EqualsDefault(Vector4Struct<T> other)
+    public bool Equals(BaselineVector4<T> other)
         => EqualityComparer<T>.Default.Equals(X, other.X) &&
         EqualityComparer<T>.Default.Equals(Y, other.Y) &&
         EqualityComparer<T>.Default.Equals(Z, other.Z) &&
         EqualityComparer<T>.Default.Equals(W, other.W);
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public bool EqualsAccelerated(Vector4Struct<T> other)
-    {
-        return Vector128.IsHardwareAccelerated
-            ? this.AsVector128().Equals(other.AsVector128())
-            : SoftwareFallback(in this, other);
-
-        static bool SoftwareFallback(in Vector4Struct<T> self, Vector4Struct<T> other)
-        {
-            return EqualityComparer<T>.Default.Equals(self.X, other.X) &&
-                EqualityComparer<T>.Default.Equals(self.Y, other.Y) &&
-                EqualityComparer<T>.Default.Equals(self.Z, other.Z) &&
-                EqualityComparer<T>.Default.Equals(self.W, other.W);
-        }
-    }
 }
-
-static class Extensions
-{
-    public static Vector128<T> AsVector128<T>(this Vector4Struct<T> value)
-        where T : struct, INumber<T>
-        => Unsafe.As<Vector4Struct<T>, Vector128<T>>(ref value);
-}
-

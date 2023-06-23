@@ -159,7 +159,7 @@ public readonly struct Matrix4x4<T>
         => Matrix4x4.Add(left, right);
 
     public static Matrix4x4<T> operator -(Matrix4x4<T> right)
-        => Matrix4x4.Negate(right);
+        => new(-right.X, -right.Y, -right.Z, -right.W);
 
     public static Matrix4x4<T> operator -(Matrix4x4<T> left, Matrix4x4<T> right)
         => Matrix4x4.Subtract(left, right);
@@ -285,6 +285,9 @@ public readonly struct Matrix4x4<T>
 
 }
 
+/// <summary>
+/// Provides static methods for matrix operations.
+/// </summary>
 public static class Matrix4x4
 {
 
@@ -298,7 +301,7 @@ public static class Matrix4x4
     /// <returns>A new <see cref="Matrix4x4{T}"/> with negated components.</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Matrix4x4<T> Negate<T>(in Matrix4x4<T> matrix)
-        where T : struct, INumber<T>, IMinMaxValue<T>
+        where T : struct, INumber<T>, IMinMaxValue<T>, ISignedNumber<T>
         => new(-matrix.X, -matrix.Y, -matrix.Z, -matrix.W);
 
     /// <summary>
