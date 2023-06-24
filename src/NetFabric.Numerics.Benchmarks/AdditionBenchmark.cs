@@ -7,7 +7,7 @@ namespace NetFabric.Numerics.Benchmarks;
 
 [GroupBenchmarksBy(BenchmarkLogicalGroupRule.ByCategory)]
 [CategoriesColumn]
-public class EqualsBenchmarks
+public class AdditionBenchmarks
 {
     BaselineVector2<int>[]? baselineVector2Ints;
     BaselineVector2<float>[]? baselineVector2Floats;
@@ -76,161 +76,149 @@ public class EqualsBenchmarks
 
     [BenchmarkCategory("Vector2", "Int")]
     [Benchmark(Baseline = true)]
-    public bool BaselineVector2Int()
+    public BaselineVector2<int> BaselineVector2Int()
     {
-        var reference = new BaselineVector2<int>(1, 1);
-        var equal = false;
+        var sum = BaselineVector2<int>.Zero;
         foreach (var value in baselineVector2Ints!)
-            equal = equal && value.Equals(reference);
-        return equal;
+            sum += value;
+        return sum;
     }
 
     [BenchmarkCategory("Vector2", "Int")]
     [Benchmark]
-    public bool NetFabricVector2Int()
+    public NetFabric.Numerics.Vector2<int> NetFabricVector2Int()
     {
-        var reference = new NetFabric.Numerics.Vector2<int>(1, 1);
-        var equal = false;
+        var sum = NetFabric.Numerics.Vector2<int>.Zero;
         foreach (var value in netfabricVector2Ints!)
-            equal = equal && value.Equals(reference);
-        return equal;
+            sum += value;
+        return sum;
     }
 
     [BenchmarkCategory("Vector2", "Float")]
     [Benchmark(Baseline = true)]
-    public bool BaselineVector2Float()
+    public BaselineVector2<float> BaselineVector2Float()
     {
-        var reference = new BaselineVector2<float>(1.0f, 1.0f);
-        var equal = false;
+        var sum = BaselineVector2<float>.Zero;
         foreach (var value in baselineVector2Floats!)
-            equal = equal && value.Equals(reference);
-        return equal;
+            sum += value;
+        return sum;
     }
 
     [BenchmarkCategory("Vector2", "Float")]
     [Benchmark]
-    public bool NetFabricVector2Float()
+    public NetFabric.Numerics.Vector2<float> NetFabricVector2Float()
     {
-        var reference = new NetFabric.Numerics.Vector2<float>(1.0f, 1.0f);
-        var equal = false;
+        var sum = NetFabric.Numerics.Vector2<float>.Zero;
         foreach (var value in netfabricVector2Floats!)
-            equal = equal && value.Equals(reference);
-        return equal;
+            sum += value;
+        return sum;
     }
 
     [BenchmarkCategory("Vector2", "Float")]
     [Benchmark]
-    public bool SystemVector2Float()
+    public System.Numerics.Vector2 SystemVector2Float()
     {
-        var reference = new System.Numerics.Vector2(1.0f, 1.0f);
-        var equal = false;
+        var sum = System.Numerics.Vector2.Zero;
         foreach (var value in systemVector2s!)
-            equal = equal && value.Equals(reference);
-        return equal;
+            sum += value;
+        return sum;
     }
 
     [BenchmarkCategory("Vector2", "Double")]
     [Benchmark(Baseline = true)]
-    public bool BaselineVector2Double()
+    public BaselineVector2<double> BaselineVector2Double()
     {
-        var reference = new BaselineVector2<double>(1.0, 1.0);
-        var equal = false;
+        var sum = BaselineVector2<double>.Zero;
         foreach (var value in baselineVector2Doubles!)
-            equal = equal && value.Equals(reference);
-        return equal;
+            sum += value;
+        return sum;
     }
 
     [BenchmarkCategory("Vector2", "Double")]
     [Benchmark]
-    public bool NetFabricVector2Double()
+    public NetFabric.Numerics.Vector2<double> NetFabricVector2Double()
     {
-        var reference = new NetFabric.Numerics.Vector2<double>(1.0, 1.0);
-        var equal = false;
+        var sum = NetFabric.Numerics.Vector2<double>.Zero;
         foreach (var value in netfabricVector2Doubles!)
-            equal = equal && value.Equals(reference);
-        return equal;
+            sum += value;
+        return sum;
     }
 
     [BenchmarkCategory("Vector4", "Int")]
     [Benchmark(Baseline = true)]
-    public bool BaselineVector4Int()
+    public BaselineVector4<int> BaselineVector4Int()
     {
-        var reference = new BaselineVector4<int>(1, 1, 1, 1);
-        var equal = false;
+        var sum = BaselineVector4<int>.Zero;
         foreach (var value in baselineVector4Ints!)
-            equal = equal && value.Equals(reference);
-        return equal;
+            sum += value;
+        return sum;
     }
 
     [BenchmarkCategory("Vector4", "Int")]
     [Benchmark]
-    public bool NetFabricVector4Int()
+    public NetFabric.Numerics.Vector4<int> NetFabricVector4Int()
     {
-        var reference = new NetFabric.Numerics.Vector4<int>(1, 1, 1, 1);
-        var equal = false;
+        var sum = NetFabric.Numerics.Vector4<int>.Zero;
         foreach (var value in netfabricVector4Ints!)
-            equal = equal && value.Equals(reference);
-        return equal;
+            sum += value;
+        return sum;
     }
 
     [BenchmarkCategory("Vector4", "Float")]
     [Benchmark(Baseline = true)]
-    public bool BaselineVector4Float()
+    public BaselineVector4<float> BaselineVector4Float()
     {
-        var reference = new BaselineVector4<float>(1.0f, 1.0f, 1.0f, 1.0f);
-        var equal = false;
+        var sum = BaselineVector4<float>.Zero;
         foreach (var value in baselineVector4Floats!)
-            equal = equal && value.Equals(reference);
-        return equal;
+            sum += value;
+        return sum;
     }
 
     [BenchmarkCategory("Vector4", "Float")]
     [Benchmark]
-    public bool NetFabricVector4Float()
+    public NetFabric.Numerics.Vector4<float> NetFabricVector4Float()
     {
-        var reference = new NetFabric.Numerics.Vector4<float>(1.0f, 1.0f, 1.0f, 1.0f);
-        var equal = false;
+        var sum = NetFabric.Numerics.Vector4<float>.Zero;
         foreach (var value in netfabricVector4Floats!)
-            equal = equal && value.Equals(reference);
-        return equal;
+            sum += value;
+        return sum;
     }
 
     [BenchmarkCategory("Vector4", "Float")]
     [Benchmark]
-    public bool SystemVector4Float()
+    public System.Numerics.Vector4 SystemVector4Float()
     {
-        var reference = new System.Numerics.Vector4(1.0f, 1.0f, 1.0f, 1.0f);
-        var equal = false;
+        var sum = System.Numerics.Vector4.Zero;
         foreach (var value in systemVector4s!)
-            equal = equal && value.Equals(reference);
-        return equal;
+            sum += value;
+        return sum;
     }
 
     [BenchmarkCategory("Vector4", "Double")]
     [Benchmark(Baseline = true)]
-    public bool BaselineVector4Double()
+    public BaselineVector4<double> BaselineVector4Double()
     {
-        var reference = new BaselineVector4<double>(1.0, 1.0, 1.0, 1.0);
-        var equal = false;
+        var sum = BaselineVector4<double>.Zero;
         foreach (var value in baselineVector4Doubles!)
-            equal = equal && value.Equals(reference);
-        return equal;
+            sum += value;
+        return sum;
     }
 
     [BenchmarkCategory("Vector4", "Double")]
     [Benchmark]
-    public bool NetFabricVector4Double()
+    public NetFabric.Numerics.Vector4<double> NetFabricVector4Double()
     {
-        var reference = new NetFabric.Numerics.Vector4<double>(1.0, 1.0, 1.0, 1.0);
-        var equal = false;
+        var sum = NetFabric.Numerics.Vector4<double>.Zero;
         foreach (var value in netfabricVector4Doubles!)
-            equal = equal && value.Equals(reference);
-        return equal;
+            sum += value;
+        return sum;
     }
 
-    readonly struct BaselineVector2<T>
+    public readonly struct BaselineVector2<T>
         where T : struct, INumber<T>
     {
+        public static readonly BaselineVector2<T> Zero = new(T.Zero, T.Zero);
+
         public readonly T X;
         public readonly T Y;
 
@@ -241,14 +229,15 @@ public class EqualsBenchmarks
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool Equals(BaselineVector2<T> other)
-            => EqualityComparer<T>.Default.Equals(X, other.X) &&
-            EqualityComparer<T>.Default.Equals(Y, other.Y);
+        public static BaselineVector2<T> operator +(BaselineVector2<T> left, BaselineVector2<T> right)
+            => new(left.X + right.X, left.Y + right.Y);
     }
 
-    readonly struct BaselineVector3<T>
+    public readonly struct BaselineVector3<T>
         where T : struct, INumber<T>
     {
+        public static readonly BaselineVector3<T> Zero = new(T.Zero, T.Zero, T.Zero);
+
         public readonly T X;
         public readonly T Y;
         public readonly T Z;
@@ -261,15 +250,15 @@ public class EqualsBenchmarks
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool Equals(BaselineVector3<T> other)
-            => EqualityComparer<T>.Default.Equals(X, other.X) &&
-            EqualityComparer<T>.Default.Equals(Y, other.Y) &&
-            EqualityComparer<T>.Default.Equals(Z, other.Z);
+        public static BaselineVector3<T> operator +(BaselineVector3<T> left, BaselineVector3<T> right)
+            => new(left.X + right.X, left.Y + right.Y, left.Z + right.Z);
     }
 
-    readonly struct BaselineVector4<T>
+    public readonly struct BaselineVector4<T>
         where T : struct, INumber<T>
     {
+        public static readonly BaselineVector4<T> Zero = new(T.Zero, T.Zero, T.Zero, T.Zero);
+
         public readonly T X;
         public readonly T Y;
         public readonly T Z;
@@ -284,10 +273,7 @@ public class EqualsBenchmarks
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool Equals(BaselineVector4<T> other)
-            => EqualityComparer<T>.Default.Equals(X, other.X) &&
-            EqualityComparer<T>.Default.Equals(Y, other.Y) &&
-            EqualityComparer<T>.Default.Equals(Z, other.Z) &&
-            EqualityComparer<T>.Default.Equals(W, other.W);
+        public static BaselineVector4<T> operator +(BaselineVector4<T> left, BaselineVector4<T> right)
+            => new(left.X + right.X, left.Y + right.Y, left.Z + right.Z, left.W + right.W);
     }
 }

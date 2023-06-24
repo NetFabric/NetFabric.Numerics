@@ -515,6 +515,7 @@ public static class Vector2
     /// <typeparam name="T">The numeric type used internally by <paramref name="vector"/>.</typeparam>
     /// <param name="vector">The vector to check.</param>
     /// <returns><c>true</c> if all components of the vector are zero; otherwise, <c>false</c>.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool IsZero<T>(in Vector2<T> vector)
         where T : struct, INumber<T>, IMinMaxValue<T>
         => vector == Vector2<T>.Zero;
@@ -530,6 +531,7 @@ public static class Vector2
     /// The <see cref="IsZero{T}(in Vector2{T}, T)"/> method checks whether all components of the vector are equal to zero within the <paramref name="tolerance"/> range.
     /// The tolerance is a small value used to account for floating-point precision errors.
     /// </remarks>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool IsZero<T>(in Vector2<T> vector, T tolerance)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => AreApproximatelyEqual(vector, Vector2<T>.Zero, tolerance);
@@ -542,6 +544,7 @@ public static class Vector2
     /// <returns>
     /// <c>true</c> if any component of the vector is NaN; otherwise, <c>false</c>.
     /// </returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool IsNaN<T>(in Vector2<T> vector)
         where T : struct, INumber<T>, IMinMaxValue<T>
         => T.IsNaN(vector.X) || T.IsNaN(vector.Y);
@@ -554,6 +557,7 @@ public static class Vector2
     /// <returns>
     /// <c>true</c> if any component of the vector is positive or negative infinity; otherwise, <c>false</c>.
     /// </returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool IsInfinity<T>(in Vector2<T> vector)
         where T : struct, INumber<T>, IMinMaxValue<T>
         => T.IsInfinity(vector.X) || T.IsInfinity(vector.Y);
@@ -566,6 +570,7 @@ public static class Vector2
     /// <returns>
     /// <c>true</c> if all components of the vector are finite numbers; otherwise, <c>false</c>.
     /// </returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool IsFinite<T>(in Vector2<T> vector)
         where T : struct, INumber<T>, IMinMaxValue<T>
         => T.IsFinite(vector.X) && T.IsFinite(vector.Y);
@@ -578,6 +583,7 @@ public static class Vector2
     /// <returns>
     /// <c>true</c> if the vector is normalized (its magnitude is 1); otherwise, <c>false</c>.
     /// </returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool IsNormalized<T>(in Vector2<T> vector)
         where T : struct, INumber<T>, IMinMaxValue<T>
         => Vector2.MagnitudeSquared(vector) == T.One;
@@ -591,6 +597,7 @@ public static class Vector2
     /// <returns>
     /// <c>true</c> if the vector is normalized (its magnitude is within the specified tolerance of 1); otherwise, <c>false</c>.
     /// </returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool IsNormalized<T>(in Vector2<T> vector, T tolerance)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => Utils.AreApproximatelyEqual(Vector2.MagnitudeSquared(vector), T.One, tolerance);
@@ -607,6 +614,7 @@ public static class Vector2
     /// This method compares the absolute difference between the two values to the specified tolerance value.
     /// If the absolute difference is less than or equal to the tolerance, the values are considered approximately equal.
     /// </remarks>    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool AreApproximatelyEqual<T>(in Vector2<T> a, in Vector2<T> b, T tolerance)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => Utils.AreApproximatelyEqual(a.X, b.X, tolerance) &&
@@ -630,6 +638,7 @@ public static class Vector2
     /// The squared magnitude is used to avoid the costly square root operation and is sufficient
     /// for comparing the relative values of vectors. 
     /// </remarks>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static int Compare<T>(in Vector2<T> vector, in Vector2<T> other)
         where T : struct, INumber<T>, IMinMaxValue<T>
         => MagnitudeSquared(vector).CompareTo(MagnitudeSquared(other));
@@ -647,6 +656,7 @@ public static class Vector2
     /// but with reversed signs for each coordinate. The resulting vector points in the opposite
     /// direction as the input vector. The input vector remains unchanged.
     /// </remarks>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector2<T> Negate<T>(in Vector2<T> right)
         where T : struct, INumber<T>, IMinMaxValue<T>, ISignedNumber<T>
         => new(-right.X, -right.Y);
@@ -665,9 +675,61 @@ public static class Vector2
     /// X, Y, Z, and W coordinates of the input vectors, respectively. The input vectors remain
     /// unchanged.
     /// </remarks>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector2<T> Add<T>(in Vector2<T> left, in Vector2<T> right)
         where T : struct, INumber<T>, IMinMaxValue<T>
-        => new(left.X + right.X, left.Y + right.Y);
+    {
+        if (typeof(T) == typeof(uint))
+        {
+            if (Vector64.IsHardwareAccelerated)
+                return (Vector2<T>)(object)Vector64.Add(((Vector2<uint>)(object)left).AsVector64(), ((Vector2<uint>)(object)right).AsVector64()).AsVector2();
+
+            if (Vector128.IsHardwareAccelerated)
+                return (Vector2<T>)(object)Vector128.Add(((Vector2<uint>)(object)left).AsVector128(), ((Vector2<uint>)(object)right).AsVector128()).AsVector2();
+        }
+
+        if (typeof(T) == typeof(int))
+        {
+            if (Vector64.IsHardwareAccelerated)
+                return (Vector2<T>)(object)Vector64.Add(((Vector2<int>)(object)left).AsVector64(), ((Vector2<int>)(object)right).AsVector64()).AsVector2();
+
+            if (Vector128.IsHardwareAccelerated)
+                return (Vector2<T>)(object)Vector128.Add(((Vector2<int>)(object)left).AsVector128(), ((Vector2<int>)(object)right).AsVector128()).AsVector2();
+        }
+
+        if (typeof(T) == typeof(float))
+        {
+            if (Vector64.IsHardwareAccelerated)
+                return (Vector2<T>)(object)Vector64.Add(((Vector2<float>)(object)left).AsVector64(), ((Vector2<float>)(object)right).AsVector64()).AsVector2();
+
+            if (Vector128.IsHardwareAccelerated)
+                return (Vector2<T>)(object)Vector128.Add(((Vector2<float>)(object)left).AsVector128(), ((Vector2<float>)(object)right).AsVector128()).AsVector2();
+        }
+
+        if (typeof(T) == typeof(ulong))
+        {
+            if (Vector128.IsHardwareAccelerated)
+                return (Vector2<T>)(object)Vector128.Add(((Vector2<ulong>)(object)left).AsVector128(), ((Vector2<ulong>)(object)right).AsVector128()).AsVector2();
+        }
+
+        if (typeof(T) == typeof(long))
+        {
+            if (Vector128.IsHardwareAccelerated)
+                return (Vector2<T>)(object)Vector128.Add(((Vector2<long>)(object)left).AsVector128(), ((Vector2<long>)(object)right).AsVector128()).AsVector2();
+        }
+
+        if (typeof(T) == typeof(double))
+        {
+            if (Vector128.IsHardwareAccelerated)
+                return (Vector2<T>)(object)Vector128.Add(((Vector2<double>)(object)left).AsVector128(), ((Vector2<double>)(object)right).AsVector128()).AsVector2();
+        }
+
+        return SoftwareFallback(in left, right);
+
+        static Vector2<T> SoftwareFallback(in Vector2<T> left, Vector2<T> right)
+            => new(left.X + right.X, left.Y + right.Y);
+    }
+
 
     /// <summary>
     /// Subtracts the second vector from the first vector component-wise and returns the result as a new Vector2.
@@ -682,6 +744,7 @@ public static class Vector2
     /// which means that the X, Y, Z, and W coordinates of the resulting vector are the differences of the
     /// X, Y, Z, and W coordinates of the input vectors, respectively. The input vectors remain unchanged.
     /// </remarks>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector2<T> Subtract<T>(in Vector2<T> left, in Vector2<T> right)
         where T : struct, INumber<T>, IMinMaxValue<T>
         => new(left.X - right.X, left.Y - right.Y);
@@ -698,6 +761,7 @@ public static class Vector2
     /// The operation is performed independently on each coordinate, meaning that the scalar value is multiplied with the X, Y, Z, and W coordinates of the input vector separately. 
     /// The input vector remains unchanged after the operation.
     /// </remarks>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector2<T> Multiply<T>(T left, in Vector2<T> right)
         where T : struct, INumber<T>, IMinMaxValue<T>
         => new(left * right.X, left * right.Y);
@@ -714,6 +778,7 @@ public static class Vector2
     /// The operation is performed independently on each coordinate, meaning that each coordinate of the input vector is divided by the scalar value separately. 
     /// The input vector remains unchanged after the operation.
     /// </remarks>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector2<T> Divide<T>(in Vector2<T> left, T right)
         where T : struct, INumber<T>, IMinMaxValue<T>
         => new(left.X / right, left.Y / right);
@@ -745,6 +810,7 @@ public static class Vector2
     /// This method is useful when you want to restrict a 3D vector to a certain range for each component.
     /// </para>
     /// </remarks>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector2<T> Clamp<T>(in Vector2<T> vector, in Vector2<T> min, in Vector2<T> max)
     where T : struct, INumber<T>, IMinMaxValue<T>
         => new(T.Clamp(vector.X, min.X, max.X), T.Clamp(vector.Y, min.Y, max.Y));
@@ -763,6 +829,7 @@ public static class Vector2
     /// The resulting vector is calculated by multiplying the start vector by (1 - factor), multiplying the end vector by factor,
     /// and then adding the two resulting vectors together.
     /// </remarks>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector2<T> Lerp<T>(in Vector2<T> start, in Vector2<T> end, T factor)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => (start * (T.One - factor)) + (end * factor);
@@ -777,6 +844,7 @@ public static class Vector2
     /// The magnitude is calculated as the Euclidean distance in the 2D Cartesian coordinate system.
     /// </para>
     /// </remarks>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static T Magnitude<T>(in Vector2<T> vector)
         where T : struct, INumber<T>, IMinMaxValue<T>, IRootFunctions<T>
         => T.Sqrt(MagnitudeSquared(in vector));
@@ -792,6 +860,7 @@ public static class Vector2
     /// The magnitude is calculated as the Euclidean distance in the 2D Cartesian coordinate system.
     /// </para>
     /// </remarks>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static TOut Magnitude<T, TOut>(in Vector2<T> vector)
         where T : struct, INumber<T>, IMinMaxValue<T>
         where TOut : struct, INumber<TOut>, IRootFunctions<TOut>
@@ -811,6 +880,7 @@ public static class Vector2
     /// taking the square root, which can be a computationally expensive operation.
     /// </para>
     /// </remarks>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static T MagnitudeSquared<T>(in Vector2<T> vector)
         where T : struct, INumber<T>, IMinMaxValue<T>
         => Utils.Pow2(vector.X) + Utils.Pow2(vector.Y);
@@ -836,6 +906,7 @@ public static class Vector2
     /// the method will return the zero vector itself, as it cannot be normalized.
     /// </para>
     /// </remarks>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector2<T> Normalize<T>(in Vector2<T> vector)
         where T : struct, INumber<T>, IMinMaxValue<T>, IRootFunctions<T>
     {
@@ -851,6 +922,7 @@ public static class Vector2
     /// <param name="left">A vector.</param>
     /// <param name="right">A vector.</param>
     /// <returns>The dot product.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static T Dot<T>(in Vector2<T> left, in Vector2<T> right)
         where T : struct, INumber<T>, IMinMaxValue<T>
         => (left.X * right.X) + (left.Y * right.Y);
@@ -861,6 +933,7 @@ public static class Vector2
     /// <param name="left">A vector.</param>
     /// <param name="right">A vector.</param>
     /// <returns>The magnitude of the cross products.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static T Cross<T>(in Vector2<T> left, in Vector2<T> right)
             where T : struct, INumber<T>, IMinMaxValue<T>
             => (left.X * right.Y) - (left.Y * right.X);

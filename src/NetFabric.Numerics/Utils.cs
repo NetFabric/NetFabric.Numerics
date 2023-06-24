@@ -1,6 +1,4 @@
-﻿using System.Runtime.Intrinsics;
-
-namespace NetFabric.Numerics;
+﻿namespace NetFabric.Numerics;
 
 static class Utils
 {

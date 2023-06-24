@@ -203,76 +203,64 @@ public readonly struct Vector4<T>
         if (typeof(T) == typeof(ushort))
         {
             if (Vector64.IsHardwareAccelerated)
-                return Vector64.Create((ushort)(object)X, (ushort)(object)Y, (ushort)(object)Z, (ushort)(object)W)
-                    .Equals(Vector64.Create((ushort)(object)other.X, (ushort)(object)other.Y, (ushort)(object)other.Z, (ushort)(object)other.W));
+                return ((Vector4<ushort>)(object)this).AsVector64().Equals(((Vector4<ushort>)(object)other).AsVector64());
 
             if (Vector128.IsHardwareAccelerated)
-                return Vector128.Create((ushort)(object)X, (ushort)(object)Y, (ushort)(object)Z, (ushort)(object)W, 0, 0, 0, 0)
-                    .Equals(Vector128.Create((ushort)(object)other.X, (ushort)(object)other.Y, (ushort)(object)other.Z, (ushort)(object)other.W, 0, 0, 0, 0));
+                return ((Vector4<ushort>)(object)this).AsVector128().Equals(((Vector4<ushort>)(object)other).AsVector128());
         }
 
         if (typeof(T) == typeof(short))
         {
             if (Vector64.IsHardwareAccelerated)
-                return Vector64.Create((short)(object)X, (short)(object)Y, (short)(object)Z, (short)(object)W)
-                    .Equals(Vector64.Create((short)(object)other.X, (short)(object)other.Y, (short)(object)other.Z, (short)(object)other.W));
+                return ((Vector4<short>)(object)this).AsVector64().Equals(((Vector4<short>)(object)other).AsVector64());
 
             if (Vector128.IsHardwareAccelerated)
-                return Vector128.Create((short)(object)X, (short)(object)Y, (short)(object)Z, (short)(object)W, 0, 0, 0, 0)
-                    .Equals(Vector128.Create((short)(object)other.X, (short)(object)other.Y, (short)(object)other.Z, (short)(object)other.W, 0, 0, 0, 0));
+                return ((Vector4<short>)(object)this).AsVector128().Equals(((Vector4<short>)(object)other).AsVector128());
         }
 
         //if (typeof(T) == typeof(Half))
         //{
         //    if (Vector64.IsHardwareAccelerated)
-        //        return Vector64.Create((Half)(object)X, (Half)(object)Y, (Half)(object)Z, (Half)(object)W)
-        //            .Equals(Vector64.Create((Half)(object)other.X, (Half)(object)other.Y, (Half)(object)other.Z, (Half)(object)other.W));
+        //        return ((Vector4<Half>)(object)this).AsVector64().Equals(((Vector4<Half>)(object)other).AsVector64());
 
         //    if (Vector128.IsHardwareAccelerated)
-        //        return Vector128.Create((Half)(object)X, (Half)(object)Y, (Half)(object)Z, (Half)(object)W, 0, 0, 0, 0)
-        //            .Equals(Vector128.Create((Half)(object)other.X, (Half)(object)other.Y, (Half)(object)other.Z, (Half)(object)other.W, 0, 0, 0, 0));
+        //        return ((Vector4<Half>)(object)this).AsVector128().Equals(((Vector4<Half>)(object)other).AsVector128());
         //}
 
         if (typeof(T) == typeof(uint))
         {
             if (Vector128.IsHardwareAccelerated)
-                return Vector128.Create((uint)(object)X, (uint)(object)Y, (uint)(object)Z, (uint)(object)W)
-                    .Equals(Vector128.Create((uint)(object)other.X, (uint)(object)other.Y, (uint)(object)other.Z, (uint)(object)other.W));
+                return ((Vector4<uint>)(object)this).AsVector128().Equals(((Vector4<uint>)(object)other).AsVector128());
         }
 
         if (typeof(T) == typeof(int))
         {
             if (Vector128.IsHardwareAccelerated)
-                return Vector128.Create((int)(object)X, (int)(object)Y, (int)(object)Z, (int)(object)W)
-                    .Equals(Vector128.Create((int)(object)other.X, (int)(object)other.Y, (int)(object)other.Z, (int)(object)other.W));
+                return ((Vector4<int>)(object)this).AsVector128().Equals(((Vector4<int>)(object)other).AsVector128());
         }
 
         if (typeof(T) == typeof(float))
         {
             if (Vector128.IsHardwareAccelerated)
-                return Vector128.Create((float)(object)X, (float)(object)Y, (float)(object)Z, (float)(object)W)
-                    .Equals(Vector128.Create((float)(object)other.X, (float)(object)other.Y, (float)(object)other.Z, (float)(object)other.W));
+                return ((Vector4<float>)(object)this).AsVector128().Equals(((Vector4<float>)(object)other).AsVector128());
         }
 
         if (typeof(T) == typeof(ulong))
         {
             if (Vector256.IsHardwareAccelerated)
-                return Vector256.Create((ulong)(object)X, (ulong)(object)Y, (ulong)(object)Z, (ulong)(object)W)
-                    .Equals(Vector256.Create((ulong)(object)other.X, (ulong)(object)other.Y, (ulong)(object)other.Z, (ulong)(object)other.W));
+                return ((Vector4<ulong>)(object)this).AsVector256().Equals(((Vector4<ulong>)(object)other).AsVector256());
         }
 
         if (typeof(T) == typeof(long))
         {
             if (Vector256.IsHardwareAccelerated)
-                return Vector256.Create((long)(object)X, (long)(object)Y, (long)(object)Z, (long)(object)W)
-                    .Equals(Vector256.Create((long)(object)other.X, (long)(object)other.Y, (long)(object)other.Z, (long)(object)other.W));
+                return ((Vector4<long>)(object)this).AsVector256().Equals(((Vector4<long>)(object)other).AsVector256());
         }
 
         if (typeof(T) == typeof(double))
         {
             if (Vector256.IsHardwareAccelerated)
-                return Vector256.Create((double)(object)X, (double)(object)Y, (double)(object)Z, (double)(object)W)
-                    .Equals(Vector256.Create((double)(object)other.X, (double)(object)other.Y, (double)(object)other.Z, (double)(object)other.W));
+                return ((Vector4<double>)(object)this).AsVector256().Equals(((Vector4<double>)(object)other).AsVector256());
         }
 
         return SoftwareFallback(in this, other);
@@ -573,6 +561,7 @@ public static class Vector4
     /// <typeparam name="T">The numeric type used internally by <paramref name="vector"/>.</typeparam>
     /// <param name="vector">The vector to check.</param>
     /// <returns><c>true</c> if all components of the vector are zero; otherwise, <c>false</c>.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool IsZero<T>(in Vector4<T> vector)
         where T : struct, INumber<T>, IMinMaxValue<T>
         => vector == Vector4<T>.Zero;
@@ -588,6 +577,7 @@ public static class Vector4
     /// The <see cref="IsZero{T}(in Vector4{T}, T)"/> method checks whether all components of the vector are equal to zero within the <paramref name="tolerance"/> range.
     /// The tolerance is a small value used to account for floating-point precision errors.
     /// </remarks>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool IsZero<T>(in Vector4<T> vector, T tolerance)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => AreApproximatelyEqual(vector, Vector4<T>.Zero, tolerance);
@@ -600,6 +590,7 @@ public static class Vector4
     /// <returns>
     /// <c>true</c> if any component of the vector is NaN; otherwise, <c>false</c>.
     /// </returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool IsNaN<T>(in Vector4<T> vector)
         where T : struct, INumber<T>, IMinMaxValue<T>
         => T.IsNaN(vector.X) || T.IsNaN(vector.Y) || T.IsNaN(vector.Z) || T.IsNaN(vector.W);
@@ -612,6 +603,7 @@ public static class Vector4
     /// <returns>
     /// <c>true</c> if any component of the vector is positive or negative infinity; otherwise, <c>false</c>.
     /// </returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool IsInfinity<T>(in Vector4<T> vector)
         where T : struct, INumber<T>, IMinMaxValue<T>
         => T.IsInfinity(vector.X) || T.IsInfinity(vector.Y) || T.IsInfinity(vector.Z) || T.IsInfinity(vector.W);
@@ -624,6 +616,7 @@ public static class Vector4
     /// <returns>
     /// <c>true</c> if all components of the vector are finite numbers; otherwise, <c>false</c>.
     /// </returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool IsFinite<T>(in Vector4<T> vector)
         where T : struct, INumber<T>, IMinMaxValue<T>
         => T.IsFinite(vector.X) && T.IsFinite(vector.Y) && T.IsFinite(vector.Z) && T.IsFinite(vector.W);
@@ -636,6 +629,7 @@ public static class Vector4
     /// <returns>
     /// <c>true</c> if the vector is normalized (its magnitude is 1); otherwise, <c>false</c>.
     /// </returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool IsNormalized<T>(in Vector4<T> vector)
         where T : struct, INumber<T>, IMinMaxValue<T>
         => Vector4.MagnitudeSquared(vector) == T.One;
@@ -649,6 +643,7 @@ public static class Vector4
     /// <returns>
     /// <c>true</c> if the vector is normalized (its magnitude is within the specified tolerance of 1); otherwise, <c>false</c>.
     /// </returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool IsNormalized<T>(in Vector4<T> vector, T tolerance)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => Utils.AreApproximatelyEqual(Vector4.MagnitudeSquared(vector), T.One, tolerance);
@@ -665,6 +660,7 @@ public static class Vector4
     /// This method compares the absolute difference between the two values to the specified tolerance value.
     /// If the absolute difference is less than or equal to the tolerance, the values are considered approximately equal.
     /// </remarks>    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool AreApproximatelyEqual<T>(in Vector4<T> a, in Vector4<T> b, T tolerance)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => Utils.AreApproximatelyEqual(a.X, b.X, tolerance) && 
@@ -690,6 +686,7 @@ public static class Vector4
     /// The squared magnitude is used to avoid the costly square root operation and is sufficient
     /// for comparing the relative values of vectors. 
     /// </remarks>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static int Compare<T>(in Vector4<T> vector, in Vector4<T> other)
         where T : struct, INumber<T>, IMinMaxValue<T>
         => MagnitudeSquared(vector).CompareTo(MagnitudeSquared(other));
@@ -707,6 +704,7 @@ public static class Vector4
     /// but with reversed signs for each coordinate. The resulting vector points in the opposite
     /// direction as the input vector. The input vector remains unchanged.
     /// </remarks>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector4<T> Negate<T>(in Vector4<T> right)
         where T : struct, INumber<T>, IMinMaxValue<T>, ISignedNumber<T>
         => new(-right.X, -right.Y, -right.Z, -right.W);
@@ -725,9 +723,79 @@ public static class Vector4
     /// X, Y, Z, and W coordinates of the input vectors, respectively. The input vectors remain
     /// unchanged.
     /// </remarks>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector4<T> Add<T>(in Vector4<T> left, in Vector4<T> right)
         where T : struct, INumber<T>, IMinMaxValue<T>
-        => new(left.X + right.X, left.Y + right.Y, left.Z + right.Z, left.W + right.W);
+    {
+        if (typeof(T) == typeof(ushort))
+        {
+            if (Vector64.IsHardwareAccelerated)
+                return (Vector4<T>)(object)Vector64.Add(((Vector4<ushort>)(object)left).AsVector64(), ((Vector4<ushort>)(object)right).AsVector64()).AsVector4();
+
+            if (Vector128.IsHardwareAccelerated)
+                return (Vector4<T>)(object)Vector128.Add(((Vector4<ushort>)(object)left).AsVector128(), ((Vector4<ushort>)(object)right).AsVector128()).AsVector4();
+        }
+
+        if (typeof(T) == typeof(short))
+        {
+            if (Vector64.IsHardwareAccelerated)
+                return (Vector4<T>)(object)Vector64.Add(((Vector4<short>)(object)left).AsVector64(), ((Vector4<short>)(object)right).AsVector64()).AsVector4();
+
+            if (Vector128.IsHardwareAccelerated)
+                return (Vector4<T>)(object)Vector128.Add(((Vector4<short>)(object)left).AsVector128(), ((Vector4<short>)(object)right).AsVector128()).AsVector4();
+        }
+
+        //if (typeof(T) == typeof(Half))
+        //{
+        //    if (Vector64.IsHardwareAccelerated)
+        //        return (Vector4<T>)(object)Vector64.Add(((Vector4<Half>)(object)left).AsVector64(), ((Vector4<Half>)(object)right).AsVector64()).AsVector4();
+
+        //    if (Vector128.IsHardwareAccelerated)
+        //        return (Vector4<T>)(object)Vector128.Add(((Vector4<Half>)(object)left).AsVector128(), ((Vector4<Half>)(object)right).AsVector128()).AsVector4();
+        //}
+
+        if (typeof(T) == typeof(uint))
+        {
+            if (Vector128.IsHardwareAccelerated)
+                return (Vector4<T>)(object)Vector128.Add(((Vector4<uint>)(object)left).AsVector128(), ((Vector4<uint>)(object)right).AsVector128()).AsVector4();
+        }
+
+        if (typeof(T) == typeof(int))
+        {
+            if (Vector128.IsHardwareAccelerated)
+                return (Vector4<T>)(object)Vector128.Add(((Vector4<int>)(object)left).AsVector128(), ((Vector4<int>)(object)right).AsVector128()).AsVector4();
+        }
+
+        if (typeof(T) == typeof(float))
+        {
+            if (Vector128.IsHardwareAccelerated)
+                return (Vector4<T>)(object)Vector128.Add(((Vector4<float>)(object)left).AsVector128(), ((Vector4<float>)(object)right).AsVector128()).AsVector4();
+        }
+
+        if (typeof(T) == typeof(ulong))
+        {
+            if (Vector256.IsHardwareAccelerated)
+                return (Vector4<T>)(object)Vector256.Add(((Vector4<ulong>)(object)left).AsVector256(), ((Vector4<ulong>)(object)right).AsVector256()).AsVector4();
+        }
+
+        if (typeof(T) == typeof(long))
+        {
+            if (Vector256.IsHardwareAccelerated)
+                return (Vector4<T>)(object)Vector256.Add(((Vector4<long>)(object)left).AsVector256(), ((Vector4<long>)(object)right).AsVector256()).AsVector4();
+        }
+
+        if (typeof(T) == typeof(double))
+        {
+            if (Vector256.IsHardwareAccelerated)
+                return (Vector4<T>)(object)Vector256.Add(((Vector4<double>)(object)left).AsVector256(), ((Vector4<double>)(object)right).AsVector256()).AsVector4();
+        }
+
+        return SoftwareFallback(in left, in right);
+
+        static Vector4<T> SoftwareFallback(in Vector4<T> left, in Vector4<T> right)
+            => new(left.X + right.X, left.Y + right.Y, left.Z + right.Z, left.W + right.W);
+    }
+
 
     /// <summary>
     /// Subtracts the second vector from the first vector component-wise and returns the result as a new Vector4.
@@ -742,6 +810,7 @@ public static class Vector4
     /// which means that the X, Y, Z, and W coordinates of the resulting vector are the differences of the
     /// X, Y, Z, and W coordinates of the input vectors, respectively. The input vectors remain unchanged.
     /// </remarks>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector4<T> Subtract<T>(in Vector4<T> left, in Vector4<T> right)
         where T : struct, INumber<T>, IMinMaxValue<T>
         => new(left.X - right.X, left.Y - right.Y, left.Z - right.Z, left.W - right.W);
@@ -758,6 +827,7 @@ public static class Vector4
     /// The operation is performed independently on each coordinate, meaning that the scalar value is multiplied with the X, Y, Z, and W coordinates of the input vector separately. 
     /// The input vector remains unchanged after the operation.
     /// </remarks>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector4<T> Multiply<T>(T left, in Vector4<T> right)
         where T : struct, INumber<T>, IMinMaxValue<T>
         => new(left * right.X, left * right.Y, left * right.Z, left * right.W);
@@ -774,6 +844,7 @@ public static class Vector4
     /// The operation is performed independently on each coordinate, meaning that each coordinate of the input vector is divided by the scalar value separately. 
     /// The input vector remains unchanged after the operation.
     /// </remarks>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector4<T> Divide<T>(in Vector4<T> left, T right)
         where T : struct, INumber<T>, IMinMaxValue<T>
         => new(left.X / right, left.Y / right, left.Z / right, left.W / right);
@@ -805,6 +876,7 @@ public static class Vector4
     /// This method is useful when you want to restrict a 3D vector to a certain range for each component.
     /// </para>
     /// </remarks>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector4<T> Clamp<T>(in Vector4<T> vector, in Vector4<T> min, in Vector4<T> max)
     where T : struct, INumber<T>, IMinMaxValue<T>
         => new(T.Clamp(vector.X, min.X, max.X), T.Clamp(vector.Y, min.Y, max.Y), T.Clamp(vector.Z, min.Z, max.Z), T.Clamp(vector.W, min.W, max.W));
@@ -823,6 +895,7 @@ public static class Vector4
     /// The resulting vector is calculated by multiplying the start vector by (1 - factor), multiplying the end vector by factor,
     /// and then adding the two resulting vectors together.
     /// </remarks>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector4<T> Lerp<T>(in Vector4<T> start, in Vector4<T> end, T factor)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => (start * (T.One - factor)) + (end * factor);
@@ -837,6 +910,7 @@ public static class Vector4
     /// The magnitude is calculated as the Euclidean distance in the 2D Cartesian coordinate system.
     /// </para>
     /// </remarks>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static T Magnitude<T>(in Vector4<T> vector)
         where T : struct, INumber<T>, IMinMaxValue<T>, IRootFunctions<T>
         => T.Sqrt(MagnitudeSquared(in vector));
@@ -852,6 +926,7 @@ public static class Vector4
     /// The magnitude is calculated as the Euclidean distance in the 2D Cartesian coordinate system.
     /// </para>
     /// </remarks>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static TOut Magnitude<T, TOut>(in Vector4<T> vector)
         where T : struct, INumber<T>, IMinMaxValue<T>
         where TOut : struct, INumber<TOut>, IRootFunctions<TOut>
@@ -871,6 +946,7 @@ public static class Vector4
     /// taking the square root, which can be a computationally expensive operation.
     /// </para>
     /// </remarks>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static T MagnitudeSquared<T>(in Vector4<T> vector)
         where T : struct, INumber<T>, IMinMaxValue<T>
         => Utils.Pow2(vector.X) + Utils.Pow2(vector.Y) + Utils.Pow2(vector.Z) + Utils.Pow2(vector.W);
@@ -896,6 +972,7 @@ public static class Vector4
     /// the method will return the zero vector itself, as it cannot be normalized.
     /// </para>
     /// </remarks>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector4<T> Normalize<T>(in Vector4<T> vector)
         where T : struct, INumber<T>, IMinMaxValue<T>, IRootFunctions<T>
     {
