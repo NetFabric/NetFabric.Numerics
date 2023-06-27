@@ -11,7 +11,6 @@ public static partial class Angle
     /// <returns>The sum of the angles in the collection.</returns>
     /// <remarks>
     /// The sum of angles is computed by adding all the angles in the given <paramref name="source"/> collection.
-    /// The resulting angle is the cumulative sum of all the angles in radians.
     /// </remarks>
     public static Angle<TUnits, T> Sum<TUnits, T>(this IEnumerable<Angle<TUnits, T>> source)
         where TUnits : IAngleUnits<TUnits>
@@ -35,7 +34,6 @@ public static partial class Angle
     /// <returns>The sum of the angles in the collection.</returns>
     /// <remarks>
     /// The sum of angles is computed by adding all the angles in the given <paramref name="source"/> collection.
-    /// The resulting angle is the cumulative sum of all the angles in radians.
     /// </remarks>
     public static Angle<TUnits, T> Sum<TUnits, T>(this Angle<TUnits, T>[] source)
         where TUnits : IAngleUnits<TUnits>
@@ -49,7 +47,6 @@ public static partial class Angle
     /// <returns>The sum of the angles in the collection.</returns>
     /// <remarks>
     /// The sum of angles is computed by adding all the angles in the given <paramref name="source"/> collection.
-    /// The resulting angle is the cumulative sum of all the angles in radians.
     /// </remarks>
     public static Angle<TUnits, T> Sum<TUnits, T>(this Memory<Angle<TUnits, T>> source)
         where TUnits : IAngleUnits<TUnits>
@@ -63,7 +60,6 @@ public static partial class Angle
     /// <returns>The sum of the angles in the collection.</returns>
     /// <remarks>
     /// The sum of angles is computed by adding all the angles in the given <paramref name="source"/> collection.
-    /// The resulting angle is the cumulative sum of all the angles in radians.
     /// </remarks>
     public static Angle<TUnits, T> Sum<TUnits, T>(this ReadOnlyMemory<Angle<TUnits, T>> source)
         where TUnits : IAngleUnits<TUnits>
@@ -77,7 +73,6 @@ public static partial class Angle
     /// <returns>The sum of the angles in the collection.</returns>
     /// <remarks>
     /// The sum of angles is computed by adding all the angles in the given <paramref name="source"/> collection.
-    /// The resulting angle is the cumulative sum of all the angles in radians.
     /// </remarks>
     public static Angle<TUnits, T> Sum<TUnits, T>(this Span<Angle<TUnits, T>> source)
         where TUnits : IAngleUnits<TUnits>
@@ -91,7 +86,6 @@ public static partial class Angle
     /// <returns>The sum of the angles in the collection.</returns>
     /// <remarks>
     /// The sum of angles is computed by adding all the angles in the given <paramref name="source"/> collection.
-    /// The resulting angle is the cumulative sum of all the angles in radians.
     /// </remarks>
     public static Angle<TUnits, T> Sum<TUnits, T>(this ReadOnlySpan<Angle<TUnits, T>> source)
         where TUnits : IAngleUnits<TUnits>
