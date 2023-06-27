@@ -57,21 +57,21 @@ static class Vector2Extensions
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector2<uint> AsVector2(this Vector128<uint> vector)
     {
-        ref byte address = ref Unsafe.As<Vector128<uint>, byte>(ref vector);
+        ref var address = ref Unsafe.As<Vector128<uint>, byte>(ref vector);
         return Unsafe.ReadUnaligned<Vector2<uint>>(ref address);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector2<int> AsVector2(this Vector128<int> vector)
     {
-        ref byte address = ref Unsafe.As<Vector128<int>, byte>(ref vector);
+        ref var address = ref Unsafe.As<Vector128<int>, byte>(ref vector);
         return Unsafe.ReadUnaligned<Vector2<int>>(ref address);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector2<float> AsVector2(this Vector128<float> vector)
     {
-        ref byte address = ref Unsafe.As<Vector128<float>, byte>(ref vector);
+        ref var address = ref Unsafe.As<Vector128<float>, byte>(ref vector);
         return Unsafe.ReadUnaligned<Vector2<float>>(ref address);
     }
 

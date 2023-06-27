@@ -69,21 +69,21 @@ static class Vector4Extensions
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector4<ushort> AsVector4(this Vector128<ushort> vector)
     {
-        ref byte address = ref Unsafe.As<Vector128<ushort>, byte>(ref vector);
+        ref var address = ref Unsafe.As<Vector128<ushort>, byte>(ref vector);
         return Unsafe.ReadUnaligned<Vector4<ushort>>(ref address);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector4<short> AsVector4(this Vector128<short> vector)
     {
-        ref byte address = ref Unsafe.As<Vector128<short>, byte>(ref vector);
+        ref var address = ref Unsafe.As<Vector128<short>, byte>(ref vector);
         return Unsafe.ReadUnaligned<Vector4<short>>(ref address);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector4<Half> AsVector4(this Vector128<Half> vector)
     {
-        ref byte address = ref Unsafe.As<Vector128<Half>, byte>(ref vector);
+        ref var address = ref Unsafe.As<Vector128<Half>, byte>(ref vector);
         return Unsafe.ReadUnaligned<Vector4<Half>>(ref address);
     }
 
