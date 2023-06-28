@@ -5,6 +5,8 @@
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <WarningsAsErrors>Nullable</WarningsAsErrors>
+
     <IsPackable>false</IsPackable>
     <RootNamespace>NetFabric.Numerics.Benchmarks</RootNamespace>
   </PropertyGroup>

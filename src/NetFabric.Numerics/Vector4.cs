@@ -108,10 +108,10 @@ public readonly struct Vector4<T>
 
     #region constants
 
-    const int count = 4;
+    public const int Count = 4;
 
     int IVector<Vector4<T>, T>.Count
-        => count;
+        => Count;
 
     /// <summary>
     /// Represents a vector whose coordinates are equal to zero. This field is read-only.
@@ -200,76 +200,22 @@ public readonly struct Vector4<T>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public bool Equals(Vector4<T> other)
     {
-        if (typeof(T) == typeof(ushort))
-        {
-            if (Vector64.IsHardwareAccelerated)
-                return ((Vector4<ushort>)(object)this).AsVector64().Equals(((Vector4<ushort>)(object)other).AsVector64());
-
-            if (Vector128.IsHardwareAccelerated)
-                return ((Vector4<ushort>)(object)this).AsVector128().Equals(((Vector4<ushort>)(object)other).AsVector128());
-        }
-
-        if (typeof(T) == typeof(short))
-        {
-            if (Vector64.IsHardwareAccelerated)
-                return ((Vector4<short>)(object)this).AsVector64().Equals(((Vector4<short>)(object)other).AsVector64());
-
-            if (Vector128.IsHardwareAccelerated)
-                return ((Vector4<short>)(object)this).AsVector128().Equals(((Vector4<short>)(object)other).AsVector128());
-        }
-
-        //if (typeof(T) == typeof(Half))
-        //{
-        //    if (Vector64.IsHardwareAccelerated)
-        //        return ((Vector4<Half>)(object)this).AsVector64().Equals(((Vector4<Half>)(object)other).AsVector64());
-
-        //    if (Vector128.IsHardwareAccelerated)
-        //        return ((Vector4<Half>)(object)this).AsVector128().Equals(((Vector4<Half>)(object)other).AsVector128());
-        //}
-
-        if (typeof(T) == typeof(uint))
-        {
-            if (Vector128.IsHardwareAccelerated)
-                return ((Vector4<uint>)(object)this).AsVector128().Equals(((Vector4<uint>)(object)other).AsVector128());
-        }
-
-        if (typeof(T) == typeof(int))
-        {
-            if (Vector128.IsHardwareAccelerated)
-                return ((Vector4<int>)(object)this).AsVector128().Equals(((Vector4<int>)(object)other).AsVector128());
-        }
-
         if (typeof(T) == typeof(float))
         {
-            if (Vector128.IsHardwareAccelerated)
-                return ((Vector4<float>)(object)this).AsVector128().Equals(((Vector4<float>)(object)other).AsVector128());
+            return Unsafe.As<Vector4<T>, System.Numerics.Vector4>(ref Unsafe.AsRef(in this))
+                .Equals(Unsafe.As<Vector4<T>, System.Numerics.Vector4>(ref Unsafe.AsRef(in other)));
         }
-
-        if (typeof(T) == typeof(ulong))
+        
+        if (Vector.IsHardwareAccelerated && Vector<T>.Count == Count && Vector<T>.IsSupported)
         {
-            if (Vector256.IsHardwareAccelerated)
-                return ((Vector4<ulong>)(object)this).AsVector256().Equals(((Vector4<ulong>)(object)other).AsVector256());
+            return Unsafe.As<Vector4<T>, Vector<T>>(ref Unsafe.AsRef(in this))
+                .Equals(Unsafe.As<Vector4<T>, Vector<T>>(ref Unsafe.AsRef(in other)));
         }
 
-        if (typeof(T) == typeof(long))
-        {
-            if (Vector256.IsHardwareAccelerated)
-                return ((Vector4<long>)(object)this).AsVector256().Equals(((Vector4<long>)(object)other).AsVector256());
-        }
-
-        if (typeof(T) == typeof(double))
-        {
-            if (Vector256.IsHardwareAccelerated)
-                return ((Vector4<double>)(object)this).AsVector256().Equals(((Vector4<double>)(object)other).AsVector256());
-        }
-
-        return SoftwareFallback(in this, other);
-
-        static bool SoftwareFallback(in Vector4<T> self, Vector4<T> other)
-            => EqualityComparer<T>.Default.Equals(self.X, other.X) &&
-                EqualityComparer<T>.Default.Equals(self.Y, other.Y) &&
-                EqualityComparer<T>.Default.Equals(self.Z, other.Z) &&
-                EqualityComparer<T>.Default.Equals(self.W, other.W);
+        return EqualityComparer<T>.Default.Equals(X, other.X) &&
+            EqualityComparer<T>.Default.Equals(Y, other.Y) &&
+            EqualityComparer<T>.Default.Equals(Z, other.Z) &&
+            EqualityComparer<T>.Default.Equals(W, other.W);
     }
 
     /// <inheritdoc/>
@@ -510,7 +456,7 @@ public readonly struct Vector4<T>
     public T this[int index]
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        get => (uint)index >= count
+        get => (uint)index >= Count
              ? Throw.ArgumentOutOfRangeException<T>(nameof(index), index)
              : Unsafe.Add(ref Unsafe.AsRef(in X), index);
     }
@@ -723,77 +669,26 @@ public static class Vector4
     /// X, Y, Z, and W coordinates of the input vectors, respectively. The input vectors remain
     /// unchanged.
     /// </remarks>
+    [SkipLocalsInit]
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector4<T> Add<T>(in Vector4<T> left, in Vector4<T> right)
         where T : struct, INumber<T>, IMinMaxValue<T>
     {
-        if (typeof(T) == typeof(ushort))
+        if (typeof(T) == typeof(uint) || typeof(T) == typeof(int) || typeof(T) == typeof(float))
         {
-            if (Vector64.IsHardwareAccelerated)
-                return (Vector4<T>)(object)Vector64.Add(((Vector4<ushort>)(object)left).AsVector64(), ((Vector4<ushort>)(object)right).AsVector64()).AsVector4();
-
-            if (Vector128.IsHardwareAccelerated)
-                return (Vector4<T>)(object)Vector128.Add(((Vector4<ushort>)(object)left).AsVector128(), ((Vector4<ushort>)(object)right).AsVector128()).AsVector4();
+            var v1 = Unsafe.As<Vector4<T>, System.Numerics.Vector4>(ref Unsafe.AsRef(in left));
+            var v2 = Unsafe.As<Vector4<T>, System.Numerics.Vector4>(ref Unsafe.AsRef(in right));
+            return Unsafe.As<System.Numerics.Vector4, Vector4<T>>(ref Unsafe.AsRef(v1 + v2));
+        }
+        
+        if (Vector.IsHardwareAccelerated && Vector<T>.Count >= Vector4<T>.Count && Vector<T>.IsSupported)
+        {
+            var v1 = Unsafe.As<Vector4<T>, Vector<T>>(ref Unsafe.AsRef(in left));
+            var v2 = Unsafe.As<Vector4<T>, Vector<T>>(ref Unsafe.AsRef(in right));
+            return Unsafe.As<Vector<T>, Vector4<T>>(ref Unsafe.AsRef(v1 + v2));
         }
 
-        if (typeof(T) == typeof(short))
-        {
-            if (Vector64.IsHardwareAccelerated)
-                return (Vector4<T>)(object)Vector64.Add(((Vector4<short>)(object)left).AsVector64(), ((Vector4<short>)(object)right).AsVector64()).AsVector4();
-
-            if (Vector128.IsHardwareAccelerated)
-                return (Vector4<T>)(object)Vector128.Add(((Vector4<short>)(object)left).AsVector128(), ((Vector4<short>)(object)right).AsVector128()).AsVector4();
-        }
-
-        //if (typeof(T) == typeof(Half))
-        //{
-        //    if (Vector64.IsHardwareAccelerated)
-        //        return (Vector4<T>)(object)Vector64.Add(((Vector4<Half>)(object)left).AsVector64(), ((Vector4<Half>)(object)right).AsVector64()).AsVector4();
-
-        //    if (Vector128.IsHardwareAccelerated)
-        //        return (Vector4<T>)(object)Vector128.Add(((Vector4<Half>)(object)left).AsVector128(), ((Vector4<Half>)(object)right).AsVector128()).AsVector4();
-        //}
-
-        if (typeof(T) == typeof(uint))
-        {
-            if (Vector128.IsHardwareAccelerated)
-                return (Vector4<T>)(object)Vector128.Add(((Vector4<uint>)(object)left).AsVector128(), ((Vector4<uint>)(object)right).AsVector128()).AsVector4();
-        }
-
-        if (typeof(T) == typeof(int))
-        {
-            if (Vector128.IsHardwareAccelerated)
-                return (Vector4<T>)(object)Vector128.Add(((Vector4<int>)(object)left).AsVector128(), ((Vector4<int>)(object)right).AsVector128()).AsVector4();
-        }
-
-        if (typeof(T) == typeof(float))
-        {
-            if (Vector128.IsHardwareAccelerated)
-                return (Vector4<T>)(object)Vector128.Add(((Vector4<float>)(object)left).AsVector128(), ((Vector4<float>)(object)right).AsVector128()).AsVector4();
-        }
-
-        if (typeof(T) == typeof(ulong))
-        {
-            if (Vector256.IsHardwareAccelerated)
-                return (Vector4<T>)(object)Vector256.Add(((Vector4<ulong>)(object)left).AsVector256(), ((Vector4<ulong>)(object)right).AsVector256()).AsVector4();
-        }
-
-        if (typeof(T) == typeof(long))
-        {
-            if (Vector256.IsHardwareAccelerated)
-                return (Vector4<T>)(object)Vector256.Add(((Vector4<long>)(object)left).AsVector256(), ((Vector4<long>)(object)right).AsVector256()).AsVector4();
-        }
-
-        if (typeof(T) == typeof(double))
-        {
-            if (Vector256.IsHardwareAccelerated)
-                return (Vector4<T>)(object)Vector256.Add(((Vector4<double>)(object)left).AsVector256(), ((Vector4<double>)(object)right).AsVector256()).AsVector4();
-        }
-
-        return SoftwareFallback(in left, in right);
-
-        static Vector4<T> SoftwareFallback(in Vector4<T> left, in Vector4<T> right)
-            => new(left.X + right.X, left.Y + right.Y, left.Z + right.Z, left.W + right.W);
+        return new(left.X + right.X, left.Y + right.Y, left.Z + right.Z, left.W + right.W);
     }
 
 

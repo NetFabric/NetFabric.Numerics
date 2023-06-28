@@ -5,6 +5,7 @@
     <TargetFrameworks>net7.0</TargetFrameworks>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <WarningsAsErrors>Nullable</WarningsAsErrors>
     <Description></Description>
     <Version>1.0.0-beta03</Version>
     <Copyright>Copyright © Antão Almada 2023</Copyright>

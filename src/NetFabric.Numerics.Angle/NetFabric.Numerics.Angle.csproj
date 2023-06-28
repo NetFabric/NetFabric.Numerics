@@ -5,6 +5,7 @@
     <TargetFrameworks>net7.0; net8.0</TargetFrameworks>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <WarningsAsErrors>Nullable</WarningsAsErrors>
     <Description>
       A strongly-typed representation of an angle.
       The explicit declaration of the units in creation and reading methods, reduces the tipical confusion when dealing with angles.

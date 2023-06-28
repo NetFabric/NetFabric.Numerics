@@ -97,10 +97,10 @@ public readonly struct Vector3<T>
 
     #region constants
 
-    const int count = 3;
+    public const int Count = 3;
 
     int IVector<Vector3<T>, T>.Count
-        => count;
+        => Count;
 
     /// <summary>
     /// Represents a vector whose coordinates are equal to zero. This field is read-only.
@@ -189,75 +189,21 @@ public readonly struct Vector3<T>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public bool Equals(Vector3<T> other)
     {
-        if (typeof(T) == typeof(ushort))
-        {
-            if (Vector64.IsHardwareAccelerated)
-                return ((Vector3<ushort>)(object)this).AsVector64().Equals(((Vector3<ushort>)(object)other).AsVector64());
-
-            if (Vector128.IsHardwareAccelerated)
-                return ((Vector3<ushort>)(object)this).AsVector128().Equals(((Vector3<ushort>)(object)other).AsVector128());
-        }
-
-        if (typeof(T) == typeof(short))
-        {
-            if (Vector64.IsHardwareAccelerated)
-                return ((Vector3<short>)(object)this).AsVector64().Equals(((Vector3<short>)(object)other).AsVector64());
-
-            if (Vector128.IsHardwareAccelerated)
-                return ((Vector3<short>)(object)this).AsVector128().Equals(((Vector3<short>)(object)other).AsVector128());
-        }
-
-        //if (typeof(T) == typeof(Half))
-        //{
-        //    if (Vector64.IsHardwareAccelerated)
-        //        return ((Vector3<Half>)(object)this).AsVector64().Equals(((Vector3<Half>)(object)other).AsVector64());
-
-        //    if (Vector128.IsHardwareAccelerated)
-        //        return ((Vector3<Half>)(object)this).AsVector128().Equals(((Vector3<Half>)(object)other).AsVector128());
-        //}
-
-        if (typeof(T) == typeof(uint))
-        {
-            if (Vector128.IsHardwareAccelerated)
-                return ((Vector3<uint>)(object)this).AsVector128().Equals(((Vector3<uint>)(object)other).AsVector128());
-        }
-
-        if (typeof(T) == typeof(int))
-        {
-            if (Vector128.IsHardwareAccelerated)
-                return ((Vector3<int>)(object)this).AsVector128().Equals(((Vector3<int>)(object)other).AsVector128());
-        }
-
         if (typeof(T) == typeof(float))
         {
-            if (Vector128.IsHardwareAccelerated)
-                return ((Vector3<float>)(object)this).AsVector128().Equals(((Vector3<float>)(object)other).AsVector128());
+            return Unsafe.As<Vector3<T>, System.Numerics.Vector3>(ref Unsafe.AsRef(in this))
+                .Equals(Unsafe.As<Vector3<T>, System.Numerics.Vector3>(ref Unsafe.AsRef(in other)));
         }
-
-        if (typeof(T) == typeof(ulong))
+        
+        if (Vector.IsHardwareAccelerated && Vector<T>.Count == Count && Vector<T>.IsSupported)
         {
-            if (Vector256.IsHardwareAccelerated)
-                return ((Vector3<ulong>)(object)this).AsVector256().Equals(((Vector3<ulong>)(object)other).AsVector256());
+            return Unsafe.As<Vector3<T>, Vector<T>>(ref Unsafe.AsRef(in this))
+                .Equals(Unsafe.As<Vector3<T>, Vector<T>>(ref Unsafe.AsRef(in other)));
         }
 
-        if (typeof(T) == typeof(long))
-        {
-            if (Vector256.IsHardwareAccelerated)
-                return ((Vector3<long>)(object)this).AsVector256().Equals(((Vector3<long>)(object)other).AsVector256());
-        }
-
-        if (typeof(T) == typeof(double))
-        {
-            if (Vector256.IsHardwareAccelerated)
-                return ((Vector3<double>)(object)this).AsVector256().Equals(((Vector3<double>)(object)other).AsVector256());
-        }
-
-        return SoftwareFallback(in this, other);
-
-        static bool SoftwareFallback(in Vector3<T> self, Vector3<T> other)
-            => EqualityComparer<T>.Default.Equals(self.X, other.X) &&
-                EqualityComparer<T>.Default.Equals(self.Y, other.Y) &&
-                EqualityComparer<T>.Default.Equals(self.Z, other.Z);
+        return EqualityComparer<T>.Default.Equals(X, other.X) &&
+            EqualityComparer<T>.Default.Equals(Y, other.Y) &&
+            EqualityComparer<T>.Default.Equals(Z, other.Z);
     }
 
     /// <inheritdoc/>
@@ -498,7 +444,7 @@ public readonly struct Vector3<T>
     public T this[int index]
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        get => (uint)index >= count
+        get => (uint)index >= Count
              ? Throw.ArgumentOutOfRangeException<T>(nameof(index), index)
              : Unsafe.Add(ref Unsafe.AsRef(in X), index);
     }
@@ -708,10 +654,27 @@ public static class Vector3
     /// X, Y, Z, and W coordinates of the input vectors, respectively. The input vectors remain
     /// unchanged.
     /// </remarks>
+    [SkipLocalsInit]
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector3<T> Add<T>(in Vector3<T> left, in Vector3<T> right)
         where T : struct, INumber<T>, IMinMaxValue<T>
-        => new(left.X + right.X, left.Y + right.Y, left.Z + right.Z);
+    {
+        if (typeof(T) == typeof(uint) || typeof(T) == typeof(int) || typeof(T) == typeof(float))
+        {
+            var v1 = Unsafe.As<Vector3<T>, System.Numerics.Vector3>(ref Unsafe.AsRef(in left));
+            var v2 = Unsafe.As<Vector3<T>, System.Numerics.Vector3>(ref Unsafe.AsRef(in right));
+            return Unsafe.As<System.Numerics.Vector3, Vector3<T>>(ref Unsafe.AsRef(v1 + v2));
+        }
+        
+        if (Vector.IsHardwareAccelerated && Vector<T>.Count >= Vector3<T>.Count && Vector<T>.IsSupported)
+        {
+            var v1 = Unsafe.As<Vector3<T>, Vector<T>>(ref Unsafe.AsRef(in left));
+            var v2 = Unsafe.As<Vector3<T>, Vector<T>>(ref Unsafe.AsRef(in right));
+            return Unsafe.As<Vector<T>, Vector3<T>>(ref Unsafe.AsRef(v1 + v2));
+        }
+
+        return new(left.X + right.X, left.Y + right.Y, left.Z + right.Z);
+    }
 
     /// <summary>
     /// Subtracts the second vector from the first vector component-wise and returns the result as a new Vector3.
