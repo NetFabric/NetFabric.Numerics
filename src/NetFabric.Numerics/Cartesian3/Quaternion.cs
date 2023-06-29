@@ -10,6 +10,7 @@
 /// <param name="Z">The Z component.</param>
 /// <param name="W">The W component.</param>
 [System.Diagnostics.DebuggerDisplay("X = {X}, Y = {Y}, Z = {Z}, W = {W}")]
+[SkipLocalsInit]
 public readonly record struct Quaternion<T>(T X, T Y, T Z, T W)
     : IEquatable<Quaternion<T>>,
       IEqualityOperators<Quaternion<T>, Quaternion<T>, bool>,

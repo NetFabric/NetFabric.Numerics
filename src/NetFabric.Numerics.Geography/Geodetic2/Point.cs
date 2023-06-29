@@ -1,8 +1,10 @@
 using System.Numerics;
+using System.Runtime.CompilerServices;
 
 namespace NetFabric.Numerics.Geography.Geodetic2;
 
 [System.Diagnostics.DebuggerDisplay("Latitude = {Latitude}, Longitude = {Longitude}")]
+[SkipLocalsInit]
 public readonly record struct Point<TDatum, TAngleUnits, T>(Angle<TAngleUnits, T> Latitude, Angle<TAngleUnits, T> Longitude) 
     : IGeodeticPoint<Point<TDatum, TAngleUnits, T>, TDatum>
     where TDatum : IDatum<TDatum>

@@ -13,6 +13,7 @@ namespace NetFabric.Numerics;
 /// The matrix is stored using four <see cref="Vector4{T}"/> instances representing the
 /// rows of the matrix.
 /// </remarks>
+[SkipLocalsInit]
 public readonly struct Matrix4x4<T>
     : IMatrix<Matrix4x4<T>, T>
     where T : struct, INumber<T>, IMinMaxValue<T>

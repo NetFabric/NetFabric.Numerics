@@ -10,6 +10,7 @@ namespace NetFabric.Numerics.Spherical;
 /// <param name="Zenith">The zenith coordinate.</param>
 /// <param name="Radius">The radius coordinate.</param>
 [System.Diagnostics.DebuggerDisplay("Azimuth = {Azimuth}, Zenith = {Zenith}, Radius = {Radius}")]
+[SkipLocalsInit]
 public readonly record struct Point<TAngleUnits, TAngle, TRadius>(Angle<TAngleUnits, TAngle> Azimuth, Angle<TAngleUnits, TAngle> Zenith, TRadius Radius) 
     : IPoint<Point<TAngleUnits, TAngle, TRadius>>
     where TAngleUnits : struct, IAngleUnits<TAngleUnits>

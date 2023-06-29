@@ -6,6 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <WarningsAsErrors>Nullable</WarningsAsErrors>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Description>
       A strongly-typed representation of an angle.
       The explicit declaration of the units in creation and reading methods, reduces the tipical confusion when dealing with angles.

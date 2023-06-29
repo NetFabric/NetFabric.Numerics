@@ -30,6 +30,7 @@ namespace NetFabric.Numerics;
 /// </remarks>
 [DebuggerDisplay("{Value}")]
 [DebuggerTypeProxy(typeof(AngleDebugView<,>))]
+[SkipLocalsInit]
 public readonly struct Angle<TUnits, T>
     : IAngle<Angle<TUnits, T>, T>,
       IUnaryPlusOperators<Angle<TUnits, T>, Angle<TUnits, T>>,

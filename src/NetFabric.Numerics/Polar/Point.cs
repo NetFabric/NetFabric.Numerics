@@ -9,6 +9,7 @@ namespace NetFabric.Numerics.Polar;
 /// <param name="Azimuth">The azimuth coordinate.</param>
 /// <param name="Radius">The radius coordinate.</param>
 [System.Diagnostics.DebuggerDisplay("Azimuth = {Azimuth}, Radius = {Radius}")]
+[SkipLocalsInit]
 public readonly record struct Point<TAngleUnits, TAngle, TRadius>(Angle<TAngleUnits, TAngle> Azimuth, TRadius Radius)
     : IPoint<Point<TAngleUnits, TAngle, TRadius>>
     where TAngleUnits : struct, IAngleUnits<TAngleUnits>

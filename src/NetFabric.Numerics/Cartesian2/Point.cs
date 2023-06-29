@@ -7,6 +7,7 @@ namespace NetFabric.Numerics.Cartesian2;
 /// <param name="X">The X coordinate.</param>
 /// <param name="Y">The X coordinate.</param>
 [System.Diagnostics.DebuggerDisplay("X = {X}, Y = {Y}")]
+[SkipLocalsInit]
 public readonly record struct Point<T>(T X, T Y) 
     : IPoint<Point<T>>
     where T: struct, INumber<T>, IMinMaxValue<T>

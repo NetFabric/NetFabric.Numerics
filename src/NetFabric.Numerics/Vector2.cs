@@ -11,6 +11,7 @@ namespace NetFabric.Numerics;
 /// <param name="X">The X coordinate.</param>
 /// <param name="Y">The X coordinate.</param>
 [System.Diagnostics.DebuggerDisplay("X = {X}, Y = {Y}")]
+[SkipLocalsInit]
 public readonly struct Vector2<T>
     : IVector<Vector2<T>, T>
     where T : struct, INumber<T>, IMinMaxValue<T>
@@ -639,7 +640,6 @@ public static class Vector2
     /// X, Y, Z, and W coordinates of the input vectors, respectively. The input vectors remain
     /// unchanged.
     /// </remarks>
-    [SkipLocalsInit]
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector2<T> Add<T>(in Vector2<T> left, in Vector2<T> right)
         where T : struct, INumber<T>, IMinMaxValue<T>
