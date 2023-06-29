@@ -179,49 +179,28 @@ public readonly struct Vector2<T>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public bool Equals(Vector2<T> other)
     {
-        if (typeof(T) == typeof(uint))
+        if (typeof(T) == typeof(ushort) || typeof(T) == typeof(short)) // 32 bit
         {
             if (Vector64.IsHardwareAccelerated)
-                return ((Vector2<uint>)(object)this).AsVector64().Equals(((Vector2<uint>)(object)other).AsVector64());
+                return new Vector4<T>(in this).Equals(new Vector4<T>(in other));
 
-            if (Vector128.IsHardwareAccelerated)
-                return ((Vector2<uint>)(object)this).AsVector128().Equals(((Vector2<uint>)(object)other).AsVector128());
+            // if (Vector128.IsHardwareAccelerated)
+            //     return new Vector4<T>(in this).Equals(new Vector4<T>(in other));
         }
 
-        if (typeof(T) == typeof(int))
+        if (typeof(T) == typeof(uint) || typeof(T) == typeof(int) || typeof(T) == typeof(float)) // 64 bit
         {
             if (Vector64.IsHardwareAccelerated)
-                return ((Vector2<int>)(object)this).AsVector64().Equals(((Vector2<int>)(object)other).AsVector64());
+                return this.AsVector64().Equals(other.AsVector64());
 
             if (Vector128.IsHardwareAccelerated)
-                return ((Vector2<int>)(object)this).AsVector128().Equals(((Vector2<int>)(object)other).AsVector128());
+                return new Vector4<T>(in this).Equals(new Vector4<T>(in other));
         }
 
-        if (typeof(T) == typeof(float))
-        {
-            if (Vector64.IsHardwareAccelerated)
-                return ((Vector2<float>)(object)this).AsVector64().Equals(((Vector2<float>)(object)other).AsVector64());
-
-            if (Vector128.IsHardwareAccelerated)
-                return ((Vector2<float>)(object)this).AsVector128().Equals(((Vector2<float>)(object)other).AsVector128());
-        }
-
-        if (typeof(T) == typeof(ulong))
+        if (typeof(T) == typeof(ulong) || typeof(T) == typeof(long) || typeof(T) == typeof(double)) // 128 bit
         {
             if (Vector128.IsHardwareAccelerated)
-                return ((Vector2<ulong>)(object)this).AsVector128().Equals(((Vector2<ulong>)(object)other).AsVector128());
-        }
-
-        if (typeof(T) == typeof(long))
-        {
-            if (Vector128.IsHardwareAccelerated)
-                return ((Vector2<long>)(object)this).AsVector128().Equals(((Vector2<long>)(object)other).AsVector128());
-        }
-
-        if (typeof(T) == typeof(double))
-        {
-            if (Vector128.IsHardwareAccelerated)
-                return ((Vector2<double>)(object)this).AsVector128().Equals(((Vector2<double>)(object)other).AsVector128());
+                return this.AsVector128().Equals(other.AsVector128());
         }
 
         return EqualityComparer<T>.Default.Equals(X, other.X) &&
