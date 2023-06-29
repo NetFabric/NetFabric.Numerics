@@ -199,8 +199,63 @@ public readonly struct Vector4<T>
     /// <param name="other">The vector to compare with the current vector.</param>
     /// <returns><c>true</c> if the current vector is equal to the other vector; otherwise, <c>false</c>.</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public bool Equals(Vector4<T> other) 
-        => EqualityComparer<T>.Default.Equals(X, other.X) &&
+    public bool Equals(Vector4<T> other)
+    {
+        if (typeof(T) == typeof(ushort))
+        {
+            if (Vector64.IsHardwareAccelerated)
+                return ((Vector4<ushort>)(object)this).AsVector64().Equals(((Vector4<ushort>)(object)other).AsVector64());
+
+            if (Vector128.IsHardwareAccelerated)
+                return ((Vector4<ushort>)(object)this).AsVector128().Equals(((Vector4<ushort>)(object)other).AsVector128());
+        }
+
+        if (typeof(T) == typeof(short))
+        {
+            if (Vector64.IsHardwareAccelerated)
+                return ((Vector4<short>)(object)this).AsVector64().Equals(((Vector4<short>)(object)other).AsVector64());
+
+            if (Vector128.IsHardwareAccelerated)
+                return ((Vector4<short>)(object)this).AsVector128().Equals(((Vector4<short>)(object)other).AsVector128());
+        }
+
+        if (typeof(T) == typeof(uint))
+        {
+            if (Vector128.IsHardwareAccelerated)
+                return ((Vector4<uint>)(object)this).AsVector128().Equals(((Vector4<uint>)(object)other).AsVector128());
+        }
+
+        if (typeof(T) == typeof(int))
+        {
+            if (Vector128.IsHardwareAccelerated)
+                return ((Vector4<int>)(object)this).AsVector128().Equals(((Vector4<int>)(object)other).AsVector128());
+        }
+
+        if (typeof(T) == typeof(float))
+        {
+            if (Vector128.IsHardwareAccelerated)
+                return ((Vector4<float>)(object)this).AsVector128().Equals(((Vector4<float>)(object)other).AsVector128());
+        }
+
+        if (typeof(T) == typeof(ulong))
+        {
+            if (Vector256.IsHardwareAccelerated)
+                return ((Vector4<ulong>)(object)this).AsVector256().Equals(((Vector4<ulong>)(object)other).AsVector256());
+        }
+
+        if (typeof(T) == typeof(long))
+        {
+            if (Vector256.IsHardwareAccelerated)
+                return ((Vector4<long>)(object)this).AsVector256().Equals(((Vector4<long>)(object)other).AsVector256());
+        }
+
+        if (typeof(T) == typeof(double))
+        {
+            if (Vector256.IsHardwareAccelerated)
+                return ((Vector4<double>)(object)this).AsVector256().Equals(((Vector4<double>)(object)other).AsVector256());
+        }
+
+        return EqualityComparer<T>.Default.Equals(X, other.X) &&
             EqualityComparer<T>.Default.Equals(Y, other.Y) &&
             EqualityComparer<T>.Default.Equals(Z, other.Z) &&
             EqualityComparer<T>.Default.Equals(W, other.W);
