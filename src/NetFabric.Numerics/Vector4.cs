@@ -669,11 +669,11 @@ public static class Vector4
                 return result.AsVector4();
             }
 
-            //if (Vector128.IsHardwareAccelerated)
-            //{
-            //    var result = Vector64.Add(left.AsVector64(), right.AsVector64());
-            //    return result.AsVector4();
-            //}
+            if (Vector128.IsHardwareAccelerated)
+            {
+                var result = Vector128.Add(left.ReadUnalignedVector128(), right.ReadUnalignedVector128());
+                return result.ReadUnalignedVector4();
+            }
         }
 
         if (typeof(T) == typeof(uint) || typeof(T) == typeof(int) || typeof(T) == typeof(float)) // 128 bit

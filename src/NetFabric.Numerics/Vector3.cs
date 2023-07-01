@@ -648,20 +648,35 @@ public static class Vector3
     {
         if (typeof(T) == typeof(ushort) || typeof(T) == typeof(short)) // 48 bit
         {
-            if (Vector64.IsHardwareAccelerated || Vector128.IsHardwareAccelerated)
-                return Vector4.Add(left.ToVector4(), right.ToVector4()).ToVector3();
+            if (Vector64.IsHardwareAccelerated)
+            {
+                var result = Vector64.Add(left.ReadUnalignedVector64(), right.ReadUnalignedVector64());
+                return result.ReadUnalignedVector3();
+            }
+
+            if (Vector128.IsHardwareAccelerated)
+            {
+                var result = Vector128.Add(left.ReadUnalignedVector128(), right.ReadUnalignedVector128());
+                return result.ReadUnalignedVector3();
+            }
         }
 
         if (typeof(T) == typeof(uint) || typeof(T) == typeof(int) || typeof(T) == typeof(float)) // 96 bit
         {
             if (Vector128.IsHardwareAccelerated)
-                return Vector4.Add(left.ToVector4(), right.ToVector4()).ToVector3();
+            {
+                var result = Vector128.Add(left.ReadUnalignedVector128(), right.ReadUnalignedVector128());
+                return result.ReadUnalignedVector3();
+            }
         }
 
         if (typeof(T) == typeof(ulong) || typeof(T) == typeof(long) || typeof(T) == typeof(double)) // 192 bit
         {
             if (Vector256.IsHardwareAccelerated)
-                return Vector4.Add(left.ToVector4(), right.ToVector4()).ToVector3();
+            {
+                var result = Vector256.Add(left.ReadUnalignedVector256(), right.ReadUnalignedVector256());
+                return result.ReadUnalignedVector3();
+            }
         }
 
         return new(left.X + right.X, left.Y + right.Y, left.Z + right.Z);

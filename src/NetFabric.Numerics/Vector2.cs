@@ -632,8 +632,17 @@ public static class Vector2
     {
         if (typeof(T) == typeof(ushort) || typeof(T) == typeof(short)) // 32 bit
         {
-            if (Vector64.IsHardwareAccelerated || Vector128.IsHardwareAccelerated)
-                return Vector4.Add(left.ToVector4(), right.ToVector4()).ToVector2();
+            if (Vector64.IsHardwareAccelerated)
+            {
+                var result = Vector64.Add(left.ReadUnalignedVector64(), right.ReadUnalignedVector64());
+                return result.ReadUnalignedVector2();
+            }
+
+            if (Vector128.IsHardwareAccelerated)
+            {
+                var result = Vector128.Add(left.ReadUnalignedVector128(), right.ReadUnalignedVector128());
+                return result.ReadUnalignedVector2();
+            }
         }
 
         if (typeof(T) == typeof(uint) || typeof(T) == typeof(int) || typeof(T) == typeof(float)) // 64 bit
@@ -645,7 +654,10 @@ public static class Vector2
             }
 
             if (Vector128.IsHardwareAccelerated)
-                return Vector4.Add(left.ToVector4(), right.ToVector4()).ToVector2();
+            {
+                var result = Vector128.Add(left.ReadUnalignedVector128(), right.ReadUnalignedVector128());
+                return result.ReadUnalignedVector2();
+            }
         }
 
         if (typeof(T) == typeof(ulong) || typeof(T) == typeof(long) || typeof(T) == typeof(double)) // 128 bit
