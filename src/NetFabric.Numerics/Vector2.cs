@@ -841,7 +841,7 @@ public static class Vector2
     public static Vector2<T> Normalize<T>(in Vector2<T> vector)
         where T : struct, INumber<T>, IMinMaxValue<T>, IRootFunctions<T>
     {
-        var length = T.CreateChecked(Magnitude(vector));
+        var length = Magnitude(vector);
         return length != T.Zero
             ? Divide(in vector, length)
             : Vector2<T>.Zero;
@@ -873,15 +873,27 @@ public static class Vector2
     /// Gets the smallest angle between two vectors.
     /// </summary>
     /// <typeparam name="T">The numeric type used internally by <paramref name="from"/> and <paramref name="to"/>.</typeparam>
-    /// <typeparam name="TAngle">The floating point type used internally by the returned angle.</typeparam>
+    /// <param name="from">The vector where the angle measurement starts at.</param>
+    /// <param name="to">The vector where the angle measurement stops at.</param>
+    /// <returns>The angle between two vectors.</returns>
+    /// <remarks>The angle is always less than 180 degrees.</remarks>
+    public static AngleReduced<Radians, T> AngleBetween<T>(in Vector2<T> from, in Vector2<T> to)
+        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>, IRootFunctions<T>, ITrigonometricFunctions<T>
+        => Angle.Acos(Dot(in from, in to) / (Magnitude(in from) * Magnitude(in to)));
+
+    /// <summary>
+    /// Gets the smallest angle between two vectors.
+    /// </summary>
+    /// <typeparam name="T">The numeric type used internally by <paramref name="from"/> and <paramref name="to"/>.</typeparam>
+    /// <typeparam name="TAngle">The numeric type used internally by the returned angle.</typeparam>
     /// <param name="from">The vector where the angle measurement starts at.</param>
     /// <param name="to">The vector where the angle measurement stops at.</param>
     /// <returns>The angle between two vectors.</returns>
     /// <remarks>The angle is always less than 180 degrees.</remarks>
     public static AngleReduced<Radians, TAngle> AngleBetween<T, TAngle>(in Vector2<T> from, in Vector2<T> to)
         where T : struct, INumber<T>, IMinMaxValue<T>
-        where TAngle : struct, IFloatingPoint<TAngle>, IMinMaxValue<TAngle>, ITrigonometricFunctions<TAngle>, IRootFunctions<TAngle>
-        => Angle.Acos(TAngle.CreateChecked(Dot(in from, in to)) / (Magnitude<T, TAngle>(in from) * Magnitude<T, TAngle>(in to)));
+        where TAngle : struct, IFloatingPoint<TAngle>, IMinMaxValue<TAngle>, IRootFunctions<TAngle>, ITrigonometricFunctions<TAngle> 
+        => AngleBetween(Vector2<TAngle>.CreateChecked(from), Vector2<TAngle>.CreateChecked(to));
 
     ///// <summary>
     ///// Gets the angle between two vectors.

@@ -114,7 +114,7 @@ public class ToDegreesTests
         // arrange
 
         // act
-        var result = Angle.ToDegrees<double>(degrees, minutes);
+        var result = Angle.ToDegrees(degrees, minutes);
 
         // assert
         result.Value.Should().BeApproximately(expected.Value, 0.000001);
@@ -160,7 +160,7 @@ public class ToDegreesTests
         // arrange
 
         // act
-        var result = Angle.ToDegrees<double>(degrees, minutes, seconds);
+        var result = Angle.ToDegrees(degrees, minutes, seconds);
 
         // assert
         result.Value.Should().BeApproximately(expected.Value, 0.000001);

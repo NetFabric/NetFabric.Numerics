@@ -119,6 +119,24 @@ public static class Point
     /// <summary>
     /// Converts a point in polar coordinates to cartesian 2D coordinates.
     /// </summary>
+    /// <typeparam name="T">The type of the coordinates of the point.</typeparam>
+    /// <param name="point">The point in polar coordinates to convert.</param>
+    /// <returns>The cartesian 2D coordinates representing the point.</returns>
+    public static Cartesian2.Point<T> ConvertToCartesian<T>(Point<Radians, T, T> point)
+        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>, ITrigonometricFunctions<T>
+    {
+        var x = point.Radius * Angle.Cos(point.Azimuth);
+        var y = point.Radius * Angle.Sin(point.Azimuth);
+
+        return new(x, y);
+    }
+
+    /// <summary>
+    /// Converts a point in polar coordinates to cartesian 2D coordinates.
+    /// </summary>
+    /// <typeparam name="TAngle">The type used by the angle of the azimuth and zenith coordinates of <paramref name="point"/>.</typeparam>
+    /// <typeparam name="TRadius">The type of the radius coordinate of <paramref name="point"/>.</typeparam>
+    /// <typeparam name="T">The type used by the resulting cartesian point coordinates.</typeparam>
     /// <param name="point">The point in polar coordinates to convert.</param>
     /// <returns>The cartesian 2D coordinates representing the point.</returns>
     public static Cartesian2.Point<T> ConvertToCartesian<TAngle, TRadius, T>(Point<Radians, TAngle, TRadius> point)

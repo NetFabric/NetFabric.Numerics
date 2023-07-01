@@ -174,9 +174,9 @@ public static class Point
     /// The distance is calculated as the Euclidean distance in the 3D Cartesian coordinate system.
     /// </para>
     /// </remarks>
-    public static double Distance<T>(in Point<T> from, in Point<T> to)
-        where T : struct, INumber<T>, IMinMaxValue<T>
-        => Math.Sqrt(double.CreateChecked(DistanceSquared(from, to)));
+    public static T Distance<T>(in Point<T> from, in Point<T> to)
+        where T : struct, INumber<T>, IMinMaxValue<T>, IRootFunctions<T>
+        => T.Sqrt(DistanceSquared(from, to));
 
     /// <summary>
     /// Calculates the square of the distance between two points.
@@ -228,18 +228,14 @@ public static class Point
     /// Converts a cartesian 3D point to spherical coordinates.
     /// </summary>
     /// <typeparam name="T">The type of the point coordinates.</typeparam>
-    /// <typeparam name="TAngle">The type of the azimuth and zenith coordinates.</typeparam>
-    /// <typeparam name="TRadius">The type of the radius coordinate.</typeparam>
     /// <param name="point">The cartesian 3D point to convert.</param>
     /// <returns>The spherical coordinates representing the point.</returns>
-    public static Spherical.Point<Radians, TAngle, TRadius> ToSpherical<T, TAngle, TRadius>(Point<T> point)
-        where T : struct, INumber<T>, IMinMaxValue<T>
-        where TAngle : struct, IFloatingPointIeee754<TAngle>, IMinMaxValue<TAngle>
-        where TRadius : struct, IFloatingPoint<TRadius>, IMinMaxValue<TRadius>, IRootFunctions<TRadius>
+    public static Spherical.Point<Radians, T, T> ToSpherical<T>(Point<T> point)
+        where T : struct, IFloatingPointIeee754<T>, IMinMaxValue<T>
     {
-        var azimuth = Angle.Atan2(TAngle.CreateChecked(point.Y), TAngle.CreateChecked(point.X));
-        var radius = TRadius.Sqrt(TRadius.CreateChecked(Utils.Pow2(point.X) + Utils.Pow2(point.Y) + Utils.Pow2(point.Z)));
-        var zenith = Angle.Acos(TAngle.CreateChecked(TRadius.CreateChecked(point.Z) / radius));
+        var azimuth = Angle.Atan2(point.Y, point.X);
+        var radius = T.Sqrt(Utils.Pow2(point.X) + Utils.Pow2(point.Y) + Utils.Pow2(point.Z));
+        var zenith = Angle.Acos(point.Z / radius);
 
         return new(azimuth, zenith, radius);
     }

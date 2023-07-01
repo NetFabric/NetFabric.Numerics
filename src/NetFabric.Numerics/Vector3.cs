@@ -188,24 +188,10 @@ public readonly struct Vector3<T>
     /// <param name="other">The vector to compare with the current vector.</param>
     /// <returns><c>true</c> if the current vector is equal to the other vector; otherwise, <c>false</c>.</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public bool Equals(Vector3<T> other)
-    {
-        if (typeof(T) == typeof(float))
-        {
-            return Unsafe.As<Vector3<T>, System.Numerics.Vector3>(ref Unsafe.AsRef(in this))
-                .Equals(Unsafe.As<Vector3<T>, System.Numerics.Vector3>(ref Unsafe.AsRef(in other)));
-        }
-        
-        if (Vector.IsHardwareAccelerated && Vector<T>.Count == Count && Vector<T>.IsSupported)
-        {
-            return Unsafe.As<Vector3<T>, Vector<T>>(ref Unsafe.AsRef(in this))
-                .Equals(Unsafe.As<Vector3<T>, Vector<T>>(ref Unsafe.AsRef(in other)));
-        }
-
-        return EqualityComparer<T>.Default.Equals(X, other.X) &&
+    public bool Equals(Vector3<T> other) 
+        => EqualityComparer<T>.Default.Equals(X, other.X) &&
             EqualityComparer<T>.Default.Equals(Y, other.Y) &&
             EqualityComparer<T>.Default.Equals(Z, other.Z);
-    }
 
     /// <inheritdoc/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -666,7 +652,7 @@ public static class Vector3
             var v2 = Unsafe.As<Vector3<T>, System.Numerics.Vector3>(ref Unsafe.AsRef(in right));
             return Unsafe.As<System.Numerics.Vector3, Vector3<T>>(ref Unsafe.AsRef(v1 + v2));
         }
-        
+
         if (Vector.IsHardwareAccelerated && Vector<T>.Count >= Vector3<T>.Count && Vector<T>.IsSupported)
         {
             var v1 = Unsafe.As<Vector3<T>, Vector<T>>(ref Unsafe.AsRef(in left));
@@ -856,7 +842,7 @@ public static class Vector3
     public static Vector3<T> Normalize<T>(in Vector3<T> vector)
         where T : struct, INumber<T>, IMinMaxValue<T>, IRootFunctions<T>
     {
-        var length = T.CreateChecked(Magnitude(vector));
+        var length = Magnitude(vector);
         return length != T.Zero
             ? Divide(in vector, length)
             : Vector3<T>.Zero;
@@ -890,13 +876,11 @@ public static class Vector3
     /// Gets the smallest angle between two vectors.
     /// </summary>
     /// <typeparam name="T">The numeric type used internally by <paramref name="from"/> and <paramref name="to"/>.</typeparam>
-    /// <typeparam name="TAngle">The floating point type used internally by the returned angle.</typeparam>
     /// <param name="from">The vector where the angle measurement starts at.</param>
     /// <param name="to">The vector where the angle measurement stops at.</param>
     /// <returns>The angle between two vectors.</returns>
     /// <remarks>The angle is always less than 180 degrees.</remarks>
-    public static AngleReduced<Radians, TAngle> AngleBetween<T, TAngle>(in Vector3<T> from, in Vector3<T> to)
-        where T : struct, INumber<T>, IMinMaxValue<T>
-        where TAngle : struct, IFloatingPoint<TAngle>, IMinMaxValue<TAngle>, ITrigonometricFunctions<TAngle>, IRootFunctions<TAngle>
-        => Angle.Acos(TAngle.CreateChecked(Dot(in from, in to)) / (Magnitude<T, TAngle>(in from) * Magnitude<T, TAngle>(in to)));
+    public static AngleReduced<Radians, T> AngleBetween<T>(in Vector3<T> from, in Vector3<T> to)
+        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>, IRootFunctions<T>, ITrigonometricFunctions<T>
+        => Angle.Acos(Dot(in from, in to) / (Magnitude(in from) * Magnitude(in to)));
 }

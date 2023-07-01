@@ -346,20 +346,20 @@ public static class Quaternion
     /// <param name="pitch">The pitch angle in radians.</param>
     /// <param name="roll">The roll angle in radians.</param>
     /// <returns>The quaternion representing the specified Euler angles.</returns>
-    public static Quaternion<double> FromYawPitchRoll<T>(Angle<Radians, T> yaw, Angle<Radians, T> pitch, Angle<Radians, T> roll)
-        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
+    public static Quaternion<T> FromYawPitchRoll<T>(Angle<Radians, T> yaw, Angle<Radians, T> pitch, Angle<Radians, T> roll)
+        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>, ITrigonometricFunctions<T>
     {
         var half = T.CreateChecked(0.5);
-        var halfYaw = double.CreateChecked(yaw.Value * half);
-        var halfPitch = double.CreateChecked(pitch.Value * half);
-        var halfRoll = double.CreateChecked(roll.Value * half);
+        var halfYaw = yaw.Value * half;
+        var halfPitch = pitch.Value * half;
+        var halfRoll = roll.Value * half;
 
-        var sinHalfYaw = Math.Sin(halfYaw);
-        var cosHalfYaw = Math.Cos(halfYaw);
-        var sinHalfPitch = Math.Sin(halfPitch);
-        var cosHalfPitch = Math.Cos(halfPitch);
-        var sinHalfRoll = Math.Sin(halfRoll);
-        var cosHalfRoll = Math.Cos(halfRoll);
+        var sinHalfYaw = T.Sin(halfYaw);
+        var cosHalfYaw = T.Cos(halfYaw);
+        var sinHalfPitch = T.Sin(halfPitch);
+        var cosHalfPitch = T.Cos(halfPitch);
+        var sinHalfRoll = T.Sin(halfRoll);
+        var cosHalfRoll = T.Cos(halfRoll);
 
         return new(
             (cosHalfYaw * sinHalfPitch * cosHalfRoll) + (sinHalfYaw * cosHalfPitch * sinHalfRoll),
@@ -386,13 +386,13 @@ public static class Quaternion
     /// </para>
     /// </remarks>
     public static Quaternion<T> Normalize<T>(in Quaternion<T> quaternion)
-        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
+        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>, IRootFunctions<T>
     {
         var norm = Norm(quaternion);
-        if (norm == 0.0)
+        if (T.IsZero(norm))
             return quaternion;
 
-        var reciprocalNorm = T.CreateChecked(1.0 / norm);
+        var reciprocalNorm = T.One / norm;
         return new(
             quaternion.X * reciprocalNorm,
             quaternion.Y * reciprocalNorm,
@@ -412,9 +412,9 @@ public static class Quaternion
     /// </para>
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static double Norm<T>(in Quaternion<T> quaternion)
-        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => Math.Sqrt(double.CreateChecked(NormSquared(quaternion)));
+    public static T Norm<T>(in Quaternion<T> quaternion)
+        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>, IRootFunctions<T>
+        => T.Sqrt(NormSquared(quaternion));
 
     /// <summary>
     /// Calculates the squared norm of the quaternion.
@@ -474,10 +474,10 @@ public static class Quaternion
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
     {
         var normSquared = NormSquared(quaternion);
-        if (normSquared == T.Zero)
+        if (T.IsZero(normSquared))
             Throw.InvalidOperationException<Quaternion<T>>("Cannot calculate the inverse of a zero quaternion.");
 
-        var reciprocalNormSquared = T.CreateChecked(T.One / normSquared);
+        var reciprocalNormSquared = T.One / normSquared;
         return new(
             -quaternion.X * reciprocalNormSquared,
             -quaternion.Y * reciprocalNormSquared,
@@ -561,7 +561,7 @@ public static class Quaternion
     /// between the two input quaternions. 
     /// </remarks>
     public static Quaternion<T> Slerp<T>(in Quaternion<T> start, in Quaternion<T> end, T factor)
-        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
+        where T : struct, IFloatingPointIeee754<T>, IMinMaxValue<T>
     {
         // Ensure the quaternions are normalized
         var startNormalized = Normalize(start);
@@ -574,21 +574,20 @@ public static class Quaternion
         dot = T.Clamp(dot, T.Zero, T.One);
 
         // Calculate the angle between the quaternions
-        var theta = Math.Acos(double.CreateChecked(dot));
+        var theta = T.Acos(dot);
 
         // Perform the spherical linear interpolation
-        var sinTheta = Math.Sin(theta);
-        if (sinTheta < double.Epsilon)
+        var sinTheta = T.Sin(theta);
+        if (sinTheta < T.Epsilon)
         {
             // Start and end quaternions are parallel or antiparallel
             // Return either the start or end quaternion
             return startNormalized;
         }
 
-        var doubleFactor = double.CreateChecked(factor);
         return
-            (startNormalized * T.CreateChecked(Math.Sin((1.0 - doubleFactor) * theta) / sinTheta)) +
-            (endNormalized * T.CreateChecked(Math.Sin(doubleFactor * theta) / sinTheta));
+            (startNormalized * (T.Sin((T.One - factor) * theta) / sinTheta)) +
+            (endNormalized * (T.Sin(factor * theta) / sinTheta));
     }
 
     /// <summary>
@@ -606,7 +605,7 @@ public static class Quaternion
     /// on the surface of the unit sphere.
     /// </remarks>
     public static Quaternion<T> SlerpShortestPath<T>(in Quaternion<T> start, in Quaternion<T> end, T factor)
-        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
+        where T : struct, IFloatingPointIeee754<T>, IMinMaxValue<T>
     {
         // Ensure the quaternions are normalized
         var startNormalized = Normalize(start);
@@ -626,21 +625,20 @@ public static class Quaternion
         dot = T.Clamp(dot, T.Zero, T.One);
 
         // Calculate the angle between the quaternions
-        var theta = Math.Acos(double.CreateChecked(dot));
+        var theta = T.Acos(dot);
 
         // Perform the spherical linear interpolation
-        var sinTheta = Math.Sin(theta);
-        if (sinTheta < double.Epsilon)
+        var sinTheta = T.Sin(theta);
+        if (sinTheta < T.Epsilon)
         {
             // Start and end quaternions are parallel or antiparallel
             // Return either the start or end quaternion
             return startNormalized;
         }
 
-        var doubleFactor = double.CreateChecked(factor);
         return
-            (startNormalized * T.CreateChecked(Math.Sin((1.0 - doubleFactor) * theta) / sinTheta)) + 
-            (endNormalized * T.CreateChecked(Math.Sin(doubleFactor * theta) / sinTheta));
+            (startNormalized * (T.Sin((T.One - factor) * theta) / sinTheta)) + 
+            (endNormalized * (T.Sin(factor * theta) / sinTheta));
     }
 
 }

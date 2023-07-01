@@ -196,17 +196,13 @@ public static class Point
     /// Converts a cartesian 2D point to polar coordinates.
     /// </summary>
     /// <typeparam name="T">The type of the point coordinates.</typeparam>
-    /// <typeparam name="TAngle">The type of the azimuth coordinate.</typeparam>
-    /// <typeparam name="TRadius">The type of the radius coordinate.</typeparam>
     /// <param name="point">The cartesian 2D point to convert.</param>
     /// <returns>The polar coordinates representing the point.</returns>
-    public static Polar.Point<Radians, TAngle, TRadius> ToPolar<T, TAngle, TRadius>(Point<T> point)
-        where T : struct, INumber<T>, IMinMaxValue<T>
-        where TAngle : struct, IFloatingPointIeee754<TAngle>, IMinMaxValue<TAngle>
-        where TRadius : struct, IFloatingPoint<TRadius>, IMinMaxValue<TRadius>, IRootFunctions<TRadius>
+    public static Polar.Point<Radians, T, T> ToPolar<T>(in Point<T> point)
+        where T : struct, IFloatingPointIeee754<T>, IMinMaxValue<T>
     {
-        var azimuth = Angle.Atan2(TAngle.CreateChecked(point.Y), TAngle.CreateChecked(point.X));
-        var radius = TRadius.Sqrt(TRadius.CreateChecked(Utils.Pow2(point.X) + Utils.Pow2(point.Y)));
+        var azimuth = Angle.Atan2(point.Y, point.X);
+        var radius = T.Sqrt(Utils.Pow2(point.X) + Utils.Pow2(point.Y));
 
         return new(azimuth, radius);
     }

@@ -1,4 +1,6 @@
-﻿namespace NetFabric.Numerics;
+﻿using System.Runtime.InteropServices;
+
+namespace NetFabric.Numerics;
 
 public static partial class Angle
 {
@@ -76,28 +78,37 @@ public static partial class Angle
 
     #endregion
 
-    public static Angle<Degrees, T> ToDegrees<T>(int degrees, double minutes)
-        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
+    public static Angle<Degrees, TMinutes> ToDegrees<TDegrees, TMinutes>(TDegrees degrees, TMinutes minutes)
+        where TDegrees : struct, IBinaryInteger<TDegrees>, ISignedNumber<TDegrees>
+        where TMinutes : struct, IFloatingPoint<TMinutes>, IMinMaxValue<TMinutes>
     {
-        if (minutes < 0.0 || minutes >= 60.0)
+        if (minutes < TMinutes.Zero || minutes >= TMinutes.CreateChecked(60.0))
             Throw.ArgumentOutOfRangeException(nameof(minutes), minutes, "Argument must be positive and less than 60.");
 
-        return degrees < 0 
-            ? new(T.CreateChecked(degrees - (minutes / 60.0)))
-            : new(T.CreateChecked(degrees + (minutes / 60.0)));
+        var floatDegrees = TMinutes.CreateChecked(degrees);
+        var reciprocal60 = TMinutes.One / TMinutes.CreateChecked(60.0);
+        return TDegrees.Sign(degrees) < 0
+            ? new(floatDegrees - (minutes * reciprocal60))
+            : new(floatDegrees + (minutes * reciprocal60));
     }
 
-    public static Angle<Degrees, T> ToDegrees<T>(int degrees, int minutes, double seconds)
-        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
+    public static Angle<Degrees, TSeconds> ToDegrees<TDegrees, TMinutes, TSeconds>(TDegrees degrees, TMinutes minutes, TSeconds seconds)
+        where TDegrees : struct, IBinaryInteger<TDegrees>, ISignedNumber<TDegrees>
+        where TMinutes : struct, IBinaryInteger<TMinutes>
+        where TSeconds : struct, IFloatingPoint<TSeconds>, IMinMaxValue<TSeconds>
     {
-        if (minutes < 0.0 || minutes >= 60.0)
+        if (minutes < TMinutes.Zero || minutes >= TMinutes.CreateChecked(60))
             Throw.ArgumentOutOfRangeException(nameof(minutes), minutes, "Argument must be positive and less than 60.");
-        if (seconds < 0.0 || seconds >= 60.0)
+        if (seconds < TSeconds.Zero || seconds >= TSeconds.CreateChecked(60.0))
             Throw.ArgumentOutOfRangeException(nameof(seconds), seconds, "Argument must be positive and less than 60.");
 
-        return degrees < 0
-            ? new(T.CreateChecked(degrees - (minutes / 60.0) - (seconds / 3600.0)))
-            : new(T.CreateChecked(degrees + (minutes / 60.0) + (seconds / 3600.0)));
+        var floatDegrees = TSeconds.CreateChecked(degrees);
+        var floatMinutes = TSeconds.CreateChecked(minutes);
+        var reciprocal60 = TSeconds.One / TSeconds.CreateChecked(60.0);
+        var reciprocal3600 = TSeconds.One / TSeconds.CreateChecked(3600.0);
+        return TDegrees.Sign(degrees) < 0
+            ? new(floatDegrees - (floatMinutes * reciprocal60) - (seconds * reciprocal3600))
+            : new(floatDegrees + (floatMinutes * reciprocal60) + (seconds * reciprocal3600));
     }
 
     /// <summary>

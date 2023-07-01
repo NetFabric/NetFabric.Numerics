@@ -872,7 +872,7 @@ public static class Vector4
     public static Vector4<T> Normalize<T>(in Vector4<T> vector)
         where T : struct, INumber<T>, IMinMaxValue<T>, IRootFunctions<T>
     {
-        var length = T.CreateChecked(Magnitude(vector));
+        var length = Magnitude(vector);
         return length != T.Zero
             ? Divide(in vector, length)
             : Vector4<T>.Zero;

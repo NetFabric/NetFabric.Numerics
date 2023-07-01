@@ -124,6 +124,30 @@ public static class Point
     /// <summary>
     /// Converts a point in spherical coordinates to cartesian 3D coordinates.
     /// </summary>
+    /// <typeparam name="T">The type of the coordinates of the point.</typeparam>
+    /// <param name="point">The point in spherical coordinates to convert.</param>
+    /// <returns>The cartesian 3D coordinates representing the point.</returns>
+    public static Cartesian3.Point<T> ConvertToCartesian<T>(Point<Radians, T, T> point)
+        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>, ITrigonometricFunctions<T>
+    {
+        var sinAzimuth = Angle.Sin(point.Azimuth);
+        var cosAzimuth = Angle.Cos(point.Azimuth);
+        var sinZenith = Angle.Sin(point.Zenith);
+        var cosZenith = Angle.Cos(point.Zenith);
+
+        var x = T.CreateChecked(point.Radius * sinZenith * cosAzimuth);
+        var y = T.CreateChecked(point.Radius * sinZenith * sinAzimuth);
+        var z = T.CreateChecked(point.Radius * cosZenith);
+
+        return new(x, y, z);
+    }
+
+    /// <summary>
+    /// Converts a point in spherical coordinates to cartesian 3D coordinates.
+    /// </summary>
+    /// <typeparam name="TAngle">The type used by the angle of the azimuth and zenith coordinates of <paramref name="point"/>.</typeparam>
+    /// <typeparam name="TRadius">The type of the radius coordinate of <paramref name="point"/>.</typeparam>
+    /// <typeparam name="T">The type used by the resulting cartesian point coordinates.</typeparam>
     /// <param name="point">The point in spherical coordinates to convert.</param>
     /// <returns>The cartesian 3D coordinates representing the point.</returns>
     public static Cartesian3.Point<T> ConvertToCartesian<TAngle, TRadius, T>(Point<Radians, TAngle, TRadius> point)
@@ -142,5 +166,4 @@ public static class Point
 
         return new(x, y, z);
     }
-
 }
