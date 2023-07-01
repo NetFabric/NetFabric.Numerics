@@ -53,14 +53,6 @@ public readonly struct Vector4<T>
         W = w;
     }
 
-    internal Vector4(in Vector2<T> vector)
-    {
-        X = vector.X;
-        Y = vector.Y;
-        Z = T.Zero;
-        W = T.Zero;
-    }
-
     /// <summary>
     /// Creates an instance of the current type from a value, 
     /// throwing an overflow exception for any values that fall outside the representable range of the current type.
@@ -207,30 +199,8 @@ public readonly struct Vector4<T>
     /// <param name="other">The vector to compare with the current vector.</param>
     /// <returns><c>true</c> if the current vector is equal to the other vector; otherwise, <c>false</c>.</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public bool Equals(Vector4<T> other)
-    {
-        if (typeof(T) == typeof(ushort) || typeof(T) == typeof(short)) // 64 bit
-        {
-            if (Vector64.IsHardwareAccelerated)
-                return this.AsVector64().Equals(other.AsVector64());
-
-            // if (Vector128.IsHardwareAccelerated)
-            //     return this.AsVector128().Equals(other.AsVector128());
-        }
-
-        if (typeof(T) == typeof(uint) || typeof(T) == typeof(int) || typeof(T) == typeof(float)) // 128 bit
-        {
-            if (Vector128.IsHardwareAccelerated)
-                return this.AsVector128().Equals(other.AsVector128());
-        }
-
-        if (typeof(T) == typeof(ulong) || typeof(T) == typeof(long) || typeof(T) == typeof(double)) // 256 bit
-        {
-            if (Vector256.IsHardwareAccelerated)
-                return this.AsVector256().Equals(other.AsVector256());
-        }
-
-        return EqualityComparer<T>.Default.Equals(X, other.X) &&
+    public bool Equals(Vector4<T> other) 
+        => EqualityComparer<T>.Default.Equals(X, other.X) &&
             EqualityComparer<T>.Default.Equals(Y, other.Y) &&
             EqualityComparer<T>.Default.Equals(Z, other.Z) &&
             EqualityComparer<T>.Default.Equals(W, other.W);
@@ -689,8 +659,43 @@ public static class Vector4
     [SkipLocalsInit]
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector4<T> Add<T>(in Vector4<T> left, in Vector4<T> right)
-        where T : struct, INumber<T>, IMinMaxValue<T> 
-        => new(left.X + right.X, left.Y + right.Y, left.Z + right.Z, left.W + right.W);
+        where T : struct, INumber<T>, IMinMaxValue<T>
+    {
+        if (typeof(T) == typeof(ushort) || typeof(T) == typeof(short)) // 64 bit
+        {
+            if (Vector64.IsHardwareAccelerated)
+            {
+                var result = Vector64.Add(left.AsVector64(), right.AsVector64());
+                return result.AsVector4();
+            }
+
+            //if (Vector128.IsHardwareAccelerated)
+            //{
+            //    var result = Vector64.Add(left.AsVector64(), right.AsVector64());
+            //    return result.AsVector4();
+            //}
+        }
+
+        if (typeof(T) == typeof(uint) || typeof(T) == typeof(int) || typeof(T) == typeof(float)) // 128 bit
+        {
+            if (Vector128.IsHardwareAccelerated)
+            {
+                var result = Vector128.Add(left.AsVector128(), right.AsVector128());
+                return result.AsVector4();
+            }
+        }
+
+        if (typeof(T) == typeof(ulong) || typeof(T) == typeof(long) || typeof(T) == typeof(double)) // 256 bit
+        {
+            if (Vector256.IsHardwareAccelerated)
+            {
+                var result = Vector256.Add(left.AsVector256(), right.AsVector256());
+                return result.AsVector4();
+            }
+        }
+
+        return new(left.X + right.X, left.Y + right.Y, left.Z + right.Z, left.W + right.W);
+    }
 
 
     /// <summary>

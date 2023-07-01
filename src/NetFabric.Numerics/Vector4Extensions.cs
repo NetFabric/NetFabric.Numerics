@@ -8,8 +8,8 @@ static class Vector4Extensions
     public static ref Vector64<T> AsVector64<T>(this in Vector4<T> vector)
         where T : struct, INumber<T>, IMinMaxValue<T>
     {
-        if (Vector4<T>.Count != Vector64<T>.Count)
-            Throw.NotSupportedException();
+        //if (Vector4<T>.Count != Vector64<T>.Count)
+        //    Throw.NotSupportedException();
 
         return ref Unsafe.As<Vector4<T>, Vector64<T>>(ref Unsafe.AsRef(in vector));
     }
@@ -18,8 +18,8 @@ static class Vector4Extensions
     public static ref Vector128<T> AsVector128<T>(this in Vector4<T> vector)
         where T : struct, INumber<T>, IMinMaxValue<T>
     {
-        if (Vector4<T>.Count != Vector64<T>.Count)
-            Throw.NotSupportedException();
+        //if (Vector4<T>.Count != Vector64<T>.Count)
+        //    Throw.NotSupportedException();
 
         return ref Unsafe.As<Vector4<T>, Vector128<T>>(ref Unsafe.AsRef(in vector));
     }
@@ -28,8 +28,8 @@ static class Vector4Extensions
     public static ref Vector256<T> AsVector256<T>(this in Vector4<T> vector)
         where T : struct, INumber<T>, IMinMaxValue<T>
     {
-        if (Vector4<T>.Count != Vector64<T>.Count)
-            Throw.NotSupportedException();
+        //if (Vector4<T>.Count != Vector64<T>.Count)
+        //    Throw.NotSupportedException();
 
         return ref Unsafe.As<Vector4<T>, Vector256<T>>(ref Unsafe.AsRef(in vector));
     }
@@ -58,4 +58,17 @@ static class Vector4Extensions
     public static ref Vector4<T> AsVector4<T>(this ref Vector256<T> vector)
         where T : struct, INumber<T>, IMinMaxValue<T>
         => ref Unsafe.As<Vector256<T>, Vector4<T>>(ref vector);
+
+    // -----------------------------------------------------
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static Vector2<T> ToVector2<T>(this in Vector4<T> vector)
+        where T : struct, INumber<T>, IMinMaxValue<T>
+        => new(vector.X, vector.Y);
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static Vector3<T> ToVector3<T>(this in Vector4<T> vector)
+        where T : struct, INumber<T>, IMinMaxValue<T>
+        => new(vector.X, vector.Y, vector.Z);
+
 }

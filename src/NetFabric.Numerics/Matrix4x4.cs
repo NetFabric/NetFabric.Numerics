@@ -798,7 +798,7 @@ public static class Matrix4x4
     /// The resulting matrix is a combination of the starting matrix and the target matrix based on the interpolation factor.
     /// The interpolation factor should be between 0 and 1, where 0 returns the starting matrix and 1 returns the target matrix.
     /// </remarks>
-    public static Matrix4x4<T> Lerp<T>(Matrix4x4<T> from, Matrix4x4<T> to, T factor)
+    public static Matrix4x4<T> Lerp<T>(in Matrix4x4<T> from, in Matrix4x4<T> to, T factor)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => new(
             Vector4.Lerp(from.X, to.X, factor),
@@ -816,7 +816,7 @@ public static class Matrix4x4
     /// The transpose of a matrix is obtained by exchanging the rows and columns of the original matrix.
     /// This method creates a new matrix where the rows of the input matrix become the columns and the columns become the rows.
     /// </remarks>
-    public static Matrix4x4<T> Transpose<T>(Matrix4x4<T> matrix)
+    public static Matrix4x4<T> Transpose<T>(in Matrix4x4<T> matrix)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => new(
             new(matrix.X.X, matrix.Y.X, matrix.Z.X, matrix.W.X),

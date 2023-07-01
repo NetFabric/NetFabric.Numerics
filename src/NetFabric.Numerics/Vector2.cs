@@ -177,33 +177,8 @@ public readonly struct Vector2<T>
     /// <param name="other">The vector to compare with the current vector.</param>
     /// <returns><c>true</c> if the current vector is equal to the other vector; otherwise, <c>false</c>.</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public bool Equals(Vector2<T> other)
-    {
-        if (typeof(T) == typeof(ushort) || typeof(T) == typeof(short)) // 32 bit
-        {
-            if (Vector64.IsHardwareAccelerated)
-                return new Vector4<T>(in this).Equals(new Vector4<T>(in other));
-
-            // if (Vector128.IsHardwareAccelerated)
-            //     return new Vector4<T>(in this).Equals(new Vector4<T>(in other));
-        }
-
-        if (typeof(T) == typeof(uint) || typeof(T) == typeof(int) || typeof(T) == typeof(float)) // 64 bit
-        {
-            if (Vector64.IsHardwareAccelerated)
-                return this.AsVector64().Equals(other.AsVector64());
-
-            if (Vector128.IsHardwareAccelerated)
-                return new Vector4<T>(in this).Equals(new Vector4<T>(in other));
-        }
-
-        if (typeof(T) == typeof(ulong) || typeof(T) == typeof(long) || typeof(T) == typeof(double)) // 128 bit
-        {
-            if (Vector128.IsHardwareAccelerated)
-                return this.AsVector128().Equals(other.AsVector128());
-        }
-
-        return EqualityComparer<T>.Default.Equals(X, other.X) &&
+    public bool Equals(Vector2<T> other) 
+        => EqualityComparer<T>.Default.Equals(X, other.X) &&
             EqualityComparer<T>.Default.Equals(Y, other.Y);
 
     /// <inheritdoc/>
@@ -653,8 +628,34 @@ public static class Vector2
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector2<T> Add<T>(in Vector2<T> left, in Vector2<T> right)
-        where T : struct, INumber<T>, IMinMaxValue<T> 
-        => new(left.X + right.X, left.Y + right.Y);
+        where T : struct, INumber<T>, IMinMaxValue<T>
+    {
+        if (typeof(T) == typeof(ushort) || typeof(T) == typeof(short)) // 32 bit
+        {
+            if (Vector64.IsHardwareAccelerated || Vector128.IsHardwareAccelerated)
+                return Vector4.Add(left.ToVector4(), right.ToVector4()).ToVector2();
+        }
+
+        if (typeof(T) == typeof(uint) || typeof(T) == typeof(int) || typeof(T) == typeof(float)) // 64 bit
+        {
+            if (Vector64.IsHardwareAccelerated)
+            {
+                var result = Vector64.Add(left.AsVector64(), right.AsVector64());
+                return result.AsVector2();
+            }
+
+            if (Vector128.IsHardwareAccelerated)
+                return Vector4.Add(left.ToVector4(), right.ToVector4()).ToVector2();
+        }
+
+        if (typeof(T) == typeof(ulong) || typeof(T) == typeof(long) || typeof(T) == typeof(double)) // 128 bit
+        {
+            var result = Vector128.Add(left.AsVector128(), right.AsVector128());
+            return result.AsVector2();
+        }
+
+        return new(left.X + right.X, left.Y + right.Y);
+    }
 
 
     /// <summary>

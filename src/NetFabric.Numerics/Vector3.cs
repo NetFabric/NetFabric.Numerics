@@ -644,8 +644,28 @@ public static class Vector3
     [SkipLocalsInit]
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector3<T> Add<T>(in Vector3<T> left, in Vector3<T> right)
-        where T : struct, INumber<T>, IMinMaxValue<T> 
-        => new(left.X + right.X, left.Y + right.Y, left.Z + right.Z);
+        where T : struct, INumber<T>, IMinMaxValue<T>
+    {
+        if (typeof(T) == typeof(ushort) || typeof(T) == typeof(short)) // 48 bit
+        {
+            if (Vector64.IsHardwareAccelerated || Vector128.IsHardwareAccelerated)
+                return Vector4.Add(left.ToVector4(), right.ToVector4()).ToVector3();
+        }
+
+        if (typeof(T) == typeof(uint) || typeof(T) == typeof(int) || typeof(T) == typeof(float)) // 96 bit
+        {
+            if (Vector128.IsHardwareAccelerated)
+                return Vector4.Add(left.ToVector4(), right.ToVector4()).ToVector3();
+        }
+
+        if (typeof(T) == typeof(ulong) || typeof(T) == typeof(long) || typeof(T) == typeof(double)) // 192 bit
+        {
+            if (Vector256.IsHardwareAccelerated)
+                return Vector4.Add(left.ToVector4(), right.ToVector4()).ToVector3();
+        }
+
+        return new(left.X + right.X, left.Y + right.Y, left.Z + right.Z);
+    }
 
     /// <summary>
     /// Subtracts the second vector from the first vector component-wise and returns the result as a new Vector3.
@@ -826,7 +846,7 @@ public static class Vector3
     public static Vector3<T> Normalize<T>(in Vector3<T> vector)
         where T : struct, INumber<T>, IMinMaxValue<T>, IRootFunctions<T>
     {
-        var length = Magnitude(vector);
+        var length = T.CreateChecked(Magnitude(vector));
         return length != T.Zero
             ? Divide(in vector, length)
             : Vector3<T>.Zero;
@@ -860,11 +880,13 @@ public static class Vector3
     /// Gets the smallest angle between two vectors.
     /// </summary>
     /// <typeparam name="T">The numeric type used internally by <paramref name="from"/> and <paramref name="to"/>.</typeparam>
+    /// <typeparam name="TAngle">The floating point type used internally by the returned angle.</typeparam>
     /// <param name="from">The vector where the angle measurement starts at.</param>
     /// <param name="to">The vector where the angle measurement stops at.</param>
     /// <returns>The angle between two vectors.</returns>
     /// <remarks>The angle is always less than 180 degrees.</remarks>
-    public static AngleReduced<Radians, T> AngleBetween<T>(in Vector3<T> from, in Vector3<T> to)
-        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>, IRootFunctions<T>, ITrigonometricFunctions<T>
-        => Angle.Acos(Dot(in from, in to) / (Magnitude(in from) * Magnitude(in to)));
+    public static AngleReduced<Radians, TAngle> AngleBetween<T, TAngle>(in Vector3<T> from, in Vector3<T> to)
+        where T : struct, INumber<T>, IMinMaxValue<T>
+        where TAngle : struct, IFloatingPoint<TAngle>, IMinMaxValue<TAngle>, ITrigonometricFunctions<TAngle>, IRootFunctions<TAngle>
+        => Angle.Acos(TAngle.CreateChecked(Dot(in from, in to)) / (Magnitude<T, TAngle>(in from) * Magnitude<T, TAngle>(in to)));
 }
