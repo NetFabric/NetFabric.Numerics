@@ -656,7 +656,6 @@ public static class Vector4
     /// X, Y, Z, and W coordinates of the input vectors, respectively. The input vectors remain
     /// unchanged.
     /// </remarks>
-    [SkipLocalsInit]
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector4<T> Add<T>(in Vector4<T> left, in Vector4<T> right)
         where T : struct, INumber<T>, IMinMaxValue<T>
@@ -665,14 +664,14 @@ public static class Vector4
         {
             if (Vector64.IsHardwareAccelerated)
             {
-                var result = Vector64.Add(left.AsVector64(), right.AsVector64());
+                var result = left.AsVector64() + right.AsVector64();
                 return result.AsVector4();
             }
 
             if (Vector128.IsHardwareAccelerated)
             {
-                var result = Vector128.Add(left.ReadUnalignedVector128(), right.ReadUnalignedVector128());
-                return result.ReadUnalignedVector4();
+                var result = left.ToVector128() + right.ToVector128();
+                return result.ToVector4();
             }
         }
 
@@ -680,7 +679,7 @@ public static class Vector4
         {
             if (Vector128.IsHardwareAccelerated)
             {
-                var result = Vector128.Add(left.AsVector128(), right.AsVector128());
+                var result = left.AsVector128() + right.AsVector128();
                 return result.AsVector4();
             }
         }
@@ -689,7 +688,7 @@ public static class Vector4
         {
             if (Vector256.IsHardwareAccelerated)
             {
-                var result = Vector256.Add(left.AsVector256(), right.AsVector256());
+                var result = left.AsVector256() + right.AsVector256();
                 return result.AsVector4();
             }
         }
