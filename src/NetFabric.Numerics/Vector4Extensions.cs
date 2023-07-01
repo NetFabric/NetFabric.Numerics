@@ -53,17 +53,4 @@ static class Vector4Extensions
     public static ref Vector4<T> AsVector4<T>(this ref Vector256<T> vector)
         where T : struct, INumber<T>, IMinMaxValue<T>
         => ref Unsafe.As<Vector256<T>, Vector4<T>>(ref vector);
-
-    // -----------------------------------------------------
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Vector2<T> ToVector2<T>(this in Vector4<T> vector)
-        where T : struct, INumber<T>, IMinMaxValue<T>
-        => new(vector.X, vector.Y);
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Vector3<T> ToVector3<T>(this in Vector4<T> vector)
-        where T : struct, INumber<T>, IMinMaxValue<T>
-        => new(vector.X, vector.Y, vector.Z);
-
 }

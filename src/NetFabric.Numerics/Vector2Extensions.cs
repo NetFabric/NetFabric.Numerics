@@ -51,11 +51,4 @@ static class Vector2Extensions
         ref byte address = ref Unsafe.As<Vector128<T>, byte>(ref vector);
         return Unsafe.ReadUnaligned<Vector2<T>>(ref address);
     }
-
-    // -----------------------------------------------------
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Vector4<T> ToVector4<T>(this in Vector2<T> vector)
-        where T : struct, INumber<T>, IMinMaxValue<T>
-        => new(vector.X, vector.Y, T.Zero, T.Zero);
 }
