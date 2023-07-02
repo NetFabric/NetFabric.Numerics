@@ -659,8 +659,20 @@ public static class Vector4
     [SkipLocalsInit]
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector4<T> Add<T>(in Vector4<T> left, in Vector4<T> right)
-        where T : struct, INumber<T>, IMinMaxValue<T> 
-        => new(left.X + right.X, left.Y + right.Y, left.Z + right.Z, left.W + right.W);
+        where T : struct, INumber<T>, IMinMaxValue<T>
+    {
+        if (typeof(T) == typeof(uint) || typeof(T) == typeof(int) || typeof(T) == typeof(float))
+        {
+            return (left.AsVector4() + right.AsVector4()).AsVector4<T>();
+        }
+
+        if (Vector.IsHardwareAccelerated && Vector<T>.Count >= Vector4<T>.Count && Vector<T>.IsSupported)
+        {
+            return (left.ToVector() + right.ToVector()).ToVector4<T>();
+        }
+
+        return new(left.X + right.X, left.Y + right.Y, left.Z + right.Z, left.W + right.W);
+    }
 
 
     /// <summary>
