@@ -177,23 +177,9 @@ public readonly struct Vector2<T>
     /// <param name="other">The vector to compare with the current vector.</param>
     /// <returns><c>true</c> if the current vector is equal to the other vector; otherwise, <c>false</c>.</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public bool Equals(Vector2<T> other)
-    {
-        if (typeof(T) == typeof(float))
-        {
-            return Unsafe.As<Vector2<T>, System.Numerics.Vector2>(ref Unsafe.AsRef(in this))
-                .Equals(Unsafe.As<Vector2<T>, System.Numerics.Vector2>(ref Unsafe.AsRef(in other)));
-        }
-
-        if (Vector.IsHardwareAccelerated && Vector<T>.Count == Count && Vector<T>.IsSupported)
-        {
-            return Unsafe.As<Vector2<T>, Vector<T>>(ref Unsafe.AsRef(in this))
-                .Equals(Unsafe.As<Vector2<T>, Vector<T>>(ref Unsafe.AsRef(in other)));
-        }
-
-        return EqualityComparer<T>.Default.Equals(X, other.X) &&
+    public bool Equals(Vector2<T> other) 
+        => EqualityComparer<T>.Default.Equals(X, other.X) &&
             EqualityComparer<T>.Default.Equals(Y, other.Y);
-    }
 
     /// <inheritdoc/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -642,24 +628,8 @@ public static class Vector2
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector2<T> Add<T>(in Vector2<T> left, in Vector2<T> right)
-        where T : struct, INumber<T>, IMinMaxValue<T>
-    {
-        if (typeof(T) == typeof(uint) || typeof(T) == typeof(int) || typeof(T) == typeof(float))
-        {
-            var v1 = Unsafe.As<Vector2<T>, System.Numerics.Vector2>(ref Unsafe.AsRef(in left));
-            var v2 = Unsafe.As<Vector2<T>, System.Numerics.Vector2>(ref Unsafe.AsRef(in right));
-            return Unsafe.As<System.Numerics.Vector2, Vector2<T>>(ref Unsafe.AsRef(v1 + v2));
-        }
-
-        if (Vector.IsHardwareAccelerated && Vector<T>.Count >= Vector2<T>.Count && Vector<T>.IsSupported)
-        {
-            var v1 = Unsafe.As<Vector2<T>, Vector<T>>(ref Unsafe.AsRef(in left));
-            var v2 = Unsafe.As<Vector2<T>, Vector<T>>(ref Unsafe.AsRef(in right));
-            return Unsafe.As<Vector<T>, Vector2<T>>(ref Unsafe.AsRef(v1 + v2));
-        }
-
-        return new(left.X + right.X, left.Y + right.Y);
-    }
+        where T : struct, INumber<T>, IMinMaxValue<T> 
+        => new(left.X + right.X, left.Y + right.Y);
 
 
     /// <summary>

@@ -199,25 +199,11 @@ public readonly struct Vector4<T>
     /// <param name="other">The vector to compare with the current vector.</param>
     /// <returns><c>true</c> if the current vector is equal to the other vector; otherwise, <c>false</c>.</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public bool Equals(Vector4<T> other)
-    {
-        if (typeof(T) == typeof(float))
-        {
-            return Unsafe.As<Vector4<T>, System.Numerics.Vector4>(ref Unsafe.AsRef(in this))
-                .Equals(Unsafe.As<Vector4<T>, System.Numerics.Vector4>(ref Unsafe.AsRef(in other)));
-        }
-        
-        if (Vector.IsHardwareAccelerated && Vector<T>.Count == Count && Vector<T>.IsSupported)
-        {
-            return Unsafe.As<Vector4<T>, Vector<T>>(ref Unsafe.AsRef(in this))
-                .Equals(Unsafe.As<Vector4<T>, Vector<T>>(ref Unsafe.AsRef(in other)));
-        }
-
-        return EqualityComparer<T>.Default.Equals(X, other.X) &&
+    public bool Equals(Vector4<T> other) 
+        => EqualityComparer<T>.Default.Equals(X, other.X) &&
             EqualityComparer<T>.Default.Equals(Y, other.Y) &&
             EqualityComparer<T>.Default.Equals(Z, other.Z) &&
             EqualityComparer<T>.Default.Equals(W, other.W);
-    }
 
     /// <inheritdoc/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -673,24 +659,8 @@ public static class Vector4
     [SkipLocalsInit]
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector4<T> Add<T>(in Vector4<T> left, in Vector4<T> right)
-        where T : struct, INumber<T>, IMinMaxValue<T>
-    {
-        if (typeof(T) == typeof(uint) || typeof(T) == typeof(int) || typeof(T) == typeof(float))
-        {
-            var v1 = Unsafe.As<Vector4<T>, System.Numerics.Vector4>(ref Unsafe.AsRef(in left));
-            var v2 = Unsafe.As<Vector4<T>, System.Numerics.Vector4>(ref Unsafe.AsRef(in right));
-            return Unsafe.As<System.Numerics.Vector4, Vector4<T>>(ref Unsafe.AsRef(v1 + v2));
-        }
-        
-        if (Vector.IsHardwareAccelerated && Vector<T>.Count >= Vector4<T>.Count && Vector<T>.IsSupported)
-        {
-            var v1 = Unsafe.As<Vector4<T>, Vector<T>>(ref Unsafe.AsRef(in left));
-            var v2 = Unsafe.As<Vector4<T>, Vector<T>>(ref Unsafe.AsRef(in right));
-            return Unsafe.As<Vector<T>, Vector4<T>>(ref Unsafe.AsRef(v1 + v2));
-        }
-
-        return new(left.X + right.X, left.Y + right.Y, left.Z + right.Z, left.W + right.W);
-    }
+        where T : struct, INumber<T>, IMinMaxValue<T> 
+        => new(left.X + right.X, left.Y + right.Y, left.Z + right.Z, left.W + right.W);
 
 
     /// <summary>
