@@ -36,3 +36,15 @@ jobs:
 
     - name: Test Solution
       run: dotnet test --no-build --verbosity normal -c:Release
+
+    - name: Disable Vector256
+      run: echo "DOTNET_EnableAVX2=0" >> $GITHUB_ENV
+
+    - name: Test Solution (Vector256 disabled)
+      run: dotnet test --no-build --verbosity normal -c:Release
+
+    - name: Disable Vectorization
+      run: echo "DOTNET_EnableHWIntrinsic=0" >> $GITHUB_ENV
+
+    - name: Test Solution (vectorization disabled)
+      run: dotnet test --no-build --verbosity normal -c:Release

@@ -628,8 +628,46 @@ public static class Vector2
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector2<T> Add<T>(in Vector2<T> left, in Vector2<T> right)
-        where T : struct, INumber<T>, IMinMaxValue<T> 
-        => new(left.X + right.X, left.Y + right.Y);
+        where T : struct, INumber<T>, IMinMaxValue<T>
+    {
+        if (typeof(T) == typeof(ushort) || typeof(T) == typeof(short)) // 32 bit
+        {
+            if (Vector64.IsHardwareAccelerated)
+            {
+                var result = left.ToVector64() + right.ToVector64();
+                return result.ToVector2();
+            }
+
+            if (Vector128.IsHardwareAccelerated)
+            {
+                var result = left.ToVector128() + right.ToVector128();
+                return result.ToVector2();
+            }
+        }
+
+        if (typeof(T) == typeof(uint) || typeof(T) == typeof(int) || typeof(T) == typeof(float)) // 64 bit
+        {
+            if (Vector64.IsHardwareAccelerated)
+            {
+                var result = left.AsVector64() + right.AsVector64();
+                return result.AsVector2();
+            }
+
+            if (Vector128.IsHardwareAccelerated)
+            {
+                var result = left.ToVector128() + right.ToVector128();
+                return result.ToVector2();
+            }
+        }
+
+        if (typeof(T) == typeof(ulong) || typeof(T) == typeof(long) || typeof(T) == typeof(double)) // 128 bit
+        {
+            var result = left.AsVector128() + right.AsVector128();
+            return result.AsVector2();
+        }
+
+        return new(left.X + right.X, left.Y + right.Y);
+    }
 
 
     /// <summary>

@@ -656,11 +656,45 @@ public static class Vector4
     /// X, Y, Z, and W coordinates of the input vectors, respectively. The input vectors remain
     /// unchanged.
     /// </remarks>
-    [SkipLocalsInit]
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector4<T> Add<T>(in Vector4<T> left, in Vector4<T> right)
-        where T : struct, INumber<T>, IMinMaxValue<T> 
-        => new(left.X + right.X, left.Y + right.Y, left.Z + right.Z, left.W + right.W);
+        where T : struct, INumber<T>, IMinMaxValue<T>
+    {
+        if (typeof(T) == typeof(ushort) || typeof(T) == typeof(short)) // 64 bit
+        {
+            if (Vector64.IsHardwareAccelerated)
+            {
+                var result = left.AsVector64() + right.AsVector64();
+                return result.AsVector4();
+            }
+
+            if (Vector128.IsHardwareAccelerated)
+            {
+                var result = left.ToVector128() + right.ToVector128();
+                return result.ToVector4();
+            }
+        }
+
+        if (typeof(T) == typeof(uint) || typeof(T) == typeof(int) || typeof(T) == typeof(float)) // 128 bit
+        {
+            if (Vector128.IsHardwareAccelerated)
+            {
+                var result = left.AsVector128() + right.AsVector128();
+                return result.AsVector4();
+            }
+        }
+
+        if (typeof(T) == typeof(ulong) || typeof(T) == typeof(long) || typeof(T) == typeof(double)) // 256 bit
+        {
+            if (Vector256.IsHardwareAccelerated)
+            {
+                var result = left.AsVector256() + right.AsVector256();
+                return result.AsVector4();
+            }
+        }
+
+        return new(left.X + right.X, left.Y + right.Y, left.Z + right.Z, left.W + right.W);
+    }
 
 
     /// <summary>
