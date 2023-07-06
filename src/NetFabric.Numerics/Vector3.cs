@@ -644,8 +644,20 @@ public static class Vector3
     [SkipLocalsInit]
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector3<T> Add<T>(in Vector3<T> left, in Vector3<T> right)
-        where T : struct, INumber<T>, IMinMaxValue<T> 
-        => new(left.X + right.X, left.Y + right.Y, left.Z + right.Z);
+        where T : struct, INumber<T>, IMinMaxValue<T>
+    {
+        if (typeof(T) == typeof(uint) || typeof(T) == typeof(int) || typeof(T) == typeof(float))
+        {
+            return (left.AsVector3() + right.AsVector3()).AsVector3<T>();
+        }
+
+        if (Vector.IsHardwareAccelerated && Vector<T>.Count >= Vector3<T>.Count && Vector<T>.IsSupported)
+        {
+            return (left.ToVector() + right.ToVector()).ToVector3<T>();
+        }
+
+        return new(left.X + right.X, left.Y + right.Y, left.Z + right.Z);
+    }
 
     /// <summary>
     /// Subtracts the second vector from the first vector component-wise and returns the result as a new Vector3.

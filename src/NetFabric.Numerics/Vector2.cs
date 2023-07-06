@@ -628,8 +628,20 @@ public static class Vector2
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector2<T> Add<T>(in Vector2<T> left, in Vector2<T> right)
-        where T : struct, INumber<T>, IMinMaxValue<T> 
-        => new(left.X + right.X, left.Y + right.Y);
+        where T : struct, INumber<T>, IMinMaxValue<T>
+    {
+        if (typeof(T) == typeof(uint) || typeof(T) == typeof(int) || typeof(T) == typeof(float))
+        {
+            return (left.AsVector2() + right.AsVector2()).AsVector2<T>();
+        }
+
+        if (Vector.IsHardwareAccelerated && Vector<T>.Count >= Vector2<T>.Count && Vector<T>.IsSupported)
+        {
+            return (left.ToVector() + right.ToVector()).ToVector2<T>();
+        }
+
+        return new(left.X + right.X, left.Y + right.Y);
+    }
 
 
     /// <summary>
