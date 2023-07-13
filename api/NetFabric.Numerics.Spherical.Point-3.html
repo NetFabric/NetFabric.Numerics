@@ -1,0 +1,628 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Struct Point&lt;TAngleUnits, TAngle, TRadius&gt;
+ | NetFabric.Numerics </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Struct Point&lt;TAngleUnits, TAngle, TRadius&gt;
+ | NetFabric.Numerics ">
+      
+      <link rel="icon" href="../images/Logo.png">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/NetFabric/NetFabric.Numerics/new/main/apiSpec/new?filename=NetFabric_Numerics_Spherical_Point_3.md&amp;value=---%0Auid%3A%20NetFabric.Numerics.Spherical.Point%603%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+  </head>
+
+  <script type="module">
+    import options from './../public/main.js'
+    import { init } from './../public/docfx.min.js'
+    init(options)
+  </script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/Logo.png" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="NetFabric.Numerics.Spherical.Point`3">
+
+
+
+  <h1 id="NetFabric_Numerics_Spherical_Point_3" data-uid="NetFabric.Numerics.Spherical.Point`3" class="text-break">
+    Struct Point&lt;TAngleUnits, TAngle, TRadius&gt;
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Spherical/Point.cs/#L12"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="NetFabric.html">NetFabric</a>.<a class="xref" href="NetFabric.Numerics.html">Numerics</a>.<a class="xref" href="NetFabric.Numerics.Spherical.html">Spherical</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>NetFabric.Numerics.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Represents a point as an immutable struct.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly record struct Point&lt;TAngleUnits, TAngle, TRadius&gt; : IPoint&lt;Point&lt;TAngleUnits, TAngle, TRadius&gt;&gt;, INumericBase&lt;Point&lt;TAngleUnits, TAngle, TRadius&gt;&gt;, IEquatable&lt;Point&lt;TAngleUnits, TAngle, TRadius&gt;&gt;, IEqualityOperators&lt;Point&lt;TAngleUnits, TAngle, TRadius&gt;, Point&lt;TAngleUnits, TAngle, TRadius&gt;, bool&gt;, IMinMaxValue&lt;Point&lt;TAngleUnits, TAngle, TRadius&gt;&gt;, IEquatable&lt;Point&lt;TAngleUnits, TAngle, TRadius&gt;&gt; where TAngleUnits : struct, IAngleUnits&lt;TAngleUnits&gt; where TAngle : struct, IFloatingPoint&lt;TAngle&gt;, IMinMaxValue&lt;TAngle&gt; where TRadius : struct, IFloatingPoint&lt;TRadius&gt;, IMinMaxValue&lt;TRadius&gt;</code></pre>
+  </div>
+
+
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TAngleUnits</code></dt>
+    <dd><p>The angle units used for the azimuth and zenith coordinates.</p>
+</dd>
+    <dt><code>TAngle</code></dt>
+    <dd><p>The type used by the angle of the azimuth and zenith coordinates.</p>
+</dd>
+    <dt><code>TRadius</code></dt>
+    <dd><p>The type of the radius coordinate.</p>
+</dd>
+  </dl>
+
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="NetFabric.Numerics.IPoint-1.html">IPoint</a>&lt;<a class="xref" href="NetFabric.Numerics.Spherical.Point-3.html">Point</a>&lt;TAngleUnits, TAngle, TRadius&gt;&gt;</div>
+      <div><a class="xref" href="NetFabric.Numerics.INumericBase-1.html">INumericBase</a>&lt;<a class="xref" href="NetFabric.Numerics.Spherical.Point-3.html">Point</a>&lt;TAngleUnits, TAngle, TRadius&gt;&gt;</div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iequatable-1">IEquatable</a>&lt;<a class="xref" href="NetFabric.Numerics.Spherical.Point-3.html">Point</a>&lt;TAngleUnits, TAngle, TRadius&gt;&gt;</div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.numerics.iequalityoperators-3">IEqualityOperators</a>&lt;<a class="xref" href="NetFabric.Numerics.Spherical.Point-3.html">Point</a>&lt;TAngleUnits, TAngle, TRadius&gt;, <a class="xref" href="NetFabric.Numerics.Spherical.Point-3.html">Point</a>&lt;TAngleUnits, TAngle, TRadius&gt;, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>&gt;</div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.numerics.iminmaxvalue-1">IMinMaxValue</a>&lt;<a class="xref" href="NetFabric.Numerics.Spherical.Point-3.html">Point</a>&lt;TAngleUnits, TAngle, TRadius&gt;&gt;</div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iequatable-1">IEquatable</a>&lt;<a class="xref" href="NetFabric.Numerics.Spherical.Point-3.html">Point</a>&lt;TAngleUnits, TAngle, TRadius&gt;&gt;</div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist derived">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.equals">ValueType.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode">ValueType.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.tostring">ValueType.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </dd></dl>
+
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="NetFabric_Numerics_Spherical_Point_3__ctor_" data-uid="NetFabric.Numerics.Spherical.Point`3.#ctor*"></a>
+
+  <h3 id="NetFabric_Numerics_Spherical_Point_3__ctor_NetFabric_Numerics_Angle__0__1__NetFabric_Numerics_Angle__0__1___2_" data-uid="NetFabric.Numerics.Spherical.Point`3.#ctor(NetFabric.Numerics.Angle{`0,`1},NetFabric.Numerics.Angle{`0,`1},`2)">
+  Point(Angle&lt;TAngleUnits, TAngle&gt;, Angle&lt;TAngleUnits, TAngle&gt;, TRadius)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Spherical/Point.cs/#L12"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Represents a point as an immutable struct.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Point(Angle&lt;TAngleUnits, TAngle&gt; Azimuth, Angle&lt;TAngleUnits, TAngle&gt; Zenith, TRadius Radius)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>Azimuth</code> <a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;TAngleUnits, TAngle&gt;</dt>
+    <dd><p>The azimuth coordinate.</p>
+</dd>
+    <dt><code>Zenith</code> <a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;TAngleUnits, TAngle&gt;</dt>
+    <dd><p>The zenith coordinate.</p>
+</dd>
+    <dt><code>Radius</code> <span class="xref">TRadius</span></dt>
+    <dd><p>The radius coordinate.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="fields">Fields
+</h2>
+
+
+
+  <h3 id="NetFabric_Numerics_Spherical_Point_3_MaxValue" data-uid="NetFabric.Numerics.Spherical.Point`3.MaxValue">
+  MaxValue
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Spherical/Point.cs/#L35"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Represents the maximum value. This field is read-only.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly Point&lt;TAngleUnits, TAngle, TRadius&gt; MaxValue</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Spherical.Point-3.html">Point</a>&lt;TAngleUnits, TAngle, TRadius&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="NetFabric_Numerics_Spherical_Point_3_MinValue" data-uid="NetFabric.Numerics.Spherical.Point`3.MinValue">
+  MinValue
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Spherical/Point.cs/#L30"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Represents the minimum value. This field is read-only.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly Point&lt;TAngleUnits, TAngle, TRadius&gt; MinValue</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Spherical.Point-3.html">Point</a>&lt;TAngleUnits, TAngle, TRadius&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="NetFabric_Numerics_Spherical_Point_3_Zero" data-uid="NetFabric.Numerics.Spherical.Point`3.Zero">
+  Zero
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Spherical/Point.cs/#L22"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly Point&lt;TAngleUnits, TAngle, TRadius&gt; Zero</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Spherical.Point-3.html">Point</a>&lt;TAngleUnits, TAngle, TRadius&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="NetFabric_Numerics_Spherical_Point_3_Azimuth_" data-uid="NetFabric.Numerics.Spherical.Point`3.Azimuth*"></a>
+
+  <h3 id="NetFabric_Numerics_Spherical_Point_3_Azimuth" data-uid="NetFabric.Numerics.Spherical.Point`3.Azimuth">
+  Azimuth
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Spherical/Point.cs/#L14"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>The azimuth coordinate.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Angle&lt;TAngleUnits, TAngle&gt; Azimuth { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;TAngleUnits, TAngle&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="NetFabric_Numerics_Spherical_Point_3_CoordinateSystem_" data-uid="NetFabric.Numerics.Spherical.Point`3.CoordinateSystem*"></a>
+
+  <h3 id="NetFabric_Numerics_Spherical_Point_3_CoordinateSystem" data-uid="NetFabric.Numerics.Spherical.Point`3.CoordinateSystem">
+  CoordinateSystem
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Spherical/Point.cs/#L47"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the coordinate system.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CoordinateSystem&lt;TAngleUnits, TAngle, TRadius&gt; CoordinateSystem { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Spherical.CoordinateSystem-3.html">CoordinateSystem</a>&lt;TAngleUnits, TAngle, TRadius&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="NetFabric_Numerics_Spherical_Point_3_Radius_" data-uid="NetFabric.Numerics.Spherical.Point`3.Radius*"></a>
+
+  <h3 id="NetFabric_Numerics_Spherical_Point_3_Radius" data-uid="NetFabric.Numerics.Spherical.Point`3.Radius">
+  Radius
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Spherical/Point.cs/#L14"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>The radius coordinate.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TRadius Radius { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><span class="xref">TRadius</span></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="NetFabric_Numerics_Spherical_Point_3_Zenith_" data-uid="NetFabric.Numerics.Spherical.Point`3.Zenith*"></a>
+
+  <h3 id="NetFabric_Numerics_Spherical_Point_3_Zenith" data-uid="NetFabric.Numerics.Spherical.Point`3.Zenith">
+  Zenith
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Spherical/Point.cs/#L14"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>The zenith coordinate.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Angle&lt;TAngleUnits, TAngle&gt; Zenith { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;TAngleUnits, TAngle&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="NetFabric_Numerics_Spherical_Point_3_CreateChecked_" data-uid="NetFabric.Numerics.Spherical.Point`3.CreateChecked*"></a>
+
+  <h3 id="NetFabric_Numerics_Spherical_Point_3_CreateChecked__2_NetFabric_Numerics_Spherical_Point__0___0___1___" data-uid="NetFabric.Numerics.Spherical.Point`3.CreateChecked``2(NetFabric.Numerics.Spherical.Point{`0,``0,``1}@)">
+  CreateChecked&lt;TAngleOther, TRadiusOther&gt;(in Point&lt;TAngleUnits, TAngleOther, TRadiusOther&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Spherical/Point.cs/#L62"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates an instance of the current type from a value,
+throwing an overflow exception for any values that fall outside the representable range of the current type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Point&lt;TAngleUnits, TAngle, TRadius&gt; CreateChecked&lt;TAngleOther, TRadiusOther&gt;(in Point&lt;TAngleUnits, TAngleOther, TRadiusOther&gt; point) where TAngleOther : struct, IFloatingPoint&lt;TAngleOther&gt;, IMinMaxValue&lt;TAngleOther&gt; where TRadiusOther : struct, IFloatingPoint&lt;TRadiusOther&gt;, IMinMaxValue&lt;TRadiusOther&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>point</code> <a class="xref" href="NetFabric.Numerics.Spherical.Point-3.html">Point</a>&lt;TAngleUnits, TAngleOther, TRadiusOther&gt;</dt>
+    <dd><p>The value which is used to create the instance of <a class="xref" href="NetFabric.Numerics.Spherical.Point-3.html">Point&lt;TAngleUnits, TAngle, TRadius&gt;</a></p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Spherical.Point-3.html">Point</a>&lt;TAngleUnits, TAngle, TRadius&gt;</dt>
+    <dd><p>An instance of <a class="xref" href="NetFabric.Numerics.Spherical.Point-3.html">Point&lt;TAngleUnits, TAngle, TRadius&gt;</a> created from <code class="paramref">point</code>.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TAngleOther</code></dt>
+    <dd><p>The type used by the angle of the azimuth and zenith coordinates of <code class="paramref">point</code>.</p>
+</dd>
+    <dt><code>TRadiusOther</code></dt>
+    <dd><p>The type of the radius coordinate of <code class="paramref">point</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.notsupportedexception">NotSupportedException</a></dt>
+    <dd><p><code class="typeparamref">TAngleOther</code> or <code class="typeparamref">TRadiusOther</code> is not supported.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.overflowexception">OverflowException</a></dt>
+    <dd><p><code class="paramref">point</code> is not representable by <a class="xref" href="NetFabric.Numerics.Spherical.Point-3.html">Point&lt;TAngleUnits, TAngle, TRadius&gt;</a>.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="NetFabric_Numerics_Spherical_Point_3_CreateSaturating_" data-uid="NetFabric.Numerics.Spherical.Point`3.CreateSaturating*"></a>
+
+  <h3 id="NetFabric_Numerics_Spherical_Point_3_CreateSaturating__2_NetFabric_Numerics_Spherical_Point__0___0___1___" data-uid="NetFabric.Numerics.Spherical.Point`3.CreateSaturating``2(NetFabric.Numerics.Spherical.Point{`0,``0,``1}@)">
+  CreateSaturating&lt;TAngleOther, TRadiusOther&gt;(in Point&lt;TAngleUnits, TAngleOther, TRadiusOther&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Spherical/Point.cs/#L81"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates an instance of the current type from a value,
+saturating any values that fall outside the representable range of the current type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Point&lt;TAngleUnits, TAngle, TRadius&gt; CreateSaturating&lt;TAngleOther, TRadiusOther&gt;(in Point&lt;TAngleUnits, TAngleOther, TRadiusOther&gt; point) where TAngleOther : struct, IFloatingPoint&lt;TAngleOther&gt;, IMinMaxValue&lt;TAngleOther&gt; where TRadiusOther : struct, IFloatingPoint&lt;TRadiusOther&gt;, IMinMaxValue&lt;TRadiusOther&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>point</code> <a class="xref" href="NetFabric.Numerics.Spherical.Point-3.html">Point</a>&lt;TAngleUnits, TAngleOther, TRadiusOther&gt;</dt>
+    <dd><p>The value which is used to create the instance of <a class="xref" href="NetFabric.Numerics.Spherical.Point-3.html">Point&lt;TAngleUnits, TAngle, TRadius&gt;</a></p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Spherical.Point-3.html">Point</a>&lt;TAngleUnits, TAngle, TRadius&gt;</dt>
+    <dd><p>An instance of <a class="xref" href="NetFabric.Numerics.Spherical.Point-3.html">Point&lt;TAngleUnits, TAngle, TRadius&gt;</a> created from <code class="paramref">point</code>.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TAngleOther</code></dt>
+    <dd><p>The type used by the angle of the azimuth and zenith coordinates of <code class="paramref">point</code>.</p>
+</dd>
+    <dt><code>TRadiusOther</code></dt>
+    <dd><p>The type of the radius coordinate of <code class="paramref">point</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.notsupportedexception">NotSupportedException</a></dt>
+    <dd><p><code class="typeparamref">TAngleOther</code> or <code class="typeparamref">TRadiusOther</code> is not supported.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.overflowexception">OverflowException</a></dt>
+    <dd><p><code class="paramref">point</code> is not representable by <a class="xref" href="NetFabric.Numerics.Spherical.Point-3.html">Point&lt;TAngleUnits, TAngle, TRadius&gt;</a>.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="NetFabric_Numerics_Spherical_Point_3_CreateTruncating_" data-uid="NetFabric.Numerics.Spherical.Point`3.CreateTruncating*"></a>
+
+  <h3 id="NetFabric_Numerics_Spherical_Point_3_CreateTruncating__2_NetFabric_Numerics_Spherical_Point__0___0___1___" data-uid="NetFabric.Numerics.Spherical.Point`3.CreateTruncating``2(NetFabric.Numerics.Spherical.Point{`0,``0,``1}@)">
+  CreateTruncating&lt;TAngleOther, TRadiusOther&gt;(in Point&lt;TAngleUnits, TAngleOther, TRadiusOther&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Spherical/Point.cs/#L100"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates an instance of the current type from a value,
+truncating any values that fall outside the representable range of the current type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Point&lt;TAngleUnits, TAngle, TRadius&gt; CreateTruncating&lt;TAngleOther, TRadiusOther&gt;(in Point&lt;TAngleUnits, TAngleOther, TRadiusOther&gt; point) where TAngleOther : struct, IFloatingPoint&lt;TAngleOther&gt;, IMinMaxValue&lt;TAngleOther&gt; where TRadiusOther : struct, IFloatingPoint&lt;TRadiusOther&gt;, IMinMaxValue&lt;TRadiusOther&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>point</code> <a class="xref" href="NetFabric.Numerics.Spherical.Point-3.html">Point</a>&lt;TAngleUnits, TAngleOther, TRadiusOther&gt;</dt>
+    <dd><p>The value which is used to create the instance of <a class="xref" href="NetFabric.Numerics.Spherical.Point-3.html">Point&lt;TAngleUnits, TAngle, TRadius&gt;</a></p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Spherical.Point-3.html">Point</a>&lt;TAngleUnits, TAngle, TRadius&gt;</dt>
+    <dd><p>An instance of <a class="xref" href="NetFabric.Numerics.Spherical.Point-3.html">Point&lt;TAngleUnits, TAngle, TRadius&gt;</a> created from <code class="paramref">point</code>.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TAngleOther</code></dt>
+    <dd><p>The type used by the angle of the azimuth and zenith coordinates of <code class="paramref">point</code>.</p>
+</dd>
+    <dt><code>TRadiusOther</code></dt>
+    <dd><p>The type of the radius coordinate of <code class="paramref">point</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.notsupportedexception">NotSupportedException</a></dt>
+    <dd><p><code class="typeparamref">TAngleOther</code> or <code class="typeparamref">TRadiusOther</code> is not supported.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.overflowexception">OverflowException</a></dt>
+    <dd><p><code class="paramref">point</code> is not representable by <a class="xref" href="NetFabric.Numerics.Spherical.Point-3.html">Point&lt;TAngleUnits, TAngle, TRadius&gt;</a>.</p>
+</dd>
+  </dl>
+
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Spherical/Point.cs/#L12" class="edit-link">Edit this page</a>
+        </div>
+
+        
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+
+    <footer class="border-top">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          Copyright (c) 2023 Antão Almada
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

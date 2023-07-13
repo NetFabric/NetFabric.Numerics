@@ -1,0 +1,1324 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class Matrix4x4
+ | NetFabric.Numerics </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class Matrix4x4
+ | NetFabric.Numerics ">
+      
+      <link rel="icon" href="../images/Logo.png">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/NetFabric/NetFabric.Numerics/new/main/apiSpec/new?filename=NetFabric_Numerics_Matrix4x4.md&amp;value=---%0Auid%3A%20NetFabric.Numerics.Matrix4x4%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+  </head>
+
+  <script type="module">
+    import options from './../public/main.js'
+    import { init } from './../public/docfx.min.js'
+    init(options)
+  </script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/Logo.png" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="NetFabric.Numerics.Matrix4x4">
+
+
+
+  <h1 id="NetFabric_Numerics_Matrix4x4" data-uid="NetFabric.Numerics.Matrix4x4" class="text-break">
+    Class Matrix4x4
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Matrix4x4.cs/#L292"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="NetFabric.html">NetFabric</a>.<a class="xref" href="NetFabric.Numerics.html">Numerics</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>NetFabric.Numerics.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Provides static methods for matrix operations.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static class Matrix4x4</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">Matrix4x4</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist derived">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="NetFabric_Numerics_Matrix4x4_Add_" data-uid="NetFabric.Numerics.Matrix4x4.Add*"></a>
+
+  <h3 id="NetFabric_Numerics_Matrix4x4_Add__1_NetFabric_Numerics_Matrix4x4___0___NetFabric_Numerics_Matrix4x4___0___" data-uid="NetFabric.Numerics.Matrix4x4.Add``1(NetFabric.Numerics.Matrix4x4{``0}@,NetFabric.Numerics.Matrix4x4{``0}@)">
+  Add&lt;T&gt;(in Matrix4x4&lt;T&gt;, in Matrix4x4&lt;T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Matrix4x4.cs/#L315"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Adds two matrices component-wise.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Matrix4x4&lt;T&gt; Add&lt;T&gt;(in Matrix4x4&lt;T&gt; left, in Matrix4x4&lt;T&gt; right) where T : struct, INumber&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>left</code> <a class="xref" href="NetFabric.Numerics.Matrix4x4-1.html">Matrix4x4</a>&lt;T&gt;</dt>
+    <dd><p>The first <a class="xref" href="NetFabric.Numerics.Matrix4x4-1.html">Matrix4x4&lt;T&gt;</a> to add.</p>
+</dd>
+    <dt><code>right</code> <a class="xref" href="NetFabric.Numerics.Matrix4x4-1.html">Matrix4x4</a>&lt;T&gt;</dt>
+    <dd><p>The second <a class="xref" href="NetFabric.Numerics.Matrix4x4-1.html">Matrix4x4&lt;T&gt;</a> to add.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Matrix4x4-1.html">Matrix4x4</a>&lt;T&gt;</dt>
+    <dd><p>A new <a class="xref" href="NetFabric.Numerics.Matrix4x4-1.html">Matrix4x4&lt;T&gt;</a> representing the element-wise addition of the two matrices.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The type of the matrix's components.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="NetFabric_Numerics_Matrix4x4_CreateFromQuaternion_" data-uid="NetFabric.Numerics.Matrix4x4.CreateFromQuaternion*"></a>
+
+  <h3 id="NetFabric_Numerics_Matrix4x4_CreateFromQuaternion__1_NetFabric_Numerics_Cartesian3_Quaternion___0___" data-uid="NetFabric.Numerics.Matrix4x4.CreateFromQuaternion``1(NetFabric.Numerics.Cartesian3.Quaternion{``0}@)">
+  CreateFromQuaternion&lt;T&gt;(in Quaternion&lt;T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Matrix4x4.cs/#L639"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates a matrix that represents a transformation from a quaternion rotation.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Matrix4x4&lt;T&gt; CreateFromQuaternion&lt;T&gt;(in Quaternion&lt;T&gt; quaternion) where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>quaternion</code> <a class="xref" href="NetFabric.Numerics.Cartesian3.Quaternion-1.html">Quaternion</a>&lt;T&gt;</dt>
+    <dd><p>The quaternion representing the rotation.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Matrix4x4-1.html">Matrix4x4</a>&lt;T&gt;</dt>
+    <dd><p>A matrix representing the quaternion rotation.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The type of the matrix and quaternion elements.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Matrix4x4_CreateFromQuaternion__1_NetFabric_Numerics_Cartesian3_Quaternion___0____remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>The resulting matrix is computed as follows:
+Q = (w, x, y, z)
+xx = x * x, xy = x * y, xz = x * z, xw = x * w
+yy = y * y, yz = y * z, yw = y * w
+zz = z * z, zw = z * w
+M = [1 - 2 * (yy + zz), 2 * (xy - zw), 2 * (xz + yw), 0;
+2 * (xy + zw), 1 - 2 * (xx + zz), 2 * (yz - xw), 0;
+2 * (xz - yw), 2 * (yz + xw), 1 - 2 * (xx + yy), 0;
+0, 0, 0, 1]
+Where:
+- Q is the quaternion representing the rotation.
+- w, x, y, z are the components of the quaternion.
+The resulting matrix represents a transformation equivalent to the rotation described by the quaternion.</p>
+</div>
+
+
+
+
+  <a id="NetFabric_Numerics_Matrix4x4_CreateLookAt_" data-uid="NetFabric.Numerics.Matrix4x4.CreateLookAt*"></a>
+
+  <h3 id="NetFabric_Numerics_Matrix4x4_CreateLookAt__1_NetFabric_Numerics_Vector3___0___NetFabric_Numerics_Vector3___0___NetFabric_Numerics_Vector3___0___" data-uid="NetFabric.Numerics.Matrix4x4.CreateLookAt``1(NetFabric.Numerics.Vector3{``0}@,NetFabric.Numerics.Vector3{``0}@,NetFabric.Numerics.Vector3{``0}@)">
+  CreateLookAt&lt;T&gt;(in Vector3&lt;T&gt;, in Vector3&lt;T&gt;, in Vector3&lt;T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Matrix4x4.cs/#L683"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates a view matrix that simulates a camera's look-at transformation.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Matrix4x4&lt;T&gt; CreateLookAt&lt;T&gt;(in Vector3&lt;T&gt; cameraPosition, in Vector3&lt;T&gt; cameraTarget, in Vector3&lt;T&gt; cameraUpVector) where T : struct, INumber&lt;T&gt;, IMinMaxValue&lt;T&gt;, IRootFunctions&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cameraPosition</code> <a class="xref" href="NetFabric.Numerics.Vector3-1.html">Vector3</a>&lt;T&gt;</dt>
+    <dd><p>The position of the camera.</p>
+</dd>
+    <dt><code>cameraTarget</code> <a class="xref" href="NetFabric.Numerics.Vector3-1.html">Vector3</a>&lt;T&gt;</dt>
+    <dd><p>The target point that the camera is looking at.</p>
+</dd>
+    <dt><code>cameraUpVector</code> <a class="xref" href="NetFabric.Numerics.Vector3-1.html">Vector3</a>&lt;T&gt;</dt>
+    <dd><p>The up direction vector of the camera.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Matrix4x4-1.html">Matrix4x4</a>&lt;T&gt;</dt>
+    <dd><p>A matrix representing the camera's look-at transformation.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The type of the matrix and vector elements.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Matrix4x4_CreateLookAt__1_NetFabric_Numerics_Vector3___0___NetFabric_Numerics_Vector3___0___NetFabric_Numerics_Vector3___0____remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>The resulting matrix is computed as follows:
+zAxis = Normalize(cameraPosition - cameraTarget)
+xAxis = Normalize(Cross(cameraUpVector, zAxis))
+yAxis = Cross(zAxis, xAxis)
+M = [xAxis.X, yAxis.X, zAxis.X, 0;
+xAxis.Y, yAxis.Y, zAxis.Y, 0;
+xAxis.Z, yAxis.Z, zAxis.Z, 0;
+-Dot(xAxis, cameraPosition), -Dot(yAxis, cameraPosition), -Dot(zAxis, cameraPosition), 1]
+Where:
+- cameraPosition is the position of the camera.
+- cameraTarget is the target point that the camera is looking at.
+- cameraUpVector is the up direction vector of the camera.
+The resulting matrix represents a view transformation that simulates the camera's position, orientation, and viewing direction.</p>
+</div>
+
+
+
+
+  <a id="NetFabric_Numerics_Matrix4x4_CreatePerspectiveFieldOfView_" data-uid="NetFabric.Numerics.Matrix4x4.CreatePerspectiveFieldOfView*"></a>
+
+  <h3 id="NetFabric_Numerics_Matrix4x4_CreatePerspectiveFieldOfView__1_NetFabric_Numerics_Angle_NetFabric_Numerics_Radians___0____0___0___0_" data-uid="NetFabric.Numerics.Matrix4x4.CreatePerspectiveFieldOfView``1(NetFabric.Numerics.Angle{NetFabric.Numerics.Radians,``0},``0,``0,``0)">
+  CreatePerspectiveFieldOfView&lt;T&gt;(Angle&lt;Radians, T&gt;, T, T, T)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Matrix4x4.cs/#L722"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates a perspective projection matrix based on the field of view.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Matrix4x4&lt;T&gt; CreatePerspectiveFieldOfView&lt;T&gt;(Angle&lt;Radians, T&gt; fieldOfView, T aspectRatio, T nearPlaneDistance, T farPlaneDistance) where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;, ITrigonometricFunctions&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>fieldOfView</code> <a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;<a class="xref" href="NetFabric.Numerics.Radians.html">Radians</a>, T&gt;</dt>
+    <dd><p>The field of view angle in radians.</p>
+</dd>
+    <dt><code>aspectRatio</code> <span class="xref">T</span></dt>
+    <dd><p>The aspect ratio of the projection.</p>
+</dd>
+    <dt><code>nearPlaneDistance</code> <span class="xref">T</span></dt>
+    <dd><p>The distance to the near clipping plane.</p>
+</dd>
+    <dt><code>farPlaneDistance</code> <span class="xref">T</span></dt>
+    <dd><p>The distance to the far clipping plane.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Matrix4x4-1.html">Matrix4x4</a>&lt;T&gt;</dt>
+    <dd><p>A matrix representing the perspective projection.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The type of the matrix elements.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Matrix4x4_CreatePerspectiveFieldOfView__1_NetFabric_Numerics_Angle_NetFabric_Numerics_Radians___0____0___0___0__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>The resulting matrix is computed as follows:
+yScale = Cot(fieldOfView / 2)
+xScale = yScale / aspectRatio
+q = farPlaneDistance / (farPlaneDistance - nearPlaneDistance)
+M = [xScale, 0, 0, 0;
+0, yScale, 0, 0;
+0, 0, q, 1;
+0, 0, -q * nearPlaneDistance, 0]
+Where:
+- fieldOfView is the field of view angle in radians.
+- aspectRatio is the aspect ratio of the projection.
+- nearPlaneDistance is the distance to the near clipping plane.
+- farPlaneDistance is the distance to the far clipping plane.
+The resulting matrix represents a perspective projection with the specified field of view, aspect ratio,
+and clipping plane distances.</p>
+</div>
+
+
+
+
+  <a id="NetFabric_Numerics_Matrix4x4_CreateRotationX_" data-uid="NetFabric.Numerics.Matrix4x4.CreateRotationX*"></a>
+
+  <h3 id="NetFabric_Numerics_Matrix4x4_CreateRotationX__1_NetFabric_Numerics_Angle_NetFabric_Numerics_Radians___0__" data-uid="NetFabric.Numerics.Matrix4x4.CreateRotationX``1(NetFabric.Numerics.Angle{NetFabric.Numerics.Radians,``0})">
+  CreateRotationX&lt;T&gt;(Angle&lt;Radians, T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Matrix4x4.cs/#L518"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates a rotation matrix that represents a rotation around the X-axis by the specified angle.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Matrix4x4&lt;T&gt; CreateRotationX&lt;T&gt;(Angle&lt;Radians, T&gt; angle) where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;, ITrigonometricFunctions&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>angle</code> <a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;<a class="xref" href="NetFabric.Numerics.Radians.html">Radians</a>, T&gt;</dt>
+    <dd><p>The angle of rotation around the X-axis.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Matrix4x4-1.html">Matrix4x4</a>&lt;T&gt;</dt>
+    <dd><p>A rotation matrix.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The type of the matrix elements.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Matrix4x4_CreateRotationX__1_NetFabric_Numerics_Angle_NetFabric_Numerics_Radians___0___remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>The resulting rotation matrix is represented by the following form:
+[  1     0      0      0  ]
+[  0  cos(a)   sin(a)  0  ]
+[  0  -sin(a)  cos(a)  0  ]
+[  0     0      0      1  ]
+The angle of rotation around the X-axis is specified by the provided <code class="paramref">angle</code> parameter.</p>
+</div>
+
+
+
+
+  <a id="NetFabric_Numerics_Matrix4x4_CreateRotationY_" data-uid="NetFabric.Numerics.Matrix4x4.CreateRotationY*"></a>
+
+  <h3 id="NetFabric_Numerics_Matrix4x4_CreateRotationY__1_NetFabric_Numerics_Angle_NetFabric_Numerics_Radians___0__" data-uid="NetFabric.Numerics.Matrix4x4.CreateRotationY``1(NetFabric.Numerics.Angle{NetFabric.Numerics.Radians,``0})">
+  CreateRotationY&lt;T&gt;(Angle&lt;Radians, T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Matrix4x4.cs/#L543"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates a rotation matrix that represents a rotation around the Y-axis by the specified angle.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Matrix4x4&lt;T&gt; CreateRotationY&lt;T&gt;(Angle&lt;Radians, T&gt; angle) where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;, ITrigonometricFunctions&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>angle</code> <a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;<a class="xref" href="NetFabric.Numerics.Radians.html">Radians</a>, T&gt;</dt>
+    <dd><p>The angle of rotation around the Y-axis.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Matrix4x4-1.html">Matrix4x4</a>&lt;T&gt;</dt>
+    <dd><p>A rotation matrix.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The type of the matrix elements.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Matrix4x4_CreateRotationY__1_NetFabric_Numerics_Angle_NetFabric_Numerics_Radians___0___remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>The resulting rotation matrix is represented by the following form:
+[  cos(a)  0  -sin(a)  0  ]
+[    0     1    0      0  ]
+[  sin(a)  0  cos(a)   0  ]
+[    0     0    0      1  ]
+The angle of rotation around the Y-axis is specified by the provided angle parameter.</p>
+</div>
+
+
+
+
+  <a id="NetFabric_Numerics_Matrix4x4_CreateRotationZ_" data-uid="NetFabric.Numerics.Matrix4x4.CreateRotationZ*"></a>
+
+  <h3 id="NetFabric_Numerics_Matrix4x4_CreateRotationZ__1_NetFabric_Numerics_Angle_NetFabric_Numerics_Radians___0__" data-uid="NetFabric.Numerics.Matrix4x4.CreateRotationZ``1(NetFabric.Numerics.Angle{NetFabric.Numerics.Radians,``0})">
+  CreateRotationZ&lt;T&gt;(Angle&lt;Radians, T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Matrix4x4.cs/#L568"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates a rotation matrix that represents a rotation around the Z-axis by the specified angle.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Matrix4x4&lt;T&gt; CreateRotationZ&lt;T&gt;(Angle&lt;Radians, T&gt; angle) where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;, ITrigonometricFunctions&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>angle</code> <a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;<a class="xref" href="NetFabric.Numerics.Radians.html">Radians</a>, T&gt;</dt>
+    <dd><p>The angle of rotation around the Z-axis.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Matrix4x4-1.html">Matrix4x4</a>&lt;T&gt;</dt>
+    <dd><p>A rotation matrix.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The type of the matrix elements.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Matrix4x4_CreateRotationZ__1_NetFabric_Numerics_Angle_NetFabric_Numerics_Radians___0___remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>The resulting rotation matrix is represented by the following form:
+[  cos(a)   sin(a)  0  0  ]
+[  -sin(a)  cos(a)  0  0  ]
+[    0        0     1  0  ]
+[    0        0     0  1  ]
+The angle of rotation around the Z-axis is specified by the provided angle parameter.</p>
+</div>
+
+
+
+
+  <a id="NetFabric_Numerics_Matrix4x4_CreateRotation_" data-uid="NetFabric.Numerics.Matrix4x4.CreateRotation*"></a>
+
+  <h3 id="NetFabric_Numerics_Matrix4x4_CreateRotation__1_NetFabric_Numerics_Vector3___0___NetFabric_Numerics_Angle_NetFabric_Numerics_Radians___0__" data-uid="NetFabric.Numerics.Matrix4x4.CreateRotation``1(NetFabric.Numerics.Vector3{``0}@,NetFabric.Numerics.Angle{NetFabric.Numerics.Radians,``0})">
+  CreateRotation&lt;T&gt;(in Vector3&lt;T&gt;, Angle&lt;Radians, T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Matrix4x4.cs/#L602"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates a rotation matrix that represents a rotation around the specified axis by the specified angle.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Matrix4x4&lt;T&gt; CreateRotation&lt;T&gt;(in Vector3&lt;T&gt; axis, Angle&lt;Radians, T&gt; angle) where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;, ITrigonometricFunctions&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>axis</code> <a class="xref" href="NetFabric.Numerics.Vector3-1.html">Vector3</a>&lt;T&gt;</dt>
+    <dd><p>The axis of rotation.</p>
+</dd>
+    <dt><code>angle</code> <a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;<a class="xref" href="NetFabric.Numerics.Radians.html">Radians</a>, T&gt;</dt>
+    <dd><p>The angle of rotation.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Matrix4x4-1.html">Matrix4x4</a>&lt;T&gt;</dt>
+    <dd><p>A rotation matrix.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The type of the matrix elements.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Matrix4x4_CreateRotation__1_NetFabric_Numerics_Vector3___0___NetFabric_Numerics_Angle_NetFabric_Numerics_Radians___0___remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>The resulting rotation matrix is based on the Rodrigues' rotation formula and is computed as follows:
+K = (axis.X, axis.Y, axis.Z)
+c = cos(angle)
+s = sin(angle)
+v = 1 - c
+R = c * I + v * K * K' + s * [0, -Kz, Ky; Kz, 0, -Kx; -Ky, Kx, 0]
+Where:
+- K is a unit vector in the direction of the axis of rotation.
+- I is the identity matrix.
+- K' is the skew-symmetric matrix of K.
+- c is the cosine of the angle of rotation.
+- s is the sine of the angle of rotation.
+- v is 1 minus the cosine of the angle of rotation.
+The resulting rotation matrix represents a rotation around the specified axis by the specified angle.</p>
+</div>
+
+
+
+
+  <a id="NetFabric_Numerics_Matrix4x4_CreateScale_" data-uid="NetFabric.Numerics.Matrix4x4.CreateScale*"></a>
+
+  <h3 id="NetFabric_Numerics_Matrix4x4_CreateScale__1___0___0___0_" data-uid="NetFabric.Numerics.Matrix4x4.CreateScale``1(``0,``0,``0)">
+  CreateScale&lt;T&gt;(T, T, T)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Matrix4x4.cs/#L496"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates a scaling matrix that represents scaling along the X, Y, and Z axes using the provided scale factors.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Matrix4x4&lt;T&gt; CreateScale&lt;T&gt;(T x, T y, T z) where T : struct, INumber&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>x</code> <span class="xref">T</span></dt>
+    <dd><p>The scale factor along the X-axis.</p>
+</dd>
+    <dt><code>y</code> <span class="xref">T</span></dt>
+    <dd><p>The scale factor along the Y-axis.</p>
+</dd>
+    <dt><code>z</code> <span class="xref">T</span></dt>
+    <dd><p>The scale factor along the Z-axis.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Matrix4x4-1.html">Matrix4x4</a>&lt;T&gt;</dt>
+    <dd><p>A scaling matrix.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The type of the matrix elements.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Matrix4x4_CreateScale__1___0___0___0__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>The resulting scaling matrix is represented by the following form:
+[ X  0  0  0 ]
+[ 0  Y  0  0 ]
+[ 0  0  Z  0 ]
+[ 0  0  0  1 ]
+The scale factors along the X, Y, and Z axes are set based on the provided parameters.</p>
+</div>
+
+
+
+
+  <a id="NetFabric_Numerics_Matrix4x4_CreateTranslation_" data-uid="NetFabric.Numerics.Matrix4x4.CreateTranslation*"></a>
+
+  <h3 id="NetFabric_Numerics_Matrix4x4_CreateTranslation__1___0___0___0_" data-uid="NetFabric.Numerics.Matrix4x4.CreateTranslation``1(``0,``0,``0)">
+  CreateTranslation&lt;T&gt;(T, T, T)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Matrix4x4.cs/#L472"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates a translation matrix that represents a translation along the X, Y, and Z axes using the provided translation offsets.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Matrix4x4&lt;T&gt; CreateTranslation&lt;T&gt;(T x, T y, T z) where T : struct, INumber&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>x</code> <span class="xref">T</span></dt>
+    <dd><p>The translation offset along the X-axis.</p>
+</dd>
+    <dt><code>y</code> <span class="xref">T</span></dt>
+    <dd><p>The translation offset along the Y-axis.</p>
+</dd>
+    <dt><code>z</code> <span class="xref">T</span></dt>
+    <dd><p>The translation offset along the Z-axis.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Matrix4x4-1.html">Matrix4x4</a>&lt;T&gt;</dt>
+    <dd><p>A translation matrix.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The type of the matrix elements.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Matrix4x4_CreateTranslation__1___0___0___0__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>The resulting translation matrix is represented by the following form:
+[ 1  0  0  X ]
+[ 0  1  0  Y ]
+[ 0  0  1  Z ]
+[ 0  0  0  1 ]
+The translation offsets along the X, Y, and Z axes are set based on the provided parameters.</p>
+</div>
+
+
+
+
+  <a id="NetFabric_Numerics_Matrix4x4_Divide_" data-uid="NetFabric.Numerics.Matrix4x4.Divide*"></a>
+
+  <h3 id="NetFabric_Numerics_Matrix4x4_Divide__1_NetFabric_Numerics_Matrix4x4___0_____0_" data-uid="NetFabric.Numerics.Matrix4x4.Divide``1(NetFabric.Numerics.Matrix4x4{``0}@,``0)">
+  Divide&lt;T&gt;(in Matrix4x4&lt;T&gt;, T)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Matrix4x4.cs/#L375"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Divides a matrix by a scalar value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Matrix4x4&lt;T&gt; Divide&lt;T&gt;(in Matrix4x4&lt;T&gt; matrix, T scalar) where T : struct, INumber&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>matrix</code> <a class="xref" href="NetFabric.Numerics.Matrix4x4-1.html">Matrix4x4</a>&lt;T&gt;</dt>
+    <dd><p>The <a class="xref" href="NetFabric.Numerics.Matrix4x4-1.html">Matrix4x4&lt;T&gt;</a> to divide.</p>
+</dd>
+    <dt><code>scalar</code> <span class="xref">T</span></dt>
+    <dd><p>The scalar value to divide the matrix by.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Matrix4x4-1.html">Matrix4x4</a>&lt;T&gt;</dt>
+    <dd><p>A new <a class="xref" href="NetFabric.Numerics.Matrix4x4-1.html">Matrix4x4&lt;T&gt;</a> representing the result of the matrix division.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The type of the matrix's components.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="NetFabric_Numerics_Matrix4x4_IsFinite_" data-uid="NetFabric.Numerics.Matrix4x4.IsFinite*"></a>
+
+  <h3 id="NetFabric_Numerics_Matrix4x4_IsFinite__1_NetFabric_Numerics_Matrix4x4___0___" data-uid="NetFabric.Numerics.Matrix4x4.IsFinite``1(NetFabric.Numerics.Matrix4x4{``0}@)">
+  IsFinite&lt;T&gt;(in Matrix4x4&lt;T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Matrix4x4.cs/#L438"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Determines whether all components of the specified <a class="xref" href="NetFabric.Numerics.Matrix4x4-1.html">Matrix4x4&lt;T&gt;</a> are finite numbers (not NaN, infinity, or negative infinity).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsFinite&lt;T&gt;(in Matrix4x4&lt;T&gt; matrix) where T : struct, INumber&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>matrix</code> <a class="xref" href="NetFabric.Numerics.Matrix4x4-1.html">Matrix4x4</a>&lt;T&gt;</dt>
+    <dd><p>The <a class="xref" href="NetFabric.Numerics.Matrix4x4-1.html">Matrix4x4&lt;T&gt;</a> to check for finite values.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p><code>true</code> if all components of the matrix are finite numbers; otherwise, <code>false</code>.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The type of the matrix's components.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="NetFabric_Numerics_Matrix4x4_IsIdentity_" data-uid="NetFabric.Numerics.Matrix4x4.IsIdentity*"></a>
+
+  <h3 id="NetFabric_Numerics_Matrix4x4_IsIdentity__1_NetFabric_Numerics_Matrix4x4___0___" data-uid="NetFabric.Numerics.Matrix4x4.IsIdentity``1(NetFabric.Numerics.Matrix4x4{``0}@)">
+  IsIdentity&lt;T&gt;(in Matrix4x4&lt;T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Matrix4x4.cs/#L390"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Determines whether the specified <a class="xref" href="NetFabric.Numerics.Matrix4x4-1.html">Matrix4x4&lt;T&gt;</a> is an identity matrix.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsIdentity&lt;T&gt;(in Matrix4x4&lt;T&gt; matrix) where T : struct, INumber&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>matrix</code> <a class="xref" href="NetFabric.Numerics.Matrix4x4-1.html">Matrix4x4</a>&lt;T&gt;</dt>
+    <dd><p>The <a class="xref" href="NetFabric.Numerics.Matrix4x4-1.html">Matrix4x4&lt;T&gt;</a> to check for identity.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p><code>true</code> if the matrix is an identity matrix; otherwise, <code>false</code>.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The type of the matrix's components.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="NetFabric_Numerics_Matrix4x4_IsInfinity_" data-uid="NetFabric.Numerics.Matrix4x4.IsInfinity*"></a>
+
+  <h3 id="NetFabric_Numerics_Matrix4x4_IsInfinity__1_NetFabric_Numerics_Matrix4x4___0___" data-uid="NetFabric.Numerics.Matrix4x4.IsInfinity``1(NetFabric.Numerics.Matrix4x4{``0}@)">
+  IsInfinity&lt;T&gt;(in Matrix4x4&lt;T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Matrix4x4.cs/#L426"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Determines whether any component of the specified <a class="xref" href="NetFabric.Numerics.Matrix4x4-1.html">Matrix4x4&lt;T&gt;</a> is positive or negative infinity.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsInfinity&lt;T&gt;(in Matrix4x4&lt;T&gt; matrix) where T : struct, INumber&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>matrix</code> <a class="xref" href="NetFabric.Numerics.Matrix4x4-1.html">Matrix4x4</a>&lt;T&gt;</dt>
+    <dd><p>The <a class="xref" href="NetFabric.Numerics.Matrix4x4-1.html">Matrix4x4&lt;T&gt;</a> to check for infinity values.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p><code>true</code> if any component of the matrix is positive or negative infinity; otherwise, <code>false</code>.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The type of the matrix's components.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="NetFabric_Numerics_Matrix4x4_IsNaN_" data-uid="NetFabric.Numerics.Matrix4x4.IsNaN*"></a>
+
+  <h3 id="NetFabric_Numerics_Matrix4x4_IsNaN__1_NetFabric_Numerics_Matrix4x4___0___" data-uid="NetFabric.Numerics.Matrix4x4.IsNaN``1(NetFabric.Numerics.Matrix4x4{``0}@)">
+  IsNaN&lt;T&gt;(in Matrix4x4&lt;T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Matrix4x4.cs/#L414"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Determines whether any component of the specified <a class="xref" href="NetFabric.Numerics.Matrix4x4-1.html">Matrix4x4&lt;T&gt;</a> is NaN (Not-a-Number).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsNaN&lt;T&gt;(in Matrix4x4&lt;T&gt; matrix) where T : struct, INumber&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>matrix</code> <a class="xref" href="NetFabric.Numerics.Matrix4x4-1.html">Matrix4x4</a>&lt;T&gt;</dt>
+    <dd><p>The <a class="xref" href="NetFabric.Numerics.Matrix4x4-1.html">Matrix4x4&lt;T&gt;</a> to check for NaN values.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p><code>true</code> if any component of the matrix is NaN; otherwise, <code>false</code>.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The type of the matrix's components.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="NetFabric_Numerics_Matrix4x4_IsZero_" data-uid="NetFabric.Numerics.Matrix4x4.IsZero*"></a>
+
+  <h3 id="NetFabric_Numerics_Matrix4x4_IsZero__1_NetFabric_Numerics_Matrix4x4___0___" data-uid="NetFabric.Numerics.Matrix4x4.IsZero``1(NetFabric.Numerics.Matrix4x4{``0}@)">
+  IsZero&lt;T&gt;(in Matrix4x4&lt;T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Matrix4x4.cs/#L402"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Determines whether the specified <a class="xref" href="NetFabric.Numerics.Matrix4x4-1.html">Matrix4x4&lt;T&gt;</a> is a zero matrix.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsZero&lt;T&gt;(in Matrix4x4&lt;T&gt; matrix) where T : struct, INumber&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>matrix</code> <a class="xref" href="NetFabric.Numerics.Matrix4x4-1.html">Matrix4x4</a>&lt;T&gt;</dt>
+    <dd><p>The <a class="xref" href="NetFabric.Numerics.Matrix4x4-1.html">Matrix4x4&lt;T&gt;</a> to check for zero.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p><code>true</code> if the matrix is a zero matrix; otherwise, <code>false</code>.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The type of the matrix's components.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="NetFabric_Numerics_Matrix4x4_Lerp_" data-uid="NetFabric.Numerics.Matrix4x4.Lerp*"></a>
+
+  <h3 id="NetFabric_Numerics_Matrix4x4_Lerp__1_NetFabric_Numerics_Matrix4x4___0__NetFabric_Numerics_Matrix4x4___0____0_" data-uid="NetFabric.Numerics.Matrix4x4.Lerp``1(NetFabric.Numerics.Matrix4x4{``0},NetFabric.Numerics.Matrix4x4{``0},``0)">
+  Lerp&lt;T&gt;(Matrix4x4&lt;T&gt;, Matrix4x4&lt;T&gt;, T)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Matrix4x4.cs/#L801"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Performs a linear interpolation between two matrices.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Matrix4x4&lt;T&gt; Lerp&lt;T&gt;(Matrix4x4&lt;T&gt; from, Matrix4x4&lt;T&gt; to, T factor) where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>from</code> <a class="xref" href="NetFabric.Numerics.Matrix4x4-1.html">Matrix4x4</a>&lt;T&gt;</dt>
+    <dd><p>The starting matrix.</p>
+</dd>
+    <dt><code>to</code> <a class="xref" href="NetFabric.Numerics.Matrix4x4-1.html">Matrix4x4</a>&lt;T&gt;</dt>
+    <dd><p>The target matrix.</p>
+</dd>
+    <dt><code>factor</code> <span class="xref">T</span></dt>
+    <dd><p>The interpolation factor. Value should be between 0 and 1.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Matrix4x4-1.html">Matrix4x4</a>&lt;T&gt;</dt>
+    <dd><p>A new matrix that represents the result of the linear interpolation.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The type of the matrix components.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Matrix4x4_Lerp__1_NetFabric_Numerics_Matrix4x4___0__NetFabric_Numerics_Matrix4x4___0____0__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>The linear interpolation (lerp) is a mathematical operation that computes a value between two given values based on a weighting factor.
+In the context of matrices, the lerp operation is performed on each component of the matrices individually.
+The resulting matrix is a combination of the starting matrix and the target matrix based on the interpolation factor.
+The interpolation factor should be between 0 and 1, where 0 returns the starting matrix and 1 returns the target matrix.</p>
+</div>
+
+
+
+
+  <a id="NetFabric_Numerics_Matrix4x4_Multiply_" data-uid="NetFabric.Numerics.Matrix4x4.Multiply*"></a>
+
+  <h3 id="NetFabric_Numerics_Matrix4x4_Multiply__1_NetFabric_Numerics_Matrix4x4___0___NetFabric_Numerics_Matrix4x4___0___" data-uid="NetFabric.Numerics.Matrix4x4.Multiply``1(NetFabric.Numerics.Matrix4x4{``0}@,NetFabric.Numerics.Matrix4x4{``0}@)">
+  Multiply&lt;T&gt;(in Matrix4x4&lt;T&gt;, in Matrix4x4&lt;T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Matrix4x4.cs/#L347"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Multiplies two matrices.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Matrix4x4&lt;T&gt; Multiply&lt;T&gt;(in Matrix4x4&lt;T&gt; left, in Matrix4x4&lt;T&gt; right) where T : struct, INumber&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>left</code> <a class="xref" href="NetFabric.Numerics.Matrix4x4-1.html">Matrix4x4</a>&lt;T&gt;</dt>
+    <dd><p>The first <a class="xref" href="NetFabric.Numerics.Matrix4x4-1.html">Matrix4x4&lt;T&gt;</a> to multiply.</p>
+</dd>
+    <dt><code>right</code> <a class="xref" href="NetFabric.Numerics.Matrix4x4-1.html">Matrix4x4</a>&lt;T&gt;</dt>
+    <dd><p>The second <a class="xref" href="NetFabric.Numerics.Matrix4x4-1.html">Matrix4x4&lt;T&gt;</a> to multiply.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Matrix4x4-1.html">Matrix4x4</a>&lt;T&gt;</dt>
+    <dd><p>A new <a class="xref" href="NetFabric.Numerics.Matrix4x4-1.html">Matrix4x4&lt;T&gt;</a> representing the result of the matrix multiplication.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The type of the matrix's components.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="NetFabric_Numerics_Matrix4x4_Multiply_" data-uid="NetFabric.Numerics.Matrix4x4.Multiply*"></a>
+
+  <h3 id="NetFabric_Numerics_Matrix4x4_Multiply__1_NetFabric_Numerics_Matrix4x4___0_____0_" data-uid="NetFabric.Numerics.Matrix4x4.Multiply``1(NetFabric.Numerics.Matrix4x4{``0}@,``0)">
+  Multiply&lt;T&gt;(in Matrix4x4&lt;T&gt;, T)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Matrix4x4.cs/#L363"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Multiplies a matrix by a scalar value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Matrix4x4&lt;T&gt; Multiply&lt;T&gt;(in Matrix4x4&lt;T&gt; matrix, T scalar) where T : struct, INumber&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>matrix</code> <a class="xref" href="NetFabric.Numerics.Matrix4x4-1.html">Matrix4x4</a>&lt;T&gt;</dt>
+    <dd><p>The <a class="xref" href="NetFabric.Numerics.Matrix4x4-1.html">Matrix4x4&lt;T&gt;</a> to multiply.</p>
+</dd>
+    <dt><code>scalar</code> <span class="xref">T</span></dt>
+    <dd><p>The scalar value to multiply the matrix by.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Matrix4x4-1.html">Matrix4x4</a>&lt;T&gt;</dt>
+    <dd><p>A new <a class="xref" href="NetFabric.Numerics.Matrix4x4-1.html">Matrix4x4&lt;T&gt;</a> representing the result of the matrix multiplication.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The type of the matrix's components.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="NetFabric_Numerics_Matrix4x4_Negate_" data-uid="NetFabric.Numerics.Matrix4x4.Negate*"></a>
+
+  <h3 id="NetFabric_Numerics_Matrix4x4_Negate__1_NetFabric_Numerics_Matrix4x4___0___" data-uid="NetFabric.Numerics.Matrix4x4.Negate``1(NetFabric.Numerics.Matrix4x4{``0}@)">
+  Negate&lt;T&gt;(in Matrix4x4&lt;T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Matrix4x4.cs/#L303"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Negates each component of the specified <a class="xref" href="NetFabric.Numerics.Matrix4x4-1.html">Matrix4x4&lt;T&gt;</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Matrix4x4&lt;T&gt; Negate&lt;T&gt;(in Matrix4x4&lt;T&gt; matrix) where T : struct, INumber&lt;T&gt;, IMinMaxValue&lt;T&gt;, ISignedNumber&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>matrix</code> <a class="xref" href="NetFabric.Numerics.Matrix4x4-1.html">Matrix4x4</a>&lt;T&gt;</dt>
+    <dd><p>The <a class="xref" href="NetFabric.Numerics.Matrix4x4-1.html">Matrix4x4&lt;T&gt;</a> to negate.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Matrix4x4-1.html">Matrix4x4</a>&lt;T&gt;</dt>
+    <dd><p>A new <a class="xref" href="NetFabric.Numerics.Matrix4x4-1.html">Matrix4x4&lt;T&gt;</a> with negated components.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The type of the matrix's components.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="NetFabric_Numerics_Matrix4x4_Subtract_" data-uid="NetFabric.Numerics.Matrix4x4.Subtract*"></a>
+
+  <h3 id="NetFabric_Numerics_Matrix4x4_Subtract__1_NetFabric_Numerics_Matrix4x4___0___NetFabric_Numerics_Matrix4x4___0___" data-uid="NetFabric.Numerics.Matrix4x4.Subtract``1(NetFabric.Numerics.Matrix4x4{``0}@,NetFabric.Numerics.Matrix4x4{``0}@)">
+  Subtract&lt;T&gt;(in Matrix4x4&lt;T&gt;, in Matrix4x4&lt;T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Matrix4x4.cs/#L331"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Subtracts two matrices component-wise.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Matrix4x4&lt;T&gt; Subtract&lt;T&gt;(in Matrix4x4&lt;T&gt; left, in Matrix4x4&lt;T&gt; right) where T : struct, INumber&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>left</code> <a class="xref" href="NetFabric.Numerics.Matrix4x4-1.html">Matrix4x4</a>&lt;T&gt;</dt>
+    <dd><p>The <a class="xref" href="NetFabric.Numerics.Matrix4x4-1.html">Matrix4x4&lt;T&gt;</a> to subtract from.</p>
+</dd>
+    <dt><code>right</code> <a class="xref" href="NetFabric.Numerics.Matrix4x4-1.html">Matrix4x4</a>&lt;T&gt;</dt>
+    <dd><p>The <a class="xref" href="NetFabric.Numerics.Matrix4x4-1.html">Matrix4x4&lt;T&gt;</a> to subtract.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Matrix4x4-1.html">Matrix4x4</a>&lt;T&gt;</dt>
+    <dd><p>A new <a class="xref" href="NetFabric.Numerics.Matrix4x4-1.html">Matrix4x4&lt;T&gt;</a> representing the element-wise subtraction of the two matrices.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The type of the matrix's components.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="NetFabric_Numerics_Matrix4x4_Transpose_" data-uid="NetFabric.Numerics.Matrix4x4.Transpose*"></a>
+
+  <h3 id="NetFabric_Numerics_Matrix4x4_Transpose__1_NetFabric_Numerics_Matrix4x4___0__" data-uid="NetFabric.Numerics.Matrix4x4.Transpose``1(NetFabric.Numerics.Matrix4x4{``0})">
+  Transpose&lt;T&gt;(Matrix4x4&lt;T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Matrix4x4.cs/#L819"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Computes the transpose of a matrix.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Matrix4x4&lt;T&gt; Transpose&lt;T&gt;(Matrix4x4&lt;T&gt; matrix) where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>matrix</code> <a class="xref" href="NetFabric.Numerics.Matrix4x4-1.html">Matrix4x4</a>&lt;T&gt;</dt>
+    <dd><p>The input matrix.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Matrix4x4-1.html">Matrix4x4</a>&lt;T&gt;</dt>
+    <dd><p>A new matrix representing the transpose of the input matrix.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The type of the matrix components.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Matrix4x4_Transpose__1_NetFabric_Numerics_Matrix4x4___0___remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>The transpose of a matrix is obtained by exchanging the rows and columns of the original matrix.
+This method creates a new matrix where the rows of the input matrix become the columns and the columns become the rows.</p>
+</div>
+
+
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Matrix4x4.cs/#L292" class="edit-link">Edit this page</a>
+        </div>
+
+        
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+
+    <footer class="border-top">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          Copyright (c) 2023 Antão Almada
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
