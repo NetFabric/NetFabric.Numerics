@@ -49,8 +49,8 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="NetFabric" Version="1.3.0" />
-    <PackageReference Include="NetFabric.Hyperlinq.Analyzer" Version="2.0.4">
+    <PackageReference Include="NetFabric" Version="1.4.1" />
+    <PackageReference Include="NetFabric.Hyperlinq.Analyzer" Version="2.3.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
