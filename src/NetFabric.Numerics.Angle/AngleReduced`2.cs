@@ -1,5 +1,7 @@
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.Windows.Markup;
 
 namespace NetFabric.Numerics;
 
@@ -56,6 +58,8 @@ public readonly struct AngleReduced<TUnits, T>
     /// <param name="value">The angle measurement in the units specified by <typeparamref name="TUnits"/>.</param>
     public AngleReduced(T value)
     {
+        if (T.IsNegative(value) || value >= T.CreateChecked(TUnits.Full))
+            Throw.ArgumentOutOfRangeException(nameof(value), value, "Must be positive and less than a full revolution.");
         Value = value;
     }
 
