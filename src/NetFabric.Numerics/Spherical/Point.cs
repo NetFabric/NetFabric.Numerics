@@ -9,9 +9,9 @@ namespace NetFabric.Numerics.Spherical;
 /// <param name="Azimuth">The azimuth coordinate.</param>
 /// <param name="Zenith">The zenith coordinate.</param>
 /// <param name="Radius">The radius coordinate.</param>
-[System.Diagnostics.DebuggerDisplay("Azimuth = {Azimuth}, Zenith = {Zenith}, Radius = {Radius}")]
+[System.Diagnostics.DebuggerDisplay("Radius = {Radius}, Azimuth = {Azimuth}, Zenith = {Zenith}")]
 [SkipLocalsInit]
-public readonly record struct Point<TAngleUnits, TAngle, TRadius>(Angle<TAngleUnits, TAngle> Azimuth, Angle<TAngleUnits, TAngle> Zenith, TRadius Radius) 
+public readonly record struct Point<TAngleUnits, TAngle, TRadius>(TRadius Radius, Angle<TAngleUnits, TAngle> Azimuth, Angle<TAngleUnits, TAngle> Zenith)
     : IPoint<Point<TAngleUnits, TAngle, TRadius>>
     where TAngleUnits : struct, IAngleUnits<TAngleUnits>
     where TAngle : struct, IFloatingPoint<TAngle>, IMinMaxValue<TAngle>
@@ -19,7 +19,7 @@ public readonly record struct Point<TAngleUnits, TAngle, TRadius>(Angle<TAngleUn
 {
     #region constants
 
-    public static readonly Point<TAngleUnits, TAngle, TRadius> Zero = new(Angle<TAngleUnits, TAngle>.Zero, Angle<TAngleUnits, TAngle>.Zero, TRadius.Zero);
+    public static readonly PointReduced<TAngleUnits, TAngle, TRadius> Zero = new(TRadius.Zero, Angle<TAngleUnits, TAngle>.Zero, Angle<TAngleUnits, TAngle>.Zero);
 
     static Point<TAngleUnits, TAngle, TRadius> INumericBase<Point<TAngleUnits, TAngle, TRadius>>.Zero
         => Zero;
@@ -27,12 +27,12 @@ public readonly record struct Point<TAngleUnits, TAngle, TRadius>(Angle<TAngleUn
     /// <summary>
     /// Represents the minimum value. This field is read-only.
     /// </summary>
-    public static readonly Point<TAngleUnits, TAngle, TRadius> MinValue = new(Angle<TAngleUnits, TAngle>.MinValue, Angle<TAngleUnits, TAngle>.MinValue, TRadius.MinValue);
+    public static readonly Point<TAngleUnits, TAngle, TRadius> MinValue = new(TRadius.MinValue, Angle<TAngleUnits, TAngle>.MinValue, Angle<TAngleUnits, TAngle>.MinValue);
 
     /// <summary>
     /// Represents the maximum value. This field is read-only.
     /// </summary>
-    public static readonly Point<TAngleUnits, TAngle, TRadius> MaxValue = new(Angle<TAngleUnits, TAngle>.MaxValue, Angle<TAngleUnits, TAngle>.MaxValue, TRadius.MaxValue);
+    public static readonly Point<TAngleUnits, TAngle, TRadius> MaxValue = new(TRadius.MaxValue, Angle<TAngleUnits, TAngle>.MaxValue, Angle<TAngleUnits, TAngle>.MaxValue);
 
     static Point<TAngleUnits, TAngle, TRadius> IMinMaxValue<Point<TAngleUnits, TAngle, TRadius>>.MinValue
         => MinValue;
@@ -63,10 +63,10 @@ public readonly record struct Point<TAngleUnits, TAngle, TRadius>(Angle<TAngleUn
         where TAngleOther : struct, IFloatingPoint<TAngleOther>, IMinMaxValue<TAngleOther>
         where TRadiusOther : struct, IFloatingPoint<TRadiusOther>, IMinMaxValue<TRadiusOther>
         => new(
-            Angle<TAngleUnits, TAngle>.CreateChecked(point.Azimuth),
-            Angle<TAngleUnits, TAngle>.CreateChecked(point.Zenith),
             TRadius.CreateChecked(point.Radius)
-        );
+,
+            Angle<TAngleUnits, TAngle>.CreateChecked(point.Azimuth),
+            Angle<TAngleUnits, TAngle>.CreateChecked(point.Zenith));
 
     /// <summary>
     /// Creates an instance of the current type from a value, 
@@ -82,10 +82,10 @@ public readonly record struct Point<TAngleUnits, TAngle, TRadius>(Angle<TAngleUn
         where TAngleOther : struct, IFloatingPoint<TAngleOther>, IMinMaxValue<TAngleOther>
         where TRadiusOther : struct, IFloatingPoint<TRadiusOther>, IMinMaxValue<TRadiusOther>
         => new(
-            Angle<TAngleUnits, TAngle>.CreateSaturating(point.Azimuth),
-            Angle<TAngleUnits, TAngle>.CreateSaturating(point.Zenith),
             TRadius.CreateSaturating(point.Radius)
-        );
+,
+            Angle<TAngleUnits, TAngle>.CreateSaturating(point.Azimuth),
+            Angle<TAngleUnits, TAngle>.CreateSaturating(point.Zenith));
 
     /// <summary>
     /// Creates an instance of the current type from a value, 
@@ -101,17 +101,17 @@ public readonly record struct Point<TAngleUnits, TAngle, TRadius>(Angle<TAngleUn
         where TAngleOther : struct, IFloatingPoint<TAngleOther>, IMinMaxValue<TAngleOther>
         where TRadiusOther : struct, IFloatingPoint<TRadiusOther>, IMinMaxValue<TRadiusOther>
         => new(
-            Angle<TAngleUnits, TAngle>.CreateTruncating(point.Azimuth),
-            Angle<TAngleUnits, TAngle>.CreateTruncating(point.Zenith),
             TRadius.CreateTruncating(point.Radius)
-        );
+,
+            Angle<TAngleUnits, TAngle>.CreateTruncating(point.Azimuth),
+            Angle<TAngleUnits, TAngle>.CreateTruncating(point.Zenith));
 
     object IPoint<Point<TAngleUnits, TAngle, TRadius>>.this[int index] 
         => index switch
         {
-            0 => Azimuth,
-            1 => Zenith,
-            2 => Radius,
+            0 => Radius,
+            1 => Azimuth,
+            2 => Zenith,
             _ => Throw.ArgumentOutOfRangeException<object>(nameof(index), index, "index out of range")
         };
 }
@@ -119,15 +119,85 @@ public readonly record struct Point<TAngleUnits, TAngle, TRadius>(Angle<TAngleUn
 /// <summary>
 /// Provides static methods for point operations.
 /// </summary>
-public static class Point
+public static partial class Point
 {
+    public static Point<Degrees, T, T> ToDegrees<T>(Point<Degrees, T, T> point)
+        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
+        => point;
+
+    public static Point<Radians, T, T> ToRadians<T>(Point<Degrees, T, T> point)
+        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
+        => new(point.Radius, Angle.ToRadians(point.Azimuth), Angle.ToRadians(point.Zenith));
+
+    public static Point<Gradians, T, T> ToGradians<T>(Point<Degrees, T, T> point)
+        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
+        => new(point.Radius, Angle.ToGradians(point.Azimuth), Angle.ToGradians(point.Zenith));
+
+    public static Point<Revolutions, T, T> ToRevolutions<T>(Point<Degrees, T, T> point)
+        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
+        => new(point.Radius, Angle.ToRevolutions(point.Azimuth), Angle.ToRevolutions(point.Zenith));
+
+    public static Point<Degrees, T, T> ToDegrees<T>(Point<Radians, T, T> point)
+        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
+        => new(point.Radius, Angle.ToDegrees(point.Azimuth), Angle.ToDegrees(point.Zenith));
+
+    public static Point<Radians, T, T> ToRadians<T>(Point<Radians, T, T> point)
+        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
+        => point;
+
+    public static Point<Gradians, T, T> ToGradians<T>(Point<Radians, T, T> point)
+        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
+        => new(point.Radius, Angle.ToGradians(point.Azimuth), Angle.ToGradians(point.Zenith));
+
+    public static Point<Revolutions, T, T> ToRevolutions<T>(Point<Radians, T, T> point)
+        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
+        => new(point.Radius, Angle.ToRevolutions(point.Azimuth), Angle.ToRevolutions(point.Zenith));
+
+    public static Point<Degrees, T, T> ToDegrees<T>(Point<Gradians, T, T> point)
+        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
+        => new(point.Radius, Angle.ToDegrees(point.Azimuth), Angle.ToDegrees(point.Zenith));
+
+    public static Point<Radians, T, T> ToRadians<T>(Point<Gradians, T, T> point)
+        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
+        => new(point.Radius, Angle.ToRadians(point.Azimuth), Angle.ToRadians(point.Zenith));
+
+    public static Point<Gradians, T, T> ToGradians<T>(Point<Gradians, T, T> point)
+        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
+        => point;
+
+    public static Point<Revolutions, T, T> ToRevolutions<T>(Point<Gradians, T, T> point)
+        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
+        => new(point.Radius, Angle.ToRevolutions(point.Azimuth), Angle.ToRevolutions(point.Zenith));
+
+    public static Point<Degrees, T, T> ToDegrees<T>(Point<Revolutions, T, T> point)
+        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
+        => new(point.Radius, Angle.ToDegrees(point.Azimuth), Angle.ToDegrees(point.Zenith));
+
+    public static Point<Radians, T, T> ToRadians<T>(Point<Revolutions, T, T> point)
+        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
+        => new(point.Radius, Angle.ToRadians(point.Azimuth), Angle.ToRadians(point.Zenith));
+
+    public static Point<Gradians, T, T> ToGradians<T>(Point<Revolutions, T, T> point)
+        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
+        => new(point.Radius, Angle.ToGradians(point.Azimuth), Angle.ToGradians(point.Zenith));
+
+    public static Point<Revolutions, T, T> ToRevolutions<T>(Point<Revolutions, T, T> point)
+        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
+        => point;
+
+    public static PointReduced<TAngleUnits, TAngle, TRadius> Reduce<TAngleUnits, TAngle, TRadius>(Point<TAngleUnits, TAngle, TRadius> point)
+        where TAngleUnits : struct, IAngleUnits<TAngleUnits>
+        where TAngle : struct, IFloatingPoint<TAngle>, IMinMaxValue<TAngle>
+        where TRadius : struct, IFloatingPoint<TRadius>, IMinMaxValue<TRadius>
+        => new(point.Radius, Angle.Reduce(point.Azimuth), Angle.Reduce(point.Zenith));
+
     /// <summary>
     /// Converts a point in spherical coordinates to cartesian 3D coordinates.
     /// </summary>
     /// <typeparam name="T">The type of the coordinates of the point.</typeparam>
     /// <param name="point">The point in spherical coordinates to convert.</param>
     /// <returns>The cartesian 3D coordinates representing the point.</returns>
-    public static Cartesian3.Point<T> ConvertToCartesian<T>(Point<Radians, T, T> point)
+    public static Cartesian3.Point<T> ToCartesian<T>(Point<Radians, T, T> point)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>, ITrigonometricFunctions<T>
     {
         var sinAzimuth = Angle.Sin(point.Azimuth);
@@ -150,7 +220,7 @@ public static class Point
     /// <typeparam name="T">The type used by the resulting cartesian point coordinates.</typeparam>
     /// <param name="point">The point in spherical coordinates to convert.</param>
     /// <returns>The cartesian 3D coordinates representing the point.</returns>
-    public static Cartesian3.Point<T> ConvertToCartesian<TAngle, TRadius, T>(Point<Radians, TAngle, TRadius> point)
+    public static Cartesian3.Point<T> ToCartesian<TAngle, TRadius, T>(Point<Radians, TAngle, TRadius> point)
         where TAngle : struct, IFloatingPoint<TAngle>, IMinMaxValue<TAngle>, ITrigonometricFunctions<TAngle>
         where TRadius : struct, IFloatingPoint<TRadius>, IMinMaxValue<TRadius>
         where T : struct, INumber<T>, IMinMaxValue<T>

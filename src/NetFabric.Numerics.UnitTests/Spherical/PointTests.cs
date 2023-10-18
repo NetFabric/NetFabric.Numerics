@@ -1,0 +1,62 @@
+using Microsoft.VisualStudio.TestPlatform.CrossPlatEngine.Helpers;
+
+namespace NetFabric.Numerics.Spherical.UnitTests;
+
+public class PointTests
+{
+    [Fact]
+    public void CoordinateSystem_Should_Succeed()
+    {
+        // arrange
+
+        // act
+        var result = Point<Degrees, double, double>.Zero.CoordinateSystem;
+
+        // assert
+        result.Coordinates[0].Should().Be(new Coordinate("Radius", typeof(double)));
+        result.Coordinates[1].Should().Be(new Coordinate("Azimuth", typeof(Angle<Degrees, double>)));
+        result.Coordinates[2].Should().Be(new Coordinate("Zenith", typeof(Angle<Degrees, double>)));
+    }
+
+
+    public static TheoryData<Point<Degrees, double, double>, Cartesian3.Point<double>> ToCartesianData => new()
+        {
+            { new(0.0, new(0.0), new(0.0)), new(0.0, 0.0, 0.0) },
+
+            { new(2.0, new(0.0),  new(0.0)),  new(0.0,   0.0,   2.0) },
+            { new(2.0, new(45.0), new(30.0)), new(0.7071067811865475, 0.7071067811865475, 1.7320508075688774) },
+            { new(3.5, new(90.0), new(60.0)), new(1.856006667768587E-16, 3.031088913245535, 1.7500000000000004) },
+        };
+
+    [Theory]
+    [MemberData(nameof(ToCartesianData))]
+    public void ToCartesian_Should_Succeed(Point<Degrees, double, double> point, Cartesian3.Point<double> expected)
+    {
+        // arrange
+
+        // act
+        var result = Point.ToCartesian(Point.ToRadians(point));
+
+        // assert
+        result.Should().BeOfType<Cartesian3.Point<double>>();
+        result.X.Should().BeApproximately(expected.X, 0.0001);
+        result.Y.Should().BeApproximately(expected.Y, 0.0001);
+        result.Z.Should().BeApproximately(expected.Z, 0.0001);
+    }
+
+    [Theory]
+    [MemberData(nameof(ToCartesianData))]
+    public void ToCartesian_With_Conversion_Should_Succeed(Point<Degrees, double, double> point, Cartesian3.Point<double> expected)
+    {
+        // arrange
+
+        // act
+        var result = Point.ToCartesian<double, double, float>(Point.ToRadians(point));
+
+        // assert
+        result.Should().BeOfType<Cartesian3.Point<float>>();
+        ((double)result.X).Should().BeApproximately(expected.X, 0.0001);
+        ((double)result.Y).Should().BeApproximately(expected.Y, 0.0001);
+        ((double)result.Z).Should().BeApproximately(expected.Z, 0.0001);
+    }
+}

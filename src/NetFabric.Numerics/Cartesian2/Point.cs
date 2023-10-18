@@ -202,8 +202,8 @@ public static class Point
         where T : struct, IFloatingPointIeee754<T>, IMinMaxValue<T>
     {
         var azimuth = Angle.Atan2(point.Y, point.X);
-        var radius = T.Sqrt(Utils.Pow2(point.X) + Utils.Pow2(point.Y));
+        var radius = Utils.Magnitude(point.X, point.Y);
 
-        return new(azimuth, radius);
+        return new(radius, azimuth);
     }
 }

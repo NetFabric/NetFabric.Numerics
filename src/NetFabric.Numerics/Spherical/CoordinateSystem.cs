@@ -8,9 +8,9 @@ public readonly record struct CoordinateSystem<TAngleUnits, TAngle, TRadius>
 {
     static readonly IReadOnlyList<Coordinate> coordinates 
         = new[] {
+            new Coordinate("Radius", typeof(TRadius)),
             new Coordinate("Azimuth", typeof(Angle<TAngleUnits, TAngle>)), 
             new Coordinate("Zenith", typeof(Angle<TAngleUnits, TAngle>)),
-            new Coordinate("Radius", typeof(TRadius)),
         };
 
     public IReadOnlyList<Coordinate> Coordinates 
