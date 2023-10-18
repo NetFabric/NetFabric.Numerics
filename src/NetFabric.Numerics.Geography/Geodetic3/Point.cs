@@ -13,12 +13,12 @@ public readonly record struct Point<TDatum, TAngleUnits, TAngle, THeight>(Angle<
     where THeight : struct, INumber<THeight>, IMinMaxValue<THeight>
 {
     public Angle<TAngleUnits, TAngle> Latitude { get; }
-        = Latitude < Angle<TAngleUnits, TAngle>.Right && Latitude > Angle<TAngleUnits, TAngle>.Right
+        = Latitude < -Angle<TAngleUnits, TAngle>.Right || Latitude > Angle<TAngleUnits, TAngle>.Right
             ? Throw.ArgumentOutOfRangeException<Angle<TAngleUnits, TAngle>>(nameof(Latitude), Latitude, "Latitude must be in [-90.0º, 90.0º]")
             : Latitude;
 
     public Angle<TAngleUnits, TAngle> Longitude { get; }
-        = Longitude <= Angle<TAngleUnits, TAngle>.Straight && Longitude > Angle<TAngleUnits, TAngle>.Straight
+        = Longitude.Value <= -TAngle.CreateChecked(TAngleUnits.Straight) || Longitude.Value > TAngle.CreateChecked(TAngleUnits.Straight)
             ? Throw.ArgumentOutOfRangeException<Angle<TAngleUnits, TAngle>>(nameof(Longitude), Longitude, "Longitude must be in ]-180.0º, 180.0º]")
             : Longitude;
 
@@ -91,7 +91,7 @@ public readonly record struct Point<TDatum, TAngleUnits, TAngle, THeight>(Angle<
     /// Represents the minimum value. This field is read-only.
     /// </summary>
     public static readonly Point<TDatum, TAngleUnits, TAngle, THeight> MinValue
-        = new(-Angle<TAngleUnits, TAngle>.Right, new(TAngle.CreateTruncating(-TAngleUnits.Straight + double.Epsilon)), THeight.MinValue);
+        = new(-Angle<TAngleUnits, TAngle>.Right, new(TAngle.CreateTruncating(-TAngleUnits.Straight + Utils.Epsilon)), THeight.MinValue);
 
     /// <summary>
     /// Represents the maximum value. This field is read-only.
