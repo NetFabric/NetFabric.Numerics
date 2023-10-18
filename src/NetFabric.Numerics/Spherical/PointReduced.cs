@@ -18,8 +18,8 @@ public readonly record struct PointReduced<TAngleUnits, TAngle, TRadius>(TRadius
     where TRadius : struct, IFloatingPoint<TRadius>, IMinMaxValue<TRadius>
 {
     public AngleReduced<TAngleUnits, TAngle> Zenith { get; }
-        = Zenith.Value < Angle<TAngleUnits, TAngle>.Zero.Value || Zenith.Value >= Angle<TAngleUnits, TAngle>.Straight.Value
-            ? Throw.ArgumentOutOfRangeException<AngleReduced<TAngleUnits, TAngle>>(nameof(Zenith), Zenith, "Zenith must be in [0.0º, 180.0º[")
+        = Zenith.Value < Angle<TAngleUnits, TAngle>.Zero.Value || Zenith.Value > Angle<TAngleUnits, TAngle>.Straight.Value
+            ? Throw.ArgumentOutOfRangeException<AngleReduced<TAngleUnits, TAngle>>(nameof(Zenith), Zenith, "Zenith must be in [0.0º, 180.0º]")
             : Zenith;
 
     #region constants
@@ -40,7 +40,7 @@ public readonly record struct PointReduced<TAngleUnits, TAngle, TRadius>(TRadius
     /// <summary>
     /// Represents the maximum value. This field is read-only.
     /// </summary>
-    public static readonly PointReduced<TAngleUnits, TAngle, TRadius> MaxValue = new(TRadius.MaxValue, AngleReduced<TAngleUnits, TAngle>.MaxValue, new(TAngle.CreateChecked(TAngleUnits.Straight - double.Epsilon)));
+    public static readonly PointReduced<TAngleUnits, TAngle, TRadius> MaxValue = new(TRadius.MaxValue, AngleReduced<TAngleUnits, TAngle>.MaxValue, Angle<TAngleUnits, TAngle>.Straight);
 
     static PointReduced<TAngleUnits, TAngle, TRadius> IMinMaxValue<PointReduced<TAngleUnits, TAngle, TRadius>>.MinValue
         => MinValue;

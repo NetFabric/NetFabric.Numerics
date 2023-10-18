@@ -233,8 +233,11 @@ public static class Point
     public static Spherical.Point<Radians, T, T> ToSpherical<T>(Point<T> point)
         where T : struct, IFloatingPointIeee754<T>, IMinMaxValue<T>
     {
-        var azimuth = Angle.Atan2(point.Y, point.X);
         var radius = Utils.Magnitude(point.X, point.Y, point.Z);
+        if (radius == T.Zero)
+            return Spherical.Point<Radians, T, T>.Zero;
+
+        var azimuth = Angle.Atan2(point.Y, point.X);
         var zenith = Angle.Acos(point.Z / radius);
 
         return new(radius, azimuth, zenith);
