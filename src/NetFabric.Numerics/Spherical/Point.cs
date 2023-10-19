@@ -3,15 +3,15 @@ namespace NetFabric.Numerics.Spherical;
 /// <summary>
 /// Represents a point as an immutable struct.
 /// </summary>
-/// <typeparam name="TAngleUnits">The angle units used for the azimuth and zenith coordinates.</typeparam>
-/// <typeparam name="TAngle">The type used by the angle of the azimuth and zenith coordinates.</typeparam>
+/// <typeparam name="TAngleUnits">The angle units used for the azimuth and polar coordinates.</typeparam>
+/// <typeparam name="TAngle">The type used by the angle of the azimuth and polar coordinates.</typeparam>
 /// <typeparam name="TRadius">The type of the radius coordinate.</typeparam>
 /// <param name="Azimuth">The azimuth coordinate.</param>
-/// <param name="Zenith">The zenith coordinate.</param>
+/// <param name="Polar">The polar coordinate.</param>
 /// <param name="Radius">The radius coordinate.</param>
-[System.Diagnostics.DebuggerDisplay("Radius = {Radius}, Azimuth = {Azimuth}, Zenith = {Zenith}")]
+[System.Diagnostics.DebuggerDisplay("Radius = {Radius}, Azimuth = {Azimuth}, Polar = {Polar}")]
 [SkipLocalsInit]
-public readonly record struct Point<TAngleUnits, TAngle, TRadius>(TRadius Radius, Angle<TAngleUnits, TAngle> Azimuth, Angle<TAngleUnits, TAngle> Zenith)
+public readonly record struct Point<TAngleUnits, TAngle, TRadius>(TRadius Radius, Angle<TAngleUnits, TAngle> Azimuth, Angle<TAngleUnits, TAngle> Polar)
     : IPoint<Point<TAngleUnits, TAngle, TRadius>>
     where TAngleUnits : struct, IAngleUnits<TAngleUnits>
     where TAngle : struct, IFloatingPoint<TAngle>, IMinMaxValue<TAngle>
@@ -53,7 +53,7 @@ public readonly record struct Point<TAngleUnits, TAngle, TRadius>(TRadius Radius
     /// Creates an instance of the current type from a value, 
     /// throwing an overflow exception for any values that fall outside the representable range of the current type.
     /// </summary>
-    /// <typeparam name="TAngleOther">The type used by the angle of the azimuth and zenith coordinates of <paramref name="point"/>.</typeparam>
+    /// <typeparam name="TAngleOther">The type used by the angle of the azimuth and polar coordinates of <paramref name="point"/>.</typeparam>
     /// <typeparam name="TRadiusOther">The type of the radius coordinate of <paramref name="point"/>.</typeparam>
     /// <param name="point">The value which is used to create the instance of <see cref="Point{TAngleUnits, TAngle, TRadius}"/></param>
     /// <returns>An instance of <see cref="Point{TAngleUnits, TAngle, TRadius}"/> created from <paramref name="point" />.</returns>
@@ -66,13 +66,13 @@ public readonly record struct Point<TAngleUnits, TAngle, TRadius>(TRadius Radius
             TRadius.CreateChecked(point.Radius)
 ,
             Angle<TAngleUnits, TAngle>.CreateChecked(point.Azimuth),
-            Angle<TAngleUnits, TAngle>.CreateChecked(point.Zenith));
+            Angle<TAngleUnits, TAngle>.CreateChecked(point.Polar));
 
     /// <summary>
     /// Creates an instance of the current type from a value, 
     /// saturating any values that fall outside the representable range of the current type.
     /// </summary>
-    /// <typeparam name="TAngleOther">The type used by the angle of the azimuth and zenith coordinates of <paramref name="point"/>.</typeparam>
+    /// <typeparam name="TAngleOther">The type used by the angle of the azimuth and polar coordinates of <paramref name="point"/>.</typeparam>
     /// <typeparam name="TRadiusOther">The type of the radius coordinate of <paramref name="point"/>.</typeparam>
     /// <param name="point">The value which is used to create the instance of <see cref="Point{TAngleUnits, TAngle, TRadius}"/></param>
     /// <returns>An instance of <see cref="Point{TAngleUnits, TAngle, TRadius}"/> created from <paramref name="point" />.</returns>
@@ -85,13 +85,13 @@ public readonly record struct Point<TAngleUnits, TAngle, TRadius>(TRadius Radius
             TRadius.CreateSaturating(point.Radius)
 ,
             Angle<TAngleUnits, TAngle>.CreateSaturating(point.Azimuth),
-            Angle<TAngleUnits, TAngle>.CreateSaturating(point.Zenith));
+            Angle<TAngleUnits, TAngle>.CreateSaturating(point.Polar));
 
     /// <summary>
     /// Creates an instance of the current type from a value, 
     /// truncating any values that fall outside the representable range of the current type.
     /// </summary>
-    /// <typeparam name="TAngleOther">The type used by the angle of the azimuth and zenith coordinates of <paramref name="point"/>.</typeparam>
+    /// <typeparam name="TAngleOther">The type used by the angle of the azimuth and polar coordinates of <paramref name="point"/>.</typeparam>
     /// <typeparam name="TRadiusOther">The type of the radius coordinate of <paramref name="point"/>.</typeparam>
     /// <param name="point">The value which is used to create the instance of <see cref="Point{TAngleUnits, TAngle, TRadius}"/></param>
     /// <returns>An instance of <see cref="Point{TAngleUnits, TAngle, TRadius}"/> created from <paramref name="point" />.</returns>
@@ -104,14 +104,14 @@ public readonly record struct Point<TAngleUnits, TAngle, TRadius>(TRadius Radius
             TRadius.CreateTruncating(point.Radius)
 ,
             Angle<TAngleUnits, TAngle>.CreateTruncating(point.Azimuth),
-            Angle<TAngleUnits, TAngle>.CreateTruncating(point.Zenith));
+            Angle<TAngleUnits, TAngle>.CreateTruncating(point.Polar));
 
     object IPoint<Point<TAngleUnits, TAngle, TRadius>>.this[int index] 
         => index switch
         {
             0 => Radius,
             1 => Azimuth,
-            2 => Zenith,
+            2 => Polar,
             _ => Throw.ArgumentOutOfRangeException<object>(nameof(index), index, "index out of range")
         };
 }
@@ -129,7 +129,7 @@ public static partial class Point
     /// <returns>The converted point in radians.</returns>
     public static Point<Radians, T, T> ToRadians<T>(Point<Degrees, T, T> point)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => new(point.Radius, Angle.ToRadians(point.Azimuth), Angle.ToRadians(point.Zenith));
+        => new(point.Radius, Angle.ToRadians(point.Azimuth), Angle.ToRadians(point.Polar));
 
     /// <summary>
     /// Convert a point from degrees to gradians.
@@ -139,7 +139,7 @@ public static partial class Point
     /// <returns>The converted point in gradians.</returns>
     public static Point<Gradians, T, T> ToGradians<T>(Point<Degrees, T, T> point)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => new(point.Radius, Angle.ToGradians(point.Azimuth), Angle.ToGradians(point.Zenith));
+        => new(point.Radius, Angle.ToGradians(point.Azimuth), Angle.ToGradians(point.Polar));
 
     /// <summary>
     /// Convert a point from degrees to revolutions.
@@ -149,7 +149,7 @@ public static partial class Point
     /// <returns>The converted point in revolutions.</returns>
     public static Point<Revolutions, T, T> ToRevolutions<T>(Point<Degrees, T, T> point)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => new(point.Radius, Angle.ToRevolutions(point.Azimuth), Angle.ToRevolutions(point.Zenith));
+        => new(point.Radius, Angle.ToRevolutions(point.Azimuth), Angle.ToRevolutions(point.Polar));
 
     /// <summary>
     /// Convert a point from radians to degrees.
@@ -159,7 +159,7 @@ public static partial class Point
     /// <returns>The converted point in degrees.</returns>
     public static Point<Degrees, T, T> ToDegrees<T>(Point<Radians, T, T> point)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => new(point.Radius, Angle.ToDegrees(point.Azimuth), Angle.ToDegrees(point.Zenith));
+        => new(point.Radius, Angle.ToDegrees(point.Azimuth), Angle.ToDegrees(point.Polar));
 
     /// <summary>
     /// Convert a point from radians to gradians.
@@ -169,7 +169,7 @@ public static partial class Point
     /// <returns>The converted point in gradians.</returns>
     public static Point<Gradians, T, T> ToGradians<T>(Point<Radians, T, T> point)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => new(point.Radius, Angle.ToGradians(point.Azimuth), Angle.ToGradians(point.Zenith));
+        => new(point.Radius, Angle.ToGradians(point.Azimuth), Angle.ToGradians(point.Polar));
 
     /// <summary>
     /// Convert a point from radians to revolutions.
@@ -179,7 +179,7 @@ public static partial class Point
     /// <returns>The converted point in revolutions.</returns>
     public static Point<Revolutions, T, T> ToRevolutions<T>(Point<Radians, T, T> point)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => new(point.Radius, Angle.ToRevolutions(point.Azimuth), Angle.ToRevolutions(point.Zenith));
+        => new(point.Radius, Angle.ToRevolutions(point.Azimuth), Angle.ToRevolutions(point.Polar));
 
     /// <summary>
     /// Convert a point from gradians to degrees.
@@ -189,7 +189,7 @@ public static partial class Point
     /// <returns>The converted point in degrees.</returns>
     public static Point<Degrees, T, T> ToDegrees<T>(Point<Gradians, T, T> point)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => new(point.Radius, Angle.ToDegrees(point.Azimuth), Angle.ToDegrees(point.Zenith));
+        => new(point.Radius, Angle.ToDegrees(point.Azimuth), Angle.ToDegrees(point.Polar));
 
     /// <summary>
     /// Convert a point from gradians to radians.
@@ -199,7 +199,7 @@ public static partial class Point
     /// <returns>The converted point in radians.</returns>
     public static Point<Radians, T, T> ToRadians<T>(Point<Gradians, T, T> point)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => new(point.Radius, Angle.ToRadians(point.Azimuth), Angle.ToRadians(point.Zenith));
+        => new(point.Radius, Angle.ToRadians(point.Azimuth), Angle.ToRadians(point.Polar));
 
     /// <summary>
     /// Convert a point from gradians to revolutions.
@@ -209,7 +209,7 @@ public static partial class Point
     /// <returns>The converted point in revolutions.</returns>
     public static Point<Revolutions, T, T> ToRevolutions<T>(Point<Gradians, T, T> point)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => new(point.Radius, Angle.ToRevolutions(point.Azimuth), Angle.ToRevolutions(point.Zenith));
+        => new(point.Radius, Angle.ToRevolutions(point.Azimuth), Angle.ToRevolutions(point.Polar));
 
     /// <summary>
     /// Convert a point from revolutions to degrees.
@@ -219,7 +219,7 @@ public static partial class Point
     /// <returns>The converted point in degrees.</returns>
     public static Point<Degrees, T, T> ToDegrees<T>(Point<Revolutions, T, T> point)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => new(point.Radius, Angle.ToDegrees(point.Azimuth), Angle.ToDegrees(point.Zenith));
+        => new(point.Radius, Angle.ToDegrees(point.Azimuth), Angle.ToDegrees(point.Polar));
 
     /// <summary>
     /// Convert a point from revolutions to radians.
@@ -229,7 +229,7 @@ public static partial class Point
     /// <returns>The converted point in radians.</returns>
     public static Point<Radians, T, T> ToRadians<T>(Point<Revolutions, T, T> point)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => new(point.Radius, Angle.ToRadians(point.Azimuth), Angle.ToRadians(point.Zenith));
+        => new(point.Radius, Angle.ToRadians(point.Azimuth), Angle.ToRadians(point.Polar));
 
     /// <summary>
     /// Convert a point from revolutions to gradians.
@@ -239,7 +239,7 @@ public static partial class Point
     /// <returns>The converted point in gradians.</returns>
     public static Point<Gradians, T, T> ToGradians<T>(Point<Revolutions, T, T> point)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => new(point.Radius, Angle.ToGradians(point.Azimuth), Angle.ToGradians(point.Zenith));
+        => new(point.Radius, Angle.ToGradians(point.Azimuth), Angle.ToGradians(point.Polar));
 
     /// <summary>
     /// Reduces a point in spherical coordinates by applying reduction functions to its components.
@@ -250,10 +250,10 @@ public static partial class Point
     /// <param name="point">The input point in spherical coordinates to be reduced.</param>
     /// <returns>
     /// A new <see cref="PointReduced{TAngleUnits, TAngle, TRadius}"/> object with a reduced
-    /// azimuthal angle and zenith angle, while keeping the original radius.
+    /// azimuthal angle and polar angle, while keeping the original radius.
     /// </returns>
     /// <remarks>
-    /// The reduction process involves applying reduction functions to the azimuthal and zenith angles
+    /// The reduction process involves applying reduction functions to the azimuthal and polar angles
     /// of the input spherical point. The radius component remains unchanged.
     /// </remarks>
     public static PointReduced<TAngleUnits, TAngle, TRadius> Reduce<TAngleUnits, TAngle, TRadius>(Point<TAngleUnits, TAngle, TRadius> point)
@@ -262,12 +262,12 @@ public static partial class Point
         where TRadius : struct, IFloatingPoint<TRadius>, IMinMaxValue<TRadius>
     {
         var azimuth = Angle.Reduce(point.Azimuth);
-        var zenith = Angle.Reduce(point.Zenith);
-        if (zenith > Angle<TAngleUnits, TAngle>.Straight)
+        var polar = Angle.Reduce(point.Polar);
+        if (polar > Angle<TAngleUnits, TAngle>.Straight)
         {
-            zenith = new(Angle<TAngleUnits, TAngle>.Full.Value - zenith.Value);
+            polar = new(Angle<TAngleUnits, TAngle>.Full.Value - polar.Value);
         }
-        return new(point.Radius, azimuth, zenith);
+        return new(point.Radius, azimuth, polar);
     }
 
     /// <summary>
@@ -281,12 +281,12 @@ public static partial class Point
     {
         var sinAzimuth = Angle.Sin(point.Azimuth);
         var cosAzimuth = Angle.Cos(point.Azimuth);
-        var sinZenith = Angle.Sin(point.Zenith);
-        var cosZenith = Angle.Cos(point.Zenith);
+        var sinPolar = Angle.Sin(point.Polar);
+        var cosPolar = Angle.Cos(point.Polar);
 
-        var x = T.CreateChecked(point.Radius * sinZenith * cosAzimuth);
-        var y = T.CreateChecked(point.Radius * sinZenith * sinAzimuth);
-        var z = T.CreateChecked(point.Radius * cosZenith);
+        var x = T.CreateChecked(point.Radius * sinPolar * cosAzimuth);
+        var y = T.CreateChecked(point.Radius * sinPolar * sinAzimuth);
+        var z = T.CreateChecked(point.Radius * cosPolar);
 
         return new(x, y, z);
     }
@@ -294,7 +294,7 @@ public static partial class Point
     /// <summary>
     /// Converts a point in spherical coordinates to cartesian 3D coordinates.
     /// </summary>
-    /// <typeparam name="TAngle">The type used by the angle of the azimuth and zenith coordinates of <paramref name="point"/>.</typeparam>
+    /// <typeparam name="TAngle">The type used by the angle of the azimuth and polar coordinates of <paramref name="point"/>.</typeparam>
     /// <typeparam name="TRadius">The type of the radius coordinate of <paramref name="point"/>.</typeparam>
     /// <typeparam name="T">The type used by the resulting cartesian point coordinates.</typeparam>
     /// <param name="point">The point in spherical coordinates to convert.</param>
@@ -306,12 +306,12 @@ public static partial class Point
     {
         var sinAzimuth = Angle.Sin(point.Azimuth);
         var cosAzimuth = Angle.Cos(point.Azimuth);
-        var sinZenith = Angle.Sin(point.Zenith);
-        var cosZenith = Angle.Cos(point.Zenith);
+        var sinPolar = Angle.Sin(point.Polar);
+        var cosPolar = Angle.Cos(point.Polar);
 
-        var x = T.CreateChecked(point.Radius * TRadius.CreateChecked(sinZenith * cosAzimuth));
-        var y = T.CreateChecked(point.Radius * TRadius.CreateChecked(sinZenith * sinAzimuth));
-        var z = T.CreateChecked(point.Radius * TRadius.CreateChecked(cosZenith));
+        var x = T.CreateChecked(point.Radius * TRadius.CreateChecked(sinPolar * cosAzimuth));
+        var y = T.CreateChecked(point.Radius * TRadius.CreateChecked(sinPolar * sinAzimuth));
+        var z = T.CreateChecked(point.Radius * TRadius.CreateChecked(cosPolar));
 
         return new(x, y, z);
     }

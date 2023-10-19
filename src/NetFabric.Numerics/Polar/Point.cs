@@ -248,10 +248,10 @@ public static partial class Point
     /// <param name="point">The input point in spherical coordinates to be reduced.</param>
     /// <returns>
     /// A new <see cref="PointReduced{TAngleUnits, TAngle, TRadius}"/> object with a reduced
-    /// azimuthal angle and zenith angle, while keeping the original radius.
+    /// azimuthal angle and polar angle, while keeping the original radius.
     /// </returns>
     /// <remarks>
-    /// The reduction process involves applying reduction functions to the azimuthal and zenith angles
+    /// The reduction process involves applying reduction functions to the azimuthal and polar angles
     /// of the input spherical point. The radius component remains unchanged.
     /// </remarks>
     public static PointReduced<TAngleUnits, TAngle, TRadius> Reduce<TAngleUnits, TAngle, TRadius>(Point<TAngleUnits, TAngle, TRadius> point)
@@ -278,7 +278,7 @@ public static partial class Point
     /// <summary>
     /// Converts a point in polar coordinates to cartesian 2D coordinates.
     /// </summary>
-    /// <typeparam name="TAngle">The type used by the angle of the azimuth and zenith coordinates of <paramref name="point"/>.</typeparam>
+    /// <typeparam name="TAngle">The type used by the angle of the azimuth and polar coordinates of <paramref name="point"/>.</typeparam>
     /// <typeparam name="TRadius">The type of the radius coordinate of <paramref name="point"/>.</typeparam>
     /// <typeparam name="T">The type used by the resulting cartesian point coordinates.</typeparam>
     /// <param name="point">The point in polar coordinates to convert.</param>

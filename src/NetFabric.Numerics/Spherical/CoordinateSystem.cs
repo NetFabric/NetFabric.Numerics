@@ -10,7 +10,7 @@ public readonly record struct CoordinateSystem<TAngleUnits, TAngle, TRadius>
         = new[] {
             new Coordinate("Radius", typeof(TRadius)),
             new Coordinate("Azimuth", typeof(Angle<TAngleUnits, TAngle>)), 
-            new Coordinate("Zenith", typeof(Angle<TAngleUnits, TAngle>)),
+            new Coordinate("Polar", typeof(Angle<TAngleUnits, TAngle>)),
         };
 
     public IReadOnlyList<Coordinate> Coordinates 

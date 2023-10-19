@@ -50,6 +50,6 @@ public class PointTests
         // assert
         result.Radius.Should().BeApproximately(expected.Radius, 0.0001);
         result.Azimuth.Value.Should().BeApproximately(expected.Azimuth.Value, 0.0001);
-        result.Zenith.Value.Should().BeApproximately(expected.Zenith.Value, 0.0001);
+        result.Polar.Value.Should().BeApproximately(expected.Polar.Value, 0.0001);
     }
 }

@@ -238,8 +238,8 @@ public static class Point
             return Spherical.Point<Radians, T, T>.Zero;
 
         var azimuth = Angle.Atan2(point.Y, point.X);
-        var zenith = Angle.Acos(point.Z / radius);
+        var polar = Angle.Acos(point.Z / radius);
 
-        return new(radius, azimuth, zenith);
+        return new(radius, azimuth, polar);
     }
 }

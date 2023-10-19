@@ -13,7 +13,7 @@ public class PointTests
         // assert
         result.Coordinates[0].Should().Be(new Coordinate("Radius", typeof(double)));
         result.Coordinates[1].Should().Be(new Coordinate("Azimuth", typeof(Angle<Degrees, double>)));
-        result.Coordinates[2].Should().Be(new Coordinate("Zenith", typeof(Angle<Degrees, double>)));
+        result.Coordinates[2].Should().Be(new Coordinate("Polar", typeof(Angle<Degrees, double>)));
     }
 
     const double radius = 2.0;
@@ -103,7 +103,7 @@ public class PointTests
         // assert
         result.Radius.Should().BeApproximately(expected.Radius, 0.0001);
         result.Azimuth.Value.Should().BeApproximately(expected.Azimuth.Value, 0.0001);
-        result.Zenith.Value.Should().BeApproximately(expected.Zenith.Value, 0.0001);
+        result.Polar.Value.Should().BeApproximately(expected.Polar.Value, 0.0001);
     }
 
 }
