@@ -2,29 +2,6 @@
 
 public class ToDegreesTests
 {
-    public static TheoryData<Angle<Degrees, double>, Angle<Degrees, double>> DegreesToDegreesData 
-        => new()
-        {
-            { Angle<Degrees, double>.Zero, Angle<Degrees, double>.Zero },
-            { Angle<Degrees, double>.Right, Angle<Degrees, double>.Right },
-            { Angle<Degrees, double>.Straight, Angle<Degrees, double>.Straight },
-        };
-
-    [Theory]
-    [MemberData(nameof(DegreesToDegreesData))]
-    public void ToDegrees_From_Degrees_Should_Succeed(
-        Angle<Degrees, double> angle, 
-        Angle<Degrees, double> expected)
-    {
-        // arrange
-
-        // act
-        var result = Angle.ToDegrees(angle);
-
-        // assert
-        result.Should().Be(expected);
-    }
-
     public static TheoryData<Angle<Radians, double>, Angle<Degrees, double>> RadiansToDegreesData 
         => new()
         {

@@ -70,27 +70,4 @@ public class ToRevolutionsReducedTests
         // assert
         result.Should().Be(expected);
     }
-
-    public static TheoryData<AngleReduced<Revolutions, double>, AngleReduced<Revolutions, double>> RevolutionsToRevolutionsData 
-        => new()
-        {
-            { Angle<Revolutions, double>.Zero, Angle<Revolutions, double>.Zero },
-            { Angle<Revolutions, double>.Right, Angle<Revolutions, double>.Right },
-            { Angle<Revolutions, double>.Straight, Angle<Revolutions, double>.Straight },
-        };
-
-    [Theory]
-    [MemberData(nameof(RevolutionsToRevolutionsData))]
-    public void ToRevolutions_From_Revolutions_Should_Succeed(
-        AngleReduced<Revolutions, double> angle, 
-        AngleReduced<Revolutions, double> expected)
-    {
-        // arrange
-
-        // act
-        var result = Angle.ToRevolutions(angle);
-
-        // assert
-        result.Should().Be(expected);
-    }
 }

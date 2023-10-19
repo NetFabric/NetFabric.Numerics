@@ -48,29 +48,6 @@ public class ToGradiansTests
         result.Should().Be(expected);
     }
 
-    public static TheoryData<Angle<Gradians, double>, Angle<Gradians, double>> GradiansToGradiansData 
-        => new()
-        {
-            { Angle<Gradians, double>.Zero, Angle<Gradians, double>.Zero },
-            { Angle<Gradians, double>.Right, Angle<Gradians, double>.Right },
-            { Angle<Gradians, double>.Straight, Angle<Gradians, double>.Straight },
-        };
-
-    [Theory]
-    [MemberData(nameof(GradiansToGradiansData))]
-    public void ToGradians_From_Gradians_Should_Succeed(
-        Angle<Gradians, double> angle, 
-        Angle<Gradians, double> expected)
-    {
-        // arrange
-
-        // act
-        var result = Angle.ToGradians(angle);
-
-        // assert
-        result.Should().Be(expected);
-    }
-
     public static TheoryData<Angle<Revolutions, double>, Angle<Gradians, double>> RevolutionsToGradiansData 
         => new()
         {

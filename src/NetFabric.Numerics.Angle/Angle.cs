@@ -48,27 +48,6 @@ public static partial class Angle
         => new(Utils.Reduce(angle));
 
     /// <summary>
-    /// Gets the reduced angle of <paramref name="angle" />.
-    /// </summary>
-    /// <typeparam name="TUnits">The angle units of <paramref name="angle"/> and the reduced angle.</typeparam>
-    /// <typeparam name="T">The floating point type used internally by <paramref name="angle"/>.</typeparam>
-    /// <param name="angle">The angle to get the reduced angle from.</param>
-    /// <remarks>
-    /// A reduced angle is an angle that is within one full revolution (360 degrees or 2π radians) 
-    /// and is expressed as an angle between 0 and 360 degrees or between 0 and 2π radians. In 
-    /// other words, a reduced angle is an angle that has been simplified by subtracting or adding
-    /// multiples of 360 degrees or 2π radians until it falls within this range. Reduced angles 
-    /// are commonly used in trigonometry to simplify calculations and to find the primary 
-    /// solution of trigonometric equations.
-    /// </remarks>
-    /// <returns>The reduced angle of <paramref name="angle"/>.</returns>
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static AngleReduced<TUnits, T> Reduce<TUnits, T>(AngleReduced<TUnits, T> angle)
-        where TUnits : IAngleUnits<TUnits>
-        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => angle;
-
-    /// <summary>
     /// Gets the reference angle of <paramref name="angle" />.
     /// </summary>
     /// <typeparam name="TUnits">The angle units of <paramref name="angle"/> and the reference angle.</typeparam>
@@ -84,7 +63,7 @@ public static partial class Angle
     /// </remarks>
     /// <returns>The reference angle of <paramref name="angle"/>.</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Angle<TUnits, T> GetReference<TUnits, T>(AngleReduced<TUnits, T> angle)
+    public static AngleReduced<TUnits, T> GetReference<TUnits, T>(AngleReduced<TUnits, T> angle)
         where TUnits : IAngleUnits<TUnits>
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => new(Utils.GetReference(angle));

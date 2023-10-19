@@ -4,20 +4,6 @@ namespace NetFabric.Numerics;
 
 public static partial class Angle
 {
-    #region from degrees
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Angle<Degrees, T> ToDegrees<T>(Angle<Degrees, T> angle)
-        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => angle;
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static AngleReduced<Degrees, T> ToDegrees<T>(AngleReduced<Degrees, T> angle)
-        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => angle;
-
-    #endregion
-
     #region from radians
 
     static class DegreesInRadians<T>

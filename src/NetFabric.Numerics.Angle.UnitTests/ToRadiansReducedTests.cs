@@ -25,29 +25,6 @@ public class ToRadiansReducedTests
         result.Should().Be(expected);
     }
 
-    public static TheoryData<AngleReduced<Radians, double>, AngleReduced<Radians, double>> RadiansToRadiansData 
-        => new()
-        {
-            { Angle<Radians, double>.Zero, Angle<Radians, double>.Zero},
-            { Angle<Radians, double>.Right, Angle<Radians, double>.Right },
-            { Angle<Radians, double>.Straight, Angle<Radians, double>.Straight },
-        };
-
-    [Theory]
-    [MemberData(nameof(RadiansToRadiansData))]
-    public void ToRadians_From_Radians_Should_Succeed(
-        AngleReduced<Radians, double> angle, 
-        AngleReduced<Radians, double> expected)
-    {
-        // arrange
-
-        // act
-        var result = Angle.ToRadians(angle);
-
-        // assert
-        result.Should().Be(expected);
-    }
-
     public static TheoryData<AngleReduced<Gradians, double>, AngleReduced<Radians, double>> GradiansToRadiansData 
         => new()
         {

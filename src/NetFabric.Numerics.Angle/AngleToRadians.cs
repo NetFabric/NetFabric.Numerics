@@ -22,20 +22,6 @@ public static partial class Angle
 
     #endregion
 
-    #region from radians
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Angle<Radians, T> ToRadians<T>(Angle<Radians, T> angle)
-        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => angle;
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static AngleReduced<Radians, T> ToRadians<T>(AngleReduced<Radians, T> angle)
-        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => angle;
-
-    #endregion
-
     #region from gradians
 
     static class RadiansInGradians<T>

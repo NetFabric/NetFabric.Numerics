@@ -25,29 +25,6 @@ public class ToRadiansTests
         result.Should().Be(expected);
     }
 
-    public static TheoryData<Angle<Radians, double>, Angle<Radians, double>> RadiansToRadiansData 
-        => new()
-        {
-            { Angle<Radians, double>.Zero, Angle<Radians, double>.Zero },
-            { Angle<Radians, double>.Right, Angle<Radians, double>.Right },
-            { Angle<Radians, double>.Straight, Angle<Radians, double>.Straight },
-        };
-
-    [Theory]
-    [MemberData(nameof(RadiansToRadiansData))]
-    public void ToRadians_From_Radians_Should_Succeed(
-        Angle<Radians, double> angle, 
-        Angle<Radians, double> expected)
-    {
-        // arrange
-
-        // act
-        var result = Angle.ToRadians(angle);
-
-        // assert
-        result.Should().Be(expected);
-    }
-
     public static TheoryData<Angle<Gradians, double>, Angle<Radians, double>> GradiansToRadiansData 
         => new()
         {

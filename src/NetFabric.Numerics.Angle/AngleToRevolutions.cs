@@ -61,18 +61,4 @@ public static partial class Angle
         => new(angle.Value * RevolutionsInGradians<T>.Value);
 
     #endregion
-
-    #region from revolutions
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Angle<Revolutions, T> ToRevolutions<T>(Angle<Revolutions, T> angle)
-        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => angle;
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static AngleReduced<Revolutions, T> ToRevolutions<T>(AngleReduced<Revolutions, T> angle)
-        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => angle;
-
-    #endregion
 }
