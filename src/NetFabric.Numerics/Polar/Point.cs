@@ -65,8 +65,7 @@ public readonly record struct Point<TAngleUnits, TAngle, TRadius>(TRadius Radius
         where TAngleOther : struct, IFloatingPoint<TAngleOther>, IMinMaxValue<TAngleOther>
         where TRadiusOther : struct, IFloatingPoint<TRadiusOther>, IMinMaxValue<TRadiusOther>
         => new(
-            TRadius.CreateChecked(point.Radius)
-,
+            TRadius.CreateChecked(point.Radius),
             Angle<TAngleUnits, TAngle>.CreateChecked(point.Azimuth));
 
     /// <summary>
@@ -83,8 +82,7 @@ public readonly record struct Point<TAngleUnits, TAngle, TRadius>(TRadius Radius
         where TAngleOther : struct, IFloatingPoint<TAngleOther>, IMinMaxValue<TAngleOther>
         where TRadiusOther : struct, IFloatingPoint<TRadiusOther>, IMinMaxValue<TRadiusOther>
         => new(
-            TRadius.CreateSaturating(point.Radius)
-,
+            TRadius.CreateSaturating(point.Radius),
             Angle<TAngleUnits, TAngle>.CreateSaturating(point.Azimuth));
 
     /// <summary>
@@ -101,8 +99,7 @@ public readonly record struct Point<TAngleUnits, TAngle, TRadius>(TRadius Radius
         where TAngleOther : struct, IFloatingPoint<TAngleOther>, IMinMaxValue<TAngleOther>
         where TRadiusOther : struct, IFloatingPoint<TRadiusOther>, IMinMaxValue<TRadiusOther>
         => new(
-            TRadius.CreateTruncating(point.Radius)
-,
+            TRadius.CreateTruncating(point.Radius),
             Angle<TAngleUnits, TAngle>.CreateTruncating(point.Azimuth));
 
     object IPoint<Point<TAngleUnits, TAngle, TRadius>>.this[int index]

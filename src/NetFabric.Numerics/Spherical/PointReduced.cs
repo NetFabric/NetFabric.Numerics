@@ -73,8 +73,7 @@ public readonly record struct PointReduced<TAngleUnits, TAngle, TRadius>(TRadius
         where TAngleOther : struct, IFloatingPoint<TAngleOther>, IMinMaxValue<TAngleOther>
         where TRadiusOther : struct, IFloatingPoint<TRadiusOther>, IMinMaxValue<TRadiusOther>
         => new(
-            TRadius.CreateChecked(point.Radius)
-,
+            TRadius.CreateChecked(point.Radius),
             AngleReduced<TAngleUnits, TAngle>.CreateChecked(point.Azimuth),
             AngleReduced<TAngleUnits, TAngle>.CreateChecked(point.Polar));
 
@@ -92,8 +91,7 @@ public readonly record struct PointReduced<TAngleUnits, TAngle, TRadius>(TRadius
         where TAngleOther : struct, IFloatingPoint<TAngleOther>, IMinMaxValue<TAngleOther>
         where TRadiusOther : struct, IFloatingPoint<TRadiusOther>, IMinMaxValue<TRadiusOther>
         => new(
-            TRadius.CreateSaturating(point.Radius)
-,
+            TRadius.CreateSaturating(point.Radius),
             AngleReduced<TAngleUnits, TAngle>.CreateSaturating(point.Azimuth),
             AngleReduced<TAngleUnits, TAngle>.CreateSaturating(point.Polar));
 

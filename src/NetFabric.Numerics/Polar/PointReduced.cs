@@ -65,8 +65,7 @@ public readonly record struct PointReduced<TAngleUnits, TAngle, TRadius>(TRadius
         where TAngleOther : struct, IFloatingPoint<TAngleOther>, IMinMaxValue<TAngleOther>
         where TRadiusOther : struct, IFloatingPoint<TRadiusOther>, IMinMaxValue<TRadiusOther>
         => new(
-            TRadius.CreateChecked(point.Radius)
-,
+            TRadius.CreateChecked(point.Radius),
             AngleReduced<TAngleUnits, TAngle>.CreateChecked(point.Azimuth));
 
     /// <summary>
@@ -83,8 +82,7 @@ public readonly record struct PointReduced<TAngleUnits, TAngle, TRadius>(TRadius
         where TAngleOther : struct, IFloatingPoint<TAngleOther>, IMinMaxValue<TAngleOther>
         where TRadiusOther : struct, IFloatingPoint<TRadiusOther>, IMinMaxValue<TRadiusOther>
         => new(
-            TRadius.CreateSaturating(point.Radius)
-,
+            TRadius.CreateSaturating(point.Radius),
             AngleReduced<TAngleUnits, TAngle>.CreateSaturating(point.Azimuth));
 
     /// <summary>
@@ -101,8 +99,7 @@ public readonly record struct PointReduced<TAngleUnits, TAngle, TRadius>(TRadius
         where TAngleOther : struct, IFloatingPoint<TAngleOther>, IMinMaxValue<TAngleOther>
         where TRadiusOther : struct, IFloatingPoint<TRadiusOther>, IMinMaxValue<TRadiusOther>
         => new(
-            TRadius.CreateTruncating(point.Radius)
-,
+            TRadius.CreateTruncating(point.Radius),
             AngleReduced<TAngleUnits, TAngle>.CreateTruncating(point.Azimuth));
 
     /// <summary>
