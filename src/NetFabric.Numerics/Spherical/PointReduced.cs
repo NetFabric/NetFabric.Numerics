@@ -17,7 +17,9 @@ public readonly record struct PointReduced<TAngleUnits, TAngle, TRadius>(TRadius
     where TAngle : struct, IFloatingPoint<TAngle>, IMinMaxValue<TAngle>
     where TRadius : struct, IFloatingPoint<TRadius>, IMinMaxValue<TRadius>
 {
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
     public AngleReduced<TAngleUnits, TAngle> Zenith { get; }
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
         = Zenith.Value < Angle<TAngleUnits, TAngle>.Zero.Value || Zenith.Value > Angle<TAngleUnits, TAngle>.Straight.Value
             ? Throw.ArgumentOutOfRangeException<AngleReduced<TAngleUnits, TAngle>>(nameof(Zenith), Zenith, "Zenith must be in [0.0º, 180.0º]")
             : Zenith;
@@ -109,8 +111,7 @@ public readonly record struct PointReduced<TAngleUnits, TAngle, TRadius>(TRadius
         where TAngleOther : struct, IFloatingPoint<TAngleOther>, IMinMaxValue<TAngleOther>
         where TRadiusOther : struct, IFloatingPoint<TRadiusOther>, IMinMaxValue<TRadiusOther>
         => new(
-            TRadius.CreateTruncating(point.Radius)
-,
+            TRadius.CreateTruncating(point.Radius),
             AngleReduced<TAngleUnits, TAngle>.CreateTruncating(point.Azimuth),
             AngleReduced<TAngleUnits, TAngle>.CreateTruncating(point.Zenith));
 
@@ -132,78 +133,125 @@ public readonly record struct PointReduced<TAngleUnits, TAngle, TRadius>(TRadius
         };
 }
 
-/// <summary>
-/// Provides static methods for point operations.
-/// </summary>
 public static partial class Point
 {
-    public static PointReduced<Degrees, T, T> ToDegrees<T>(PointReduced<Degrees, T, T> point)
-    where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-    => point;
-
+    /// <summary>
+    /// Convert a point from degrees to radians.
+    /// </summary>
+    /// <typeparam name="T">The generic type for floating-point calculations.</typeparam>
+    /// <param name="point">The input point in degrees.</param>
+    /// <returns>The converted point in radians.</returns>
     public static PointReduced<Radians, T, T> ToRadians<T>(PointReduced<Degrees, T, T> point)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => new(point.Radius, Angle.ToRadians(point.Azimuth), Angle.ToRadians(point.Zenith));
 
+    /// <summary>
+    /// Convert a point from degrees to gradians.
+    /// </summary>
+    /// <typeparam name="T">The generic type for floating-point calculations.</typeparam>
+    /// <param name="point">The input point in degrees.</param>
+    /// <returns>The converted point in gradians.</returns>
     public static PointReduced<Gradians, T, T> ToGradians<T>(PointReduced<Degrees, T, T> point)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => new(point.Radius, Angle.ToGradians(point.Azimuth), Angle.ToGradians(point.Zenith));
 
+    /// <summary>
+    /// Convert a point from degrees to revolutions.
+    /// </summary>
+    /// <typeparam name="T">The generic type for floating-point calculations.</typeparam>
+    /// <param name="point">The input point in degrees.</param>
+    /// <returns>The converted point in revolutions.</returns>
     public static PointReduced<Revolutions, T, T> ToRevolutions<T>(PointReduced<Degrees, T, T> point)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => new(point.Radius, Angle.ToRevolutions(point.Azimuth), Angle.ToRevolutions(point.Zenith));
 
+    /// <summary>
+    /// Convert a point from radians to degrees.
+    /// </summary>
+    /// <typeparam name="T">The generic type for floating-point calculations.</typeparam>
+    /// <param name="point">The input point in radians.</param>
+    /// <returns>The converted point in degrees.</returns>
     public static PointReduced<Degrees, T, T> ToDegrees<T>(PointReduced<Radians, T, T> point)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => new(point.Radius, Angle.ToDegrees(point.Azimuth), Angle.ToDegrees(point.Zenith));
 
-    public static PointReduced<Radians, T, T> ToRadians<T>(PointReduced<Radians, T, T> point)
-        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => point;
-
+    /// <summary>
+    /// Convert a point from radians to gradians.
+    /// </summary>
+    /// <typeparam name="T">The generic type for floating-point calculations.</typeparam>
+    /// <param name="point">The input point in radians.</param>
+    /// <returns>The converted point in gradians.</returns>
     public static PointReduced<Gradians, T, T> ToGradians<T>(PointReduced<Radians, T, T> point)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => new(point.Radius, Angle.ToGradians(point.Azimuth), Angle.ToGradians(point.Zenith));
 
+    /// <summary>
+    /// Convert a point from radians to revolutions.
+    /// </summary>
+    /// <typeparam name="T">The generic type for floating-point calculations.</typeparam>
+    /// <param name="point">The input point in radians.</param>
+    /// <returns>The converted point in revolutions.</returns>
     public static PointReduced<Revolutions, T, T> ToRevolutions<T>(PointReduced<Radians, T, T> point)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => new(point.Radius, Angle.ToRevolutions(point.Azimuth), Angle.ToRevolutions(point.Zenith));
 
+    /// <summary>
+    /// Convert a point from gradians to degrees.
+    /// </summary>
+    /// <typeparam name="T">The generic type for floating-point calculations.</typeparam>
+    /// <param name="point">The input point in gradians.</param>
+    /// <returns>The converted point in degrees.</returns>
     public static PointReduced<Degrees, T, T> ToDegrees<T>(PointReduced<Gradians, T, T> point)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => new(point.Radius, Angle.ToDegrees(point.Azimuth), Angle.ToDegrees(point.Zenith));
 
+    /// <summary>
+    /// Convert a point from gradians to radians.
+    /// </summary>
+    /// <typeparam name="T">The generic type for floating-point calculations.</typeparam>
+    /// <param name="point">The input point in gradians.</param>
+    /// <returns>The converted point in radians.</returns>
     public static PointReduced<Radians, T, T> ToRadians<T>(PointReduced<Gradians, T, T> point)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => new(point.Radius, Angle.ToRadians(point.Azimuth), Angle.ToRadians(point.Zenith));
 
-    public static PointReduced<Gradians, T, T> ToGradians<T>(PointReduced<Gradians, T, T> point)
-        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => point;
-
+    /// <summary>
+    /// Convert a point from gradians to revolutions.
+    /// </summary>
+    /// <typeparam name="T">The generic type for floating-point calculations.</typeparam>
+    /// <param name="point">The input point in gradians.</param>
+    /// <returns>The converted point in revolutions.</returns>
     public static PointReduced<Revolutions, T, T> ToRevolutions<T>(PointReduced<Gradians, T, T> point)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => new(point.Radius, Angle.ToRevolutions(point.Azimuth), Angle.ToRevolutions(point.Zenith));
 
+    /// <summary>
+    /// Convert a point from revolutions to degrees.
+    /// </summary>
+    /// <typeparam name="T">The generic type for floating-point calculations.</typeparam>
+    /// <param name="point">The input point in revolutions.</param>
+    /// <returns>The converted point in degrees.</returns>
     public static PointReduced<Degrees, T, T> ToDegrees<T>(PointReduced<Revolutions, T, T> point)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => new(point.Radius, Angle.ToDegrees(point.Azimuth), Angle.ToDegrees(point.Zenith));
 
+    /// <summary>
+    /// Convert a point from revolutions to radians.
+    /// </summary>
+    /// <typeparam name="T">The generic type for floating-point calculations.</typeparam>
+    /// <param name="point">The input point in revolutions.</param>
+    /// <returns>The converted point in radians.</returns>
     public static PointReduced<Radians, T, T> ToRadians<T>(PointReduced<Revolutions, T, T> point)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => new(point.Radius, Angle.ToRadians(point.Azimuth), Angle.ToRadians(point.Zenith));
 
+    /// <summary>
+    /// Convert a point from revolutions to gradians.
+    /// </summary>
+    /// <typeparam name="T">The generic type for floating-point calculations.</typeparam>
+    /// <param name="point">The input point in revolutions.</param>
+    /// <returns>The converted point in gradians.</returns>
     public static PointReduced<Gradians, T, T> ToGradians<T>(PointReduced<Revolutions, T, T> point)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => new(point.Radius, Angle.ToGradians(point.Azimuth), Angle.ToGradians(point.Zenith));
-
-    public static PointReduced<Revolutions, T, T> ToRevolutions<T>(PointReduced<Revolutions, T, T> point)
-        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => point;
-
-    public static PointReduced<TAngleUnits, TAngle, TRadius> Reduce<TAngleUnits, TAngle, TRadius>(PointReduced<TAngleUnits, TAngle, TRadius> point)
-        where TAngleUnits : struct, IAngleUnits<TAngleUnits>
-        where TAngle : struct, IFloatingPoint<TAngle>, IMinMaxValue<TAngle>
-        where TRadius : struct, IFloatingPoint<TRadius>, IMinMaxValue<TRadius>
-        => point;
 }

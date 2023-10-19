@@ -76,4 +76,34 @@ public class PointTests
         ((double)result.Y).Should().BeApproximately(expected.Y, 0.0001);
         ((double)result.Z).Should().BeApproximately(expected.Z, 0.0001);
     }
+
+
+    public static TheoryData<Point<Degrees, double, double>, Point<Degrees, double, double>> ReduceData => new()
+        {
+            { new(2.0, new(0.0), new(0.0)),     new(2.0, new(0.0), new(0.0)) },
+            { new(2.0, new(0.0), new(45.0)),   new(2.0, new(0.0), new(45.0)) },
+            { new(2.0, new(0.0), new(90.0)),   new(2.0, new(0.0), new(90.0)) },
+            { new(2.0, new(0.0), new(135.0)),   new(2.0, new(0.0), new(135.0)) },
+            { new(2.0, new(0.0), new(180.0)),   new(2.0, new(0.0), new(180.0)) },
+            { new(2.0, new(0.0), new(225.0)),   new(2.0, new(0.0), new(135.0)) },
+            { new(2.0, new(0.0), new(270.0)),   new(2.0, new(0.0), new(90.0)) },
+            { new(2.0, new(0.0), new(315.0)),   new(2.0, new(0.0), new(45.0)) },
+            { new(2.0, new(0.0), new(360.0)),   new(2.0, new(0.0), new(0.0)) },
+        };
+
+    [Theory]
+    [MemberData(nameof(ReduceData))]
+    public void Reduce_Should_Succeed(Point<Degrees, double, double> point, Point<Degrees, double, double> expected)
+    {
+        // arrange
+
+        // act
+        var result = Point.Reduce(point);
+
+        // assert
+        result.Radius.Should().BeApproximately(expected.Radius, 0.0001);
+        result.Azimuth.Value.Should().BeApproximately(expected.Azimuth.Value, 0.0001);
+        result.Zenith.Value.Should().BeApproximately(expected.Zenith.Value, 0.0001);
+    }
+
 }
