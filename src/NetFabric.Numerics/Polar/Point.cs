@@ -354,10 +354,8 @@ public static partial class Point
     public static Cartesian2.Point<T> ToCartesian<T>(Point<Radians, T, T> point)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>, ITrigonometricFunctions<T>
     {
-        var x = point.Radius * Angle.Cos(point.Azimuth);
-        var y = point.Radius * Angle.Sin(point.Azimuth);
-
-        return new(x, y);
+        var (sin, cos) = Angle.SinCos(point.Azimuth);
+        return new(point.Radius * cos, point.Radius * sin);
     }
 
     /// <summary>

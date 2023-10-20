@@ -328,8 +328,7 @@ public static class Quaternion
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>, ITrigonometricFunctions<T>
     {
         var halfAngle = angle / (T.One + T.One);
-        var sin = Angle.Sin(halfAngle);
-        var cos = Angle.Cos(halfAngle);
+        var (sin, cos) = Angle.SinCos(halfAngle);
         return new(
             axis.X * sin,
             axis.Y * sin,
