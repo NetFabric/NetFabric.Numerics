@@ -8,7 +8,7 @@
     <WarningsAsErrors>Nullable</WarningsAsErrors>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Description></Description>
-    <Version>1.0.0-beta03</Version>
+    <Version>1.0.0-beta06</Version>
     <Copyright>Copyright © Antão Almada 2023</Copyright>
     <Authors>Antão Almada</Authors>
     <Company>NetFabric</Company>
@@ -18,11 +18,11 @@
     <PackageTags>math, numerics, vector, quaternion, cartesian, polar, spherical</PackageTags>
     <PackageProjectUrl>https://netfabric.github.io/NetFabric.Numerics/</PackageProjectUrl>
     <PackageReleaseNotes>
-      Add Angle and AngleSigned between two cartesian vectors.
-      Add Matrix4x4.
     </PackageReleaseNotes>
     <RootNamespace>NetFabric.Numerics</RootNamespace>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
 
   <ItemGroup>

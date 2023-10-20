@@ -8,7 +8,7 @@
     <WarningsAsErrors>Nullable</WarningsAsErrors>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Description></Description>
-    <Version>1.0.0-beta03</Version>
+    <Version>1.0.0-beta05</Version>
     <Copyright>Copyright © Antão Almada 2023</Copyright>
     <Authors>Antão Almada</Authors>
     <Company>NetFabric</Company>
@@ -18,10 +18,11 @@
     <PackageTags>math, numerics, geodetic, geography, latlon, latitude, longitude, datum, utm, wgs84</PackageTags>
     <PackageProjectUrl>https://netfabric.github.io/NetFabric.Numerics/</PackageProjectUrl>
     <PackageReleaseNotes>
-      Add README.
     </PackageReleaseNotes>
     <RootNamespace>NetFabric.Numerics.Geography</RootNamespace>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
 
   <PropertyGroup>
