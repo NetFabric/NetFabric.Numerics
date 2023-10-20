@@ -18,7 +18,7 @@ public class PointTests
 
     static readonly double sqr2 = double.Sqrt(2.0);
 
-    public static TheoryData<Point<double>, Spherical.Point<Degrees, double, double>> ToSphericalData => new()
+    public static TheoryData<Point<double>, Spherical.Point<double, Degrees, double>> ToSphericalData => new()
         {
             { new(0.0,  0.0, 0.0),  new(0.0,  new(0.0),   new(0.0)) },
 
@@ -40,7 +40,7 @@ public class PointTests
 
     [Theory]
     [MemberData(nameof(ToSphericalData))]
-    public void ToSpherical_Should_Succeed(Point<double> point, Spherical.Point<Degrees, double, double> expected)
+    public void ToSpherical_Should_Succeed(Point<double> point, Spherical.Point<double, Degrees, double> expected)
     {
         // arrange
 

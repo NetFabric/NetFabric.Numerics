@@ -17,7 +17,7 @@ public class PointTests
 
     static readonly double sqr2 = double.Sqrt(2.0);
 
-    public static TheoryData<Point<double>, Polar.Point<Degrees, double, double>> ToPolarData => new()
+    public static TheoryData<Point<double>, Polar.Point<double, Degrees, double>> ToPolarData => new()
         {
             { new(0.0,  0.0),  new(0.0,  new(0.0)) },
             { new(1.0,  0.0),  new(1.0,  new(0.0)) },
@@ -32,7 +32,7 @@ public class PointTests
 
     [Theory]
     [MemberData(nameof(ToPolarData))]
-    public void ToPolar_Should_Succeed(Point<double> point, Polar.Point<Degrees, double, double> expected)
+    public void ToPolar_Should_Succeed(Point<double> point, Polar.Point<double, Degrees, double> expected)
     {
         // arrange
 

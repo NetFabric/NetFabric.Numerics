@@ -198,11 +198,30 @@ public static class Point
     /// <typeparam name="T">The type of the point coordinates.</typeparam>
     /// <param name="point">The cartesian 2D point to convert.</param>
     /// <returns>The polar coordinates representing the point.</returns>
-    public static Polar.Point<Radians, T, T> ToPolar<T>(in Point<T> point)
+    public static Polar.Point<T, Radians, T> ToPolar<T>(in Point<T> point)
         where T : struct, IFloatingPointIeee754<T>, IMinMaxValue<T>
     {
         var azimuth = Angle.Atan2(point.Y, point.X);
         var radius = Utils.Magnitude(point.X, point.Y);
+
+        return new(radius, azimuth);
+    }
+
+    /// <summary>
+    /// Converts a cartesian 2D point to polar coordinates.
+    /// </summary>
+    /// <typeparam name="T">The type of the point coordinates.</typeparam>
+    /// <typeparam name="TRadius">The type of the radius value.</typeparam>
+    /// <typeparam name="TAngle">The type of the angle values.</typeparam>
+    /// <param name="point">The cartesian 2D point to convert.</param>
+    /// <returns>The polar coordinates representing the point.</returns>
+    public static Polar.Point<TRadius, Radians, TAngle> ToPolar<T, TRadius, TAngle>(in Point<T> point)
+        where T : struct, IFloatingPointIeee754<T>, IMinMaxValue<T>
+        where TRadius : struct, IFloatingPoint<TRadius>, IMinMaxValue<TRadius>
+        where TAngle : struct, IFloatingPoint<TAngle>, IMinMaxValue<TAngle>, ITrigonometricFunctions<TAngle>
+    {
+        var radius = TRadius.CreateChecked(Utils.Magnitude(point.X, point.Y));
+        var azimuth = Angle<Radians, TAngle>.CreateChecked(Angle.Atan2(point.Y, point.X));
 
         return new(radius, azimuth);
     }
