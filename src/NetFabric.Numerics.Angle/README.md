@@ -1,64 +1,120 @@
-﻿# NetFabric.Numerics.Angle: Strongly-Typed Angle Implementation
+﻿Certainly, let's restructure the README.md for **NetFabric.Numerics.Angle** following the same structure as the previous READMEs:
 
-**NetFabric.Numerics.Angle** offers a robust, strongly-typed angle implementation.
+---
 
-> **Important:**
-> Please be aware that **NetFabric.Numerics.Angle** leverages [generic math](https://learn.microsoft.com/en-us/dotnet/standard/generics/math) capabilities, which are exclusive to .NET 7 and C# 11. Ensure that you are using a compatible version of the framework before integrating this library. If you're working with older versions of .NET, consider using [NetFabric.Angle](https://github.com/NetFabric/NetFabric.Angle) instead.
+# NetFabric.Numerics.Angle
 
-``` csharp
-using NetFabric.Numerics.Angle;
+A Strongly-Typed Angle Implementation in C#.
 
-// Create angles
+## Key Features
+
+- **Strongly-typed** angle implementation.
+- Compatibility with **.NET 7** and **C# 11**.
+- Comprehensive angular representations with **Angle** and **AngleReduced**.
+
+## Introduction
+
+Welcome to **NetFabric.Numerics.Angle** – a robust C# library that simplifies angle calculations with a strong typing approach.
+
+## Getting Started
+
+Ensure that you are working in a .NET 7 or higher environment to fully leverage the capabilities of **NetFabric.Numerics.Angle**. Once you're set up, explore the world of strongly-typed angles.
+
+### Strongly-Typed Angle Creation
+
+**NetFabric.Numerics.Angle** provides robust angle creation with strong typing:
+
+```csharp
 var degreesDoubleAngle = new Angle<Degrees, double>(45.0);
 var radiansFloatAngle = new Angle<Radians, float>(1.57f);
 var gradiansDecimalAngle = new Angle<Gradians, decimal>(200.0m);
 var revolutionsHalfAngle = new Angle<Revolutions, Half>((Half)0.25);
+```
 
-// Constants
-var zeroDegreesDoubleAngle = Angle<Degrees, double>.Zero; // 0.0 degrees
-var rightDegreesFloatAngle = Angle<Degrees, float>.Right; // 90.0f degrees
-var straightRadiansDecimalAngle = Angle<Radians, decimal>.Straight; // π radians
-var fullRevolutionsHalfAngle = Angle<Revolutions, Half>.Full; // 1 revolution
+### Essential Constants
 
-// Perform angle operations
+Easily access essential angle constants:
+
+```csharp
+var zeroDegreesDoubleAngle = Angle<Degrees, double>.Zero;
+var rightDegreesFloatAngle = Angle<Degrees, float>.Right;
+var straightRadiansDecimalAngle = Angle<Radians, decimal>.Straight;
+var fullRevolutionsHalfAngle = Angle<Revolutions, Half>.Full;
+```
+
+### Angle Operations
+
+Perform various angle operations with precision:
+
+```csharp
 var sum = degreesDoubleAngle + Angle<Degrees, double>.Right;
 var difference = gradiansDecimalAngle - Angle<Gradians, decimal>.Right;
 var product = 2.0 * degreesDoubleAngle;
 var quotient = gradiansDecimalAngle / 100.0m;
 var remainder = degreesDoubleAngle % 180.0;
+```
 
-// Compare angles
+### Angle Comparison
+
+Easily compare angles for your calculations:
+
+```csharp
 var areEqual = degreesDoubleAngle.Equals(Angle<Gradians, double>.Right);
 var isGreater = gradiansDecimalAngle > Angle<Gradians, decimal>.Right;
+```
 
-// Convert angles
+### Angle Conversion
+
+Convert angles to different units and data types:
+
+```csharp
 var convertedToRadians = Angle.ToRadians(degreesDoubleAngle);
 var convertedToDegrees = Angle.ToDegrees(radiansFloatAngle);
 var convertedToRevolution = Angle.ToRevolutions(degreesDoubleAngle);
 
-var convertToFloatChecked = Angle<Degrees, float>.CreateChecked(degreesDoubleAngle); // throws if value is out of range
-var convertToFloatSaturating = Angle<Degrees, float>.CreateSaturating(degreesDoubleAngle); // saturates if value is out of range
-var convertToFloatTruncating = Angle<Degrees, float>.CreateTruncating(degreesDoubleAngle); // truncates if value is out of range
+var convertToFloatChecked = Angle<Degrees, float>.CreateChecked(degreesDoubleAngle);
+var convertToFloatSaturating = Angle<Degrees, float>.CreateSaturating(degreesDoubleAngle);
+var convertToFloatTruncating = Angle<Degrees, float>.CreateTruncating(degreesDoubleAngle);
+```
 
-// Perform trigonometric calculations
+### Trigonometric Calculations
+
+Leverage trigonometric functions for your angle calculations:
+
+```csharp
 var sineValue = Angle.Sin(radiansFloatAngle);
 var cosineValue = Angle.Cos(Angle.ToRadians(degreesDoubleAngle));
 var tangentValue = Angle.Tan(radiansFloatAngle);
 var arcSineRadiansAngle = Angle.Asin(sineValue);
+```
 
-// Reduce angles
+### Angle Reduction
+
+Understand the significance of angle reduction in your calculations:
+
+```csharp
 var reducedAngle = Angle.Reduce(degreesDoubleAngle);
 var quadrant = Angle.GetQuadrant(reducedAngle);
 var reference = Angle.GetReference(reducedAngle);
+```
 
-// Classify angles
+### Classifying Angles
+
+Classify angles with methods like `IsZero`, `IsAcute`, `IsRight`, `IsObtuse`, `IsStraight`, and more:
+
+```csharp
 var isZeroAngle = Angle.IsZero(reducedAngle);
 var isAcuteAngle = Angle.IsAcute(reducedAngle);
 var isRightAngle = Angle.IsRight(reducedAngle);
 var isObtuseAngle = Angle.IsObtuse(reducedAngle);
 var isStraightAngle = Angle.IsStraight(reducedAngle);
+```
 
-// Calculate collection operations
+### Collection Support
+
+Optimized operations on collections of angles:
+
+```csharp
 var angleCollection = new[] { degreesDoubleAngle, Angle<Degrees, double>.Right, Angle<Degrees, double>.Straight };
 var collectionSum = angleCollection.Sum();
 var collectionAverage = angleCollection.Average();
@@ -87,26 +143,9 @@ A prominent benefit of **AngleReduced** is its ability to reduce the frequency o
 
 When comparing angles, it's essential to choose the appropriate angle representation, whether **Angle** or **AngleReduced**, depending on the specific requirements of your calculations.
 
-### Key Distinctions:
-
-- **Angle<TUnits, T** represents an angle using a value of type **T** within the chosen **TUnits** unit. The **T** type can encompass various data types, such as **Half**, **float**, **double**, **decimal**, or any other implementation of **IFloatingPoint<TSelf>**.
-- **AngleReduced<TUnits, T** represents an angle with a value of type **T** within the same **TUnits** unit but reduced to the range **[TUnits.Zero, TUnits.Full[**.
-
-### Range Considerations
-
-- **Angle<TUnits, T** has the capacity to represent any angle value within the range of **[T.MinValue, T.MaxValue]** within the specified **TUnits** unit. However, certain operations may necessitate reducing the angle to the range of **[TUnits.Zero, TUnits.Full[**. To optimize performance in such scenarios, consider employing **AngleReduced<TUnits, T**, which guarantees that the angle is already in a reduced form.
-
-### Unit Conversion
-
-To facilitate the versatile usage of angle values in different units, you can utilize methods like **ToDegrees()**, **ToGradians()**, **ToRadians()**, and **ToRevolutions()**. These methods offer a convenient way to convert angles from one unit to another, enabling you to adapt angle values to the specific requirements of your calculations.
-
-### Data Type Conversion
-
-Additionally, the angle library provides methods like **CreateChecked()**, **CreateSaturating()**, and **CreateTruncating()** to manage data type conversion. These methods cater to diverse scenarios, allowing you to choose between checked, saturating, or truncating conversions based on your specific requirements for data type conversion.
-
 In conclusion, the choice between **Angle** and **AngleReduced** depends on the nature of your angle-related computations. Be mindful of their distinctions and use the one that best aligns with your specific needs for representing and comparing angles, managing units, handling data type conversions, and reducing the frequency of angle reduction operations.
 
-## Angle classification
+## Angle Classification
 
 **NetFabric.Numerics.Angle** provides a large number of methods to classify an angle: `IsZero`, `IsAcute`, `IsRight`, `IsObtuse`, `IsStraight`, `IsReflex`, `IsOblique`, `AreComplementary`, `AreSupplementary`
 
@@ -114,11 +153,13 @@ These methods are only available for `AngleReduced<TUnits, T>`. When classifying
 
 ## Trigonometry
 
-**NetFabric.Numerics.Angle** provides a large number of trigonometric methods: `Sin`, `Cos`, `Tan`, `Sec`, `Csc`, `Cot`, `Sinh`, `Cosh`, `Tanh`, `Sech`, `Csch`, `Coth`, `Asin`, `Acos`, `Atan`, `Acot`, `Asec`, `Acsc`
+**NetFabric.Numerics.Angle** provides a large number of trigonometric methods: `Sin`,
+
+ `Cos`, `Tan`, `Sec`, `Csc`, `Cot`, `Sinh`, `Cosh`, `Tanh`, `Sech`, `Csch`, `Coth`, `Asin`, `Acos`, `Atan`, `Acot`, `Asec`, `Acsc`
 
 These methods are only available for angles in radians. When using an angle on any other unit, convert it first by using `Angle.ToRadians()`.
 
-## Collections support
+## Collections Support
 
 **NetFabric.Numerics.Angle** provides optimized operations on collections of angles: `Sum`, `Average`.
 

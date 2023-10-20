@@ -1,51 +1,68 @@
 ﻿# NetFabric.Numerics
 
-**NetFabric.Numerics** provides strongly-typed implementations for cartesian and polar coordinates, and operations for 2D and 3D vectors and quaternions.
+Your Comprehensive Strongly-Typed Toolkit for Numeric and Geometric Operations in C#!
 
-> WARNING: 
-> **NetFabric.Numerics** makes use of [generic math](https://learn.microsoft.com/en-us/dotnet/standard/generics/math) features only available in .NET 7 and C# 11.
-> Make sure you are using a compatible version of the framework before using this library.
+## Key Features
 
-``` csharp
-using NetFabric.Numerics;
+- **Strongly-typed** implementations for cartesian, polar, and spherical coordinates.
+- Seamless operations on 2D and 3D vectors and quaternions.
+- Leveraging the latest [generic math](https://learn.microsoft.com/en-us/dotnet/standard/generics/math) features, available in .NET 7 and C# 11.
 
-// Create points
+## Introduction
+
+Welcome to **NetFabric.Numerics** – a versatile library designed to simplify numeric and geometric calculations in C#.
+
+## Getting Started
+
+To harness the full capabilities of **NetFabric.Numerics**, ensure you have a compatible .NET 7 or higher environment. Once you're set up, you can unlock the potential of various coordinate systems and efficient operations.
+
+### Strongly-Typed Coordinates
+
+**NetFabric.Numerics** shines with its **strongly-typed** approach to coordinate systems. Whether you're dealing with 2D, 3D, polar, or spherical coordinates, our library offers precision with strong typing:
+
+```csharp
 var point2DInteger = new Cartesian2.Point<int>(10, 20);
 var point2DFloat = new Cartesian2.Point<float>(10.0f, 20.0f);
-var point2DDouble = new Cartesian2.Point<double>(10.0, 20.0);
-
-var pointPolarDegreesFloat = new Polar.Point<Degrees, float, float>(
-    Angle<Degrees, float>.Right, // 90 degrees azimuth
-    10.0f); // radius
-var pointPolarRadiansDouble = new Polar.Point<Radians, double, double>(
-    new Angle<Radians, double>(double.Pi), // 180 degrees azimuth
-    10.0f); // radius
-
-var point3DInteger = new Cartesian3.Point<int>(10, 20, 30);
-var point3DFloat = new Cartesian3.Point<float>(10.0f, 20.0f, 30.0f);
 var point3DDouble = new Cartesian3.Point<double>(10.0, 20.0, 30.0);
 
+var pointPolarDegreesFloat = new Polar.Point<Degrees, float, float>(Angle<Degrees, float>.Right, 10.0f);
+var pointPolarRadiansDouble = new Polar.Point<Radians, double, double>(new Angle<Radians, double>(Math.PI), 10.0f);
+
 var pointSphericalDegreesFloat = new Spherical.Point<Degrees, float, float>(
-    Angle<Degrees, float>.Zero, // 0 degrees azimuth
-    Angle<Degrees, float>.Right, // 90 degrees zenith
-    10.0f); // radius
+    Angle<Degrees, float>.Zero, // Azimuth: 0 degrees
+    Angle<Degrees, float>.Right, // Zenith: 90 degrees
+    10.0f); // Radius
+```
 
-// Create quaternions
+### Quaternions Made Easy
+
+Quaternions are crucial for orientation and rotation. With **NetFabric.Numerics**, you can create them with strong typing and ease:
+
+```csharp
 var quaternionFloat = new Cartesian3.Quaternion<float>(1.0f, 2.0f, 3.0f, 4.0f);
-var quaternionDouble = Cartesian3.Quaternion.FromYawPitchRoll<double>(
-    Angle<Radians, double>.Zero, // 0 degrees yaw
-    Angle<Radians, double>.Zero, // 0 degrees pitch
-    Angle<Radians, double>.Right); // 90 degrees roll
+var quaternionDouble = Cartesian3.Quaternion.FromYawPitchRoll<double>(Angle<Radians, double>.Zero, Angle<Radians, double>.Right);
+```
 
-// Perform math operations
+### Efficient Math Operations
+
+Elevate your numeric operations with our library. Enjoy simple, efficient, and accurate calculations with strong typing:
+
+```csharp
 var vector3DDouble = point3DDouble - new Cartesian3.Point<double>(1.0, 1.0, 1.0);
 var point3DTransformed = point3DDouble + vector3DDouble;
-
-// Conversions
-var convertToFloatChecked = Cartesian3.Point<float>.CreateChecked(point3DDouble); // throws if value is out of range
-var convertToFloatSaturated = Cartesian3.Point<float>.CreateSaturating(point3DDouble); // saturate if value is out of range
-var convertToFloatTruncated = Cartesian3.Point<float>.CreateTruncating(point3DDouble); // truncate if value is out of range
 ```
+
+### Simple Conversions
+
+**NetFabric.Numerics** simplifies converting between different numeric types while preserving strong typing. You choose how to handle out-of-range values:
+
+```csharp
+var convertToFloatChecked = Cartesian3.Point<float>.CreateChecked(point3DDouble);
+var convertToFloatSaturated = Cartesian3.Point<float>.CreateSaturating(point3DDouble);
+var convertToFloatTruncated = Cartesian3.Point<float>.CreateTruncating(point3DDouble);
+```
+
+Discover how **NetFabric.Numerics** can simplify your numeric and geometric challenges today.
 
 ## Credits
 
