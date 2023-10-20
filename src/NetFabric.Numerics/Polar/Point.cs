@@ -10,12 +10,30 @@ namespace NetFabric.Numerics.Polar;
 /// <param name="Radius">The radius coordinate.</param>
 [System.Diagnostics.DebuggerDisplay("Radius = {Radius}, Azimuth = {Azimuth}")]
 [SkipLocalsInit]
-public readonly record struct Point<TAngleUnits, TAngle, TRadius>(TRadius Radius, Angle<TAngleUnits, TAngle> Azimuth)
+public readonly struct Point<TAngleUnits, TAngle, TRadius>
     : IPoint<Point<TAngleUnits, TAngle, TRadius>>
     where TAngleUnits : struct, IAngleUnits<TAngleUnits>
     where TAngle : struct, IFloatingPoint<TAngle>, IMinMaxValue<TAngle>
     where TRadius : struct, IFloatingPoint<TRadius>, IMinMaxValue<TRadius>
 {
+    public TRadius Radius { get; }
+
+    public Angle<TAngleUnits, TAngle> Azimuth { get; }
+
+    /// <summary>
+    /// Creates an instance of the current type from spherical coordinates.
+    /// </summary>
+    /// <param name="radius">The radial distance from the origin (usually the radial distance).</param>
+    /// <param name="azimuth">The horizontal angle in radians with units defined by <typeparamref name="TUnits"/> (often called the azimuth angle).</param>
+    /// <remarks>
+    /// These parameters collectively define the position of a 2D point in space based on polar coordinates.
+    /// </remarks>
+    public Point(TRadius radius, Angle<TAngleUnits, TAngle> azimuth)
+    {
+        Radius = radius;
+        Azimuth = azimuth;
+    }
+
     #region constants
 
     /// <summary>
@@ -109,6 +127,76 @@ public readonly record struct Point<TAngleUnits, TAngle, TRadius>(TRadius Radius
             1 => Azimuth,
             _ => Throw.ArgumentOutOfRangeException<object>(nameof(index), index, "index out of range")
         };
+
+    #region equality
+
+    /// <summary>
+    /// Indicates whether two <see cref="Point{TAngleUnits, TAngle, TRadius}"/> instances are equal.
+    /// </summary>
+    /// <param name="left">The first point to compare.</param>
+    /// <param name="right">The second point to compare.</param>
+    /// <returns>true if the two points are equal, false otherwise.</returns>
+    /// <remarks>
+    /// The method compares the numerical values of the <paramref name="left"/> and <paramref name="right"/> points to determine their equality.
+    /// </remarks>
+    public static bool operator ==(Point<TAngleUnits, TAngle, TRadius> left, Point<TAngleUnits, TAngle, TRadius> right)
+        => left.Equals(right);
+
+    /// <summary>
+    /// Indicates whether two <see cref="Point{TAngleUnits, TAngle, TRadius}"/> instances are not equal.
+    /// </summary>
+    /// <param name="left">The first point to compare.</param>
+    /// <param name="right">The second point to compare.</param>
+    /// <returns>true if the two points are not equal, false otherwise.</returns>
+    /// <remarks>
+    /// The method compares the numerical values of the <paramref name="left"/> and <paramref name="right"/> points to determine their equality.
+    /// </remarks>
+    public static bool operator !=(Point<TAngleUnits, TAngle, TRadius> left, Point<TAngleUnits, TAngle, TRadius> right)
+        => !left.Equals(right);
+
+    /// <summary>
+    /// Returns the hash code for the current <see cref="Point{TAngleUnits, TAngle, TRadius}"/> instance.
+    /// </summary>
+    /// <returns>A 32-bit signed integer hash code.</returns>
+    public override int GetHashCode()
+        => HashCode.Combine(Radius, Azimuth);
+
+    /// <summary>
+    /// Indicates whether the current <see cref="Point{TAngleUnits, TAngle, TRadius}"/> instance is equal to another <see cref="Point{TAngleUnits, TAngle, TRadius}"/> instance.
+    /// </summary>
+    /// <param name="other">A <see cref="Point{TAngleUnits, TAngle, TRadius}"/> value to compare to this instance.</param>
+    /// <returns>true if <paramref name="other"/> has the same value as this instance; otherwise, false.</returns>
+    public bool Equals(Point<TAngleUnits, TAngle, TRadius> other)
+        => EqualityComparer<TRadius>.Default.Equals(Radius, other.Radius) &&
+            Azimuth.Equals(other.Azimuth);
+
+    /// <summary>
+    /// Indicates whether the current <see cref="Point{TAngleUnits, TAngle, TRadius}"/> instance is equal to another <see cref="PointReduced{TAngleUnits, TAngle, TRadius}"/> instance.
+    /// </summary>
+    /// <param name="other">A <see cref="PointReduced{TAngleUnits, TAngle, TRadius}"/> value to compare to this instance.</param>
+    /// <returns>true if <paramref name="other"/> has the same value as this instance; otherwise, false.
+    public bool Equals(PointReduced<TAngleUnits, TAngle, TRadius> other)
+        => EqualityComparer<TRadius>.Default.Equals(Radius, other.Radius) &&
+            Azimuth.Equals(other.Azimuth);
+
+    /// <summary>
+    /// Indicates whether the current <see cref="Point{TAngleUnits, TAngle, TRadius}"/> instance is equal to another object.
+    /// </summary>
+    /// <param name="obj">An object to compare with this instance.</param>
+    /// <returns>
+    /// true if <paramref name="obj"/> is an instance of a <see cref="Point{TAngleUnits, TAngle, TRadius}"/> or 
+    /// <see cref="PointReduced{TAngleUnits, TAngle, TRadius}"/> and equals the value of this instance; otherwise, false.
+    /// </returns>
+    public override bool Equals(object? obj)
+        => obj switch
+        {
+            Point<TAngleUnits, TAngle, TRadius> point => Equals(point),
+            PointReduced<TAngleUnits, TAngle, TRadius> point => Equals(point),
+            _ => false
+        };
+
+    #endregion
+
 }
 
 /// <summary>

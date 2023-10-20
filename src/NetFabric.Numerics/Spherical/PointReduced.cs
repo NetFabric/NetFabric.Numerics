@@ -17,9 +17,7 @@ public readonly record struct PointReduced<TAngleUnits, TAngle, TRadius>(TRadius
     where TAngle : struct, IFloatingPoint<TAngle>, IMinMaxValue<TAngle>
     where TRadius : struct, IFloatingPoint<TRadius>, IMinMaxValue<TRadius>
 {
-#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
     public AngleReduced<TAngleUnits, TAngle> Polar { get; }
-#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
         = Polar.Value < Angle<TAngleUnits, TAngle>.Zero.Value || Polar.Value > Angle<TAngleUnits, TAngle>.Straight.Value
             ? Throw.ArgumentOutOfRangeException<AngleReduced<TAngleUnits, TAngle>>(nameof(Polar), Polar, "Polar must be in [0.0º, 180.0º]")
             : Polar;
