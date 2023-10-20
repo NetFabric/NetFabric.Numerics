@@ -36,7 +36,7 @@ namespace NetFabric.Numerics;
 [DebuggerDisplay("{Value}")]
 [DebuggerTypeProxy(typeof(AngleReducedDebugView<,>))]
 [SkipLocalsInit]
-public readonly struct AngleReduced<TUnits, T>
+public readonly record struct AngleReduced<TUnits, T>(T Value)
     : IAngle<AngleReduced<TUnits, T>, T>,
       IUnaryPlusOperators<AngleReduced<TUnits, T>, AngleReduced<TUnits, T>>,
       IUnaryNegationOperators<AngleReduced<TUnits, T>, Angle<TUnits, T>>,
@@ -47,22 +47,6 @@ public readonly struct AngleReduced<TUnits, T>
     where TUnits : IAngleUnits<TUnits>
     where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
 {
-    /// <summary>
-    /// Gets angle measurement in the units specified by <typeparamref name="TUnits"/>.
-    /// </summary>
-    public T Value { get; }
-
-    /// <summary>
-    /// Creates an instance of the current type from a value.
-    /// </summary>
-    /// <param name="value">The angle measurement in the units specified by <typeparamref name="TUnits"/>.</param>
-    public AngleReduced(T value)
-    {
-        if (T.IsNegative(value) || value >= T.CreateChecked(TUnits.Full))
-            Throw.ArgumentOutOfRangeException(nameof(value), value, "Must be positive and less than a full revolution.");
-        Value = value;
-    }
-
     /// <summary>
     /// Creates an instance of the current type from a value, 
     /// throwing an overflow exception for any values that fall outside the representable range of the current type.
@@ -113,73 +97,6 @@ public readonly struct AngleReduced<TUnits, T>
     /// </remarks>
     public static implicit operator Angle<TUnits, T>(AngleReduced<TUnits, T> angle)
         => new(angle.Value);
-
-    #region equality
-
-    /// <summary>
-    /// Indicates whether two <see cref="Angle{TUnits, T}"/> instances are equal.
-    /// </summary>
-    /// <param name="left">The first angle to compare.</param>
-    /// <param name="right">The second angle to compare.</param>
-    /// <returns>true if the two angles are equal, false otherwise.</returns>
-    /// <remarks>
-    /// The method compares the numerical values of the <paramref name="left"/> and <paramref name="right"/> angles to determine their equality.
-    /// </remarks>
-    public static bool operator ==(AngleReduced<TUnits, T> left, AngleReduced<TUnits, T> right)
-        => left.Equals(right);
-
-    /// <summary>
-    /// Indicates whether two <see cref="Angle{TUnits, T}"/> instances are not equal.
-    /// </summary>
-    /// <param name="left">The first angle to compare.</param>
-    /// <param name="right">The second angle to compare.</param>
-    /// <returns>true if the two angles are equal, false otherwise.returns>
-    /// <remarks>
-    /// The method compares the numerical values of the <paramref name="left"/> and <paramref name="right"/> angles to determine their equality.
-    /// </remarks>
-    public static bool operator !=(AngleReduced<TUnits, T> left, AngleReduced<TUnits, T> right)
-        => !left.Equals(right);
-
-    /// <summary>
-    /// Returns the hash code for the current <see cref="Angle{TUnits, T}"/> instance.
-    /// </summary>
-    /// <returns>A 32-bit signed integer hash code.</returns>
-    public override int GetHashCode()
-    => EqualityComparer<T>.Default.GetHashCode(Value);
-
-    /// <summary>
-    /// Indicates whether the current <see cref="AngleReduced{TUnits, T}"/> instance is equal to another <see cref="Angle{TUnits, T}"/> instance.
-    /// </summary>
-    /// <param name="other">An <see cref="Angle{TUnits, T}"/> value to compare to this instance.</param>
-    /// <returns>true if <paramref name="other"/> has the same value as this instance; otherwise, false.</returns>
-    public bool Equals(Angle<TUnits, T> other)
-        => EqualityComparer<T>.Default.Equals(Value, other.Value);
-
-    /// <summary>
-    /// Indicates whether the current <see cref="AngleReduced{TUnits, T}"/> instance is equal to another <see cref="AngleReduced{TUnits, T}"/> instance.
-    /// </summary>
-    /// <param name="other">An <see cref="AngleReduced{TUnits, T}"/> value to compare to this instance.</param>
-    /// <returns>true if <paramref name="other"/> has the same value as this instance; otherwise, false.</returns>
-    public bool Equals(AngleReduced<TUnits, T> other)
-        => EqualityComparer<T>.Default.Equals(Value, other.Value);
-
-    /// <summary>
-    /// Indicates whether the current <see cref="Angle{TUnits, T}"/> instance is equal to another object.
-    /// </summary>
-    /// <param name="obj">An object to compare with this instance.</param>
-    /// <returns>
-    /// true if <paramref name="obj"/> is an instance of an <see cref="Angle{TUnits, T}"/> or 
-    /// <see cref="AngleReduced{TUnits, T}"/> and equals the value of this instance; otherwise, false.
-    /// </returns>
-    public override bool Equals(object? obj)
-        => obj switch
-        {
-            Angle<TUnits, T> angle => Equals(angle),
-            AngleReduced<TUnits, T> angle => Equals(angle),
-            _ => false
-        };
-
-    #endregion
 
     #region constants
 

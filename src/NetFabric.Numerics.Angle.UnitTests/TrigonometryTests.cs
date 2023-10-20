@@ -33,7 +33,7 @@ public class TrigonometryTests
     {
         // arrange
         var cos = Math.Cos(angle.Value);
-        var expected = new Angle<Radians, double>(Math.Acos(cos));
+        var expected = new AngleReduced<Radians, double>(Math.Acos(cos));
 
         // act
         var result = Angle.Acos(cos);

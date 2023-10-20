@@ -1,11 +1,9 @@
-﻿# NetFabric.Numerics.Angle
+﻿# NetFabric.Numerics.Angle: Strongly-Typed Angle Implementation
 
-**NetFabric.Numerics.Angle** provides a strongly-typed implementation of an angle. 
+**NetFabric.Numerics.Angle** offers a robust, strongly-typed angle implementation.
 
-> WARNING: 
-> **NetFabric.Numerics.Angle** makes use of [generic math](https://learn.microsoft.com/en-us/dotnet/standard/generics/math) features only available in .NET 7 and C# 11.
-> Make sure you are using a compatible version of the framework before using this library.
-> For older versions of .NET, please use [NetFabric.Angle](https://github.com/NetFabric/NetFabric.Angle) instead.
+> **Important:**
+> Please be aware that **NetFabric.Numerics.Angle** leverages [generic math](https://learn.microsoft.com/en-us/dotnet/standard/generics/math) capabilities, which are exclusive to .NET 7 and C# 11. Ensure that you are using a compatible version of the framework before integrating this library. If you're working with older versions of .NET, consider using [NetFabric.Angle](https://github.com/NetFabric/NetFabric.Angle) instead.
 
 ``` csharp
 using NetFabric.Numerics.Angle;
@@ -66,18 +64,47 @@ var collectionSum = angleCollection.Sum();
 var collectionAverage = angleCollection.Average();
 ```
 
-## Angle<TUnits, T> vs. AngleReduced<TUnits, T>
+## Angle vs. AngleReduced: Comprehensive Angular Representations
 
-- `Angle<TUnits, T>` represents an angle as a value of type `T` in the specified `TUnits` unit. 
-- `AngleReduced<TUnits, T>` represents an angle as a value of type `T` in the specified `TUnits` unit, reduced to the range `[TUnits.Zero, TUnits.Full[`.
-- The `T` type can be any of the following types: `Half`, `float`, `double`, `decimal`, or any other implementation of `IFloatingPoint<TSelf>`.
-- The `TUnits` type can be any of the following types: `Degrees`, `Radians`, `Gradians`, `Revolutions`, or any other implementation of `IAngleUnits<TSelf>`.
+In the world of angular measurements, distinguishing between **Angle** and **AngleReduced** is pivotal. These two types serve unique purposes, offering a comprehensive approach to angular representation, units, and data type conversion.
 
-`Angle<TUnits, T>` can represent any angle value in the range `[T.MinValue, T.MaxValue]` in the specified `TUnits` unit. Some operations require the angle to be reduced to `[TUnits.Zero, TUnits.Full[`. 
-To avoid the cost of reducing the angle every time, `AngleReduced<TUnits, T>` can be used instead. It guarantees that the angle is already reduced. 
+### The Nature of Angles
 
-An `Angle<TUnits, T>` can be converted to an `AngleReduced<TUnits, T>` using the `Angle.Reduce()` method.
-`AngleReduced<TUnits, T>` can be implicitly converted to an `Angle<TUnits, T>`.
+Angles possess a periodic nature, cycling back to their original value after a full revolution, akin to a complete circle. When comparing two **Angle** instances, it's important to understand that, for performance reasons, this periodicity is not inherently considered. However, if your comparison demands accounting for this periodic nature, the angles should be reduced.
+
+### AngleReduced: Embracing Periodicity and Unit Restrictions
+
+**AngleReduced** is meticulously crafted to embrace the periodicity of angles while enforcing specific unit restrictions. However, one of its most significant advantages is the minimization of angle reduction:
+
+- It represents an angle as a value of type **T** within the chosen **TUnits** unit.
+- Crucially, **AngleReduced** ensures that the angle remains within the range of **[TUnits.Zero, TUnits.Full[**. This range restriction guarantees that two **AngleReduced** instances with the same value are considered equivalent. Notably, it's important to mention that **AngleReduced** can be implicitly converted to **Angle** when needed, offering flexibility in your angular computations.
+
+### Reducing Reduction Frequency
+
+A prominent benefit of **AngleReduced** is its ability to reduce the frequency of angle reduction operations. Reduction has to be explicitly performed only when required. The **AngleReduced** type also allows the compiler to know if reduction has already been performed, providing a clear indicator of the angle's status.
+
+### Comparing Reduced Angles
+
+When comparing angles, it's essential to choose the appropriate angle representation, whether **Angle** or **AngleReduced**, depending on the specific requirements of your calculations.
+
+### Key Distinctions:
+
+- **Angle<TUnits, T** represents an angle using a value of type **T** within the chosen **TUnits** unit. The **T** type can encompass various data types, such as **Half**, **float**, **double**, **decimal**, or any other implementation of **IFloatingPoint<TSelf>**.
+- **AngleReduced<TUnits, T** represents an angle with a value of type **T** within the same **TUnits** unit but reduced to the range **[TUnits.Zero, TUnits.Full[**.
+
+### Range Considerations
+
+- **Angle<TUnits, T** has the capacity to represent any angle value within the range of **[T.MinValue, T.MaxValue]** within the specified **TUnits** unit. However, certain operations may necessitate reducing the angle to the range of **[TUnits.Zero, TUnits.Full[**. To optimize performance in such scenarios, consider employing **AngleReduced<TUnits, T**, which guarantees that the angle is already in a reduced form.
+
+### Unit Conversion
+
+To facilitate the versatile usage of angle values in different units, you can utilize methods like **ToDegrees()**, **ToGradians()**, **ToRadians()**, and **ToRevolutions()**. These methods offer a convenient way to convert angles from one unit to another, enabling you to adapt angle values to the specific requirements of your calculations.
+
+### Data Type Conversion
+
+Additionally, the angle library provides methods like **CreateChecked()**, **CreateSaturating()**, and **CreateTruncating()** to manage data type conversion. These methods cater to diverse scenarios, allowing you to choose between checked, saturating, or truncating conversions based on your specific requirements for data type conversion.
+
+In conclusion, the choice between **Angle** and **AngleReduced** depends on the nature of your angle-related computations. Be mindful of their distinctions and use the one that best aligns with your specific needs for representing and comparing angles, managing units, handling data type conversions, and reducing the frequency of angle reduction operations.
 
 ## Angle classification
 
