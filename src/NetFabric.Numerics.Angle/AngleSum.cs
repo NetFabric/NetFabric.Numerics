@@ -43,32 +43,6 @@ public static partial class Angle
     /// <summary>
     /// Calculates the sum of a collection of angles.
     /// </summary>
-    /// <param name="source">The <see cref="Memory{T}"/> collection of angles.</param>
-    /// <returns>The sum of the angles in the collection.</returns>
-    /// <remarks>
-    /// The sum of angles is computed by adding all the angles in the given <paramref name="source"/> collection.
-    /// </remarks>
-    public static Angle<TUnits, T> Sum<TUnits, T>(this Memory<Angle<TUnits, T>> source)
-        where TUnits : IAngleUnits<TUnits>
-        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => source.Span.Sum();
-
-    /// <summary>
-    /// Calculates the sum of a collection of angles.
-    /// </summary>
-    /// <param name="source">The <see cref="IReadOnlyList{T}"/> collection of angles.</param>
-    /// <returns>The sum of the angles in the collection.</returns>
-    /// <remarks>
-    /// The sum of angles is computed by adding all the angles in the given <paramref name="source"/> collection.
-    /// </remarks>
-    public static Angle<TUnits, T> Sum<TUnits, T>(this ReadOnlyMemory<Angle<TUnits, T>> source)
-        where TUnits : IAngleUnits<TUnits>
-        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => source.Span.Sum();
-
-    /// <summary>
-    /// Calculates the sum of a collection of angles.
-    /// </summary>
     /// <param name="source">The <see cref="Span{T}"/> collection of angles.</param>
     /// <returns>The sum of the angles in the collection.</returns>
     /// <remarks>
