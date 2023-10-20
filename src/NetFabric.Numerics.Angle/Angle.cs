@@ -45,7 +45,12 @@ public static partial class Angle
     public static AngleReduced<TUnits, T> Reduce<TUnits, T>(Angle<TUnits, T> angle)
         where TUnits : IAngleUnits<TUnits>
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => new(Utils.Reduce(angle));
+    {
+        var reduced = angle.Value % Angle<TUnits, T>.Full.Value;
+        return reduced >= T.Zero
+            ? new(reduced)
+            : new(reduced + Angle<TUnits, T>.Full.Value);
+    }
 
     /// <summary>
     /// Gets the reference angle of <paramref name="angle" />.
@@ -66,7 +71,18 @@ public static partial class Angle
     public static AngleReduced<TUnits, T> GetReference<TUnits, T>(AngleReduced<TUnits, T> angle)
         where TUnits : IAngleUnits<TUnits>
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => new(Utils.GetReference(angle));
+    {
+        var quadrant = GetQuadrant(angle);
+        return quadrant switch
+        {
+            Quadrant.Second => new(Angle<TUnits, T>.Straight.Value - angle.Value),
+            Quadrant.NegativeX => Angle<TUnits, T>.Zero,
+            Quadrant.Third => new(angle.Value - Angle<TUnits, T>.Straight.Value),
+            Quadrant.NegativeY => Angle<TUnits, T>.Right,
+            Quadrant.Fourth => new(Angle<TUnits, T>.Full.Value - angle.Value),
+            _ => angle,
+        };
+    }
 
     /// <summary>
     /// Gets the quadrant of <paramref name="angle" />.
@@ -101,7 +117,24 @@ public static partial class Angle
     public static Quadrant GetQuadrant<TUnits, T>(AngleReduced<TUnits, T> angle)
         where TUnits : IAngleUnits<TUnits>
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => Utils.GetQuadrant(angle);
+    {
+        var value = angle.Value;
+        if (value == Angle<TUnits, T>.Zero.Value)
+            return Quadrant.PositiveX;
+        if (value < Angle<TUnits, T>.Right.Value)
+            return Quadrant.First;
+        if (value == Angle<TUnits, T>.Right.Value)
+            return Quadrant.PositiveY;
+        if (value < Angle<TUnits, T>.Straight.Value)
+            return Quadrant.Second;
+        if (value == Angle<TUnits, T>.Straight.Value)
+            return Quadrant.NegativeX;
+        if (value < Angle<TUnits, T>.Straight.Value + Angle<TUnits, T>.Right.Value)
+            return Quadrant.Third;
+        if (value == Angle<TUnits, T>.Straight.Value + Angle<TUnits, T>.Right.Value)
+            return Quadrant.NegativeY;
+        return Quadrant.Fourth;
+    }
 
     /// <summary>
     /// Returns the absolute value of the specified angle.
