@@ -1,69 +1,99 @@
 ﻿# NetFabric.Numerics
 
-Your Comprehensive Strongly-Typed Toolkit for Numeric and Geometric Operations in C#!
+## Overview
+
+**NetFabric.Numerics** is a C# library that specializes in delivering strongly-typed implementations for various coordinate systems, making it well-suited for precise numeric and geometric operations. This README will introduce you to the library's key features and how to use it effectively.
 
 ## Key Features
 
-- **Strongly-typed** implementations for cartesian, polar, and spherical coordinates.
-- Seamless operations on 2D and 3D vectors and quaternions.
-- Leveraging the latest [generic math](https://learn.microsoft.com/en-us/dotnet/standard/generics/math) features, available in .NET 7 and C# 11.
+- **Strong Typing:** The library places a strong emphasis on type safety, ensuring that your code remains robust without the need for excessive memory allocation.
 
-## Introduction
+- **Universal Compatibility:** **NetFabric.Numerics** harnesses the latest generic math features, and it requires .NET 7 or a more recent version.
 
-Welcome to **NetFabric.Numerics** – a versatile library designed to simplify numeric and geometric calculations in C#.
+- **Mathematical Concepts:** The library is founded on the mathematical concepts of points and vectors. Subtracting two points results in a vector, and adding a point and a vector results in a point.
 
-## Getting Started
+## Usage
 
-To harness the full capabilities of **NetFabric.Numerics**, ensure you have a compatible .NET 7 or higher environment. Once you're set up, you can unlock the potential of various coordinate systems and efficient operations.
+To make the most of **NetFabric.Numerics**, follow these steps:
 
-### Strongly-Typed Coordinates
+1. **Installation:** The library is available as a NuGet package. You can install it using your preferred method, such as Package Manager Console, .NET CLI, or Visual Studio.
 
-**NetFabric.Numerics** shines with its **strongly-typed** approach to coordinate systems. Whether you're dealing with 2D, 3D, polar, or spherical coordinates, our library offers precision with strong typing:
-
-```csharp
-var point2DInteger = new Cartesian2.Point<int>(10, 20);
-var point2DFloat = new Cartesian2.Point<float>(10.0f, 20.0f);
-var point3DDouble = new Cartesian3.Point<double>(10.0, 20.0, 30.0);
-
-var pointPolarDegreesFloat = new Polar.Point<Degrees, float, float>(Angle<Degrees, float>.Right, 10.0f);
-var pointPolarRadiansDouble = new Polar.Point<Radians, double, double>(new Angle<Radians, double>(Math.PI), 10.0f);
-
-var pointSphericalDegreesFloat = new Spherical.Point<Degrees, float, float>(
-    Angle<Degrees, float>.Zero, // Azimuth: 0 degrees
-    Angle<Degrees, float>.Right, // Zenith: 90 degrees
-    10.0f); // Radius
+```shell
+dotnet add package NetFabric.Numerics
 ```
 
-### Quaternions Made Easy
-
-Quaternions are crucial for orientation and rotation. With **NetFabric.Numerics**, you can create them with strong typing and ease:
+2. **Add Namespace:** Import the necessary namespaces in your C# code to access the library's functionality.
 
 ```csharp
-var quaternionFloat = new Cartesian3.Quaternion<float>(1.0f, 2.0f, 3.0f, 4.0f);
-var quaternionDouble = Cartesian3.Quaternion.FromYawPitchRoll<double>(Angle<Radians, double>.Zero, Angle<Radians, double>.Right);
+using NetFabric.Numerics;
+using NetFabric.Numerics.Cartesian2;
+using NetFabric.Numerics.Polar;
+```
+
+When using points and vectors from multiple coordinate systems, you can use the following namespace:
+
+```csharp
+using NetFabric.Numerics;
+```
+
+Precede the type by the coordinate system name to avoid ambiguity:
+
+```csharp
+var point2D = new Cartesian2.Point<int>(10, 20);
+var point3D = new Cartesian3.Point<int>(10, 20, 30);
+var pointPolar = new Polar.Point<float, Degrees, float>(10, 20);
+var pointSpherical = new Spherical.Point<float, Degrees, float>(10, 20, 30);
+```
+
+3. **Start Using the Library:** Once the library is installed and namespaces are imported, you can begin using it for your strongly-typed numeric and geometric operations. For detailed information and examples on how to use different features and coordinate systems, refer to the library's documentation.
+
+## Strong Typing in Coordinates
+
+**NetFabric.Numerics** excels in providing a strongly-typed approach to coordinate systems, built on the mathematical concepts of points and vectors. Subtracting two points results in a vector, while adding a point and a vector results in a point. This approach is showcased in various examples:
+
+```csharp
+using NetFabric.Numerics.Cartesian2;
+
+var integerPoint = new Point<int>(0, 0);                // Point using integers
+var doublePrecisionPoint = new Point<double>(0.0, 0.0); // Point using double precision
+var singlePrecisionPoint = new Point<float>(0.0, 0.0);  // Point using single precision
+```
+
+### Quaternions Made Simple
+
+Quaternions are essential for orientation and rotation. With **NetFabric.Numerics**, you can work with them efficiently:
+
+```csharp
+// Strongly-typed Quaternion using single precision
+var quaternionFloat = new Quaternion<float>(1.0f, 2.0f, 3.0f, 4.0f);
 ```
 
 ### Efficient Math Operations
 
-Elevate your numeric operations with our library. Enjoy simple, efficient, and accurate calculations with strong typing:
+**NetFabric.Numerics** simplifies numeric operations while maintaining precision and strong typing:
 
 ```csharp
-var vector3DDouble = point3DDouble - new Cartesian3.Point<double>(1.0, 1.0, 1.0);
+// Subtract two 3D points, resulting in a vector
+var vector3DDouble = point3DDouble - new Point<double>(1.0, 1.0, 1.0);
+
+// Transform a 3D point with a vector, resulting in a new point
 var point3DTransformed = point3DDouble + vector3DDouble;
 ```
 
 ### Simple Conversions
 
-**NetFabric.Numerics** simplifies converting between different numeric types while preserving strong typing. You choose how to handle out-of-range values:
+The library simplifies converting between different numeric types while preserving strong typing:
 
 ```csharp
-var convertToFloatChecked = Cartesian3.Point<float>.CreateChecked(point3DDouble);
-var convertToFloatSaturated = Cartesian3.Point<float>.CreateSaturating(point3DDouble);
-var convertToFloatTruncated = Cartesian3.Point<float>.CreateTruncating(point3DDouble);
+// Convert a 3D point to single precision, checking for overflow
+var convertToFloatChecked = Point<float>.CreateChecked(point3DDouble);
+
+// Convert a 3D point to single precision, saturating on overflow
+var convertToFloatSaturated = Point<float>.CreateSaturating(point3DDouble);
+
+// Convert a 3D point to single precision, truncating on overflow
+var convertToFloatTruncated = Point<float>.CreateTruncating(point3DDouble);
 ```
-
-Discover how **NetFabric.Numerics** can simplify your numeric and geometric challenges today.
-
 ## Credits
 
 The following open-source projects are used to build and test this project:
