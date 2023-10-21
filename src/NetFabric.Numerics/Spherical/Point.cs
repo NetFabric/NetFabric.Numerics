@@ -395,9 +395,9 @@ public static partial class Point
         var (sinAzimuth, cosAzimuth) = Angle.SinCos(point.Azimuth);
         var (sinPolar, cosPolar) = Angle.SinCos(point.Polar);
 
-        var x = T.CreateChecked(point.Radius * sinPolar * cosAzimuth);
-        var y = T.CreateChecked(point.Radius * sinPolar * sinAzimuth);
-        var z = T.CreateChecked(point.Radius * cosPolar);
+        var x = point.Radius * sinPolar * cosAzimuth;
+        var y = point.Radius * sinPolar * sinAzimuth;
+        var z = point.Radius * cosPolar;
 
         return new(x, y, z);
     }
@@ -412,17 +412,16 @@ public static partial class Point
     /// <returns>The cartesian 3D coordinates representing the point.</returns>
     public static Cartesian3.Point<T> ToCartesian<TRadius, TAngle, T>(Point<TRadius, Radians, TAngle> point)
         where TRadius : struct, IFloatingPoint<TRadius>, IMinMaxValue<TRadius>
-        where TAngle : struct, IFloatingPoint<TAngle>, IMinMaxValue<TAngle>, ITrigonometricFunctions<TAngle>
-        where T : struct, INumber<T>, IMinMaxValue<T>
+        where TAngle : struct, IFloatingPoint<TAngle>, IMinMaxValue<TAngle>
+        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>, ITrigonometricFunctions<T>
     {
-        var sinAzimuth = Angle.Sin(point.Azimuth);
-        var cosAzimuth = Angle.Cos(point.Azimuth);
-        var sinPolar = Angle.Sin(point.Polar);
-        var cosPolar = Angle.Cos(point.Polar);
+        var (sinAzimuth, cosAzimuth) = Angle.SinCos(Angle<Radians, T>.CreateChecked(point.Azimuth));
+        var (sinPolar, cosPolar) = Angle.SinCos(Angle<Radians, T>.CreateChecked(point.Polar));
+        var radius = T.CreateChecked(point.Radius);
 
-        var x = T.CreateChecked(point.Radius * TRadius.CreateChecked(sinPolar * cosAzimuth));
-        var y = T.CreateChecked(point.Radius * TRadius.CreateChecked(sinPolar * sinAzimuth));
-        var z = T.CreateChecked(point.Radius * TRadius.CreateChecked(cosPolar));
+        var x = radius * sinPolar * cosAzimuth;
+        var y = radius * sinPolar * sinAzimuth;
+        var z = radius * cosPolar;
 
         return new(x, y, z);
     }

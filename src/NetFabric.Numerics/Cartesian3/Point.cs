@@ -242,25 +242,4 @@ public static class Point
 
         return new(radius, azimuth, polar);
     }
-
-    /// <summary>
-    /// Converts a cartesian 3D point to spherical coordinates.
-    /// </summary>
-    /// <typeparam name="T">The type of the point coordinates.</typeparam>
-    /// <param name="point">The cartesian 3D point to convert.</param>
-    /// <returns>The spherical coordinates representing the point.</returns>
-    public static Spherical.Point<TRadius, Radians, TAngle> ToSpherical<T, TRadius, TAngle>(Point<T> point)
-        where T : struct, IFloatingPointIeee754<T>, IMinMaxValue<T>
-        where TRadius : struct, IFloatingPoint<TRadius>, IMinMaxValue<TRadius>
-        where TAngle : struct, IFloatingPoint<TAngle>, IMinMaxValue<TAngle>, ITrigonometricFunctions<TAngle>
-    {
-        var radius = Utils.Magnitude(point.X, point.Y, point.Z);
-        if (radius == T.Zero)
-            return Spherical.Point<TRadius, Radians, TAngle>.Zero;
-
-        var azimuth = Angle<Radians, TAngle>.CreateChecked(Angle.Atan2(point.Y, point.X));
-        var polar = Angle<Radians, TAngle>.CreateChecked((Angle<Radians, T>)Angle.Acos(point.Z / radius));
-
-        return new(TRadius.CreateChecked(radius), Angle<Radians, TAngle>.CreateChecked(azimuth), polar);
-    }
 }

@@ -378,8 +378,8 @@ public static partial class Point
     public static Cartesian2.Point<T> ToCartesian<T>(Point<T, Radians, T> point)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>, ITrigonometricFunctions<T>
     {
-        var (sin, cos) = Angle.SinCos(point.Azimuth);
-        return new(point.Radius * cos, point.Radius * sin);
+        var (sinAzimuth, cosAzimuth) = Angle.SinCos(point.Azimuth);
+        return new(point.Radius * cosAzimuth, point.Radius * sinAzimuth);
     }
 
     /// <summary>
@@ -392,11 +392,14 @@ public static partial class Point
     /// <returns>The cartesian 2D coordinates representing the point.</returns>
     public static Cartesian2.Point<T> ToCartesian<TRadius, TAngle, T>(Point<TRadius, Radians, TAngle> point)
         where TRadius : struct, IFloatingPoint<TRadius>, IMinMaxValue<TRadius>
-        where TAngle : struct, IFloatingPoint<TAngle>, IMinMaxValue<TAngle>, ITrigonometricFunctions<TAngle>
-        where T : struct, INumber<T>, IMinMaxValue<T>
+        where TAngle : struct, IFloatingPoint<TAngle>, IMinMaxValue<TAngle>
+        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>, ITrigonometricFunctions<T>
     {
-        var x = T.CreateChecked(point.Radius * TRadius.CreateChecked(Angle.Cos(point.Azimuth)));
-        var y = T.CreateChecked(point.Radius * TRadius.CreateChecked(Angle.Sin(point.Azimuth)));
+        var (sinAzimuth, cosAzimuth) = Angle.SinCos(Angle<Radians, T>.CreateChecked(point.Azimuth));
+        var radius = T.CreateChecked(point.Radius);
+
+        var x = radius * cosAzimuth;
+        var y = radius * sinAzimuth;
 
         return new(x, y);
     }
