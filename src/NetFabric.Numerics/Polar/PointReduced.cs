@@ -12,7 +12,7 @@ namespace NetFabric.Numerics.Polar;
 [SkipLocalsInit]
 public readonly record struct PointReduced<TRadius, TAngleUnits, TAngle>(TRadius Radius, AngleReduced<TAngleUnits, TAngle> Azimuth)
     : IPoint<PointReduced<TRadius, TAngleUnits, TAngle>>
-    where TRadius : struct, IFloatingPoint<TRadius>, IMinMaxValue<TRadius>
+    where TRadius : struct, INumber<TRadius>, IMinMaxValue<TRadius>
     where TAngleUnits : struct, IAngleUnits<TAngleUnits>
     where TAngle : struct, IFloatingPoint<TAngle>, IMinMaxValue<TAngle>
 {
@@ -132,7 +132,7 @@ public static partial class Point
     /// <param name="point">The input point in degrees.</param>
     /// <returns>The converted point in radians.</returns>    
     public static PointReduced<TRadius, Radians, TAngle> ToRadians<TRadius, TAngle>(PointReduced<TRadius, Degrees, TAngle> point)
-        where TRadius : struct, IFloatingPoint<TRadius>, IMinMaxValue<TRadius>
+        where TRadius : struct, INumber<TRadius>, IMinMaxValue<TRadius>
         where TAngle : struct, IFloatingPoint<TAngle>, IMinMaxValue<TAngle>
         => new(point.Radius, Angle.ToRadians(point.Azimuth));
 
@@ -144,7 +144,7 @@ public static partial class Point
     /// <param name="point">The input point in degrees.</param>
     /// <returns>The converted point in gradians.</returns>
     public static PointReduced<TRadius, Gradians, TAngle> ToGradians<TRadius, TAngle>(PointReduced<TRadius, Degrees, TAngle> point)
-        where TRadius : struct, IFloatingPoint<TRadius>, IMinMaxValue<TRadius>
+        where TRadius : struct, INumber<TRadius>, IMinMaxValue<TRadius>
         where TAngle : struct, IFloatingPoint<TAngle>, IMinMaxValue<TAngle>
         => new(point.Radius, Angle.ToGradians(point.Azimuth));
 
@@ -156,7 +156,7 @@ public static partial class Point
     /// <param name="point">The input point in degrees.</param>
     /// <returns>The converted point in revolutions.</returns>
     public static PointReduced<TRadius, Revolutions, TAngle> ToRevolutions<TRadius, TAngle>(PointReduced<TRadius, Degrees, TAngle> point)
-        where TRadius : struct, IFloatingPoint<TRadius>, IMinMaxValue<TRadius>
+        where TRadius : struct, INumber<TRadius>, IMinMaxValue<TRadius>
         where TAngle : struct, IFloatingPoint<TAngle>, IMinMaxValue<TAngle>
         => new(point.Radius, Angle.ToRevolutions(point.Azimuth));
 
@@ -168,7 +168,7 @@ public static partial class Point
     /// <param name="point">The input point in radians.</param>
     /// <returns>The converted point in degrees.</returns>
     public static PointReduced<TRadius, Degrees, TAngle> ToDegrees<TRadius, TAngle>(PointReduced<TRadius, Radians, TAngle> point)
-        where TRadius : struct, IFloatingPoint<TRadius>, IMinMaxValue<TRadius>
+        where TRadius : struct, INumber<TRadius>, IMinMaxValue<TRadius>
         where TAngle : struct, IFloatingPoint<TAngle>, IMinMaxValue<TAngle>
         => new(point.Radius, Angle.ToDegrees(point.Azimuth));
 
@@ -180,7 +180,7 @@ public static partial class Point
     /// <param name="point">The input point in radians.</param>
     /// <returns>The converted point in gradians.</returns>
     public static PointReduced<TRadius, Gradians, TAngle> ToGradians<TRadius, TAngle>(PointReduced<TRadius, Radians, TAngle> point)
-        where TRadius : struct, IFloatingPoint<TRadius>, IMinMaxValue<TRadius>
+        where TRadius : struct, INumber<TRadius>, IMinMaxValue<TRadius>
         where TAngle : struct, IFloatingPoint<TAngle>, IMinMaxValue<TAngle>
         => new(point.Radius, Angle.ToGradians(point.Azimuth));
 
@@ -192,7 +192,7 @@ public static partial class Point
     /// <param name="point">The input point in radians.</param>
     /// <returns>The converted point in revolutions.</returns>
     public static PointReduced<TRadius, Revolutions, TAngle> ToRevolutions<TRadius, TAngle>(PointReduced<TRadius, Radians, TAngle> point)
-        where TRadius : struct, IFloatingPoint<TRadius>, IMinMaxValue<TRadius>
+        where TRadius : struct, INumber<TRadius>, IMinMaxValue<TRadius>
         where TAngle : struct, IFloatingPoint<TAngle>, IMinMaxValue<TAngle>
         => new(point.Radius, Angle.ToRevolutions(point.Azimuth));
 
@@ -204,7 +204,7 @@ public static partial class Point
     /// <param name="point">The input point in gradians.</param>
     /// <returns>The converted point in degrees.</returns>
     public static PointReduced<TRadius, Degrees, TAngle> ToDegrees<TRadius, TAngle>(PointReduced<TRadius, Gradians, TAngle> point)
-        where TRadius : struct, IFloatingPoint<TRadius>, IMinMaxValue<TRadius>
+        where TRadius : struct, INumber<TRadius>, IMinMaxValue<TRadius>
         where TAngle : struct, IFloatingPoint<TAngle>, IMinMaxValue<TAngle>
         => new(point.Radius, Angle.ToDegrees(point.Azimuth));
 
@@ -216,7 +216,7 @@ public static partial class Point
     /// <param name="point">The input point in gradians.</param>
     /// <returns>The converted point in radians.</returns>
     public static PointReduced<TRadius, Radians, TAngle> ToRadians<TRadius, TAngle>(PointReduced<TRadius, Gradians, TAngle> point)
-        where TRadius : struct, IFloatingPoint<TRadius>, IMinMaxValue<TRadius>
+        where TRadius : struct, INumber<TRadius>, IMinMaxValue<TRadius>
         where TAngle : struct, IFloatingPoint<TAngle>, IMinMaxValue<TAngle>
         => new(point.Radius, Angle.ToRadians(point.Azimuth));
 
@@ -228,7 +228,7 @@ public static partial class Point
     /// <param name="point">The input point in gradians.</param>
     /// <returns>The converted point in revolutions.</returns>
     public static PointReduced<TRadius, Revolutions, TAngle> ToRevolutions<TRadius, TAngle>(PointReduced<TRadius, Gradians, TAngle> point)
-        where TRadius : struct, IFloatingPoint<TRadius>, IMinMaxValue<TRadius>
+        where TRadius : struct, INumber<TRadius>, IMinMaxValue<TRadius>
         where TAngle : struct, IFloatingPoint<TAngle>, IMinMaxValue<TAngle>
         => new(point.Radius, Angle.ToRevolutions(point.Azimuth));
 
@@ -240,7 +240,7 @@ public static partial class Point
     /// <param name="point">The input point in revolutions.</param>
     /// <returns>The converted point in degrees.</returns>
     public static PointReduced<TRadius, Degrees, TAngle> ToDegrees<TRadius, TAngle>(PointReduced<TRadius, Revolutions, TAngle> point)
-        where TRadius : struct, IFloatingPoint<TRadius>, IMinMaxValue<TRadius>
+        where TRadius : struct, INumber<TRadius>, IMinMaxValue<TRadius>
         where TAngle : struct, IFloatingPoint<TAngle>, IMinMaxValue<TAngle>
         => new(point.Radius, Angle.ToDegrees(point.Azimuth));
 
@@ -252,7 +252,7 @@ public static partial class Point
     /// <param name="point">The input point in revolutions.</param>
     /// <returns>The converted point in radians.</returns>
     public static PointReduced<TRadius, Radians, TAngle> ToRadians<TRadius, TAngle>(PointReduced<TRadius, Revolutions, TAngle> point)
-        where TRadius : struct, IFloatingPoint<TRadius>, IMinMaxValue<TRadius>
+        where TRadius : struct, INumber<TRadius>, IMinMaxValue<TRadius>
         where TAngle : struct, IFloatingPoint<TAngle>, IMinMaxValue<TAngle>
         => new(point.Radius, Angle.ToRadians(point.Azimuth));
 
@@ -264,7 +264,7 @@ public static partial class Point
     /// <param name="point">The input point in revolutions.</param>
     /// <returns>The converted point in gradians.</returns>
     public static PointReduced<TRadius, Gradians, TAngle> ToGradians<TRadius, TAngle>(PointReduced<TRadius, Revolutions, TAngle> point)
-        where TRadius : struct, IFloatingPoint<TRadius>, IMinMaxValue<TRadius>
+        where TRadius : struct, INumber<TRadius>, IMinMaxValue<TRadius>
         where TAngle : struct, IFloatingPoint<TAngle>, IMinMaxValue<TAngle>
         => new(point.Radius, Angle.ToGradians(point.Azimuth));
 }

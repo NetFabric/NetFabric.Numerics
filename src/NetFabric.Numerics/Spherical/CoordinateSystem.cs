@@ -2,7 +2,7 @@ namespace NetFabric.Numerics.Spherical;
 
 public readonly record struct CoordinateSystem<TRadius, TAngleUnits, TAngle>
     : ICoordinateSystem
-    where TRadius : struct, IFloatingPoint<TRadius>
+    where TRadius : struct, INumber<TRadius>
     where TAngleUnits : struct, IAngleUnits<TAngleUnits>
     where TAngle : struct, IFloatingPoint<TAngle>, IMinMaxValue<TAngle>
 {
