@@ -64,14 +64,13 @@ You can choose the unit of measurement for your angles and specify the desired p
 ``` csharp
 using NetFabric.Numerics.Polar;
 
-var degreesPoint = new Point<double, Degrees, double>(0.0, 0.0);            // Polar point using degrees
-var radiansPoint = new Point<double, Radians, double>(0.0, 0.0);            // Polar point using radians
-var gradiansPoint = new Point<double, Gradians, double>(0.0, 0.0);          // Polar point using gradians
-var revolutionsPoint = new Point<double, Revolutions, double>(0.0, 0.0);    // Polar point using revolutions
+var degreesPoint = new Point<Degrees, double>(0.0, 0.0);            // Polar point using degrees
+var radiansPoint = new Point<Radians, double>(0.0, 0.0);            // Polar point using radians
+var gradiansPoint = new Point<Gradians, double>(0.0, 0.0);          // Polar point using gradians
+var revolutionsPoint = new Point<Revolutions, double>(0.0, 0.0);    // Polar point using revolutions
 
-var doublePrecisionPoint = new Point<double, Degrees, double>(0.0, 0.0);    // Polar point with double precision
-var singlePrecisionPoint = new Point<float, Degrees, float>(0.0, 0.0);      // Polar point with single precision
-var mixedPrecisionPoint = new Point<double, Degrees, float>(0.0, 0.0);      // Polar point with mixed precision (double for radius and single for azimuth angle)
+var doublePrecisionPoint = new Point<Degrees, double>(0.0, 0.0);    // Polar point with double precision
+var singlePrecisionPoint = new Point<Degrees, float>(0.0, 0.0);     // Polar point with single precision
 ```
 
 With **NetFabric.Numerics**, you can work with polar coordinates using different units of measurement and specify the desired precision for the azimuth and radius.

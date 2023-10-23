@@ -8,7 +8,7 @@ public class PointTests
         // arrange
 
         // act
-        var result = Point<double, Degrees, double>.Zero.CoordinateSystem;
+        var result = Point<Degrees, double>.Zero.CoordinateSystem;
 
         // assert
         result.Coordinates[0].Should().Be(new Coordinate("Radius", typeof(double)));
@@ -19,7 +19,7 @@ public class PointTests
     const double radius = 2.0;
     static readonly double radiusCos45 = radius * Angle.Cos(Angle.ToRadians(new Angle<Degrees, double>(45.0)));
 
-    public static TheoryData<Point<double, Degrees, double>, Cartesian3.Point<double>> ToCartesianData => new()
+    public static TheoryData<Point<Degrees, double>, Cartesian3.Point<double>> ToCartesianData => new()
         {
             { new(0.0, new(0.0), new(0.0)), new(0.0, 0.0, 0.0) },
 
@@ -47,7 +47,7 @@ public class PointTests
 
     [Theory]
     [MemberData(nameof(ToCartesianData))]
-    public void ToCartesian_Should_Succeed(Point<double, Degrees, double> point, Cartesian3.Point<double> expected)
+    public void ToCartesian_Should_Succeed(Point<Degrees, double> point, Cartesian3.Point<double> expected)
     {
         // arrange
 
@@ -61,24 +61,7 @@ public class PointTests
         result.Z.Should().BeApproximately(expected.Z, 0.0001);
     }
 
-    [Theory]
-    [MemberData(nameof(ToCartesianData))]
-    public void ToCartesian_With_Conversion_Should_Succeed(Point<double, Degrees, double> point, Cartesian3.Point<double> expected)
-    {
-        // arrange
-
-        // act
-        var result = Point.ToCartesian<double, double, float>(Point.ToRadians(point));
-
-        // assert
-        result.Should().BeOfType<Cartesian3.Point<float>>();
-        ((double)result.X).Should().BeApproximately(expected.X, 0.0001);
-        ((double)result.Y).Should().BeApproximately(expected.Y, 0.0001);
-        ((double)result.Z).Should().BeApproximately(expected.Z, 0.0001);
-    }
-
-
-    public static TheoryData<Point<double, Degrees, double>, Point<double, Degrees, double>> ReduceData => new()
+    public static TheoryData<Point<Degrees, double>, Point<Degrees, double>> ReduceData => new()
         {
             { new(2.0, new(0.0), new(0.0)),     new(2.0, new(0.0), new(0.0)) },
             { new(2.0, new(0.0), new(45.0)),   new(2.0, new(0.0), new(45.0)) },
@@ -93,7 +76,7 @@ public class PointTests
 
     [Theory]
     [MemberData(nameof(ReduceData))]
-    public void Reduce_Should_Succeed(Point<double, Degrees, double> point, Point<double, Degrees, double> expected)
+    public void Reduce_Should_Succeed(Point<Degrees, double> point, Point<Degrees, double> expected)
     {
         // arrange
 

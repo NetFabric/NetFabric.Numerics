@@ -432,7 +432,7 @@ public static class Quaternion
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static T NormSquared<T>(in Quaternion<T> quaternion)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => Utils.Pow2(quaternion.X) + Utils.Pow2(quaternion.Y) + Utils.Pow2(quaternion.Z) + Utils.Pow2(quaternion.W);
+        => Utils.Square(quaternion.X) + Utils.Square(quaternion.Y) + Utils.Square(quaternion.Z) + Utils.Square(quaternion.W);
 
     /// <summary>
     /// Returns the conjugate of the specified quaternion.

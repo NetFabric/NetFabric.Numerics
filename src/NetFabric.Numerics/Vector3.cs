@@ -799,7 +799,7 @@ public static class Vector3
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static T MagnitudeSquared<T>(in Vector3<T> vector)
         where T : struct, INumber<T>, IMinMaxValue<T>
-        => Utils.Pow2(vector.X) + Utils.Pow2(vector.Y) + Utils.Pow2(vector.Z);
+        => Utils.Square(vector.X) + Utils.Square(vector.Y) + Utils.Square(vector.Z);
 
     /// <summary>
     /// Returns a new vector that represents the normalized form of the specified vector.

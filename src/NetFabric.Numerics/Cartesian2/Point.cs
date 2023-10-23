@@ -167,7 +167,7 @@ public static class Point
     /// </remarks>
     public static T DistanceSquared<T>(in Point<T> from, in Point<T> to)
         where T : struct, INumber<T>, IMinMaxValue<T>
-        => Utils.Pow2(to.X - from.X) + Utils.Pow2(to.Y - from.Y);
+        => Utils.Square(to.X - from.X) + Utils.Square(to.Y - from.Y);
 
     /// <summary>
     /// Gets the Manhattan distance between two points.
@@ -198,30 +198,17 @@ public static class Point
     /// <typeparam name="T">The type of the point coordinates.</typeparam>
     /// <param name="point">The cartesian 2D point to convert.</param>
     /// <returns>The polar coordinates representing the point.</returns>
-    public static Polar.Point<T, Radians, T> ToPolar<T>(in Point<T> point)
+    /// <remarks>
+    /// If the type of point to convert doesn't meet the constraints, please convert it first to a suitable type using one of the conversion methods: 
+    /// - <see cref="CreateChecked"/>
+    /// - <see cref="CreateSaturating"/>
+    /// - <see cref="CreateTruncating"/>
+    /// </remarks>
+    public static Polar.Point<Radians, T> ToPolar<T>(in Point<T> point)
         where T : struct, IFloatingPointIeee754<T>, IMinMaxValue<T>
     {
         var azimuth = Angle.Atan2(point.Y, point.X);
         var radius = Utils.Magnitude(point.X, point.Y);
-
-        return new(radius, azimuth);
-    }
-
-    /// <summary>
-    /// Converts a cartesian 2D point to polar coordinates.
-    /// </summary>
-    /// <typeparam name="T">The type of the point coordinates.</typeparam>
-    /// <typeparam name="TRadius">The type of the radius value.</typeparam>
-    /// <typeparam name="TAngle">The type of the angle values.</typeparam>
-    /// <param name="point">The cartesian 2D point to convert.</param>
-    /// <returns>The polar coordinates representing the point.</returns>
-    public static Polar.Point<TRadius, Radians, TAngle> ToPolar<T, TRadius, TAngle>(in Point<T> point)
-        where T : struct, INumber<T>, IMinMaxValue<T>
-        where TRadius : struct, IFloatingPoint<TRadius>, IMinMaxValue<TRadius>, IRootFunctions<TRadius>
-        where TAngle : struct, IFloatingPointIeee754<TAngle>, IMinMaxValue<TAngle>, ITrigonometricFunctions<TAngle>
-    {
-        var radius = Utils.Magnitude(TRadius.CreateChecked(point.X), TRadius.CreateChecked(point.Y));
-        var azimuth = Angle.Atan2(TAngle.CreateChecked(point.Y), TAngle.CreateChecked(point.X));
 
         return new(radius, azimuth);
     }

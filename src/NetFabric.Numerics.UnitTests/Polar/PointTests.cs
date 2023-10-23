@@ -8,7 +8,7 @@ public class PointTests
         // arrange
 
         // act
-        var result = Point<double, Degrees, double>.Zero.CoordinateSystem;
+        var result = Point<Degrees, double>.Zero.CoordinateSystem;
 
         // assert
         result.Coordinates[0].Should().Be(new Coordinate("Radius", typeof(double)));
@@ -18,7 +18,7 @@ public class PointTests
     const double radius = 2.0;
     static readonly double radiusCos45 = radius * Angle.Cos(Angle.ToRadians(new Angle<Degrees, double>(45.0)));
 
-    public static TheoryData<Point<double, Degrees, double>, Cartesian2.Point<double>> ToCartesianData => new()
+    public static TheoryData<Point<Degrees, double>, Cartesian2.Point<double>> ToCartesianData => new()
         {
             { new(0.0, new(0.0)), new(0.0, 0.0) },
 
@@ -35,7 +35,7 @@ public class PointTests
 
     [Theory]
     [MemberData(nameof(ToCartesianData))]
-    public void ToCartesian_Should_Succeed(Point<double, Degrees, double> point, Cartesian2.Point<double> expected)
+    public void ToCartesian_Should_Succeed(Point<Degrees, double> point, Cartesian2.Point<double> expected)
     {
         // arrange
 
@@ -46,20 +46,5 @@ public class PointTests
         result.Should().BeOfType<Cartesian2.Point<double>>();
         result.X.Should().BeApproximately(expected.X, 0.0001);
         result.Y.Should().BeApproximately(expected.Y, 0.0001);
-    }
-
-    [Theory]
-    [MemberData(nameof(ToCartesianData))]
-    public void ToCartesian_With_Conversion_Should_Succeed(Point<double, Degrees, double> point, Cartesian2.Point<double> expected)
-    {
-        // arrange
-
-        // act
-        var result = Point.ToCartesian<double, double, float>(Point.ToRadians(point));
-
-        // assert
-        result.Should().BeOfType<Cartesian2.Point<float>>();
-        ((double)result.X).Should().BeApproximately(expected.X, 0.0001);
-        ((double)result.Y).Should().BeApproximately(expected.Y, 0.0001);
     }
 }

@@ -12,6 +12,8 @@
 
 - **Mathematical Concepts:** The library is founded on the mathematical concepts of points and vectors. Subtracting two points results in a vector, and adding a point and a vector results in a point.
 
+- **Support for Multiple Coordinate Systems:** **NetFabric.Numerics** supports multiple coordinate systems, including Cartesian, Polar, and Spherical coordinates. This allows you to work with various coordinate systems seamlessly, expanding the library's versatility for your numeric and geometric operations.
+
 ## Usage
 
 To make the most of **NetFabric.Numerics**, follow these steps:
@@ -28,6 +30,7 @@ dotnet add package NetFabric.Numerics
 using NetFabric.Numerics;
 using NetFabric.Numerics.Cartesian2;
 using NetFabric.Numerics.Polar;
+using NetFabric.Numerics.Spherical; // Include the Spherical coordinate system
 ```
 
 When using points and vectors from multiple coordinate systems, you can use the following namespace:
@@ -41,8 +44,8 @@ Precede the type by the coordinate system name to avoid ambiguity:
 ```csharp
 var point2D = new Cartesian2.Point<int>(10, 20);
 var point3D = new Cartesian3.Point<int>(10, 20, 30);
-var pointPolar = new Polar.Point<float, Degrees, float>(10, 20);
-var pointSpherical = new Spherical.Point<float, Degrees, float>(10, 20, 30);
+var pointPolar = new Polar.Point<Degrees, float>(10, 20);
+var pointSpherical = new Spherical.Point<Degrees, float>(10, 20, 30);
 ```
 
 3. **Start Using the Library:** Once the library is installed and namespaces are imported, you can begin using it for your strongly-typed numeric and geometric operations. For detailed information and examples on how to use different features and coordinate systems, refer to the library's documentation.
@@ -94,6 +97,7 @@ var convertToFloatSaturated = Point<float>.CreateSaturating(point3DDouble);
 // Convert a 3D point to single precision, truncating on overflow
 var convertToFloatTruncated = Point<float>.CreateTruncating(point3DDouble);
 ```
+
 ## Credits
 
 The following open-source projects are used to build and test this project:

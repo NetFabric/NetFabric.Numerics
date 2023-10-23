@@ -1,5 +1,14 @@
 namespace NetFabric.Numerics.Cartesian2;
 
+/// <summary>
+/// Represents a 2D Cartesian coordinate system.
+/// </summary>
+/// <typeparam name="T">The numeric type used for the coordinates.</typeparam>
+/// <remarks>
+/// In a Cartesian coordinate system, coordinates are represented by a pair of values (X, Y) that specify
+/// the position of a point in 2D space. The X-coordinate represents the horizontal position, and the
+/// Y-coordinate represents the vertical position.
+/// </remarks>
 public readonly record struct CoordinateSystem<T>
     : ICoordinateSystem
     where T: struct, INumber<T>
@@ -10,6 +19,12 @@ public readonly record struct CoordinateSystem<T>
             new Coordinate("Y", typeof(T)),
         };
 
+    /// <summary>
+    /// Gets the list of coordinates in the polar coordinate system.
+    /// </summary>
+    /// <remarks>
+    /// Each coordinate contains information about its name and type.
+    /// </remarks>
     public IReadOnlyList<Coordinate> Coordinates
         => coordinates;
 }
