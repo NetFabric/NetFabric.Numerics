@@ -1,22 +1,20 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 
-namespace NetFabric.Numerics.Spherical;
+namespace NetFabric.Numerics.Rectangular3D;
 
 /// <summary>
 /// Represents a vector as an immutable struct.
 /// </summary>  
-/// <typeparam name="TAngleUnits">The angle units used for the azimuth and polar coordinates.</typeparam>
-/// <typeparam name="T">The type of the radius coordinate.</typeparam>
-/// <param name="Radius">The radius coordinate.</param>
-/// <param name="Azimuth">The azimuth coordinate.</param>
-/// <param name="Polar">The polar coordinate.</param>
-[System.Diagnostics.DebuggerDisplay("Radius = {Radius}, Azimuth = {Azimuth}, Polar = {Polar}")]
+/// <typeparam name="T">The type of the vector coordinates.</typeparam>
+/// <param name="X">The X coordinate.</param>
+/// <param name="Y">The Y coordinate.</param>
+/// <param name="Z">The Z coordinate.</param>
+[System.Diagnostics.DebuggerDisplay("X = {X}, Y = {Y}, Z = {Z}")]
 [SkipLocalsInit]
-public readonly record struct Vector<TAngleUnits, T>(T Radius, Angle<TAngleUnits, T> Azimuth, Angle<TAngleUnits, T> Polar)
-    : IVector<Vector<TAngleUnits, T>, T>
-    where TAngleUnits : struct, IAngleUnits<TAngleUnits>
-    where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
+public readonly record struct Vector<T>(T X, T Y, T Z)
+    : IVector<Vector<T>, T>
+    where T : struct, INumber<T>, IMinMaxValue<T>
 {
 
     #region constants
@@ -24,27 +22,42 @@ public readonly record struct Vector<TAngleUnits, T>(T Radius, Angle<TAngleUnits
     /// <summary>
     /// Represents a vector whose coordinates are equal to zero. This field is read-only.
     /// </summary>
-    public static readonly Vector<TAngleUnits, T> Zero = new(T.Zero, Angle<TAngleUnits, T>.Zero, Angle<TAngleUnits, T>.Zero);
+    public static readonly Vector<T> Zero = new(T.Zero, T.Zero, T.Zero);
 
-    static Vector<TAngleUnits, T> IGeometricBase<Vector<TAngleUnits, T>>.Zero
+    static Vector<T> IGeometricBase<Vector<T>>.Zero
         => Zero;
 
-    static Vector<TAngleUnits, T> IAdditiveIdentity<Vector<TAngleUnits, T>, Vector<TAngleUnits, T>>.AdditiveIdentity
+    static Vector<T> IAdditiveIdentity<Vector<T>, Vector<T>>.AdditiveIdentity
         => Zero;
+
+    /// <summary>
+    /// Represents a vector whose X coordinate is one and others are zero. This field is read-only.
+    /// </summary>
+    public static readonly Vector<T> UnitX = new(T.One, T.Zero, T.Zero);
+
+    /// <summary>
+    /// Represents a vector whose Y coordinate is one and others are zero. This field is read-only.
+    /// </summary>
+    public static readonly Vector<T> UnitY = new(T.Zero, T.One, T.Zero);
+
+    /// <summary>
+    /// Represents a vector whose Z coordinate is one and others are zero. This field is read-only.
+    /// </summary>
+    public static readonly Vector<T> UnitZ = new(T.Zero, T.Zero, T.One);
 
     /// <summary>
     /// Represents the minimum value. This field is read-only.
     /// </summary>
-    public static readonly Vector<TAngleUnits, T> MinValue = new(T.MinValue, Angle<TAngleUnits, T>.MinValue, Angle<TAngleUnits, T>.MinValue);
+    public static readonly Vector<T> MinValue = new(T.MinValue, T.MinValue, T.MinValue);
 
     /// <summary>
     /// Represents the maximum value. This field is read-only.
     /// </summary>
-    public static readonly Vector<TAngleUnits, T> MaxValue = new(T.MaxValue, Angle<TAngleUnits, T>.MaxValue, Angle<TAngleUnits, T>.MaxValue);
+    public static readonly Vector<T> MaxValue = new(T.MaxValue, T.MaxValue, T.MaxValue);
 
-    static Vector<TAngleUnits, T> IMinMaxValue<Vector<TAngleUnits, T>>.MinValue
+    static Vector<T> IMinMaxValue<Vector<T>>.MinValue
         => MinValue;
-    static Vector<TAngleUnits, T> IMinMaxValue<Vector<TAngleUnits, T>>.MaxValue
+    static Vector<T> IMinMaxValue<Vector<T>>.MaxValue
         => MaxValue;
 
     #endregion
@@ -52,9 +65,9 @@ public readonly record struct Vector<TAngleUnits, T>(T Radius, Angle<TAngleUnits
     /// <summary>
     /// Gets the coordinate system.
     /// </summary>
-    public CoordinateSystem<TAngleUnits, T> CoordinateSystem
+    public CoordinateSystem<T> CoordinateSystem
         => new();
-    ICoordinateSystem IGeometricBase<Vector<TAngleUnits, T>>.CoordinateSystem
+    ICoordinateSystem IGeometricBase<Vector<T>>.CoordinateSystem
         => CoordinateSystem;
 
     /// <summary>
@@ -62,138 +75,157 @@ public readonly record struct Vector<TAngleUnits, T>(T Radius, Angle<TAngleUnits
     /// throwing an overflow exception for any values that fall outside the representable range of the current type.
     /// </summary>
     /// <typeparam name="TOther">The type of the components of <paramref name="vector"/>.</typeparam>
-    /// <param name="vector">The value which is used to create the instance of <see cref="Vector{TAngleUnits, T}"/></param>
-    /// <returns>An instance of <see cref="Vector{TAngleUnits, T}"/> created from <paramref name="vector" />.</returns>
-    /// <exception cref="NotSupportedException"><typeparamref name="TOther" /> or <typeparamref name="TOther"/> is not supported.</exception>
-    /// <exception cref="OverflowException"><paramref name="vector" /> is not representable by <see cref="Vector{TAngleUnits, T}"/>.</exception>
-    public static Vector<TAngleUnits, T> CreateChecked<TOther>(ref readonly Vector<TAngleUnits, TOther> vector)
-        where TOther : struct, IFloatingPoint<TOther>, IMinMaxValue<TOther>
+    /// <param name="vector">The value which is used to create the instance of <see cref="Vector{T}"/></param>
+    /// <returns>An instance of <see cref="Vector{T}"/> created from <paramref name="vector" />.</returns>
+    /// <exception cref="NotSupportedException"><typeparamref name="TOther" /> is not supported.</exception>
+    /// <exception cref="OverflowException"><paramref name="vector" /> is not representable by <see cref="Vector{T}"/>.</exception>
+    public static Vector<T> CreateChecked<TOther>(ref readonly Vector<TOther> vector)
+        where TOther : struct, INumber<TOther>, IMinMaxValue<TOther>, IRootFunctions<TOther>
         => new(
-            T.CreateChecked(vector.Radius),
-            Angle<TAngleUnits, T>.CreateChecked(vector.Azimuth),
-            Angle<TAngleUnits, T>.CreateChecked(vector.Polar));
+            T.CreateChecked(vector.X),
+            T.CreateChecked(vector.Y),
+            T.CreateChecked(vector.Z)
+        );
 
     /// <summary>
     /// Creates an instance of the current type from a value, 
     /// saturating any values that fall outside the representable range of the current type.
     /// </summary>
     /// <typeparam name="TOther">The type of the components of <paramref name="vector"/>.</typeparam>
-    /// <param name="vector">The value which is used to create the instance of <see cref="Vector{TAngleUnits, T}"/></param>
-    /// <returns>An instance of <see cref="Vector{TAngleUnits, T}"/> created from <paramref name="vector" />.</returns>
-    /// <exception cref="NotSupportedException"><typeparamref name="TOther" /> or <typeparamref name="TOther"/> is not supported.</exception>
-    /// <exception cref="OverflowException"><paramref name="vector" /> is not representable by <see cref="Vector{TAngleUnits, T}"/>.</exception>
-    public static Vector<TAngleUnits, T> CreateSaturating<TOther>(ref readonly Vector<TAngleUnits, TOther> vector)
-        where TOther : struct, IFloatingPoint<TOther>, IMinMaxValue<TOther>
+    /// <param name="vector">The value which is used to create the instance of <see cref="Vector{T}"/></param>
+    /// <returns>An instance of <see cref="Vector{T}"/> created from <paramref name="vector" />.</returns>
+    /// <exception cref="NotSupportedException"><typeparamref name="TOther" /> is not supported.</exception>
+    /// <exception cref="OverflowException"><paramref name="vector" /> is not representable by <see cref="Vector{T}"/>.</exception>
+    public static Vector<T> CreateSaturating<TOther>(ref readonly Vector<TOther> vector)
+        where TOther : struct, INumber<TOther>, IMinMaxValue<TOther>, IRootFunctions<TOther>
         => new(
-            T.CreateSaturating(vector.Radius),
-            Angle<TAngleUnits, T>.CreateSaturating(vector.Azimuth),
-            Angle<TAngleUnits, T>.CreateSaturating(vector.Polar));
+            T.CreateSaturating(vector.X),
+            T.CreateSaturating(vector.Y),
+            T.CreateSaturating(vector.Z)
+        );
 
     /// <summary>
     /// Creates an instance of the current type from a value, 
     /// truncating any values that fall outside the representable range of the current type.
     /// </summary>
     /// <typeparam name="TOther">The type of the components of <paramref name="vector"/>.</typeparam>
-    /// <param name="vector">The value which is used to create the instance of <see cref="Vector{TAngleUnits, T}"/></param>
-    /// <returns>An instance of <see cref="Vector{TAngleUnits, T}"/> created from <paramref name="vector" />.</returns>
-    /// <exception cref="NotSupportedException"><typeparamref name="TOther" /> or <typeparamref name="TOther"/> is not supported.</exception>
-    /// <exception cref="OverflowException"><paramref name="vector" /> is not representable by <see cref="Vector{TAngleUnits, T}"/>.</exception>
-    public static Vector<TAngleUnits, T> CreateTruncating<TOther>(ref readonly Vector<TAngleUnits, TOther> vector)
-        where TOther : struct, IFloatingPoint<TOther>, IMinMaxValue<TOther>
+    /// <param name="vector">The value which is used to create the instance of <see cref="Vector{T}"/></param>
+    /// <returns>An instance of <see cref="Vector{T}"/> created from <paramref name="vector" />.</returns>
+    /// <exception cref="NotSupportedException"><typeparamref name="TOther" /> is not supported.</exception>
+    /// <exception cref="OverflowException"><paramref name="vector" /> is not representable by <see cref="Vector{T}"/>.</exception>
+    public static Vector<T> CreateTruncating<TOther>(ref readonly Vector<TOther> vector)
+        where TOther : struct, INumber<TOther>, IMinMaxValue<TOther>, IRootFunctions<TOther>
         => new(
-            T.CreateTruncating(vector.Radius),
-            Angle<TAngleUnits, T>.CreateTruncating(vector.Azimuth),
-            Angle<TAngleUnits, T>.CreateTruncating(vector.Polar));
+            T.CreateTruncating(vector.X),
+            T.CreateTruncating(vector.Y),
+            T.CreateTruncating(vector.Z)
+        );
 
-    object IGeometricBase<Vector<TAngleUnits, T>>.this[int index]
+    object IGeometricBase<Vector<T>>.this[int index]
         => index switch
         {
-            0 => Radius,
-            1 => Azimuth,
-            2 => Polar,
+            0 => X,
+            1 => Y,
+            2 => Z,
             _ => Throw.ArgumentOutOfRangeException<object>(nameof(index), index, "index out of range")
         };
 
     #region comparison
 
     /// <summary>
-    /// Determines whether the magnitude of the left <see cref="Vector{TAngleUnits, T}"/> is less than the magnitude of the right <see cref="Vector{TAngleUnits, T}"/>.
+    /// Determines whether the magnitude of the left <see cref="Vector{T}"/> is less than the magnitude of the right <see cref="Vector{T}"/>.
     /// </summary>
-    /// <param name="left">The left <see cref="Vector{TAngleUnits, T}"/> to compare.</param>
-    /// <param name="right">The right <see cref="Vector{TAngleUnits, T}"/> to compare.</param>
-    /// <returns>True if the magnitude of the left <see cref="Vector{TAngleUnits, T}"/> is less than the magnitude of the right <see cref="Vector{TAngleUnits, T}"/>; otherwise, false.</returns>
+    /// <param name="left">The left <see cref="Vector{T}"/> to compare.</param>
+    /// <param name="right">The right <see cref="Vector{T}"/> to compare.</param>
+    /// <returns>True if the magnitude of the left <see cref="Vector{T}"/> is less than the magnitude of the right <see cref="Vector{T}"/>; otherwise, false.</returns>
     /// <remarks>
     /// <para>
-    /// This operator compares the magnitude of the left <see cref="Vector{TAngleUnits, T}"/> with the magnitude of the right <see cref="Vector{TAngleUnits, T}"/>. 
-    /// It returns true if and only if the magnitude of the left <see cref="Vector{TAngleUnits, T}"/> is less than the magnitude of the right <see cref="Vector{TAngleUnits, T}"/>. 
+    /// This operator compares the magnitude of the left <see cref="Vector{T}"/> with the magnitude of the right <see cref="Vector{T}"/>. 
+    /// It returns true if and only if the magnitude of the left <see cref="Vector{T}"/> is less than the magnitude of the right <see cref="Vector{T}"/>. 
     /// Otherwise, it returns false. The comparison is based on the magnitudes of the vectors and is independent of their directions.
+    /// </para>
+    /// <para>
+    /// The comparison of magnitudes is performed using the <see cref="Vector.Magnitude{T}(ref readonly Vector{T})"/> method, which calculates the square root of the magnitude squared. 
+    /// However, to optimize the performance, this operator directly compares the magnitude squared values of the vectors, accessible through the <see cref="Vector.MagnitudeSquared{T}(ref readonly Vector{T})"/> method.
     /// </para>
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool operator <(Vector<TAngleUnits, T> left, Vector<TAngleUnits, T> right)
+    public static bool operator <(Vector<T> left, Vector<T> right)
         => Vector.Compare(in left, in right) < 0;
 
     /// <summary>
-    /// Determines whether the magnitude of the left <see cref="Vector{TAngleUnits, T}"/> is less than or equal to the magnitude of the right <see cref="Vector{TAngleUnits, T}"/>.
+    /// Determines whether the magnitude of the left <see cref="Vector{T}"/> is less than or equal to the magnitude of the right <see cref="Vector{T}"/>.
     /// </summary>
-    /// <param name="left">The left <see cref="Vector{TAngleUnits, T}"/> to compare.</param>
-    /// <param name="right">The right <see cref="Vector{TAngleUnits, T}"/> to compare.</param>
-    /// <returns>True if the magnitude of the left <see cref="Vector{TAngleUnits, T}"/> is less than or equal to the magnitude of the right <see cref="Vector{TAngleUnits, T}"/>; otherwise, false.</returns>
+    /// <param name="left">The left <see cref="Vector{T}"/> to compare.</param>
+    /// <param name="right">The right <see cref="Vector{T}"/> to compare.</param>
+    /// <returns>True if the magnitude of the left <see cref="Vector{T}"/> is less than or equal to the magnitude of the right <see cref="Vector{T}"/>; otherwise, false.</returns>
     /// <remarks>
     /// <para>
-    /// This operator compares the magnitude of the left <see cref="Vector{TAngleUnits, T}"/> with the magnitude of the right <see cref="Vector{TAngleUnits, T}"/>. 
-    /// It returns true if and only if the magnitude of the left <see cref="Vector{TAngleUnits, T}"/> is less than or equal to the magnitude of the right <see cref="Vector{TAngleUnits, T}"/>. 
+    /// This operator compares the magnitude of the left <see cref="Vector{T}"/> with the magnitude of the right <see cref="Vector{T}"/>. 
+    /// It returns true if and only if the magnitude of the left <see cref="Vector{T}"/> is less than or equal to the magnitude of the right <see cref="Vector{T}"/>. 
     /// Otherwise, it returns false. The comparison is based on the magnitudes of the vectors and is independent of their directions.
+    /// </para>
+    /// <para>
+    /// The comparison of magnitudes is performed using the <see cref="Vector.Magnitude{T}(ref readonly Vector{T})"/> method, which calculates the square root of the magnitude squared. 
+    /// However, to optimize the performance, this operator directly compares the magnitude squared values of the vectors, accessible through the <see cref="Vector.MagnitudeSquared{T}(ref readonly Vector{T})"/> method.
     /// </para>
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool operator <=(Vector<TAngleUnits, T> left, Vector<TAngleUnits, T> right)
+    public static bool operator <=(Vector<T> left, Vector<T> right)
         => Vector.Compare(in left, in right) <= 0;
 
     /// <summary>
-    /// Determines whether the magnitude of the left <see cref="Vector{TAngleUnits, T}"/> is greater than the magnitude of the right <see cref="Vector{TAngleUnits, T}"/>.
+    /// Determines whether the magnitude of the left <see cref="Vector{T}"/> is greater than the magnitude of the right <see cref="Vector{T}"/>.
     /// </summary>
-    /// <param name="left">The left <see cref="Vector{TAngleUnits, T}"/> to compare.</param>
-    /// <param name="right">The right <see cref="Vector{TAngleUnits, T}"/> to compare.</param>
-    /// <returns>True if the magnitude of the left <see cref="Vector{TAngleUnits, T}"/> is greater than the magnitude of the right <see cref="Vector{TAngleUnits, T}"/>; otherwise, false.</returns>
+    /// <param name="left">The left <see cref="Vector{T}"/> to compare.</param>
+    /// <param name="right">The right <see cref="Vector{T}"/> to compare.</param>
+    /// <returns>True if the magnitude of the left <see cref="Vector{T}"/> is greater than the magnitude of the right <see cref="Vector{T}"/>; otherwise, false.</returns>
     /// <remarks>
     /// <para>
-    /// This operator compares the magnitude of the left <see cref="Vector{TAngleUnits, T}"/> with the magnitude of the right <see cref="Vector{TAngleUnits, T}"/>. 
-    /// It returns true if and only if the magnitude of the left <see cref="Vector{TAngleUnits, T}"/> is greater than the magnitude of the right <see cref="Vector{TAngleUnits, T}"/>. 
+    /// This operator compares the magnitude of the left <see cref="Vector{T}"/> with the magnitude of the right <see cref="Vector{T}"/>. 
+    /// It returns true if and only if the magnitude of the left <see cref="Vector{T}"/> is greater than the magnitude of the right <see cref="Vector{T}"/>. 
     /// Otherwise, it returns false. The comparison is based on the magnitudes of the vectors and is independent of their directions.
+    /// </para>
+    /// <para>
+    /// The comparison of magnitudes is performed using the <see cref="Vector.Magnitude{T}(ref readonly Vector{T})"/> method, which calculates the square root of the magnitude squared. 
+    /// However, to optimize the performance, this operator directly compares the magnitude squared values of the vectors, accessible through the <see cref="Vector.MagnitudeSquared{T}(ref readonly Vector{T})"/> method.
     /// </para>
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool operator >(Vector<TAngleUnits, T> left, Vector<TAngleUnits, T> right)
+    public static bool operator >(Vector<T> left, Vector<T> right)
         => Vector.Compare(in left, in right) > 0;
 
     /// <summary>
-    /// Determines whether the magnitude of the left <see cref="Vector{TAngleUnits, T}"/> is greater than or equal to the magnitude of the right <see cref="Vector{TAngleUnits, T}"/>.
+    /// Determines whether the magnitude of the left <see cref="Vector{T}"/> is greater than or equal to the magnitude of the right <see cref="Vector{T}"/>.
     /// </summary>
-    /// <param name="left">The left <see cref="Vector{TAngleUnits, T}"/> to compare.</param>
-    /// <param name="right">The right <see cref="Vector{TAngleUnits, T}"/> to compare.</param>
-    /// <returns>True if the magnitude of the left <see cref="Vector{TAngleUnits, T}"/> is greater than or equal to the magnitude of the right <see cref="Vector{TAngleUnits, T}"/>; otherwise, false.</returns>
+    /// <param name="left">The left <see cref="Vector{T}"/> to compare.</param>
+    /// <param name="right">The right <see cref="Vector{T}"/> to compare.</param>
+    /// <returns>True if the magnitude of the left <see cref="Vector{T}"/> is greater than or equal to the magnitude of the right <see cref="Vector{T}"/>; otherwise, false.</returns>
     /// <remarks>
     /// <para>
-    /// This operator compares the magnitude of the left <see cref="Vector{TAngleUnits, T}"/> with the magnitude of the right <see cref="Vector{TAngleUnits, T}"/>. 
-    /// It returns true if and only if the magnitude of the left <see cref="Vector{TAngleUnits, T}"/> is greater than or equal to the magnitude of the right <see cref="Vector{TAngleUnits, T}"/>. 
+    /// This operator compares the magnitude of the left <see cref="Vector{T}"/> with the magnitude of the right <see cref="Vector{T}"/>. 
+    /// It returns true if and only if the magnitude of the left <see cref="Vector{T}"/> is greater than or equal to the magnitude of the right <see cref="Vector{T}"/>. 
     /// Otherwise, it returns false. The comparison is based on the magnitudes of the vectors and is independent of their directions.
+    /// </para>
+    /// <para>
+    /// The comparison of magnitudes is performed using the <see cref="Vector.Magnitude{T}(ref readonly Vector{T})"/> method, which calculates the square root of the magnitude squared. 
+    /// However, to optimize the performance, this operator directly compares the magnitude squared values of the vectors, accessible through the <see cref="Vector.MagnitudeSquared{T}(ref readonly Vector{T})"/> method.
     /// </para>
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool operator >=(Vector<TAngleUnits, T> left, Vector<TAngleUnits, T> right)
+    public static bool operator >=(Vector<T> left, Vector<T> right)
         => Vector.Compare(in left, in right) >= 0;
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    int IComparable<Vector<TAngleUnits, T>>.CompareTo(Vector<TAngleUnits, T> other)
-        => Vector.Magnitude(in this).CompareTo(Vector.Magnitude(in other));
+    int IComparable<Vector<T>>.CompareTo(Vector<T> other)
+        => Vector.MagnitudeSquared(in this).CompareTo(Vector.MagnitudeSquared(in other));
 
     readonly int IComparable.CompareTo(object? obj)
         => obj switch
         {
             null => 1,
-            Vector<TAngleUnits, T> other => Vector.Compare(in this, in other),
-            _ => Throw.ArgumentException<int>($"Argument must be of type {nameof(Vector<TAngleUnits, T>)}.", nameof(obj)),
+            Vector<T> other => Vector.Compare(in this, in other),
+            _ => Throw.ArgumentException<int>($"Argument must be of type {nameof(Vector<T>)}.", nameof(obj)),
         };
 
     #endregion
@@ -215,7 +247,7 @@ public readonly record struct Vector<TAngleUnits, T>(T Radius, Angle<TAngleUnits
     /// </para>
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Vector<TAngleUnits, T> operator +(Vector<TAngleUnits, T> right)
+    public static Vector<T> operator +(Vector<T> right)
         => right;
 
     /// <summary>
@@ -228,7 +260,7 @@ public readonly record struct Vector<TAngleUnits, T>(T Radius, Angle<TAngleUnits
     /// This operator performs component-wise addition of the input vectors, where each component of the resulting vector is the sum of the corresponding components of the input vectors.
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Vector<TAngleUnits, T> operator +(Vector<TAngleUnits, T> left, Vector<TAngleUnits, T> right)
+    public static Vector<T> operator +(Vector<T> left, Vector<T> right)
         => Vector.Add(in left, in right);
 
     /// <summary>
@@ -240,8 +272,8 @@ public readonly record struct Vector<TAngleUnits, T>(T Radius, Angle<TAngleUnits
     /// This operator reverses the sign of each component of the input vector, resulting ref readonly a new vector with the opposite direction.
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Vector<TAngleUnits, T> operator -(Vector<TAngleUnits, T> right)
-        => new(-right.Radius, -right.Azimuth, -right.Polar);
+    public static Vector<T> operator -(Vector<T> right)
+        => new(-right.X, -right.Y, -right.Z);
 
     /// <summary>
     /// Subtracts the components of the second <see cref="Vector{T}"/> from the corresponding components of the first <see cref="Vector{T}"/>.
@@ -254,7 +286,7 @@ public readonly record struct Vector<TAngleUnits, T>(T Radius, Angle<TAngleUnits
     /// resulting ref readonly a new vector with the subtracted values.
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Vector<TAngleUnits, T> operator -(Vector<TAngleUnits, T> left, Vector<TAngleUnits, T> right)
+    public static Vector<T> operator -(Vector<T> left, Vector<T> right)
         => Vector.Subtract(in left, in right);
 
     /// <summary>
@@ -268,7 +300,7 @@ public readonly record struct Vector<TAngleUnits, T>(T Radius, Angle<TAngleUnits
     /// resulting ref readonly a new vector with the scaled values.
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Vector<TAngleUnits, T> operator *(Vector<TAngleUnits, T> left, T right)
+    public static Vector<T> operator *(Vector<T> left, T right)
         => Vector.Multiply(right, in left);
 
     /// <summary>
@@ -282,7 +314,7 @@ public readonly record struct Vector<TAngleUnits, T>(T Radius, Angle<TAngleUnits
     /// resulting ref readonly a new vector with the scaled values.
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Vector<TAngleUnits, T> operator *(T left, Vector<TAngleUnits, T> right)
+    public static Vector<T> operator *(T left, Vector<T> right)
         => Vector.Multiply(left, in right);
 
     /// <summary>
@@ -296,10 +328,17 @@ public readonly record struct Vector<TAngleUnits, T>(T Radius, Angle<TAngleUnits
     /// resulting ref readonly a new vector with the scaled values.
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Vector<TAngleUnits, T> operator /(Vector<TAngleUnits, T> left, T right)
+    public static Vector<T> operator /(Vector<T> left, T right)
         => Vector.Divide(in left, right);
 
     #endregion
+
+    /// <summary>
+    /// Converts the vector to its string representation.
+    /// </summary>
+    /// <returns>A string representation of the vector.</returns>
+    public readonly override string ToString()
+        => ToString(null);
 
     /// <summary>
     /// Converts the vector to its string representation using the specified format and format provider.
@@ -310,7 +349,7 @@ public readonly record struct Vector<TAngleUnits, T>(T Radius, Angle<TAngleUnits
     public readonly string ToString([StringSyntax(StringSyntaxAttribute.NumericFormat)] string? format, IFormatProvider? formatProvider = default)
     {
         var separator = NumberFormatInfo.GetInstance(formatProvider).NumberGroupSeparator;
-        return $"<{Radius.ToString(format, formatProvider)}{separator} {Azimuth.ToString(format, formatProvider)}{separator} {Polar.ToString(format, formatProvider)}>";
+        return $"<{X.ToString(format, formatProvider)}{separator} {Y.ToString(format, formatProvider)}{separator} {Z.ToString(format, formatProvider)}>";
     }
 }
 
@@ -322,115 +361,100 @@ public static class Vector
     /// <summary>
     /// Determines whether the specified vector is a zero vector, where all components are zero.
     /// </summary>
-    /// <typeparam name="TAngleUnits">The angle units used for the azimuth and polar coordinates.</typeparam>
-    /// <typeparam name="T">The type of the radius coordinate.</typeparam>
+    /// <typeparam name="T">The type of the vector coordinates.</typeparam>
     /// <param name="vector">The vector to check.</param>
     /// <returns><c>true</c> if all components of the vector are zero; otherwise, <c>false</c>.</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool IsZero<TAngleUnits, T>(ref readonly Vector<TAngleUnits, T> vector)
-    where TAngleUnits : struct, IAngleUnits<TAngleUnits>
-    where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => vector == Vector<TAngleUnits, T>.Zero;
+    public static bool IsZero<T>(ref readonly Vector<T> vector)
+        where T : struct, INumber<T>, IMinMaxValue<T>
+        => vector == Vector<T>.Zero;
 
     /// <summary>
     /// Determines whether the specified vector is a zero vector, where all components are zero.
     /// </summary>
-    /// <typeparam name="TAngleUnits">The angle units used for the azimuth and polar coordinates.</typeparam>
-    /// <typeparam name="T">The type of the radius coordinate.</typeparam>
+    /// <typeparam name="T">The type of the vector coordinates.</typeparam>
     /// <param name="vector">The vector to check.</param>
     /// <param name="tolerance">The tolerance value.</param>
     /// <returns><c>true</c> if all components of the vector are zero; otherwise, <c>false</c>.</returns>
     /// <remarks>
-    /// The <see cref="Vector.IsZero{TAngleUnits, T}(ref readonly Vector{TAngleUnits, T}, T)"/> method checks whether all components of the vector are equal to zero within the <paramref name="tolerance"/> range.
+    /// The <see cref="IsZero{T}(ref readonly Vector{T}, T)"/> method checks whether all components of the vector are equal to zero within the <paramref name="tolerance"/> range.
     /// The tolerance is a small value used to account for floating-point precision errors.
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool IsZero<TAngleUnits, T>(ref readonly Vector<TAngleUnits, T> vector, T tolerance)
-        where TAngleUnits : struct, IAngleUnits<TAngleUnits>
+    public static bool IsZero<T>(ref readonly Vector<T> vector, T tolerance)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => AreApproximatelyEqual(in vector, in Vector<TAngleUnits, T>.Zero, tolerance);
+        => AreApproximatelyEqual(in vector, in Vector<T>.Zero, tolerance);
 
     /// <summary>
     /// Determines whether any component of the specified <see cref="Vector{T}"/> is NaN (Not-a-Number).
     /// </summary>
-    /// <typeparam name="TAngleUnits">The angle units used for the azimuth and polar coordinates.</typeparam>
-    /// <typeparam name="T">The type of the radius coordinate.</typeparam>
+    /// <typeparam name="T">The type of the vector's components.</typeparam>
     /// <param name="vector">The <see cref="Vector{T}"/> to check for NaN values.</param>
     /// <returns>
     /// <c>true</c> if any component of the vector is NaN; otherwise, <c>false</c>.
     /// </returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool IsNaN<TAngleUnits, T>(ref readonly Vector<TAngleUnits, T> vector)
-        where TAngleUnits : struct, IAngleUnits<TAngleUnits>
-        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => T.IsNaN(vector.Radius) || Angle.IsNaN(vector.Azimuth) || Angle.IsNaN(vector.Polar);
+    public static bool IsNaN<T>(ref readonly Vector<T> vector)
+        where T : struct, INumber<T>, IMinMaxValue<T>
+        => T.IsNaN(vector.X) || T.IsNaN(vector.Y) || T.IsNaN(vector.Z);
 
     /// <summary>
     /// Determines whether any component of the specified <see cref="Vector{T}"/> is positive or negative infinity.
     /// </summary>
-    /// <typeparam name="TAngleUnits">The angle units used for the azimuth and polar coordinates.</typeparam>
-    /// <typeparam name="T">The type of the radius coordinate.</typeparam>
+    /// <typeparam name="T">The type of the vector's components.</typeparam>
     /// <param name="vector">The <see cref="Vector{T}"/> to check for infinity values.</param>
     /// <returns>
     /// <c>true</c> if any component of the vector is positive or negative infinity; otherwise, <c>false</c>.
     /// </returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool IsInfinity<TAngleUnits, T>(ref readonly Vector<TAngleUnits, T> vector)
-        where TAngleUnits : struct, IAngleUnits<TAngleUnits>
-        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => T.IsInfinity(vector.Radius) || Angle.IsInfinity(vector.Azimuth) || Angle.IsInfinity(vector.Polar);
+    public static bool IsInfinity<T>(ref readonly Vector<T> vector)
+        where T : struct, INumber<T>, IMinMaxValue<T>
+        => T.IsInfinity(vector.X) || T.IsInfinity(vector.Y) || T.IsInfinity(vector.Z);
 
     /// <summary>
     /// Determines whether all components of the specified <see cref="Vector{T}"/> are finite numbers (not NaN, infinity, or negative infinity).
     /// </summary>
-    /// <typeparam name="TAngleUnits">The angle units used for the azimuth and polar coordinates.</typeparam>
-    /// <typeparam name="T">The type of the radius coordinate.</typeparam>
+    /// <typeparam name="T">The type of the vector's components.</typeparam>
     /// <param name="vector">The <see cref="Vector{T}"/> to check for finite values.</param>
     /// <returns>
     /// <c>true</c> if all components of the vector are finite numbers; otherwise, <c>false</c>.
     /// </returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool IsFinite<TAngleUnits, T>(ref readonly Vector<TAngleUnits, T> vector)
-        where TAngleUnits : struct, IAngleUnits<TAngleUnits>
-        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => T.IsFinite(vector.Radius) && Angle.IsFinite(vector.Azimuth) && Angle.IsFinite(vector.Polar);
+    public static bool IsFinite<T>(ref readonly Vector<T> vector)
+        where T : struct, INumber<T>, IMinMaxValue<T>
+        => T.IsFinite(vector.X) && T.IsFinite(vector.Y) && T.IsFinite(vector.Z);
 
     /// <summary>
     /// Determines whether the specified <see cref="Vector{T}"/> is a normalized vector.
     /// </summary>
-    /// <typeparam name="TAngleUnits">The angle units used for the azimuth and polar coordinates.</typeparam>
-    /// <typeparam name="T">The type of the radius coordinate.</typeparam>
+    /// <typeparam name="T">The type of the vector's components.</typeparam>
     /// <param name="vector">The <see cref="Vector{T}"/> to check for normalization.</param>
     /// <returns>
     /// <c>true</c> if the vector is normalized (its magnitude is 1); otherwise, <c>false</c>.
     /// </returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool IsNormalized<TAngleUnits, T>(ref readonly Vector<TAngleUnits, T> vector)
-        where TAngleUnits : struct, IAngleUnits<TAngleUnits>
-        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => Vector.Magnitude(in vector) == T.One;
+    public static bool IsNormalized<T>(ref readonly Vector<T> vector)
+        where T : struct, INumber<T>, IMinMaxValue<T>
+        => MagnitudeSquared(in vector) == T.One;
 
     /// <summary>
     /// Determines whether the specified <see cref="Vector{T}"/> is a normalized vector within the specified tolerance.
     /// </summary>
-    /// <typeparam name="TAngleUnits">The angle units used for the azimuth and polar coordinates.</typeparam>
-    /// <typeparam name="T">The type of the radius coordinate.</typeparam>
+    /// <typeparam name="T">The type of the vector's components.</typeparam>
     /// <param name="vector">The <see cref="Vector{T}"/> to check for normalization.</param>
     /// <param name="tolerance">The tolerance used for the comparison.</param>
     /// <returns>
     /// <c>true</c> if the vector is normalized (its magnitude is within the specified tolerance of 1); otherwise, <c>false</c>.
     /// </returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool IsNormalized<TAngleUnits, T>(ref readonly Vector<TAngleUnits, T> vector, T tolerance)
-        where TAngleUnits : struct, IAngleUnits<TAngleUnits>
+    public static bool IsNormalized<T>(ref readonly Vector<T> vector, T tolerance)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => Utils.AreApproximatelyEqual(Vector.Magnitude(in vector), T.One, tolerance);
+        => Utils.AreApproximatelyEqual(MagnitudeSquared(in vector), T.One, tolerance);
 
     /// <summary>
     /// Checks if two floating-point values are approximately equal within the specified tolerance.
     /// </summary>
-    /// <typeparam name="TAngleUnits">The angle units used for the azimuth and polar coordinates.</typeparam>
-    /// <typeparam name="T">The type of the radius coordinate.</typeparam>
+    /// <typeparam name="T">The type of the vector coordinates.</typeparam>
     /// <param name="a">The first value to compare.</param>
     /// <param name="b">The second value to compare.</param>
     /// <param name="tolerance">The tolerance value.</param>
@@ -438,20 +462,18 @@ public static class Vector
     /// <remarks>
     /// This method compares the absolute difference between the two values to the specified tolerance value.
     /// If the absolute difference is less than or equal to the tolerance, the values are considered approximately equal.
-    /// </remarks>    
+    /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool AreApproximatelyEqual<TAngleUnits, T>(ref readonly Vector<TAngleUnits, T> a, ref readonly Vector<TAngleUnits, T> b, T tolerance)
-        where TAngleUnits : struct, IAngleUnits<TAngleUnits>
+    public static bool AreApproximatelyEqual<T>(ref readonly Vector<T> a, ref readonly Vector<T> b, T tolerance)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => Utils.AreApproximatelyEqual(a.Radius, b.Radius, tolerance) &&
-            Utils.AreApproximatelyEqual(a.Azimuth.Value, b.Azimuth.Value, tolerance) &&
-            Utils.AreApproximatelyEqual(a.Polar.Value, b.Polar.Value, tolerance);
+        => Utils.AreApproximatelyEqual(a.X, b.X, tolerance) &&
+            Utils.AreApproximatelyEqual(a.Y, b.Y, tolerance) &&
+            Utils.AreApproximatelyEqual(a.Z, b.Z, tolerance);
 
     /// <summary>
     /// Compares two Vector instances and returns an indication of their relative values.
     /// </summary>
-    /// <typeparam name="TAngleUnits">The angle units used for the azimuth and polar coordinates.</typeparam>
-    /// <typeparam name="T">The type of the radius coordinate.</typeparam>
+    /// <typeparam name="T">The type of the vector coordinates.</typeparam>
     /// <param name="vector">The first Vector to compare.</param>
     /// <param name="other">The second Vector to compare.</param>
     /// <returns>
@@ -467,18 +489,16 @@ public static class Vector
     /// for comparing the relative values of vectors. 
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int Compare<TAngleUnits, T>(ref readonly Vector<TAngleUnits, T> vector, ref readonly Vector<TAngleUnits, T> other)
-        where TAngleUnits : struct, IAngleUnits<TAngleUnits>
-        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => Magnitude(in vector).CompareTo(Magnitude(in other));
+    public static int Compare<T>(ref readonly Vector<T> vector, ref readonly Vector<T> other)
+        where T : struct, INumber<T>, IMinMaxValue<T>
+        => MagnitudeSquared(in vector).CompareTo(MagnitudeSquared(in other));
 
     #region arithmetic
 
     /// <summary>
     /// Negates the specified Vector by reversing the sign of each of its coordinates.
     /// </summary>
-    /// <typeparam name="TAngleUnits">The angle units used for the azimuth and polar coordinates.</typeparam>
-    /// <typeparam name="T">The type of the radius coordinate.</typeparam>
+    /// <typeparam name="T">The type of the vector coordinates.</typeparam>
     /// <param name="right">The Vector to negate.</param>
     /// <returns>A new Vector with the negated coordinates.</returns>
     /// <remarks>
@@ -487,77 +507,69 @@ public static class Vector
     /// direction as the input vector. The input vector remains unchanged.
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Vector<TAngleUnits, T> Negate<TAngleUnits, T>(ref readonly Vector<TAngleUnits, T> right)
-        where TAngleUnits : struct, IAngleUnits<TAngleUnits>
-        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => new(-right.Radius, -right.Azimuth, -right.Polar);
+    public static Vector<T> Negate<T>(ref readonly Vector<T> right)
+        where T : struct, INumber<T>, IMinMaxValue<T>, ISignedNumber<T>
+        => new(-right.X, -right.Y, -right.Z);
 
     /// <summary>
     /// Adds two vectors component-wise and returns the result as a new Vector.
     /// </summary>
-    /// <typeparam name="TAngleUnits">The angle units used for the azimuth and polar coordinates.</typeparam>
-    /// <typeparam name="T">The type of the radius coordinate.</typeparam>
+    /// <typeparam name="T">The type of the vector coordinates.</typeparam>
     /// <param name="left">The first Vector to add.</param>
     /// <param name="right">The second Vector to add.</param>
     /// <returns>A new Vector that is the component-wise sum of the input vectors.</returns>
     /// <remarks>
     /// This method adds the corresponding coordinates of the two input vectors and returns
     /// a new Vector with the resulting sums. The operation is performed component-wise, which
-    /// means that the Radius, Azimuth, Polar, and W coordinates of the resulting vector are the sums of the
-    /// Radius, Azimuth, Polar, and W coordinates of the input vectors, respectively. The input vectors remain
+    /// means that the X, Y, Z, and W coordinates of the resulting vector are the sums of the
+    /// X, Y, Z, and W coordinates of the input vectors, respectively. The input vectors remain
     /// unchanged.
     /// </remarks>
     [SkipLocalsInit]
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Vector<TAngleUnits, T> Add<TAngleUnits, T>(ref readonly Vector<TAngleUnits, T> left, ref readonly Vector<TAngleUnits, T> right)
-        where TAngleUnits : struct, IAngleUnits<TAngleUnits>
-        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => new(left.Radius + right.Radius, left.Azimuth + right.Azimuth, left.Polar + right.Polar);
+    public static Vector<T> Add<T>(ref readonly Vector<T> left, ref readonly Vector<T> right)
+        where T : struct, INumber<T>, IMinMaxValue<T>
+        => new(left.X + right.X, left.Y + right.Y, left.Z + right.Z);
 
     /// <summary>
     /// Subtracts the second vector from the first vector component-wise and returns the result as a new Vector.
     /// </summary>
-    /// <typeparam name="TAngleUnits">The angle units used for the azimuth and polar coordinates.</typeparam>
-    /// <typeparam name="T">The type of the radius coordinate.</typeparam>
+    /// <typeparam name="T">The type of the vector coordinates.</typeparam>
     /// <param name="left">The Vector to subtract from (the minuend).</param>
     /// <param name="right">The Vector to subtract (the subtrahend).</param>
     /// <returns>A new Vector that is the component-wise difference of the input vectors.</returns>
     /// <remarks>
     /// This method subtracts the corresponding coordinates of the second vector from the first vector
     /// and returns a new Vector with the resulting differences. The operation is performed component-wise,
-    /// which means that the Radius, Azimuth, Polar, and W coordinates of the resulting vector are the differences of the
-    /// Radius, Azimuth, Polar, and W coordinates of the input vectors, respectively. The input vectors remain unchanged.
+    /// which means that the X, Y, Z, and W coordinates of the resulting vector are the differences of the
+    /// X, Y, Z, and W coordinates of the input vectors, respectively. The input vectors remain unchanged.
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Vector<TAngleUnits, T> Subtract<TAngleUnits, T>(ref readonly Vector<TAngleUnits, T> left, ref readonly Vector<TAngleUnits, T> right)
-        where TAngleUnits : struct, IAngleUnits<TAngleUnits>
-        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => new(left.Radius - right.Radius, left.Azimuth - right.Azimuth, left.Polar - right.Polar);
+    public static Vector<T> Subtract<T>(ref readonly Vector<T> left, ref readonly Vector<T> right)
+        where T : struct, INumber<T>, IMinMaxValue<T>
+        => new(left.X - right.X, left.Y - right.Y, left.Z - right.Z);
 
     /// <summary>
     /// Multiplies a scalar value with each coordinate of the input Vector and returns the result as a new Vector.
     /// </summary>
-    /// <typeparam name="TAngleUnits">The angle units used for the azimuth and polar coordinates.</typeparam>
-    /// <typeparam name="T">The type of the radius coordinate.</typeparam>
+    /// <typeparam name="T">The type of the scalar and vector coordinates.</typeparam>
     /// <param name="left">The scalar value to multiply with each coordinate of the input vector.</param>
     /// <param name="right">The Vector to multiply.</param>
     /// <returns>A new Vector that is the result of multiplying each coordinate of the input vector by the scalar value.</returns>
     /// <remarks>
     /// This method multiplies the specified scalar value with each coordinate of the input Vector and returns a new Vector with the resulting products. 
-    /// The operation is performed independently on each coordinate, meaning that the scalar value is multiplied with the Radius, Azimuth, Polar, and W coordinates of the input vector separately. 
+    /// The operation is performed independently on each coordinate, meaning that the scalar value is multiplied with the X, Y, Z, and W coordinates of the input vector separately. 
     /// The input vector remains unchanged after the operation.
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Vector<TAngleUnits, T> Multiply<TAngleUnits, T>(T left, ref readonly Vector<TAngleUnits, T> right)
-        where TAngleUnits : struct, IAngleUnits<TAngleUnits>
-        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => new(left * right.Radius, left * right.Azimuth, left * right.Polar);
+    public static Vector<T> Multiply<T>(T left, ref readonly Vector<T> right)
+        where T : struct, INumber<T>, IMinMaxValue<T>
+        => new(left * right.X, left * right.Y, left * right.Z);
 
     /// <summary>
     /// Divides each coordinate of the input Vector by a scalar value and returns the result as a new Vector.
     /// </summary>
-    /// <typeparam name="TAngleUnits">The angle units used for the azimuth and polar coordinates.</typeparam>
-    /// <typeparam name="T">The type of the radius coordinate.</typeparam>
+    /// <typeparam name="T">The type of the scalar and vector coordinates.</typeparam>
     /// <param name="left">The Vector to divide.</param>
     /// <param name="right">The scalar value to divide each coordinate of the input vector by.</param>
     /// <returns>A new Vector that is the result of dividing each coordinate of the input vector by the scalar value.</returns>
@@ -567,18 +579,16 @@ public static class Vector
     /// The input vector remains unchanged after the operation.
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Vector<TAngleUnits, T> Divide<TAngleUnits, T>(ref readonly Vector<TAngleUnits, T> left, T right)
-        where TAngleUnits : struct, IAngleUnits<TAngleUnits>
-        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => new(left.Radius / right, left.Azimuth / right, left.Polar / right);
+    public static Vector<T> Divide<T>(ref readonly Vector<T> left, T right)
+        where T : struct, INumber<T>, IMinMaxValue<T>
+        => new(left.X / right, left.Y / right, left.Z / right);
 
     #endregion
 
     /// <summary>
     /// Returns a new vector that is clamped within the specified minimum and maximum values for each component.
     /// </summary>
-    /// <typeparam name="TAngleUnits">The angle units used for the azimuth and polar coordinates.</typeparam>
-    /// <typeparam name="T">The type of the radius coordinate.</typeparam>
+    /// <typeparam name="T">The type of the vector coordinates.</typeparam>
     /// <param name="vector">The vector to clamp.</param>
     /// <param name="min">The minimum values for each component.</param>
     /// <param name="max">The maximum values for each component.</param>
@@ -601,16 +611,14 @@ public static class Vector
     /// </para>
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Vector<TAngleUnits, T> Clamp<TAngleUnits, T>(ref readonly Vector<TAngleUnits, T> vector, ref readonly Vector<TAngleUnits, T> min, ref readonly Vector<TAngleUnits, T> max)
-        where TAngleUnits : struct, IAngleUnits<TAngleUnits>
-        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => new(T.Clamp(vector.Radius, min.Radius, max.Radius), Angle.Clamp(vector.Azimuth, min.Azimuth, max.Azimuth), Angle.Clamp(vector.Polar, min.Polar, max.Polar));
+    public static Vector<T> Clamp<T>(ref readonly Vector<T> vector, ref readonly Vector<T> min, ref readonly Vector<T> max)
+    where T : struct, INumber<T>, IMinMaxValue<T>
+        => new(T.Clamp(vector.X, min.X, max.X), T.Clamp(vector.Y, min.Y, max.Y), T.Clamp(vector.Z, min.Z, max.Z));
 
     /// <summary>
     /// Performs linear interpolation between two vectors.
     /// </summary>
-    /// <typeparam name="TAngleUnits">The angle units used for the azimuth and polar coordinates.</typeparam>
-    /// <typeparam name="T">The type of the radius coordinate.</typeparam>
+    /// <typeparam name="T">The type of the vector components.</typeparam>
     /// <param name="start">The starting vector.</param>
     /// <param name="end">The ending vector.</param>
     /// <param name="factor">The interpolation factor. Should be between 0 and 1.</param>
@@ -622,16 +630,14 @@ public static class Vector
     /// and then adding the two resulting vectors together.
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Vector<TAngleUnits, T> Lerp<TAngleUnits, T>(ref readonly Vector<TAngleUnits, T> start, ref readonly Vector<TAngleUnits, T> end, T factor)
-        where TAngleUnits : struct, IAngleUnits<TAngleUnits>
+    public static Vector<T> Lerp<T>(ref readonly Vector<T> start, ref readonly Vector<T> end, T factor)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => (start * (T.One - factor)) + (end * factor);
 
     /// <summary>
     /// Calculates the magnitude (length) of the vector.
     /// </summary>
-    /// <typeparam name="TAngleUnits">The angle units used for the azimuth and polar coordinates.</typeparam>
-    /// <typeparam name="T">The type of the radius coordinate.</typeparam>
+    /// <typeparam name="T">The type of the vector coordinates.</typeparam>
     /// <returns>The magnitude of the vector.</returns>
     /// <remarks>
     /// <para>
@@ -639,16 +645,49 @@ public static class Vector
     /// </para>
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static T Magnitude<TAngleUnits, T>(ref readonly Vector<TAngleUnits, T> vector)
-        where TAngleUnits : struct, IAngleUnits<TAngleUnits>
-        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => vector.Radius;
+    public static T Magnitude<T>(ref readonly Vector<T> vector)
+        where T : struct, INumber<T>, IMinMaxValue<T>, IRootFunctions<T>
+        => T.Sqrt(MagnitudeSquared(in vector));
+
+    /// <summary>
+    /// Calculates the magnitude (length) of the vector.
+    /// </summary>
+    /// <typeparam name="T">The type of the vector coordinates.</typeparam>
+    /// <typeparam name="TOut">The numeric type used for the magnitude.</typeparam>
+    /// <returns>The magnitude of the vector.</returns>
+    /// <remarks>
+    /// <para>
+    /// The magnitude is calculated as the Euclidean distance ref readonly the 2D Rectangular coordinate system.
+    /// </para>
+    /// </remarks>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static TOut Magnitude<T, TOut>(ref readonly Vector<T> vector)
+        where T : struct, INumber<T>, IMinMaxValue<T>
+        where TOut : struct, INumber<TOut>, IRootFunctions<TOut>
+        => TOut.Sqrt(TOut.CreateChecked(MagnitudeSquared(in vector)));
+
+    /// <summary>
+    /// Calculates the square of the magnitude (length) of the vector.
+    /// </summary>
+    /// <typeparam name="T">The type of the vector coordinates.</typeparam>
+    /// <returns>The square of the magnitude of the vector.</returns>
+    /// <remarks>
+    /// <para>
+    /// The square of the magnitude is calculated as the Euclidean distance ref readonly the 2D Rectangular coordinate system.
+    /// </para>
+    /// <para>
+    /// Note that the square of the magnitude is returned instead of the actual magnitude to avoid the need for
+    /// taking the square root, which can be a computationally expensive operation.
+    /// </para>
+    /// </remarks>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static T MagnitudeSquared<T>(ref readonly Vector<T> vector)
+        where T : struct, INumber<T>, IMinMaxValue<T>
+        => Utils.Square(vector.X) + Utils.Square(vector.Y) + Utils.Square(vector.Z);
 
     /// <summary>
     /// Returns a new vector that represents the normalized form of the specified vector.
     /// </summary>
-    /// <typeparam name="TAngleUnits">The angle units used for the azimuth and polar coordinates.</typeparam>
-    /// <typeparam name="T">The type of the radius coordinate.</typeparam>
     /// <param name="vector">The vector to normalize.</param>
     /// <returns>
     /// A new vector that represents the normalized form of the specified vector.
@@ -668,37 +707,48 @@ public static class Vector
     /// </para>
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Vector<TAngleUnits, T> Normalize<TAngleUnits, T>(ref readonly Vector<TAngleUnits, T> vector)
-        where TAngleUnits : struct, IAngleUnits<TAngleUnits>
-        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
+    public static Vector<T> Normalize<T>(ref readonly Vector<T> vector)
+        where T : struct, INumber<T>, IMinMaxValue<T>, IRootFunctions<T>
     {
         var length = Magnitude(in vector);
         return length != T.Zero
             ? Divide(in vector, length)
-            : Vector<TAngleUnits, T>.Zero;
+            : Vector<T>.Zero;
     }
 
     /// <summary>
     /// Calculates the dot product.
     /// </summary>
-    /// <typeparam name="T">The type of the radius coordinate.</typeparam>
     /// <param name="left">A vector.</param>
     /// <param name="right">A vector.</param>
     /// <returns>The dot product.</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static T Dot<T>(ref readonly Vector<Radians, T> left, ref readonly Vector<Radians, T> right)
-        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>, ITrigonometricFunctions<T>
-        => Magnitude(in left) * Magnitude(in right) * Angle.Cos(left.Azimuth - right.Azimuth);
+    public static T Dot<T>(ref readonly Vector<T> left, ref readonly Vector<T> right)
+        where T : struct, INumber<T>, IMinMaxValue<T>
+        => (left.X * right.X) + (left.Y * right.Y) + (left.Z * right.Z);
+
+    /// <summary>
+    /// Calculates the cross product.
+    /// </summary>
+    /// <param name="left">A vector.</param>
+    /// <param name="right">A vector.</param>
+    /// <returns>The cross products.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static Vector<T> Cross<T>(ref readonly Vector<T> left, ref readonly Vector<T> right)
+            where T : struct, INumber<T>, IMinMaxValue<T>
+            => new((left.Y * right.Z) - (left.Z * right.Y),
+                    (left.Z * right.X) - (left.X * right.Z),
+                    (left.X * right.Y) - (left.Y * right.X));
 
     /// <summary>
     /// Gets the smallest angle between two vectors.
     /// </summary>
-    /// <typeparam name="T">The type of the radius coordinate.</typeparam>
+    /// <typeparam name="T">The numeric type used internally by <paramref name="from"/> and <paramref name="to"/>.</typeparam>
     /// <param name="from">The vector where the angle measurement starts at.</param>
     /// <param name="to">The vector where the angle measurement stops at.</param>
     /// <returns>The angle between two vectors.</returns>
     /// <remarks>The angle is always less than 180 degrees.</remarks>
-    public static AngleReduced<Radians, T> AngleBetween<T>(ref readonly Vector<Radians, T> from, ref readonly Vector<Radians, T> to)
-        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>, ITrigonometricFunctions<T>
+    public static AngleReduced<Radians, T> AngleBetween<T>(ref readonly Vector<T> from, ref readonly Vector<T> to)
+        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>, ITrigonometricFunctions<T>, IRootFunctions<T>
         => Angle.Acos(Dot(in from, in to) / (Magnitude(in from) * Magnitude(in to)));
 }

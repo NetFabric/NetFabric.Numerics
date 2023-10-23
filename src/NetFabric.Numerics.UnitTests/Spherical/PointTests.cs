@@ -19,7 +19,7 @@ public class PointTests
     const double radius = 2.0;
     static readonly double radiusCos45 = radius * Angle.Cos(Angle.ToRadians(new Angle<Degrees, double>(45.0)));
 
-    public static TheoryData<Point<Degrees, double>, Cartesian3.Point<double>> ToCartesianData => new()
+    public static TheoryData<Point<Degrees, double>, Rectangular3D.Point<double>> ToRectangularData => new()
         {
             { new(0.0, new(0.0), new(0.0)), new(0.0, 0.0, 0.0) },
 
@@ -46,16 +46,16 @@ public class PointTests
         };
 
     [Theory]
-    [MemberData(nameof(ToCartesianData))]
-    public void ToCartesian_Should_Succeed(Point<Degrees, double> point, Cartesian3.Point<double> expected)
+    [MemberData(nameof(ToRectangularData))]
+    public void ToRectangular_Should_Succeed(Point<Degrees, double> point, Rectangular3D.Point<double> expected)
     {
         // arrange
 
         // act
-        var result = Point.ToCartesian(Point.ToRadians(point));
+        var result = Point.ToRectangular(Point.ToRadians(point));
 
         // assert
-        result.Should().BeOfType<Cartesian3.Point<double>>();
+        result.Should().BeOfType<Rectangular3D.Point<double>>();
         result.X.Should().BeApproximately(expected.X, 0.0001);
         result.Y.Should().BeApproximately(expected.Y, 0.0001);
         result.Z.Should().BeApproximately(expected.Z, 0.0001);

@@ -1,4 +1,4 @@
-namespace NetFabric.Numerics.Cartesian2.UnitTests;
+namespace NetFabric.Numerics.Rectangular2D.UnitTests;
 
 public class PointTests
 {
@@ -37,7 +37,7 @@ public class PointTests
         // arrange
 
         // act
-        var result = Polar.Point.Reduce(Polar.Point.ToDegrees(Point.ToPolar(point)));
+        var result = Polar.Point.Reduce(Polar.Point.ToDegrees(Point.ToPolar(in point)));
 
         // assert
         result.Radius.Should().BeApproximately(expected.Radius, 0.0001);

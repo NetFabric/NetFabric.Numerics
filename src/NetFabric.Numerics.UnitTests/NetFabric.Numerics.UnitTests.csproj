@@ -2,10 +2,6 @@
 
   <PropertyGroup>
     <TargetFrameworks>net7.0; net8.0</TargetFrameworks>
-    <RootNamespace>NetFabric.Numerics._2D.UnitTests</RootNamespace>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-    <WarningsAsErrors>Nullable</WarningsAsErrors>
 
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>

@@ -1,7 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 
-namespace NetFabric.Numerics.Spherical;
+namespace NetFabric.Numerics.Polar;
 
 /// <summary>
 /// Represents a vector as an immutable struct.
@@ -10,10 +10,9 @@ namespace NetFabric.Numerics.Spherical;
 /// <typeparam name="T">The type of the radius coordinate.</typeparam>
 /// <param name="Radius">The radius coordinate.</param>
 /// <param name="Azimuth">The azimuth coordinate.</param>
-/// <param name="Polar">The polar coordinate.</param>
-[System.Diagnostics.DebuggerDisplay("Radius = {Radius}, Azimuth = {Azimuth}, Polar = {Polar}")]
+[System.Diagnostics.DebuggerDisplay("Radius = {Radius}, Azimuth = {Azimuth}")]
 [SkipLocalsInit]
-public readonly record struct Vector<TAngleUnits, T>(T Radius, Angle<TAngleUnits, T> Azimuth, Angle<TAngleUnits, T> Polar)
+public readonly record struct Vector<TAngleUnits, T>(T Radius, Angle<TAngleUnits, T> Azimuth)
     : IVector<Vector<TAngleUnits, T>, T>
     where TAngleUnits : struct, IAngleUnits<TAngleUnits>
     where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
@@ -24,7 +23,7 @@ public readonly record struct Vector<TAngleUnits, T>(T Radius, Angle<TAngleUnits
     /// <summary>
     /// Represents a vector whose coordinates are equal to zero. This field is read-only.
     /// </summary>
-    public static readonly Vector<TAngleUnits, T> Zero = new(T.Zero, Angle<TAngleUnits, T>.Zero, Angle<TAngleUnits, T>.Zero);
+    public static readonly Vector<TAngleUnits, T> Zero = new(T.Zero, Angle<TAngleUnits, T>.Zero);
 
     static Vector<TAngleUnits, T> IGeometricBase<Vector<TAngleUnits, T>>.Zero
         => Zero;
@@ -35,12 +34,12 @@ public readonly record struct Vector<TAngleUnits, T>(T Radius, Angle<TAngleUnits
     /// <summary>
     /// Represents the minimum value. This field is read-only.
     /// </summary>
-    public static readonly Vector<TAngleUnits, T> MinValue = new(T.MinValue, Angle<TAngleUnits, T>.MinValue, Angle<TAngleUnits, T>.MinValue);
+    public static readonly Vector<TAngleUnits, T> MinValue = new(T.MinValue, Angle<TAngleUnits, T>.MinValue);
 
     /// <summary>
     /// Represents the maximum value. This field is read-only.
     /// </summary>
-    public static readonly Vector<TAngleUnits, T> MaxValue = new(T.MaxValue, Angle<TAngleUnits, T>.MaxValue, Angle<TAngleUnits, T>.MaxValue);
+    public static readonly Vector<TAngleUnits, T> MaxValue = new(T.MaxValue, Angle<TAngleUnits, T>.MaxValue);
 
     static Vector<TAngleUnits, T> IMinMaxValue<Vector<TAngleUnits, T>>.MinValue
         => MinValue;
@@ -70,8 +69,7 @@ public readonly record struct Vector<TAngleUnits, T>(T Radius, Angle<TAngleUnits
         where TOther : struct, IFloatingPoint<TOther>, IMinMaxValue<TOther>
         => new(
             T.CreateChecked(vector.Radius),
-            Angle<TAngleUnits, T>.CreateChecked(vector.Azimuth),
-            Angle<TAngleUnits, T>.CreateChecked(vector.Polar));
+            Angle<TAngleUnits, T>.CreateChecked(vector.Azimuth));
 
     /// <summary>
     /// Creates an instance of the current type from a value, 
@@ -86,8 +84,7 @@ public readonly record struct Vector<TAngleUnits, T>(T Radius, Angle<TAngleUnits
         where TOther : struct, IFloatingPoint<TOther>, IMinMaxValue<TOther>
         => new(
             T.CreateSaturating(vector.Radius),
-            Angle<TAngleUnits, T>.CreateSaturating(vector.Azimuth),
-            Angle<TAngleUnits, T>.CreateSaturating(vector.Polar));
+            Angle<TAngleUnits, T>.CreateSaturating(vector.Azimuth));
 
     /// <summary>
     /// Creates an instance of the current type from a value, 
@@ -102,15 +99,13 @@ public readonly record struct Vector<TAngleUnits, T>(T Radius, Angle<TAngleUnits
         where TOther : struct, IFloatingPoint<TOther>, IMinMaxValue<TOther>
         => new(
             T.CreateTruncating(vector.Radius),
-            Angle<TAngleUnits, T>.CreateTruncating(vector.Azimuth),
-            Angle<TAngleUnits, T>.CreateTruncating(vector.Polar));
+            Angle<TAngleUnits, T>.CreateTruncating(vector.Azimuth));
 
     object IGeometricBase<Vector<TAngleUnits, T>>.this[int index]
         => index switch
         {
             0 => Radius,
             1 => Azimuth,
-            2 => Polar,
             _ => Throw.ArgumentOutOfRangeException<object>(nameof(index), index, "index out of range")
         };
 
@@ -241,7 +236,7 @@ public readonly record struct Vector<TAngleUnits, T>(T Radius, Angle<TAngleUnits
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector<TAngleUnits, T> operator -(Vector<TAngleUnits, T> right)
-        => new(-right.Radius, -right.Azimuth, -right.Polar);
+        => new(-right.Radius, -right.Azimuth);
 
     /// <summary>
     /// Subtracts the components of the second <see cref="Vector{T}"/> from the corresponding components of the first <see cref="Vector{T}"/>.
@@ -310,7 +305,7 @@ public readonly record struct Vector<TAngleUnits, T>(T Radius, Angle<TAngleUnits
     public readonly string ToString([StringSyntax(StringSyntaxAttribute.NumericFormat)] string? format, IFormatProvider? formatProvider = default)
     {
         var separator = NumberFormatInfo.GetInstance(formatProvider).NumberGroupSeparator;
-        return $"<{Radius.ToString(format, formatProvider)}{separator} {Azimuth.ToString(format, formatProvider)}{separator} {Polar.ToString(format, formatProvider)}>";
+        return $"<{Radius.ToString(format, formatProvider)}{separator} {Azimuth.ToString(format, formatProvider)}>";
     }
 }
 
@@ -363,7 +358,7 @@ public static class Vector
     public static bool IsNaN<TAngleUnits, T>(ref readonly Vector<TAngleUnits, T> vector)
         where TAngleUnits : struct, IAngleUnits<TAngleUnits>
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => T.IsNaN(vector.Radius) || Angle.IsNaN(vector.Azimuth) || Angle.IsNaN(vector.Polar);
+        => T.IsNaN(vector.Radius) || Angle.IsNaN(vector.Azimuth);
 
     /// <summary>
     /// Determines whether any component of the specified <see cref="Vector{T}"/> is positive or negative infinity.
@@ -378,7 +373,7 @@ public static class Vector
     public static bool IsInfinity<TAngleUnits, T>(ref readonly Vector<TAngleUnits, T> vector)
         where TAngleUnits : struct, IAngleUnits<TAngleUnits>
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => T.IsInfinity(vector.Radius) || Angle.IsInfinity(vector.Azimuth) || Angle.IsInfinity(vector.Polar);
+        => T.IsInfinity(vector.Radius) || Angle.IsInfinity(vector.Azimuth);
 
     /// <summary>
     /// Determines whether all components of the specified <see cref="Vector{T}"/> are finite numbers (not NaN, infinity, or negative infinity).
@@ -393,7 +388,7 @@ public static class Vector
     public static bool IsFinite<TAngleUnits, T>(ref readonly Vector<TAngleUnits, T> vector)
         where TAngleUnits : struct, IAngleUnits<TAngleUnits>
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => T.IsFinite(vector.Radius) && Angle.IsFinite(vector.Azimuth) && Angle.IsFinite(vector.Polar);
+        => T.IsFinite(vector.Radius) && Angle.IsFinite(vector.Azimuth);
 
     /// <summary>
     /// Determines whether the specified <see cref="Vector{T}"/> is a normalized vector.
@@ -424,7 +419,7 @@ public static class Vector
     public static bool IsNormalized<TAngleUnits, T>(ref readonly Vector<TAngleUnits, T> vector, T tolerance)
         where TAngleUnits : struct, IAngleUnits<TAngleUnits>
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => Utils.AreApproximatelyEqual(Vector.Magnitude(in vector), T.One, tolerance);
+        => Utils.AreApproximatelyEqual(Magnitude(in vector), T.One, tolerance);
 
     /// <summary>
     /// Checks if two floating-point values are approximately equal within the specified tolerance.
@@ -438,14 +433,13 @@ public static class Vector
     /// <remarks>
     /// This method compares the absolute difference between the two values to the specified tolerance value.
     /// If the absolute difference is less than or equal to the tolerance, the values are considered approximately equal.
-    /// </remarks>    
+    /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool AreApproximatelyEqual<TAngleUnits, T>(ref readonly Vector<TAngleUnits, T> a, ref readonly Vector<TAngleUnits, T> b, T tolerance)
         where TAngleUnits : struct, IAngleUnits<TAngleUnits>
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => Utils.AreApproximatelyEqual(a.Radius, b.Radius, tolerance) &&
-            Utils.AreApproximatelyEqual(a.Azimuth.Value, b.Azimuth.Value, tolerance) &&
-            Utils.AreApproximatelyEqual(a.Polar.Value, b.Polar.Value, tolerance);
+            Utils.AreApproximatelyEqual(a.Azimuth.Value, b.Azimuth.Value, tolerance);
 
     /// <summary>
     /// Compares two Vector instances and returns an indication of their relative values.
@@ -490,7 +484,7 @@ public static class Vector
     public static Vector<TAngleUnits, T> Negate<TAngleUnits, T>(ref readonly Vector<TAngleUnits, T> right)
         where TAngleUnits : struct, IAngleUnits<TAngleUnits>
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => new(-right.Radius, -right.Azimuth, -right.Polar);
+        => new(-right.Radius, -right.Azimuth);
 
     /// <summary>
     /// Adds two vectors component-wise and returns the result as a new Vector.
@@ -512,7 +506,7 @@ public static class Vector
     public static Vector<TAngleUnits, T> Add<TAngleUnits, T>(ref readonly Vector<TAngleUnits, T> left, ref readonly Vector<TAngleUnits, T> right)
         where TAngleUnits : struct, IAngleUnits<TAngleUnits>
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => new(left.Radius + right.Radius, left.Azimuth + right.Azimuth, left.Polar + right.Polar);
+        => new(left.Radius + right.Radius, left.Azimuth + right.Azimuth);
 
     /// <summary>
     /// Subtracts the second vector from the first vector component-wise and returns the result as a new Vector.
@@ -532,7 +526,7 @@ public static class Vector
     public static Vector<TAngleUnits, T> Subtract<TAngleUnits, T>(ref readonly Vector<TAngleUnits, T> left, ref readonly Vector<TAngleUnits, T> right)
         where TAngleUnits : struct, IAngleUnits<TAngleUnits>
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => new(left.Radius - right.Radius, left.Azimuth - right.Azimuth, left.Polar - right.Polar);
+        => new(left.Radius - right.Radius, left.Azimuth - right.Azimuth);
 
     /// <summary>
     /// Multiplies a scalar value with each coordinate of the input Vector and returns the result as a new Vector.
@@ -551,7 +545,7 @@ public static class Vector
     public static Vector<TAngleUnits, T> Multiply<TAngleUnits, T>(T left, ref readonly Vector<TAngleUnits, T> right)
         where TAngleUnits : struct, IAngleUnits<TAngleUnits>
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => new(left * right.Radius, left * right.Azimuth, left * right.Polar);
+        => new(left * right.Radius, left * right.Azimuth);
 
     /// <summary>
     /// Divides each coordinate of the input Vector by a scalar value and returns the result as a new Vector.
@@ -570,7 +564,7 @@ public static class Vector
     public static Vector<TAngleUnits, T> Divide<TAngleUnits, T>(ref readonly Vector<TAngleUnits, T> left, T right)
         where TAngleUnits : struct, IAngleUnits<TAngleUnits>
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => new(left.Radius / right, left.Azimuth / right, left.Polar / right);
+        => new(left.Radius / right, left.Azimuth / right);
 
     #endregion
 
@@ -604,7 +598,7 @@ public static class Vector
     public static Vector<TAngleUnits, T> Clamp<TAngleUnits, T>(ref readonly Vector<TAngleUnits, T> vector, ref readonly Vector<TAngleUnits, T> min, ref readonly Vector<TAngleUnits, T> max)
         where TAngleUnits : struct, IAngleUnits<TAngleUnits>
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => new(T.Clamp(vector.Radius, min.Radius, max.Radius), Angle.Clamp(vector.Azimuth, min.Azimuth, max.Azimuth), Angle.Clamp(vector.Polar, min.Polar, max.Polar));
+        => new(T.Clamp(vector.Radius, min.Radius, max.Radius), Angle.Clamp(vector.Azimuth, min.Azimuth, max.Azimuth));
 
     /// <summary>
     /// Performs linear interpolation between two vectors.

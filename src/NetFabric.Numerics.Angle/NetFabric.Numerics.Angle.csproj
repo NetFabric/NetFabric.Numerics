@@ -3,9 +3,6 @@
   <PropertyGroup>
     <Title>NetFabric.Numerics.Angle</Title>
     <TargetFrameworks>net7.0; net8.0</TargetFrameworks>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-    <WarningsAsErrors>Nullable</WarningsAsErrors>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Description>
       A strongly-typed representation of an angle.
@@ -13,9 +10,6 @@
       Includes conversion, linear interpolation, reduction, reference angle, comparison, classification, trigonometry and algebra operations.
     </Description>
     <Version>1.0.0-beta06</Version>
-    <Copyright>Copyright © Antão Almada 2023</Copyright>
-    <Authors>Antão Almada</Authors>
-    <Company>NetFabric</Company>
     <PackageIcon>Icon.png</PackageIcon>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
@@ -27,7 +21,6 @@
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-    <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>

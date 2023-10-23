@@ -17,7 +17,7 @@ namespace NetFabric.Numerics.Polar
             };
 
         /// <summary>
-        /// Gets the list of coordinates in the polar coordinate system.
+        /// Gets the list of coordinates ref readonly the polar coordinate system.
         /// </summary>
         /// <remarks>
         /// Each coordinate contains information about its name and type.

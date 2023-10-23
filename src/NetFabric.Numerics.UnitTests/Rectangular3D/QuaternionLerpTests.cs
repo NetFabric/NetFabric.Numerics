@@ -1,6 +1,6 @@
-﻿using NetFabric.Numerics.Cartesian3;
+﻿using NetFabric.Numerics.Rectangular3D;
 
-namespace NetFabric.Numerics.UnitsTests.Cartesian3;
+namespace NetFabric.Numerics.UnitsTests.Rectangular3D;
 
 public class QuaternionLerpTests
 {
@@ -21,7 +21,7 @@ public class QuaternionLerpTests
         // arrange
 
         // act
-        var result = Quaternion.Lerp(start, end, factor);
+        var result = Quaternion.Lerp(in start, in end, factor);
 
         // assert
         result.Should().Be(expected);
@@ -34,7 +34,7 @@ public class QuaternionLerpTests
         // arrange
 
         // act
-        var result = Quaternion.LerpShortestPath(start, end, factor);
+        var result = Quaternion.LerpShortestPath(in start, in end, factor);
 
         // assert
         result.Should().Be(expected);
@@ -47,7 +47,7 @@ public class QuaternionLerpTests
         // arrange
 
         // act
-        var result = Quaternion.Slerp(start, end, factor);
+        var result = Quaternion.Slerp(in start, in end, factor);
 
         // assert
         result.Should().Be(expected);
@@ -60,7 +60,7 @@ public class QuaternionLerpTests
         // arrange
 
         // act
-        var result = Quaternion.SlerpShortestPath(start, end, factor);
+        var result = Quaternion.SlerpShortestPath(in start, in end, factor);
 
         // assert
         result.Should().Be(expected);

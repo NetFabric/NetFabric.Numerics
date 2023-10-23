@@ -1,4 +1,4 @@
-namespace NetFabric.Numerics.Cartesian3.UnitTests;
+namespace NetFabric.Numerics.Rectangular3D.UnitTests;
 
 public class PointTests
 {

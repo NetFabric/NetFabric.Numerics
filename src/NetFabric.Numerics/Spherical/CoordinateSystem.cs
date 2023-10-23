@@ -18,7 +18,7 @@ namespace NetFabric.Numerics.Spherical
             };
 
         /// <summary>
-        /// Gets the list of coordinates in the spherical coordinate system.
+        /// Gets the list of coordinates ref readonly the spherical coordinate system.
         /// </summary>
         /// <remarks>
         /// Each coordinate contains information about its name and type.

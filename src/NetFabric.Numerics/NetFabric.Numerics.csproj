@@ -3,19 +3,13 @@
   <PropertyGroup>
     <Title>NetFabric.Numerics</Title>
     <TargetFrameworks>net7.0; net8.0</TargetFrameworks>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-    <WarningsAsErrors>Nullable</WarningsAsErrors>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Description></Description>
     <Version>1.0.0-beta06</Version>
-    <Copyright>Copyright © Antão Almada 2023</Copyright>
-    <Authors>Antão Almada</Authors>
-    <Company>NetFabric</Company>
     <PackageIcon>Icon.png</PackageIcon>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageTags>math, numerics, vector, quaternion, cartesian, polar, spherical</PackageTags>
+    <PackageTags>math, numerics, vector, quaternion, rectangular, polar, spherical</PackageTags>
     <PackageProjectUrl>https://netfabric.github.io/NetFabric.Numerics/</PackageProjectUrl>
     <PackageReleaseNotes>
     </PackageReleaseNotes>
@@ -45,7 +39,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Spherical\Vector.cs" />
+    <Compile Remove="Matrix4x4.cs" />
   </ItemGroup>
 
   <ItemGroup>
