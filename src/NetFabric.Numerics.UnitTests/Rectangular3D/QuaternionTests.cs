@@ -1,6 +1,6 @@
 ﻿using FluentAssertions;
 
-namespace NetFabric.Numerics.Cartesian3.UnitsTests;
+namespace NetFabric.Numerics.Rectangular3D.UnitsTests;
 
 public class QuaternionTests
 {
@@ -191,30 +191,30 @@ public class QuaternionTests
         result.Should().Be(value);
     }
 
-    public static TheoryData<Vector3<float>, Angle<Radians, float>> FromAxisAngleData
+    public static TheoryData<Vector<float>, Angle<Radians, float>> FromAxisAngleData
         => new()
         {
-                {Vector3<float>.UnitX, Angle<Radians, float>.Zero},
-                {Vector3<float>.UnitX, Angle<Radians, float>.Right},
-                {Vector3<float>.UnitX, -Angle<Radians, float>.Right},
+                {Vector<float>.UnitX, Angle<Radians, float>.Zero},
+                {Vector<float>.UnitX, Angle<Radians, float>.Right},
+                {Vector<float>.UnitX, -Angle<Radians, float>.Right},
 
-                {Vector3<float>.UnitY, Angle<Radians, float>.Zero},
-                {Vector3<float>.UnitY, Angle<Radians, float>.Right},
-                {Vector3<float>.UnitY, -Angle<Radians, float>.Right},
+                {Vector<float>.UnitY, Angle<Radians, float>.Zero},
+                {Vector<float>.UnitY, Angle<Radians, float>.Right},
+                {Vector<float>.UnitY, -Angle<Radians, float>.Right},
 
-                {Vector3<float>.UnitZ, Angle<Radians, float>.Zero},
-                {Vector3<float>.UnitZ, Angle<Radians, float>.Right},
-                {Vector3<float>.UnitZ, -Angle<Radians, float>.Right},
+                {Vector<float>.UnitZ, Angle<Radians, float>.Zero},
+                {Vector<float>.UnitZ, Angle<Radians, float>.Right},
+                {Vector<float>.UnitZ, -Angle<Radians, float>.Right},
         };
 
     [Theory]
     [MemberData(nameof(FromAxisAngleData))]
-    public void FromAxisAngle_Should_Succeed(Vector3<float> axis, Angle<Radians, float> angle)
+    public void FromAxisAngle_Should_Succeed(Vector<float> axis, Angle<Radians, float> angle)
     {
         // arrange
         var expected = System.Numerics.Quaternion.CreateFromAxisAngle(new System.Numerics.Vector3(axis.X, axis.Y, axis.Z), angle.Value);
         // act
-        var result = Quaternion.FromAxisAngle(axis, angle);
+        var result = Quaternion.FromAxisAngle(in axis, angle);
 
         // assert
         result.X.Should().Be(expected.X);
@@ -259,7 +259,7 @@ public class QuaternionTests
         var expected = System.Numerics.Quaternion.Normalize(new System.Numerics.Quaternion(quaternion.X, quaternion.Y, quaternion.Z, quaternion.W));
 
         // act
-        var result = Quaternion.Normalize(quaternion);
+        var result = Quaternion.Normalize(in quaternion);
 
         // assert
         result.X.Should().BeApproximately(expected.X, 1e-7f);
@@ -276,7 +276,7 @@ public class QuaternionTests
         var expected = System.Numerics.Quaternion.Dot(new System.Numerics.Quaternion(left.X, left.Y, left.Z, left.W), new System.Numerics.Quaternion(right.X, right.Y, right.Z, right.W));
 
         // act
-        var result = Quaternion.DotProduct(left, right);
+        var result = Quaternion.DotProduct(in left, in right);
 
         // assert
         result.Should().Be(expected);

@@ -6,7 +6,7 @@
 /// <typeparam name="TSelf">The type that implements the interface.</typeparam>
 /// <typeparam name="T">The type of the matrix elements.</typeparam>
 public interface IMatrix<TSelf, T>
-    : INumericBase<TSelf>,
+    : IGeometricBase<TSelf>,
       IAdditiveIdentity<TSelf, TSelf>,
       IUnaryPlusOperators<TSelf, TSelf>,
       IAdditionOperators<TSelf, TSelf, TSelf>,
@@ -19,19 +19,19 @@ public interface IMatrix<TSelf, T>
     where T : struct, INumber<T>, IMinMaxValue<T>
 {
     /// <summary>
-    /// Gets the number of rows in the matrix.
+    /// Gets the number of rows ref readonly the matrix.
     /// </summary>
-    /// <value>The number of rows in the matrix.</value>
+    /// <value>The number of rows ref readonly the matrix.</value>
     int RowCount { get; }
 
     /// <summary>
-    /// Gets the number of columns in the matrix.
+    /// Gets the number of columns ref readonly the matrix.
     /// </summary>
-    /// <value>The number of columns in the matrix.</value>
+    /// <value>The number of columns ref readonly the matrix.</value>
     int ColumnCount { get; }
 
     /// <summary>
-    /// Gets the value at the specified row and column in the matrix.
+    /// Gets the value at the specified row and column ref readonly the matrix.
     /// </summary>
     /// <param name="row">The zero-based index of the row.</param>
     /// <param name="column">The zero-based index of the column.</param>

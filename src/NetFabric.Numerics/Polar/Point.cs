@@ -1,58 +1,60 @@
+using System.Drawing;
+
 namespace NetFabric.Numerics.Polar;
 
 /// <summary>
-/// Represents a point in polar coordinates.
+/// Represents a point ref readonly polar coordinates.
 /// </summary>
-/// <typeparam name="TUnits">The units used for the angles.</typeparam>
+/// <typeparam name="TAngleUnits">The units used for the angles.</typeparam>
 /// <typeparam name="T">The type used for the coordinates.</typeparam>
 [System.Diagnostics.DebuggerDisplay("Radius = {Radius}, Azimuth = {Azimuth}")]
 [SkipLocalsInit]
-public readonly struct Point<TUnits, T>
-    : IPoint<Point<TUnits, T>>
-    where TUnits : struct, IAngleUnits<TUnits>
+public readonly struct Point<TAngleUnits, T>(T radius, Angle<TAngleUnits, T> azimuth)
+    : IPoint<Point<TAngleUnits, T>>
+    where TAngleUnits : struct, IAngleUnits<TAngleUnits>
     where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
 {
-    public T Radius { get; }
-
-    public Angle<TUnits, T> Azimuth { get; }
+    /// <summary>
+    /// Gets the radius component of the polar coordinate point.
+    /// </summary>
+    /// <remarks>
+    /// This property is read-only.
+    /// </remarks>
+    public T Radius
+        => radius;
 
     /// <summary>
-    /// Creates an instance of the current type from spherical coordinates.
+    /// Gets the azimuth angle component of the polar coordinate point.
     /// </summary>
-    /// <param name="radius">The radial distance from the origin (usually the radial distance).</param>
-    /// <param name="azimuth">The horizontal angle in radians with units defined by <typeparamref name="TUnits"/> (often called the azimuth angle).</param>
     /// <remarks>
-    /// These parameters collectively define the position of a 2D point in space based on polar coordinates.
+    /// This property is read-only.
     /// </remarks>
-    public Point(T radius, Angle<TUnits, T> azimuth)
-    {
-        Radius = radius;
-        Azimuth = azimuth;
-    }
+    public Angle<TAngleUnits, T> Azimuth
+        => azimuth;
 
     #region constants
 
     /// <summary>
     /// Represents the zero value. This field is read-only.
     /// </summary>
-    public static readonly PointReduced<TUnits, T> Zero = new(T.Zero, Angle<TUnits, T>.Zero);
+    public static readonly PointReduced<TAngleUnits, T> Zero = new(T.Zero, Angle<TAngleUnits, T>.Zero);
 
-    static Point<TUnits, T> INumericBase<Point<TUnits, T>>.Zero
+    static Point<TAngleUnits, T> IGeometricBase<Point<TAngleUnits, T>>.Zero
         => Zero;
 
     /// <summary>
     /// Represents the minimum value. This field is read-only.
     /// </summary>
-    public static readonly Point<TUnits, T> MinValue = new(T.MinValue, Angle<TUnits, T>.MinValue);
+    public static readonly Point<TAngleUnits, T> MinValue = new(T.MinValue, Angle<TAngleUnits, T>.MinValue);
 
     /// <summary>
     /// Represents the maximum value. This field is read-only.
     /// </summary>
-    public static readonly Point<TUnits, T> MaxValue = new(T.MaxValue, Angle<TUnits, T>.MaxValue);
+    public static readonly Point<TAngleUnits, T> MaxValue = new(T.MaxValue, Angle<TAngleUnits, T>.MaxValue);
 
-    static Point<TUnits, T> IMinMaxValue<Point<TUnits, T>>.MinValue
+    static Point<TAngleUnits, T> IMinMaxValue<Point<TAngleUnits, T>>.MinValue
         => MinValue;
-    static Point<TUnits, T> IMinMaxValue<Point<TUnits, T>>.MaxValue
+    static Point<TAngleUnits, T> IMinMaxValue<Point<TAngleUnits, T>>.MaxValue
         => MaxValue;
 
     #endregion
@@ -60,9 +62,9 @@ public readonly struct Point<TUnits, T>
     /// <summary>
     /// Gets the coordinate system.
     /// </summary>
-    public CoordinateSystem<TUnits, T> CoordinateSystem
+    public CoordinateSystem<TAngleUnits, T> CoordinateSystem
         => new();
-    ICoordinateSystem IPoint<Point<TUnits, T>>.CoordinateSystem
+    ICoordinateSystem IGeometricBase<Point<TAngleUnits, T>>.CoordinateSystem
         => CoordinateSystem;
 
     /// <summary>
@@ -70,47 +72,47 @@ public readonly struct Point<TUnits, T>
     /// throwing an overflow exception for any values that fall outside the representable range of the current type.
     /// </summary>
     /// <typeparam name="TOther">The type of the components of <paramref name="point"/>.</typeparam>
-    /// <param name="point">The value which is used to create the instance of <see cref="Point{TUnits, T}"/></param>
-    /// <returns>An instance of <see cref="Point{TUnits, T}"/> created from <paramref name="point" />.</returns>
+    /// <param name="point">The value which is used to create the instance of <see cref="Point{TAngleUnits, T}"/></param>
+    /// <returns>An instance of <see cref="Point{TAngleUnits, T}"/> created from <paramref name="point" />.</returns>
     /// <exception cref="NotSupportedException"><typeparamref name="TOther" /> or <typeparamref name="TOther"/> is not supported.</exception>
-    /// <exception cref="OverflowException"><paramref name="point" /> is not representable by <see cref="Point{TUnits, T}"/>.</exception>
-    public static Point<TUnits, T> CreateChecked<TOther>(in Point<TUnits, TOther> point)
+    /// <exception cref="OverflowException"><paramref name="point" /> is not representable by <see cref="Point{TAngleUnits, T}"/>.</exception>
+    public static Point<TAngleUnits, T> CreateChecked<TOther>(ref readonly Point<TAngleUnits, TOther> point)
         where TOther : struct, IFloatingPoint<TOther>, IMinMaxValue<TOther>
         => new(
             T.CreateChecked(point.Radius),
-            Angle<TUnits, T>.CreateChecked(point.Azimuth));
+            Angle<TAngleUnits, T>.CreateChecked(point.Azimuth));
 
     /// <summary>
     /// Creates an instance of the current type from a value, 
     /// saturating any values that fall outside the representable range of the current type.
     /// </summary>
     /// <typeparam name="TOther">The type of the components of <paramref name="point"/>.</typeparam>
-    /// <param name="point">The value which is used to create the instance of <see cref="Point{TUnits, T}"/></param>
-    /// <returns>An instance of <see cref="Point{TUnits, T}"/> created from <paramref name="point" />.</returns>
+    /// <param name="point">The value which is used to create the instance of <see cref="Point{TAngleUnits, T}"/></param>
+    /// <returns>An instance of <see cref="Point{TAngleUnits, T}"/> created from <paramref name="point" />.</returns>
     /// <exception cref="NotSupportedException"><typeparamref name="TOther" /> or <typeparamref name="TOther"/> is not supported.</exception>
-    /// <exception cref="OverflowException"><paramref name="point" /> is not representable by <see cref="Point{TUnits, T}"/>.</exception>
-    public static Point<TUnits, T> CreateSaturating<TOther>(in Point<TUnits, TOther> point)
+    /// <exception cref="OverflowException"><paramref name="point" /> is not representable by <see cref="Point{TAngleUnits, T}"/>.</exception>
+    public static Point<TAngleUnits, T> CreateSaturating<TOther>(ref readonly Point<TAngleUnits, TOther> point)
         where TOther : struct, IFloatingPoint<TOther>, IMinMaxValue<TOther>
         => new(
             T.CreateSaturating(point.Radius),
-            Angle<TUnits, T>.CreateSaturating(point.Azimuth));
+            Angle<TAngleUnits, T>.CreateSaturating(point.Azimuth));
 
     /// <summary>
     /// Creates an instance of the current type from a value, 
     /// truncating any values that fall outside the representable range of the current type.
     /// </summary>
     /// <typeparam name="TOther">The type of the components of <paramref name="point"/>.</typeparam>
-    /// <param name="point">The value which is used to create the instance of <see cref="Point{TUnits, T}"/></param>
-    /// <returns>An instance of <see cref="Point{TUnits, T}"/> created from <paramref name="point" />.</returns>
+    /// <param name="point">The value which is used to create the instance of <see cref="Point{TAngleUnits, T}"/></param>
+    /// <returns>An instance of <see cref="Point{TAngleUnits, T}"/> created from <paramref name="point" />.</returns>
     /// <exception cref="NotSupportedException"><typeparamref name="TOther" /> or <typeparamref name="TOther"/> is not supported.</exception>
-    /// <exception cref="OverflowException"><paramref name="point" /> is not representable by <see cref="Point{TUnits, T}"/>.</exception>
-    public static Point<TUnits, T> CreateTruncating<TOther>(in Point<TUnits, TOther> point)
+    /// <exception cref="OverflowException"><paramref name="point" /> is not representable by <see cref="Point{TAngleUnits, T}"/>.</exception>
+    public static Point<TAngleUnits, T> CreateTruncating<TOther>(ref readonly Point<TAngleUnits, TOther> point)
         where TOther : struct, IFloatingPoint<TOther>, IMinMaxValue<TOther>
         => new(
             T.CreateTruncating(point.Radius),
-            Angle<TUnits, T>.CreateTruncating(point.Azimuth));
+            Angle<TAngleUnits, T>.CreateTruncating(point.Azimuth));
 
-    object IPoint<Point<TUnits, T>>.this[int index]
+    object IGeometricBase<Point<TAngleUnits, T>>.this[int index]
         => index switch
         {
             0 => Radius,
@@ -121,7 +123,7 @@ public readonly struct Point<TUnits, T>
     #region equality
 
     /// <summary>
-    /// Indicates whether two <see cref="Point{TUnits, T}"/> instances are equal.
+    /// Indicates whether two <see cref="Point{TAngleUnits, T}"/> instances are equal.
     /// </summary>
     /// <param name="left">The first point to compare.</param>
     /// <param name="right">The second point to compare.</param>
@@ -129,11 +131,11 @@ public readonly struct Point<TUnits, T>
     /// <remarks>
     /// The method compares the numerical values of the <paramref name="left"/> and <paramref name="right"/> points to determine their equality.
     /// </remarks>
-    public static bool operator ==(Point<TUnits, T> left, Point<TUnits, T> right)
+    public static bool operator ==(Point<TAngleUnits, T> left, Point<TAngleUnits, T> right)
         => left.Equals(right);
 
     /// <summary>
-    /// Indicates whether two <see cref="Point{TUnits, T}"/> instances are not equal.
+    /// Indicates whether two <see cref="Point{TAngleUnits, T}"/> instances are not equal.
     /// </summary>
     /// <param name="left">The first point to compare.</param>
     /// <param name="right">The second point to compare.</param>
@@ -141,47 +143,47 @@ public readonly struct Point<TUnits, T>
     /// <remarks>
     /// The method compares the numerical values of the <paramref name="left"/> and <paramref name="right"/> points to determine their equality.
     /// </remarks>
-    public static bool operator !=(Point<TUnits, T> left, Point<TUnits, T> right)
+    public static bool operator !=(Point<TAngleUnits, T> left, Point<TAngleUnits, T> right)
         => !left.Equals(right);
 
     /// <summary>
-    /// Returns the hash code for the current <see cref="Point{TUnits, T}"/> instance.
+    /// Returns the hash code for the current <see cref="Point{TAngleUnits, T}"/> instance.
     /// </summary>
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
         => HashCode.Combine(Radius, Azimuth);
 
     /// <summary>
-    /// Indicates whether the current <see cref="Point{TUnits, T}"/> instance is equal to another <see cref="Point{TUnits, T}"/> instance.
+    /// Indicates whether the current <see cref="Point{TAngleUnits, T}"/> instance is equal to another <see cref="Point{TAngleUnits, T}"/> instance.
     /// </summary>
-    /// <param name="other">A <see cref="Point{TUnits, T}"/> value to compare to this instance.</param>
+    /// <param name="other">A <see cref="Point{TAngleUnits, T}"/> value to compare to this instance.</param>
     /// <returns>true if <paramref name="other"/> has the same value as this instance; otherwise, false.</returns>
-    public bool Equals(Point<TUnits, T> other)
+    public bool Equals(Point<TAngleUnits, T> other)
         => EqualityComparer<T>.Default.Equals(Radius, other.Radius) &&
             Azimuth.Equals(other.Azimuth);
 
     /// <summary>
-    /// Indicates whether the current <see cref="Point{TUnits, T}"/> instance is equal to another <see cref="PointReduced{TUnits, T}"/> instance.
+    /// Indicates whether the current <see cref="Point{TAngleUnits, T}"/> instance is equal to another <see cref="PointReduced{TAngleUnits, T}"/> instance.
     /// </summary>
-    /// <param name="other">A <see cref="PointReduced{TUnits, T}"/> value to compare to this instance.</param>
-    /// <returns>true if <paramref name="other"/> has the same value as this instance; otherwise, false.
-    public bool Equals(PointReduced<TUnits, T> other)
+    /// <param name="other">A <see cref="PointReduced{TAngleUnits, T}"/> value to compare to this instance.</param>
+    /// <returns>true if <paramref name="other"/> has the same value as this instance; otherwise, false.</returns>
+    public bool Equals(PointReduced<TAngleUnits, T> other)
         => EqualityComparer<T>.Default.Equals(Radius, other.Radius) &&
             Azimuth.Equals(other.Azimuth);
 
     /// <summary>
-    /// Indicates whether the current <see cref="Point{TUnits, T}"/> instance is equal to another object.
+    /// Indicates whether the current <see cref="Point{TAngleUnits, T}"/> instance is equal to another object.
     /// </summary>
     /// <param name="obj">An object to compare with this instance.</param>
     /// <returns>
-    /// true if <paramref name="obj"/> is an instance of a <see cref="Point{TUnits, T}"/> or 
-    /// <see cref="PointReduced{TUnits, T}"/> and equals the value of this instance; otherwise, false.
+    /// true if <paramref name="obj"/> is an instance of a <see cref="Point{TAngleUnits, T}"/> or 
+    /// <see cref="PointReduced{TAngleUnits, T}"/> and equals the value of this instance; otherwise, false.
     /// </returns>
     public override bool Equals(object? obj)
         => obj switch
         {
-            Point<TUnits, T> point => Equals(point),
-            PointReduced<TUnits, T> point => Equals(point),
+            Point<TAngleUnits, T> point => Equals(point),
+            PointReduced<TAngleUnits, T> point => Equals(point),
             _ => false
         };
 
@@ -198,8 +200,8 @@ public static partial class Point
     /// Converts a point from degrees to radians.
     /// </summary>
     /// <typeparam name="T">The type used for the coordinates.</typeparam>
-    /// <param name="point">The input point in degrees.</param>
-    /// <returns>The converted point in radians.</returns>    
+    /// <param name="point">The input point ref readonly degrees.</param>
+    /// <returns>The converted point ref readonly radians.</returns>    
     public static Point<Radians, T> ToRadians<T>(Point<Degrees, T> point)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => new(point.Radius, Angle.ToRadians(point.Azimuth));
@@ -208,8 +210,8 @@ public static partial class Point
     /// Convert a point from degrees to gradians.
     /// </summary>
     /// <typeparam name="T">The type used for the coordinates.</typeparam>
-    /// <param name="point">The input point in degrees.</param>
-    /// <returns>The converted point in gradians.</returns>
+    /// <param name="point">The input point ref readonly degrees.</param>
+    /// <returns>The converted point ref readonly gradians.</returns>
     public static Point<Gradians, T> ToGradians<T>(Point<Degrees, T> point)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => new(point.Radius, Angle.ToGradians(point.Azimuth));
@@ -218,8 +220,8 @@ public static partial class Point
     /// Convert a point from degrees to revolutions.
     /// </summary>
     /// <typeparam name="T">The type used for the coordinates.</typeparam>
-    /// <param name="point">The input point in degrees.</param>
-    /// <returns>The converted point in revolutions.</returns>
+    /// <param name="point">The input point ref readonly degrees.</param>
+    /// <returns>The converted point ref readonly revolutions.</returns>
     public static Point<Revolutions, T> ToRevolutions<T>(Point<Degrees, T> point)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => new(point.Radius, Angle.ToRevolutions(point.Azimuth));
@@ -228,8 +230,8 @@ public static partial class Point
     /// Convert a point from radians to degrees.
     /// </summary>
     /// <typeparam name="T">The type used for the coordinates.</typeparam>
-    /// <param name="point">The input point in radians.</param>
-    /// <returns>The converted point in degrees.</returns>
+    /// <param name="point">The input point ref readonly radians.</param>
+    /// <returns>The converted point ref readonly degrees.</returns>
     public static Point<Degrees, T> ToDegrees<T>(Point<Radians, T> point)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => new(point.Radius, Angle.ToDegrees(point.Azimuth));
@@ -238,8 +240,8 @@ public static partial class Point
     /// Convert a point from radians to gradians.
     /// </summary>
     /// <typeparam name="T">The type used for the coordinates.</typeparam>
-    /// <param name="point">The input point in radians.</param>
-    /// <returns>The converted point in gradians.</returns>
+    /// <param name="point">The input point ref readonly radians.</param>
+    /// <returns>The converted point ref readonly gradians.</returns>
     public static Point<Gradians, T> ToGradians<T>(Point<Radians, T> point)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => new(point.Radius, Angle.ToGradians(point.Azimuth));
@@ -248,8 +250,8 @@ public static partial class Point
     /// Convert a point from radians to revolutions.
     /// </summary>
     /// <typeparam name="T">The type used for the coordinates.</typeparam>
-    /// <param name="point">The input point in radians.</param>
-    /// <returns>The converted point in revolutions.</returns>
+    /// <param name="point">The input point ref readonly radians.</param>
+    /// <returns>The converted point ref readonly revolutions.</returns>
     public static Point<Revolutions, T> ToRevolutions<T>(Point<Radians, T> point)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => new(point.Radius, Angle.ToRevolutions(point.Azimuth));
@@ -258,8 +260,8 @@ public static partial class Point
     /// Convert a point from gradians to degrees.
     /// </summary>
     /// <typeparam name="T">The type used for the coordinates.</typeparam>
-    /// <param name="point">The input point in gradians.</param>
-    /// <returns>The converted point in degrees.</returns>
+    /// <param name="point">The input point ref readonly gradians.</param>
+    /// <returns>The converted point ref readonly degrees.</returns>
     public static Point<Degrees, T> ToDegrees<T>(Point<Gradians, T> point)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => new(point.Radius, Angle.ToDegrees(point.Azimuth));
@@ -268,8 +270,8 @@ public static partial class Point
     /// Convert a point from gradians to radians.
     /// </summary>
     /// <typeparam name="T">The type used for the coordinates.</typeparam>
-    /// <param name="point">The input point in gradians.</param>
-    /// <returns>The converted point in radians.</returns>
+    /// <param name="point">The input point ref readonly gradians.</param>
+    /// <returns>The converted point ref readonly radians.</returns>
     public static Point<Radians, T> ToRadians<T>(Point<Gradians, T> point)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => new(point.Radius, Angle.ToRadians(point.Azimuth));
@@ -278,8 +280,8 @@ public static partial class Point
     /// Convert a point from gradians to revolutions.
     /// </summary>
     /// <typeparam name="T">The type used for the coordinates.</typeparam>
-    /// <param name="point">The input point in gradians.</param>
-    /// <returns>The converted point in revolutions.</returns>
+    /// <param name="point">The input point ref readonly gradians.</param>
+    /// <returns>The converted point ref readonly revolutions.</returns>
     public static Point<Revolutions, T> ToRevolutions<T>(Point<Gradians, T> point)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => new(point.Radius, Angle.ToRevolutions(point.Azimuth));
@@ -288,8 +290,8 @@ public static partial class Point
     /// Convert a point from revolutions to degrees.
     /// </summary>
     /// <typeparam name="T">The type used for the coordinates.</typeparam>
-    /// <param name="point">The input point in revolutions.</param>
-    /// <returns>The converted point in degrees.</returns>
+    /// <param name="point">The input point ref readonly revolutions.</param>
+    /// <returns>The converted point ref readonly degrees.</returns>
     public static Point<Degrees, T> ToDegrees<T>(Point<Revolutions, T> point)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => new(point.Radius, Angle.ToDegrees(point.Azimuth));
@@ -298,8 +300,8 @@ public static partial class Point
     /// Convert a point from revolutions to radians.
     /// </summary>
     /// <typeparam name="T">The type used for the coordinates.</typeparam>
-    /// <param name="point">The input point in revolutions.</param>
-    /// <returns>The converted point in radians.</returns>
+    /// <param name="point">The input point ref readonly revolutions.</param>
+    /// <returns>The converted point ref readonly radians.</returns>
     public static Point<Radians, T> ToRadians<T>(Point<Revolutions, T> point)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => new(point.Radius, Angle.ToRadians(point.Azimuth));
@@ -308,44 +310,44 @@ public static partial class Point
     /// Convert a point from revolutions to gradians.
     /// </summary>
     /// <typeparam name="T">The type used for the coordinates.</typeparam>
-    /// <param name="point">The input point in revolutions.</param>
-    /// <returns>The converted point in gradians.</returns>
+    /// <param name="point">The input point ref readonly revolutions.</param>
+    /// <returns>The converted point ref readonly gradians.</returns>
     public static Point<Gradians, T> ToGradians<T>(Point<Revolutions, T> point)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => new(point.Radius, Angle.ToGradians(point.Azimuth));
 
     /// <summary>
-    /// Reduces a point in spherical coordinates by applying reduction functions to its components.
+    /// Reduces a point ref readonly spherical coordinates by applying reduction functions to its components.
     /// </summary>
-    /// <typeparam name="TUnits">The type representing angle units.</typeparam>
+    /// <typeparam name="TAngleUnits">The type representing angle units.</typeparam>
     /// <typeparam name="T">The type used for the coordinates.</typeparam>
-    /// <param name="point">The input point in spherical coordinates to be reduced.</param>
+    /// <param name="point">The input point ref readonly spherical coordinates to be reduced.</param>
     /// <returns>
-    /// A new <see cref="PointReduced{TUnits, T}"/> object with a reduced
+    /// A new <see cref="PointReduced{TAngleUnits, T}"/> object with a reduced
     /// azimuthal angle and polar angle, while keeping the original radius.
     /// </returns>
     /// <remarks>
     /// The reduction process involves applying reduction functions to the azimuthal and polar angles
     /// of the input spherical point. The radius component remains unchanged.
     /// </remarks>
-    public static PointReduced<TUnits, T> Reduce<TUnits, T>(Point<TUnits, T> point)
-        where TUnits : struct, IAngleUnits<TUnits>
+    public static PointReduced<TAngleUnits, T> Reduce<TAngleUnits, T>(Point<TAngleUnits, T> point)
+        where TAngleUnits : struct, IAngleUnits<TAngleUnits>
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => new(point.Radius, Angle.Reduce(point.Azimuth));
 
     /// <summary>
-    /// Converts a point in polar coordinates to cartesian 2D coordinates.
+    /// Converts a point ref readonly polar coordinates to rectangular 2D coordinates.
     /// </summary>
     /// <typeparam name="T">The type used for the coordinates.</typeparam>
-    /// <param name="point">The point in polar coordinates to convert.</param>
-    /// <returns>The cartesian 2D coordinates representing the point.</returns>
+    /// <param name="point">The point ref readonly polar coordinates to convert.</param>
+    /// <returns>The rectangular 2D coordinates representing the point.</returns>
     /// <remarks>
     /// If the type of point to convert doesn't meet the constraints, please convert it first to a suitable type using one of the conversion methods: 
-    /// - <see cref="CreateChecked"/>
-    /// - <see cref="CreateSaturating"/>
-    /// - <see cref="CreateTruncating"/>
+    /// - <see cref="Point{TAngleUnits, T}.CreateChecked{TOther}(ref readonly Point{TAngleUnits, TOther})"/>
+    /// - <see cref="Point{TAngleUnits, T}.CreateSaturating{TOther}(ref readonly Point{TAngleUnits, TOther})"/>
+    /// - <see cref="Point{TAngleUnits, T}.CreateTruncating{TOther}(ref readonly Point{TAngleUnits, TOther})"/>
     /// </remarks>
-    public static Cartesian2.Point<T> ToCartesian<T>(Point<Radians, T> point)
+    public static Rectangular2D.Point<T> ToRectangular<T>(Point<Radians, T> point)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>, ITrigonometricFunctions<T>
     {
         var (sinAzimuth, cosAzimuth) = Angle.SinCos(point.Azimuth);

@@ -1,4 +1,4 @@
-namespace NetFabric.Numerics.Cartesian3;
+namespace NetFabric.Numerics.Rectangular3D;
 
 /// <summary>
 /// Represents a point as an immutable struct.
@@ -17,7 +17,7 @@ public readonly record struct Point<T>(T X, T Y, T Z)
 
     public static readonly Point<T> Zero = new(T.Zero, T.Zero, T.Zero);
 
-    static Point<T> INumericBase<Point<T>>.Zero
+    static Point<T> IGeometricBase<Point<T>>.Zero
         => Zero;
 
     /// <summary>
@@ -42,7 +42,7 @@ public readonly record struct Point<T>(T X, T Y, T Z)
     /// </summary>
     public CoordinateSystem<T> CoordinateSystem 
         => new();
-    ICoordinateSystem IPoint<Point<T>>.CoordinateSystem 
+    ICoordinateSystem IGeometricBase<Point<T>>.CoordinateSystem 
         => CoordinateSystem;
 
     /// <summary>
@@ -54,7 +54,7 @@ public readonly record struct Point<T>(T X, T Y, T Z)
     /// <returns>An instance of <see cref="Point{T}"/> created from <paramref name="point" />.</returns>
     /// <exception cref="NotSupportedException"><typeparamref name="TOther" /> is not supported.</exception>
     /// <exception cref="OverflowException"><paramref name="point" /> is not representable by <see cref="Point{T}"/>.</exception>
-    public static Point<T> CreateChecked<TOther>(in Point<TOther> point)
+    public static Point<T> CreateChecked<TOther>(ref readonly Point<TOther> point)
         where TOther : struct, INumber<TOther>, IMinMaxValue<TOther>
         => new(
             T.CreateChecked(point.X),
@@ -71,7 +71,7 @@ public readonly record struct Point<T>(T X, T Y, T Z)
     /// <returns>An instance of <see cref="Point{T}"/> created from <paramref name="point" />.</returns>
     /// <exception cref="NotSupportedException"><typeparamref name="TOther" /> is not supported.</exception>
     /// <exception cref="OverflowException"><paramref name="point" /> is not representable by <see cref="Point{T}"/>.</exception>
-    public static Point<T> CreateSaturating<TOther>(in Point<TOther> point)
+    public static Point<T> CreateSaturating<TOther>(ref readonly Point<TOther> point)
         where TOther : struct, INumber<TOther>, IMinMaxValue<TOther>
         => new(
             T.CreateSaturating(point.X),
@@ -88,7 +88,7 @@ public readonly record struct Point<T>(T X, T Y, T Z)
     /// <returns>An instance of <see cref="Point{T}"/> created from <paramref name="point" />.</returns>
     /// <exception cref="NotSupportedException"><typeparamref name="TOther" /> is not supported.</exception>
     /// <exception cref="OverflowException"><paramref name="point" /> is not representable by <see cref="Point{T}"/>.</exception>
-    public static Point<T> CreateTruncating<TOther>(in Point<TOther> point)
+    public static Point<T> CreateTruncating<TOther>(ref readonly Point<TOther> point)
         where TOther : struct, INumber<TOther>, IMinMaxValue<TOther>
         => new(
             T.CreateTruncating(point.X),
@@ -99,7 +99,7 @@ public readonly record struct Point<T>(T X, T Y, T Z)
     #region addition
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Point<T> operator +(in Point<T> left, in Vector3<T> right)
+    public static Point<T> operator +(in Point<T> left, in Vector<T> right)
         => new(left.X + right.X, left.Y + right.Y, left.Z + right.Z);
 
     #endregion
@@ -107,16 +107,16 @@ public readonly record struct Point<T>(T X, T Y, T Z)
     #region subtraction
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Point<T> operator -(in Point<T> left, in Vector3<T> right)
+    public static Point<T> operator -(in Point<T> left, in Vector<T> right)
         => new(left.X - right.X, left.Y - right.Y, left.Z - right.Z);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Vector3<T> operator -(in Point<T> left, in Point<T> right)
+    public static Vector<T> operator -(in Point<T> left, in Point<T> right)
         => new(left.X - right.X, left.Y - right.Y, left.Z - right.Z);
 
     #endregion
 
-    object IPoint<Point<T>>.this[int index] 
+    object IGeometricBase<Point<T>>.this[int index] 
         => index switch
         {
             0 => X,
@@ -148,7 +148,7 @@ public static class Point
     /// </para>
     /// <para>
     /// The transformation is applied by multiplying the point with the quaternion,
-    /// resulting in a new 3-dimensional point that represents the original point
+    /// resulting ref readonly a new 3-dimensional point that represents the original point
     /// after being transformed by the quaternion.
     /// </para>
     /// </remarks>
@@ -171,12 +171,12 @@ public static class Point
     /// The <see cref="Distance"/> method calculates the distance between two points specified by the <paramref name="from"/> and <paramref name="to"/> parameters.
     /// </para>
     /// <para>
-    /// The distance is calculated as the Euclidean distance in the 3D Cartesian coordinate system.
+    /// The distance is calculated as the Euclidean distance ref readonly the 3D Rectangular coordinate system.
     /// </para>
     /// </remarks>
-    public static T Distance<T>(in Point<T> from, in Point<T> to)
+    public static T Distance<T>(ref readonly Point<T> from, ref readonly Point<T> to)
         where T : struct, INumber<T>, IMinMaxValue<T>, IRootFunctions<T>
-        => T.Sqrt(DistanceSquared(from, to));
+        => T.Sqrt(DistanceSquared(in from, in to));
 
     /// <summary>
     /// Calculates the square of the distance between two points.
@@ -190,14 +190,14 @@ public static class Point
     /// specified by the <paramref name="from"/> and <paramref name="to"/> parameters.
     /// </para>
     /// <para>
-    /// The distance is calculated as the Euclidean distance in the 3D Cartesian coordinate system.
+    /// The distance is calculated as the Euclidean distance ref readonly the 3D Rectangular coordinate system.
     /// </para>
     /// <para>
     /// Note that the square of the distance is returned instead of the actual distance to avoid the need for
     /// taking the square root, which can be a computationally expensive operation.
     /// </para>
     /// </remarks>
-    public static T DistanceSquared<T>(in Point<T> from, in Point<T> to)
+    public static T DistanceSquared<T>(ref readonly Point<T> from, ref readonly Point<T> to)
         where T : struct, INumber<T>, IMinMaxValue<T>
         => Utils.Square(to.X - from.X) + Utils.Square(to.Y - from.Y) + Utils.Square(to.Z - from.Z);
 
@@ -210,7 +210,7 @@ public static class Point
     /// <remarks>
     /// <para>
     /// The term "Manhattan Distance" comes from the idea of measuring the distance a taxi 
-    /// would have to travel along a grid of city blocks (which are typically arranged in 
+    /// would have to travel along a grid of city blocks (which are typically arranged ref readonly 
     /// a rectangular or square grid pattern) to reach the destination point from the 
     /// starting point. 
     /// </para>
@@ -220,21 +220,21 @@ public static class Point
     /// </para>
     /// </remarks>
     /// <returns>The Manhattan distance between two points.</returns>
-    public static T ManhattanDistance<T>(in Point<T> from, in Point<T> to)
+    public static T ManhattanDistance<T>(ref readonly Point<T> from, ref readonly Point<T> to)
         where T : struct, INumber<T>, IMinMaxValue<T>
         => T.Abs(to.X - from.X) + T.Abs(to.Y - from.Y) + T.Abs(to.Z - from.Z);
 
     /// <summary>
-    /// Converts a Cartesian 3D point to spherical coordinates.
+    /// Converts a Rectangular 3D point to spherical coordinates.
     /// </summary>
     /// <typeparam name="T">The type of the point coordinates, which must adhere to IEEE 754 standards and provide min/max values.</typeparam>
-    /// <param name="point">The Cartesian 3D point to convert.</param>
+    /// <param name="point">The Rectangular 3D point to convert.</param>
     /// <returns>The spherical coordinates representing the point.</returns>
     /// <remarks>
     /// If the type of point to convert doesn't meet the constraints, please convert it first to a suitable type using one of the conversion methods: 
-    /// - <see cref="CreateChecked"/>
-    /// - <see cref="CreateSaturating"/>
-    /// - <see cref="CreateTruncating"/>
+    /// - <see cref="Point{T}.CreateChecked{TOther}(ref readonly Point{TOther})"/>
+    /// - <see cref="Point{T}.CreateSaturating{TOther}(ref readonly Point{TOther})"/>
+    /// - <see cref="Point{T}.CreateTruncating{TOther}(ref readonly Point{TOther})"/>
     /// </remarks>
     public static Spherical.Point<Radians, T> ToSpherical<T>(Point<T> point)
         where T : struct, IFloatingPointIeee754<T>, IMinMaxValue<T>

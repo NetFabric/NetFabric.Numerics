@@ -1,4 +1,4 @@
-﻿using NetFabric.Numerics.Cartesian3;
+﻿using NetFabric.Numerics.Rectangular3D;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 
@@ -62,13 +62,13 @@ public readonly struct Matrix4x4<T>
     /// <returns>An instance of <see cref="Matrix4x4{T}"/> created from <paramref name="matrix" />.</returns>
     /// <exception cref="NotSupportedException"><typeparamref name="TOther" /> is not supported.</exception>
     /// <exception cref="OverflowException"><paramref name="matrix" /> is not representable by <see cref="Matrix4x4{T}"/>.</exception>
-    public static Matrix4x4<T> CreateChecked<TOther>(in Matrix4x4<TOther> matrix)
+    public static Matrix4x4<T> CreateChecked<TOther>(ref readonly Matrix4x4<TOther> matrix)
         where TOther : struct, INumber<TOther>, IMinMaxValue<TOther>
         => new(
-            Vector4<T>.CreateChecked(matrix.X),
-            Vector4<T>.CreateChecked(matrix.Y),
-            Vector4<T>.CreateChecked(matrix.Z),
-            Vector4<T>.CreateChecked(matrix.W)
+            Vector4<T>.CreateChecked(in matrix.X),
+            Vector4<T>.CreateChecked(in matrix.Y),
+            Vector4<T>.CreateChecked(in matrix.Z),
+            Vector4<T>.CreateChecked(in matrix.W)
         );
 
     /// <summary>
@@ -80,13 +80,13 @@ public readonly struct Matrix4x4<T>
     /// <returns>An instance of <see cref="Matrix4x4{T}"/> created from <paramref name="matrix" />.</returns>
     /// <exception cref="NotSupportedException"><typeparamref name="TOther" /> is not supported.</exception>
     /// <exception cref="OverflowException"><paramref name="matrix" /> is not representable by <see cref="Matrix4x4{T}"/>.</exception>
-    public static Matrix4x4<T> CreateSaturating<TOther>(in Matrix4x4<TOther> matrix)
+    public static Matrix4x4<T> CreateSaturating<TOther>(ref readonly Matrix4x4<TOther> matrix)
         where TOther : struct, INumber<TOther>, IMinMaxValue<TOther>
         => new(
-            Vector4<T>.CreateSaturating(matrix.X),
-            Vector4<T>.CreateSaturating(matrix.Y),
-            Vector4<T>.CreateSaturating(matrix.Z),
-            Vector4<T>.CreateSaturating(matrix.W)
+            Vector4<T>.CreateSaturating(in matrix.X),
+            Vector4<T>.CreateSaturating(in matrix.Y),
+            Vector4<T>.CreateSaturating(in matrix.Z),
+            Vector4<T>.CreateSaturating(in matrix.W)
         );
 
     /// <summary>
@@ -98,13 +98,13 @@ public readonly struct Matrix4x4<T>
     /// <returns>An instance of <see cref="Matrix4x4{T}"/> created from <paramref name="matrix" />.</returns>
     /// <exception cref="NotSupportedException"><typeparamref name="TOther" /> is not supported.</exception>
     /// <exception cref="OverflowException"><paramref name="matrix" /> is not representable by <see cref="Matrix4x4{T}"/>.</exception>
-    public static Matrix4x4<T> CreateTruncating<TOther>(in Matrix4x4<TOther> matrix)
+    public static Matrix4x4<T> CreateTruncating<TOther>(ref readonly Matrix4x4<TOther> matrix)
         where TOther : struct, INumber<TOther>, IMinMaxValue<TOther>
         => new(
-            Vector4<T>.CreateTruncating(matrix.X),
-            Vector4<T>.CreateTruncating(matrix.Y),
-            Vector4<T>.CreateTruncating(matrix.Z),
-            Vector4<T>.CreateTruncating(matrix.W)
+            Vector4<T>.CreateTruncating(in matrix.X),
+            Vector4<T>.CreateTruncating(in matrix.Y),
+            Vector4<T>.CreateTruncating(in matrix.Z),
+            Vector4<T>.CreateTruncating(in matrix.W)
         );
 
     #region constants
@@ -234,7 +234,7 @@ public readonly struct Matrix4x4<T>
     #endregion
 
     /// <summary>
-    /// Gets the element at the specified row and column in the <see cref="Matrix4x4{T}"/>.
+    /// Gets the element at the specified row and column ref readonly the <see cref="Matrix4x4{T}"/>.
     /// </summary>
     /// <param name="row">The zero-based row index.</param>
     /// <param name="column">The zero-based column index.</param>
@@ -301,7 +301,7 @@ public static class Matrix4x4
     /// <param name="matrix">The <see cref="Matrix4x4{T}"/> to negate.</param>
     /// <returns>A new <see cref="Matrix4x4{T}"/> with negated components.</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Matrix4x4<T> Negate<T>(in Matrix4x4<T> matrix)
+    public static Matrix4x4<T> Negate<T>(ref readonly Matrix4x4<T> matrix)
         where T : struct, INumber<T>, IMinMaxValue<T>, ISignedNumber<T>
         => new(-matrix.X, -matrix.Y, -matrix.Z, -matrix.W);
 
@@ -313,7 +313,7 @@ public static class Matrix4x4
     /// <param name="right">The second <see cref="Matrix4x4{T}"/> to add.</param>
     /// <returns>A new <see cref="Matrix4x4{T}"/> representing the element-wise addition of the two matrices.</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Matrix4x4<T> Add<T>(in Matrix4x4<T> left, in Matrix4x4<T> right)
+    public static Matrix4x4<T> Add<T>(ref readonly Matrix4x4<T> left, ref readonly Matrix4x4<T> right)
         where T : struct, INumber<T>, IMinMaxValue<T>
         => new(
             left.X + right.X,
@@ -329,7 +329,7 @@ public static class Matrix4x4
     /// <param name="right">The <see cref="Matrix4x4{T}"/> to subtract.</param>
     /// <returns>A new <see cref="Matrix4x4{T}"/> representing the element-wise subtraction of the two matrices.</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Matrix4x4<T> Subtract<T>(in Matrix4x4<T> left, in Matrix4x4<T> right)
+    public static Matrix4x4<T> Subtract<T>(ref readonly Matrix4x4<T> left, ref readonly Matrix4x4<T> right)
         where T : struct, INumber<T>, IMinMaxValue<T>
         => new(
             left.X - right.X,
@@ -345,7 +345,7 @@ public static class Matrix4x4
     /// <param name="right">The second <see cref="Matrix4x4{T}"/> to multiply.</param>
     /// <returns>A new <see cref="Matrix4x4{T}"/> representing the result of the matrix multiplication.</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Matrix4x4<T> Multiply<T>(in Matrix4x4<T> left, in Matrix4x4<T> right)
+    public static Matrix4x4<T> Multiply<T>(ref readonly Matrix4x4<T> left, ref readonly Matrix4x4<T> right)
         where T : struct, INumber<T>, IMinMaxValue<T>
         => new(
             (right.X * left.X.X) + (right.Y * left.X.Y) + (right.Z * left.X.Z) + (right.W * left.X.W),
@@ -361,7 +361,7 @@ public static class Matrix4x4
     /// <param name="scalar">The scalar value to multiply the matrix by.</param>
     /// <returns>A new <see cref="Matrix4x4{T}"/> representing the result of the matrix multiplication.</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Matrix4x4<T> Multiply<T>(in Matrix4x4<T> matrix, T scalar)
+    public static Matrix4x4<T> Multiply<T>(ref readonly Matrix4x4<T> matrix, T scalar)
         where T : struct, INumber<T>, IMinMaxValue<T>
         => new(matrix.X * scalar, matrix.Y * scalar, matrix.Z * scalar, matrix.W * scalar);
 
@@ -373,7 +373,7 @@ public static class Matrix4x4
     /// <param name="scalar">The scalar value to divide the matrix by.</param>
     /// <returns>A new <see cref="Matrix4x4{T}"/> representing the result of the matrix division.</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Matrix4x4<T> Divide<T>(in Matrix4x4<T> matrix, T scalar)
+    public static Matrix4x4<T> Divide<T>(ref readonly Matrix4x4<T> matrix, T scalar)
         where T : struct, INumber<T>, IMinMaxValue<T>
         => new(matrix.X / scalar, matrix.Y / scalar, matrix.Z / scalar, matrix.W / scalar);
 
@@ -387,7 +387,7 @@ public static class Matrix4x4
     /// <returns>
     /// <c>true</c> if the matrix is an identity matrix; otherwise, <c>false</c>.
     /// </returns>
-    public static bool IsIdentity<T>(in Matrix4x4<T> matrix)
+    public static bool IsIdentity<T>(ref readonly Matrix4x4<T> matrix)
         where T : struct, INumber<T>, IMinMaxValue<T>
         => matrix == Matrix4x4<T>.Identity;
 
@@ -399,7 +399,7 @@ public static class Matrix4x4
     /// <returns>
     /// <c>true</c> if the matrix is a zero matrix; otherwise, <c>false</c>.
     /// </returns>
-    public static bool IsZero<T>(in Matrix4x4<T> matrix)
+    public static bool IsZero<T>(ref readonly Matrix4x4<T> matrix)
         where T : struct, INumber<T>, IMinMaxValue<T>
         => matrix == Matrix4x4<T>.Zero;
 
@@ -411,7 +411,7 @@ public static class Matrix4x4
     /// <returns>
     /// <c>true</c> if any component of the matrix is NaN; otherwise, <c>false</c>.
     /// </returns>
-    public static bool IsNaN<T>(in Matrix4x4<T> matrix)
+    public static bool IsNaN<T>(ref readonly Matrix4x4<T> matrix)
         where T : struct, INumber<T>, IMinMaxValue<T>
         => Vector4.IsNaN(matrix.X) || Vector4.IsNaN(matrix.Y) || Vector4.IsNaN(matrix.Z) || Vector4.IsNaN(matrix.W);
 
@@ -423,7 +423,7 @@ public static class Matrix4x4
     /// <returns>
     /// <c>true</c> if any component of the matrix is positive or negative infinity; otherwise, <c>false</c>.
     /// </returns>
-    public static bool IsInfinity<T>(in Matrix4x4<T> matrix)
+    public static bool IsInfinity<T>(ref readonly Matrix4x4<T> matrix)
         where T : struct, INumber<T>, IMinMaxValue<T>
         => Vector4.IsInfinity(matrix.X) || Vector4.IsInfinity(matrix.Y) || Vector4.IsInfinity(matrix.Z) || Vector4.IsInfinity(matrix.W);
 
@@ -435,7 +435,7 @@ public static class Matrix4x4
     /// <returns>
     /// <c>true</c> if all components of the matrix are finite numbers; otherwise, <c>false</c>.
     /// </returns>
-    public static bool IsFinite<T>(in Matrix4x4<T> matrix)
+    public static bool IsFinite<T>(ref readonly Matrix4x4<T> matrix)
         where T : struct, INumber<T>, IMinMaxValue<T>
         => Vector4.IsFinite(matrix.X) && Vector4.IsFinite(matrix.Y) && Vector4.IsFinite(matrix.Z) && Vector4.IsFinite(matrix.W);
 
@@ -591,7 +591,7 @@ public static class Matrix4x4
     ///     v = 1 - c
     ///     R = c * I + v * K * K' + s * [0, -Kz, Ky; Kz, 0, -Kx; -Ky, Kx, 0]
     /// Where:
-    ///     - K is a unit vector in the direction of the axis of rotation.
+    ///     - K is a unit vector ref readonly the direction of the axis of rotation.
     ///     - I is the identity matrix.
     ///     - K' is the skew-symmetric matrix of K.
     ///     - c is the cosine of the angle of rotation.
@@ -599,7 +599,7 @@ public static class Matrix4x4
     ///     - v is 1 minus the cosine of the angle of rotation.
     /// The resulting rotation matrix represents a rotation around the specified axis by the specified angle.
     /// </remarks>
-    public static Matrix4x4<T> CreateRotation<T>(in Vector3<T> axis, Angle<Radians, T> angle)
+    public static Matrix4x4<T> CreateRotation<T>(ref readonly Vector3<T> axis, Angle<Radians, T> angle)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>, ITrigonometricFunctions<T>
     {
         var (sin, cos) = Angle.SinCos(angle);
@@ -636,7 +636,7 @@ public static class Matrix4x4
     ///     - w, x, y, z are the components of the quaternion.
     /// The resulting matrix represents a transformation equivalent to the rotation described by the quaternion.
     /// </remarks>
-    public static Matrix4x4<T> CreateFromQuaternion<T>(in Quaternion<T> quaternion)
+    public static Matrix4x4<T> CreateFromQuaternion<T>(ref readonly Quaternion<T> quaternion)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
     {
         var (x, y, z, w) = quaternion;
@@ -680,7 +680,7 @@ public static class Matrix4x4
     ///     - cameraUpVector is the up direction vector of the camera.
     /// The resulting matrix represents a view transformation that simulates the camera's position, orientation, and viewing direction.
     /// </remarks>
-    public static Matrix4x4<T> CreateLookAt<T>(in Vector3<T> cameraPosition, in Vector3<T> cameraTarget, in Vector3<T> cameraUpVector)
+    public static Matrix4x4<T> CreateLookAt<T>(ref readonly Vector3<T> cameraPosition, ref readonly Vector3<T> cameraTarget, ref readonly Vector3<T> cameraUpVector)
         where T : struct, INumber<T>, IMinMaxValue<T>, IRootFunctions<T>
     {
         var z = Vector3.Normalize(cameraPosition - cameraTarget);
@@ -697,7 +697,7 @@ public static class Matrix4x4
     /// Creates a perspective projection matrix based on the field of view.
     /// </summary>
     /// <typeparam name="T">The type of the matrix elements.</typeparam>
-    /// <param name="fieldOfView">The field of view angle in radians.</param>
+    /// <param name="fieldOfView">The field of view angle ref readonly radians.</param>
     /// <param name="aspectRatio">The aspect ratio of the projection.</param>
     /// <param name="nearPlaneDistance">The distance to the near clipping plane.</param>
     /// <param name="farPlaneDistance">The distance to the far clipping plane.</param>
@@ -712,7 +712,7 @@ public static class Matrix4x4
     ///          0, 0, q, 1;
     ///          0, 0, -q * nearPlaneDistance, 0]
     /// Where:
-    ///     - fieldOfView is the field of view angle in radians.
+    ///     - fieldOfView is the field of view angle ref readonly radians.
     ///     - aspectRatio is the aspect ratio of the projection.
     ///     - nearPlaneDistance is the distance to the near clipping plane.
     ///     - farPlaneDistance is the distance to the far clipping plane.

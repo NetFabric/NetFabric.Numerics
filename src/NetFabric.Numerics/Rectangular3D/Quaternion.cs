@@ -1,7 +1,7 @@
-﻿namespace NetFabric.Numerics.Cartesian3;
+﻿namespace NetFabric.Numerics.Rectangular3D;
 
 /// <summary>
-/// Represents a quaternion, a mathematical object used to represent rotations in 3D space.
+/// Represents a quaternion, a mathematical object used to represent rotations ref readonly 3D space.
 /// The quaternion is represented by an immutable struct.
 /// </summary>
 /// <typeparam name="T">The type of the quaternion components.</typeparam>
@@ -36,11 +36,11 @@ public readonly record struct Quaternion<T>(T X, T Y, T Z, T W)
     /// <remarks>
     /// <para>
     /// The <see cref="Identity"/> quaternion is a special quaternion that has a real part equal to 1 and an imaginary part equal to (0, 0, 0).
-    /// Multiplying any quaternion by the <see cref="Identity"/> quaternion results in the same quaternion, and multiplying a quaternion by the conjugate of the <see cref="Identity"/> quaternion
+    /// Multiplying any quaternion by the <see cref="Identity"/> quaternion results ref readonly the same quaternion, and multiplying a quaternion by the conjugate of the <see cref="Identity"/> quaternion
     /// will give the original quaternion.
     /// </para>
     /// <para>
-    /// The <see cref="Identity"/> quaternion serves as the multiplicative identity in quaternion algebra, similar to how the number 1 serves as the multiplicative identity in real number arithmetic.
+    /// The <see cref="Identity"/> quaternion serves as the multiplicative identity ref readonly quaternion algebra, similar to how the number 1 serves as the multiplicative identity ref readonly real number arithmetic.
     /// </para>
     /// </remarks>
     public static readonly Quaternion<T> Identity = new(T.Zero, T.Zero, T.Zero, T.One);
@@ -78,7 +78,7 @@ public readonly record struct Quaternion<T>(T X, T Y, T Z, T W)
     /// <returns>An instance of <see cref="Quaternion{T}"/> created from <paramref name="quaternion" />.</returns>
     /// <exception cref="NotSupportedException"><typeparamref name="TOther" /> is not supported.</exception>
     /// <exception cref="OverflowException"><paramref name="quaternion" /> is not representable by <see cref="Quaternion{T}"/>.</exception>
-    public static Quaternion<T> CreateChecked<TOther>(in Quaternion<TOther> quaternion)
+    public static Quaternion<T> CreateChecked<TOther>(ref readonly Quaternion<TOther> quaternion)
         where TOther : struct, IFloatingPoint<TOther>, IMinMaxValue<TOther>
         => new(
             T.CreateChecked(quaternion.X),
@@ -96,7 +96,7 @@ public readonly record struct Quaternion<T>(T X, T Y, T Z, T W)
     /// <returns>An instance of <see cref="Quaternion{T}"/> created from <paramref name="quaternion" />.</returns>
     /// <exception cref="NotSupportedException"><typeparamref name="TOther" /> is not supported.</exception>
     /// <exception cref="OverflowException"><paramref name="quaternion" /> is not representable by <see cref="Quaternion{T}"/>.</exception>
-    public static Quaternion<T> CreateSaturating<TOther>(in Quaternion<TOther> quaternion)
+    public static Quaternion<T> CreateSaturating<TOther>(ref readonly Quaternion<TOther> quaternion)
         where TOther : struct, IFloatingPoint<TOther>, IMinMaxValue<TOther>
         => new(
             T.CreateSaturating(quaternion.X),
@@ -114,7 +114,7 @@ public readonly record struct Quaternion<T>(T X, T Y, T Z, T W)
     /// <returns>An instance of <see cref="Quaternion{T}"/> created from <paramref name="quaternion" />.</returns>
     /// <exception cref="NotSupportedException"><typeparamref name="TOther" /> is not supported.</exception>
     /// <exception cref="OverflowException"><paramref name="quaternion" /> is not representable by <see cref="Quaternion{T}"/>.</exception>
-    public static Quaternion<T> CreateTruncating<TOther>(in Quaternion<TOther> quaternion)
+    public static Quaternion<T> CreateTruncating<TOther>(ref readonly Quaternion<TOther> quaternion)
         where TOther : struct, IFloatingPoint<TOther>, IMinMaxValue<TOther>
         => new(
             T.CreateTruncating(quaternion.X),
@@ -138,7 +138,7 @@ public readonly record struct Quaternion<T>(T X, T Y, T Z, T W)
     /// This operator is implemented using aggressive inlining to optimize performance.
     /// </para>
     /// <para>
-    /// The unary plus operator is primarily useful for consistency and readability in quaternion expressions
+    /// The unary plus operator is primarily useful for consistency and readability ref readonly quaternion expressions
     /// where a positive sign is explicitly specified before a quaternion.
     /// </para>
     /// </remarks>
@@ -155,11 +155,11 @@ public readonly record struct Quaternion<T>(T X, T Y, T Z, T W)
     /// <remarks>
     /// <para>
     /// The operator adds the corresponding components of the quaternions <paramref name="left"/> and <paramref name="right"/>
-    /// in an aggressively inlined manner, resulting in improved performance for quaternion arithmetic operations.
+    /// ref readonly an aggressively inlined manner, resulting ref readonly improved performance for quaternion arithmetic operations.
     /// </para>
     /// <para>
     /// This operator calculates the sum of the x, y, z, and w components of the quaternions,
-    /// resulting in a new quaternion with the summed components.
+    /// resulting ref readonly a new quaternion with the summed components.
     /// </para>
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -178,11 +178,11 @@ public readonly record struct Quaternion<T>(T X, T Y, T Z, T W)
     /// <remarks>
     /// <para>
     /// The operator negates each component of the specified quaternion <paramref name="right"/>
-    /// in an aggressively inlined manner, resulting in improved performance for arithmetic operations involving quaternions.
+    /// ref readonly an aggressively inlined manner, resulting ref readonly improved performance for arithmetic operations involving quaternions.
     /// </para>
     /// <para>
     /// This operator calculates the negation of the x, y, z, and w components of the quaternion,
-    /// resulting in a new quaternion with the negated components.
+    /// resulting ref readonly a new quaternion with the negated components.
     /// </para>
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -198,12 +198,12 @@ public readonly record struct Quaternion<T>(T X, T Y, T Z, T W)
     /// <remarks>
     /// <para>
     /// The operator subtracts each component of the second quaternion <paramref name="right"/>
-    /// from the corresponding component of the first quaternion <paramref name="left"/> in an aggressively inlined manner,
-    /// resulting in improved performance for arithmetic operations involving quaternions.
+    /// from the corresponding component of the first quaternion <paramref name="left"/> ref readonly an aggressively inlined manner,
+    /// resulting ref readonly improved performance for arithmetic operations involving quaternions.
     /// </para>
     /// <para>
     /// This operator calculates the difference between the x, y, z, and w components of the quaternions,
-    /// resulting in a new quaternion with the difference between their respective components.
+    /// resulting ref readonly a new quaternion with the difference between their respective components.
     /// </para>
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -275,7 +275,7 @@ public readonly record struct Quaternion<T>(T X, T Y, T Z, T W)
     /// </para>
     /// </remarks>
     public static Quaternion<T> operator /(Quaternion<T> left, Quaternion<T> right) 
-        => left * Quaternion.Inverse(right);
+        => left * Quaternion.Inverse(in right);
 
     #endregion
 }
@@ -299,7 +299,7 @@ public static class Quaternion
     ///   to determine if it is an identity quaternion.
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool IsIdentity<T>(in Quaternion<T> quaternion)
+    public static bool IsIdentity<T>(ref readonly Quaternion<T> quaternion)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => quaternion == Quaternion<T>.Identity;
 
@@ -308,23 +308,23 @@ public static class Quaternion
     /// </summary>
     /// <typeparam name="T">The numeric type of the quaternion's components.</typeparam>
     /// <param name="axis">The axis of rotation specified as a vector.</param>
-    /// <param name="angle">The angle of rotation specified as an angle in radians.</param>
+    /// <param name="angle">The angle of rotation specified as an angle ref readonly radians.</param>
     /// <returns>A new quaternion representing the rotation around the specified axis by the given angle.</returns>
     /// <remarks>
     /// <para>
     /// The <see cref="FromAxisAngle{T}"/> method creates a new quaternion that represents a rotation around a specified axis
-    /// by the given angle. The axis of rotation is specified as a quaternion in the <paramref name="axis"/> parameter,
-    /// while the angle of rotation is specified as an angle in radians in the <paramref name="angle"/> parameter.
+    /// by the given angle. The axis of rotation is specified as a quaternion ref readonly the <paramref name="axis"/> parameter,
+    /// while the angle of rotation is specified as an angle ref readonly radians ref readonly the <paramref name="angle"/> parameter.
     /// </para>
     /// <para>
-    /// The resulting quaternion represents the rotation in a 3D space and can be used to transform points or other quaternions.
+    /// The resulting quaternion represents the rotation ref readonly a 3D space and can be used to transform points or other quaternions.
     /// </para>
     /// <para>
     /// Note that the axis vector must be a unit vector, meaning its magnitude (length) must be equal to 1.
     /// If the axis vector is not normalized, unexpected results may occur.
     /// </para>
     /// </remarks>
-    public static Quaternion<T> FromAxisAngle<T>(in Vector3<T> axis, Angle<Radians, T> angle)
+    public static Quaternion<T> FromAxisAngle<T>(ref readonly Vector<T> axis, Angle<Radians, T> angle)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>, ITrigonometricFunctions<T>
     {
         var halfAngle = angle / (T.One + T.One);
@@ -341,9 +341,9 @@ public static class Quaternion
     /// Creates a quaternion from the specified yaw, pitch and roll angles.
     /// </summary>
     /// <typeparam name="T">The type of the quaternion components.</typeparam>
-    /// <param name="yaw">The yaw angle in radians.</param>
-    /// <param name="pitch">The pitch angle in radians.</param>
-    /// <param name="roll">The roll angle in radians.</param>
+    /// <param name="yaw">The yaw angle ref readonly radians.</param>
+    /// <param name="pitch">The pitch angle ref readonly radians.</param>
+    /// <param name="roll">The roll angle ref readonly radians.</param>
     /// <returns>The quaternion representing the specified Euler angles.</returns>
     public static Quaternion<T> FromYawPitchRoll<T>(Angle<Radians, T> yaw, Angle<Radians, T> pitch, Angle<Radians, T> roll)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>, ITrigonometricFunctions<T>
@@ -378,16 +378,16 @@ public static class Quaternion
     /// The normalization of a quaternion involves dividing each component by the quaternion's norm to ensure its length becomes 1.
     /// </para>
     /// <para>
-    /// This method modifies the original quaternion in place and returns the normalized quaternion.
+    /// This method modifies the original quaternion ref readonly place and returns the normalized quaternion.
     /// </para>
     /// <para>
     /// If the quaternion's norm is zero, the method returns the original quaternion without performing any normalization to avoid division by zero.
     /// </para>
     /// </remarks>
-    public static Quaternion<T> Normalize<T>(in Quaternion<T> quaternion)
+    public static Quaternion<T> Normalize<T>(ref readonly Quaternion<T> quaternion)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>, IRootFunctions<T>
     {
-        var norm = Norm(quaternion);
+        var norm = Norm(in quaternion);
         if (T.IsZero(norm))
             return quaternion;
 
@@ -411,9 +411,9 @@ public static class Quaternion
     /// </para>
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static T Norm<T>(in Quaternion<T> quaternion)
+    public static T Norm<T>(ref readonly Quaternion<T> quaternion)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>, IRootFunctions<T>
-        => T.Sqrt(NormSquared(quaternion));
+        => T.Sqrt(NormSquared(in quaternion));
 
     /// <summary>
     /// Calculates the squared norm of the quaternion.
@@ -430,7 +430,7 @@ public static class Quaternion
     /// </para>
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static T NormSquared<T>(in Quaternion<T> quaternion)
+    public static T NormSquared<T>(ref readonly Quaternion<T> quaternion)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => Utils.Square(quaternion.X) + Utils.Square(quaternion.Y) + Utils.Square(quaternion.Z) + Utils.Square(quaternion.W);
 
@@ -441,11 +441,11 @@ public static class Quaternion
     /// <returns>The conjugate of the quaternion.</returns>
     /// <remarks>
     /// The conjugate of a quaternion is obtained by negating the vector part (X, Y, Z) of the quaternion
-    /// while keeping the scalar part (W) unchanged. The conjugate is useful in various quaternion operations,
+    /// while keeping the scalar part (W) unchanged. The conjugate is useful ref readonly various quaternion operations,
     /// such as quaternion multiplication and division.
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Quaternion<T> Conjugate<T>(in Quaternion<T> quaternion)
+    public static Quaternion<T> Conjugate<T>(ref readonly Quaternion<T> quaternion)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => new(-quaternion.X, -quaternion.Y, -quaternion.Z, quaternion.W);
 
@@ -466,13 +466,13 @@ public static class Quaternion
     /// </para>
     /// <para>
     /// Note that the inverse of a quaternion is only defined when the quaternion is non-zero. In the case of a zero quaternion,
-    /// attempting to calculate the inverse will result in division by zero, which is an undefined operation.
+    /// attempting to calculate the inverse will result ref readonly division by zero, which is an undefined operation.
     /// </para>
     /// </remarks>
-    public static Quaternion<T> Inverse<T>(in Quaternion<T> quaternion)
+    public static Quaternion<T> Inverse<T>(ref readonly Quaternion<T> quaternion)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
     {
-        var normSquared = NormSquared(quaternion);
+        var normSquared = NormSquared(in quaternion);
         if (T.IsZero(normSquared))
             Throw.InvalidOperationException<Quaternion<T>>("Cannot calculate the inverse of a zero quaternion.");
 
@@ -503,7 +503,7 @@ public static class Quaternion
     /// are parallel or perpendicular to each other.
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static T DotProduct<T>(in Quaternion<T> left, in Quaternion<T> right)
+    public static T DotProduct<T>(ref readonly Quaternion<T> left, ref readonly Quaternion<T> right)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => (left.X * right.X) + (left.Y * right.Y) + (left.Z * right.Z) + (left.W * right.W);
 
@@ -517,12 +517,12 @@ public static class Quaternion
     /// <returns>The interpolated quaternion.</returns>
     /// <remarks>
     /// This method performs linear interpolation between the start and end quaternions using the given factor.
-    /// The interpolation is performed in a straight line and does not consider the shortest path between the quaternions.
+    /// The interpolation is performed ref readonly a straight line and does not consider the shortest path between the quaternions.
     /// The resulting interpolated quaternion may not be normalized. If normalization is desired, call the
     /// <see cref="Quaternion.Normalize"/> method on the result.
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Quaternion<T> Lerp<T>(in Quaternion<T> start, in Quaternion<T> end, T factor)
+    public static Quaternion<T> Lerp<T>(ref readonly Quaternion<T> start, ref readonly Quaternion<T> end, T factor)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T> 
         => (start * (T.One - factor)) + (end * factor);
 
@@ -540,9 +540,9 @@ public static class Quaternion
     /// and continuous rotations. The resulting interpolated quaternion may not be normalized. If normalization
     /// is desired, call the <see cref="Quaternion.Normalize"/> method on the result.
     /// </remarks>
-    public static Quaternion<T> LerpShortestPath<T>(in Quaternion<T> start, in Quaternion<T> end, T factor)
+    public static Quaternion<T> LerpShortestPath<T>(ref readonly Quaternion<T> start, ref readonly Quaternion<T> end, T factor)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => (T.Sign(DotProduct(start, end)) < 0)
+        => (T.Sign(DotProduct(in start, in end)) < 0)
             ? (start * (T.One - factor)) - (end * factor)
             : (start * (T.One - factor)) + (end * factor);
 
@@ -559,15 +559,15 @@ public static class Quaternion
     /// using the provided interpolation factor. The resulting quaternion represents an intermediate rotation
     /// between the two input quaternions. 
     /// </remarks>
-    public static Quaternion<T> Slerp<T>(in Quaternion<T> start, in Quaternion<T> end, T factor)
+    public static Quaternion<T> Slerp<T>(ref readonly Quaternion<T> start, ref readonly Quaternion<T> end, T factor)
         where T : struct, IFloatingPointIeee754<T>, IMinMaxValue<T>
     {
         // Ensure the quaternions are normalized
-        var startNormalized = Normalize(start);
-        var endNormalized = Normalize(end);
+        var startNormalized = Normalize(in start);
+        var endNormalized = Normalize(in end);
 
         // Calculate the dot product between the quaternions
-        var dot = DotProduct(startNormalized, endNormalized);
+        var dot = DotProduct(in startNormalized, in endNormalized);
 
         // Clamp the dot product to ensure valid interpolation
         dot = T.Clamp(dot, T.Zero, T.One);
@@ -603,15 +603,15 @@ public static class Quaternion
     /// between the two input quaternions. The interpolation is always performed along the shortest path
     /// on the surface of the unit sphere.
     /// </remarks>
-    public static Quaternion<T> SlerpShortestPath<T>(in Quaternion<T> start, in Quaternion<T> end, T factor)
+    public static Quaternion<T> SlerpShortestPath<T>(ref readonly Quaternion<T> start, ref readonly Quaternion<T> end, T factor)
         where T : struct, IFloatingPointIeee754<T>, IMinMaxValue<T>
     {
         // Ensure the quaternions are normalized
-        var startNormalized = Normalize(start);
-        var endNormalized = Normalize(end);
+        var startNormalized = Normalize(in start);
+        var endNormalized = Normalize(in end);
 
         // Calculate the dot product between the quaternions
-        var dot = DotProduct(startNormalized, endNormalized);
+        var dot = DotProduct(in startNormalized, in endNormalized);
 
         // Adjust the end quaternion to take the shortest path
         if (T.Sign(dot) < 0)

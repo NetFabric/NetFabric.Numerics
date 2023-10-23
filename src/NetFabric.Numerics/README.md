@@ -12,7 +12,7 @@
 
 - **Mathematical Concepts:** The library is founded on the mathematical concepts of points and vectors. Subtracting two points results in a vector, and adding a point and a vector results in a point.
 
-- **Support for Multiple Coordinate Systems:** **NetFabric.Numerics** supports multiple coordinate systems, including Cartesian, Polar, and Spherical coordinates. This allows you to work with various coordinate systems seamlessly, expanding the library's versatility for your numeric and geometric operations.
+- **Support for Multiple Coordinate Systems:** **NetFabric.Numerics** supports multiple coordinate systems, including Rectangular, Polar, and Spherical coordinates. This allows you to work with various coordinate systems seamlessly, expanding the library's versatility for your numeric and geometric operations.
 
 ## Usage
 
@@ -28,7 +28,7 @@ dotnet add package NetFabric.Numerics
 
 ```csharp
 using NetFabric.Numerics;
-using NetFabric.Numerics.Cartesian2;
+using NetFabric.Numerics.Rectangular2D;
 using NetFabric.Numerics.Polar;
 using NetFabric.Numerics.Spherical; // Include the Spherical coordinate system
 ```
@@ -42,8 +42,8 @@ using NetFabric.Numerics;
 Precede the type by the coordinate system name to avoid ambiguity:
 
 ```csharp
-var point2D = new Cartesian2.Point<int>(10, 20);
-var point3D = new Cartesian3.Point<int>(10, 20, 30);
+var point2D = new Rectangular2D.Point<int>(10, 20);
+var point3D = new Rectangular3D.Point<int>(10, 20, 30);
 var pointPolar = new Polar.Point<Degrees, float>(10, 20);
 var pointSpherical = new Spherical.Point<Degrees, float>(10, 20, 30);
 ```
@@ -55,7 +55,7 @@ var pointSpherical = new Spherical.Point<Degrees, float>(10, 20, 30);
 **NetFabric.Numerics** excels in providing a strongly-typed approach to coordinate systems, built on the mathematical concepts of points and vectors. Subtracting two points results in a vector, while adding a point and a vector results in a point. This approach is showcased in various examples:
 
 ```csharp
-using NetFabric.Numerics.Cartesian2;
+using NetFabric.Numerics.Rectangular2D;
 
 var integerPoint = new Point<int>(0, 0);                // Point using integers
 var doublePrecisionPoint = new Point<double>(0.0, 0.0); // Point using double precision

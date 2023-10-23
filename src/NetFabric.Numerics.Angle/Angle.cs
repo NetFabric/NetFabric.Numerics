@@ -27,6 +27,24 @@
 public static partial class Angle
 {
     /// <summary>
+    /// Clamps an angle to be within a specified range.
+    /// </summary>
+    /// <typeparam name="TAngleUnits">The units of measurement for the angle.</typeparam>
+    /// <typeparam name="T">The numeric type used for angle representation.</typeparam>
+    /// <param name="vector">The angle to be clamped.</param>
+    /// <param name="min">The minimum allowed angle in the specified units.</param>
+    /// <param name="max">The maximum allowed angle in the specified units.</param>
+    /// <returns>
+    /// An angle within the specified range. If the input angle is less than the minimum angle, the minimum angle is returned.
+    /// If the input angle is greater than the maximum angle, the maximum angle is returned. Otherwise, the input angle is returned.
+    /// </returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static Angle<TAngleUnits, T> Clamp<TAngleUnits, T>(Angle<TAngleUnits, T> vector, Angle<TAngleUnits, T> min, Angle<TAngleUnits, T> max)
+        where TAngleUnits : struct, IAngleUnits<TAngleUnits>
+        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
+        => new(T.Clamp(vector.Value, min.Value, max.Value));
+
+    /// <summary>
     /// Gets the reduced angle of <paramref name="angle" />.
     /// </summary>
     /// <typeparam name="TUnits">The angle units of <paramref name="angle"/> and the reduced angle.</typeparam>
@@ -251,6 +269,51 @@ public static partial class Angle
         where TUnits : IAngleUnits<TUnits>
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => angle == Angle<TUnits, T>.Zero;
+
+    /// <summary>
+    /// Determines whether the specified angle is NaN (Not-a-Number).
+    /// </summary>
+    /// <typeparam name="TUnits">The angle units of <paramref name="angle"/>.</typeparam>
+    /// <typeparam name="T">The floating point type used internally by <paramref name="angle"/>.</typeparam>
+    /// <param name="angle">Source angle.</param>
+    /// <returns>
+    /// <c>true</c> if angle value is NaN; otherwise, <c>false</c>.
+    /// </returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static bool IsNaN<TUnits, T>(Angle<TUnits, T> angle)
+        where TUnits : IAngleUnits<TUnits>
+        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
+        => T.IsNaN(angle.Value);
+
+    /// <summary>
+    /// Determines whether the specified angle is positive or negative infinity.
+    /// </summary>
+    /// <typeparam name="TUnits">The angle units of <paramref name="angle"/>.</typeparam>
+    /// <typeparam name="T">The floating point type used internally by <paramref name="angle"/>.</typeparam>
+    /// <param name="angle">Source angle.</param>
+    /// <returns>
+    /// <c>true</c> if angle value is positive or negative infinity; otherwise, <c>false</c>.
+    /// </returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static bool IsInfinity<TUnits, T>(Angle<TUnits, T> angle)
+        where TUnits : IAngleUnits<TUnits>
+        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
+        => T.IsInfinity(angle.Value);
+
+    /// <summary>
+    /// Determines whether the specified angle is finite numbers (not NaN, infinity, or negative infinity).
+    /// </summary>
+    /// <typeparam name="TUnits">The angle units of <paramref name="angle"/>.</typeparam>
+    /// <typeparam name="T">The floating point type used internally by <paramref name="angle"/>.</typeparam>
+    /// <param name="angle">Source angle.</param>
+    /// <returns>
+    /// <c>true</c> if angle value is finite numbers; otherwise, <c>false</c>.
+    /// </returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static bool IsFinite<TUnits, T>(Angle<TUnits, T> angle)
+        where TUnits : IAngleUnits<TUnits>
+        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
+        => T.IsFinite(angle.Value);
 
     /// <summary>
     /// Indicates whether the specified angle is acute.

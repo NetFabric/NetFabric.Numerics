@@ -84,7 +84,7 @@ public readonly record struct Point<TDatum, TAngleUnits, TAngle, THeight>(Angle<
     public static readonly Point<TDatum, TAngleUnits, TAngle, THeight> Zero 
         = new(Angle<TAngleUnits, TAngle>.Zero, Angle<TAngleUnits, TAngle>.Zero, THeight.Zero);
 
-    static Point<TDatum, TAngleUnits, TAngle, THeight> INumericBase<Point<TDatum, TAngleUnits, TAngle, THeight>>.Zero
+    static Point<TDatum, TAngleUnits, TAngle, THeight> IGeometricBase<Point<TDatum, TAngleUnits, TAngle, THeight>>.Zero
         => Zero;
 
     /// <summary>
@@ -111,10 +111,10 @@ public readonly record struct Point<TDatum, TAngleUnits, TAngle, THeight>(Angle<
     /// </summary>
     public CoordinateSystem<TDatum, TAngle, THeight> CoordinateSystem 
         => new();
-    ICoordinateSystem IPoint<Point<TDatum, TAngleUnits, TAngle, THeight>>.CoordinateSystem 
+    ICoordinateSystem IGeometricBase<Point<TDatum, TAngleUnits, TAngle, THeight>>.CoordinateSystem 
         => CoordinateSystem;
 
-    object IPoint<Point<TDatum, TAngleUnits, TAngle, THeight>>.this[int index] 
+    object IGeometricBase<Point<TDatum, TAngleUnits, TAngle, THeight>>.this[int index] 
         => index switch
         {
             0 => Latitude,

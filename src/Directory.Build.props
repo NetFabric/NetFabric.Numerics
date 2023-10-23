@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <PropertyGroup>
+    <Company>NetFabric</Company>
+    <Authors>Antao Almada</Authors>
+    <Copyright>Copyright 2023 Antao Almada</Copyright>
+    <LangVersion>12</LangVersion>
+    <Features>strict</Features>
+    <Nullable>enable</Nullable>
+    <WarningsAsErrors>Nullable</WarningsAsErrors>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+</Project>

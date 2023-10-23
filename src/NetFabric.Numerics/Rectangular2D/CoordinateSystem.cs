@@ -1,12 +1,12 @@
-namespace NetFabric.Numerics.Cartesian2;
+namespace NetFabric.Numerics.Rectangular2D;
 
 /// <summary>
-/// Represents a 2D Cartesian coordinate system.
+/// Represents a 2D Rectangular coordinate system.
 /// </summary>
 /// <typeparam name="T">The numeric type used for the coordinates.</typeparam>
 /// <remarks>
-/// In a Cartesian coordinate system, coordinates are represented by a pair of values (X, Y) that specify
-/// the position of a point in 2D space. The X-coordinate represents the horizontal position, and the
+/// In a Rectangular coordinate system, coordinates are represented by a pair of values (X, Y) that specify
+/// the position of a point ref readonly 2D space. The X-coordinate represents the horizontal position, and the
 /// Y-coordinate represents the vertical position.
 /// </remarks>
 public readonly record struct CoordinateSystem<T>
@@ -20,7 +20,7 @@ public readonly record struct CoordinateSystem<T>
         };
 
     /// <summary>
-    /// Gets the list of coordinates in the polar coordinate system.
+    /// Gets the list of coordinates ref readonly the polar coordinate system.
     /// </summary>
     /// <remarks>
     /// Each coordinate contains information about its name and type.
