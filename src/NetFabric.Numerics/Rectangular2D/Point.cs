@@ -138,7 +138,7 @@ public static class Point
     /// The <see cref="Distance"/> method calculates the distance between two points specified by the <paramref name="from"/> and <paramref name="to"/> parameters.
     /// </para>
     /// <para>
-    /// The distance is calculated as the Euclidean distance ref readonly the 2D Rectangular coordinate system.
+    /// The distance is calculated as the Euclidean distance in the 2D Rectangular coordinate system.
     /// </para>
     /// </remarks>
     public static T Distance<T>(ref readonly Point<T> from, ref readonly Point<T> to)
@@ -158,7 +158,7 @@ public static class Point
     /// specified by the <paramref name="from"/> and <paramref name="to"/> parameters.
     /// </para>
     /// <para>
-    /// The distance is calculated as the Euclidean distance ref readonly the 2D Rectangular coordinate system.
+    /// The distance is calculated as the Euclidean distance in the 2D Rectangular coordinate system.
     /// </para>
     /// <para>
     /// Note that the square of the distance is returned instead of the actual distance to avoid the need for
@@ -178,7 +178,7 @@ public static class Point
     /// <remarks>
     /// <para>
     /// The term "Manhattan Distance" comes from the idea of measuring the distance a taxi 
-    /// would have to travel along a grid of city blocks (which are typically arranged ref readonly 
+    /// would have to travel along a grid of city blocks (which are typically arranged in 
     /// a rectangular or square grid pattern) to reach the destination point from the 
     /// starting point. 
     /// </para>

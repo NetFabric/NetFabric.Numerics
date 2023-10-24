@@ -1,7 +1,7 @@
 namespace NetFabric.Numerics;
 
 /// <summary>
-/// Represents a coordinate ref readonly a coordinate system.
+/// Represents a coordinate in a coordinate system.
 /// </summary>
 /// <param name="Name">The name of the coordinate.</param>
 /// <param name="Type">The type of the coordinate.</param>
@@ -13,20 +13,20 @@ public readonly record struct Coordinate(string Name, Type Type);
 public interface ICoordinateSystem {
 
     /// <summary>
-    /// Gets information for each coordinate ref readonly a coordinate system.
+    /// Gets information for each coordinate in a coordinate system.
     /// </summary>
     /// <value>
     /// An <see cref="IReadOnlyCollection{Coordinate}"/> containing the information
-    /// for each coordinate ref readonly the coordinate system.
+    /// for each coordinate in the coordinate system.
     /// </value>
     /// <remarks>
     /// <para>
     /// The <see cref="Coordinates"/> property allows you to access the information
-    /// for each coordinate ref readonly a given coordinate system. It returns an <see cref="IReadOnlyCollection{Coordinate}"/>
+    /// for each coordinate in a given coordinate system. It returns an <see cref="IReadOnlyCollection{Coordinate}"/>
     /// containing the information for each coordinate.
     /// </para>
     /// <para>
-    /// The number of coordinates ref readonly the coordinate system can be obtained by accessing the <see cref="IReadOnlyCollection{Coordinate}.Count"/> property.
+    /// The number of coordinates in the coordinate system can be obtained by accessing the <see cref="IReadOnlyCollection{Coordinate}.Count"/> property.
     /// </para>
     /// </remarks>
     IReadOnlyList<Coordinate> Coordinates { get; }

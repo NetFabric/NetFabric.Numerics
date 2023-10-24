@@ -148,7 +148,7 @@ public static class Point
     /// </para>
     /// <para>
     /// The transformation is applied by multiplying the point with the quaternion,
-    /// resulting ref readonly a new 3-dimensional point that represents the original point
+    /// resulting in a new 3-dimensional point that represents the original point
     /// after being transformed by the quaternion.
     /// </para>
     /// </remarks>
@@ -171,7 +171,7 @@ public static class Point
     /// The <see cref="Distance"/> method calculates the distance between two points specified by the <paramref name="from"/> and <paramref name="to"/> parameters.
     /// </para>
     /// <para>
-    /// The distance is calculated as the Euclidean distance ref readonly the 3D Rectangular coordinate system.
+    /// The distance is calculated as the Euclidean distance in the 3D Rectangular coordinate system.
     /// </para>
     /// </remarks>
     public static T Distance<T>(ref readonly Point<T> from, ref readonly Point<T> to)
@@ -190,7 +190,7 @@ public static class Point
     /// specified by the <paramref name="from"/> and <paramref name="to"/> parameters.
     /// </para>
     /// <para>
-    /// The distance is calculated as the Euclidean distance ref readonly the 3D Rectangular coordinate system.
+    /// The distance is calculated as the Euclidean distance in the 3D Rectangular coordinate system.
     /// </para>
     /// <para>
     /// Note that the square of the distance is returned instead of the actual distance to avoid the need for
@@ -210,7 +210,7 @@ public static class Point
     /// <remarks>
     /// <para>
     /// The term "Manhattan Distance" comes from the idea of measuring the distance a taxi 
-    /// would have to travel along a grid of city blocks (which are typically arranged ref readonly 
+    /// would have to travel along a grid of city blocks (which are typically arranged in 
     /// a rectangular or square grid pattern) to reach the destination point from the 
     /// starting point. 
     /// </para>
