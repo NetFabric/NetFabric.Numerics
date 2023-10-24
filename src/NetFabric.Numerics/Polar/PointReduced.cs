@@ -58,7 +58,7 @@ public readonly record struct PointReduced<TAngleUnits, T>(T Radius, AngleReduce
     /// <returns>An instance of <see cref="PointReduced{TAngleUnits, T}"/> created from <paramref name="point" />.</returns>
     /// <exception cref="NotSupportedException"><typeparamref name="TOther" /> or <typeparamref name="TOther"/> is not supported.</exception>
     /// <exception cref="OverflowException"><paramref name="point" /> is not representable by <see cref="PointReduced{TAngleUnits, T}"/>.</exception>
-    public static PointReduced<TAngleUnits, T> CreateChecked<TOther>(ref readonly PointReduced<TAngleUnits, TOther> point)
+    public static PointReduced<TAngleUnits, T> CreateChecked<TOther>(in PointReduced<TAngleUnits, TOther> point)
         where TOther : struct, IFloatingPoint<TOther>, IMinMaxValue<TOther>
         => new(
             T.CreateChecked(point.Radius),
@@ -73,7 +73,7 @@ public readonly record struct PointReduced<TAngleUnits, T>(T Radius, AngleReduce
     /// <returns>An instance of <see cref="PointReduced{TAngleUnits, T}"/> created from <paramref name="point" />.</returns>
     /// <exception cref="NotSupportedException"><typeparamref name="TOther" /> or <typeparamref name="TOther"/> is not supported.</exception>
     /// <exception cref="OverflowException"><paramref name="point" /> is not representable by <see cref="PointReduced{TAngleUnits, T}"/>.</exception>
-    public static PointReduced<TAngleUnits, T> CreateSaturating<TOther>(ref readonly PointReduced<TAngleUnits, TOther> point)
+    public static PointReduced<TAngleUnits, T> CreateSaturating<TOther>(in PointReduced<TAngleUnits, TOther> point)
         where TOther : struct, IFloatingPoint<TOther>, IMinMaxValue<TOther>
         => new(
             T.CreateSaturating(point.Radius),
@@ -88,7 +88,7 @@ public readonly record struct PointReduced<TAngleUnits, T>(T Radius, AngleReduce
     /// <returns>An instance of <see cref="PointReduced{TAngleUnits, T}"/> created from <paramref name="point" />.</returns>
     /// <exception cref="NotSupportedException"><typeparamref name="TOther" /> or <typeparamref name="TOther"/> is not supported.</exception>
     /// <exception cref="OverflowException"><paramref name="point" /> is not representable by <see cref="PointReduced{TAngleUnits, T}"/>.</exception>
-    public static PointReduced<TAngleUnits, T> CreateTruncating<TOther>(ref readonly PointReduced<TAngleUnits, TOther> point)
+    public static PointReduced<TAngleUnits, T> CreateTruncating<TOther>(in PointReduced<TAngleUnits, TOther> point)
         where TOther : struct, IFloatingPoint<TOther>, IMinMaxValue<TOther>
         => new(
             T.CreateTruncating(point.Radius),

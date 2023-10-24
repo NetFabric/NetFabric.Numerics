@@ -80,7 +80,7 @@ public readonly struct Point<TAngleUnits, T>(T radius, Angle<TAngleUnits, T> azi
     /// <returns>An instance of <see cref="Point{TAngleUnits, T}"/> created from <paramref name="point" />.</returns>
     /// <exception cref="NotSupportedException"><typeparamref name="TOther" /> or <typeparamref name="TOther"/> is not supported.</exception>
     /// <exception cref="OverflowException"><paramref name="point" /> is not representable by <see cref="Point{TAngleUnits, T}"/>.</exception>
-    public static Point<TAngleUnits, T> CreateChecked<TOther>(ref readonly Point<TAngleUnits, TOther> point)
+    public static Point<TAngleUnits, T> CreateChecked<TOther>(in Point<TAngleUnits, TOther> point)
         where TOther : struct, IFloatingPoint<TOther>, IMinMaxValue<TOther>
         => new(
             T.CreateChecked(point.Radius),
@@ -96,7 +96,7 @@ public readonly struct Point<TAngleUnits, T>(T radius, Angle<TAngleUnits, T> azi
     /// <returns>An instance of <see cref="Point{TAngleUnits, T}"/> created from <paramref name="point" />.</returns>
     /// <exception cref="NotSupportedException"><typeparamref name="TOther" /> or <typeparamref name="TOther"/> is not supported.</exception>
     /// <exception cref="OverflowException"><paramref name="point" /> is not representable by <see cref="Point{TAngleUnits, T}"/>.</exception>
-    public static Point<TAngleUnits, T> CreateSaturating<TOther>(ref readonly Point<TAngleUnits, TOther> point)
+    public static Point<TAngleUnits, T> CreateSaturating<TOther>(in Point<TAngleUnits, TOther> point)
         where TOther : struct, IFloatingPoint<TOther>, IMinMaxValue<TOther>
         => new(
             T.CreateSaturating(point.Radius),
@@ -112,7 +112,7 @@ public readonly struct Point<TAngleUnits, T>(T radius, Angle<TAngleUnits, T> azi
     /// <returns>An instance of <see cref="Point{TAngleUnits, T}"/> created from <paramref name="point" />.</returns>
     /// <exception cref="NotSupportedException"><typeparamref name="TOther" /> or <typeparamref name="TOther"/> is not supported.</exception>
     /// <exception cref="OverflowException"><paramref name="point" /> is not representable by <see cref="Point{TAngleUnits, T}"/>.</exception>
-    public static Point<TAngleUnits, T> CreateTruncating<TOther>(ref readonly Point<TAngleUnits, TOther> point)
+    public static Point<TAngleUnits, T> CreateTruncating<TOther>(in Point<TAngleUnits, TOther> point)
         where TOther : struct, IFloatingPoint<TOther>, IMinMaxValue<TOther>
         => new(
             T.CreateTruncating(point.Radius),
@@ -360,9 +360,9 @@ public static partial class Point
     /// <returns>The rectangular 3D coordinates representing the point.</returns>
     /// <remarks>
     /// If the type of point to convert doesn't meet the constraints, please convert it first to a suitable type using one of the conversion methods: 
-    /// - <see cref="Point{TAngleUnits, T}.CreateChecked{TOther}(ref readonly Point{TAngleUnits, TOther})"/>
-    /// - <see cref="Point{TAngleUnits, T}.CreateSaturating{TOther}(ref readonly Point{TAngleUnits, TOther})"/>
-    /// - <see cref="Point{TAngleUnits, T}.CreateTruncating{TOther}(ref readonly Point{TAngleUnits, TOther})"/>
+    /// - <see cref="Point{TAngleUnits, T}.CreateChecked{TOther}(in Point{TAngleUnits, TOther})"/>
+    /// - <see cref="Point{TAngleUnits, T}.CreateSaturating{TOther}(in Point{TAngleUnits, TOther})"/>
+    /// - <see cref="Point{TAngleUnits, T}.CreateTruncating{TOther}(in Point{TAngleUnits, TOther})"/>
     /// </remarks>
     public static Rectangular3D.Point<T> ToRectangular<T>(Point<Radians, T> point)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>, ITrigonometricFunctions<T>
