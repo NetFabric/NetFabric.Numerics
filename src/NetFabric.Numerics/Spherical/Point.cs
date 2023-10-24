@@ -7,7 +7,7 @@ namespace NetFabric.Numerics.Spherical;
 /// <typeparam name="T">The type used for the coordinates.</typeparam>
 [System.Diagnostics.DebuggerDisplay("Radius = {Radius}, Azimuth = {Azimuth}, Polar = {Polar}")]
 [SkipLocalsInit]
-public readonly struct Point<TAngleUnits, T>(T radius, Angle<TAngleUnits, T> azimuth, Angle<TAngleUnits, T> polar)
+public readonly struct Point<TAngleUnits, T>
     : IPoint<Point<TAngleUnits, T>>
     where TAngleUnits : struct, IAngleUnits<TAngleUnits>
     where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
@@ -18,8 +18,7 @@ public readonly struct Point<TAngleUnits, T>(T radius, Angle<TAngleUnits, T> azi
     /// <remarks>
     /// This property is read-only.
     /// </remarks>
-    public T Radius
-        => radius;
+    public T Radius { get; }
 
     /// <summary>
     /// Gets the azimuth angle component of the spherical coordinate point.
@@ -27,8 +26,7 @@ public readonly struct Point<TAngleUnits, T>(T radius, Angle<TAngleUnits, T> azi
     /// <remarks>
     /// This property is read-only.
     /// </remarks>
-    public Angle<TAngleUnits, T> Azimuth
-        => azimuth;
+    public Angle<TAngleUnits, T> Azimuth { get; }
 
     /// <summary>
     /// Gets the polar angle component of the spherical coordinate point.
@@ -36,8 +34,23 @@ public readonly struct Point<TAngleUnits, T>(T radius, Angle<TAngleUnits, T> azi
     /// <remarks>
     /// This property is read-only.
     /// </remarks>
-    public Angle<TAngleUnits, T> Polar
-        => polar;
+    public Angle<TAngleUnits, T> Polar { get; }
+
+    /// <summary>
+    /// Creates an instance of the current type from spherical coordinates.
+    /// </summary>
+    /// <param name="radius">The radial distance from the origin (usually the radial distance).</param>
+    /// <param name="azimuth">The horizontal angle in radians with units defined by <typeparamref name="TAngleUnits"/> (often called the azimuth angle).</param>
+    /// <param name="polar">The vertical angle in radians with units defined by <typeparamref name="TAngleUnits"/> (frequently referred to as the polar or zenith angle).</param>
+    /// <remarks>
+    /// These parameters collectively define the position of a 3D point in space based on spherical coordinates.
+    /// </remarks>
+    public Point(T radius, Angle<TAngleUnits, T> azimuth, Angle<TAngleUnits, T> polar)
+    {
+        Radius = radius;
+        Azimuth = azimuth;
+        Polar = polar;
+    }
 
     #region constants
 
