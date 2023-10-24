@@ -1,8 +1,4 @@
-﻿Certainly, let's restructure the README.md for **NetFabric.Numerics.Angle** following the same structure as the previous READMEs:
-
----
-
-# NetFabric.Numerics.Angle
+﻿# NetFabric.Numerics.Angle
 
 A Strongly-Typed Angle Implementation in C#.
 
