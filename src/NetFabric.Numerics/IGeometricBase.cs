@@ -1,7 +1,7 @@
 ﻿namespace NetFabric.Numerics;
 
 /// <summary>
-/// Represents a base type.
+/// Represents a geometric type.
 /// </summary>
 /// <typeparam name="TSelf">The type that implements the interface.</typeparam>
 public interface IGeometricBase<TSelf>

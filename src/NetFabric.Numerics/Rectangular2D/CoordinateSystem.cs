@@ -5,9 +5,8 @@ namespace NetFabric.Numerics.Rectangular2D;
 /// </summary>
 /// <typeparam name="T">The numeric type used for the coordinates.</typeparam>
 /// <remarks>
-/// In a Rectangular coordinate system, coordinates are represented by a pair of values (X, Y) that specify
-/// the position of a point in 2D space. The X-coordinate represents the horizontal position, and the
-/// Y-coordinate represents the vertical position.
+/// A Rectangular coordinate system uses a pair of values (X, Y) to specify the position of a point in 2D space.
+/// The X-coordinate represents the horizontal position, and the Y-coordinate represents the vertical position.
 /// </remarks>
 public readonly record struct CoordinateSystem<T>
     : ICoordinateSystem

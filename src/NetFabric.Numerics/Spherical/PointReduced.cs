@@ -1,10 +1,16 @@
 namespace NetFabric.Numerics.Spherical;
 
 /// <summary>
-/// Represents a point as an immutable struct.
+/// Represents a reduced point in a Spherical coordinate system.
 /// </summary>
 /// <typeparam name="TAngleUnits">The units used for the angles.</typeparam>
 /// <typeparam name="T">The type used for the coordinates.</typeparam>
+/// <remarks>
+/// In a Spherical coordinate system, a reduced point is represented by a triplet of values: the radius, the azimuth, and the polar angle.
+/// The radius represents the distance from the origin, the azimuth represents the angle measured counterclockwise
+/// from a reference direction in the XY plane within a full revolution, and the polar angle represents the angle measured from the positive Z-axis within half a revolution. 
+/// The choice of angle units is determined by the specified angle units type, TAngleUnits.
+/// </remarks>
 /// <param name="Azimuth">The azimuth coordinate.</param>
 /// <param name="Polar">The polar coordinate.</param>
 /// <param name="Radius">The radius coordinate.</param>

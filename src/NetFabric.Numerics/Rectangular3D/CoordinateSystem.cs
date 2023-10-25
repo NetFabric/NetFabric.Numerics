@@ -5,7 +5,7 @@ namespace NetFabric.Numerics.Rectangular3D;
 /// </summary>
 /// <typeparam name="T">The numeric type used for the coordinates.</typeparam>
 /// <remarks>
-/// In a Rectangular coordinate system, coordinates are represented by a triplet of values (X, Y, Z) that specify
+/// In a 3D Rectangular coordinate system, coordinates are represented by a triplet of values (X, Y, Z) that specify
 /// the position of a point in 3D space. The X-coordinate represents the horizontal position, the Y-coordinate
 /// represents the vertical position, and the Z-coordinate represents the depth or altitude.
 /// </remarks>

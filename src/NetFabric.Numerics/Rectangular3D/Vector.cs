@@ -4,9 +4,14 @@ using System.Globalization;
 namespace NetFabric.Numerics.Rectangular3D;
 
 /// <summary>
-/// Represents a vector as an immutable struct.
-/// </summary>  
-/// <typeparam name="T">The type of the vector coordinates.</typeparam>
+/// Represents a 3D vector in a Rectangular coordinate system.
+/// </summary>
+/// <typeparam name="T">The numeric type used for the vector's components.</typeparam>
+/// <remarks>
+/// In a 3D Rectangular coordinate system, a vector is represented by a triplet of values (X, Y, Z) that specify its
+/// direction and magnitude in 3D space. The X-component represents the horizontal direction, the Y-component
+/// represents the vertical direction, and the Z-component represents the depth or altitude direction.
+/// </remarks>
 /// <param name="X">The X coordinate.</param>
 /// <param name="Y">The Y coordinate.</param>
 /// <param name="Z">The Z coordinate.</param>

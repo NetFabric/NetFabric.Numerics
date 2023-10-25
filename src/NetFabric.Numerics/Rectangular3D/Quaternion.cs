@@ -1,10 +1,14 @@
 ﻿namespace NetFabric.Numerics.Rectangular3D;
 
 /// <summary>
-/// Represents a quaternion, a mathematical object used to represent rotations in 3D space.
-/// The quaternion is represented by an immutable struct.
+/// Represents a quaternion, a mathematical construct used to represent rotations in 3D space.
 /// </summary>
-/// <typeparam name="T">The type of the quaternion components.</typeparam>
+/// <typeparam name="T">The numeric type used for the quaternion's components.</typeparam>
+/// <remarks>
+/// A quaternion is used to describe rotations in 3D space. It consists of four components (W, X, Y, Z), where W
+/// represents the real part, and (X, Y, Z) represent the imaginary part. Quaternions are particularly useful for
+/// smooth and efficient interpolation of rotations.
+/// </remarks>
 /// <param name="X">The X component.</param>
 /// <param name="Y">The Y component.</param>
 /// <param name="Z">The Z component.</param>

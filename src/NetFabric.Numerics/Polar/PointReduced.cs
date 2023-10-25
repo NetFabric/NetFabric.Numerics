@@ -1,10 +1,15 @@
 namespace NetFabric.Numerics.Polar;
 
 /// <summary>
-/// Represents a point as an immutable struct.
+/// Represents a reduced point in a Polar coordinate system.
 /// </summary>
-/// <typeparam name="TAngleUnits">The angle units used for the azimuth coordinate.</typeparam>
+/// <typeparam name="TAngleUnits">The units used for the angles.</typeparam>
 /// <typeparam name="T">The type used for the coordinates.</typeparam>
+/// <remarks>
+/// In a Polar coordinate system, a reduced point is represented by a pair of values: the radius and the azimuth.
+/// The radius represents the distance from the origin, and the azimuth represents the angle measured counterclockwise
+/// from a reference direction within a full revolution. The choice of angle units is determined by the specified angle units type, TAngleUnits.
+/// </remarks>
 /// <param name="Radius">The radius coordinate.</param>
 /// <param name="Azimuth">The azimuth coordinate.</param>
 [System.Diagnostics.DebuggerDisplay("Radius = {Radius}, Azimuth = {Azimuth}")]

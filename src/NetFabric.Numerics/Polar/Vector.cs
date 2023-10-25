@@ -4,10 +4,15 @@ using System.Globalization;
 namespace NetFabric.Numerics.Polar;
 
 /// <summary>
-/// Represents a vector as an immutable struct.
-/// </summary>  
-/// <typeparam name="TAngleUnits">The angle units used for the azimuth and polar coordinates.</typeparam>
-/// <typeparam name="T">The type of the radius coordinate.</typeparam>
+/// Represents a vector in a Polar coordinate system.
+/// </summary>
+/// <typeparam name="TAngleUnits">The units used for the angles.</typeparam>
+/// <typeparam name="T">The type of the vector's components.</typeparam>
+/// <remarks>
+/// In a Polar coordinate system, a vector is represented by a pair of values: the magnitude (radius) and the direction (azimuth).
+/// The magnitude represents the length or distance of the vector, and the azimuth represents the angle measured counterclockwise
+/// from a reference direction. The choice of angle units is determined by the specified angle units type, TAngleUnits.
+/// </remarks>
 /// <param name="Radius">The radius coordinate.</param>
 /// <param name="Azimuth">The azimuth coordinate.</param>
 [System.Diagnostics.DebuggerDisplay("Radius = {Radius}, Azimuth = {Azimuth}")]

@@ -1,5 +1,3 @@
-using System.Drawing;
-
 namespace NetFabric.Numerics.Polar;
 
 /// <summary>
@@ -7,6 +5,11 @@ namespace NetFabric.Numerics.Polar;
 /// </summary>
 /// <typeparam name="TAngleUnits">The units used for the angles.</typeparam>
 /// <typeparam name="T">The type used for the coordinates.</typeparam>
+/// <remarks>
+/// In a Polar coordinate system, a point is represented by two values: the radius and the azimuth. The radius
+/// represents the distance from the origin, and the azimuth represents the angle measured counterclockwise from
+/// a reference direction. The choice of angle units is determined by the specified angle units type, TAngleUnits.
+/// </remarks>
 [System.Diagnostics.DebuggerDisplay("Radius = {Radius}, Azimuth = {Azimuth}")]
 [SkipLocalsInit]
 public readonly struct Point<TAngleUnits, T>

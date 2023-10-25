@@ -1,11 +1,15 @@
 namespace NetFabric.Numerics.Rectangular2D;
 
 /// <summary>
-/// Represents a point as an immutable struct.
+/// Represents a point in a 2D Rectangular coordinate system.
 /// </summary>
-/// <typeparam name="T">The type of the point coordinates.</typeparam>
+/// <typeparam name="T">The numeric type used for the coordinates.</typeparam>
+/// <remarks>
+/// In a 2D Rectangular coordinate system, a point is represented by a pair of values (X, Y) that specify its position
+/// in 2D space. The X-coordinate represents the horizontal position, and the Y-coordinate represents the vertical position.
+/// </remarks>
 /// <param name="X">The X coordinate.</param>
-/// <param name="Y">The X coordinate.</param>
+/// <param name="Y">The Y coordinate.</param>
 [System.Diagnostics.DebuggerDisplay("X = {X}, Y = {Y}")]
 [SkipLocalsInit]
 public readonly record struct Point<T>(T X, T Y) 

@@ -4,9 +4,14 @@ using System.Globalization;
 namespace NetFabric.Numerics.Rectangular2D;
 
 /// <summary>
-/// Represents a vector as an immutable struct.
-/// </summary>  
-/// <typeparam name="T">The type of the vector coordinates.</typeparam>
+/// Represents a 2D vector in a Rectangular coordinate system.
+/// </summary>
+/// <typeparam name="T">The numeric type used for the vector's components.</typeparam>
+/// <remarks>
+/// In a 2D Rectangular coordinate system, a vector is represented by a pair of values (X, Y) that specify its
+/// direction and magnitude in 2D space. The X-component represents the horizontal direction, and the Y-component
+/// represents the vertical direction.
+/// </remarks>
 /// <param name="X">The X coordinate.</param>
 /// <param name="Y">The Y coordinate.</param>
 [System.Diagnostics.DebuggerDisplay("X = {X}, Y = {Y}")]

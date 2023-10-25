@@ -1,7 +1,7 @@
 namespace NetFabric.Numerics;
 
 /// <summary>
-/// Represents a vector.
+/// Represents a vector in a coordinate system.
 /// </summary>
 /// <typeparam name="TSelf">The type that implements the interface.</typeparam>
 /// <typeparam name="T">The type of the vector coordinates.</typeparam>

@@ -4,10 +4,16 @@ using System.Globalization;
 namespace NetFabric.Numerics.Spherical;
 
 /// <summary>
-/// Represents a vector as an immutable struct.
-/// </summary>  
-/// <typeparam name="TAngleUnits">The angle units used for the azimuth and polar coordinates.</typeparam>
-/// <typeparam name="T">The type of the radius coordinate.</typeparam>
+/// Represents a vector in a Spherical coordinate system.
+/// </summary>
+/// <typeparam name="TAngleUnits">The units used for the angles.</typeparam>
+/// <typeparam name="T">The type of the vector's components.</typeparam>
+/// <remarks>
+/// In a Spherical coordinate system, a vector is represented by three values: the magnitude (radius), the azimuth, and the polar angle.
+/// The magnitude represents the length or distance of the vector, the azimuth represents the angle measured counterclockwise
+/// from a reference direction in the XY plane, and the polar angle represents the angle measured from the positive Z-axis.
+/// The choice of angle units is determined by the specified angle units type, TAngleUnits.
+/// </remarks>
 /// <param name="Radius">The radius coordinate.</param>
 /// <param name="Azimuth">The azimuth coordinate.</param>
 /// <param name="Polar">The polar coordinate.</param>

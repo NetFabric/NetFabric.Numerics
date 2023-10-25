@@ -1,12 +1,17 @@
 namespace NetFabric.Numerics.Rectangular3D;
 
 /// <summary>
-/// Represents a point as an immutable struct.
+/// Represents a point in a 3D Rectangular coordinate system.
 /// </summary>
-/// <typeparam name="T">The type of the point coordinates.</typeparam>
+/// <typeparam name="T">The numeric type used for the coordinates.</typeparam>
+/// <remarks>
+/// In a 3D Rectangular coordinate system, a point is represented by a triplet of values (X, Y, Z) that specify its
+/// position in 3D space. The X-coordinate represents the horizontal position, the Y-coordinate represents the vertical
+/// position, and the Z-coordinate represents the depth or altitude.
+/// </remarks>
 /// <param name="X">The X coordinate.</param>
-/// <param name="Y">The X coordinate.</param>
-/// <param name="Z">The X coordinate.</param>
+/// <param name="Y">The Y coordinate.</param>
+/// <param name="Z">The Z coordinate.</param>
 [System.Diagnostics.DebuggerDisplay("X = {X}, Y = {Y}, Z = {Z}")]
 [SkipLocalsInit]
 public readonly record struct Point<T>(T X, T Y, T Z) 
