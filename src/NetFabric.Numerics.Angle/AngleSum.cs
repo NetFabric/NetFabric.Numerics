@@ -28,7 +28,7 @@ public static partial class Angle
     }
 
     /// <summary>
-    /// Calculates the sum of a collection of angles.
+    /// Calculates the sum of an array of angles.
     /// </summary>
     /// <param name="source">The array collection of angles.</param>
     /// <returns>The sum of the angles in the collection.</returns>
@@ -41,7 +41,7 @@ public static partial class Angle
         => source.AsSpan().Sum();
 
     /// <summary>
-    /// Calculates the sum of a collection of angles.
+    /// Calculates the sum of a span of angles.
     /// </summary>
     /// <param name="source">The <see cref="Span{T}"/> collection of angles.</param>
     /// <returns>The sum of the angles in the collection.</returns>
@@ -54,7 +54,7 @@ public static partial class Angle
         => ((ReadOnlySpan<Angle<TUnits, T>>)source).Sum();
 
     /// <summary>
-    /// Calculates the sum of a collection of angles.
+    /// Calculates the sum of a read-only span of angles.
     /// </summary>
     /// <param name="source">The <see cref="ReadOnlySpan{T}"/> collection of angles.</param>
     /// <returns>The sum of the angles in the collection.</returns>

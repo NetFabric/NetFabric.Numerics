@@ -95,9 +95,9 @@ public static partial class Angle
     /// </para>
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Angle<Radians, T> Atan2<T>(T x, T y)
+    public static Angle<Radians, T> Atan2<T>(T y, T x)
         where T : struct, IFloatingPointIeee754<T>, IMinMaxValue<T>
-        => new(T.Atan2(x, y));
+        => new(T.Atan2(y, x));
 
     /// <summary>
     /// Calculates the arc cotangent of a value.

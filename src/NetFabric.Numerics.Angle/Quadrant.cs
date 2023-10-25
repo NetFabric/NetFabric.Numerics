@@ -1,40 +1,47 @@
 namespace NetFabric.Numerics;
 
 /// <summary>
-/// The four regions divided by the x and y axis.
+/// An enumeration representing the quadrants and axes in a two-dimensional Cartesian coordinate system.
 /// </summary>
 public enum Quadrant
 {
     /// <summary>
-    /// Lies on the positive x axis.
+    /// Represents the positive x-axis.
     /// </summary>
     PositiveX,
+
     /// <summary>
-    /// The region where x and y are positive.
+    /// Represents the first quadrant, where both x and y values are positive.
     /// </summary>
     First,
+
     /// <summary>
-    /// Lies on the positive y axis.
+    /// Represents the positive y-axis.
     /// </summary>
     PositiveY,
+
     /// <summary>
-    /// The region where x is negative and y is positive.
+    /// Represents the second quadrant, where x is negative, and y is positive.
     /// </summary>
     Second,
+
     /// <summary>
-    /// Lies on the negative x axis.
+    /// Represents the negative x-axis.
     /// </summary>
     NegativeX,
+
     /// <summary>
-    /// The region where x and y are negative.
+    /// Represents the third quadrant, where both x and y values are negative.
     /// </summary>
     Third,
+
     /// <summary>
-    /// Lies on the negative y axis.
+    /// Represents the negative y-axis.
     /// </summary>
     NegativeY,
+
     /// <summary>
-    /// The region where x is positive and y is negative.
+    /// Represents the fourth quadrant, where x is positive, and y is negative.
     /// </summary>
     Fourth
 }
