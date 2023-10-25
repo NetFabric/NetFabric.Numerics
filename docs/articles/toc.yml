@@ -1,2 +1,8 @@
 - name: Introduction
   href: intro.md
+- name: The Evolution of Math in .NET 7 - Harnessing the Power of Generics
+  href: GenericMath.md
+- name: Strongly Typed Angles with NetFabric.Numerics
+  href: Angles.md
+- name: The Advantages of Using Point and Vector Mathematical Concepts
+  href: PointsAndVectors.md
