@@ -18,7 +18,7 @@ namespace NetFabric.Numerics.Polar;
 [System.Diagnostics.DebuggerDisplay("Radius = {Radius}, Azimuth = {Azimuth}")]
 [SkipLocalsInit]
 public readonly record struct Vector<TAngleUnits, T>(T Radius, Angle<TAngleUnits, T> Azimuth)
-    : IVector<Vector<TAngleUnits, T>, T>
+    : IVector<Vector<TAngleUnits, T>, CoordinateSystem<TAngleUnits, T>, T>
     where TAngleUnits : struct, IAngleUnits<TAngleUnits>
     where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
 {
@@ -30,7 +30,7 @@ public readonly record struct Vector<TAngleUnits, T>(T Radius, Angle<TAngleUnits
     /// </summary>
     public static readonly Vector<TAngleUnits, T> Zero = new(T.Zero, Angle<TAngleUnits, T>.Zero);
 
-    static Vector<TAngleUnits, T> IGeometricBase<Vector<TAngleUnits, T>>.Zero
+    static Vector<TAngleUnits, T> IGeometricBase<Vector<TAngleUnits, T>, CoordinateSystem<TAngleUnits, T>>.Zero
         => Zero;
 
     static Vector<TAngleUnits, T> IAdditiveIdentity<Vector<TAngleUnits, T>, Vector<TAngleUnits, T>>.AdditiveIdentity
@@ -58,8 +58,6 @@ public readonly record struct Vector<TAngleUnits, T>(T Radius, Angle<TAngleUnits
     /// </summary>
     public CoordinateSystem<TAngleUnits, T> CoordinateSystem
         => new();
-    ICoordinateSystem IGeometricBase<Vector<TAngleUnits, T>>.CoordinateSystem
-        => CoordinateSystem;
 
     /// <summary>
     /// Creates an instance of the current type from a value, 
@@ -106,7 +104,7 @@ public readonly record struct Vector<TAngleUnits, T>(T Radius, Angle<TAngleUnits
             T.CreateTruncating(vector.Radius),
             Angle<TAngleUnits, T>.CreateTruncating(vector.Azimuth));
 
-    object IGeometricBase<Vector<TAngleUnits, T>>.this[int index]
+    object IGeometricBase<Vector<TAngleUnits, T>, CoordinateSystem<TAngleUnits, T>>.this[int index]
         => index switch
         {
             0 => Radius,

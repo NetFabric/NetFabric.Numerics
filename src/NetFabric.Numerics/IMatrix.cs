@@ -6,8 +6,7 @@
 /// <typeparam name="TSelf">The type that implements the interface.</typeparam>
 /// <typeparam name="T">The type of the matrix elements.</typeparam>
 public interface IMatrix<TSelf, T>
-    : IGeometricBase<TSelf>,
-      IAdditiveIdentity<TSelf, TSelf>,
+    : IAdditiveIdentity<TSelf, TSelf>,
       IUnaryPlusOperators<TSelf, TSelf>,
       IAdditionOperators<TSelf, TSelf, TSelf>,
       IUnaryNegationOperators<TSelf, TSelf>,

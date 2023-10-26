@@ -18,7 +18,7 @@ namespace NetFabric.Numerics.Rectangular3D;
 [System.Diagnostics.DebuggerDisplay("X = {X}, Y = {Y}, Z = {Z}")]
 [SkipLocalsInit]
 public readonly record struct Vector<T>(T X, T Y, T Z)
-    : IVector<Vector<T>, T>
+    : IVector<Vector<T>, CoordinateSystem<T>, T>
     where T : struct, INumber<T>, IMinMaxValue<T>
 {
 
@@ -29,7 +29,7 @@ public readonly record struct Vector<T>(T X, T Y, T Z)
     /// </summary>
     public static readonly Vector<T> Zero = new(T.Zero, T.Zero, T.Zero);
 
-    static Vector<T> IGeometricBase<Vector<T>>.Zero
+    static Vector<T> IGeometricBase<Vector<T>, CoordinateSystem<T>>.Zero
         => Zero;
 
     static Vector<T> IAdditiveIdentity<Vector<T>, Vector<T>>.AdditiveIdentity
@@ -72,8 +72,6 @@ public readonly record struct Vector<T>(T X, T Y, T Z)
     /// </summary>
     public CoordinateSystem<T> CoordinateSystem
         => new();
-    ICoordinateSystem IGeometricBase<Vector<T>>.CoordinateSystem
-        => CoordinateSystem;
 
     /// <summary>
     /// Creates an instance of the current type from a value, 
@@ -126,7 +124,7 @@ public readonly record struct Vector<T>(T X, T Y, T Z)
             T.CreateTruncating(vector.Z)
         );
 
-    object IGeometricBase<Vector<T>>.this[int index]
+    object IGeometricBase<Vector<T>, CoordinateSystem<T>>.this[int index]
         => index switch
         {
             0 => X,

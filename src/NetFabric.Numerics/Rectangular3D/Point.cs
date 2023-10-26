@@ -15,14 +15,14 @@ namespace NetFabric.Numerics.Rectangular3D;
 [System.Diagnostics.DebuggerDisplay("X = {X}, Y = {Y}, Z = {Z}")]
 [SkipLocalsInit]
 public readonly record struct Point<T>(T X, T Y, T Z) 
-    : IPoint<Point<T>>
+    : IPoint<Point<T>, CoordinateSystem<T>>
     where T: struct, INumber<T>, IMinMaxValue<T>
 {
     #region constants
 
     public static readonly Point<T> Zero = new(T.Zero, T.Zero, T.Zero);
 
-    static Point<T> IGeometricBase<Point<T>>.Zero
+    static Point<T> IGeometricBase<Point<T>, CoordinateSystem<T>>.Zero
         => Zero;
 
     /// <summary>
@@ -47,8 +47,6 @@ public readonly record struct Point<T>(T X, T Y, T Z)
     /// </summary>
     public CoordinateSystem<T> CoordinateSystem 
         => new();
-    ICoordinateSystem IGeometricBase<Point<T>>.CoordinateSystem 
-        => CoordinateSystem;
 
     /// <summary>
     /// Creates an instance of the current type from a value, 
@@ -121,7 +119,7 @@ public readonly record struct Point<T>(T X, T Y, T Z)
 
     #endregion
 
-    object IGeometricBase<Point<T>>.this[int index] 
+    object IGeometricBase<Point<T>, CoordinateSystem<T>>.this[int index] 
         => index switch
         {
             0 => X,

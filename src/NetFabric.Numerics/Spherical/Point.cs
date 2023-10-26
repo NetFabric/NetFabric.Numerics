@@ -14,7 +14,7 @@ namespace NetFabric.Numerics.Spherical;
 [System.Diagnostics.DebuggerDisplay("Radius = {Radius}, Azimuth = {Azimuth}, Polar = {Polar}")]
 [SkipLocalsInit]
 public readonly struct Point<TAngleUnits, T>
-    : IPoint<Point<TAngleUnits, T>>
+    : IPoint<Point<TAngleUnits, T>, CoordinateSystem<TAngleUnits, T>>
     where TAngleUnits : struct, IAngleUnits<TAngleUnits>
     where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
 {
@@ -62,7 +62,7 @@ public readonly struct Point<TAngleUnits, T>
 
     public static readonly PointReduced<TAngleUnits, T> Zero = new(T.Zero, Angle<TAngleUnits, T>.Zero, Angle<TAngleUnits, T>.Zero);
 
-    static Point<TAngleUnits, T> IGeometricBase<Point<TAngleUnits, T>>.Zero
+    static Point<TAngleUnits, T> IGeometricBase<Point<TAngleUnits, T>, CoordinateSystem<TAngleUnits, T>>.Zero
         => Zero;
 
     /// <summary>
@@ -87,8 +87,6 @@ public readonly struct Point<TAngleUnits, T>
     /// </summary>
     public CoordinateSystem<TAngleUnits, T> CoordinateSystem 
         => new();
-    ICoordinateSystem IGeometricBase<Point<TAngleUnits, T>>.CoordinateSystem 
-        => CoordinateSystem;
 
     /// <summary>
     /// Creates an instance of the current type from a value, 
@@ -138,7 +136,7 @@ public readonly struct Point<TAngleUnits, T>
             Angle<TAngleUnits, T>.CreateTruncating(point.Azimuth),
             Angle<TAngleUnits, T>.CreateTruncating(point.Polar));
 
-    object IGeometricBase<Point<TAngleUnits, T>>.this[int index] 
+    object IGeometricBase<Point<TAngleUnits, T>, CoordinateSystem<TAngleUnits, T>>.this[int index] 
         => index switch
         {
             0 => Radius,

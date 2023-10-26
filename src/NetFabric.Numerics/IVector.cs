@@ -3,10 +3,11 @@ namespace NetFabric.Numerics;
 /// <summary>
 /// Represents a vector in a coordinate system.
 /// </summary>
-/// <typeparam name="TSelf">The type that implements the interface.</typeparam>
+/// <typeparam name="TSelf">The type implementing the interface.</typeparam>
+/// <typeparam name="TCoordinateSystem">The type representing the coordinate system.</typeparam>
 /// <typeparam name="T">The type of the vector coordinates.</typeparam>
-public interface IVector<TSelf, T>
-    : IGeometricBase<TSelf>,
+public interface IVector<TSelf, TCoordinateSystem, T>
+    : IGeometricBase<TSelf, TCoordinateSystem>,
       IComparable,
       IComparable<TSelf>,
       IComparisonOperators<TSelf, TSelf, bool>,
@@ -18,7 +19,8 @@ public interface IVector<TSelf, T>
       IMultiplyOperators<TSelf, T, TSelf>,
       IDivisionOperators<TSelf, T, TSelf>,
       IMinMaxValue<TSelf>
-    where TSelf : struct, IVector<TSelf, T>?
+    where TSelf : struct, IVector<TSelf, TCoordinateSystem, T>?
+    where TCoordinateSystem : ICoordinateSystem
     where T : struct, INumber<T>, IMinMaxValue<T>
 {
 }

@@ -17,7 +17,7 @@ namespace NetFabric.Numerics.Spherical;
 [System.Diagnostics.DebuggerDisplay("Radius = {Radius}, Azimuth = {Azimuth}, Polar = {Polar}")]
 [SkipLocalsInit]
 public readonly record struct PointReduced<TAngleUnits, T>(T Radius, AngleReduced<TAngleUnits, T> Azimuth, AngleReduced<TAngleUnits, T> Polar)
-    : IPoint<PointReduced<TAngleUnits, T>>
+    : IPoint<PointReduced<TAngleUnits, T>, CoordinateSystem<TAngleUnits, T>>
     where TAngleUnits : struct, IAngleUnits<TAngleUnits>
     where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
 {
@@ -33,7 +33,7 @@ public readonly record struct PointReduced<TAngleUnits, T>(T Radius, AngleReduce
     /// </summary>
     public static readonly PointReduced<TAngleUnits, T> Zero = new(T.Zero, Angle<TAngleUnits, T>.Zero, Angle<TAngleUnits, T>.Zero);
 
-    static PointReduced<TAngleUnits, T> IGeometricBase<PointReduced<TAngleUnits, T>>.Zero
+    static PointReduced<TAngleUnits, T> IGeometricBase<PointReduced<TAngleUnits, T>, CoordinateSystem<TAngleUnits, T>>.Zero
         => Zero;
 
     /// <summary>
@@ -58,8 +58,6 @@ public readonly record struct PointReduced<TAngleUnits, T>(T Radius, AngleReduce
     /// </summary>
     public CoordinateSystem<TAngleUnits, T> CoordinateSystem
         => new();
-    ICoordinateSystem IGeometricBase<PointReduced<TAngleUnits, T>>.CoordinateSystem
-        => CoordinateSystem;
 
     /// <summary>
     /// Creates an instance of the current type from a value, 
@@ -117,7 +115,7 @@ public readonly record struct PointReduced<TAngleUnits, T>(T Radius, AngleReduce
     public static implicit operator Point<TAngleUnits, T>(PointReduced<TAngleUnits, T> angle)
         => new(angle.Radius, angle.Azimuth, angle.Polar);
 
-    object IGeometricBase<PointReduced<TAngleUnits, T>>.this[int index]
+    object IGeometricBase<PointReduced<TAngleUnits, T>, CoordinateSystem<TAngleUnits, T>>.this[int index]
         => index switch
         {
             0 => Radius,

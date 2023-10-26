@@ -3,17 +3,19 @@
 /// <summary>
 /// Represents a geometric type.
 /// </summary>
-/// <typeparam name="TSelf">The type that implements the interface.</typeparam>
-public interface IGeometricBase<TSelf>
+/// <typeparam name="TSelf">The type implementing the interface.</typeparam>
+/// <typeparam name="TCoordinateSystem">The type representing the coordinate system.</typeparam>
+public interface IGeometricBase<TSelf, TCoordinateSystem>
     : IEquatable<TSelf>,
       IEqualityOperators<TSelf, TSelf, bool>
-    where TSelf : struct, IGeometricBase<TSelf>?
+    where TSelf : struct, IGeometricBase<TSelf, TCoordinateSystem>?
+    where TCoordinateSystem : ICoordinateSystem
 {    
     /// <summary>
-    /// Gets a coordinate system of the point.
+    /// Gets the coordinate system of the point.
     /// </summary>
     /// <value>The coordinate system of the point.</value>
-    ICoordinateSystem CoordinateSystem { get; }
+    TCoordinateSystem CoordinateSystem { get; }
 
     /// <summary>
     /// Gets the value for a given coordinate of the point.
@@ -30,11 +32,13 @@ public interface IGeometricBase<TSelf>
     /// </remarks>
     object this[int index] { get; }
 
-    /// <summary>Gets the value <c>0</c> for the type.</summary>
+    /// <summary>
+    /// Gets the zero value for the type.
+    /// </summary>
     static abstract TSelf Zero { get; }
 
     /// <summary>
-    /// Determines whether <paramref name="value"/> is zero.
+    /// Determines whether a value is zero.
     /// </summary>
     /// <param name="value">The value to check.</param>
     /// <returns><c>true</c> if the value is a zero vector; otherwise, <c>false</c>.</returns>
@@ -42,3 +46,4 @@ public interface IGeometricBase<TSelf>
     public static bool IsZero(TSelf value) 
         => value.Equals(TSelf.Zero);
 }
+
