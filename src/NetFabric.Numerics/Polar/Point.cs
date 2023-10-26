@@ -34,7 +34,7 @@ public readonly struct Point<TAngleUnits, T>
     public Angle<TAngleUnits, T> Azimuth { get; }
 
     /// <summary>
-    /// Creates an instance of the current type from spherical coordinates.
+    /// Creates an instance of the current type from polar coordinates.
     /// </summary>
     /// <param name="radius">The radial distance from the origin (usually the radial distance).</param>
     /// <param name="azimuth">The horizontal angle in radians with units defined by <typeparamref name="TAngleUnits"/> (often called the azimuth angle).</param>
@@ -332,18 +332,18 @@ public static partial class Point
         => new(point.Radius, Angle.ToGradians(point.Azimuth));
 
     /// <summary>
-    /// Reduces a point in spherical coordinates by applying reduction functions to its components.
+    /// Reduces a point in polar coordinates by applying reduction functions to its components.
     /// </summary>
     /// <typeparam name="TAngleUnits">The type representing angle units.</typeparam>
     /// <typeparam name="T">The type used for the coordinates.</typeparam>
-    /// <param name="point">The input point in spherical coordinates to be reduced.</param>
+    /// <param name="point">The input point in polar coordinates to be reduced.</param>
     /// <returns>
     /// A new <see cref="PointReduced{TAngleUnits, T}"/> object with a reduced
-    /// azimuthal angle and polar angle, while keeping the original radius.
+    /// azimuthal angle, while keeping the original radius.
     /// </returns>
     /// <remarks>
-    /// The reduction process involves applying reduction functions to the azimuthal and polar angles
-    /// of the input spherical point. The radius component remains unchanged.
+    /// The reduction process involves applying reduction functions to the azimuthal angle
+    /// of the input polar point. The radius component remains unchanged.
     /// </remarks>
     public static PointReduced<TAngleUnits, T> Reduce<TAngleUnits, T>(Point<TAngleUnits, T> point)
         where TAngleUnits : struct, IAngleUnits<TAngleUnits>

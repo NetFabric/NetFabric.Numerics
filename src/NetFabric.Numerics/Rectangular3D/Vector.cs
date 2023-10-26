@@ -526,8 +526,8 @@ public static class Vector
     /// <remarks>
     /// This method adds the corresponding coordinates of the two input vectors and returns
     /// a new Vector with the resulting sums. The operation is performed component-wise, which
-    /// means that the X, Y, Z, and W coordinates of the resulting vector are the sums of the
-    /// X, Y, Z, and W coordinates of the input vectors, respectively. The input vectors remain
+    /// means that the X, Y, and Z coordinates of the resulting vector are the sums of the
+    /// X, Y, and Z coordinates of the input vectors, respectively. The input vectors remain
     /// unchanged.
     /// </remarks>
     [SkipLocalsInit]
@@ -546,8 +546,8 @@ public static class Vector
     /// <remarks>
     /// This method subtracts the corresponding coordinates of the second vector from the first vector
     /// and returns a new Vector with the resulting differences. The operation is performed component-wise,
-    /// which means that the X, Y, Z, and W coordinates of the resulting vector are the differences of the
-    /// X, Y, Z, and W coordinates of the input vectors, respectively. The input vectors remain unchanged.
+    /// which means that the X, Y, and Z coordinates of the resulting vector are the differences of the
+    /// X, Y, and Z coordinates of the input vectors, respectively. The input vectors remain unchanged.
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector<T> Subtract<T>(in Vector<T> left, in Vector<T> right)
@@ -563,7 +563,7 @@ public static class Vector
     /// <returns>A new Vector that is the result of multiplying each coordinate of the input vector by the scalar value.</returns>
     /// <remarks>
     /// This method multiplies the specified scalar value with each coordinate of the input Vector and returns a new Vector with the resulting products. 
-    /// The operation is performed independently on each coordinate, meaning that the scalar value is multiplied with the X, Y, Z, and W coordinates of the input vector separately. 
+    /// The operation is performed independently on each coordinate, meaning that the scalar value is multiplied with the X, Y, and Z coordinates of the input vector separately. 
     /// The input vector remains unchanged after the operation.
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
