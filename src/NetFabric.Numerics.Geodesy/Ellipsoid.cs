@@ -1,6 +1,6 @@
 ﻿using System.Numerics;
 
-namespace NetFabric.Numerics.Geography;
+namespace NetFabric.Numerics.Geodesy;
 
 /// <summary>
 /// Summary description for Ellipsoid.

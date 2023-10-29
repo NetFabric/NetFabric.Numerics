@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Title>NetFabric.Numerics.Geography</Title>
+    <Title>NetFabric.Numerics.Geodesy</Title>
     <TargetFrameworks>net7.0</TargetFrameworks>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Description></Description>
@@ -9,11 +9,11 @@
     <PackageIcon>Icon.png</PackageIcon>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageTags>math, numerics, geodetic, geography, latlon, latitude, longitude, datum, utm, wgs84</PackageTags>
+    <PackageTags>math, numerics, geodetic, geodesy, geography, latlon, latitude, longitude, datum, utm, wgs84</PackageTags>
     <PackageProjectUrl>https://netfabric.github.io/NetFabric.Numerics/</PackageProjectUrl>
     <PackageReleaseNotes>
     </PackageReleaseNotes>
-    <RootNamespace>NetFabric.Numerics.Geography</RootNamespace>
+    <RootNamespace>NetFabric.Numerics.Geodesy</RootNamespace>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>

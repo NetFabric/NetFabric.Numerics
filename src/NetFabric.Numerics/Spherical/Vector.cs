@@ -21,7 +21,7 @@ namespace NetFabric.Numerics.Spherical;
 [SkipLocalsInit]
 public readonly record struct Vector<TAngleUnits, T>(T Radius, Angle<TAngleUnits, T> Azimuth, Angle<TAngleUnits, T> Polar)
     : IVector<Vector<TAngleUnits, T>, CoordinateSystem<TAngleUnits, T>, T>
-    where TAngleUnits : struct, IAngleUnits<TAngleUnits>
+    where TAngleUnits : IAngleUnits
     where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
 {
 
@@ -54,12 +54,6 @@ public readonly record struct Vector<TAngleUnits, T>(T Radius, Angle<TAngleUnits
         => MaxValue;
 
     #endregion
-
-    /// <summary>
-    /// Gets the coordinate system.
-    /// </summary>
-    public CoordinateSystem<TAngleUnits, T> CoordinateSystem
-        => new();
 
     /// <summary>
     /// Creates an instance of the current type from a value, 
@@ -109,7 +103,7 @@ public readonly record struct Vector<TAngleUnits, T>(T Radius, Angle<TAngleUnits
             Angle<TAngleUnits, T>.CreateTruncating(vector.Azimuth),
             Angle<TAngleUnits, T>.CreateTruncating(vector.Polar));
 
-    object IGeometricBase<Vector<TAngleUnits, T>, CoordinateSystem<TAngleUnits, T>>.this[int index]
+    object IGeometricBase.this[int index]
         => index switch
         {
             0 => Radius,
@@ -332,7 +326,7 @@ public static class Vector
     /// <returns><c>true</c> if all components of the vector are zero; otherwise, <c>false</c>.</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool IsZero<TAngleUnits, T>(in Vector<TAngleUnits, T> vector)
-    where TAngleUnits : struct, IAngleUnits<TAngleUnits>
+    where TAngleUnits : IAngleUnits
     where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => vector == Vector<TAngleUnits, T>.Zero;
 
@@ -350,7 +344,7 @@ public static class Vector
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool IsZero<TAngleUnits, T>(in Vector<TAngleUnits, T> vector, T tolerance)
-        where TAngleUnits : struct, IAngleUnits<TAngleUnits>
+        where TAngleUnits : IAngleUnits
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => AreApproximatelyEqual(in vector, in Vector<TAngleUnits, T>.Zero, tolerance);
 
@@ -365,7 +359,7 @@ public static class Vector
     /// </returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool IsNaN<TAngleUnits, T>(in Vector<TAngleUnits, T> vector)
-        where TAngleUnits : struct, IAngleUnits<TAngleUnits>
+        where TAngleUnits : IAngleUnits
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => T.IsNaN(vector.Radius) || Angle.IsNaN(vector.Azimuth) || Angle.IsNaN(vector.Polar);
 
@@ -380,7 +374,7 @@ public static class Vector
     /// </returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool IsInfinity<TAngleUnits, T>(in Vector<TAngleUnits, T> vector)
-        where TAngleUnits : struct, IAngleUnits<TAngleUnits>
+        where TAngleUnits : IAngleUnits
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => T.IsInfinity(vector.Radius) || Angle.IsInfinity(vector.Azimuth) || Angle.IsInfinity(vector.Polar);
 
@@ -395,7 +389,7 @@ public static class Vector
     /// </returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool IsFinite<TAngleUnits, T>(in Vector<TAngleUnits, T> vector)
-        where TAngleUnits : struct, IAngleUnits<TAngleUnits>
+        where TAngleUnits : IAngleUnits
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => T.IsFinite(vector.Radius) && Angle.IsFinite(vector.Azimuth) && Angle.IsFinite(vector.Polar);
 
@@ -410,7 +404,7 @@ public static class Vector
     /// </returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool IsNormalized<TAngleUnits, T>(in Vector<TAngleUnits, T> vector)
-        where TAngleUnits : struct, IAngleUnits<TAngleUnits>
+        where TAngleUnits : IAngleUnits
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => Vector.Magnitude(in vector) == T.One;
 
@@ -426,7 +420,7 @@ public static class Vector
     /// </returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool IsNormalized<TAngleUnits, T>(in Vector<TAngleUnits, T> vector, T tolerance)
-        where TAngleUnits : struct, IAngleUnits<TAngleUnits>
+        where TAngleUnits : IAngleUnits
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => Utils.AreApproximatelyEqual(Vector.Magnitude(in vector), T.One, tolerance);
 
@@ -445,7 +439,7 @@ public static class Vector
     /// </remarks>    
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool AreApproximatelyEqual<TAngleUnits, T>(in Vector<TAngleUnits, T> a, in Vector<TAngleUnits, T> b, T tolerance)
-        where TAngleUnits : struct, IAngleUnits<TAngleUnits>
+        where TAngleUnits : IAngleUnits
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => Utils.AreApproximatelyEqual(a.Radius, b.Radius, tolerance) &&
             Utils.AreApproximatelyEqual(a.Azimuth.Value, b.Azimuth.Value, tolerance) &&
@@ -472,7 +466,7 @@ public static class Vector
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static int Compare<TAngleUnits, T>(in Vector<TAngleUnits, T> vector, in Vector<TAngleUnits, T> other)
-        where TAngleUnits : struct, IAngleUnits<TAngleUnits>
+        where TAngleUnits : IAngleUnits
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => Magnitude(in vector).CompareTo(Magnitude(in other));
 
@@ -492,7 +486,7 @@ public static class Vector
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector<TAngleUnits, T> Negate<TAngleUnits, T>(in Vector<TAngleUnits, T> right)
-        where TAngleUnits : struct, IAngleUnits<TAngleUnits>
+        where TAngleUnits : IAngleUnits
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => new(-right.Radius, -right.Azimuth, -right.Polar);
 
@@ -514,7 +508,7 @@ public static class Vector
     [SkipLocalsInit]
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector<TAngleUnits, T> Add<TAngleUnits, T>(in Vector<TAngleUnits, T> left, in Vector<TAngleUnits, T> right)
-        where TAngleUnits : struct, IAngleUnits<TAngleUnits>
+        where TAngleUnits : IAngleUnits
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => new(left.Radius + right.Radius, left.Azimuth + right.Azimuth, left.Polar + right.Polar);
 
@@ -534,7 +528,7 @@ public static class Vector
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector<TAngleUnits, T> Subtract<TAngleUnits, T>(in Vector<TAngleUnits, T> left, in Vector<TAngleUnits, T> right)
-        where TAngleUnits : struct, IAngleUnits<TAngleUnits>
+        where TAngleUnits : IAngleUnits
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => new(left.Radius - right.Radius, left.Azimuth - right.Azimuth, left.Polar - right.Polar);
 
@@ -553,7 +547,7 @@ public static class Vector
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector<TAngleUnits, T> Multiply<TAngleUnits, T>(T left, in Vector<TAngleUnits, T> right)
-        where TAngleUnits : struct, IAngleUnits<TAngleUnits>
+        where TAngleUnits : IAngleUnits
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => new(left * right.Radius, left * right.Azimuth, left * right.Polar);
 
@@ -572,7 +566,7 @@ public static class Vector
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector<TAngleUnits, T> Divide<TAngleUnits, T>(in Vector<TAngleUnits, T> left, T right)
-        where TAngleUnits : struct, IAngleUnits<TAngleUnits>
+        where TAngleUnits : IAngleUnits
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => new(left.Radius / right, left.Azimuth / right, left.Polar / right);
 
@@ -606,7 +600,7 @@ public static class Vector
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector<TAngleUnits, T> Clamp<TAngleUnits, T>(in Vector<TAngleUnits, T> vector, in Vector<TAngleUnits, T> min, in Vector<TAngleUnits, T> max)
-        where TAngleUnits : struct, IAngleUnits<TAngleUnits>
+        where TAngleUnits : IAngleUnits
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => new(T.Clamp(vector.Radius, min.Radius, max.Radius), Angle.Clamp(vector.Azimuth, min.Azimuth, max.Azimuth), Angle.Clamp(vector.Polar, min.Polar, max.Polar));
 
@@ -627,7 +621,7 @@ public static class Vector
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector<TAngleUnits, T> Lerp<TAngleUnits, T>(in Vector<TAngleUnits, T> start, in Vector<TAngleUnits, T> end, T factor)
-        where TAngleUnits : struct, IAngleUnits<TAngleUnits>
+        where TAngleUnits : IAngleUnits
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => (start * (T.One - factor)) + (end * factor);
 
@@ -644,7 +638,7 @@ public static class Vector
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static T Magnitude<TAngleUnits, T>(in Vector<TAngleUnits, T> vector)
-        where TAngleUnits : struct, IAngleUnits<TAngleUnits>
+        where TAngleUnits : IAngleUnits
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => vector.Radius;
 
@@ -673,7 +667,7 @@ public static class Vector
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector<TAngleUnits, T> Normalize<TAngleUnits, T>(in Vector<TAngleUnits, T> vector)
-        where TAngleUnits : struct, IAngleUnits<TAngleUnits>
+        where TAngleUnits : IAngleUnits
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
     {
         var length = Magnitude(in vector);

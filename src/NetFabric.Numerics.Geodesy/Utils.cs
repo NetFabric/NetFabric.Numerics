@@ -1,4 +1,4 @@
-﻿namespace NetFabric.Numerics.Geography;
+﻿namespace NetFabric.Numerics.Geodesy;
 
 class Utils
 {

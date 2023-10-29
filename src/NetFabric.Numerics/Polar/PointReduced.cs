@@ -16,7 +16,7 @@ namespace NetFabric.Numerics.Polar;
 [SkipLocalsInit]
 public readonly record struct PointReduced<TAngleUnits, T>(T Radius, AngleReduced<TAngleUnits, T> Azimuth)
     : IPoint<PointReduced<TAngleUnits, T>, CoordinateSystem<TAngleUnits, T>>
-    where TAngleUnits : struct, IAngleUnits<TAngleUnits>
+    where TAngleUnits : IAngleUnits
     where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
 {
     #region constants
@@ -45,12 +45,6 @@ public readonly record struct PointReduced<TAngleUnits, T>(T Radius, AngleReduce
         => MaxValue;
 
     #endregion
-
-    /// <summary>
-    /// Gets the coordinate system.
-    /// </summary>
-    public CoordinateSystem<TAngleUnits, T> CoordinateSystem
-        => new();
 
     /// <summary>
     /// Creates an instance of the current type from a value, 
@@ -105,7 +99,7 @@ public readonly record struct PointReduced<TAngleUnits, T>(T Radius, AngleReduce
     public static implicit operator Point<TAngleUnits, T>(PointReduced<TAngleUnits, T> angle)
         => new(angle.Radius, angle.Azimuth);
 
-    object IGeometricBase<PointReduced<TAngleUnits, T>, CoordinateSystem<TAngleUnits, T>>.this[int index]
+    object IGeometricBase.this[int index]
         => index switch
         {
             0 => Radius,

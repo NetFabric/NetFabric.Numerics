@@ -3,22 +3,10 @@
 /// <summary>
 /// Represents a geometric type.
 /// </summary>
-/// <typeparam name="TSelf">The type implementing the interface.</typeparam>
-/// <typeparam name="TCoordinateSystem">The type representing the coordinate system.</typeparam>
-public interface IGeometricBase<TSelf, TCoordinateSystem>
-    : IEquatable<TSelf>,
-      IEqualityOperators<TSelf, TSelf, bool>
-    where TSelf : struct, IGeometricBase<TSelf, TCoordinateSystem>?
-    where TCoordinateSystem : ICoordinateSystem
-{    
+public interface IGeometricBase
+{        
     /// <summary>
-    /// Gets the coordinate system of the point.
-    /// </summary>
-    /// <value>The coordinate system of the point.</value>
-    TCoordinateSystem CoordinateSystem { get; }
-
-    /// <summary>
-    /// Gets the value for a given coordinate of the point.
+    /// Gets the value for a given coordinate of the geometric object.
     /// </summary>
     /// <param name="index">The index of the coordinate to get the value.</param>
     /// <value>The value of the coordinate indexed by index.</value>
@@ -32,6 +20,43 @@ public interface IGeometricBase<TSelf, TCoordinateSystem>
     /// </remarks>
     object this[int index] { get; }
 
+    /// <summary>
+    /// Gets the coordinate system of the geometric object.
+    /// </summary>
+    /// <value>The coordinate system of the geometric object.</value>
+    CoordinateSystem CoordinateSystem { get; }
+}
+
+/// <summary>
+/// Represents a geometric type.
+/// </summary>
+public interface IGeometricBase<TCoordinateSystem>
+    : IGeometricBase
+    where TCoordinateSystem : ICoordinateSystem
+{    
+    /// <summary>
+    /// Gets the coordinate system of the geometric object.
+    /// </summary>
+    /// <value>The coordinate system of the geometric object.</value>
+    new CoordinateSystem<TCoordinateSystem> CoordinateSystem 
+        => CoordinateSystem<TCoordinateSystem>.Instance;
+
+    CoordinateSystem IGeometricBase.CoordinateSystem
+        => CoordinateSystem;
+}
+    
+/// <summary>
+/// Represents a geometric type.
+/// </summary>
+/// <typeparam name="TSelf">The type implementing the interface.</typeparam>
+/// <typeparam name="TCoordinateSystem">The type representing the coordinate system.</typeparam>
+public interface IGeometricBase<TSelf, TCoordinateSystem>
+    : IGeometricBase<TCoordinateSystem>
+    , IEquatable<TSelf>
+    , IEqualityOperators<TSelf, TSelf, bool>
+    where TSelf : struct, IGeometricBase<TSelf, TCoordinateSystem>?
+    where TCoordinateSystem : ICoordinateSystem
+{    
     /// <summary>
     /// Gets the zero value for the type.
     /// </summary>

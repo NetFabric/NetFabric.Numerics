@@ -14,7 +14,7 @@ namespace NetFabric.Numerics.Polar;
 [SkipLocalsInit]
 public readonly struct Point<TAngleUnits, T>
     : IPoint<Point<TAngleUnits, T>, CoordinateSystem<TAngleUnits, T>>
-    where TAngleUnits : struct, IAngleUnits<TAngleUnits>
+    where TAngleUnits : IAngleUnits
     where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
 {
     /// <summary>
@@ -75,12 +75,6 @@ public readonly struct Point<TAngleUnits, T>
     #endregion
 
     /// <summary>
-    /// Gets the coordinate system.
-    /// </summary>
-    public CoordinateSystem<TAngleUnits, T> CoordinateSystem
-        => new();
-
-    /// <summary>
     /// Creates an instance of the current type from a value, 
     /// throwing an overflow exception for any values that fall outside the representable range of the current type.
     /// </summary>
@@ -125,7 +119,7 @@ public readonly struct Point<TAngleUnits, T>
             T.CreateTruncating(point.Radius),
             Angle<TAngleUnits, T>.CreateTruncating(point.Azimuth));
 
-    object IGeometricBase<Point<TAngleUnits, T>, CoordinateSystem<TAngleUnits, T>>.this[int index]
+    object IGeometricBase.this[int index]
         => index switch
         {
             0 => Radius,
@@ -344,7 +338,7 @@ public static partial class Point
     /// of the input polar point. The radius component remains unchanged.
     /// </remarks>
     public static PointReduced<TAngleUnits, T> Reduce<TAngleUnits, T>(Point<TAngleUnits, T> point)
-        where TAngleUnits : struct, IAngleUnits<TAngleUnits>
+        where TAngleUnits : IAngleUnits
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => new(point.Radius, Angle.Reduce(point.Azimuth));
 

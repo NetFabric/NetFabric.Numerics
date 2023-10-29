@@ -9,23 +9,20 @@ namespace NetFabric.Numerics.Rectangular3D;
 /// the position of a point in 3D space. The X-coordinate represents the horizontal position, the Y-coordinate
 /// represents the vertical position, and the Z-coordinate represents the depth or altitude.
 /// </remarks>
-public readonly record struct CoordinateSystem<T>
-        : ICoordinateSystem
-        where T: struct, INumber<T>
-    {
-        static readonly IReadOnlyList<Coordinate> coordinates 
-            = new[] {
-                new Coordinate("X", typeof(T)), 
-                new Coordinate("Y", typeof(T)),
-                new Coordinate("Z", typeof(T)),
-            };
-
+public abstract class CoordinateSystem<T>
+    : ICoordinateSystem
+    where T: struct, INumber<T>
+{
     /// <summary>
     /// Gets the list of coordinates in the polar coordinate system.
     /// </summary>
     /// <remarks>
     /// Each coordinate contains information about its name and type.
     /// </remarks>
-    public IReadOnlyList<Coordinate> Coordinates 
-            => coordinates;
-    }
+    public static IReadOnlyList<Coordinate> Coordinates { get; } 
+        = new[] {
+            new Coordinate("X", typeof(T)),
+            new Coordinate("Y", typeof(T)),
+            new Coordinate("Z", typeof(T)),
+        };
+}

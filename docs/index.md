@@ -11,7 +11,7 @@ To get started with **NetFabric.Numerics**, you need to install the library's Nu
 
 - [NetFabric.Numerics.Angle](https://www.nuget.org/packages/NetFabric.Numerics.Angle/): Provides strongly-typed angle implementations.
 - [NetFabric.Numerics](https://www.nuget.org/packages/NetFabric.Numerics/): Provides strongly-typed rectangular 2D and 3D, polar, and spherical coordinate system implementations.
-- [NetFabric.Numerics.Geography](https://www.nuget.org/packages/NetFabric.Numerics.Geography/): Provides strongly-typed geodetic coordinate implementations.
+- [NetFabric.Numerics.Geodesy](https://www.nuget.org/packages/NetFabric.Numerics.Geodesy/): Provides strongly-typed geodetic coordinate implementations.
 
 Make sure to include the appropriate package(s) in your project, depending on your specific needs.
 

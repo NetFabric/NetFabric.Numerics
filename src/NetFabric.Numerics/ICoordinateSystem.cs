@@ -10,8 +10,8 @@ public readonly record struct Coordinate(string Name, Type Type);
 /// <summary>
 /// Represents a coordinate system.
 /// </summary>
-public interface ICoordinateSystem {
-
+public interface ICoordinateSystem 
+{
     /// <summary>
     /// Gets information for each coordinate in a coordinate system.
     /// </summary>
@@ -29,5 +29,5 @@ public interface ICoordinateSystem {
     /// The number of coordinates in the coordinate system can be obtained by accessing the <see cref="IReadOnlyCollection{Coordinate}.Count"/> property.
     /// </para>
     /// </remarks>
-    IReadOnlyList<Coordinate> Coordinates { get; }
+    static abstract IReadOnlyList<Coordinate> Coordinates { get; }
 }

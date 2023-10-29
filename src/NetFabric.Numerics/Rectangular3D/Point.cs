@@ -43,12 +43,6 @@ public readonly record struct Point<T>(T X, T Y, T Z)
     #endregion
 
     /// <summary>
-    /// Gets the coordinate system.
-    /// </summary>
-    public CoordinateSystem<T> CoordinateSystem 
-        => new();
-
-    /// <summary>
     /// Creates an instance of the current type from a value, 
     /// throwing an overflow exception for any values that fall outside the representable range of the current type.
     /// </summary>
@@ -119,7 +113,7 @@ public readonly record struct Point<T>(T X, T Y, T Z)
 
     #endregion
 
-    object IGeometricBase<Point<T>, CoordinateSystem<T>>.this[int index] 
+    object IGeometricBase.this[int index] 
         => index switch
         {
             0 => X,

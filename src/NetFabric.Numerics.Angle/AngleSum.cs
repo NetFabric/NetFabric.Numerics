@@ -13,7 +13,7 @@ public static partial class Angle
     /// The sum of angles is computed by adding all the angles in the given <paramref name="source"/> collection.
     /// </remarks>
     public static Angle<TUnits, T> Sum<TUnits, T>(this IEnumerable<Angle<TUnits, T>> source)
-        where TUnits : IAngleUnits<TUnits>
+        where TUnits : IAngleUnits
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
     {
         if(source.TryGetSpan(out var span))
@@ -36,7 +36,7 @@ public static partial class Angle
     /// The sum of angles is computed by adding all the angles in the given <paramref name="source"/> collection.
     /// </remarks>
     public static Angle<TUnits, T> Sum<TUnits, T>(this Angle<TUnits, T>[] source)
-        where TUnits : IAngleUnits<TUnits>
+        where TUnits : IAngleUnits
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => source.AsSpan().Sum();
 
@@ -49,7 +49,7 @@ public static partial class Angle
     /// The sum of angles is computed by adding all the angles in the given <paramref name="source"/> collection.
     /// </remarks>
     public static Angle<TUnits, T> Sum<TUnits, T>(this Span<Angle<TUnits, T>> source)
-        where TUnits : IAngleUnits<TUnits>
+        where TUnits : IAngleUnits
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => ((ReadOnlySpan<Angle<TUnits, T>>)source).Sum();
 
@@ -62,7 +62,7 @@ public static partial class Angle
     /// The sum of angles is computed by adding all the angles in the given <paramref name="source"/> collection.
     /// </remarks>
     public static Angle<TUnits, T> Sum<TUnits, T>(this ReadOnlySpan<Angle<TUnits, T>> source)
-        where TUnits : IAngleUnits<TUnits>
+        where TUnits : IAngleUnits
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
     {
         var sum = T.Zero;

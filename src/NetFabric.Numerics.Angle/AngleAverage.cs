@@ -13,7 +13,7 @@ public static partial class Angle
     /// The resulting angle represents the average value of all the angles.
     /// </remarks>
     public static Angle<TUnits, T>? Average<TUnits, T>(this IEnumerable<Angle<TUnits, T>> source)
-        where TUnits : IAngleUnits<TUnits>
+        where TUnits : IAngleUnits
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
     {
         var sum = T.Zero;
@@ -42,7 +42,7 @@ public static partial class Angle
     /// The resulting angle represents the average value of all the angles.
     /// </remarks>
     public static Angle<TUnits, T>? Average<TUnits, T>(this Angle<TUnits, T>[] source)
-        where TUnits : IAngleUnits<TUnits>
+        where TUnits : IAngleUnits
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => source.AsSpan().Average();
 
@@ -57,7 +57,7 @@ public static partial class Angle
     /// The resulting angle represents the average value of all the angles.
     /// </remarks>
     public static Angle<TUnits, T>? Average<TUnits, T>(this Span<Angle<TUnits, T>> source)
-        where TUnits : IAngleUnits<TUnits>
+        where TUnits : IAngleUnits
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => ((ReadOnlySpan<Angle<TUnits, T>>)source).Average();
 
@@ -72,7 +72,7 @@ public static partial class Angle
     /// The resulting angle represents the average value of all the angles.
     /// </remarks>
     public static Angle<TUnits, T>? Average<TUnits, T>(this ReadOnlySpan<Angle<TUnits, T>> source)
-        where TUnits : IAngleUnits<TUnits>
+        where TUnits : IAngleUnits
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T> 
         => source.Length == 0
             ? null

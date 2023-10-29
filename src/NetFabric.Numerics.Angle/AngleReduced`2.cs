@@ -1,7 +1,5 @@
-using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
-using System.Windows.Markup;
 
 namespace NetFabric.Numerics;
 
@@ -37,16 +35,14 @@ namespace NetFabric.Numerics;
 [DebuggerTypeProxy(typeof(AngleReducedDebugView<,>))]
 [SkipLocalsInit]
 public readonly record struct AngleReduced<TUnits, T>(T Value)
-    : IAngle<AngleReduced<TUnits, T>, T>,
-      IUnaryPlusOperators<AngleReduced<TUnits, T>, AngleReduced<TUnits, T>>,
-      IUnaryNegationOperators<AngleReduced<TUnits, T>, Angle<TUnits, T>>,
-      IAdditionOperators<AngleReduced<TUnits, T>, Angle<TUnits, T>, Angle<TUnits, T>>,
-      ISubtractionOperators<AngleReduced<TUnits, T>, Angle<TUnits, T>, Angle<TUnits, T>>,
-      IDivisionOperators<AngleReduced<TUnits, T>, T, Angle<TUnits, T>>,
-      IModulusOperators<AngleReduced<TUnits, T>, T, Angle<TUnits, T>>
-    where TUnits : IAngleUnits<TUnits>
+    : IAngle<AngleReduced<TUnits, T>, TUnits, T, Angle<TUnits, T>>
+    where TUnits : IAngleUnits
     where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
 {
+
+    object IAngle.Value 
+        => Value;
+
     /// <summary>
     /// Creates an instance of the current type from a value, 
     /// throwing an overflow exception for any values that fall outside the representable range of the current type.
@@ -346,7 +342,7 @@ public readonly record struct AngleReduced<TUnits, T>(T Value)
     /// </summary>
     /// <returns>A string that represents the current angle.</returns>
     /// <remarks>
-    /// The string representation of the angle includes the numerical value followed by the unit of measurement (e.g., º, rad, grad, or rev).
+    /// The string representation of the angle includes the numerical value followed by the unit of measurement (e.g., ï¿½, rad, grad, or rev).
     /// </remarks>
     public override readonly string? ToString()
         => Value.ToString();
@@ -373,4 +369,62 @@ public readonly record struct AngleReduced<TUnits, T>(T Value)
     /// <returns></returns>
     public readonly string ToString(string? format, IFormatProvider? formatProvider)
         => Value.ToString(format, formatProvider);
+
+    /// <summary>
+    /// Parses a string into an angle.
+    /// </summary>
+    /// <param name="s">The string to parse.</param>
+    /// <param name="provider">An object that provides culture-specific formatting information about s.</param>
+    /// <returns>The result of parsing <paramref name="s"/>.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="s"/> is <see langword="null"/>.</exception>
+    /// <exception cref="FormatException"><paramref name="s"/> is not in the correct format.</exception>
+    /// <exception cref="OverflowException"><paramref name="s"/> represents a number less than <see cref="Angle{TUnits,T}.MinValue"/> or greater than <see cref="Angle{TUnits,T}.MaxValue"/>.</exception>
+    public static AngleReduced<TUnits, T> Parse(string s, IFormatProvider? provider)
+        => new(T.Parse(s, provider));
+
+    /// <summary>
+    /// Tries to parse a string into an angle.
+    /// </summary>
+    /// <param name="s">The string to parse.</param>
+    /// <param name="provider">An object that provides culture-specific formatting information about <paramref name="s"/>.</param>
+    /// <param name="result">When this method returns, contains the result of successfully parsing <paramref name="s"/> or an undefined value on failure.</param>
+    /// <returns>true if <paramref name="s"/> was successfully parsed; otherwise, false.</returns>
+    public static bool TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider, [MaybeNullWhen(false)] out AngleReduced<TUnits, T> result)
+    {
+        if (T.TryParse(s, provider, out var value))
+        {
+            result = new(value);
+            return true;
+        }
+
+        result = default;
+        return false;
+    }
+
+    /// <summary>
+    /// Parses a span of characters into an angle.
+    /// </summary>
+    /// <param name="s">The span of characters to parse.</param>
+    /// <param name="provider">An object that provides culture-specific formatting information about <paramref name="s"/>.</param>
+    /// <returns>The result of parsing <paramref name="s"/>.</returns>
+    public static AngleReduced<TUnits, T> Parse(ReadOnlySpan<char> s, IFormatProvider? provider)
+        => new(T.Parse(s, provider));
+
+    /// <summary>
+    /// Tries to parse a span of characters into an angle.
+    /// </summary>
+    /// <param name="s">The span of characters to parse.</param>
+    /// <param name="provider">An object that provides culture-specific formatting information about <paramref name="s"/>.</param>
+    /// <param name="result">When this method returns, contains the result of successfully parsing <paramref name="s"/>, or an undefined value on failure.</param>
+    /// <returns> true if <paramref name="s"/> was successfully parsed; otherwise, false.</returns>
+    public static bool TryParse(ReadOnlySpan<char> s, IFormatProvider? provider, [MaybeNullWhen(false)] out AngleReduced<TUnits, T> result)
+    {
+        if(T.TryParse(s, provider, out var value)) {             
+            result = new(value);
+            return true;
+        }
+
+        result = default;
+        return false;
+    }
 }

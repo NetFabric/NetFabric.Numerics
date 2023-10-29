@@ -6,9 +6,10 @@ public class PointTests
     public void CoordinateSystem_Should_Succeed()
     {
         // arrange
+        IGeometricBase point = Point<Degrees, double>.Zero;
 
         // act
-        var result = Point<Degrees, double>.Zero.CoordinateSystem;
+        var result = point.CoordinateSystem;
 
         // assert
         result.Coordinates[0].Should().Be(new Coordinate("Radius", typeof(double)));
