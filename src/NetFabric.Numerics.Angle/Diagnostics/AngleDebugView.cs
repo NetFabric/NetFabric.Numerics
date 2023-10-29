@@ -1,7 +1,7 @@
 ﻿namespace NetFabric.Numerics;
 
 class AngleDebugView<TUnits, T>
-    where TUnits : IAngleUnits<TUnits>
+    where TUnits : IAngleUnits
     where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
 {
     readonly Angle<TUnits, T> angle;

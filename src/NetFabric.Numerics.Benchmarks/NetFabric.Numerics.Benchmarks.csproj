@@ -15,13 +15,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="BenchmarkDotNet" Version="0.13.9" />
+    <PackageReference Include="BenchmarkDotNet" Version="0.13.10" />
     <PackageReference Include="NetFabric" Version="1.4.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\NetFabric.Numerics.Angle\NetFabric.Numerics.Angle.csproj" />
-    <ProjectReference Include="..\NetFabric.Numerics.Geography\NetFabric.Numerics.Geography.csproj" />
     <ProjectReference Include="..\NetFabric.Numerics\NetFabric.Numerics.csproj" />
   </ItemGroup>
 

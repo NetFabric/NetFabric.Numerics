@@ -18,7 +18,7 @@ public class TrigonometryTests
     public void Cos_Double_Should_Succeed(Angle<Radians, double> angle)
     {
         // arrange
-        var expected = Math.Cos(angle.Value);
+        var expected = double.Cos(angle.Value);
 
         // act
         var result = Angle.Cos(angle);
@@ -32,8 +32,8 @@ public class TrigonometryTests
     public void ACos_Double_Should_Succeed(Angle<Radians, double> angle)
     {
         // arrange
-        var cos = Math.Cos(angle.Value);
-        var expected = new AngleReduced<Radians, double>(Math.Acos(cos));
+        var cos = double.Cos(angle.Value);
+        var expected = new AngleReduced<Radians, double>(double.Acos(cos));
 
         // act
         var result = Angle.Acos(cos);
@@ -58,7 +58,7 @@ public class TrigonometryTests
     public void Cos_Float_Should_Succeed(Angle<Radians, float> angle)
     {
         // arrange
-        var expected = (float)Math.Cos(angle.Value);
+        var expected = float.Cos(angle.Value);
 
         // act
         var result = Angle.Cos(angle);

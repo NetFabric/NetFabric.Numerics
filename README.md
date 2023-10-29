@@ -11,7 +11,7 @@ To get started with **NetFabric.Numerics**, you need to install the library's Nu
 
 - [NetFabric.Numerics.Angle](https://www.nuget.org/packages/NetFabric.Numerics.Angle/): Provides strongly-typed angle implementations.
 - [NetFabric.Numerics](https://www.nuget.org/packages/NetFabric.Numerics/): Provides strongly-typed rectangular, polar and spherical coordinate implementations.
-- [NetFabric.Numerics.Geography](https://www.nuget.org/packages/NetFabric.Numerics.Geography/): Provides strongly-typed geodetic coordinate implementations.
+- [NetFabric.Numerics.Geodesy](https://www.nuget.org/packages/NetFabric.Numerics.Geodesy/): Provides strongly-typed geodetic coordinate implementations.
 
 Make sure to include the appropriate package(s) in your project, depending on your specific needs.
 
@@ -80,7 +80,7 @@ With **NetFabric.Numerics**, you can work with polar coordinates using different
 **NetFabric.Numerics** also supports strongly-typed geodetic coordinate implementations, specifically latitude and longitude. Here's an example:
 
 ``` csharp
-using NetFabric.Numerics.Geography.Geodetic2;
+using NetFabric.Numerics.Geodesy.Geodetic2;
 
 var wgs84Point = new Point<WGS84, Degrees, double>(new(0.0), new(0.0));                    // Geodetic point using WGS84 datum
 var wgs1972Point = new Point<WGS1972, Degrees, double>(new(0.0), new(0.0));                // Geodetic point using WGS1972 datum

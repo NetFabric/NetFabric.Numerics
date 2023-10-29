@@ -32,16 +32,8 @@ namespace NetFabric.Numerics;
 [DebuggerTypeProxy(typeof(AngleDebugView<,>))]
 [SkipLocalsInit]
 public readonly struct Angle<TUnits, T>
-    : IAngle<Angle<TUnits, T>, T>,
-      IUnaryPlusOperators<Angle<TUnits, T>, Angle<TUnits, T>>,
-      IUnaryNegationOperators<Angle<TUnits, T>, Angle<TUnits, T>>,
-      IAdditionOperators<Angle<TUnits, T>, Angle<TUnits, T>, Angle<TUnits, T>>,
-      ISubtractionOperators<Angle<TUnits, T>, Angle<TUnits, T>, Angle<TUnits, T>>,
-      IDivisionOperators<Angle<TUnits, T>, T, Angle<TUnits, T>>,
-      IModulusOperators<Angle<TUnits, T>, T, Angle<TUnits, T>>,
-      ISpanFormattable,
-      ISpanParsable<Angle<TUnits, T>>
-    where TUnits : IAngleUnits<TUnits>
+    : IAngle<Angle<TUnits, T>, TUnits, T, Angle<TUnits, T>>
+    where TUnits : IAngleUnits
     where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
 {
     /// <summary>
@@ -205,6 +197,9 @@ public readonly struct Angle<TUnits, T>
             AngleReduced<TUnits, T> angle => Equals(angle),
             _ => false
         };
+
+    object IAngle.Value 
+        => Value;
 
     #endregion
 
@@ -436,7 +431,7 @@ public readonly struct Angle<TUnits, T>
     /// </summary>
     /// <returns>A string that represents the current angle.</returns>
     /// <remarks>
-    /// The string representation of the angle includes the numerical value followed by the unit of measurement (e.g., º, rad, grad, or rev).
+    /// The string representation of the angle includes the numerical value followed by the unit of measurement (e.g., ï¿½, rad, grad, or rev).
     /// </remarks>
     public override readonly string? ToString()
         => Value.ToString();

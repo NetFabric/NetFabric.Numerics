@@ -3,6 +3,28 @@
 public class DegreesTests
 {
     [Fact]
+    public void IAngle_Should_Succeed()
+    {
+        // arrange
+        IAngle angle = Angle<Degrees, float>.Right;
+
+        // act
+        var units = angle.Units;
+        var value = angle.Value;
+        var valueType = angle.ValueType;
+
+        // assert
+        units.Name.Should().Be(Degrees.Name);
+        units.Symbol.Should().Be(Degrees.Symbol);
+        units.Zero.Should().Be(Degrees.Zero);
+        units.Right.Should().Be(Degrees.Right);
+        units.Straight.Should().Be(Degrees.Straight);
+        units.Full.Should().Be(Degrees.Full);
+        value.Should().Be(Degrees.Right);
+        valueType.Should().Be(typeof(float));
+    }
+
+    [Fact]
     public void Constants_Should_Succeed()
     {
         Angle<Degrees, double>.Zero.Value.Should().Be(0.0);

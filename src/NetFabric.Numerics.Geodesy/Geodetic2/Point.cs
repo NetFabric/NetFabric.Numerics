@@ -1,14 +1,14 @@
 using System.Numerics;
 using System.Runtime.CompilerServices;
 
-namespace NetFabric.Numerics.Geography.Geodetic2;
+namespace NetFabric.Numerics.Geodesy.Geodetic2;
 
 [System.Diagnostics.DebuggerDisplay("Latitude = {Latitude}, Longitude = {Longitude}")]
 [SkipLocalsInit]
 public readonly record struct Point<TDatum, TAngleUnits, T>(Angle<TAngleUnits, T> Latitude, Angle<TAngleUnits, T> Longitude) 
-    : IGeodeticPoint<Point<TDatum, TAngleUnits, T>, TDatum>
-    where TDatum : IDatum<TDatum>
-    where TAngleUnits : struct, IAngleUnits<TAngleUnits>
+    : IGeodeticPoint<Point<TDatum, TAngleUnits, T>, CoordinateSystem<TDatum, T>, TDatum, T>
+    where TDatum : IDatum<T>
+    where TAngleUnits : IAngleUnits
     where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
 {
     public Angle<TAngleUnits, T> Latitude { get; } 
@@ -30,7 +30,8 @@ public readonly record struct Point<TDatum, TAngleUnits, T>(Angle<TAngleUnits, T
     /// <returns>An instance of <see cref="Point{TDatum, TAngleUnits, TAngle}"/> created from <paramref name="point" />.</returns>
     /// <exception cref="NotSupportedException"><typeparamref name="TOther" /> is not supported.</exception>
     /// <exception cref="OverflowException"><paramref name="point" /> is not representable by <see cref="Point{TDatum, TAngleUnits, TAngle}"/>.</exception>
-    public static Point<TDatum, TAngleUnits, T> CreateChecked<TOther>(in Point<TDatum, TAngleUnits, TOther> point)
+    public static Point<TDatum, TAngleUnits, T> CreateChecked<TDatumOther, TOther>(in Point<TDatumOther, TAngleUnits, TOther> point)
+        where TDatumOther : IDatum<TOther>
         where TOther : struct, IFloatingPoint<TOther>, IMinMaxValue<TOther>
         => new(
             Angle<TAngleUnits, T>.CreateChecked(point.Latitude),
@@ -46,7 +47,8 @@ public readonly record struct Point<TDatum, TAngleUnits, T>(Angle<TAngleUnits, T
     /// <returns>An instance of <see cref="Point{TDatum, TAngleUnits, TAngle}"/> created from <paramref name="point" />.</returns>
     /// <exception cref="NotSupportedException"><typeparamref name="TOther" /> is not supported.</exception>
     /// <exception cref="OverflowException"><paramref name="point" /> is not representable by <see cref="Point{TDatum, TAngleUnits, TAngle}"/>.</exception>
-    public static Point<TDatum, TAngleUnits, T> CreateSaturating<TOther>(in Point<TDatum, TAngleUnits, TOther> point)
+    public static Point<TDatum, TAngleUnits, T> CreateSaturating<TDatumOther, TOther>(in Point<TDatumOther, TAngleUnits, TOther> point)
+        where TDatumOther : IDatum<TOther>
         where TOther : struct, IFloatingPoint<TOther>, IMinMaxValue<TOther>
         => new(
             Angle<TAngleUnits, T>.CreateSaturating(point.Latitude),
@@ -62,7 +64,8 @@ public readonly record struct Point<TDatum, TAngleUnits, T>(Angle<TAngleUnits, T
     /// <returns>An instance of <see cref="Point{TDatum, TAngleUnits, TAngle}"/> created from <paramref name="point" />.</returns>
     /// <exception cref="NotSupportedException"><typeparamref name="TOther" /> is not supported.</exception>
     /// <exception cref="OverflowException"><paramref name="point" /> is not representable by <see cref="Point{TDatum, TAngleUnits, TAngle}"/>.</exception>
-    public static Point<TDatum, TAngleUnits, T> CreateTruncating<TOther>(in Point<TDatum, TAngleUnits, TOther> point)
+    public static Point<TDatum, TAngleUnits, T> CreateTruncating<TDatumOther, TOther>(in Point<TDatumOther, TAngleUnits, TOther> point)
+        where TDatumOther : IDatum<TOther>
         where TOther : struct, IFloatingPoint<TOther>, IMinMaxValue<TOther>
         => new(
             Angle<TAngleUnits, T>.CreateTruncating(point.Latitude),
@@ -74,7 +77,7 @@ public readonly record struct Point<TDatum, TAngleUnits, T>(Angle<TAngleUnits, T
     public static readonly Point<TDatum, TAngleUnits, T> Zero
         = new(Angle<TAngleUnits, T>.Zero, Angle<TAngleUnits, T>.Zero);
 
-    static Point<TDatum, TAngleUnits, T> IGeometricBase<Point<TDatum, TAngleUnits, T>>.Zero
+    static Point<TDatum, TAngleUnits, T> IGeometricBase<Point<TDatum, TAngleUnits, T>, CoordinateSystem<TDatum, T>>.Zero
         => Zero;
 
     /// <summary>
@@ -96,15 +99,7 @@ public readonly record struct Point<TDatum, TAngleUnits, T>(Angle<TAngleUnits, T
 
     #endregion
 
-    /// <summary>
-    /// Gets the coordinate system.
-    /// </summary>
-    public CoordinateSystem<TDatum, T> CoordinateSystem 
-        => new();
-    ICoordinateSystem IGeometricBase<Point<TDatum, TAngleUnits, T>>.CoordinateSystem 
-        => CoordinateSystem;
-
-    object IGeometricBase<Point<TDatum, TAngleUnits, T>>.this[int index] 
+    object IGeometricBase.this[int index] 
         => index switch
         {
             0 => Latitude,

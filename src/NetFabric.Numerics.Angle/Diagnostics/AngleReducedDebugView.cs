@@ -2,7 +2,7 @@
 
 class AngleReducedDebugView<TUnits, T>
     : AngleDebugView<TUnits, T>
-    where TUnits : IAngleUnits<TUnits>
+    where TUnits : IAngleUnits
     where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
 {
     public AngleReducedDebugView(AngleReduced<TUnits, T> angle)

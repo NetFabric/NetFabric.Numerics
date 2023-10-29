@@ -40,7 +40,7 @@ public static partial class Angle
     /// </returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Angle<TAngleUnits, T> Clamp<TAngleUnits, T>(Angle<TAngleUnits, T> vector, Angle<TAngleUnits, T> min, Angle<TAngleUnits, T> max)
-        where TAngleUnits : struct, IAngleUnits<TAngleUnits>
+        where TAngleUnits : IAngleUnits
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => new(T.Clamp(vector.Value, min.Value, max.Value));
 
@@ -61,7 +61,7 @@ public static partial class Angle
     /// <returns>The reduced angle of <paramref name="angle"/>.</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static AngleReduced<TUnits, T> Reduce<TUnits, T>(Angle<TUnits, T> angle)
-        where TUnits : IAngleUnits<TUnits>
+        where TUnits : IAngleUnits
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
     {
         var reduced = angle.Value % Angle<TUnits, T>.Full.Value;
@@ -87,7 +87,7 @@ public static partial class Angle
     /// <returns>The reference angle of <paramref name="angle"/>.</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static AngleReduced<TUnits, T> GetReference<TUnits, T>(AngleReduced<TUnits, T> angle)
-        where TUnits : IAngleUnits<TUnits>
+        where TUnits : IAngleUnits
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
     {
         var quadrant = GetQuadrant(angle);
@@ -133,7 +133,7 @@ public static partial class Angle
     /// <returns>The quadrant of <paramref name="angle"/>.</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Quadrant GetQuadrant<TUnits, T>(AngleReduced<TUnits, T> angle)
-        where TUnits : IAngleUnits<TUnits>
+        where TUnits : IAngleUnits
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
     {
         var value = angle.Value;
@@ -172,7 +172,7 @@ public static partial class Angle
     /// </para>
     /// </remarks>    
     public static Angle<TUnits, T> Abs<TUnits, T>(Angle<TUnits, T> angle)
-        where TUnits : IAngleUnits<TUnits>
+        where TUnits : IAngleUnits
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => T.Sign(angle.Value) >= 0
             ? angle
@@ -187,7 +187,7 @@ public static partial class Angle
     /// <returns>A number that indicates the sign of value, -1 if value is less than zero, 0 if value equal to zero, 1 if value is grater than zero.</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static int Sign<TUnits, T>(Angle<TUnits, T> angle)
-        where TUnits : IAngleUnits<TUnits>
+        where TUnits : IAngleUnits
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => T.Sign(angle.Value);
 
@@ -219,7 +219,7 @@ public static partial class Angle
     /// <returns>The result of the linear interpolation.</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Angle<TUnits, T> Lerp<TUnits, T>(Angle<TUnits, T> a1, Angle<TUnits, T> a2, T t)
-        where TUnits : IAngleUnits<TUnits>
+        where TUnits : IAngleUnits
         where T : struct, IFloatingPointIeee754<T>, IMinMaxValue<T>
 #if NET8_0_OR_GREATER
         => new(T.Lerp(a1.Value, a2.Value, t)); 
@@ -237,7 +237,7 @@ public static partial class Angle
     /// <returns>The smallest of the two angles.</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Angle<TUnits, T> Min<TUnits, T>(Angle<TUnits, T> left, Angle<TUnits, T> right)
-        where TUnits : IAngleUnits<TUnits>
+        where TUnits : IAngleUnits
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => new(T.Min(left.Value, right.Value));
 
@@ -251,7 +251,7 @@ public static partial class Angle
     /// <returns>The largest of the two angles.</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Angle<TUnits, T> Max<TUnits, T>(Angle<TUnits, T> left, Angle<TUnits, T> right)
-        where TUnits : IAngleUnits<TUnits>
+        where TUnits : IAngleUnits
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => new(T.Max(left.Value, right.Value));
 
@@ -266,7 +266,7 @@ public static partial class Angle
     /// <returns>true if the reduction of the absolute angle is zero; otherwise false.</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool IsZero<TUnits, T>(Angle<TUnits, T> angle)
-        where TUnits : IAngleUnits<TUnits>
+        where TUnits : IAngleUnits
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => angle == Angle<TUnits, T>.Zero;
 
@@ -281,7 +281,7 @@ public static partial class Angle
     /// </returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool IsNaN<TUnits, T>(Angle<TUnits, T> angle)
-        where TUnits : IAngleUnits<TUnits>
+        where TUnits : IAngleUnits
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => T.IsNaN(angle.Value);
 
@@ -296,7 +296,7 @@ public static partial class Angle
     /// </returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool IsInfinity<TUnits, T>(Angle<TUnits, T> angle)
-        where TUnits : IAngleUnits<TUnits>
+        where TUnits : IAngleUnits
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => T.IsInfinity(angle.Value);
 
@@ -311,7 +311,7 @@ public static partial class Angle
     /// </returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool IsFinite<TUnits, T>(Angle<TUnits, T> angle)
-        where TUnits : IAngleUnits<TUnits>
+        where TUnits : IAngleUnits
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => T.IsFinite(angle.Value);
 
@@ -330,7 +330,7 @@ public static partial class Angle
     /// otherwise false.
     /// </returns>
     public static bool IsAcute<TUnits, T>(AngleReduced<TUnits, T> angle)
-        where TUnits : IAngleUnits<TUnits>
+        where TUnits : IAngleUnits
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => angle.Value > Angle<TUnits, T>.Zero.Value && angle.Value < Angle<TUnits, T>.Right.Value;
 
@@ -347,7 +347,7 @@ public static partial class Angle
     /// </remarks>
     /// <returns>true if the reduction of the absolute angle is 90 degrees; otherwise false.</returns>
     public static bool IsRight<TUnits, T>(AngleReduced<TUnits, T> angle)
-        where TUnits : IAngleUnits<TUnits>
+        where TUnits : IAngleUnits
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => angle.Value == Angle<TUnits, T>.Right.Value;
 
@@ -367,7 +367,7 @@ public static partial class Angle
     /// 180 degrees; otherwise false.
     /// </returns>
     public static bool IsObtuse<TUnits, T>(AngleReduced<TUnits, T> angle)
-        where TUnits : IAngleUnits<TUnits>
+        where TUnits : IAngleUnits
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => angle.Value > Angle<TUnits, T>.Right.Value && angle.Value < Angle<TUnits, T>.Straight.Value;
 
@@ -384,7 +384,7 @@ public static partial class Angle
     /// </remarks>
     /// <returns>true if the reduction of the absolute angle is 180 degrees; otherwise false.</returns>
     public static bool IsStraight<TUnits, T>(AngleReduced<TUnits, T> angle)
-        where TUnits : IAngleUnits<TUnits>
+        where TUnits : IAngleUnits
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => angle.Value == Angle<TUnits, T>.Straight.Value;
 
@@ -404,7 +404,7 @@ public static partial class Angle
     /// 360 degrees; otherwise false.
     /// </returns>
     public static bool IsReflex<TUnits, T>(AngleReduced<TUnits, T> angle)
-        where TUnits : IAngleUnits<TUnits>
+        where TUnits : IAngleUnits
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => angle.Value > Angle<TUnits, T>.Straight.Value;
 
@@ -421,7 +421,7 @@ public static partial class Angle
     /// </remarks>
     /// <returns>true if the angle is not right or a multiple of a right angle; otherwise false.</returns>
     public static bool IsOblique<TUnits, T>(AngleReduced<TUnits, T> angle)
-        where TUnits : IAngleUnits<TUnits>
+        where TUnits : IAngleUnits
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => angle.Value % Angle<TUnits, T>.Right.Value != T.Zero;
 
@@ -437,7 +437,7 @@ public static partial class Angle
     /// a right angle value to determine if they are complementary.
     /// </remarks>
     public static bool AreComplementary<TUnits, T>(AngleReduced<TUnits, T> first, AngleReduced<TUnits, T> second)
-        where TUnits : IAngleUnits<TUnits>
+        where TUnits : IAngleUnits
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => first.Value + second.Value == Angle<TUnits, T>.Right.Value;
 
@@ -453,7 +453,7 @@ public static partial class Angle
     /// a straight angle value to determine if they are supplementary.
     /// </remarks>
     public static bool AreSupplementary<TUnits, T>(AngleReduced<TUnits, T> first, AngleReduced<TUnits, T> second)
-        where TUnits : IAngleUnits<TUnits>
+        where TUnits : IAngleUnits
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => first.Value + second.Value == Angle<TUnits, T>.Straight.Value;
 

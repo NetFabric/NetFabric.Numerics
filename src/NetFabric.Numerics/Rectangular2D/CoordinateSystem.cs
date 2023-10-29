@@ -8,22 +8,19 @@ namespace NetFabric.Numerics.Rectangular2D;
 /// A Rectangular coordinate system uses a pair of values (X, Y) to specify the position of a point in 2D space.
 /// The X-coordinate represents the horizontal position, and the Y-coordinate represents the vertical position.
 /// </remarks>
-public readonly record struct CoordinateSystem<T>
+public abstract class CoordinateSystem<T>
     : ICoordinateSystem
     where T: struct, INumber<T>
 {
-    static readonly IReadOnlyList<Coordinate> coordinates 
-        = new[] {
-            new Coordinate("X", typeof(T)), 
-            new Coordinate("Y", typeof(T)),
-        };
-
     /// <summary>
     /// Gets the list of coordinates in the polar coordinate system.
     /// </summary>
     /// <remarks>
     /// Each coordinate contains information about its name and type.
     /// </remarks>
-    public IReadOnlyList<Coordinate> Coordinates
-        => coordinates;
+    public static IReadOnlyList<Coordinate> Coordinates { get; } 
+        = new[] {
+            new Coordinate("X", typeof(T)),
+            new Coordinate("Y", typeof(T)),
+        };
 }

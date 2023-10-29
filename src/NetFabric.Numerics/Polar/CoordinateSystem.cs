@@ -11,23 +11,20 @@ namespace NetFabric.Numerics.Polar;
 /// measured counterclockwise from a reference direction. The choice of angle units is determined by the specified angle
 /// units type, TAngleUnits.
 /// </remarks>
-public readonly record struct CoordinateSystem<TAngleUnits, T>
+public abstract class CoordinateSystem<TAngleUnits, T>
     : ICoordinateSystem
-    where TAngleUnits : struct, IAngleUnits<TAngleUnits>
+    where TAngleUnits : IAngleUnits
     where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
 {
-    static readonly IReadOnlyList<Coordinate> coordinates
-        = new[] {
-            new Coordinate("Radius", typeof(T)),
-            new Coordinate("Azimuth", typeof(Angle<TAngleUnits, T>)),
-        };
-
     /// <summary>
     /// Gets the list of coordinates in the polar coordinate system.
     /// </summary>
     /// <remarks>
     /// Each coordinate contains information about its name and type.
     /// </remarks>
-    public IReadOnlyList<Coordinate> Coordinates
-        => coordinates;
+    public static IReadOnlyList<Coordinate> Coordinates { get; } 
+        = new[] {
+            new Coordinate("Radius", typeof(T)),
+            new Coordinate("Azimuth", typeof(Angle<TAngleUnits, T>)),
+        };
 }
