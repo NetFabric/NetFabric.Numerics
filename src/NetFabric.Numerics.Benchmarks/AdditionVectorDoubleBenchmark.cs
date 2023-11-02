@@ -2,7 +2,7 @@
 using BenchmarkDotNet.Configs;
 using NetFabric.Numerics;
 
-namespace Benchmarks;
+namespace NetFabric.Numerics.Benchmarks;
 
 [GroupBenchmarksBy(BenchmarkLogicalGroupRule.ByCategory)]
 [CategoriesColumn]
