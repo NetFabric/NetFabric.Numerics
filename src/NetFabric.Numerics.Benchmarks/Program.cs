@@ -25,8 +25,8 @@ var config = DefaultConfig.Instance
     .WithSummaryStyle(SummaryStyle.Default.WithRatioStyle(RatioStyle.Trend))
     .HideColumns(Column.EnvironmentVariables, Column.RatioSD, Column.Error)
     .AddDiagnoser(MemoryDiagnoser.Default)
-    .AddDiagnoser(new DisassemblyDiagnoser(new DisassemblyDiagnoserConfig
-        (exportGithubMarkdown: true, printInstructionAddresses: false)))
+    // .AddDiagnoser(new DisassemblyDiagnoser(new DisassemblyDiagnoserConfig
+    //     (exportGithubMarkdown: true, printInstructionAddresses: false)))
     .AddExporter(MarkdownExporter.GitHub)
     .AddJob(net70.WithEnvironmentVariable("DOTNET_EnableHWIntrinsic", "0").WithId(".NET 7 Scalar").AsBaseline())
     .AddJob(net80.WithEnvironmentVariable("DOTNET_EnableHWIntrinsic", "0").WithId(".NET 8 Scalar"));
