@@ -1,23 +1,23 @@
 ﻿# NetFabric.Numerics.Geodesy
 
-Your Strongly-Typed Solution for Geodesy Coordinates and Calculations in C#!
+Your Strongly-Typed Solution for geodetic Coordinates and Calculations in C#!
 
 ## Key Features
 
-- **Strongly-typed** implementation of geography coordinates.
+- **Strongly-typed** implementation of geodetic coordinates.
 - Utilizes the latest [generic math](https://learn.microsoft.com/en-us/dotnet/standard/generics/math) features, compatible with .NET 7 and C# 11.
 
 ## Introduction
 
-Welcome to **NetFabric.Numerics.Geodesy** – a library tailored for precise geography calculations in C# with a focus on strong typing.
+Welcome to **NetFabric.Numerics.Geodesy** – a library tailored for precise geodesy calculations in C# with a focus on strong typing.
 
 ## Getting Started
 
-To make the most of **NetFabric.Numerics.Geodesy**, ensure you're operating within a compatible .NET 7 or higher environment. Once ready, explore the world of geography with strong typing.
+To make the most of **NetFabric.Numerics.Geodesy**, ensure you're operating within a compatible .NET 7 or higher environment. Once ready, explore the world of geodesy with strong typing.
 
 ### Strongly-Typed Geodesy Coordinates
 
-**NetFabric.Numerics.Geodesy** distinguishes itself with a **strongly-typed** approach to geography coordinates. It covers various datums, including WGS84, NAD83, and more, providing accuracy through strong typing:
+**NetFabric.Numerics.Geodesy** distinguishes itself with a **strongly-typed** approach to geodetic coordinates. It covers various datums, including WGS84, NAD83, and more, providing accuracy through strong typing:
 
 ```csharp
 var wgs84Point = new Point<WGS84, Degrees, double>(new(0.0), new(0.0));                 // LatLon point using WGS84 datum
@@ -37,7 +37,7 @@ var (degreesLatitude2, minutesLatitude2, secondsLatitude) = Angle.ToDegreesMinut
 
 ### Geodesy with Strong Typing
 
-Explore how **NetFabric.Numerics.Geodesy** can enhance your geography calculations with strong typing. Discover the precision, safety, and versatility it brings to C# geography operations.
+Explore how **NetFabric.Numerics.Geodesy** can enhance your geodesy calculations with strong typing. Discover the precision, safety, and versatility it brings to C# geodesy operations.
 
 ## Credits
 
