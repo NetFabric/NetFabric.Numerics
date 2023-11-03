@@ -9,7 +9,7 @@
       The explicit declaration of the units in creation and reading methods, reduces the tipical confusion when dealing with angles.
       Includes conversion, linear interpolation, reduction, reference angle, comparison, classification, trigonometry and algebra operations.
     </Description>
-    <Version>1.0.0-beta07</Version>
+    <Version>1.0.0-beta08</Version>
     <PackageIcon>Icon.png</PackageIcon>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
