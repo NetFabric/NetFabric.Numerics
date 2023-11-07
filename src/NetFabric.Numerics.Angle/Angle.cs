@@ -221,11 +221,7 @@ public static partial class Angle
     public static Angle<TUnits, T> Lerp<TUnits, T>(Angle<TUnits, T> a1, Angle<TUnits, T> a2, T t)
         where TUnits : IAngleUnits
         where T : struct, IFloatingPointIeee754<T>, IMinMaxValue<T>
-#if NET8_0_OR_GREATER
         => new(T.Lerp(a1.Value, a2.Value, t)); 
-#else
-        => new(Utils.Lerp(a1.Value, a2.Value, t));
-#endif
 
     /// <summary>
     /// Returns the smallest of two angles.

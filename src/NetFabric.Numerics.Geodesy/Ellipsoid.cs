@@ -39,7 +39,7 @@ public readonly record struct Ellipsoid<T>(T EquatorialRadius, T Flattening)
     /// <returns>An instance of <see cref="Ellipsoid{T}"/> created from <paramref name="ellipsoid" />.</returns>
     /// <exception cref="NotSupportedException"><typeparamref name="TOther" /> is not supported.</exception>
     /// <exception cref="OverflowException"><paramref name="ellipsoid" /> is not representable by <see cref="Ellipsoid{T}"/>.</exception>
-    public static Ellipsoid<T> CreateChecked<TOther>(in Ellipsoid<TOther> ellipsoid)
+    public static Ellipsoid<T> CreateChecked<TOther>(ref readonly Ellipsoid<TOther> ellipsoid)
         where TOther : struct, IFloatingPoint<TOther>
         => new(
             T.CreateChecked(ellipsoid.EquatorialRadius),
@@ -55,7 +55,7 @@ public readonly record struct Ellipsoid<T>(T EquatorialRadius, T Flattening)
     /// <returns>An instance of <see cref="Ellipsoid{T}"/> created from <paramref name="ellipsoid" />.</returns>
     /// <exception cref="NotSupportedException"><typeparamref name="TOther" /> is not supported.</exception>
     /// <exception cref="OverflowException"><paramref name="ellipsoid" /> is not representable by <see cref="Ellipsoid{T}"/>.</exception>
-    public static Ellipsoid<T> CreateSaturating<TOther>(in Ellipsoid<TOther> ellipsoid)
+    public static Ellipsoid<T> CreateSaturating<TOther>(ref readonly Ellipsoid<TOther> ellipsoid)
         where TOther : struct, IFloatingPoint<TOther>
         => new(
             T.CreateSaturating(ellipsoid.EquatorialRadius),
@@ -71,7 +71,7 @@ public readonly record struct Ellipsoid<T>(T EquatorialRadius, T Flattening)
     /// <returns>An instance of <see cref="Ellipsoid{T}"/> created from <paramref name="ellipsoid" />.</returns>
     /// <exception cref="NotSupportedException"><typeparamref name="TOther" /> is not supported.</exception>
     /// <exception cref="OverflowException"><paramref name="ellipsoid" /> is not representable by <see cref="Ellipsoid{T}"/>.</exception>
-    public static Ellipsoid<T> CreateTruncating<TOther>(in Ellipsoid<TOther> ellipsoid)
+    public static Ellipsoid<T> CreateTruncating<TOther>(ref readonly Ellipsoid<TOther> ellipsoid)
         where TOther : struct, IFloatingPoint<TOther>
         => new(
             T.CreateTruncating(ellipsoid.EquatorialRadius),
@@ -88,51 +88,51 @@ public static class Ellipsoid
     /// Calculates the surface area of the ellipsoid.
     /// </summary>
     /// <value>The surface area of the ellipsoid.</value>
-    public static T SurfaceArea<T>(in Ellipsoid<T> ellipsoid)
+    public static T SurfaceArea<T>(ref readonly Ellipsoid<T> ellipsoid)
         where T : struct, IFloatingPoint<T>, IPowerFunctions<T>, IRootFunctions<T>, ILogarithmicFunctions<T>
     {
-        var eccentricity = Eccentricity(ellipsoid);
+        var eccentricity = Eccentricity(in ellipsoid);
         var two = T.One + T.One;
-        return (two * T.Pi * T.Pow(ellipsoid.EquatorialRadius, two)) + (T.Pi * (T.Pow(PolarRadius(ellipsoid), two) / eccentricity) * T.Log10((T.One + eccentricity) / (T.One - eccentricity)));
+        return (two * T.Pi * T.Pow(ellipsoid.EquatorialRadius, two)) + (T.Pi * (T.Pow(PolarRadius(in ellipsoid), two) / eccentricity) * T.Log10((T.One + eccentricity) / (T.One - eccentricity)));
     }
 
     /// <summary>
     /// Calculates the volume of the ellipsoid.
     /// </summary>
     /// <value>The volume of the ellipsoid.</value>
-    public static T Volume<T>(in Ellipsoid<T> ellipsoid)
+    public static T Volume<T>(ref readonly Ellipsoid<T> ellipsoid)
         where T : struct, IFloatingPoint<T>, IPowerFunctions<T>
-        => T.CreateChecked(4) * T.Pi * T.Pow(ellipsoid.EquatorialRadius, T.CreateChecked(2)) * PolarRadius(ellipsoid) / T.CreateChecked(3);
+        => T.CreateChecked(4) * T.Pi * T.Pow(ellipsoid.EquatorialRadius, T.CreateChecked(2)) * PolarRadius(in ellipsoid) / T.CreateChecked(3);
 
     /// <summary>
     /// Calculates the radius of curvatures at the poles.
     /// </summary>
     /// <value>The radius of curvatures at the poles.</value>
-    public static T RadiusOfCurvatureAtPoles<T>(in Ellipsoid<T> ellipsoid)
+    public static T RadiusOfCurvatureAtPoles<T>(ref readonly Ellipsoid<T> ellipsoid)
         where T : struct, IFloatingPoint<T>, IRootFunctions<T>
-        => ellipsoid.EquatorialRadius / T.Sqrt(T.One - EccentricitySquared(ellipsoid));
+        => ellipsoid.EquatorialRadius / T.Sqrt(T.One - EccentricitySquared(in ellipsoid));
 
     /// <summary>
     /// Calculates the radius of curvature in a meridian plane at the equator.
     /// </summary>
     /// <value>The radius of curvature in a meridian plane at the equator.</value>
-    public static T RadiusOfCurvatureAtEquator<T>(in Ellipsoid<T> ellipsoid)
+    public static T RadiusOfCurvatureAtEquator<T>(ref readonly Ellipsoid<T> ellipsoid)
         where T : struct, IFloatingPoint<T>
-        => ellipsoid.EquatorialRadius * (T.One - EccentricitySquared(ellipsoid));
+        => ellipsoid.EquatorialRadius * (T.One - EccentricitySquared(in ellipsoid));
 
-    public static T PolarRadius<T>(in Ellipsoid<T> ellipsoid)
+    public static T PolarRadius<T>(ref readonly Ellipsoid<T> ellipsoid)
         where T : struct, IFloatingPoint<T>
         => ellipsoid.EquatorialRadius * (T.One - ellipsoid.Flattening);
 
-    public static T Eccentricity<T>(in Ellipsoid<T> ellipsoid)
+    public static T Eccentricity<T>(ref readonly Ellipsoid<T> ellipsoid)
         where T : struct, IFloatingPoint<T>, IRootFunctions<T>
-        => T.Sqrt(EccentricitySquared(ellipsoid));
+        => T.Sqrt(EccentricitySquared(in ellipsoid));
 
-    public static T EccentricitySquared<T>(in Ellipsoid<T> ellipsoid)
+    public static T EccentricitySquared<T>(ref readonly Ellipsoid<T> ellipsoid)
         where T : struct, IFloatingPoint<T>
         => ellipsoid.Flattening * (T.CreateChecked(2) - ellipsoid.Flattening);
 
-    public static T ArithmeticMeanRadius<T>(in Ellipsoid<T> ellipsoid)
+    public static T ArithmeticMeanRadius<T>(ref readonly Ellipsoid<T> ellipsoid)
         where T : struct, IFloatingPoint<T>
-        => ((T.CreateChecked(2) * ellipsoid.EquatorialRadius) + PolarRadius(ellipsoid)) / T.CreateChecked(3);
+        => ((T.CreateChecked(2) * ellipsoid.EquatorialRadius) + PolarRadius(in ellipsoid)) / T.CreateChecked(3);
 }

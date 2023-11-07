@@ -1,6 +1,6 @@
 ﻿using FluentAssertions;
 
-namespace NetFabric.Numerics.Rectangular3D.UnitsTests;
+namespace NetFabric.Numerics.Rectangular3D.UnitTests;
 
 public class QuaternionTests
 {
