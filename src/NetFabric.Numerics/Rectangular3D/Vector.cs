@@ -76,7 +76,7 @@ public readonly record struct Vector<T>(T X, T Y, T Z)
     /// <returns>An instance of <see cref="Vector{T}"/> created from <paramref name="vector" />.</returns>
     /// <exception cref="NotSupportedException"><typeparamref name="TOther" /> is not supported.</exception>
     /// <exception cref="OverflowException"><paramref name="vector" /> is not representable by <see cref="Vector{T}"/>.</exception>
-    public static Vector<T> CreateChecked<TOther>(in Vector<TOther> vector)
+    public static Vector<T> CreateChecked<TOther>(ref readonly Vector<TOther> vector)
         where TOther : struct, INumber<TOther>, IMinMaxValue<TOther>, IRootFunctions<TOther>
         => new(
             T.CreateChecked(vector.X),
@@ -93,7 +93,7 @@ public readonly record struct Vector<T>(T X, T Y, T Z)
     /// <returns>An instance of <see cref="Vector{T}"/> created from <paramref name="vector" />.</returns>
     /// <exception cref="NotSupportedException"><typeparamref name="TOther" /> is not supported.</exception>
     /// <exception cref="OverflowException"><paramref name="vector" /> is not representable by <see cref="Vector{T}"/>.</exception>
-    public static Vector<T> CreateSaturating<TOther>(in Vector<TOther> vector)
+    public static Vector<T> CreateSaturating<TOther>(ref readonly Vector<TOther> vector)
         where TOther : struct, INumber<TOther>, IMinMaxValue<TOther>, IRootFunctions<TOther>
         => new(
             T.CreateSaturating(vector.X),
@@ -110,7 +110,7 @@ public readonly record struct Vector<T>(T X, T Y, T Z)
     /// <returns>An instance of <see cref="Vector{T}"/> created from <paramref name="vector" />.</returns>
     /// <exception cref="NotSupportedException"><typeparamref name="TOther" /> is not supported.</exception>
     /// <exception cref="OverflowException"><paramref name="vector" /> is not representable by <see cref="Vector{T}"/>.</exception>
-    public static Vector<T> CreateTruncating<TOther>(in Vector<TOther> vector)
+    public static Vector<T> CreateTruncating<TOther>(ref readonly Vector<TOther> vector)
         where TOther : struct, INumber<TOther>, IMinMaxValue<TOther>, IRootFunctions<TOther>
         => new(
             T.CreateTruncating(vector.X),
@@ -142,8 +142,8 @@ public readonly record struct Vector<T>(T X, T Y, T Z)
     /// Otherwise, it returns false. The comparison is based on the magnitudes of the vectors and is independent of their directions.
     /// </para>
     /// <para>
-    /// The comparison of magnitudes is performed using the <see cref="Vector.Magnitude{T}(in Vector{T})"/> method, which calculates the square root of the magnitude squared. 
-    /// However, to optimize the performance, this operator directly compares the magnitude squared values of the vectors, accessible through the <see cref="Vector.MagnitudeSquared{T}(in Vector{T})"/> method.
+    /// The comparison of magnitudes is performed using the <see cref="Vector.Magnitude{T}(ref readonly Vector{T})"/> method, which calculates the square root of the magnitude squared. 
+    /// However, to optimize the performance, this operator directly compares the magnitude squared values of the vectors, accessible through the <see cref="Vector.MagnitudeSquared{T}(ref readonly Vector{T})"/> method.
     /// </para>
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -163,8 +163,8 @@ public readonly record struct Vector<T>(T X, T Y, T Z)
     /// Otherwise, it returns false. The comparison is based on the magnitudes of the vectors and is independent of their directions.
     /// </para>
     /// <para>
-    /// The comparison of magnitudes is performed using the <see cref="Vector.Magnitude{T}(in Vector{T})"/> method, which calculates the square root of the magnitude squared. 
-    /// However, to optimize the performance, this operator directly compares the magnitude squared values of the vectors, accessible through the <see cref="Vector.MagnitudeSquared{T}(in Vector{T})"/> method.
+    /// The comparison of magnitudes is performed using the <see cref="Vector.Magnitude{T}(ref readonly Vector{T})"/> method, which calculates the square root of the magnitude squared. 
+    /// However, to optimize the performance, this operator directly compares the magnitude squared values of the vectors, accessible through the <see cref="Vector.MagnitudeSquared{T}(ref readonly Vector{T})"/> method.
     /// </para>
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -184,8 +184,8 @@ public readonly record struct Vector<T>(T X, T Y, T Z)
     /// Otherwise, it returns false. The comparison is based on the magnitudes of the vectors and is independent of their directions.
     /// </para>
     /// <para>
-    /// The comparison of magnitudes is performed using the <see cref="Vector.Magnitude{T}(in Vector{T})"/> method, which calculates the square root of the magnitude squared. 
-    /// However, to optimize the performance, this operator directly compares the magnitude squared values of the vectors, accessible through the <see cref="Vector.MagnitudeSquared{T}(in Vector{T})"/> method.
+    /// The comparison of magnitudes is performed using the <see cref="Vector.Magnitude{T}(ref readonly Vector{T})"/> method, which calculates the square root of the magnitude squared. 
+    /// However, to optimize the performance, this operator directly compares the magnitude squared values of the vectors, accessible through the <see cref="Vector.MagnitudeSquared{T}(ref readonly Vector{T})"/> method.
     /// </para>
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -205,8 +205,8 @@ public readonly record struct Vector<T>(T X, T Y, T Z)
     /// Otherwise, it returns false. The comparison is based on the magnitudes of the vectors and is independent of their directions.
     /// </para>
     /// <para>
-    /// The comparison of magnitudes is performed using the <see cref="Vector.Magnitude{T}(in Vector{T})"/> method, which calculates the square root of the magnitude squared. 
-    /// However, to optimize the performance, this operator directly compares the magnitude squared values of the vectors, accessible through the <see cref="Vector.MagnitudeSquared{T}(in Vector{T})"/> method.
+    /// The comparison of magnitudes is performed using the <see cref="Vector.Magnitude{T}(ref readonly Vector{T})"/> method, which calculates the square root of the magnitude squared. 
+    /// However, to optimize the performance, this operator directly compares the magnitude squared values of the vectors, accessible through the <see cref="Vector.MagnitudeSquared{T}(ref readonly Vector{T})"/> method.
     /// </para>
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -362,7 +362,7 @@ public static class Vector
     /// <param name="vector">The vector to check.</param>
     /// <returns><c>true</c> if all components of the vector are zero; otherwise, <c>false</c>.</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool IsZero<T>(in Vector<T> vector)
+    public static bool IsZero<T>(ref readonly Vector<T> vector)
         where T : struct, INumber<T>, IMinMaxValue<T>
         => vector == Vector<T>.Zero;
 
@@ -374,11 +374,11 @@ public static class Vector
     /// <param name="tolerance">The tolerance value.</param>
     /// <returns><c>true</c> if all components of the vector are zero; otherwise, <c>false</c>.</returns>
     /// <remarks>
-    /// The <see cref="IsZero{T}(in Vector{T}, T)"/> method checks whether all components of the vector are equal to zero within the <paramref name="tolerance"/> range.
+    /// The <see cref="IsZero{T}(ref readonly Vector{T}, T)"/> method checks whether all components of the vector are equal to zero within the <paramref name="tolerance"/> range.
     /// The tolerance is a small value used to account for floating-point precision errors.
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool IsZero<T>(in Vector<T> vector, T tolerance)
+    public static bool IsZero<T>(ref readonly Vector<T> vector, T tolerance)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => AreApproximatelyEqual(in vector, in Vector<T>.Zero, tolerance);
 
@@ -391,7 +391,7 @@ public static class Vector
     /// <c>true</c> if any component of the vector is NaN; otherwise, <c>false</c>.
     /// </returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool IsNaN<T>(in Vector<T> vector)
+    public static bool IsNaN<T>(ref readonly Vector<T> vector)
         where T : struct, INumber<T>, IMinMaxValue<T>
         => T.IsNaN(vector.X) || T.IsNaN(vector.Y) || T.IsNaN(vector.Z);
 
@@ -404,7 +404,7 @@ public static class Vector
     /// <c>true</c> if any component of the vector is positive or negative infinity; otherwise, <c>false</c>.
     /// </returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool IsInfinity<T>(in Vector<T> vector)
+    public static bool IsInfinity<T>(ref readonly Vector<T> vector)
         where T : struct, INumber<T>, IMinMaxValue<T>
         => T.IsInfinity(vector.X) || T.IsInfinity(vector.Y) || T.IsInfinity(vector.Z);
 
@@ -417,7 +417,7 @@ public static class Vector
     /// <c>true</c> if all components of the vector are finite numbers; otherwise, <c>false</c>.
     /// </returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool IsFinite<T>(in Vector<T> vector)
+    public static bool IsFinite<T>(ref readonly Vector<T> vector)
         where T : struct, INumber<T>, IMinMaxValue<T>
         => T.IsFinite(vector.X) && T.IsFinite(vector.Y) && T.IsFinite(vector.Z);
 
@@ -430,7 +430,7 @@ public static class Vector
     /// <c>true</c> if the vector is normalized (its magnitude is 1); otherwise, <c>false</c>.
     /// </returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool IsNormalized<T>(in Vector<T> vector)
+    public static bool IsNormalized<T>(ref readonly Vector<T> vector)
         where T : struct, INumber<T>, IMinMaxValue<T>
         => MagnitudeSquared(in vector) == T.One;
 
@@ -444,7 +444,7 @@ public static class Vector
     /// <c>true</c> if the vector is normalized (its magnitude is within the specified tolerance of 1); otherwise, <c>false</c>.
     /// </returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool IsNormalized<T>(in Vector<T> vector, T tolerance)
+    public static bool IsNormalized<T>(ref readonly Vector<T> vector, T tolerance)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => Utils.AreApproximatelyEqual(MagnitudeSquared(in vector), T.One, tolerance);
 
@@ -461,7 +461,7 @@ public static class Vector
     /// If the absolute difference is less than or equal to the tolerance, the values are considered approximately equal.
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool AreApproximatelyEqual<T>(in Vector<T> a, in Vector<T> b, T tolerance)
+    public static bool AreApproximatelyEqual<T>(ref readonly Vector<T> a, ref readonly Vector<T> b, T tolerance)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => Utils.AreApproximatelyEqual(a.X, b.X, tolerance) &&
             Utils.AreApproximatelyEqual(a.Y, b.Y, tolerance) &&
@@ -486,7 +486,7 @@ public static class Vector
     /// for comparing the relative values of vectors. 
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int Compare<T>(in Vector<T> vector, in Vector<T> other)
+    public static int Compare<T>(ref readonly Vector<T> vector, ref readonly Vector<T> other)
         where T : struct, INumber<T>, IMinMaxValue<T>
         => MagnitudeSquared(in vector).CompareTo(MagnitudeSquared(in other));
 
@@ -504,7 +504,7 @@ public static class Vector
     /// direction as the input vector. The input vector remains unchanged.
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Vector<T> Negate<T>(in Vector<T> right)
+    public static Vector<T> Negate<T>(ref readonly Vector<T> right)
         where T : struct, INumber<T>, IMinMaxValue<T>, ISignedNumber<T>
         => new(-right.X, -right.Y, -right.Z);
 
@@ -524,7 +524,7 @@ public static class Vector
     /// </remarks>
     [SkipLocalsInit]
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Vector<T> Add<T>(in Vector<T> left, in Vector<T> right)
+    public static Vector<T> Add<T>(ref readonly Vector<T> left, ref readonly Vector<T> right)
         where T : struct, INumber<T>, IMinMaxValue<T>
         => new(left.X + right.X, left.Y + right.Y, left.Z + right.Z);
 
@@ -542,7 +542,7 @@ public static class Vector
     /// X, Y, and Z coordinates of the input vectors, respectively. The input vectors remain unchanged.
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Vector<T> Subtract<T>(in Vector<T> left, in Vector<T> right)
+    public static Vector<T> Subtract<T>(ref readonly Vector<T> left, ref readonly Vector<T> right)
         where T : struct, INumber<T>, IMinMaxValue<T>
         => new(left.X - right.X, left.Y - right.Y, left.Z - right.Z);
 
@@ -559,7 +559,7 @@ public static class Vector
     /// The input vector remains unchanged after the operation.
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Vector<T> Multiply<T>(T left, in Vector<T> right)
+    public static Vector<T> Multiply<T>(T left, ref readonly Vector<T> right)
         where T : struct, INumber<T>, IMinMaxValue<T>
         => new(left * right.X, left * right.Y, left * right.Z);
 
@@ -576,7 +576,7 @@ public static class Vector
     /// The input vector remains unchanged after the operation.
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Vector<T> Divide<T>(in Vector<T> left, T right)
+    public static Vector<T> Divide<T>(ref readonly Vector<T> left, T right)
         where T : struct, INumber<T>, IMinMaxValue<T>
         => new(left.X / right, left.Y / right, left.Z / right);
 
@@ -608,7 +608,7 @@ public static class Vector
     /// </para>
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Vector<T> Clamp<T>(in Vector<T> vector, in Vector<T> min, in Vector<T> max)
+    public static Vector<T> Clamp<T>(ref readonly Vector<T> vector, ref readonly Vector<T> min, ref readonly Vector<T> max)
     where T : struct, INumber<T>, IMinMaxValue<T>
         => new(T.Clamp(vector.X, min.X, max.X), T.Clamp(vector.Y, min.Y, max.Y), T.Clamp(vector.Z, min.Z, max.Z));
 
@@ -627,7 +627,7 @@ public static class Vector
     /// and then adding the two resulting vectors together.
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Vector<T> Lerp<T>(in Vector<T> start, in Vector<T> end, T factor)
+    public static Vector<T> Lerp<T>(ref readonly Vector<T> start, ref readonly Vector<T> end, T factor)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => (start * (T.One - factor)) + (end * factor);
 
@@ -642,7 +642,7 @@ public static class Vector
     /// </para>
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static T Magnitude<T>(in Vector<T> vector)
+    public static T Magnitude<T>(ref readonly Vector<T> vector)
         where T : struct, INumber<T>, IMinMaxValue<T>, IRootFunctions<T>
         => T.Sqrt(MagnitudeSquared(in vector));
 
@@ -658,7 +658,7 @@ public static class Vector
     /// </para>
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static TOut Magnitude<T, TOut>(in Vector<T> vector)
+    public static TOut Magnitude<T, TOut>(ref readonly Vector<T> vector)
         where T : struct, INumber<T>, IMinMaxValue<T>
         where TOut : struct, INumber<TOut>, IRootFunctions<TOut>
         => TOut.Sqrt(TOut.CreateChecked(MagnitudeSquared(in vector)));
@@ -678,7 +678,7 @@ public static class Vector
     /// </para>
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static T MagnitudeSquared<T>(in Vector<T> vector)
+    public static T MagnitudeSquared<T>(ref readonly Vector<T> vector)
         where T : struct, INumber<T>, IMinMaxValue<T>
         => Utils.Square(vector.X) + Utils.Square(vector.Y) + Utils.Square(vector.Z);
 
@@ -704,7 +704,7 @@ public static class Vector
     /// </para>
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Vector<T> Normalize<T>(in Vector<T> vector)
+    public static Vector<T> Normalize<T>(ref readonly Vector<T> vector)
         where T : struct, INumber<T>, IMinMaxValue<T>, IRootFunctions<T>
     {
         var length = Magnitude(in vector);
@@ -720,7 +720,7 @@ public static class Vector
     /// <param name="right">A vector.</param>
     /// <returns>The dot product.</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static T Dot<T>(in Vector<T> left, in Vector<T> right)
+    public static T Dot<T>(ref readonly Vector<T> left, ref readonly Vector<T> right)
         where T : struct, INumber<T>, IMinMaxValue<T>
         => (left.X * right.X) + (left.Y * right.Y) + (left.Z * right.Z);
 
@@ -731,7 +731,7 @@ public static class Vector
     /// <param name="right">A vector.</param>
     /// <returns>The cross products.</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Vector<T> Cross<T>(in Vector<T> left, in Vector<T> right)
+    public static Vector<T> Cross<T>(ref readonly Vector<T> left, ref readonly Vector<T> right)
             where T : struct, INumber<T>, IMinMaxValue<T>
             => new((left.Y * right.Z) - (left.Z * right.Y),
                     (left.Z * right.X) - (left.X * right.Z),
@@ -745,7 +745,7 @@ public static class Vector
     /// <param name="to">The vector where the angle measurement stops at.</param>
     /// <returns>The angle between two vectors.</returns>
     /// <remarks>The angle is always less than 180 degrees.</remarks>
-    public static AngleReduced<Radians, T> AngleBetween<T>(in Vector<T> from, in Vector<T> to)
+    public static AngleReduced<Radians, T> AngleBetween<T>(ref readonly Vector<T> from, ref readonly Vector<T> to)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>, ITrigonometricFunctions<T>, IRootFunctions<T>
         => Angle.Acos(Dot(in from, in to) / (Magnitude(in from) * Magnitude(in to)));
 }

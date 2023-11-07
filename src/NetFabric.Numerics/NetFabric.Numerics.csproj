@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <Title>NetFabric.Numerics</Title>
-    <TargetFrameworks>net7.0; net8.0</TargetFrameworks>
+    <TargetFrameworks>net8.0</TargetFrameworks>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Description></Description>
     <Version>1.0.0-beta08</Version>
@@ -28,19 +28,6 @@
   <PropertyGroup>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="NetFabric.Numerics.Angle.UnitTests\**" />
-    <Compile Remove="NetFabric.Numerics.UnitTests\**" />
-    <EmbeddedResource Remove="NetFabric.Numerics.Angle.UnitTests\**" />
-    <EmbeddedResource Remove="NetFabric.Numerics.UnitTests\**" />
-    <None Remove="NetFabric.Numerics.Angle.UnitTests\**" />
-    <None Remove="NetFabric.Numerics.UnitTests\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Remove="Matrix4x4.cs" />
-  </ItemGroup>
 
   <ItemGroup>
     <None Include="..\..\Icon.png" Pack="true" PackagePath="" />

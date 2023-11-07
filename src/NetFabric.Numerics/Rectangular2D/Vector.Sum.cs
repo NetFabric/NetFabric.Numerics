@@ -1,8 +1,8 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace NetFabric.Numerics;
+namespace NetFabric.Numerics.Rectangular2D;
 
-public static partial class Angle
+public static partial class Vector
 {
     /// <summary>
     /// Calculates the sum of a collection of angles.
@@ -12,19 +12,18 @@ public static partial class Angle
     /// <remarks>
     /// The sum of angles is computed by adding all the angles in the given <paramref name="source"/> collection.
     /// </remarks>
-    public static Angle<TUnits, T> Sum<TUnits, T>(this IEnumerable<Angle<TUnits, T>> source)
-        where TUnits : IAngleUnits
-        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
+    public static Vector<T> Sum<T>(this IEnumerable<Vector<T>> source)
+        where T : struct, INumber<T>, IMinMaxValue<T>
     {
         if(source.TryGetSpan(out var span))
             return span.Sum();
 
-        var sum = T.Zero;
-        foreach (var angle in source)
+        var sum = Vector<T>.Zero;
+        foreach (var value in source)
         {
-            checked { sum += angle.Value; }
+            checked { sum += value; }
         }
-        return new Angle<TUnits, T>(sum);
+        return sum;
     }
 
     /// <summary>
@@ -35,9 +34,8 @@ public static partial class Angle
     /// <remarks>
     /// The sum of angles is computed by adding all the angles in the given <paramref name="source"/> collection.
     /// </remarks>
-    public static Angle<TUnits, T> Sum<TUnits, T>(this Angle<TUnits, T>[] source)
-        where TUnits : IAngleUnits
-        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
+    public static Vector<T> Sum<T>(this Vector<T>[] source)
+        where T : struct, INumber<T>, IMinMaxValue<T>
         => source.AsSpan().Sum();
 
     /// <summary>
@@ -48,10 +46,9 @@ public static partial class Angle
     /// <remarks>
     /// The sum of angles is computed by adding all the angles in the given <paramref name="source"/> collection.
     /// </remarks>
-    public static Angle<TUnits, T> Sum<TUnits, T>(this Span<Angle<TUnits, T>> source)
-        where TUnits : IAngleUnits
-        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => ((ReadOnlySpan<Angle<TUnits, T>>)source).Sum();
+    public static Vector<T> Sum<T>(this Span<Vector<T>> source)
+        where T : struct, INumber<T>, IMinMaxValue<T>
+        => ((ReadOnlySpan<Vector<T>>)source).Sum();
 
     /// <summary>
     /// Calculates the sum of a read-only span of angles.
@@ -61,8 +58,7 @@ public static partial class Angle
     /// <remarks>
     /// The sum of angles is computed by adding all the angles in the given <paramref name="source"/> collection.
     /// </remarks>
-    public static Angle<TUnits, T> Sum<TUnits, T>(this ReadOnlySpan<Angle<TUnits, T>> source)
-        where TUnits : IAngleUnits
-        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => new(Tensor.Sum(MemoryMarshal.Cast<Angle<TUnits, T>, T>(source)));
+    public static Vector<T> Sum<T>(this ReadOnlySpan<Vector<T>> source)
+        where T : struct, INumber<T>, IMinMaxValue<T>
+        => new(Tensor.Sum2D(MemoryMarshal.Cast<Vector<T>, T>(source)));
 }

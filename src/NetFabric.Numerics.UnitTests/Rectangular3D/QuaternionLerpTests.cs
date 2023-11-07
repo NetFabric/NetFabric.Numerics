@@ -1,6 +1,4 @@
-﻿using NetFabric.Numerics.Rectangular3D;
-
-namespace NetFabric.Numerics.UnitsTests.Rectangular3D;
+﻿namespace NetFabric.Numerics.Rectangular3D.UnitTests;
 
 public class QuaternionLerpTests
 {

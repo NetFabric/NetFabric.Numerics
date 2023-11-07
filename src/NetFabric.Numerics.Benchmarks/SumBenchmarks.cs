@@ -7,7 +7,7 @@ public class SumBenchmarks
     Angle<Degrees, double>[]? array;
     ReadOnlyCollection<Angle<Degrees, double>>? collection; 
 
-    [Params(0, 1, 10, 1_000)]
+    [Params(10_000)]
     public int Count { get; set; }
 
     [GlobalSetup]
