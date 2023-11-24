@@ -9,18 +9,6 @@ using BenchmarkDotNet.Running;
 using Perfolizer.Horology;
 using System.Runtime.Intrinsics;
 
-var net70 = Job.Default
-    .WithRuntime(CoreRuntime.Core70)
-    .WithWarmupCount(1)
-    .WithIterationTime(TimeInterval.FromSeconds(0.25))
-    .WithMaxIterationCount(20);
-
-var net80 = Job.Default
-    .WithRuntime(CoreRuntime.Core80)
-    .WithWarmupCount(1)
-    .WithIterationTime(TimeInterval.FromSeconds(0.25))
-    .WithMaxIterationCount(20);
-
 var config = DefaultConfig.Instance
     .WithSummaryStyle(SummaryStyle.Default.WithRatioStyle(RatioStyle.Trend))
     .HideColumns(Column.EnvironmentVariables, Column.RatioSD, Column.Error)
@@ -28,23 +16,27 @@ var config = DefaultConfig.Instance
     // .AddDiagnoser(new DisassemblyDiagnoser(new DisassemblyDiagnoserConfig
     //     (exportGithubMarkdown: true, printInstructionAddresses: false)))
     .AddExporter(MarkdownExporter.GitHub)
-    .AddJob(net70.WithEnvironmentVariable("DOTNET_EnableHWIntrinsic", "0").WithId(".NET 7 Scalar").AsBaseline())
-    .AddJob(net80.WithEnvironmentVariable("DOTNET_EnableHWIntrinsic", "0").WithId(".NET 8 Scalar"));
+    .AddJob(Job.Default.WithId("Scalar")
+        .WithEnvironmentVariable("DOTNET_EnableHWIntrinsic", "0")
+        .AsBaseline());
 
+if (Vector128.IsHardwareAccelerated)
+{
+    config = config
+        .AddJob(Job.Default.WithId("Vector128")
+            .WithEnvironmentVariable("DOTNET_EnableAVX2", "0")
+            .WithEnvironmentVariable("DOTNET_EnableAVX512F", "0"));
+}
 if (Vector256.IsHardwareAccelerated)
 {
     config = config
-        .AddJob(net70.WithId(".NET 7 Vector256"))
-        .AddJob(net80.WithId(".NET 8 Vector256"))
-        .AddJob(net70.WithEnvironmentVariable("DOTNET_EnableAVX2", "0").WithId(".NET 7 Vector128"))
-        .AddJob(net80.WithEnvironmentVariable("DOTNET_EnableAVX2", "0").WithId(".NET 8 Vector128"));
-
+        .AddJob(Job.Default.WithId("Vector256")
+            .WithEnvironmentVariable("DOTNET_EnableAVX512F", "0"));
 }
-else if (Vector128.IsHardwareAccelerated)
+if (Vector512.IsHardwareAccelerated)
 {
     config = config
-        .AddJob(net70.WithId(".NET 7 Vector128"))
-        .AddJob(net80.WithId(".NET 8 Vector128"));
+        .AddJob(Job.Default.WithId("Vector512"));
 }
 
 BenchmarkSwitcher.FromAssembly(typeof(Program).Assembly).Run(args, config);

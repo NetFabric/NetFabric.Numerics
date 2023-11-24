@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <Title>NetFabric.Numerics.Angle</Title>
-    <TargetFrameworks>net7.0; net8.0</TargetFrameworks>
+    <TargetFrameworks>net8.0</TargetFrameworks>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Description>
       A strongly-typed representation of an angle.

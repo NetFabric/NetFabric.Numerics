@@ -1,5 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
+using System.Runtime.Intrinsics;
 
 namespace NetFabric.Numerics.Rectangular2D;
 
@@ -515,7 +516,33 @@ public static class Vector
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector<T> Add<T>(in Vector<T> left, in Vector<T> right)
         where T : struct, INumber<T>, IMinMaxValue<T>
-        => new(left.X + right.X, left.Y + right.Y);
+    {
+        if(Vector128.IsHardwareAccelerated)
+        {
+            if (typeof(T) == typeof(double))
+            {
+                var vectorLeft = Unsafe.BitCast<Vector<T>, Vector128<double>>(left);
+                var vectorRight = Unsafe.BitCast<Vector<T>, Vector128<double>>(right);
+                return Unsafe.BitCast<Vector128<double>, Vector<T>>(Vector128.Add(vectorLeft, vectorRight));
+            } 
+
+            if (typeof(T) == typeof(long))
+            {
+                var vectorLeft = Unsafe.BitCast<Vector<T>, Vector128<long>>(left);
+                var vectorRight = Unsafe.BitCast<Vector<T>, Vector128<long>>(right);
+                return Unsafe.BitCast<Vector128<long>, Vector<T>>(Vector128.Add(vectorLeft, vectorRight));
+            } 
+
+            if (typeof(T) == typeof(ulong))
+            {
+                var vectorLeft = Unsafe.BitCast<Vector<T>, Vector128<ulong>>(left);
+                var vectorRight = Unsafe.BitCast<Vector<T>, Vector128<ulong>>(right);
+                return Unsafe.BitCast<Vector128<ulong>, Vector<T>>(Vector128.Add(vectorLeft, vectorRight));
+            } 
+        } 
+
+        return new(left.X + right.X, left.Y + right.Y);
+    }
 
     /// <summary>
     /// Subtracts the second vector from the first vector component-wise and returns the result as a new Vector.
