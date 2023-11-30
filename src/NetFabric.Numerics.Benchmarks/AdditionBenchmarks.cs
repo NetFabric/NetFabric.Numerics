@@ -14,9 +14,6 @@ public class AdditionBenchmarks
     Rectangular2D.Vector<long>[]? rectangular2_long;
     Rectangular2D.Vector<float>[]? rectangular2_float;
     Rectangular2D.Vector<double>[]? rectangular2_double;
-  
-    Polar.Vector<Degrees, float>[]? polar_float;
-    Polar.Vector<Degrees, double>[]? polar_double;
 
     [Params(10_000)]
     public int Count { get; set; }
@@ -30,9 +27,6 @@ public class AdditionBenchmarks
         rectangular2_long = GetEnumerable(Count).Select<(int x, int y), Rectangular2D.Vector<long>>(item => new(item.x, item.y)).ToArray();
         rectangular2_float = GetEnumerable(Count).Select<(int x, int y), Rectangular2D.Vector<float>>(item => new(item.x, item.y)).ToArray();
         rectangular2_double = GetEnumerable(Count).Select<(int x, int y), Rectangular2D.Vector<double>>(item => new(item.x, item.y)).ToArray();
-
-        polar_float = GetEnumerable(Count).Select<(int x, int y), Polar.Vector<Degrees, float>>(item => new(item.x, new(item.y))).ToArray();
-        polar_double = GetEnumerable(Count).Select<(int x, int y), Polar.Vector<Degrees, double>>(item => new(item.x, new(item.y))).ToArray();
 
         static IEnumerable<(int x, int y)> GetEnumerable(int count)
         {
@@ -64,15 +58,15 @@ public class AdditionBenchmarks
         return sum;
     }
 
-    [BenchmarkCategory("Float")]
-    [Benchmark(Baseline = true)]
-    public Vector2 Vector2()
-    {
-        var sum = System.Numerics.Vector2.Zero;
-        foreach (var item in vector2!)
-            sum += item;
-        return sum;
-    }
+    // [BenchmarkCategory("Float")]
+    // [Benchmark(Baseline = true)]
+    // public Vector2 Vector2()
+    // {
+    //     var sum = System.Numerics.Vector2.Zero;
+    //     foreach (var item in vector2!)
+    //         sum += item;
+    //     return sum;
+    // }
 
     [BenchmarkCategory("Float")]
     [Benchmark]
@@ -80,16 +74,6 @@ public class AdditionBenchmarks
     {
         var sum = Rectangular2D.Vector<float>.Zero;
         foreach (var item in rectangular2_float!)
-            sum += item;
-        return sum;
-    }
-
-    [BenchmarkCategory("Float")]
-    [Benchmark]
-    public Polar.Vector<Degrees, float> Polar_Float()
-    {
-        var sum = Polar.Vector<Degrees, float>.Zero;
-        foreach (var item in polar_float!)
             sum += item;
         return sum;
     }
@@ -103,15 +87,4 @@ public class AdditionBenchmarks
             sum += item;
         return sum;
     }
-
-    [BenchmarkCategory("Double")]
-    [Benchmark]
-    public Polar.Vector<Degrees, double> Polar_Double()
-    {
-        var sum = Polar.Vector<Degrees, double>.Zero;
-        foreach (var item in polar_double!)
-            sum += item;
-        return sum;
-    }
-
 }
