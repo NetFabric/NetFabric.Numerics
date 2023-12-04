@@ -16,7 +16,7 @@
 
   <ItemGroup>
     <PackageReference Include="BenchmarkDotNet" Version="0.13.10" />
-    <PackageReference Include="NetFabric" Version="1.4.1" />
+    <PackageReference Include="NetFabric" Version="1.4.2" />
   </ItemGroup>
 
   <ItemGroup>
