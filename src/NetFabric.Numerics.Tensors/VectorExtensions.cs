@@ -2,7 +2,7 @@ namespace NetFabric.Numerics;
 
 static class VectorExtensions
 {
-    public static void Fill<T>(this ref Vector<T> vector, T value1, T value2)
+    public static void Fill<T>(this Vector<T> vector, T value1, T value2)
         where T : struct
     {
         ref var valueArrayRef = ref Unsafe.As<Vector<T>, T>(ref Unsafe.AsRef(in vector));
