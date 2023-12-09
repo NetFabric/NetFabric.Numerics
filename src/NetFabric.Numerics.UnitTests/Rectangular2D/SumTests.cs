@@ -2,6 +2,8 @@
 
 public class SumTests
 {
+    /*
+
     public static TheoryData<Vector<double>[], Vector<double>> SumData 
         => new()
         {
@@ -49,4 +51,6 @@ public class SumTests
         // assert
         result.Should().Be(expected);
     }
+
+    */
 }

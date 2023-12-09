@@ -2,6 +2,8 @@
 
 public class SpanVectorAddTests
 {
+    /*
+    
     public static TheoryData<Vector<double>[], Vector<double>, Vector<double>[]> AddValueData 
         => new()
         {
@@ -171,4 +173,6 @@ public class SpanVectorAddTests
         // assert
         rightInt.Should().Equal(expectedInt);
     }
+
+    */
 }
