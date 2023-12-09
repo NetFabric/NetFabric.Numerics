@@ -23,7 +23,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Using Include="System.Collections" />
     <Using Include="System.Numerics" />
     <Using Include="System.Runtime.CompilerServices" />
   </ItemGroup>

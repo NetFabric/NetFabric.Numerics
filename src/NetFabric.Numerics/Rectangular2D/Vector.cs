@@ -522,14 +522,6 @@ public static partial class Vector
         where T : struct, INumber<T>, IMinMaxValue<T>
         => new(left.X + right.X, left.Y + right.Y);
 
-    public static void Add<T>(ReadOnlySpan<Vector<T>> source, Vector<T> value, Span<Vector<T>> result)
-        where T : struct, INumber<T>, IMinMaxValue<T>
-        => Tensor.Add(MemoryMarshal.Cast<Vector<T>, T>(source), value.X, value.Y, MemoryMarshal.Cast<Vector<T>, T>(result));
-
-    public static void Add<T>(ReadOnlySpan<Vector<T>> left, ReadOnlySpan<Vector<T>> right, Span<Vector<T>> result)
-        where T : struct, INumber<T>, IMinMaxValue<T>
-        => Tensor.Add(MemoryMarshal.Cast<Vector<T>, T>(left), MemoryMarshal.Cast<Vector<T>, T>(right), MemoryMarshal.Cast<Vector<T>, T>(result));
-
     /// <summary>
     /// Subtracts the second vector from the first vector component-wise and returns the result as a new Vector.
     /// </summary>
@@ -547,14 +539,6 @@ public static partial class Vector
     public static Vector<T> Subtract<T>(ref readonly Vector<T> left, ref readonly Vector<T> right)
         where T : struct, INumber<T>, IMinMaxValue<T>
         => new(left.X - right.X, left.Y - right.Y);
-
-    public static void Subtract<T>(ReadOnlySpan<Vector<T>> source, Vector<T> value, Span<Vector<T>> result)
-        where T : struct, INumber<T>, IMinMaxValue<T>
-        => Tensor.Subtract(MemoryMarshal.Cast<Vector<T>, T>(source), value.X, value.Y, MemoryMarshal.Cast<Vector<T>, T>(result));
-
-    public static void Subtract<T>(ReadOnlySpan<Vector<T>> left, ReadOnlySpan<Vector<T>> right, Span<Vector<T>> result)
-        where T : struct, INumber<T>, IMinMaxValue<T>
-        => Tensor.Subtract(MemoryMarshal.Cast<Vector<T>, T>(left), MemoryMarshal.Cast<Vector<T>, T>(right), MemoryMarshal.Cast<Vector<T>, T>(result));
 
     /// <summary>
     /// Multiplies a scalar value with each coordinate of the input Vector and returns the result as a new Vector.

@@ -1,31 +1,32 @@
 namespace NetFabric.Numerics;
 
-public interface IUnaryTensorOperation<T>
+public interface IUnaryOperator<T>
+    where T : struct
 {
-    void Apply(ref readonly T item);
-    void Apply(ref readonly Vector<T> vector);
+    static abstract T Invoke(T x);
+    static abstract Vector<T> Invoke(Vector<T> x);
 }
 
-public interface IUnary2DTensorOperation<T>
+public interface IBinaryOperator<T> 
+    where T : struct
 {
-    void Apply(ref readonly T item1, ref readonly T item2);
-    void Apply(ref readonly Vector<T> vector);
+    static abstract T Invoke(T x, T y);
+    static abstract Vector<T> Invoke(Vector<T> x, Vector<T> y);
 }
 
-public interface IBinaryTensorOperation<T>
+public interface IAggregationOperator<T> 
+    : IBinaryOperator<T>
+    where T : struct
 {
-    void Apply(ref readonly T sourceItem, ref T destinationItem);
-    void Apply(ref readonly Vector<T> sourceVector, ref Vector<T> destinationVector);
+    static virtual T Seed 
+        => Throw.NotSupportedException<T>();
+
+    static abstract T ResultSelector(T value, Vector<T> vector);
 }
 
-public interface IBinary2DTensorOperation<T>
+public interface ITernaryOperator<T>
+    where T : struct
 {
-    void Apply(ref readonly T sourceItem1, ref readonly T sourceItem2, ref T destinationItem1, ref T destinationItem2);
-    void Apply(ref readonly Vector<T> sourceVector, ref Vector<T> destinationVector);
-}
-
-public interface ITernaryTensorOperation<T>
-{
-    void Apply(ref readonly T leftItem, ref readonly T rightItem, ref T destinationItem);
-    void Apply(ref readonly Vector<T> leftVector, ref readonly Vector<T> rightVector, ref Vector<T> destinationVector);
+    static abstract T Invoke(T x, T y, T z);
+    static abstract Vector<T> Invoke(Vector<T> x, Vector<T> y, Vector<T> z);
 }
