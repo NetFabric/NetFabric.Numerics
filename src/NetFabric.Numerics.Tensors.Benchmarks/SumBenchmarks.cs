@@ -1,8 +1,8 @@
 ﻿using BenchmarkDotNet.Attributes;
 
-namespace NetFabric.Numerics.Rectangular2D.Benchmarks;
+namespace NetFabric.Numerics.Tensors.Benchmarks;
 
-public class TensorAddBenchmarks
+public class SumBenchmarks
 {
     short[]? arrayShort;
     int[]? arrayInt;
@@ -38,26 +38,26 @@ public class TensorAddBenchmarks
     }
 
     [Benchmark]
-    public void Add_Short()
-        => Tensor.Add<short>(arrayShort!, arrayShort!, arrayShort!);
+    public short Sum_Short()
+        => Tensor.Sum<short>(arrayShort!);
 
     [Benchmark]
-    public void Add_Int()
-        => Tensor.Add<int>(arrayInt!, arrayInt!, arrayInt!);
+    public int Sum_Int()
+        => Tensor.Sum<int>(arrayInt!);
 
     [Benchmark]
-    public void Add_Long()
-        => Tensor.Add<long>(arrayLong!, arrayLong!, arrayLong!);
+    public long Sum_Long()
+        => Tensor.Sum<long>(arrayLong!);
 
     [Benchmark]
-    public void Add_Half()
-        => Tensor.Add<Half>(arrayHalf!, arrayHalf!, arrayHalf!);
+    public Half Sum_Half()
+        => Tensor.Sum<Half>(arrayHalf!);
 
     [Benchmark]
-    public void Add_Float()
-        => Tensor.Add<float>(arrayFloat!, arrayFloat!, arrayFloat!);
+    public float Sum_Float()
+        => Tensor.Sum<float>(arrayFloat!);
 
     [Benchmark]
-    public void Add_Double()
-        => Tensor.Add<double>(arrayDouble!, arrayDouble!, arrayDouble!);
+    public double Sum_Double()
+        => Tensor.Sum<double>(arrayDouble);
 }
