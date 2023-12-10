@@ -1,8 +1,8 @@
 ﻿using BenchmarkDotNet.Attributes;
 
-namespace NetFabric.Numerics.Rectangular2D.Benchmarks;
+namespace NetFabric.Numerics.Tensors.Benchmarks;
 
-public class TensorAddValueBenchmarks
+public class AddValueBenchmarks
 {
     short[]? arrayShort;
     int[]? arrayInt;
