@@ -11,7 +11,7 @@ public static partial class Tensor
     static bool SpansOverlapAndAreNotSame<T>(ReadOnlySpan<T> span1, ReadOnlySpan<T> span2)
         => !Unsafe.AreSame(ref MemoryMarshal.GetReference(span1), ref MemoryMarshal.GetReference(span2)) && span1.Overlaps(span2);
 
-    public static void Apply<T, TOperator>(ReadOnlySpan<T> x, Span<T> destination)
+    public static void Apply<T, TOperator>(ReadOnlySpan<T> x, Span<T> destination, bool useIntrinsics = true)
         where T : struct
         where TOperator : struct, IUnaryOperator<T>
     {
@@ -25,7 +25,8 @@ public static partial class Tensor
 
         // Check if hardware acceleration and Vector<T> support are available,
         // and if the length of the x is greater than the Vector<T>.Count.
-        if (Vector.IsHardwareAccelerated &&
+        if (useIntrinsics &&
+            Vector.IsHardwareAccelerated &&
             Vector<T>.IsSupported &&
             x.Length >= Vector<T>.Count)
         {
@@ -56,7 +57,7 @@ public static partial class Tensor
         }
     }
 
-    public static void Apply<T, TOperator>(ReadOnlySpan<T> x, ReadOnlySpan<T> y, Span<T> destination)
+    public static void Apply<T, TOperator>(ReadOnlySpan<T> x, ReadOnlySpan<T> y, Span<T> destination, bool useIntrinsics = true)
         where T : struct
         where TOperator : struct, IBinaryOperator<T>
     {
@@ -74,7 +75,8 @@ public static partial class Tensor
 
         // Check if hardware acceleration and Vector<T> support are available,
         // and if the length of the x is greater than the Vector<T>.Count.
-        if (Vector.IsHardwareAccelerated &&
+        if (useIntrinsics &&
+            Vector.IsHardwareAccelerated &&
             Vector<T>.IsSupported &&
             x.Length >= Vector<T>.Count)
         {
@@ -110,7 +112,7 @@ public static partial class Tensor
         }
     }
 
-    public static void Apply<T, TOperator>(ReadOnlySpan<T> x, T y, Span<T> destination)
+    public static void Apply<T, TOperator>(ReadOnlySpan<T> x, T y, Span<T> destination, bool useIntrinsics = true)
         where T : struct
         where TOperator : struct, IBinaryOperator<T>
     {
@@ -124,7 +126,8 @@ public static partial class Tensor
 
         // Check if hardware acceleration and Vector<T> support are available,
         // and if the length of the x is greater than the Vector<T>.Count.
-        if (Vector.IsHardwareAccelerated &&
+        if (useIntrinsics &&
+            Vector.IsHardwareAccelerated &&
             Vector<T>.IsSupported &&
             x.Length >= Vector<T>.Count)
         {
@@ -158,7 +161,7 @@ public static partial class Tensor
         }
     }
 
-    public static void Apply<T, TOperator>(ReadOnlySpan<T> x, ReadOnlySpan<T> y, ReadOnlySpan<T> z, Span<T> destination)
+    public static void Apply<T, TOperator>(ReadOnlySpan<T> x, ReadOnlySpan<T> y, ReadOnlySpan<T> z, Span<T> destination, bool useIntrinsics = true)
         where T : struct
         where TOperator : struct, ITernaryOperator<T>
     {
@@ -178,7 +181,8 @@ public static partial class Tensor
 
         // Check if hardware acceleration and Vector<T> support are available,
         // and if the length of the x is greater than the Vector<T>.Count.
-        if (Vector.IsHardwareAccelerated &&
+        if (useIntrinsics &&
+            Vector.IsHardwareAccelerated &&
             Vector<T>.IsSupported &&
             x.Length >= Vector<T>.Count)
         {
@@ -219,7 +223,7 @@ public static partial class Tensor
         }
     }
 
-    public static void Apply<T, TOperator>(ReadOnlySpan<T> x, T y, ReadOnlySpan<T> z, Span<T> destination)
+    public static void Apply<T, TOperator>(ReadOnlySpan<T> x, T y, ReadOnlySpan<T> z, Span<T> destination, bool useIntrinsics = true)
         where T : struct
         where TOperator : struct, ITernaryOperator<T>
     {
@@ -237,7 +241,8 @@ public static partial class Tensor
 
         // Check if hardware acceleration and Vector<T> support are available,
         // and if the length of the x is greater than the Vector<T>.Count.
-        if (Vector.IsHardwareAccelerated &&
+        if (useIntrinsics &&
+            Vector.IsHardwareAccelerated &&
             Vector<T>.IsSupported &&
             x.Length >= Vector<T>.Count)
         {
@@ -276,7 +281,7 @@ public static partial class Tensor
         }
     }
 
-    public static void Apply<T, TOperator>(ReadOnlySpan<T> x, ReadOnlySpan<T> y, T z, Span<T> destination)
+    public static void Apply<T, TOperator>(ReadOnlySpan<T> x, ReadOnlySpan<T> y, T z, Span<T> destination, bool useIntrinsics = true)
         where T : struct
         where TOperator : struct, ITernaryOperator<T>
     {
@@ -294,7 +299,8 @@ public static partial class Tensor
 
         // Check if hardware acceleration and Vector<T> support are available,
         // and if the length of the x is greater than the Vector<T>.Count.
-        if (Vector.IsHardwareAccelerated &&
+        if (useIntrinsics &&
+            Vector.IsHardwareAccelerated &&
             Vector<T>.IsSupported &&
             x.Length >= Vector<T>.Count)
         {
@@ -333,7 +339,7 @@ public static partial class Tensor
         }
     }
 
-    public static void Apply<T, TOperator>(ReadOnlySpan<T> x, T y, T z, Span<T> destination)
+    public static void Apply<T, TOperator>(ReadOnlySpan<T> x, T y, T z, Span<T> destination, bool useIntrinsics = true)
         where T : struct
         where TOperator : struct, ITernaryOperator<T>
     {
@@ -347,7 +353,8 @@ public static partial class Tensor
 
         // Check if hardware acceleration and Vector<T> support are available,
         // and if the length of the x is greater than the Vector<T>.Count.
-        if (Vector.IsHardwareAccelerated &&
+        if (useIntrinsics &&
+            Vector.IsHardwareAccelerated &&
             Vector<T>.IsSupported &&
             x.Length >= Vector<T>.Count)
         {
