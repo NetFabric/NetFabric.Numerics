@@ -17,6 +17,10 @@ public static partial class Tensor
         where T : struct, IDivisionOperators<T, T, T>
         => Apply<T, DivideOperator<T>>(left, right, destination);
 
+    public static void Divide<T>(ReadOnlySpan<T> left, ValueTuple<T, T> right, Span<T> destination)
+        where T : struct, IDivisionOperators<T, T, T>
+        => Apply<T, DivideOperator<T>>(left, right, destination);
+
     /// <summary>
     /// Divides corresponding elements in the left and right spans and stores the result in the destination span.
     /// </summary>

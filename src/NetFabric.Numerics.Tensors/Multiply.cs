@@ -17,6 +17,10 @@ public static partial class Tensor
         where T : struct, IMultiplyOperators<T, T, T>
         => Apply<T, MultiplyOperator<T>>(left, right, destination);
 
+    public static void Multiply<T>(ReadOnlySpan<T> left, ValueTuple<T, T> right, Span<T> destination)
+        where T : struct, IMultiplyOperators<T, T, T>
+        => Apply<T, MultiplyOperator<T>>(left, right, destination);
+
     /// <summary>
     /// Multiplies corresponding elements in the left and right spans and stores the result in the destination span.
     /// </summary>

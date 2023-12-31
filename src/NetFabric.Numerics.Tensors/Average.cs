@@ -15,7 +15,7 @@ public static partial class Tensor
     /// </remarks>
     public static T? Average<T>(ReadOnlySpan<T> source)
         where T : struct, INumberBase<T>, IAdditionOperators<T, T, T>, IAdditiveIdentity<T, T>, IDivisionOperators<T, T, T>
-        => source.Length == 0
+        => source.Length is 0
             ? null
             : Sum(source) / T.CreateChecked(source.Length);
 }

@@ -24,6 +24,16 @@ public interface IAggregationOperator<T>
     static abstract T ResultSelector(T value, Vector<T> vector);
 }
 
+public interface IAggregationPairsOperator<T> 
+    : IBinaryOperator<T>
+    where T : struct
+{
+    static virtual ValueTuple<T, T> Seed 
+        => Throw.NotSupportedException<ValueTuple<T, T>>();
+
+    static abstract ValueTuple<T, T> ResultSelector(ValueTuple<T, T> value, Vector<T> vector);
+}
+
 public interface ITernaryOperator<T>
     where T : struct
 {

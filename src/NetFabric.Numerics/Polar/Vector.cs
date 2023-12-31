@@ -309,7 +309,7 @@ public readonly record struct Vector<TAngleUnits, T>(T Radius, Angle<TAngleUnits
 /// <summary>
 /// Provides static methods for vector operations.
 /// </summary>
-public static class Vector
+public static partial class Vector
 {
     /// <summary>
     /// Determines whether the specified vector is a zero vector, where all components are zero.
@@ -400,7 +400,7 @@ public static class Vector
     public static bool IsNormalized<TAngleUnits, T>(ref readonly Vector<TAngleUnits, T> vector)
         where TAngleUnits : IAngleUnits
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => Vector.Magnitude(in vector) == T.One;
+        => Magnitude(in vector) == T.One;
 
     /// <summary>
     /// Determines whether the specified <see cref="Vector{T}"/> is a normalized vector within the specified tolerance.

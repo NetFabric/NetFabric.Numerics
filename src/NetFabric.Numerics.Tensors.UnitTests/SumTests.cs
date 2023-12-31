@@ -13,7 +13,7 @@ public class SumTests
     {
         // arrange
         var source = Enumerable.Range(0, count).Select(value => (short)value).ToArray();
-        var expected = Enumerable.Range(0, count).Sum();
+        var expected = source.Aggregate(0, (sum, value) => sum + value);
 
         // act
         var result = Tensor.Sum<short>(source);
