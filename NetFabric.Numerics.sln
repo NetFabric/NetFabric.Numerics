@@ -56,13 +56,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetFabric.Numerics.Geodesy"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetFabric.Numerics.Geodesy.UnitTests", "src\NetFabric.Numerics.Geodesy.UnitTests\NetFabric.Numerics.Geodesy.UnitTests.csproj", "{4E4414C1-E5CF-4679-9016-7C3F70F13110}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetFabric.Numerics.Tensors", "src\NetFabric.Numerics.Tensors\NetFabric.Numerics.Tensors.csproj", "{8D2EE0A5-32A2-4019-AD55-7E9B70B76D67}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetFabric.Numerics.Tensors", "src\NetFabric.Numerics.Tensors\NetFabric.Numerics.Tensors.csproj", "{8D2EE0A5-32A2-4019-AD55-7E9B70B76D67}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{EC0C1351-970E-48A9-BDA3-3E5E2B095402}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetFabric.Numerics.Tensors.UnitTests", "src\NetFabric.Numerics.Tensors.UnitTests\NetFabric.Numerics.Tensors.UnitTests.csproj", "{31E6CCB0-E04A-4947-BF74-E8E70D5594E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetFabric.Numerics.Tensors.UnitTests", "src\NetFabric.Numerics.Tensors.UnitTests\NetFabric.Numerics.Tensors.UnitTests.csproj", "{31E6CCB0-E04A-4947-BF74-E8E70D5594E5}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetFabric.Numerics.Tensors.Benchmarks", "src\NetFabric.Numerics.Tensors.Benchmarks\NetFabric.Numerics.Tensors.Benchmarks.csproj", "{A8467A84-F9DD-4B6C-91BB-CF39029331A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetFabric.Numerics.Tensors.Benchmarks", "src\NetFabric.Numerics.Tensors.Benchmarks\NetFabric.Numerics.Tensors.Benchmarks.csproj", "{A8467A84-F9DD-4B6C-91BB-CF39029331A4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -118,8 +116,6 @@ Global
 		{A04C4E36-5F33-43F8-A7EE-15D81C7F8A58} = {762517CA-3F22-4DC6-955C-4F4FC69EB670}
 		{BA0837F2-730C-4537-B08B-5FFD2D91AF30} = {762517CA-3F22-4DC6-955C-4F4FC69EB670}
 		{83BDB68A-4F4B-4D7D-A7C7-55CC9F03657B} = {762517CA-3F22-4DC6-955C-4F4FC69EB670}
-		{31E6CCB0-E04A-4947-BF74-E8E70D5594E5} = {EC0C1351-970E-48A9-BDA3-3E5E2B095402}
-		{A8467A84-F9DD-4B6C-91BB-CF39029331A4} = {EC0C1351-970E-48A9-BDA3-3E5E2B095402}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AACC30AE-BE57-461F-817B-2AE0F001A33F}

@@ -16,6 +16,9 @@ public static partial class Angle
         where TUnits : IAngleUnits
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
     {
+        if(source.TryGetSpan(out var span))
+            return span.Average();
+
         var sum = T.Zero;
         var count = T.Zero;
         foreach (var angle in source)
@@ -74,7 +77,7 @@ public static partial class Angle
     public static Angle<TUnits, T>? Average<TUnits, T>(this ReadOnlySpan<Angle<TUnits, T>> source)
         where TUnits : IAngleUnits
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T> 
-        => source.Length == 0
+        => source.Length is 0
             ? null
             : Sum(source) / T.CreateChecked(source.Length);
 }
