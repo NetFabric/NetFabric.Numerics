@@ -147,6 +147,7 @@ public static partial class Tensor
         if (useIntrinsics &&
             Vector.IsHardwareAccelerated &&
             Vector<T>.IsSupported &&
+            Vector<T>.Count > 2 &&
             Vector<T>.Count % 2 is 0 &&
             x.Length >= Vector<T>.Count)
         {
@@ -270,6 +271,7 @@ public static partial class Tensor
         if (useIntrinsics &&
             Vector.IsHardwareAccelerated &&
             Vector<T>.IsSupported &&
+            Vector<T>.Count > 2 &&
             Vector<T>.Count % 2 is 0 &&
             x.Length >= Vector<T>.Count)
         {
@@ -383,6 +385,7 @@ public static partial class Tensor
         if (useIntrinsics &&
             Vector.IsHardwareAccelerated &&
             Vector<T>.IsSupported &&
+            Vector<T>.Count > 2 &&
             Vector<T>.Count % 2 is 0 &&
             x.Length >= Vector<T>.Count)
         {

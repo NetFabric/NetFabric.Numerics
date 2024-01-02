@@ -29,6 +29,7 @@ namespace NetFabric.Numerics
 
             if (Vector.IsHardwareAccelerated &&
                 Vector<T>.IsSupported &&
+                Vector<T>.Count > 2 &&
                 Vector<T>.Count % 2 is 0 &&
                 source.Length >= Vector<T>.Count)
             {
