@@ -1,10 +1,8 @@
-using System.Runtime.InteropServices;
-
 namespace NetFabric.Numerics;
 
 public static partial class Tensor
 {
-    public static void Apply<T, TOperator>(ReadOnlySpan<T> x, Span<T> destination, bool useIntrinsics = true)
+    public static void Apply<T, TOperator>(ReadOnlySpan<T> x, Span<T> destination)
         where T : struct
         where TOperator : struct, IUnaryOperator<T>
     {
@@ -18,8 +16,7 @@ public static partial class Tensor
 
         // Check if hardware acceleration and Vector<T> support are available,
         // and if the length of the x is greater than the Vector<T>.Count.
-        if (useIntrinsics &&
-            Vector.IsHardwareAccelerated &&
+        if (Vector.IsHardwareAccelerated &&
             Vector<T>.IsSupported &&
             x.Length >= Vector<T>.Count)
         {

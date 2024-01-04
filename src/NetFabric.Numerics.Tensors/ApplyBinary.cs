@@ -1,10 +1,8 @@
-using System.Runtime.InteropServices;
-
 namespace NetFabric.Numerics;
 
 public static partial class Tensor
 {
-    public static void Apply<T, TOperator>(ReadOnlySpan<T> x, ReadOnlySpan<T> y, Span<T> destination, bool useIntrinsics = true)
+    public static void Apply<T, TOperator>(ReadOnlySpan<T> x, ReadOnlySpan<T> y, Span<T> destination)
         where T : struct
         where TOperator : struct, IBinaryOperator<T>
     {
@@ -22,8 +20,7 @@ public static partial class Tensor
 
         // Check if hardware acceleration and Vector<T> support are available,
         // and if the length of the x is greater than the Vector<T>.Count.
-        if (useIntrinsics &&
-            Vector.IsHardwareAccelerated &&
+        if (Vector.IsHardwareAccelerated &&
             Vector<T>.IsSupported &&
             x.Length >= Vector<T>.Count)
         {
@@ -59,7 +56,7 @@ public static partial class Tensor
         }
     }
 
-    public static void Apply<T, TOperator>(ReadOnlySpan<T> x, T y, Span<T> destination, bool useIntrinsics = true)
+    public static void Apply<T, TOperator>(ReadOnlySpan<T> x, T y, Span<T> destination)
         where T : struct
         where TOperator : struct, IBinaryOperator<T>
     {
@@ -73,8 +70,7 @@ public static partial class Tensor
 
         // Check if hardware acceleration and Vector<T> support are available,
         // and if the length of the x is greater than the Vector<T>.Count.
-        if (useIntrinsics &&
-            Vector.IsHardwareAccelerated &&
+        if (Vector.IsHardwareAccelerated &&
             Vector<T>.IsSupported &&
             x.Length >= Vector<T>.Count)
         {
@@ -108,7 +104,7 @@ public static partial class Tensor
         }
     }
 
-    public static void Apply<T, TOperator>(ReadOnlySpan<T> x, ValueTuple<T, T> y, Span<T> destination, bool useIntrinsics = true)
+    public static void Apply<T, TOperator>(ReadOnlySpan<T> x, ValueTuple<T, T> y, Span<T> destination)
         where T : struct
         where TOperator : struct, IBinaryOperator<T>
     {
@@ -124,8 +120,7 @@ public static partial class Tensor
 
         // Check if hardware acceleration and Vector<T> support are available,
         // and if the length of the x is greater than the Vector<T>.Count.
-        if (useIntrinsics &&
-            Vector.IsHardwareAccelerated &&
+        if (Vector.IsHardwareAccelerated &&
             Vector<T>.IsSupported &&
             Vector<T>.Count > 2 &&
             Vector<T>.Count % 2 is 0 &&
@@ -161,6 +156,33 @@ public static partial class Tensor
             Unsafe.Add(ref destinationRef, index + 1) = TOperator.Invoke(
                 Unsafe.Add(ref xRef, index + 1),
                 y.Item2);
+        }
+    }
+
+    public static void Apply<T, TOperator>(ReadOnlySpan<T> x, ValueTuple<T, T, T> y, Span<T> destination)
+        where T : struct
+        where TOperator : struct, IBinaryOperator<T>
+    {
+        if (x.Length % 3 is not 0)
+            Throw.ArgumentException(nameof(x), "x span must have a size multiple of 3.");
+        if (x.Length > destination.Length)
+            Throw.ArgumentException(nameof(destination), "Destination span is too small.");
+        if (SpansOverlapAndAreNotSame(x, destination))
+            Throw.ArgumentException(nameof(destination), "Destination span overlaps with x.");
+
+        ref var xRef = ref MemoryMarshal.GetReference(x);
+        ref var destinationRef = ref MemoryMarshal.GetReference(destination);
+        for (nint index = 0; index < x.Length; index += 3)
+        {
+            Unsafe.Add(ref destinationRef, index) = TOperator.Invoke(
+                Unsafe.Add(ref xRef, index),
+                y.Item1);
+            Unsafe.Add(ref destinationRef, index + 1) = TOperator.Invoke(
+                Unsafe.Add(ref xRef, index + 1),
+                y.Item2);
+            Unsafe.Add(ref destinationRef, index + 2) = TOperator.Invoke(
+                Unsafe.Add(ref xRef, index + 2),
+                y.Item3);
         }
     }
 

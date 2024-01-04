@@ -1,92 +1,59 @@
-﻿using System.Linq;
-
-namespace NetFabric.Numerics.Tensors.UnitTests;
+﻿namespace NetFabric.Numerics.Tensors.UnitTests;
 
 public class AddValueTests
 {
-    public const short constValue = 42;
-
     public static TheoryData<int> AddData 
         => new() { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37 };
+
+    static void Add_Should_Succeed<T>(int count)
+        where T : struct, INumber<T>
+    {
+        // arrange
+        var source = Enumerable.Range(0, count);
+        var x = source
+            .Select(value => T.CreateChecked(value))
+            .ToArray();
+        var y = T.CreateChecked(42);
+        var result = new T[count];
+        var expected = source
+            .Select(value => T.CreateChecked(value) + y)
+            .ToArray();
+
+        // act
+        Tensor.Add(x, y, result);
+
+        // assert
+        result.Should().Equal(expected);
+    }
 
     [Theory]
     [MemberData(nameof(AddData))]
     public void Add_Short_Should_Succeed(int count)
-    {
-        // arrange
-        var x = Enumerable.Range(0, count).Select(value => (short)value).ToArray();
-        var result = new short[count];
-        var expected = Enumerable.Range(0, count).Select(value => (short)(value + constValue)).ToArray();
-
-        // act
-        Tensor.Add(x, constValue, result);
-
-        // assert
-        result.Should().Equal(expected);
-    }
+        => Add_Should_Succeed<short>(count);
 
     [Theory]
     [MemberData(nameof(AddData))]
     public void Add_Int_Should_Succeed(int count)
-    {
-        // arrange
-        var x = Enumerable.Range(0, count).ToArray();
-        var result = new int[count];
-        var expected = Enumerable.Range(0, count).Select(value => value + constValue).ToArray();
-
-        // act
-        Tensor.Add(x, (int)constValue, result);
-
-        // assert
-        result.Should().Equal(expected);
-    }
+        => Add_Should_Succeed<int>(count);
 
     [Theory]
     [MemberData(nameof(AddData))]
     public void Add_Long_Should_Succeed(int count)
-    {
-        // arrange
-        var x = Enumerable.Range(0, count).Select(value => (long)value).ToArray();
-        var result = new long[count];
-        var expected = Enumerable.Range(0, count).Select(value => (long)(value + constValue)).ToArray();
+        => Add_Should_Succeed<long>(count);
 
-        // act
-        Tensor.Add(x, (long)constValue, result);
-
-        // assert
-        result.Should().Equal(expected);
-    }
+    [Theory]
+    [MemberData(nameof(AddData))]
+    public void Add_Half_Should_Succeed(int count)
+        => Add_Should_Succeed<Half>(count);
 
     [Theory]
     [MemberData(nameof(AddData))]
     public void Add_Float_Should_Succeed(int count)
-    {
-        // arrange
-        var x = Enumerable.Range(0, count).Select(value => (float)value).ToArray();
-        var result = new float[count];
-        var expected = Enumerable.Range(0, count).Select(value => (float)(value + constValue)).ToArray();
-
-        // act
-        Tensor.Add(x, (float)constValue, result);
-
-        // assert
-        result.Should().Equal(expected);
-    }
+        => Add_Should_Succeed<float>(count);
 
     [Theory]
     [MemberData(nameof(AddData))]
     public void Add_Double_Should_Succeed(int count)
-    {
-        // arrange
-        var x = Enumerable.Range(0, count).Select(value => (double)value).ToArray();
-        var result = new double[count];
-        var expected = Enumerable.Range(0, count).Select(value => (double)(value + constValue)).ToArray();
-
-        // act
-        Tensor.Add(x, (double)constValue, result);
-
-        // assert
-        result.Should().Equal(expected);
-    }
+        => Add_Should_Succeed<double>(count);
 
 }
