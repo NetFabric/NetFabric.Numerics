@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Company>NetFabric</Company>
     <Authors>Antao Almada</Authors>
-    <Copyright>Copyright 2023 Antao Almada</Copyright>
+    <Copyright>Copyright 2023-2024 Antao Almada</Copyright>
     <LangVersion>12</LangVersion>
     <Features>strict</Features>
     <Nullable>enable</Nullable>

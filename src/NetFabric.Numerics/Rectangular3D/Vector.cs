@@ -353,7 +353,7 @@ public readonly record struct Vector<T>(T X, T Y, T Z)
 /// <summary>
 /// Provides static methods for vector operations.
 /// </summary>
-public static class Vector
+public static partial class Vector
 {
     /// <summary>
     /// Determines whether the specified vector is a zero vector, where all components are zero.

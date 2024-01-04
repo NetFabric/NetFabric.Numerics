@@ -1,6 +1,8 @@
-﻿namespace NetFabric.Numerics.Tensors.UnitTests;
+﻿using System.Runtime.InteropServices;
 
-public class AddMultiplyValueTests
+namespace NetFabric.Numerics.Tensors.UnitTests;
+
+public class AddMultiplyValueTripletsTests
 {
     public static TheoryData<int> AddData 
         => new() { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37 };
@@ -11,19 +13,23 @@ public class AddMultiplyValueTests
         // arrange
         var source = Enumerable.Range(0, count);
         var x = source
-            .Select(value => T.CreateChecked(value))
+            .Select(value => new MyVector3<T>(T.CreateChecked(value), T.CreateChecked(value + 1), T.CreateChecked(value + 2)))
             .ToArray();
-        var y = T.CreateChecked(24);
+        var y = (T.CreateChecked(24), T.CreateChecked(25), T.CreateChecked(26));
         var z = source
-            .Select(value => T.CreateChecked(value + 2))
+            .Select(value => new MyVector3<T>(T.CreateChecked(value + 2), T.CreateChecked(value + 3), T.CreateChecked(value + 4)))
             .ToArray();
-        var result = new T[count];
+        var result = new MyVector3<T>[count];
         var expected = source
-            .Select(value => T.CreateChecked((value + 24) * (value + 2)))
+            .Select(value => new MyVector3<T>(T.CreateChecked((value + 24) * (value + 2)), T.CreateChecked((value + 26) * (value + 3)), T.CreateChecked((value + 28) * (value + 4))))
             .ToArray();
 
         // act
-        Tensor.AddMultiply(x, y, z, result);
+        Tensor.AddMultiply(
+            MemoryMarshal.Cast<MyVector3<T>, T>(x),
+            y,
+            MemoryMarshal.Cast<MyVector3<T>, T>(z),
+            MemoryMarshal.Cast<MyVector3<T>, T>(result));
 
         // assert
         result.Should().Equal(expected);
@@ -35,19 +41,23 @@ public class AddMultiplyValueTests
         // arrange
         var source = Enumerable.Range(0, count);
         var x = source
-            .Select(value => T.CreateChecked(value))
+            .Select(value => new MyVector3<T>(T.CreateChecked(value), T.CreateChecked(value + 1), T.CreateChecked(value + 2)))
             .ToArray();
         var y = source
-            .Select(value => T.CreateChecked(value + 1))
+            .Select(value => new MyVector3<T>(T.CreateChecked(value + 2), T.CreateChecked(value + 3), T.CreateChecked(value + 4)))
             .ToArray();
-        var z = T.CreateChecked(42);
-        var result = new T[count];
+        var z = (T.CreateChecked(42), T.CreateChecked(43), T.CreateChecked(44));
+        var result = new MyVector3<T>[count];
         var expected = source
-            .Select(value => T.CreateChecked((value + value + 1) * 42))
+            .Select(value => new MyVector3<T>(T.CreateChecked((value + value + 2) * 42), T.CreateChecked((value + value + 4) * 43), T.CreateChecked((value + value + 6) * 44)))
             .ToArray();
 
         // act
-        Tensor.AddMultiply(x, y, z, result);
+        Tensor.AddMultiply(
+            MemoryMarshal.Cast<MyVector3<T>, T>(x),
+            MemoryMarshal.Cast<MyVector3<T>, T>(y),
+            z,
+            MemoryMarshal.Cast<MyVector3<T>, T>(result));
 
         // assert
         result.Should().Equal(expected);
@@ -59,17 +69,21 @@ public class AddMultiplyValueTests
         // arrange
         var source = Enumerable.Range(0, count);
         var x = source
-            .Select(value => T.CreateChecked(value))
+            .Select(value => new MyVector3<T>(T.CreateChecked(value), T.CreateChecked(value + 1), T.CreateChecked(value + 2)))
             .ToArray();
-        var y = T.CreateChecked(24);
-        var z = T.CreateChecked(42);
-        var result = new T[count];
+        var y = (T.CreateChecked(24), T.CreateChecked(25), T.CreateChecked(26));
+        var z = (T.CreateChecked(42), T.CreateChecked(43), T.CreateChecked(44));
+        var result = new MyVector3<T>[count];
         var expected = source
-            .Select(value => T.CreateChecked((value + 24) * 42))
+            .Select(value => new MyVector3<T>(T.CreateChecked((value + 24) * 42), T.CreateChecked((value + 26) * 43), T.CreateChecked((value + 28) * 44)))
             .ToArray();
 
         // act
-        Tensor.AddMultiply(x, y, z, result);
+        Tensor.AddMultiply(
+            MemoryMarshal.Cast<MyVector3<T>, T>(x),
+            y,
+            z,
+            MemoryMarshal.Cast<MyVector3<T>, T>(result));
 
         // assert
         result.Should().Equal(expected);
@@ -119,6 +133,21 @@ public class AddMultiplyValueTests
     [MemberData(nameof(AddData))]
     public void AddMultiply_Both_Long_Should_Succeed(int count)
         => AddMultiply_Both_Should_Succeed<long>(count);
+
+    [Theory]
+    [MemberData(nameof(AddData))]
+    public void AddMultiply_First_Half_Should_Succeed(int count)
+        => AddMultiply_First_Should_Succeed<Half>(count);
+
+    [Theory]
+    [MemberData(nameof(AddData))]
+    public void AddMultiply_Second_Half_Should_Succeed(int count)
+        => AddMultiply_Second_Should_Succeed<Half>(count);
+
+    [Theory]
+    [MemberData(nameof(AddData))]
+    public void AddMultiply_Both_Half_Should_Succeed(int count)
+        => AddMultiply_Both_Should_Succeed<Half>(count);
 
     [Theory]
     [MemberData(nameof(AddData))]

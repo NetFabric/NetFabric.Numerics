@@ -5,10 +5,11 @@
 
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
-    <RootNamespace>NetFabric.Numerics.Tensors.UnitsTests</RootNamespace>
+    <RootNamespace>NetFabric.Numerics.Tensors.UnitTests</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
+    <Using Include="System.Numerics" />
     <Using Include="FluentAssertions" />
     <Using Include="Xunit" />
   </ItemGroup>
