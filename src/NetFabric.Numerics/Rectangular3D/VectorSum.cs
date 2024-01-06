@@ -1,4 +1,4 @@
-﻿namespace NetFabric.Numerics.Rectangular2D;
+﻿namespace NetFabric.Numerics.Rectangular3D;
 
 public static partial class Vector
 {
@@ -18,15 +18,17 @@ public static partial class Vector
 
         var sumX = T.Zero;
         var sumY = T.Zero;
+        var sumZ = T.Zero;
         foreach (var vector in source)
         {
             checked 
             { 
                 sumX += vector.X; 
                 sumY += vector.Y;
+                sumZ += vector.Z;
             }
         }
-        return new Vector<T>(sumX, sumY);
+        return new Vector<T>(sumX, sumY, sumZ);
     }
 
     /// <summary>
@@ -64,7 +66,7 @@ public static partial class Vector
     public static Vector<T> Sum<T>(this ReadOnlySpan<Vector<T>> source)
         where T : struct, INumber<T>, IMinMaxValue<T>
     {
-        (var sumX, var sumY) = Tensor.SumPairs(MemoryMarshal.Cast<Vector<T>, T>(source));
-        return new Vector<T>(sumX, sumY);
+        (var sumX, var sumY, var sumZ) = Tensor.SumTriplets(MemoryMarshal.Cast<Vector<T>, T>(source));
+        return new Vector<T>(sumX, sumY, sumZ);
     }
 }

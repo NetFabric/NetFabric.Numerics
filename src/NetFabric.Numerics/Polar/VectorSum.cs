@@ -1,6 +1,4 @@
-﻿using System.Runtime.InteropServices;
-
-namespace NetFabric.Numerics.Polar;
+﻿namespace NetFabric.Numerics.Polar;
 
 public static partial class Vector
 {

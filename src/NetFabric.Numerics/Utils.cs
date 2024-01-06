@@ -1,6 +1,4 @@
-﻿using System.Runtime.InteropServices;
-
-namespace NetFabric.Numerics;
+﻿namespace NetFabric.Numerics;
 
 /// <summary>
 /// Utility methods for performing mathematical operations on generic types.

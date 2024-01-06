@@ -1,6 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
-using System.Runtime.InteropServices;
 
 namespace NetFabric.Numerics.Rectangular2D;
 

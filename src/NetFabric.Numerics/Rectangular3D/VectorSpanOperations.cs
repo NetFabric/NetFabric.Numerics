@@ -1,6 +1,4 @@
-﻿using System.Runtime.InteropServices;
-
-namespace NetFabric.Numerics.Rectangular3D;
+﻿namespace NetFabric.Numerics.Rectangular3D;
 
 public static partial class Vector
 {
