@@ -56,12 +56,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetFabric.Numerics.Geodesy"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetFabric.Numerics.Geodesy.UnitTests", "src\NetFabric.Numerics.Geodesy.UnitTests\NetFabric.Numerics.Geodesy.UnitTests.csproj", "{4E4414C1-E5CF-4679-9016-7C3F70F13110}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetFabric.Numerics.Tensors", "src\NetFabric.Numerics.Tensors\NetFabric.Numerics.Tensors.csproj", "{8D2EE0A5-32A2-4019-AD55-7E9B70B76D67}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetFabric.Numerics.Tensors.UnitTests", "src\NetFabric.Numerics.Tensors.UnitTests\NetFabric.Numerics.Tensors.UnitTests.csproj", "{31E6CCB0-E04A-4947-BF74-E8E70D5594E5}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetFabric.Numerics.Tensors.Benchmarks", "src\NetFabric.Numerics.Tensors.Benchmarks\NetFabric.Numerics.Tensors.Benchmarks.csproj", "{A8467A84-F9DD-4B6C-91BB-CF39029331A4}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -96,18 +90,6 @@ Global
 		{4E4414C1-E5CF-4679-9016-7C3F70F13110}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E4414C1-E5CF-4679-9016-7C3F70F13110}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E4414C1-E5CF-4679-9016-7C3F70F13110}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8D2EE0A5-32A2-4019-AD55-7E9B70B76D67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8D2EE0A5-32A2-4019-AD55-7E9B70B76D67}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8D2EE0A5-32A2-4019-AD55-7E9B70B76D67}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8D2EE0A5-32A2-4019-AD55-7E9B70B76D67}.Release|Any CPU.Build.0 = Release|Any CPU
-		{31E6CCB0-E04A-4947-BF74-E8E70D5594E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{31E6CCB0-E04A-4947-BF74-E8E70D5594E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{31E6CCB0-E04A-4947-BF74-E8E70D5594E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{31E6CCB0-E04A-4947-BF74-E8E70D5594E5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A8467A84-F9DD-4B6C-91BB-CF39029331A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A8467A84-F9DD-4B6C-91BB-CF39029331A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A8467A84-F9DD-4B6C-91BB-CF39029331A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A8467A84-F9DD-4B6C-91BB-CF39029331A4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
