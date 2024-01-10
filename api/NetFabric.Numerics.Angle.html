@@ -1,0 +1,4262 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class Angle
+ | NetFabric.Numerics </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class Angle
+ | NetFabric.Numerics ">
+      
+      <link rel="icon" href="../images/Logo.png">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/NetFabric/NetFabric.Numerics/new/main/apiSpec/new?filename=NetFabric_Numerics_Angle.md&amp;value=---%0Auid%3A%20NetFabric.Numerics.Angle%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+  </head>
+
+  <script type="module" src="./../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/Logo.png" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="NetFabric.Numerics.Angle">
+
+
+
+  <h1 id="NetFabric_Numerics_Angle" data-uid="NetFabric.Numerics.Angle" class="text-break">
+    Class Angle
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/AngleTrigonometry.cs/#L3"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="NetFabric.html">NetFabric</a>.<a class="xref" href="NetFabric.Numerics.html">Numerics</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>NetFabric.Numerics.Angle.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Provides static operations and utility methods for instances of type <a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle&lt;TUnits, T&gt;</a>
+and <a class="xref" href="NetFabric.Numerics.AngleReduced-2.html">AngleReduced&lt;TUnits, T&gt;</a>.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static class Angle</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">Angle</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist derived">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+
+
+
+  <h2 id="NetFabric_Numerics_Angle_remarks">Remarks</h2>
+  <div class="markdown level0 remarks"><p>
+The <a class="xref" href="NetFabric.Numerics.Angle.html">Angle</a> static class contains various static operations and utility methods that can 
+be used with instances of the <a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle&lt;TUnits, T&gt;</a> and <a class="xref" href="NetFabric.Numerics.AngleReduced-2.html">AngleReduced&lt;TUnits, T&gt;</a> structs.
+These methods enable you to perform common angle-related operations, such as trigonometric functions, 
+conversions, and classification.
+</p>
+<p>
+The static methods in this class are designed to work with instances of the <a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle&lt;TUnits, T&gt;</a> 
+and <a class="xref" href="NetFabric.Numerics.AngleReduced-2.html">AngleReduced&lt;TUnits, T&gt;</a> structs, ensuring type safety and correct unit conversions.
+</p>
+<p>
+You can use the static methods in the <a class="xref" href="NetFabric.Numerics.Angle.html">Angle</a> class to perform operations on angles of the same 
+measurement units, or convert between different measurement units using the provided conversion methods.
+</p>
+<p>
+Note that all the methods in the <a class="xref" href="NetFabric.Numerics.Angle.html">Angle</a> class are static, and they do not modify the original 
+angle instances. Instead, they return new angle instances with the desired results.
+</p>
+</div>
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="NetFabric_Numerics_Angle_Abs_" data-uid="NetFabric.Numerics.Angle.Abs*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_Abs__2_NetFabric_Numerics_Angle___0___1__" data-uid="NetFabric.Numerics.Angle.Abs``2(NetFabric.Numerics.Angle{``0,``1})">
+  Abs&lt;TUnits, T&gt;(Angle&lt;TUnits, T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/Angle.cs/#L174"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns the absolute value of the specified angle.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Angle&lt;TUnits, T&gt; Abs&lt;TUnits, T&gt;(Angle&lt;TUnits, T&gt; angle) where TUnits : IAngleUnits where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>angle</code> <a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;TUnits, T&gt;</dt>
+    <dd><p>The angle.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;TUnits, T&gt;</dt>
+    <dd><p>The absolute value of the angle.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TUnits</code></dt>
+    <dd><p>The angle units of <code class="paramref">angle</code>.</p>
+</dd>
+    <dt><code>T</code></dt>
+    <dd><p>The floating point type used internally by <code class="paramref">angle</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Angle_Abs__2_NetFabric_Numerics_Angle___0___1___remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>
+The <a class="xref" href="NetFabric.Numerics.Angle.html#NetFabric_Numerics_Angle_Abs__2_NetFabric_Numerics_Angle___0___1__">Abs&lt;TUnits, T&gt;(Angle&lt;TUnits, T&gt;)</a> method returns the absolute value of the angle, which is the non-negative value 
+representing the magnitude of the angle without considering its sign.
+</p>
+<p>
+If the input angle is positive or zero, the method returns the same angle. If the input angle is 
+negative, the method returns the angle with its sign reversed, resulting in a positive angle with the same magnitude.
+</p>
+</div>
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_Acos_" data-uid="NetFabric.Numerics.Angle.Acos*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_Acos__1___0_" data-uid="NetFabric.Numerics.Angle.Acos``1(``0)">
+  Acos&lt;T&gt;(T)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/AngleTrigonometry.cs/#L25"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Calculates the arc cosine (inverse cosine) of an angle.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static AngleReduced&lt;Radians, T&gt; Acos&lt;T&gt;(T cos) where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;, ITrigonometricFunctions&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cos</code> <span class="xref">T</span></dt>
+    <dd><p>The cosine value of the angle.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.AngleReduced-2.html">AngleReduced</a>&lt;<a class="xref" href="NetFabric.Numerics.Radians.html">Radians</a>, T&gt;</dt>
+    <dd><p>The angle in radians whose cosine is equal to the given value.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The floating point type used internally by the returned angle.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Angle_Acos__1___0__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>
+The arc cosine function calculates the angle whose cosine is equal to the given <code class="paramref">cos</code> value.
+It returns an angle between 0 and π (180 degrees) in radians.
+The resulting angle represents the measure of the arc whose cosine is equal to the given <code class="paramref">cos</code> value.
+For example, if the <code class="paramref">cos</code> value is 0.5, the resulting angle would be approximately 60 degrees.
+</p>
+<p>
+This method calls into the underlying C runtime, and the exact result or valid input range may differ between different operating systems or architectures.
+</p>
+</div>
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentoutofrangeexception">ArgumentOutOfRangeException</a></dt>
+    <dd><p>Thrown when the provided <code class="paramref">sin</code> value is outside the range [-1, 1].</p>
+</dd>
+  </dl>
+
+
+
+  <a id="NetFabric_Numerics_Angle_Acot_" data-uid="NetFabric.Numerics.Angle.Acot*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_Acot__1___0_" data-uid="NetFabric.Numerics.Angle.Acot``1(``0)">
+  Acot&lt;T&gt;(T)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/AngleTrigonometry.cs/#L117"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Calculates the arc cotangent of a value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static AngleReduced&lt;Radians, T&gt; Acot&lt;T&gt;(T cot) where T : struct, IFloatingPointIeee754&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cot</code> <span class="xref">T</span></dt>
+    <dd><p>The cotangent value.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.AngleReduced-2.html">AngleReduced</a>&lt;<a class="xref" href="NetFabric.Numerics.Radians.html">Radians</a>, T&gt;</dt>
+    <dd><p>The arc cotangent of the specified value.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The floating point type used internally by the returned angle.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Angle_Acot__1___0__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>
+The arc cotangent (acot) of a value is the angle whose cotangent equals the given value.
+The method calculates the arc cotangent of the <code class="paramref">cot</code> value using the formula: acot(cot) = atan(1 / cot).
+</p>
+<p>
+This method calls into the underlying C runtime, and the exact result or valid input range may differ between different operating systems or architectures.
+</p>
+</div>
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_Acsc_" data-uid="NetFabric.Numerics.Angle.Acsc*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_Acsc__1___0_" data-uid="NetFabric.Numerics.Angle.Acsc``1(``0)">
+  Acsc&lt;T&gt;(T)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/AngleTrigonometry.cs/#L157"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Calculates the arc cosecant of a value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Angle&lt;Radians, T&gt; Acsc&lt;T&gt;(T csc) where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;, ITrigonometricFunctions&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>csc</code> <span class="xref">T</span></dt>
+    <dd><p>The cosecant value.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;<a class="xref" href="NetFabric.Numerics.Radians.html">Radians</a>, T&gt;</dt>
+    <dd><p>The arc cosecant of the specified value.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The floating point type used internally by the returned angle.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Angle_Acsc__1___0__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>
+The arc cosecant (acsc) of a value is the angle whose cosecant equals the given value.
+The method calculates the arc cosecant of the <code class="paramref">csc</code> value using the formula: acsc(csc) = asin(1 / csc).
+</p>
+<p>
+This method calls into the underlying C runtime, and the exact result or valid input range may differ between different operating systems or architectures.
+</p>
+</div>
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_Add_" data-uid="NetFabric.Numerics.Angle.Add*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_Add__2_System_ReadOnlySpan_NetFabric_Numerics_Angle___0___1___NetFabric_Numerics_Angle___0___1__System_Span_NetFabric_Numerics_Angle___0___1___" data-uid="NetFabric.Numerics.Angle.Add``2(System.ReadOnlySpan{NetFabric.Numerics.Angle{``0,``1}},NetFabric.Numerics.Angle{``0,``1},System.Span{NetFabric.Numerics.Angle{``0,``1}})">
+  Add&lt;TUnits, T&gt;(ReadOnlySpan&lt;Angle&lt;TUnits, T&gt;&gt;, Angle&lt;TUnits, T&gt;, Span&lt;Angle&lt;TUnits, T&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/AngleSpanOperations.cs/#L7"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void Add&lt;TUnits, T&gt;(ReadOnlySpan&lt;Angle&lt;TUnits, T&gt;&gt; angles, Angle&lt;TUnits, T&gt; value, Span&lt;Angle&lt;TUnits, T&gt;&gt; result) where TUnits : IAngleUnits where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>angles</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.readonlyspan-1">ReadOnlySpan</a>&lt;<a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;TUnits, T&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>value</code> <a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;TUnits, T&gt;</dt>
+    <dd></dd>
+    <dt><code>result</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.span-1">Span</a>&lt;<a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;TUnits, T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TUnits</code></dt>
+    <dd></dd>
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_Add_" data-uid="NetFabric.Numerics.Angle.Add*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_Add__2_System_ReadOnlySpan_NetFabric_Numerics_Angle___0___1___System_ReadOnlySpan_NetFabric_Numerics_Angle___0___1___System_Span_NetFabric_Numerics_Angle___0___1___" data-uid="NetFabric.Numerics.Angle.Add``2(System.ReadOnlySpan{NetFabric.Numerics.Angle{``0,``1}},System.ReadOnlySpan{NetFabric.Numerics.Angle{``0,``1}},System.Span{NetFabric.Numerics.Angle{``0,``1}})">
+  Add&lt;TUnits, T&gt;(ReadOnlySpan&lt;Angle&lt;TUnits, T&gt;&gt;, ReadOnlySpan&lt;Angle&lt;TUnits, T&gt;&gt;, Span&lt;Angle&lt;TUnits, T&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/AngleSpanOperations.cs/#L12"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void Add&lt;TUnits, T&gt;(ReadOnlySpan&lt;Angle&lt;TUnits, T&gt;&gt; left, ReadOnlySpan&lt;Angle&lt;TUnits, T&gt;&gt; right, Span&lt;Angle&lt;TUnits, T&gt;&gt; result) where TUnits : IAngleUnits where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>left</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.readonlyspan-1">ReadOnlySpan</a>&lt;<a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;TUnits, T&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>right</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.readonlyspan-1">ReadOnlySpan</a>&lt;<a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;TUnits, T&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>result</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.span-1">Span</a>&lt;<a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;TUnits, T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TUnits</code></dt>
+    <dd></dd>
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_AreComplementary_" data-uid="NetFabric.Numerics.Angle.AreComplementary*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_AreComplementary__2_NetFabric_Numerics_AngleReduced___0___1__NetFabric_Numerics_AngleReduced___0___1__" data-uid="NetFabric.Numerics.Angle.AreComplementary``2(NetFabric.Numerics.AngleReduced{``0,``1},NetFabric.Numerics.AngleReduced{``0,``1})">
+  AreComplementary&lt;TUnits, T&gt;(AngleReduced&lt;TUnits, T&gt;, AngleReduced&lt;TUnits, T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/Angle.cs/#L435"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Checks if two angles are complementary.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool AreComplementary&lt;TUnits, T&gt;(AngleReduced&lt;TUnits, T&gt; first, AngleReduced&lt;TUnits, T&gt; second) where TUnits : IAngleUnits where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>first</code> <a class="xref" href="NetFabric.Numerics.AngleReduced-2.html">AngleReduced</a>&lt;TUnits, T&gt;</dt>
+    <dd><p>The first angle to compare.</p>
+</dd>
+    <dt><code>second</code> <a class="xref" href="NetFabric.Numerics.AngleReduced-2.html">AngleReduced</a>&lt;TUnits, T&gt;</dt>
+    <dd><p>The second angle to compare.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>True if the two angles are complementary, false otherwise.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TUnits</code></dt>
+    <dd></dd>
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Angle_AreComplementary__2_NetFabric_Numerics_AngleReduced___0___1__NetFabric_Numerics_AngleReduced___0___1___remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>Two angles are considered complementary if their sum equals a right angle (90 degrees or π/2 radians).
+The method compares the sum of the <code class="paramref">first</code> and <code class="paramref">second</code> angles with
+a right angle value to determine if they are complementary.</p>
+</div>
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_AreSupplementary_" data-uid="NetFabric.Numerics.Angle.AreSupplementary*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_AreSupplementary__2_NetFabric_Numerics_AngleReduced___0___1__NetFabric_Numerics_AngleReduced___0___1__" data-uid="NetFabric.Numerics.Angle.AreSupplementary``2(NetFabric.Numerics.AngleReduced{``0,``1},NetFabric.Numerics.AngleReduced{``0,``1})">
+  AreSupplementary&lt;TUnits, T&gt;(AngleReduced&lt;TUnits, T&gt;, AngleReduced&lt;TUnits, T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/Angle.cs/#L451"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Checks if two angles are supplementary.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool AreSupplementary&lt;TUnits, T&gt;(AngleReduced&lt;TUnits, T&gt; first, AngleReduced&lt;TUnits, T&gt; second) where TUnits : IAngleUnits where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>first</code> <a class="xref" href="NetFabric.Numerics.AngleReduced-2.html">AngleReduced</a>&lt;TUnits, T&gt;</dt>
+    <dd><p>The first angle to compare.</p>
+</dd>
+    <dt><code>second</code> <a class="xref" href="NetFabric.Numerics.AngleReduced-2.html">AngleReduced</a>&lt;TUnits, T&gt;</dt>
+    <dd><p>The second angle to compare.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>True if the two angles are supplementary, false otherwise.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TUnits</code></dt>
+    <dd></dd>
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Angle_AreSupplementary__2_NetFabric_Numerics_AngleReduced___0___1__NetFabric_Numerics_AngleReduced___0___1___remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>Two angles are considered supplementary if their sum equals a straight angle (180 degrees or π radians).
+The method compares the sum of the <code class="paramref">first</code> and <code class="paramref">second</code> angles with
+a straight angle value to determine if they are supplementary.</p>
+</div>
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_Asec_" data-uid="NetFabric.Numerics.Angle.Asec*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_Asec__1___0_" data-uid="NetFabric.Numerics.Angle.Asec``1(``0)">
+  Asec&lt;T&gt;(T)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/AngleTrigonometry.cs/#L137"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Calculates the arc secant of a value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static AngleReduced&lt;Radians, T&gt; Asec&lt;T&gt;(T sec) where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;, ITrigonometricFunctions&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>sec</code> <span class="xref">T</span></dt>
+    <dd><p>The secant value.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.AngleReduced-2.html">AngleReduced</a>&lt;<a class="xref" href="NetFabric.Numerics.Radians.html">Radians</a>, T&gt;</dt>
+    <dd><p>The arc secant of the specified value.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The floating point type used internally by the returned angle.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Angle_Asec__1___0__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>
+The arc secant (asec) of a value is the angle whose secant equals the given value.
+The method calculates the arc secant of the <code class="paramref">sec</code> value using the formula: asec(sec) = acos(1 / sec).
+</p>
+<p>
+This method calls into the underlying C runtime, and the exact result or valid input range may differ between different operating systems or architectures.
+</p>
+</div>
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_Asin_" data-uid="NetFabric.Numerics.Angle.Asin*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_Asin__1___0_" data-uid="NetFabric.Numerics.Angle.Asin``1(``0)">
+  Asin&lt;T&gt;(T)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/AngleTrigonometry.cs/#L52"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Calculates the arc sine (inverse sine) of an angle.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Angle&lt;Radians, T&gt; Asin&lt;T&gt;(T sin) where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;, ITrigonometricFunctions&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>sin</code> <span class="xref">T</span></dt>
+    <dd><p>The sine value of the angle.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;<a class="xref" href="NetFabric.Numerics.Radians.html">Radians</a>, T&gt;</dt>
+    <dd><p>The angle in radians whose sine is equal to the given value.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The floating point type used internally by the returned angle.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Angle_Asin__1___0__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>
+The arc sine function calculates the angle whose sine is equal to the given <code class="paramref">sin</code> value.
+It returns an angle between -π/2 (-90 degrees) and π/2 (90 degrees) in radians.
+The resulting angle represents the measure of the arc whose sine is equal to the given <code class="paramref">sin</code> value.
+For example, if the <code class="paramref">sin</code> value is 0.5, the resulting angle would be approximately 30 degrees.
+</p>
+<p>
+This method calls into the underlying C runtime, and the exact result or valid input range may differ between different operating systems or architectures.
+</p>
+</div>
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentoutofrangeexception">ArgumentOutOfRangeException</a></dt>
+    <dd><p>Thrown when the provided <code class="paramref">sin</code> value is outside the range [-1, 1].</p>
+</dd>
+  </dl>
+
+
+
+  <a id="NetFabric_Numerics_Angle_Atan2_" data-uid="NetFabric.Numerics.Angle.Atan2*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_Atan2__1___0___0_" data-uid="NetFabric.Numerics.Angle.Atan2``1(``0,``0)">
+  Atan2&lt;T&gt;(T, T)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/AngleTrigonometry.cs/#L97"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Calculates the arc tangent (inverse tangent) of the ratio of two specified numbers.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Angle&lt;Radians, T&gt; Atan2&lt;T&gt;(T y, T x) where T : struct, IFloatingPointIeee754&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>y</code> <span class="xref">T</span></dt>
+    <dd><p>The y-coordinate of the point.</p>
+</dd>
+    <dt><code>x</code> <span class="xref">T</span></dt>
+    <dd><p>The x-coordinate of the point.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;<a class="xref" href="NetFabric.Numerics.Radians.html">Radians</a>, T&gt;</dt>
+    <dd><p>The angle whose tangent is equal to the ratio <code class="paramref">y</code> / <code class="paramref">x</code>.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The floating point type used internally by the returned angle.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Angle_Atan2__1___0___0__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>
+The arc tangent function calculates the angle whose tangent is equal to the ratio of <code class="paramref">y</code> and <code class="paramref">x</code>.
+It returns an angle between -π and π (-180 degrees and 180 degrees) in radians.
+The resulting angle represents the measure of the arc whose tangent is equal to the ratio <code class="paramref">y</code> / <code class="paramref">x</code>.
+</p>
+<p>
+This method calls into the underlying C runtime, and the exact result or valid input range may differ between different operating systems or architectures.
+</p>
+</div>
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_Atan_" data-uid="NetFabric.Numerics.Angle.Atan*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_Atan__1___0_" data-uid="NetFabric.Numerics.Angle.Atan``1(``0)">
+  Atan&lt;T&gt;(T)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/AngleTrigonometry.cs/#L75"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Calculates the arc tangent (inverse tangent) of an angle.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Angle&lt;Radians, T&gt; Atan&lt;T&gt;(T tan) where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;, ITrigonometricFunctions&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>tan</code> <span class="xref">T</span></dt>
+    <dd><p>The tangent value of the angle.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;<a class="xref" href="NetFabric.Numerics.Radians.html">Radians</a>, T&gt;</dt>
+    <dd><p>The angle in radians whose tangent is equal to the given value.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The floating point type used internally by the returned angle.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Angle_Atan__1___0__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>
+The arc tangent function calculates the angle whose tangent is equal to the given <code class="paramref">tan</code> value.
+It returns an angle between -π/2 (-90 degrees) and π/2 (90 degrees) in radians.
+The resulting angle represents the measure of the arc whose tangent is equal to the given <code class="paramref">tan</code> value.
+</p>
+<p>
+This method calls into the underlying C runtime, and the exact result or valid input range may differ between different operating systems or architectures.
+</p>
+</div>
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_Average_" data-uid="NetFabric.Numerics.Angle.Average*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_Average__2_NetFabric_Numerics_Angle___0___1____" data-uid="NetFabric.Numerics.Angle.Average``2(NetFabric.Numerics.Angle{``0,``1}[])">
+  Average&lt;TUnits, T&gt;(Angle&lt;TUnits, T&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/AngleAverage.cs/#L47"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Calculates the average of an array of angles.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Angle&lt;TUnits, T&gt;? Average&lt;TUnits, T&gt;(this Angle&lt;TUnits, T&gt;[] source) where TUnits : IAngleUnits where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>source</code> <a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;TUnits, T&gt;[]</dt>
+    <dd><p>The array of angles.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;TUnits, T&gt;?</dt>
+    <dd><p>The average angle in the collection, or null if the collection is empty.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TUnits</code></dt>
+    <dd></dd>
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Angle_Average__2_NetFabric_Numerics_Angle___0___1_____remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>The average angle is computed by summing all the angles in the given <code class="paramref">source</code> collection and dividing the sum by the count of angles.
+If the array is empty, the method returns null to indicate that there are no angles to compute the average from.
+The resulting angle represents the average value of all the angles.</p>
+</div>
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_Average_" data-uid="NetFabric.Numerics.Angle.Average*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_Average__2_System_Collections_Generic_IEnumerable_NetFabric_Numerics_Angle___0___1___" data-uid="NetFabric.Numerics.Angle.Average``2(System.Collections.Generic.IEnumerable{NetFabric.Numerics.Angle{``0,``1}})">
+  Average&lt;TUnits, T&gt;(IEnumerable&lt;Angle&lt;TUnits, T&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/AngleAverage.cs/#L15"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Calculates the average of a collection of angles.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Angle&lt;TUnits, T&gt;? Average&lt;TUnits, T&gt;(this IEnumerable&lt;Angle&lt;TUnits, T&gt;&gt; source) where TUnits : IAngleUnits where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>source</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;TUnits, T&gt;&gt;</dt>
+    <dd><p>The enumerable of angles.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;TUnits, T&gt;?</dt>
+    <dd><p>The average angle in the collection, or null if the collection is empty.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TUnits</code></dt>
+    <dd></dd>
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Angle_Average__2_System_Collections_Generic_IEnumerable_NetFabric_Numerics_Angle___0___1____remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>The average angle is computed by summing all the angles in the given <code class="paramref">source</code> collection and dividing the sum by the count of angles.
+If the array is empty, the method returns null to indicate that there are no angles to compute the average from.
+The resulting angle represents the average value of all the angles.</p>
+</div>
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_Average_" data-uid="NetFabric.Numerics.Angle.Average*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_Average__2_System_ReadOnlySpan_NetFabric_Numerics_Angle___0___1___" data-uid="NetFabric.Numerics.Angle.Average``2(System.ReadOnlySpan{NetFabric.Numerics.Angle{``0,``1}})">
+  Average&lt;TUnits, T&gt;(ReadOnlySpan&lt;Angle&lt;TUnits, T&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/AngleAverage.cs/#L77"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Calculates the average of a read-only span of angles.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Angle&lt;TUnits, T&gt;? Average&lt;TUnits, T&gt;(this ReadOnlySpan&lt;Angle&lt;TUnits, T&gt;&gt; source) where TUnits : IAngleUnits where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>source</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.readonlyspan-1">ReadOnlySpan</a>&lt;<a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;TUnits, T&gt;&gt;</dt>
+    <dd><p>The <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.readonlyspan-1">ReadOnlySpan&lt;T&gt;</a> of angles.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;TUnits, T&gt;?</dt>
+    <dd><p>The average angle in the collection, or null if the collection is empty.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TUnits</code></dt>
+    <dd></dd>
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Angle_Average__2_System_ReadOnlySpan_NetFabric_Numerics_Angle___0___1____remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>The average angle is computed by summing all the angles in the given <code class="paramref">source</code> collection and dividing the sum by the count of angles.
+If the array is empty, the method returns null to indicate that there are no angles to compute the average from.
+The resulting angle represents the average value of all the angles.</p>
+</div>
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_Average_" data-uid="NetFabric.Numerics.Angle.Average*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_Average__2_System_Span_NetFabric_Numerics_Angle___0___1___" data-uid="NetFabric.Numerics.Angle.Average``2(System.Span{NetFabric.Numerics.Angle{``0,``1}})">
+  Average&lt;TUnits, T&gt;(Span&lt;Angle&lt;TUnits, T&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/AngleAverage.cs/#L62"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Calculates the average of a span of angles.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Angle&lt;TUnits, T&gt;? Average&lt;TUnits, T&gt;(this Span&lt;Angle&lt;TUnits, T&gt;&gt; source) where TUnits : IAngleUnits where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>source</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.span-1">Span</a>&lt;<a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;TUnits, T&gt;&gt;</dt>
+    <dd><p>The <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.span-1">Span&lt;T&gt;</a> of angles.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;TUnits, T&gt;?</dt>
+    <dd><p>The average angle in the collection, or null if the collection is empty.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TUnits</code></dt>
+    <dd></dd>
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Angle_Average__2_System_Span_NetFabric_Numerics_Angle___0___1____remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>The average angle is computed by summing all the angles in the given <code class="paramref">source</code> collection and dividing the sum by the count of angles.
+If the array is empty, the method returns null to indicate that there are no angles to compute the average from.
+The resulting angle represents the average value of all the angles.</p>
+</div>
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_Clamp_" data-uid="NetFabric.Numerics.Angle.Clamp*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_Clamp__2_NetFabric_Numerics_Angle___0___1__NetFabric_Numerics_Angle___0___1__NetFabric_Numerics_Angle___0___1__" data-uid="NetFabric.Numerics.Angle.Clamp``2(NetFabric.Numerics.Angle{``0,``1},NetFabric.Numerics.Angle{``0,``1},NetFabric.Numerics.Angle{``0,``1})">
+  Clamp&lt;TAngleUnits, T&gt;(Angle&lt;TAngleUnits, T&gt;, Angle&lt;TAngleUnits, T&gt;, Angle&lt;TAngleUnits, T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/Angle.cs/#L41"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Clamps an angle to be within a specified range.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Angle&lt;TAngleUnits, T&gt; Clamp&lt;TAngleUnits, T&gt;(Angle&lt;TAngleUnits, T&gt; vector, Angle&lt;TAngleUnits, T&gt; min, Angle&lt;TAngleUnits, T&gt; max) where TAngleUnits : IAngleUnits where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>vector</code> <a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;TAngleUnits, T&gt;</dt>
+    <dd><p>The angle to be clamped.</p>
+</dd>
+    <dt><code>min</code> <a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;TAngleUnits, T&gt;</dt>
+    <dd><p>The minimum allowed angle in the specified units.</p>
+</dd>
+    <dt><code>max</code> <a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;TAngleUnits, T&gt;</dt>
+    <dd><p>The maximum allowed angle in the specified units.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;TAngleUnits, T&gt;</dt>
+    <dd><p>An angle within the specified range. If the input angle is less than the minimum angle, the minimum angle is returned.
+If the input angle is greater than the maximum angle, the maximum angle is returned. Otherwise, the input angle is returned.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TAngleUnits</code></dt>
+    <dd><p>The units of measurement for the angle.</p>
+</dd>
+    <dt><code>T</code></dt>
+    <dd><p>The numeric type used for angle representation.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_Cos_" data-uid="NetFabric.Numerics.Angle.Cos*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_Cos__1_NetFabric_Numerics_Angle_NetFabric_Numerics_Radians___0__" data-uid="NetFabric.Numerics.Angle.Cos``1(NetFabric.Numerics.Angle{NetFabric.Numerics.Radians,``0})">
+  Cos&lt;T&gt;(Angle&lt;Radians, T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/AngleTrigonometry.cs/#L179"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Calculates the cosine of an angle.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static T Cos&lt;T&gt;(Angle&lt;Radians, T&gt; angle) where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;, ITrigonometricFunctions&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>angle</code> <a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;<a class="xref" href="NetFabric.Numerics.Radians.html">Radians</a>, T&gt;</dt>
+    <dd><p>The angle in radians.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">T</span></dt>
+    <dd><p>The cosine of the given angle.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The floating point type used internally by <code class="paramref">angle</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Angle_Cos__1_NetFabric_Numerics_Angle_NetFabric_Numerics_Radians___0___remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>
+The cosine function calculates the ratio of the adjacent side to the hypotenuse of a right triangle
+with the given <code class="paramref">angle</code>.
+The returned value ranges between -1 and 1, where -1 represents a 180-degree angle (π radians)
+and 1 represents a 0-degree angle (0 radians).
+</p>
+<p>
+This method calls into the underlying C runtime, and the exact result or valid input range may differ between different operating systems or architectures.
+</p>
+</div>
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_Cosh_" data-uid="NetFabric.Numerics.Angle.Cosh*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_Cosh__1_NetFabric_Numerics_Angle_NetFabric_Numerics_Radians___0__" data-uid="NetFabric.Numerics.Angle.Cosh``1(NetFabric.Numerics.Angle{NetFabric.Numerics.Radians,``0})">
+  Cosh&lt;T&gt;(Angle&lt;Radians, T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/AngleTrigonometry.cs/#L199"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Calculates the hyperbolic cosine of an angle.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static T Cosh&lt;T&gt;(Angle&lt;Radians, T&gt; angle) where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;, IHyperbolicFunctions&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>angle</code> <a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;<a class="xref" href="NetFabric.Numerics.Radians.html">Radians</a>, T&gt;</dt>
+    <dd><p>The angle in radians.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">T</span></dt>
+    <dd><p>The hyperbolic cosine of the given angle.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The floating point type used internally by <code class="paramref">angle</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Angle_Cosh__1_NetFabric_Numerics_Angle_NetFabric_Numerics_Radians___0___remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>
+The hyperbolic cosine function calculates the ratio (e^<code class="paramref">angle</code> + e^(-<code class="paramref">angle</code>)) / 2,
+where e is Euler's number (approximately 2.71828).
+</p>
+<p>
+This method calls into the underlying C runtime, and the exact result or valid input range may differ between different operating systems or architectures.
+</p>
+</div>
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_Cot_" data-uid="NetFabric.Numerics.Angle.Cot*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_Cot__1_NetFabric_Numerics_Angle_NetFabric_Numerics_Radians___0__" data-uid="NetFabric.Numerics.Angle.Cot``1(NetFabric.Numerics.Angle{NetFabric.Numerics.Radians,``0})">
+  Cot&lt;T&gt;(Angle&lt;Radians, T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/AngleTrigonometry.cs/#L320"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Calculates the cotangent of an angle.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static T Cot&lt;T&gt;(Angle&lt;Radians, T&gt; angle) where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;, ITrigonometricFunctions&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>angle</code> <a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;<a class="xref" href="NetFabric.Numerics.Radians.html">Radians</a>, T&gt;</dt>
+    <dd><p>The angle in radians.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">T</span></dt>
+    <dd><p>The cotangent of the specified angle.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The floating point type used internally by <code class="paramref">angle</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Angle_Cot__1_NetFabric_Numerics_Angle_NetFabric_Numerics_Radians___0___remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>
+The cotangent of an angle is defined as the reciprocal of the tangent function.
+The method calculates the cotangent of the <code class="paramref">angle</code> using the formula: cot(angle) = 1 / cot(angle).
+</p>
+<p>
+This method calls into the underlying C runtime, and the exact result or valid input range may differ between different operating systems or architectures.
+</p>
+</div>
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_Coth_" data-uid="NetFabric.Numerics.Angle.Coth*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_Coth__1_NetFabric_Numerics_Angle_NetFabric_Numerics_Radians___0__" data-uid="NetFabric.Numerics.Angle.Coth``1(NetFabric.Numerics.Angle{NetFabric.Numerics.Radians,``0})">
+  Coth&lt;T&gt;(Angle&lt;Radians, T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/AngleTrigonometry.cs/#L340"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Calculates the hyperbolic cotangent of an angle.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static T Coth&lt;T&gt;(Angle&lt;Radians, T&gt; angle) where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;, IHyperbolicFunctions&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>angle</code> <a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;<a class="xref" href="NetFabric.Numerics.Radians.html">Radians</a>, T&gt;</dt>
+    <dd><p>The angle in radians.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">T</span></dt>
+    <dd><p>The hyperbolic cotangent of the specified angle.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The floating point type used internally by <code class="paramref">angle</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Angle_Coth__1_NetFabric_Numerics_Angle_NetFabric_Numerics_Radians___0___remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>
+The hyperbolic cotangent (coth) of an angle is defined as the reciprocal of the hyperbolic tangent (tanh) function.
+The method calculates the hyperbolic cotangent of the <code class="paramref">angle</code> using the formula: coth(angle) = 1 / tanh(angle).
+</p>
+<p>
+This method calls into the underlying C runtime, and the exact result or valid input range may differ between different operating systems or architectures.
+</p>
+</div>
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_Csc_" data-uid="NetFabric.Numerics.Angle.Csc*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_Csc__1_NetFabric_Numerics_Angle_NetFabric_Numerics_Radians___0__" data-uid="NetFabric.Numerics.Angle.Csc``1(NetFabric.Numerics.Angle{NetFabric.Numerics.Radians,``0})">
+  Csc&lt;T&gt;(Angle&lt;Radians, T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/AngleTrigonometry.cs/#L400"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Calculates the cosecant of an angle.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static T Csc&lt;T&gt;(Angle&lt;Radians, T&gt; angle) where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;, ITrigonometricFunctions&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>angle</code> <a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;<a class="xref" href="NetFabric.Numerics.Radians.html">Radians</a>, T&gt;</dt>
+    <dd><p>The angle in radians.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">T</span></dt>
+    <dd><p>The cosecant of the specified angle.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The floating point type used internally by <code class="paramref">angle</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Angle_Csc__1_NetFabric_Numerics_Angle_NetFabric_Numerics_Radians___0___remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>
+The cosecant of an angle is defined as the reciprocal of the sine function.
+The method calculates the cosecant of the <code class="paramref">angle</code> using the formula: csc(angle) = 1 / sin(angle).
+</p>
+<p>
+This method calls into the underlying C runtime, and the exact result or valid input range may differ between different operating systems or architectures.
+</p>
+</div>
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_Csch_" data-uid="NetFabric.Numerics.Angle.Csch*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_Csch__1_NetFabric_Numerics_Angle_NetFabric_Numerics_Radians___0__" data-uid="NetFabric.Numerics.Angle.Csch``1(NetFabric.Numerics.Angle{NetFabric.Numerics.Radians,``0})">
+  Csch&lt;T&gt;(Angle&lt;Radians, T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/AngleTrigonometry.cs/#L420"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Calculates the hyperbolic cosecant of an angle.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static T Csch&lt;T&gt;(Angle&lt;Radians, T&gt; angle) where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;, IHyperbolicFunctions&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>angle</code> <a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;<a class="xref" href="NetFabric.Numerics.Radians.html">Radians</a>, T&gt;</dt>
+    <dd><p>The angle in radians.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">T</span></dt>
+    <dd><p>The hyperbolic cosecant of the specified angle.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The floating point type used internally by <code class="paramref">angle</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Angle_Csch__1_NetFabric_Numerics_Angle_NetFabric_Numerics_Radians___0___remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>
+The hyperbolic cosecant (csch) of an angle is defined as the reciprocal of the hyperbolic sine (sinh) function.
+The method calculates the hyperbolic cosecant of the <code class="paramref">angle</code> using the formula: csch(angle) = 1 / sinh(angle).
+</p>
+<p>
+This method calls into the underlying C runtime, and the exact result or valid input range may differ between different operating systems or architectures.
+</p>
+</div>
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_Divide_" data-uid="NetFabric.Numerics.Angle.Divide*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_Divide__2_System_ReadOnlySpan_NetFabric_Numerics_Angle___0___1___NetFabric_Numerics_Angle___0___1__System_Span_NetFabric_Numerics_Angle___0___1___" data-uid="NetFabric.Numerics.Angle.Divide``2(System.ReadOnlySpan{NetFabric.Numerics.Angle{``0,``1}},NetFabric.Numerics.Angle{``0,``1},System.Span{NetFabric.Numerics.Angle{``0,``1}})">
+  Divide&lt;TUnits, T&gt;(ReadOnlySpan&lt;Angle&lt;TUnits, T&gt;&gt;, Angle&lt;TUnits, T&gt;, Span&lt;Angle&lt;TUnits, T&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/AngleSpanOperations.cs/#L32"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void Divide&lt;TUnits, T&gt;(ReadOnlySpan&lt;Angle&lt;TUnits, T&gt;&gt; angles, Angle&lt;TUnits, T&gt; value, Span&lt;Angle&lt;TUnits, T&gt;&gt; result) where TUnits : IAngleUnits where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>angles</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.readonlyspan-1">ReadOnlySpan</a>&lt;<a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;TUnits, T&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>value</code> <a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;TUnits, T&gt;</dt>
+    <dd></dd>
+    <dt><code>result</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.span-1">Span</a>&lt;<a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;TUnits, T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TUnits</code></dt>
+    <dd></dd>
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_GetQuadrant_" data-uid="NetFabric.Numerics.Angle.GetQuadrant*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_GetQuadrant__2_NetFabric_Numerics_AngleReduced___0___1__" data-uid="NetFabric.Numerics.Angle.GetQuadrant``2(NetFabric.Numerics.AngleReduced{``0,``1})">
+  GetQuadrant&lt;TUnits, T&gt;(AngleReduced&lt;TUnits, T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/Angle.cs/#L134"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the quadrant of <code class="paramref">angle</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Quadrant GetQuadrant&lt;TUnits, T&gt;(AngleReduced&lt;TUnits, T&gt; angle) where TUnits : IAngleUnits where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>angle</code> <a class="xref" href="NetFabric.Numerics.AngleReduced-2.html">AngleReduced</a>&lt;TUnits, T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Quadrant.html">Quadrant</a></dt>
+    <dd><p>The quadrant of <code class="paramref">angle</code>.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TUnits</code></dt>
+    <dd><p>The angle units of <code class="paramref">angle</code>.</p>
+</dd>
+    <dt><code>T</code></dt>
+    <dd><p>The floating point type used internally by <code class="paramref">angle</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Angle_GetQuadrant__2_NetFabric_Numerics_AngleReduced___0___1___remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>
+The quadrant of an angle is a region of the coordinate plane that is determined by the signs
+of the x and y coordinates of a point on the terminal side of the angle in standard position
+(i.e., starting from the positive x-axis). There are four quadrants in the coordinate plane,
+numbered counterclockwise from <a class="xref" href="NetFabric.Numerics.Quadrant.html#NetFabric_Numerics_Quadrant_First">First</a> to <a class="xref" href="NetFabric.Numerics.Quadrant.html#NetFabric_Numerics_Quadrant_Fourth">Fourth</a>. 
+<a class="xref" href="NetFabric.Numerics.Quadrant.html#NetFabric_Numerics_Quadrant_First">First</a> is where both x and y coordinates are positive, 
+<a class="xref" href="NetFabric.Numerics.Quadrant.html#NetFabric_Numerics_Quadrant_Second">Second</a> is where x is negative and y is positive, 
+<a class="xref" href="NetFabric.Numerics.Quadrant.html#NetFabric_Numerics_Quadrant_Third">Third</a> is where both x and y coordinates are negative, and 
+<a class="xref" href="NetFabric.Numerics.Quadrant.html#NetFabric_Numerics_Quadrant_Fourth">Fourth</a> is where x is positive and y is negative. 
+The quadrant of an angle is used to determine the sign of its trigonometric 
+functions (sine, cosine, tangent, etc.) and to locate its reference angle.
+</p>
+<p>
+A quadrantal angle is an angle whose terminal side lies on one of the coordinate axes 
+(i.e., the x-axis or the y-axis) in standard position. Quadrantal angles have a measure
+of 0 degrees, 90 degrees, 180 degrees, or 270 degrees, or an equivalent radian measure. 
+In other words, they are angles that are exact multiples of 90 degrees or π/2 radians. 
+Quadrantal angles have special properties in trigonometry, such as having a sine or cosine 
+value of 1 or -1, and are often used in solving problems involving trigonometric functions.
+</p>
+</div>
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_GetReference_" data-uid="NetFabric.Numerics.Angle.GetReference*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_GetReference__2_NetFabric_Numerics_AngleReduced___0___1__" data-uid="NetFabric.Numerics.Angle.GetReference``2(NetFabric.Numerics.AngleReduced{``0,``1})">
+  GetReference&lt;TUnits, T&gt;(AngleReduced&lt;TUnits, T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/Angle.cs/#L88"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the reference angle of <code class="paramref">angle</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static AngleReduced&lt;TUnits, T&gt; GetReference&lt;TUnits, T&gt;(AngleReduced&lt;TUnits, T&gt; angle) where TUnits : IAngleUnits where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>angle</code> <a class="xref" href="NetFabric.Numerics.AngleReduced-2.html">AngleReduced</a>&lt;TUnits, T&gt;</dt>
+    <dd><p>The angle to get the reference angle from.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.AngleReduced-2.html">AngleReduced</a>&lt;TUnits, T&gt;</dt>
+    <dd><p>The reference angle of <code class="paramref">angle</code>.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TUnits</code></dt>
+    <dd><p>The angle units of <code class="paramref">angle</code> and the reference angle.</p>
+</dd>
+    <dt><code>T</code></dt>
+    <dd><p>The floating point type used internally by <code class="paramref">angle</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Angle_GetReference__2_NetFabric_Numerics_AngleReduced___0___1___remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>A reference angle is the positive acute angle formed between the terminal side of an angle
+in standard position (i.e., starting from the positive x-axis) and the x-axis. It is always
+measured in a counterclockwise direction and has the same trigonometric function values
+(sine, cosine, tangent, etc.) as the original angle or its coterminal angles. Reference
+angles are often used to simplify calculations involving trigonometric functions and to
+find the general solutions of trigonometric equations.</p>
+</div>
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_IsAcute_" data-uid="NetFabric.Numerics.Angle.IsAcute*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_IsAcute__2_NetFabric_Numerics_AngleReduced___0___1__" data-uid="NetFabric.Numerics.Angle.IsAcute``2(NetFabric.Numerics.AngleReduced{``0,``1})">
+  IsAcute&lt;TUnits, T&gt;(AngleReduced&lt;TUnits, T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/Angle.cs/#L328"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Indicates whether the specified angle is acute.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsAcute&lt;TUnits, T&gt;(AngleReduced&lt;TUnits, T&gt; angle) where TUnits : IAngleUnits where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>angle</code> <a class="xref" href="NetFabric.Numerics.AngleReduced-2.html">AngleReduced</a>&lt;TUnits, T&gt;</dt>
+    <dd><p>Source angle.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>true if the reduction of the absolute angle is greater than zero and less than 90 degrees;
+otherwise false.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TUnits</code></dt>
+    <dd><p>The angle units of <code class="paramref">angle</code>.</p>
+</dd>
+    <dt><code>T</code></dt>
+    <dd><p>The floating point type used internally by <code class="paramref">angle</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Angle_IsAcute__2_NetFabric_Numerics_AngleReduced___0___1___remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>An acute angle is a type of angle that measures less than 90 degrees (π/2 radians).
+It is formed by the intersection of two straight lines or line segments that do not
+create a right angle.</p>
+</div>
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_IsFinite_" data-uid="NetFabric.Numerics.Angle.IsFinite*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_IsFinite__2_NetFabric_Numerics_Angle___0___1__" data-uid="NetFabric.Numerics.Angle.IsFinite``2(NetFabric.Numerics.Angle{``0,``1})">
+  IsFinite&lt;TUnits, T&gt;(Angle&lt;TUnits, T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/Angle.cs/#L308"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Determines whether the specified angle is finite numbers (not NaN, infinity, or negative infinity).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsFinite&lt;TUnits, T&gt;(Angle&lt;TUnits, T&gt; angle) where TUnits : IAngleUnits where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>angle</code> <a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;TUnits, T&gt;</dt>
+    <dd><p>Source angle.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p><code>true</code> if angle value is finite numbers; otherwise, <code>false</code>.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TUnits</code></dt>
+    <dd><p>The angle units of <code class="paramref">angle</code>.</p>
+</dd>
+    <dt><code>T</code></dt>
+    <dd><p>The floating point type used internally by <code class="paramref">angle</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_IsInfinity_" data-uid="NetFabric.Numerics.Angle.IsInfinity*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_IsInfinity__2_NetFabric_Numerics_Angle___0___1__" data-uid="NetFabric.Numerics.Angle.IsInfinity``2(NetFabric.Numerics.Angle{``0,``1})">
+  IsInfinity&lt;TUnits, T&gt;(Angle&lt;TUnits, T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/Angle.cs/#L293"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Determines whether the specified angle is positive or negative infinity.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsInfinity&lt;TUnits, T&gt;(Angle&lt;TUnits, T&gt; angle) where TUnits : IAngleUnits where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>angle</code> <a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;TUnits, T&gt;</dt>
+    <dd><p>Source angle.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p><code>true</code> if angle value is positive or negative infinity; otherwise, <code>false</code>.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TUnits</code></dt>
+    <dd><p>The angle units of <code class="paramref">angle</code>.</p>
+</dd>
+    <dt><code>T</code></dt>
+    <dd><p>The floating point type used internally by <code class="paramref">angle</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_IsNaN_" data-uid="NetFabric.Numerics.Angle.IsNaN*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_IsNaN__2_NetFabric_Numerics_Angle___0___1__" data-uid="NetFabric.Numerics.Angle.IsNaN``2(NetFabric.Numerics.Angle{``0,``1})">
+  IsNaN&lt;TUnits, T&gt;(Angle&lt;TUnits, T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/Angle.cs/#L278"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Determines whether the specified angle is NaN (Not-a-Number).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsNaN&lt;TUnits, T&gt;(Angle&lt;TUnits, T&gt; angle) where TUnits : IAngleUnits where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>angle</code> <a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;TUnits, T&gt;</dt>
+    <dd><p>Source angle.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p><code>true</code> if angle value is NaN; otherwise, <code>false</code>.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TUnits</code></dt>
+    <dd><p>The angle units of <code class="paramref">angle</code>.</p>
+</dd>
+    <dt><code>T</code></dt>
+    <dd><p>The floating point type used internally by <code class="paramref">angle</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_IsOblique_" data-uid="NetFabric.Numerics.Angle.IsOblique*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_IsOblique__2_NetFabric_Numerics_AngleReduced___0___1__" data-uid="NetFabric.Numerics.Angle.IsOblique``2(NetFabric.Numerics.AngleReduced{``0,``1})">
+  IsOblique&lt;TUnits, T&gt;(AngleReduced&lt;TUnits, T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/Angle.cs/#L419"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Indicates whether the specified angle is oblique.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsOblique&lt;TUnits, T&gt;(AngleReduced&lt;TUnits, T&gt; angle) where TUnits : IAngleUnits where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>angle</code> <a class="xref" href="NetFabric.Numerics.AngleReduced-2.html">AngleReduced</a>&lt;TUnits, T&gt;</dt>
+    <dd><p>Source angle.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>true if the angle is not right or a multiple of a right angle; otherwise false.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TUnits</code></dt>
+    <dd><p>The angle units of <code class="paramref">angle</code>.</p>
+</dd>
+    <dt><code>T</code></dt>
+    <dd><p>The floating point type used internally by <code class="paramref">angle</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Angle_IsOblique__2_NetFabric_Numerics_AngleReduced___0___1___remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>An oblique angle is a type of angle that is not a right angle (90 degrees) or a multiple of a
+right angle. It is formed by the intersection of two non-perpendicular lines or line segments
+that create a turn that is neither a right angle nor a straight angle.</p>
+</div>
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_IsObtuse_" data-uid="NetFabric.Numerics.Angle.IsObtuse*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_IsObtuse__2_NetFabric_Numerics_AngleReduced___0___1__" data-uid="NetFabric.Numerics.Angle.IsObtuse``2(NetFabric.Numerics.AngleReduced{``0,``1})">
+  IsObtuse&lt;TUnits, T&gt;(AngleReduced&lt;TUnits, T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/Angle.cs/#L365"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Indicates whether the specified angle is obtuse.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsObtuse&lt;TUnits, T&gt;(AngleReduced&lt;TUnits, T&gt; angle) where TUnits : IAngleUnits where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>angle</code> <a class="xref" href="NetFabric.Numerics.AngleReduced-2.html">AngleReduced</a>&lt;TUnits, T&gt;</dt>
+    <dd><p>Source angle.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>true if the reduction of the absolute angle is greater than 90 degrees and less than
+180 degrees; otherwise false.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TUnits</code></dt>
+    <dd><p>The angle units of <code class="paramref">angle</code>.</p>
+</dd>
+    <dt><code>T</code></dt>
+    <dd><p>The floating point type used internally by <code class="paramref">angle</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Angle_IsObtuse__2_NetFabric_Numerics_AngleReduced___0___1___remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>An obtuse angle is a type of angle that measures more than 90 degrees (π/2 radians) but less
+than 180 degrees (π radians). It is formed by the intersection of two straight lines or line
+segments that create a turn greater than a right angle.</p>
+</div>
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_IsReflex_" data-uid="NetFabric.Numerics.Angle.IsReflex*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_IsReflex__2_NetFabric_Numerics_AngleReduced___0___1__" data-uid="NetFabric.Numerics.Angle.IsReflex``2(NetFabric.Numerics.AngleReduced{``0,``1})">
+  IsReflex&lt;TUnits, T&gt;(AngleReduced&lt;TUnits, T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/Angle.cs/#L402"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Indicates whether the specified angle is reflex.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsReflex&lt;TUnits, T&gt;(AngleReduced&lt;TUnits, T&gt; angle) where TUnits : IAngleUnits where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>angle</code> <a class="xref" href="NetFabric.Numerics.AngleReduced-2.html">AngleReduced</a>&lt;TUnits, T&gt;</dt>
+    <dd><p>Source angle.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>true if the reduction of the absolute angle is greater than 180 degrees and less than
+360 degrees; otherwise false.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TUnits</code></dt>
+    <dd><p>The angle units of <code class="paramref">angle</code>.</p>
+</dd>
+    <dt><code>T</code></dt>
+    <dd><p>The floating point type used internally by <code class="paramref">angle</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Angle_IsReflex__2_NetFabric_Numerics_AngleReduced___0___1___remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>A reflex angle is a type of angle that measures more than 180 degrees (π radians) but less than
+360 degrees (2π radians). It is formed by the intersection of two straight lines or line segments
+that create a turn greater than a straight angle.</p>
+</div>
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_IsRight_" data-uid="NetFabric.Numerics.Angle.IsRight*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_IsRight__2_NetFabric_Numerics_AngleReduced___0___1__" data-uid="NetFabric.Numerics.Angle.IsRight``2(NetFabric.Numerics.AngleReduced{``0,``1})">
+  IsRight&lt;TUnits, T&gt;(AngleReduced&lt;TUnits, T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/Angle.cs/#L345"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Indicates whether the specified angle is right.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsRight&lt;TUnits, T&gt;(AngleReduced&lt;TUnits, T&gt; angle) where TUnits : IAngleUnits where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>angle</code> <a class="xref" href="NetFabric.Numerics.AngleReduced-2.html">AngleReduced</a>&lt;TUnits, T&gt;</dt>
+    <dd><p>Source angle.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>true if the reduction of the absolute angle is 90 degrees; otherwise false.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TUnits</code></dt>
+    <dd><p>The angle units of <code class="paramref">angle</code>.</p>
+</dd>
+    <dt><code>T</code></dt>
+    <dd><p>The floating point type used internally by <code class="paramref">angle</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Angle_IsRight__2_NetFabric_Numerics_AngleReduced___0___1___remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>A right angle is an angle that measures exactly 90 degrees (π/2 radians) and is formed by the
+intersection of two straight lines or line segments that are perpendicular to each other.
+It is a quarter turn, 90 degrees, π/2 radians, or 100 gradians</p>
+</div>
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_IsStraight_" data-uid="NetFabric.Numerics.Angle.IsStraight*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_IsStraight__2_NetFabric_Numerics_AngleReduced___0___1__" data-uid="NetFabric.Numerics.Angle.IsStraight``2(NetFabric.Numerics.AngleReduced{``0,``1})">
+  IsStraight&lt;TUnits, T&gt;(AngleReduced&lt;TUnits, T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/Angle.cs/#L382"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Indicates whether the specified angle is straight.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsStraight&lt;TUnits, T&gt;(AngleReduced&lt;TUnits, T&gt; angle) where TUnits : IAngleUnits where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>angle</code> <a class="xref" href="NetFabric.Numerics.AngleReduced-2.html">AngleReduced</a>&lt;TUnits, T&gt;</dt>
+    <dd><p>Source angle.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>true if the reduction of the absolute angle is 180 degrees; otherwise false.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TUnits</code></dt>
+    <dd><p>The angle units of <code class="paramref">angle</code>.</p>
+</dd>
+    <dt><code>T</code></dt>
+    <dd><p>The floating point type used internally by <code class="paramref">angle</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Angle_IsStraight__2_NetFabric_Numerics_AngleReduced___0___1___remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>A straight angle is a type of angle that measures exactly 180 degrees (π radians). It is formed
+by the intersection of two straight lines or line segments that create a straight line.
+It is a half turn, 180 degrees, π radians, or 200 gradians</p>
+</div>
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_IsZero_" data-uid="NetFabric.Numerics.Angle.IsZero*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_IsZero__2_NetFabric_Numerics_Angle___0___1__" data-uid="NetFabric.Numerics.Angle.IsZero``2(NetFabric.Numerics.Angle{``0,``1})">
+  IsZero&lt;TUnits, T&gt;(Angle&lt;TUnits, T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/Angle.cs/#L263"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Indicates whether the specified angle is equal to Zero.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsZero&lt;TUnits, T&gt;(Angle&lt;TUnits, T&gt; angle) where TUnits : IAngleUnits where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>angle</code> <a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;TUnits, T&gt;</dt>
+    <dd><p>Source angle.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>true if the reduction of the absolute angle is zero; otherwise false.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TUnits</code></dt>
+    <dd><p>The angle units of <code class="paramref">angle</code>.</p>
+</dd>
+    <dt><code>T</code></dt>
+    <dd><p>The floating point type used internally by <code class="paramref">angle</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_Lerp_" data-uid="NetFabric.Numerics.Angle.Lerp*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_Lerp__2_NetFabric_Numerics_Angle___0___1__NetFabric_Numerics_Angle___0___1____1_" data-uid="NetFabric.Numerics.Angle.Lerp``2(NetFabric.Numerics.Angle{``0,``1},NetFabric.Numerics.Angle{``0,``1},``1)">
+  Lerp&lt;TUnits, T&gt;(Angle&lt;TUnits, T&gt;, Angle&lt;TUnits, T&gt;, T)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/Angle.cs/#L220"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Performs a linear interpolation.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Angle&lt;TUnits, T&gt; Lerp&lt;TUnits, T&gt;(Angle&lt;TUnits, T&gt; a1, Angle&lt;TUnits, T&gt; a2, T t) where TUnits : IAngleUnits where T : struct, IFloatingPointIeee754&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>a1</code> <a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;TUnits, T&gt;</dt>
+    <dd><p>The first angle.</p>
+</dd>
+    <dt><code>a2</code> <a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;TUnits, T&gt;</dt>
+    <dd><p>The second angle.</p>
+</dd>
+    <dt><code>t</code> <span class="xref">T</span></dt>
+    <dd><p>A value that linearly interpolates between the a1 parameter and the a2 parameter.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;TUnits, T&gt;</dt>
+    <dd><p>The result of the linear interpolation.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TUnits</code></dt>
+    <dd><p>The angle units of <code class="paramref">a1</code> and <code class="paramref">a2</code>.</p>
+</dd>
+    <dt><code>T</code></dt>
+    <dd><p>The floating point type used internally by <code class="paramref">a1</code> and <code class="paramref">a2</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Angle_Lerp__2_NetFabric_Numerics_Angle___0___1__NetFabric_Numerics_Angle___0___1____1__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>
+The Lerp (Linear Interpolation) operation calculates a value that lies somewhere between 
+<code class="paramref">a1</code> and <code class="paramref">a2</code>, based on <code class="paramref">t</code> that represents 
+the position between those endpoints. 
+The formula for the Lerp function is: 
+result = (1 - <code class="paramref">t</code>) * <code class="paramref">a1</code> + <code class="paramref">t</code> * <code class="paramref">a2</code>, 
+where <code class="paramref">t</code> is usually a value between 0 and 1.
+</p>
+<p>
+The Lerp function can also support values less than zero and greater than one for <code class="paramref">t</code>, 
+allowing for extrapolation beyond the range defined by the start and end values. 
+If the third value is less than zero, the Lerp function returns a value that is extrapolated 
+in the negative direction. Similarly, if <code class="paramref">t</code> is greater than one, the Lerp 
+function returns a value that is extrapolated in the positive direction.
+</p>
+</div>
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_Max_" data-uid="NetFabric.Numerics.Angle.Max*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_Max__2_NetFabric_Numerics_Angle___0___1__NetFabric_Numerics_Angle___0___1__" data-uid="NetFabric.Numerics.Angle.Max``2(NetFabric.Numerics.Angle{``0,``1},NetFabric.Numerics.Angle{``0,``1})">
+  Max&lt;TUnits, T&gt;(Angle&lt;TUnits, T&gt;, Angle&lt;TUnits, T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/Angle.cs/#L248"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns the largest of two angles.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Angle&lt;TUnits, T&gt; Max&lt;TUnits, T&gt;(Angle&lt;TUnits, T&gt; left, Angle&lt;TUnits, T&gt; right) where TUnits : IAngleUnits where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>left</code> <a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;TUnits, T&gt;</dt>
+    <dd><p>The first of two angles to compare.</p>
+</dd>
+    <dt><code>right</code> <a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;TUnits, T&gt;</dt>
+    <dd><p>The second of two angles to compare.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;TUnits, T&gt;</dt>
+    <dd><p>The largest of the two angles.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TUnits</code></dt>
+    <dd><p>The angle units of <code class="paramref">left</code> and <code class="paramref">right</code>.</p>
+</dd>
+    <dt><code>T</code></dt>
+    <dd><p>The floating point type used internally by <code class="paramref">left</code> and <code class="paramref">right</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_Min_" data-uid="NetFabric.Numerics.Angle.Min*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_Min__2_NetFabric_Numerics_Angle___0___1__NetFabric_Numerics_Angle___0___1__" data-uid="NetFabric.Numerics.Angle.Min``2(NetFabric.Numerics.Angle{``0,``1},NetFabric.Numerics.Angle{``0,``1})">
+  Min&lt;TUnits, T&gt;(Angle&lt;TUnits, T&gt;, Angle&lt;TUnits, T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/Angle.cs/#L234"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns the smallest of two angles.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Angle&lt;TUnits, T&gt; Min&lt;TUnits, T&gt;(Angle&lt;TUnits, T&gt; left, Angle&lt;TUnits, T&gt; right) where TUnits : IAngleUnits where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>left</code> <a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;TUnits, T&gt;</dt>
+    <dd><p>The first of two angles to compare.</p>
+</dd>
+    <dt><code>right</code> <a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;TUnits, T&gt;</dt>
+    <dd><p>The second of two angles to compare.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;TUnits, T&gt;</dt>
+    <dd><p>The smallest of the two angles.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TUnits</code></dt>
+    <dd><p>The angle units of <code class="paramref">left</code> and <code class="paramref">right</code>.</p>
+</dd>
+    <dt><code>T</code></dt>
+    <dd><p>The floating point type used internally by <code class="paramref">left</code> and <code class="paramref">right</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_Multiply_" data-uid="NetFabric.Numerics.Angle.Multiply*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_Multiply__2_System_ReadOnlySpan_NetFabric_Numerics_Angle___0___1___NetFabric_Numerics_Angle___0___1__System_Span_NetFabric_Numerics_Angle___0___1___" data-uid="NetFabric.Numerics.Angle.Multiply``2(System.ReadOnlySpan{NetFabric.Numerics.Angle{``0,``1}},NetFabric.Numerics.Angle{``0,``1},System.Span{NetFabric.Numerics.Angle{``0,``1}})">
+  Multiply&lt;TUnits, T&gt;(ReadOnlySpan&lt;Angle&lt;TUnits, T&gt;&gt;, Angle&lt;TUnits, T&gt;, Span&lt;Angle&lt;TUnits, T&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/AngleSpanOperations.cs/#L27"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void Multiply&lt;TUnits, T&gt;(ReadOnlySpan&lt;Angle&lt;TUnits, T&gt;&gt; angles, Angle&lt;TUnits, T&gt; value, Span&lt;Angle&lt;TUnits, T&gt;&gt; result) where TUnits : IAngleUnits where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>angles</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.readonlyspan-1">ReadOnlySpan</a>&lt;<a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;TUnits, T&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>value</code> <a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;TUnits, T&gt;</dt>
+    <dd></dd>
+    <dt><code>result</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.span-1">Span</a>&lt;<a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;TUnits, T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TUnits</code></dt>
+    <dd></dd>
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_Reduce_" data-uid="NetFabric.Numerics.Angle.Reduce*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_Reduce__2_NetFabric_Numerics_Angle___0___1__" data-uid="NetFabric.Numerics.Angle.Reduce``2(NetFabric.Numerics.Angle{``0,``1})">
+  Reduce&lt;TUnits, T&gt;(Angle&lt;TUnits, T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/Angle.cs/#L62"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the reduced angle of <code class="paramref">angle</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static AngleReduced&lt;TUnits, T&gt; Reduce&lt;TUnits, T&gt;(Angle&lt;TUnits, T&gt; angle) where TUnits : IAngleUnits where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>angle</code> <a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;TUnits, T&gt;</dt>
+    <dd><p>The angle to get the reduced angle from.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.AngleReduced-2.html">AngleReduced</a>&lt;TUnits, T&gt;</dt>
+    <dd><p>The reduced angle of <code class="paramref">angle</code>.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TUnits</code></dt>
+    <dd><p>The angle units of <code class="paramref">angle</code> and the reduced angle.</p>
+</dd>
+    <dt><code>T</code></dt>
+    <dd><p>The floating point type used internally by <code class="paramref">angle</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Angle_Reduce__2_NetFabric_Numerics_Angle___0___1___remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>A reduced angle is an angle that is within one full revolution (360 degrees or 2π radians)
+and is expressed as an angle between 0 and 360 degrees or between 0 and 2π radians. In
+other words, a reduced angle is an angle that has been simplified by subtracting or adding
+multiples of 360 degrees or 2π radians until it falls within this range. Reduced angles
+are commonly used in trigonometry to simplify calculations and to find the primary
+solution of trigonometric equations.</p>
+</div>
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_Sec_" data-uid="NetFabric.Numerics.Angle.Sec*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_Sec__1_NetFabric_Numerics_Angle_NetFabric_Numerics_Radians___0__" data-uid="NetFabric.Numerics.Angle.Sec``1(NetFabric.Numerics.Angle{NetFabric.Numerics.Radians,``0})">
+  Sec&lt;T&gt;(Angle&lt;Radians, T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/AngleTrigonometry.cs/#L360"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Calculates the secant of an angle.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static T Sec&lt;T&gt;(Angle&lt;Radians, T&gt; angle) where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;, ITrigonometricFunctions&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>angle</code> <a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;<a class="xref" href="NetFabric.Numerics.Radians.html">Radians</a>, T&gt;</dt>
+    <dd><p>The angle in radians.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">T</span></dt>
+    <dd><p>The secant of the specified angle.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The floating point type used internally by <code class="paramref">angle</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Angle_Sec__1_NetFabric_Numerics_Angle_NetFabric_Numerics_Radians___0___remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>
+The secant of an angle is defined as the reciprocal of the cosine function.
+The method calculates the secant of the <code class="paramref">angle</code> using the formula: sec(angle) = 1 / cos(angle).
+</p>
+<p>
+This method calls into the underlying C runtime, and the exact result or valid input range may differ between different operating systems or architectures.
+</p>
+</div>
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_Sech_" data-uid="NetFabric.Numerics.Angle.Sech*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_Sech__1_NetFabric_Numerics_Angle_NetFabric_Numerics_Radians___0__" data-uid="NetFabric.Numerics.Angle.Sech``1(NetFabric.Numerics.Angle{NetFabric.Numerics.Radians,``0})">
+  Sech&lt;T&gt;(Angle&lt;Radians, T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/AngleTrigonometry.cs/#L380"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Calculates the hyperbolic secant of an angle.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static T Sech&lt;T&gt;(Angle&lt;Radians, T&gt; angle) where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;, IHyperbolicFunctions&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>angle</code> <a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;<a class="xref" href="NetFabric.Numerics.Radians.html">Radians</a>, T&gt;</dt>
+    <dd><p>The angle in radians.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">T</span></dt>
+    <dd><p>The hyperbolic secant of the specified angle.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The floating point type used internally by <code class="paramref">angle</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Angle_Sech__1_NetFabric_Numerics_Angle_NetFabric_Numerics_Radians___0___remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>
+The hyperbolic secant (sech) of an angle is defined as the reciprocal of the hyperbolic cosine (cosh) function.
+The method calculates the hyperbolic secant of the <code class="paramref">angle</code> using the formula: sech(angle) = 1 / cosh(angle).
+</p>
+<p>
+This method calls into the underlying C runtime, and the exact result or valid input range may differ between different operating systems or architectures.
+</p>
+</div>
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_Sign_" data-uid="NetFabric.Numerics.Angle.Sign*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_Sign__2_NetFabric_Numerics_Angle___0___1__" data-uid="NetFabric.Numerics.Angle.Sign``2(NetFabric.Numerics.Angle{``0,``1})">
+  Sign&lt;TUnits, T&gt;(Angle&lt;TUnits, T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/Angle.cs/#L188"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns a value indicating the sign of <code class="paramref">angle</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static int Sign&lt;TUnits, T&gt;(Angle&lt;TUnits, T&gt; angle) where TUnits : IAngleUnits where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>angle</code> <a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;TUnits, T&gt;</dt>
+    <dd><p>Source angle.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>A number that indicates the sign of value, -1 if value is less than zero, 0 if value equal to zero, 1 if value is grater than zero.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TUnits</code></dt>
+    <dd><p>The angle units of <code class="paramref">angle</code>.</p>
+</dd>
+    <dt><code>T</code></dt>
+    <dd><p>The floating point type used internally by <code class="paramref">angle</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_SinCos_" data-uid="NetFabric.Numerics.Angle.SinCos*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_SinCos__1_NetFabric_Numerics_Angle_NetFabric_Numerics_Radians___0__" data-uid="NetFabric.Numerics.Angle.SinCos``1(NetFabric.Numerics.Angle{NetFabric.Numerics.Radians,``0})">
+  SinCos&lt;T&gt;(Angle&lt;Radians, T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/AngleTrigonometry.cs/#L258"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Calculates the sine and the cosine of an angle.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static (T Sin, T Cos) SinCos&lt;T&gt;(Angle&lt;Radians, T&gt; angle) where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;, ITrigonometricFunctions&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>angle</code> <a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;<a class="xref" href="NetFabric.Numerics.Radians.html">Radians</a>, T&gt;</dt>
+    <dd><p>The angle in radians.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt>(T <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetuple---0,--0-.sin">Sin</a>, T <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetuple---0,--0-.cos">Cos</a>)</dt>
+    <dd><p>A tuple containing the sine and the cosine of the given angle.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The floating point type used internally by <code class="paramref">angle</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Angle_SinCos__1_NetFabric_Numerics_Angle_NetFabric_Numerics_Radians___0___remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>
+This method calls into the underlying C runtime, and the exact result or valid input range may differ between different operating systems or architectures.
+</p>
+</div>
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_Sin_" data-uid="NetFabric.Numerics.Angle.Sin*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_Sin__1_NetFabric_Numerics_Angle_NetFabric_Numerics_Radians___0__" data-uid="NetFabric.Numerics.Angle.Sin``1(NetFabric.Numerics.Angle{NetFabric.Numerics.Radians,``0})">
+  Sin&lt;T&gt;(Angle&lt;Radians, T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/AngleTrigonometry.cs/#L221"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Calculates the sine of an angle.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static T Sin&lt;T&gt;(Angle&lt;Radians, T&gt; angle) where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;, ITrigonometricFunctions&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>angle</code> <a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;<a class="xref" href="NetFabric.Numerics.Radians.html">Radians</a>, T&gt;</dt>
+    <dd><p>The angle in radians.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">T</span></dt>
+    <dd><p>The sine of the given angle.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The floating point type used internally by <code class="paramref">angle</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Angle_Sin__1_NetFabric_Numerics_Angle_NetFabric_Numerics_Radians___0___remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>
+The sine function calculates the ratio of the opposite side to the hypotenuse of a right triangle
+with the given <code class="paramref">angle</code>.
+The returned value ranges between -1 and 1, where -1 represents a 270-degree angle (-3π/2 radians)
+and 1 represents a 90-degree angle (π/2 radians).
+</p>
+<p>
+This method calls into the underlying C runtime, and the exact result or valid input range may differ between different operating systems or architectures.
+</p>
+</div>
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_Sinh_" data-uid="NetFabric.Numerics.Angle.Sinh*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_Sinh__1_NetFabric_Numerics_Angle_NetFabric_Numerics_Radians___0__" data-uid="NetFabric.Numerics.Angle.Sinh``1(NetFabric.Numerics.Angle{NetFabric.Numerics.Radians,``0})">
+  Sinh&lt;T&gt;(Angle&lt;Radians, T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/AngleTrigonometry.cs/#L241"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Calculates the hyperbolic sine of an angle.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static T Sinh&lt;T&gt;(Angle&lt;Radians, T&gt; angle) where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;, IHyperbolicFunctions&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>angle</code> <a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;<a class="xref" href="NetFabric.Numerics.Radians.html">Radians</a>, T&gt;</dt>
+    <dd><p>The angle in radians.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">T</span></dt>
+    <dd><p>The hyperbolic sine of the given angle.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The floating point type used internally by <code class="paramref">angle</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Angle_Sinh__1_NetFabric_Numerics_Angle_NetFabric_Numerics_Radians___0___remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>
+The hyperbolic sine function calculates the ratio (e^<code class="paramref">angle</code> - e^(-<code class="paramref">angle</code>)) / 2,
+where e is Euler's number (approximately 2.71828).
+</p>
+<p>
+This method calls into the underlying C runtime, and the exact result or valid input range may differ between different operating systems or architectures.
+</p>
+</div>
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_Subtract_" data-uid="NetFabric.Numerics.Angle.Subtract*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_Subtract__2_System_ReadOnlySpan_NetFabric_Numerics_Angle___0___1___NetFabric_Numerics_Angle___0___1__System_Span_NetFabric_Numerics_Angle___0___1___" data-uid="NetFabric.Numerics.Angle.Subtract``2(System.ReadOnlySpan{NetFabric.Numerics.Angle{``0,``1}},NetFabric.Numerics.Angle{``0,``1},System.Span{NetFabric.Numerics.Angle{``0,``1}})">
+  Subtract&lt;TUnits, T&gt;(ReadOnlySpan&lt;Angle&lt;TUnits, T&gt;&gt;, Angle&lt;TUnits, T&gt;, Span&lt;Angle&lt;TUnits, T&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/AngleSpanOperations.cs/#L17"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void Subtract&lt;TUnits, T&gt;(ReadOnlySpan&lt;Angle&lt;TUnits, T&gt;&gt; angles, Angle&lt;TUnits, T&gt; value, Span&lt;Angle&lt;TUnits, T&gt;&gt; result) where TUnits : IAngleUnits where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>angles</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.readonlyspan-1">ReadOnlySpan</a>&lt;<a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;TUnits, T&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>value</code> <a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;TUnits, T&gt;</dt>
+    <dd></dd>
+    <dt><code>result</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.span-1">Span</a>&lt;<a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;TUnits, T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TUnits</code></dt>
+    <dd></dd>
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_Subtract_" data-uid="NetFabric.Numerics.Angle.Subtract*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_Subtract__2_System_ReadOnlySpan_NetFabric_Numerics_Angle___0___1___System_ReadOnlySpan_NetFabric_Numerics_Angle___0___1___System_Span_NetFabric_Numerics_Angle___0___1___" data-uid="NetFabric.Numerics.Angle.Subtract``2(System.ReadOnlySpan{NetFabric.Numerics.Angle{``0,``1}},System.ReadOnlySpan{NetFabric.Numerics.Angle{``0,``1}},System.Span{NetFabric.Numerics.Angle{``0,``1}})">
+  Subtract&lt;TUnits, T&gt;(ReadOnlySpan&lt;Angle&lt;TUnits, T&gt;&gt;, ReadOnlySpan&lt;Angle&lt;TUnits, T&gt;&gt;, Span&lt;Angle&lt;TUnits, T&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/AngleSpanOperations.cs/#L22"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void Subtract&lt;TUnits, T&gt;(ReadOnlySpan&lt;Angle&lt;TUnits, T&gt;&gt; left, ReadOnlySpan&lt;Angle&lt;TUnits, T&gt;&gt; right, Span&lt;Angle&lt;TUnits, T&gt;&gt; result) where TUnits : IAngleUnits where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>left</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.readonlyspan-1">ReadOnlySpan</a>&lt;<a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;TUnits, T&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>right</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.readonlyspan-1">ReadOnlySpan</a>&lt;<a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;TUnits, T&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>result</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.span-1">Span</a>&lt;<a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;TUnits, T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TUnits</code></dt>
+    <dd></dd>
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_Sum_" data-uid="NetFabric.Numerics.Angle.Sum*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_Sum__2_NetFabric_Numerics_Angle___0___1____" data-uid="NetFabric.Numerics.Angle.Sum``2(NetFabric.Numerics.Angle{``0,``1}[])">
+  Sum&lt;TUnits, T&gt;(Angle&lt;TUnits, T&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/AngleSum.cs/#L38"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Calculates the sum of an array of angles.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Angle&lt;TUnits, T&gt; Sum&lt;TUnits, T&gt;(this Angle&lt;TUnits, T&gt;[] source) where TUnits : IAngleUnits where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>source</code> <a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;TUnits, T&gt;[]</dt>
+    <dd><p>The array collection of angles.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;TUnits, T&gt;</dt>
+    <dd><p>The sum of the angles in the collection.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TUnits</code></dt>
+    <dd></dd>
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Angle_Sum__2_NetFabric_Numerics_Angle___0___1_____remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>The sum of angles is computed by adding all the angles in the given <code class="paramref">source</code> collection.</p>
+</div>
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_Sum_" data-uid="NetFabric.Numerics.Angle.Sum*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_Sum__2_System_Collections_Generic_IEnumerable_NetFabric_Numerics_Angle___0___1___" data-uid="NetFabric.Numerics.Angle.Sum``2(System.Collections.Generic.IEnumerable{NetFabric.Numerics.Angle{``0,``1}})">
+  Sum&lt;TUnits, T&gt;(IEnumerable&lt;Angle&lt;TUnits, T&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/AngleSum.cs/#L15"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Calculates the sum of a collection of angles.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Angle&lt;TUnits, T&gt; Sum&lt;TUnits, T&gt;(this IEnumerable&lt;Angle&lt;TUnits, T&gt;&gt; source) where TUnits : IAngleUnits where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>source</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;TUnits, T&gt;&gt;</dt>
+    <dd><p>The enumerable collection of angles.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;TUnits, T&gt;</dt>
+    <dd><p>The sum of the angles in the collection.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TUnits</code></dt>
+    <dd></dd>
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Angle_Sum__2_System_Collections_Generic_IEnumerable_NetFabric_Numerics_Angle___0___1____remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>The sum of angles is computed by adding all the angles in the given <code class="paramref">source</code> collection.</p>
+</div>
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_Sum_" data-uid="NetFabric.Numerics.Angle.Sum*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_Sum__2_System_ReadOnlySpan_NetFabric_Numerics_Angle___0___1___" data-uid="NetFabric.Numerics.Angle.Sum``2(System.ReadOnlySpan{NetFabric.Numerics.Angle{``0,``1}})">
+  Sum&lt;TUnits, T&gt;(ReadOnlySpan&lt;Angle&lt;TUnits, T&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/AngleSum.cs/#L64"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Calculates the sum of a read-only span of angles.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Angle&lt;TUnits, T&gt; Sum&lt;TUnits, T&gt;(this ReadOnlySpan&lt;Angle&lt;TUnits, T&gt;&gt; source) where TUnits : IAngleUnits where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>source</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.readonlyspan-1">ReadOnlySpan</a>&lt;<a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;TUnits, T&gt;&gt;</dt>
+    <dd><p>The <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.readonlyspan-1">ReadOnlySpan&lt;T&gt;</a> collection of angles.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;TUnits, T&gt;</dt>
+    <dd><p>The sum of the angles in the collection.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TUnits</code></dt>
+    <dd></dd>
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Angle_Sum__2_System_ReadOnlySpan_NetFabric_Numerics_Angle___0___1____remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>The sum of angles is computed by adding all the angles in the given <code class="paramref">source</code> collection.</p>
+</div>
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_Sum_" data-uid="NetFabric.Numerics.Angle.Sum*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_Sum__2_System_Span_NetFabric_Numerics_Angle___0___1___" data-uid="NetFabric.Numerics.Angle.Sum``2(System.Span{NetFabric.Numerics.Angle{``0,``1}})">
+  Sum&lt;TUnits, T&gt;(Span&lt;Angle&lt;TUnits, T&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/AngleSum.cs/#L51"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Calculates the sum of a span of angles.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Angle&lt;TUnits, T&gt; Sum&lt;TUnits, T&gt;(this Span&lt;Angle&lt;TUnits, T&gt;&gt; source) where TUnits : IAngleUnits where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>source</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.span-1">Span</a>&lt;<a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;TUnits, T&gt;&gt;</dt>
+    <dd><p>The <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.span-1">Span&lt;T&gt;</a> collection of angles.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;TUnits, T&gt;</dt>
+    <dd><p>The sum of the angles in the collection.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TUnits</code></dt>
+    <dd></dd>
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Angle_Sum__2_System_Span_NetFabric_Numerics_Angle___0___1____remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>The sum of angles is computed by adding all the angles in the given <code class="paramref">source</code> collection.</p>
+</div>
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_Tan_" data-uid="NetFabric.Numerics.Angle.Tan*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_Tan__1_NetFabric_Numerics_Angle_NetFabric_Numerics_Radians___0__" data-uid="NetFabric.Numerics.Angle.Tan``1(NetFabric.Numerics.Angle{NetFabric.Numerics.Radians,``0})">
+  Tan&lt;T&gt;(Angle&lt;Radians, T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/AngleTrigonometry.cs/#L279"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Calculates the tangent of an angle.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static T Tan&lt;T&gt;(Angle&lt;Radians, T&gt; angle) where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;, ITrigonometricFunctions&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>angle</code> <a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;<a class="xref" href="NetFabric.Numerics.Radians.html">Radians</a>, T&gt;</dt>
+    <dd><p>The angle in radians.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">T</span></dt>
+    <dd><p>The tangent of the given angle.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The floating point type used internally by <code class="paramref">angle</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Angle_Tan__1_NetFabric_Numerics_Angle_NetFabric_Numerics_Radians___0___remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>
+The tangent function calculates the ratio of the sine of the angle to the cosine of the angle.
+It represents the slope of the line tangent to the unit circle at the given <code class="paramref">angle</code>.
+The returned value can range from negative infinity to positive infinity.
+</p>
+<p>
+This method calls into the underlying C runtime, and the exact result or valid input range may differ between different operating systems or architectures.
+</p>
+</div>
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_Tanh_" data-uid="NetFabric.Numerics.Angle.Tanh*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_Tanh__1_NetFabric_Numerics_Angle_NetFabric_Numerics_Radians___0__" data-uid="NetFabric.Numerics.Angle.Tanh``1(NetFabric.Numerics.Angle{NetFabric.Numerics.Radians,``0})">
+  Tanh&lt;T&gt;(Angle&lt;Radians, T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/AngleTrigonometry.cs/#L300"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Calculates the hyperbolic tangent of an angle.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static T Tanh&lt;T&gt;(Angle&lt;Radians, T&gt; angle) where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;, IHyperbolicFunctions&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>angle</code> <a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;<a class="xref" href="NetFabric.Numerics.Radians.html">Radians</a>, T&gt;</dt>
+    <dd><p>The angle in radians.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">T</span></dt>
+    <dd><p>The hyperbolic tangent of the given angle.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The floating point type used internally by <code class="paramref">angle</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Angle_Tanh__1_NetFabric_Numerics_Angle_NetFabric_Numerics_Radians___0___remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>
+The hyperbolic tangent function calculates the ratio (e^<code class="paramref">angle</code> - e^(-<code class="paramref">angle</code>)) /
+(e^<code class="paramref">angle</code> + e^(-<code class="paramref">angle</code>)), where e is Euler's number (approximately 2.71828).
+The returned value represents the hyperbolic tangent of the given <code class="paramref">angle</code>.
+</p>
+<p>
+This method calls into the underlying C runtime, and the exact result or valid input range may differ between different operating systems or architectures.
+</p>
+</div>
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_ToDegreesMinutesSeconds_" data-uid="NetFabric.Numerics.Angle.ToDegreesMinutesSeconds*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_ToDegreesMinutesSeconds__4_NetFabric_Numerics_Angle_NetFabric_Numerics_Degrees___0__" data-uid="NetFabric.Numerics.Angle.ToDegreesMinutesSeconds``4(NetFabric.Numerics.Angle{NetFabric.Numerics.Degrees,``0})">
+  ToDegreesMinutesSeconds&lt;T, TDegrees, TMinutes, TSeconds&gt;(Angle&lt;Degrees, T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/AngleToDegrees.cs/#L117"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the value of the current Angle structure expressed in Degrees, minutes and seconds.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static (TDegrees Degrees, TMinutes Minutes, TSeconds Seconds) ToDegreesMinutesSeconds&lt;T, TDegrees, TMinutes, TSeconds&gt;(Angle&lt;Degrees, T&gt; angle) where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt; where TDegrees : IBinaryInteger&lt;TDegrees&gt; where TMinutes : IBinaryInteger&lt;TMinutes&gt; where TSeconds : IFloatingPoint&lt;TSeconds&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>angle</code> <a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;<a class="xref" href="NetFabric.Numerics.Degrees.html">Degrees</a>, T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt>(TDegrees <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetuple---1,--2,--3-.degrees">Degrees</a>, TMinutes <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetuple---1,--2,--3-.minutes">Minutes</a>, TSeconds <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetuple---1,--2,--3-.seconds">Seconds</a>)</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+    <dt><code>TDegrees</code></dt>
+    <dd></dd>
+    <dt><code>TMinutes</code></dt>
+    <dd></dd>
+    <dt><code>TSeconds</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_ToDegreesMinutes_" data-uid="NetFabric.Numerics.Angle.ToDegreesMinutes*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_ToDegreesMinutes__3_NetFabric_Numerics_Angle_NetFabric_Numerics_Degrees___0__" data-uid="NetFabric.Numerics.Angle.ToDegreesMinutes``3(NetFabric.Numerics.Angle{NetFabric.Numerics.Degrees,``0})">
+  ToDegreesMinutes&lt;T, TDegrees, TMinutes&gt;(Angle&lt;Degrees, T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/AngleToDegrees.cs/#L103"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the value of the angle expressed in Degrees and minutes.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static (TDegrees Degrees, TMinutes Minutes) ToDegreesMinutes&lt;T, TDegrees, TMinutes&gt;(Angle&lt;Degrees, T&gt; angle) where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt; where TDegrees : IBinaryInteger&lt;TDegrees&gt; where TMinutes : IFloatingPoint&lt;TMinutes&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>angle</code> <a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;<a class="xref" href="NetFabric.Numerics.Degrees.html">Degrees</a>, T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt>(TDegrees <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetuple---1,--2-.degrees">Degrees</a>, TMinutes <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetuple---1,--2-.minutes">Minutes</a>)</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+    <dt><code>TDegrees</code></dt>
+    <dd></dd>
+    <dt><code>TMinutes</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_ToDegrees_" data-uid="NetFabric.Numerics.Angle.ToDegrees*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_ToDegrees__1_NetFabric_Numerics_AngleReduced_NetFabric_Numerics_Gradians___0__" data-uid="NetFabric.Numerics.Angle.ToDegrees``1(NetFabric.Numerics.AngleReduced{NetFabric.Numerics.Gradians,``0})">
+  ToDegrees&lt;T&gt;(AngleReduced&lt;Gradians, T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/AngleToDegrees.cs/#L40"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static AngleReduced&lt;Degrees, T&gt; ToDegrees&lt;T&gt;(AngleReduced&lt;Gradians, T&gt; angle) where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>angle</code> <a class="xref" href="NetFabric.Numerics.AngleReduced-2.html">AngleReduced</a>&lt;<a class="xref" href="NetFabric.Numerics.Gradians.html">Gradians</a>, T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.AngleReduced-2.html">AngleReduced</a>&lt;<a class="xref" href="NetFabric.Numerics.Degrees.html">Degrees</a>, T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_ToDegrees_" data-uid="NetFabric.Numerics.Angle.ToDegrees*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_ToDegrees__1_NetFabric_Numerics_AngleReduced_NetFabric_Numerics_Radians___0__" data-uid="NetFabric.Numerics.Angle.ToDegrees``1(NetFabric.Numerics.AngleReduced{NetFabric.Numerics.Radians,``0})">
+  ToDegrees&lt;T&gt;(AngleReduced&lt;Radians, T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/AngleToDegrees.cs/#L20"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static AngleReduced&lt;Degrees, T&gt; ToDegrees&lt;T&gt;(AngleReduced&lt;Radians, T&gt; angle) where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>angle</code> <a class="xref" href="NetFabric.Numerics.AngleReduced-2.html">AngleReduced</a>&lt;<a class="xref" href="NetFabric.Numerics.Radians.html">Radians</a>, T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.AngleReduced-2.html">AngleReduced</a>&lt;<a class="xref" href="NetFabric.Numerics.Degrees.html">Degrees</a>, T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_ToDegrees_" data-uid="NetFabric.Numerics.Angle.ToDegrees*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_ToDegrees__1_NetFabric_Numerics_AngleReduced_NetFabric_Numerics_Revolutions___0__" data-uid="NetFabric.Numerics.Angle.ToDegrees``1(NetFabric.Numerics.AngleReduced{NetFabric.Numerics.Revolutions,``0})">
+  ToDegrees&lt;T&gt;(AngleReduced&lt;Revolutions, T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/AngleToDegrees.cs/#L60"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static AngleReduced&lt;Degrees, T&gt; ToDegrees&lt;T&gt;(AngleReduced&lt;Revolutions, T&gt; angle) where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>angle</code> <a class="xref" href="NetFabric.Numerics.AngleReduced-2.html">AngleReduced</a>&lt;<a class="xref" href="NetFabric.Numerics.Revolutions.html">Revolutions</a>, T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.AngleReduced-2.html">AngleReduced</a>&lt;<a class="xref" href="NetFabric.Numerics.Degrees.html">Degrees</a>, T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_ToDegrees_" data-uid="NetFabric.Numerics.Angle.ToDegrees*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_ToDegrees__1_NetFabric_Numerics_Angle_NetFabric_Numerics_Gradians___0__" data-uid="NetFabric.Numerics.Angle.ToDegrees``1(NetFabric.Numerics.Angle{NetFabric.Numerics.Gradians,``0})">
+  ToDegrees&lt;T&gt;(Angle&lt;Gradians, T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/AngleToDegrees.cs/#L35"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Angle&lt;Degrees, T&gt; ToDegrees&lt;T&gt;(Angle&lt;Gradians, T&gt; angle) where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>angle</code> <a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;<a class="xref" href="NetFabric.Numerics.Gradians.html">Gradians</a>, T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;<a class="xref" href="NetFabric.Numerics.Degrees.html">Degrees</a>, T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_ToDegrees_" data-uid="NetFabric.Numerics.Angle.ToDegrees*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_ToDegrees__1_NetFabric_Numerics_Angle_NetFabric_Numerics_Radians___0__" data-uid="NetFabric.Numerics.Angle.ToDegrees``1(NetFabric.Numerics.Angle{NetFabric.Numerics.Radians,``0})">
+  ToDegrees&lt;T&gt;(Angle&lt;Radians, T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/AngleToDegrees.cs/#L15"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Angle&lt;Degrees, T&gt; ToDegrees&lt;T&gt;(Angle&lt;Radians, T&gt; angle) where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>angle</code> <a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;<a class="xref" href="NetFabric.Numerics.Radians.html">Radians</a>, T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;<a class="xref" href="NetFabric.Numerics.Degrees.html">Degrees</a>, T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_ToDegrees_" data-uid="NetFabric.Numerics.Angle.ToDegrees*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_ToDegrees__1_NetFabric_Numerics_Angle_NetFabric_Numerics_Revolutions___0__" data-uid="NetFabric.Numerics.Angle.ToDegrees``1(NetFabric.Numerics.Angle{NetFabric.Numerics.Revolutions,``0})">
+  ToDegrees&lt;T&gt;(Angle&lt;Revolutions, T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/AngleToDegrees.cs/#L55"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Angle&lt;Degrees, T&gt; ToDegrees&lt;T&gt;(Angle&lt;Revolutions, T&gt; angle) where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>angle</code> <a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;<a class="xref" href="NetFabric.Numerics.Revolutions.html">Revolutions</a>, T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;<a class="xref" href="NetFabric.Numerics.Degrees.html">Degrees</a>, T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_ToDegrees_" data-uid="NetFabric.Numerics.Angle.ToDegrees*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_ToDegrees__2___0___1_" data-uid="NetFabric.Numerics.Angle.ToDegrees``2(``0,``1)">
+  ToDegrees&lt;TDegrees, TMinutes&gt;(TDegrees, TMinutes)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/AngleToDegrees.cs/#L67"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Angle&lt;Degrees, TMinutes&gt; ToDegrees&lt;TDegrees, TMinutes&gt;(TDegrees degrees, TMinutes minutes) where TDegrees : struct, IBinaryInteger&lt;TDegrees&gt;, ISignedNumber&lt;TDegrees&gt; where TMinutes : struct, IFloatingPoint&lt;TMinutes&gt;, IMinMaxValue&lt;TMinutes&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>degrees</code> <span class="xref">TDegrees</span></dt>
+    <dd></dd>
+    <dt><code>minutes</code> <span class="xref">TMinutes</span></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;<a class="xref" href="NetFabric.Numerics.Degrees.html">Degrees</a>, TMinutes&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDegrees</code></dt>
+    <dd></dd>
+    <dt><code>TMinutes</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_ToDegrees_" data-uid="NetFabric.Numerics.Angle.ToDegrees*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_ToDegrees__3___0___1___2_" data-uid="NetFabric.Numerics.Angle.ToDegrees``3(``0,``1,``2)">
+  ToDegrees&lt;TDegrees, TMinutes, TSeconds&gt;(TDegrees, TMinutes, TSeconds)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/AngleToDegrees.cs/#L81"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Angle&lt;Degrees, TSeconds&gt; ToDegrees&lt;TDegrees, TMinutes, TSeconds&gt;(TDegrees degrees, TMinutes minutes, TSeconds seconds) where TDegrees : struct, IBinaryInteger&lt;TDegrees&gt;, ISignedNumber&lt;TDegrees&gt; where TMinutes : struct, IBinaryInteger&lt;TMinutes&gt; where TSeconds : struct, IFloatingPoint&lt;TSeconds&gt;, IMinMaxValue&lt;TSeconds&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>degrees</code> <span class="xref">TDegrees</span></dt>
+    <dd></dd>
+    <dt><code>minutes</code> <span class="xref">TMinutes</span></dt>
+    <dd></dd>
+    <dt><code>seconds</code> <span class="xref">TSeconds</span></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;<a class="xref" href="NetFabric.Numerics.Degrees.html">Degrees</a>, TSeconds&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDegrees</code></dt>
+    <dd></dd>
+    <dt><code>TMinutes</code></dt>
+    <dd></dd>
+    <dt><code>TSeconds</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_ToGradians_" data-uid="NetFabric.Numerics.Angle.ToGradians*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_ToGradians__1_NetFabric_Numerics_AngleReduced_NetFabric_Numerics_Degrees___0__" data-uid="NetFabric.Numerics.Angle.ToGradians``1(NetFabric.Numerics.AngleReduced{NetFabric.Numerics.Degrees,``0})">
+  ToGradians&lt;T&gt;(AngleReduced&lt;Degrees, T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/AngleToGradians.cs/#L18"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static AngleReduced&lt;Gradians, T&gt; ToGradians&lt;T&gt;(AngleReduced&lt;Degrees, T&gt; angle) where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>angle</code> <a class="xref" href="NetFabric.Numerics.AngleReduced-2.html">AngleReduced</a>&lt;<a class="xref" href="NetFabric.Numerics.Degrees.html">Degrees</a>, T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.AngleReduced-2.html">AngleReduced</a>&lt;<a class="xref" href="NetFabric.Numerics.Gradians.html">Gradians</a>, T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_ToGradians_" data-uid="NetFabric.Numerics.Angle.ToGradians*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_ToGradians__1_NetFabric_Numerics_AngleReduced_NetFabric_Numerics_Radians___0__" data-uid="NetFabric.Numerics.Angle.ToGradians``1(NetFabric.Numerics.AngleReduced{NetFabric.Numerics.Radians,``0})">
+  ToGradians&lt;T&gt;(AngleReduced&lt;Radians, T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/AngleToGradians.cs/#L38"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static AngleReduced&lt;Gradians, T&gt; ToGradians&lt;T&gt;(AngleReduced&lt;Radians, T&gt; angle) where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>angle</code> <a class="xref" href="NetFabric.Numerics.AngleReduced-2.html">AngleReduced</a>&lt;<a class="xref" href="NetFabric.Numerics.Radians.html">Radians</a>, T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.AngleReduced-2.html">AngleReduced</a>&lt;<a class="xref" href="NetFabric.Numerics.Gradians.html">Gradians</a>, T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_ToGradians_" data-uid="NetFabric.Numerics.Angle.ToGradians*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_ToGradians__1_NetFabric_Numerics_AngleReduced_NetFabric_Numerics_Revolutions___0__" data-uid="NetFabric.Numerics.Angle.ToGradians``1(NetFabric.Numerics.AngleReduced{NetFabric.Numerics.Revolutions,``0})">
+  ToGradians&lt;T&gt;(AngleReduced&lt;Revolutions, T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/AngleToGradians.cs/#L58"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static AngleReduced&lt;Gradians, T&gt; ToGradians&lt;T&gt;(AngleReduced&lt;Revolutions, T&gt; angle) where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>angle</code> <a class="xref" href="NetFabric.Numerics.AngleReduced-2.html">AngleReduced</a>&lt;<a class="xref" href="NetFabric.Numerics.Revolutions.html">Revolutions</a>, T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.AngleReduced-2.html">AngleReduced</a>&lt;<a class="xref" href="NetFabric.Numerics.Gradians.html">Gradians</a>, T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_ToGradians_" data-uid="NetFabric.Numerics.Angle.ToGradians*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_ToGradians__1_NetFabric_Numerics_Angle_NetFabric_Numerics_Degrees___0__" data-uid="NetFabric.Numerics.Angle.ToGradians``1(NetFabric.Numerics.Angle{NetFabric.Numerics.Degrees,``0})">
+  ToGradians&lt;T&gt;(Angle&lt;Degrees, T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/AngleToGradians.cs/#L13"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Angle&lt;Gradians, T&gt; ToGradians&lt;T&gt;(Angle&lt;Degrees, T&gt; angle) where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>angle</code> <a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;<a class="xref" href="NetFabric.Numerics.Degrees.html">Degrees</a>, T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;<a class="xref" href="NetFabric.Numerics.Gradians.html">Gradians</a>, T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_ToGradians_" data-uid="NetFabric.Numerics.Angle.ToGradians*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_ToGradians__1_NetFabric_Numerics_Angle_NetFabric_Numerics_Radians___0__" data-uid="NetFabric.Numerics.Angle.ToGradians``1(NetFabric.Numerics.Angle{NetFabric.Numerics.Radians,``0})">
+  ToGradians&lt;T&gt;(Angle&lt;Radians, T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/AngleToGradians.cs/#L33"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Angle&lt;Gradians, T&gt; ToGradians&lt;T&gt;(Angle&lt;Radians, T&gt; angle) where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>angle</code> <a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;<a class="xref" href="NetFabric.Numerics.Radians.html">Radians</a>, T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;<a class="xref" href="NetFabric.Numerics.Gradians.html">Gradians</a>, T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_ToGradians_" data-uid="NetFabric.Numerics.Angle.ToGradians*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_ToGradians__1_NetFabric_Numerics_Angle_NetFabric_Numerics_Revolutions___0__" data-uid="NetFabric.Numerics.Angle.ToGradians``1(NetFabric.Numerics.Angle{NetFabric.Numerics.Revolutions,``0})">
+  ToGradians&lt;T&gt;(Angle&lt;Revolutions, T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/AngleToGradians.cs/#L53"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Angle&lt;Gradians, T&gt; ToGradians&lt;T&gt;(Angle&lt;Revolutions, T&gt; angle) where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>angle</code> <a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;<a class="xref" href="NetFabric.Numerics.Revolutions.html">Revolutions</a>, T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;<a class="xref" href="NetFabric.Numerics.Gradians.html">Gradians</a>, T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_ToRadians_" data-uid="NetFabric.Numerics.Angle.ToRadians*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_ToRadians__1_NetFabric_Numerics_AngleReduced_NetFabric_Numerics_Degrees___0__" data-uid="NetFabric.Numerics.Angle.ToRadians``1(NetFabric.Numerics.AngleReduced{NetFabric.Numerics.Degrees,``0})">
+  ToRadians&lt;T&gt;(AngleReduced&lt;Degrees, T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/AngleToRadians.cs/#L18"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static AngleReduced&lt;Radians, T&gt; ToRadians&lt;T&gt;(AngleReduced&lt;Degrees, T&gt; angle) where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>angle</code> <a class="xref" href="NetFabric.Numerics.AngleReduced-2.html">AngleReduced</a>&lt;<a class="xref" href="NetFabric.Numerics.Degrees.html">Degrees</a>, T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.AngleReduced-2.html">AngleReduced</a>&lt;<a class="xref" href="NetFabric.Numerics.Radians.html">Radians</a>, T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_ToRadians_" data-uid="NetFabric.Numerics.Angle.ToRadians*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_ToRadians__1_NetFabric_Numerics_AngleReduced_NetFabric_Numerics_Gradians___0__" data-uid="NetFabric.Numerics.Angle.ToRadians``1(NetFabric.Numerics.AngleReduced{NetFabric.Numerics.Gradians,``0})">
+  ToRadians&lt;T&gt;(AngleReduced&lt;Gradians, T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/AngleToRadians.cs/#L38"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static AngleReduced&lt;Radians, T&gt; ToRadians&lt;T&gt;(AngleReduced&lt;Gradians, T&gt; angle) where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>angle</code> <a class="xref" href="NetFabric.Numerics.AngleReduced-2.html">AngleReduced</a>&lt;<a class="xref" href="NetFabric.Numerics.Gradians.html">Gradians</a>, T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.AngleReduced-2.html">AngleReduced</a>&lt;<a class="xref" href="NetFabric.Numerics.Radians.html">Radians</a>, T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_ToRadians_" data-uid="NetFabric.Numerics.Angle.ToRadians*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_ToRadians__1_NetFabric_Numerics_AngleReduced_NetFabric_Numerics_Revolutions___0__" data-uid="NetFabric.Numerics.Angle.ToRadians``1(NetFabric.Numerics.AngleReduced{NetFabric.Numerics.Revolutions,``0})">
+  ToRadians&lt;T&gt;(AngleReduced&lt;Revolutions, T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/AngleToRadians.cs/#L58"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static AngleReduced&lt;Radians, T&gt; ToRadians&lt;T&gt;(AngleReduced&lt;Revolutions, T&gt; angle) where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>angle</code> <a class="xref" href="NetFabric.Numerics.AngleReduced-2.html">AngleReduced</a>&lt;<a class="xref" href="NetFabric.Numerics.Revolutions.html">Revolutions</a>, T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.AngleReduced-2.html">AngleReduced</a>&lt;<a class="xref" href="NetFabric.Numerics.Radians.html">Radians</a>, T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_ToRadians_" data-uid="NetFabric.Numerics.Angle.ToRadians*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_ToRadians__1_NetFabric_Numerics_Angle_NetFabric_Numerics_Degrees___0__" data-uid="NetFabric.Numerics.Angle.ToRadians``1(NetFabric.Numerics.Angle{NetFabric.Numerics.Degrees,``0})">
+  ToRadians&lt;T&gt;(Angle&lt;Degrees, T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/AngleToRadians.cs/#L13"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Angle&lt;Radians, T&gt; ToRadians&lt;T&gt;(Angle&lt;Degrees, T&gt; angle) where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>angle</code> <a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;<a class="xref" href="NetFabric.Numerics.Degrees.html">Degrees</a>, T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;<a class="xref" href="NetFabric.Numerics.Radians.html">Radians</a>, T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_ToRadians_" data-uid="NetFabric.Numerics.Angle.ToRadians*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_ToRadians__1_NetFabric_Numerics_Angle_NetFabric_Numerics_Gradians___0__" data-uid="NetFabric.Numerics.Angle.ToRadians``1(NetFabric.Numerics.Angle{NetFabric.Numerics.Gradians,``0})">
+  ToRadians&lt;T&gt;(Angle&lt;Gradians, T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/AngleToRadians.cs/#L33"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Angle&lt;Radians, T&gt; ToRadians&lt;T&gt;(Angle&lt;Gradians, T&gt; angle) where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>angle</code> <a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;<a class="xref" href="NetFabric.Numerics.Gradians.html">Gradians</a>, T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;<a class="xref" href="NetFabric.Numerics.Radians.html">Radians</a>, T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_ToRadians_" data-uid="NetFabric.Numerics.Angle.ToRadians*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_ToRadians__1_NetFabric_Numerics_Angle_NetFabric_Numerics_Revolutions___0__" data-uid="NetFabric.Numerics.Angle.ToRadians``1(NetFabric.Numerics.Angle{NetFabric.Numerics.Revolutions,``0})">
+  ToRadians&lt;T&gt;(Angle&lt;Revolutions, T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/AngleToRadians.cs/#L53"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Angle&lt;Radians, T&gt; ToRadians&lt;T&gt;(Angle&lt;Revolutions, T&gt; angle) where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>angle</code> <a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;<a class="xref" href="NetFabric.Numerics.Revolutions.html">Revolutions</a>, T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;<a class="xref" href="NetFabric.Numerics.Radians.html">Radians</a>, T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_ToRevolutions_" data-uid="NetFabric.Numerics.Angle.ToRevolutions*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_ToRevolutions__1_NetFabric_Numerics_AngleReduced_NetFabric_Numerics_Degrees___0__" data-uid="NetFabric.Numerics.Angle.ToRevolutions``1(NetFabric.Numerics.AngleReduced{NetFabric.Numerics.Degrees,``0})">
+  ToRevolutions&lt;T&gt;(AngleReduced&lt;Degrees, T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/AngleToRevolutions.cs/#L18"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static AngleReduced&lt;Revolutions, T&gt; ToRevolutions&lt;T&gt;(AngleReduced&lt;Degrees, T&gt; angle) where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>angle</code> <a class="xref" href="NetFabric.Numerics.AngleReduced-2.html">AngleReduced</a>&lt;<a class="xref" href="NetFabric.Numerics.Degrees.html">Degrees</a>, T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.AngleReduced-2.html">AngleReduced</a>&lt;<a class="xref" href="NetFabric.Numerics.Revolutions.html">Revolutions</a>, T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_ToRevolutions_" data-uid="NetFabric.Numerics.Angle.ToRevolutions*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_ToRevolutions__1_NetFabric_Numerics_AngleReduced_NetFabric_Numerics_Gradians___0__" data-uid="NetFabric.Numerics.Angle.ToRevolutions``1(NetFabric.Numerics.AngleReduced{NetFabric.Numerics.Gradians,``0})">
+  ToRevolutions&lt;T&gt;(AngleReduced&lt;Gradians, T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/AngleToRevolutions.cs/#L58"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static AngleReduced&lt;Revolutions, T&gt; ToRevolutions&lt;T&gt;(AngleReduced&lt;Gradians, T&gt; angle) where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>angle</code> <a class="xref" href="NetFabric.Numerics.AngleReduced-2.html">AngleReduced</a>&lt;<a class="xref" href="NetFabric.Numerics.Gradians.html">Gradians</a>, T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.AngleReduced-2.html">AngleReduced</a>&lt;<a class="xref" href="NetFabric.Numerics.Revolutions.html">Revolutions</a>, T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_ToRevolutions_" data-uid="NetFabric.Numerics.Angle.ToRevolutions*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_ToRevolutions__1_NetFabric_Numerics_AngleReduced_NetFabric_Numerics_Radians___0__" data-uid="NetFabric.Numerics.Angle.ToRevolutions``1(NetFabric.Numerics.AngleReduced{NetFabric.Numerics.Radians,``0})">
+  ToRevolutions&lt;T&gt;(AngleReduced&lt;Radians, T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/AngleToRevolutions.cs/#L38"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static AngleReduced&lt;Revolutions, T&gt; ToRevolutions&lt;T&gt;(AngleReduced&lt;Radians, T&gt; angle) where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>angle</code> <a class="xref" href="NetFabric.Numerics.AngleReduced-2.html">AngleReduced</a>&lt;<a class="xref" href="NetFabric.Numerics.Radians.html">Radians</a>, T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.AngleReduced-2.html">AngleReduced</a>&lt;<a class="xref" href="NetFabric.Numerics.Revolutions.html">Revolutions</a>, T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_ToRevolutions_" data-uid="NetFabric.Numerics.Angle.ToRevolutions*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_ToRevolutions__1_NetFabric_Numerics_Angle_NetFabric_Numerics_Degrees___0__" data-uid="NetFabric.Numerics.Angle.ToRevolutions``1(NetFabric.Numerics.Angle{NetFabric.Numerics.Degrees,``0})">
+  ToRevolutions&lt;T&gt;(Angle&lt;Degrees, T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/AngleToRevolutions.cs/#L13"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Angle&lt;Revolutions, T&gt; ToRevolutions&lt;T&gt;(Angle&lt;Degrees, T&gt; angle) where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>angle</code> <a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;<a class="xref" href="NetFabric.Numerics.Degrees.html">Degrees</a>, T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;<a class="xref" href="NetFabric.Numerics.Revolutions.html">Revolutions</a>, T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_ToRevolutions_" data-uid="NetFabric.Numerics.Angle.ToRevolutions*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_ToRevolutions__1_NetFabric_Numerics_Angle_NetFabric_Numerics_Gradians___0__" data-uid="NetFabric.Numerics.Angle.ToRevolutions``1(NetFabric.Numerics.Angle{NetFabric.Numerics.Gradians,``0})">
+  ToRevolutions&lt;T&gt;(Angle&lt;Gradians, T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/AngleToRevolutions.cs/#L53"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Angle&lt;Revolutions, T&gt; ToRevolutions&lt;T&gt;(Angle&lt;Gradians, T&gt; angle) where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>angle</code> <a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;<a class="xref" href="NetFabric.Numerics.Gradians.html">Gradians</a>, T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;<a class="xref" href="NetFabric.Numerics.Revolutions.html">Revolutions</a>, T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="NetFabric_Numerics_Angle_ToRevolutions_" data-uid="NetFabric.Numerics.Angle.ToRevolutions*"></a>
+
+  <h3 id="NetFabric_Numerics_Angle_ToRevolutions__1_NetFabric_Numerics_Angle_NetFabric_Numerics_Radians___0__" data-uid="NetFabric.Numerics.Angle.ToRevolutions``1(NetFabric.Numerics.Angle{NetFabric.Numerics.Radians,``0})">
+  ToRevolutions&lt;T&gt;(Angle&lt;Radians, T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/AngleToRevolutions.cs/#L33"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Angle&lt;Revolutions, T&gt; ToRevolutions&lt;T&gt;(Angle&lt;Radians, T&gt; angle) where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>angle</code> <a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;<a class="xref" href="NetFabric.Numerics.Radians.html">Radians</a>, T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Angle-2.html">Angle</a>&lt;<a class="xref" href="NetFabric.Numerics.Revolutions.html">Revolutions</a>, T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics.Angle/AngleTrigonometry.cs/#L3" class="edit-link">Edit this page</a>
+        </div>
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          Copyright (c) 2023 Antão Almada
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

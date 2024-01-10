@@ -1,0 +1,1278 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Struct Vector&lt;T&gt;
+ | NetFabric.Numerics </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Struct Vector&lt;T&gt;
+ | NetFabric.Numerics ">
+      
+      <link rel="icon" href="../images/Logo.png">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/NetFabric/NetFabric.Numerics/new/main/apiSpec/new?filename=NetFabric_Numerics_Rectangular2D_Vector_1.md&amp;value=---%0Auid%3A%20NetFabric.Numerics.Rectangular2D.Vector%601%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+  </head>
+
+  <script type="module" src="./../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/Logo.png" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="NetFabric.Numerics.Rectangular2D.Vector`1">
+
+
+
+  <h1 id="NetFabric_Numerics_Rectangular2D_Vector_1" data-uid="NetFabric.Numerics.Rectangular2D.Vector`1" class="text-break">
+    Struct Vector&lt;T&gt;
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Rectangular2D/Vector.cs/#L17"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="NetFabric.html">NetFabric</a>.<a class="xref" href="NetFabric.Numerics.html">Numerics</a>.<a class="xref" href="NetFabric.Numerics.Rectangular2D.html">Rectangular2D</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>NetFabric.Numerics.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Represents a 2D vector in a Rectangular coordinate system.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly record struct Vector&lt;T&gt; : IVector&lt;Vector&lt;T&gt;, CoordinateSystem&lt;T&gt;, T&gt;, IVector, IGeometricBase&lt;Vector&lt;T&gt;, CoordinateSystem&lt;T&gt;&gt;, IGeometricBase&lt;CoordinateSystem&lt;T&gt;&gt;, IGeometricBase, IEquatable&lt;Vector&lt;T&gt;&gt;, IComparable, IComparable&lt;Vector&lt;T&gt;&gt;, IComparisonOperators&lt;Vector&lt;T&gt;, Vector&lt;T&gt;, bool&gt;, IEqualityOperators&lt;Vector&lt;T&gt;, Vector&lt;T&gt;, bool&gt;, IAdditiveIdentity&lt;Vector&lt;T&gt;, Vector&lt;T&gt;&gt;, IUnaryPlusOperators&lt;Vector&lt;T&gt;, Vector&lt;T&gt;&gt;, IAdditionOperators&lt;Vector&lt;T&gt;, Vector&lt;T&gt;, Vector&lt;T&gt;&gt;, IUnaryNegationOperators&lt;Vector&lt;T&gt;, Vector&lt;T&gt;&gt;, ISubtractionOperators&lt;Vector&lt;T&gt;, Vector&lt;T&gt;, Vector&lt;T&gt;&gt;, IMultiplyOperators&lt;Vector&lt;T&gt;, T, Vector&lt;T&gt;&gt;, IDivisionOperators&lt;Vector&lt;T&gt;, T, Vector&lt;T&gt;&gt;, IMinMaxValue&lt;Vector&lt;T&gt;&gt;, IEquatable&lt;Vector&lt;T&gt;&gt; where T : struct, INumber&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The numeric type used for the vector's components.</p>
+</dd>
+  </dl>
+
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="NetFabric.Numerics.IVector-3.html">IVector</a>&lt;<a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector</a>&lt;T&gt;, <a class="xref" href="NetFabric.Numerics.Rectangular2D.CoordinateSystem-1.html">CoordinateSystem</a>&lt;T&gt;, T&gt;</div>
+      <div><a class="xref" href="NetFabric.Numerics.IVector.html">IVector</a></div>
+      <div><a class="xref" href="NetFabric.Numerics.IGeometricBase-2.html">IGeometricBase</a>&lt;<a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector</a>&lt;T&gt;, <a class="xref" href="NetFabric.Numerics.Rectangular2D.CoordinateSystem-1.html">CoordinateSystem</a>&lt;T&gt;&gt;</div>
+      <div><a class="xref" href="NetFabric.Numerics.IGeometricBase-1.html">IGeometricBase</a>&lt;<a class="xref" href="NetFabric.Numerics.Rectangular2D.CoordinateSystem-1.html">CoordinateSystem</a>&lt;T&gt;&gt;</div>
+      <div><a class="xref" href="NetFabric.Numerics.IGeometricBase.html">IGeometricBase</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iequatable-1">IEquatable</a>&lt;<a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector</a>&lt;T&gt;&gt;</div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.icomparable">IComparable</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.icomparable-1">IComparable</a>&lt;<a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector</a>&lt;T&gt;&gt;</div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.numerics.icomparisonoperators-3">IComparisonOperators</a>&lt;<a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector</a>&lt;T&gt;, <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector</a>&lt;T&gt;, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>&gt;</div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.numerics.iequalityoperators-3">IEqualityOperators</a>&lt;<a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector</a>&lt;T&gt;, <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector</a>&lt;T&gt;, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>&gt;</div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.numerics.iadditiveidentity-2">IAdditiveIdentity</a>&lt;<a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector</a>&lt;T&gt;, <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector</a>&lt;T&gt;&gt;</div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.numerics.iunaryplusoperators-2">IUnaryPlusOperators</a>&lt;<a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector</a>&lt;T&gt;, <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector</a>&lt;T&gt;&gt;</div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.numerics.iadditionoperators-3">IAdditionOperators</a>&lt;<a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector</a>&lt;T&gt;, <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector</a>&lt;T&gt;, <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector</a>&lt;T&gt;&gt;</div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.numerics.iunarynegationoperators-2">IUnaryNegationOperators</a>&lt;<a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector</a>&lt;T&gt;, <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector</a>&lt;T&gt;&gt;</div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.numerics.isubtractionoperators-3">ISubtractionOperators</a>&lt;<a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector</a>&lt;T&gt;, <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector</a>&lt;T&gt;, <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector</a>&lt;T&gt;&gt;</div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.numerics.imultiplyoperators-3">IMultiplyOperators</a>&lt;<a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector</a>&lt;T&gt;, T, <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector</a>&lt;T&gt;&gt;</div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.numerics.idivisionoperators-3">IDivisionOperators</a>&lt;<a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector</a>&lt;T&gt;, T, <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector</a>&lt;T&gt;&gt;</div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.numerics.iminmaxvalue-1">IMinMaxValue</a>&lt;<a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector</a>&lt;T&gt;&gt;</div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iequatable-1">IEquatable</a>&lt;<a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector</a>&lt;T&gt;&gt;</div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist derived">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.equals">ValueType.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode">ValueType.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </dd></dl>
+
+
+
+
+  <h2 id="NetFabric_Numerics_Rectangular2D_Vector_1_remarks">Remarks</h2>
+  <div class="markdown level0 remarks"><p>In a 2D Rectangular coordinate system, a vector is represented by a pair of values (X, Y) that specify its
+direction and magnitude in 2D space. The X-component represents the horizontal direction, and the Y-component
+represents the vertical direction.</p>
+</div>
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="NetFabric_Numerics_Rectangular2D_Vector_1__ctor_" data-uid="NetFabric.Numerics.Rectangular2D.Vector`1.#ctor*"></a>
+
+  <h3 id="NetFabric_Numerics_Rectangular2D_Vector_1__ctor_System_ValueTuple__0__0__" data-uid="NetFabric.Numerics.Rectangular2D.Vector`1.#ctor(System.ValueTuple{`0,`0})">
+  Vector((T, T))
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Rectangular2D/Vector.cs/#L64"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector((T, T) tuple)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>tuple</code> (T <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetuple---0,--0-.sin">Sin</a>, T <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetuple---0,--0-.cos">Cos</a>)</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NetFabric_Numerics_Rectangular2D_Vector_1__ctor_" data-uid="NetFabric.Numerics.Rectangular2D.Vector`1.#ctor*"></a>
+
+  <h3 id="NetFabric_Numerics_Rectangular2D_Vector_1__ctor__0__0_" data-uid="NetFabric.Numerics.Rectangular2D.Vector`1.#ctor(`0,`0)">
+  Vector(T, T)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Rectangular2D/Vector.cs/#L17"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Represents a 2D vector in a Rectangular coordinate system.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector(T X, T Y)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>X</code> <span class="xref">T</span></dt>
+    <dd><p>The X coordinate.</p>
+</dd>
+    <dt><code>Y</code> <span class="xref">T</span></dt>
+    <dd><p>The Y coordinate.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Rectangular2D_Vector_1__ctor__0__0__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>In a 2D Rectangular coordinate system, a vector is represented by a pair of values (X, Y) that specify its
+direction and magnitude in 2D space. The X-component represents the horizontal direction, and the Y-component
+represents the vertical direction.</p>
+</div>
+
+
+
+
+  <h2 class="section" id="fields">Fields
+</h2>
+
+
+
+  <h3 id="NetFabric_Numerics_Rectangular2D_Vector_1_MaxValue" data-uid="NetFabric.Numerics.Rectangular2D.Vector`1.MaxValue">
+  MaxValue
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Rectangular2D/Vector.cs/#L55"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Represents the maximum value. This field is read-only.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly Vector&lt;T&gt; MaxValue</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector</a>&lt;T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="NetFabric_Numerics_Rectangular2D_Vector_1_MinValue" data-uid="NetFabric.Numerics.Rectangular2D.Vector`1.MinValue">
+  MinValue
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Rectangular2D/Vector.cs/#L50"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Represents the minimum value. This field is read-only.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly Vector&lt;T&gt; MinValue</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector</a>&lt;T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="NetFabric_Numerics_Rectangular2D_Vector_1_UnitX" data-uid="NetFabric.Numerics.Rectangular2D.Vector`1.UnitX">
+  UnitX
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Rectangular2D/Vector.cs/#L40"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Represents a vector whose X coordinate is one and others are zero. This field is read-only.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly Vector&lt;T&gt; UnitX</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector</a>&lt;T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="NetFabric_Numerics_Rectangular2D_Vector_1_UnitY" data-uid="NetFabric.Numerics.Rectangular2D.Vector`1.UnitY">
+  UnitY
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Rectangular2D/Vector.cs/#L45"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Represents a vector whose Y coordinate is one and others are zero. This field is read-only.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly Vector&lt;T&gt; UnitY</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector</a>&lt;T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="NetFabric_Numerics_Rectangular2D_Vector_1_Zero" data-uid="NetFabric.Numerics.Rectangular2D.Vector`1.Zero">
+  Zero
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Rectangular2D/Vector.cs/#L29"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Represents a vector whose coordinates are equal to zero. This field is read-only.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly Vector&lt;T&gt; Zero</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector</a>&lt;T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="NetFabric_Numerics_Rectangular2D_Vector_1_X_" data-uid="NetFabric.Numerics.Rectangular2D.Vector`1.X*"></a>
+
+  <h3 id="NetFabric_Numerics_Rectangular2D_Vector_1_X" data-uid="NetFabric.Numerics.Rectangular2D.Vector`1.X">
+  X
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Rectangular2D/Vector.cs/#L19"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>The X coordinate.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public T X { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><span class="xref">T</span></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="NetFabric_Numerics_Rectangular2D_Vector_1_Y_" data-uid="NetFabric.Numerics.Rectangular2D.Vector`1.Y*"></a>
+
+  <h3 id="NetFabric_Numerics_Rectangular2D_Vector_1_Y" data-uid="NetFabric.Numerics.Rectangular2D.Vector`1.Y">
+  Y
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Rectangular2D/Vector.cs/#L19"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>The Y coordinate.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public T Y { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><span class="xref">T</span></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="NetFabric_Numerics_Rectangular2D_Vector_1_CreateChecked_" data-uid="NetFabric.Numerics.Rectangular2D.Vector`1.CreateChecked*"></a>
+
+  <h3 id="NetFabric_Numerics_Rectangular2D_Vector_1_CreateChecked__1_NetFabric_Numerics_Rectangular2D_Vector___0___" data-uid="NetFabric.Numerics.Rectangular2D.Vector`1.CreateChecked``1(NetFabric.Numerics.Rectangular2D.Vector{``0}@)">
+  CreateChecked&lt;TOther&gt;(ref readonly Vector&lt;TOther&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Rectangular2D/Vector.cs/#L77"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates an instance of the current type from a value,
+throwing an overflow exception for any values that fall outside the representable range of the current type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Vector&lt;T&gt; CreateChecked&lt;TOther&gt;(ref readonly Vector&lt;TOther&gt; vector) where TOther : struct, INumber&lt;TOther&gt;, IMinMaxValue&lt;TOther&gt;, IRootFunctions&lt;TOther&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>vector</code> <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector</a>&lt;TOther&gt;</dt>
+    <dd><p>The value which is used to create the instance of <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a></p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector</a>&lt;T&gt;</dt>
+    <dd><p>An instance of <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a> created from <code class="paramref">vector</code>.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TOther</code></dt>
+    <dd><p>The type of the components of <code class="paramref">vector</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.notsupportedexception">NotSupportedException</a></dt>
+    <dd><p><code class="typeparamref">TOther</code> is not supported.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.overflowexception">OverflowException</a></dt>
+    <dd><p><code class="paramref">vector</code> is not representable by <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a>.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="NetFabric_Numerics_Rectangular2D_Vector_1_CreateSaturating_" data-uid="NetFabric.Numerics.Rectangular2D.Vector`1.CreateSaturating*"></a>
+
+  <h3 id="NetFabric_Numerics_Rectangular2D_Vector_1_CreateSaturating__1_NetFabric_Numerics_Rectangular2D_Vector___0___" data-uid="NetFabric.Numerics.Rectangular2D.Vector`1.CreateSaturating``1(NetFabric.Numerics.Rectangular2D.Vector{``0}@)">
+  CreateSaturating&lt;TOther&gt;(ref readonly Vector&lt;TOther&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Rectangular2D/Vector.cs/#L93"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates an instance of the current type from a value,
+saturating any values that fall outside the representable range of the current type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Vector&lt;T&gt; CreateSaturating&lt;TOther&gt;(ref readonly Vector&lt;TOther&gt; vector) where TOther : struct, INumber&lt;TOther&gt;, IMinMaxValue&lt;TOther&gt;, IRootFunctions&lt;TOther&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>vector</code> <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector</a>&lt;TOther&gt;</dt>
+    <dd><p>The value which is used to create the instance of <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a></p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector</a>&lt;T&gt;</dt>
+    <dd><p>An instance of <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a> created from <code class="paramref">vector</code>.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TOther</code></dt>
+    <dd><p>The type of the components of <code class="paramref">vector</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.notsupportedexception">NotSupportedException</a></dt>
+    <dd><p><code class="typeparamref">TOther</code> is not supported.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.overflowexception">OverflowException</a></dt>
+    <dd><p><code class="paramref">vector</code> is not representable by <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a>.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="NetFabric_Numerics_Rectangular2D_Vector_1_CreateTruncating_" data-uid="NetFabric.Numerics.Rectangular2D.Vector`1.CreateTruncating*"></a>
+
+  <h3 id="NetFabric_Numerics_Rectangular2D_Vector_1_CreateTruncating__1_NetFabric_Numerics_Rectangular2D_Vector___0___" data-uid="NetFabric.Numerics.Rectangular2D.Vector`1.CreateTruncating``1(NetFabric.Numerics.Rectangular2D.Vector{``0}@)">
+  CreateTruncating&lt;TOther&gt;(ref readonly Vector&lt;TOther&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Rectangular2D/Vector.cs/#L109"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates an instance of the current type from a value,
+truncating any values that fall outside the representable range of the current type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Vector&lt;T&gt; CreateTruncating&lt;TOther&gt;(ref readonly Vector&lt;TOther&gt; vector) where TOther : struct, INumber&lt;TOther&gt;, IMinMaxValue&lt;TOther&gt;, IRootFunctions&lt;TOther&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>vector</code> <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector</a>&lt;TOther&gt;</dt>
+    <dd><p>The value which is used to create the instance of <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a></p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector</a>&lt;T&gt;</dt>
+    <dd><p>An instance of <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a> created from <code class="paramref">vector</code>.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TOther</code></dt>
+    <dd><p>The type of the components of <code class="paramref">vector</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.notsupportedexception">NotSupportedException</a></dt>
+    <dd><p><code class="typeparamref">TOther</code> is not supported.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.overflowexception">OverflowException</a></dt>
+    <dd><p><code class="paramref">vector</code> is not representable by <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a>.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="NetFabric_Numerics_Rectangular2D_Vector_1_ToString_" data-uid="NetFabric.Numerics.Rectangular2D.Vector`1.ToString*"></a>
+
+  <h3 id="NetFabric_Numerics_Rectangular2D_Vector_1_ToString" data-uid="NetFabric.Numerics.Rectangular2D.Vector`1.ToString">
+  ToString()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Rectangular2D/Vector.cs/#L331"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Converts the vector to its string representation.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override string ToString()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>A string representation of the vector.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NetFabric_Numerics_Rectangular2D_Vector_1_ToString_" data-uid="NetFabric.Numerics.Rectangular2D.Vector`1.ToString*"></a>
+
+  <h3 id="NetFabric_Numerics_Rectangular2D_Vector_1_ToString_System_String_System_IFormatProvider_" data-uid="NetFabric.Numerics.Rectangular2D.Vector`1.ToString(System.String,System.IFormatProvider)">
+  ToString(string?, IFormatProvider?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Rectangular2D/Vector.cs/#L340"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Converts the vector to its string representation using the specified format and format provider.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string ToString(string? format, IFormatProvider? formatProvider = null)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>format</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The format specifier to apply to the vector's components. If null, the default format will be used.</p>
+</dd>
+    <dt><code>formatProvider</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iformatprovider">IFormatProvider</a></dt>
+    <dd><p>The format provider to use for culture-specific formatting. If null, the current culture will be used.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>A string representation of the vector.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="operators">Operators
+</h2>
+
+
+  <a id="NetFabric_Numerics_Rectangular2D_Vector_1_op_Addition_" data-uid="NetFabric.Numerics.Rectangular2D.Vector`1.op_Addition*"></a>
+
+  <h3 id="NetFabric_Numerics_Rectangular2D_Vector_1_op_Addition_NetFabric_Numerics_Rectangular2D_Vector__0__NetFabric_Numerics_Rectangular2D_Vector__0__" data-uid="NetFabric.Numerics.Rectangular2D.Vector`1.op_Addition(NetFabric.Numerics.Rectangular2D.Vector{`0},NetFabric.Numerics.Rectangular2D.Vector{`0})">
+  operator +(Vector&lt;T&gt;, Vector&lt;T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Rectangular2D/Vector.cs/#L253"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Adds two <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a> instances component-wise.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Vector&lt;T&gt; operator +(Vector&lt;T&gt; left, Vector&lt;T&gt; right)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>left</code> <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector</a>&lt;T&gt;</dt>
+    <dd><p>The first <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a> to add.</p>
+</dd>
+    <dt><code>right</code> <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector</a>&lt;T&gt;</dt>
+    <dd><p>The second <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a> to add.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector</a>&lt;T&gt;</dt>
+    <dd><p>A new <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a> that is the result of adding the corresponding components of the input vectors.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Rectangular2D_Vector_1_op_Addition_NetFabric_Numerics_Rectangular2D_Vector__0__NetFabric_Numerics_Rectangular2D_Vector__0___remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>This operator performs component-wise addition of the input vectors, where each component of the resulting vector is the sum of the corresponding components of the input vectors.</p>
+</div>
+
+
+
+
+  <a id="NetFabric_Numerics_Rectangular2D_Vector_1_op_Division_" data-uid="NetFabric.Numerics.Rectangular2D.Vector`1.op_Division*"></a>
+
+  <h3 id="NetFabric_Numerics_Rectangular2D_Vector_1_op_Division_NetFabric_Numerics_Rectangular2D_Vector__0___0_" data-uid="NetFabric.Numerics.Rectangular2D.Vector`1.op_Division(NetFabric.Numerics.Rectangular2D.Vector{`0},`0)">
+  operator /(Vector&lt;T&gt;, T)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Rectangular2D/Vector.cs/#L321"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Divides each component of the <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a> by the specified scalar value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Vector&lt;T&gt; operator /(Vector&lt;T&gt; left, T right)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>left</code> <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector</a>&lt;T&gt;</dt>
+    <dd><p>The <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a> to divide.</p>
+</dd>
+    <dt><code>right</code> <span class="xref">T</span></dt>
+    <dd><p>The scalar value to divide by.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector</a>&lt;T&gt;</dt>
+    <dd><p>A new <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a> with each component divided by the scalar value.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Rectangular2D_Vector_1_op_Division_NetFabric_Numerics_Rectangular2D_Vector__0___0__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>This operator divides each component of the vector by the specified scalar value,
+resulting in a new vector with the scaled values.</p>
+</div>
+
+
+
+
+  <a id="NetFabric_Numerics_Rectangular2D_Vector_1_op_GreaterThan_" data-uid="NetFabric.Numerics.Rectangular2D.Vector`1.op_GreaterThan*"></a>
+
+  <h3 id="NetFabric_Numerics_Rectangular2D_Vector_1_op_GreaterThan_NetFabric_Numerics_Rectangular2D_Vector__0__NetFabric_Numerics_Rectangular2D_Vector__0__" data-uid="NetFabric.Numerics.Rectangular2D.Vector`1.op_GreaterThan(NetFabric.Numerics.Rectangular2D.Vector{`0},NetFabric.Numerics.Rectangular2D.Vector{`0})">
+  operator &gt;(Vector&lt;T&gt;, Vector&lt;T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Rectangular2D/Vector.cs/#L185"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Determines whether the magnitude of the left <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a> is greater than the magnitude of the right <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator &gt;(Vector&lt;T&gt; left, Vector&lt;T&gt; right)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>left</code> <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector</a>&lt;T&gt;</dt>
+    <dd><p>The left <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a> to compare.</p>
+</dd>
+    <dt><code>right</code> <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector</a>&lt;T&gt;</dt>
+    <dd><p>The right <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a> to compare.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>True if the magnitude of the left <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a> is greater than the magnitude of the right <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a>; otherwise, false.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Rectangular2D_Vector_1_op_GreaterThan_NetFabric_Numerics_Rectangular2D_Vector__0__NetFabric_Numerics_Rectangular2D_Vector__0___remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>
+This operator compares the magnitude of the left <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a> with the magnitude of the right <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a>. 
+It returns true if and only if the magnitude of the left <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a> is greater than the magnitude of the right <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a>. 
+Otherwise, it returns false. The comparison is based on the magnitudes of the vectors and is independent of their directions.
+</p>
+<p>
+The comparison of magnitudes is performed using the <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector.html#NetFabric_Numerics_Rectangular2D_Vector_Magnitude__1_NetFabric_Numerics_Rectangular2D_Vector___0___">Magnitude&lt;T&gt;(ref readonly Vector&lt;T&gt;)</a> method, which calculates the square root of the magnitude squared. 
+However, to optimize the performance, this operator directly compares the magnitude squared values of the vectors, accessible through the <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector.html#NetFabric_Numerics_Rectangular2D_Vector_MagnitudeSquared__1_NetFabric_Numerics_Rectangular2D_Vector___0___">MagnitudeSquared&lt;T&gt;(ref readonly Vector&lt;T&gt;)</a> method.
+</p>
+</div>
+
+
+
+
+  <a id="NetFabric_Numerics_Rectangular2D_Vector_1_op_GreaterThanOrEqual_" data-uid="NetFabric.Numerics.Rectangular2D.Vector`1.op_GreaterThanOrEqual*"></a>
+
+  <h3 id="NetFabric_Numerics_Rectangular2D_Vector_1_op_GreaterThanOrEqual_NetFabric_Numerics_Rectangular2D_Vector__0__NetFabric_Numerics_Rectangular2D_Vector__0__" data-uid="NetFabric.Numerics.Rectangular2D.Vector`1.op_GreaterThanOrEqual(NetFabric.Numerics.Rectangular2D.Vector{`0},NetFabric.Numerics.Rectangular2D.Vector{`0})">
+  operator &gt;=(Vector&lt;T&gt;, Vector&lt;T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Rectangular2D/Vector.cs/#L206"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Determines whether the magnitude of the left <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a> is greater than or equal to the magnitude of the right <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator &gt;=(Vector&lt;T&gt; left, Vector&lt;T&gt; right)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>left</code> <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector</a>&lt;T&gt;</dt>
+    <dd><p>The left <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a> to compare.</p>
+</dd>
+    <dt><code>right</code> <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector</a>&lt;T&gt;</dt>
+    <dd><p>The right <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a> to compare.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>True if the magnitude of the left <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a> is greater than or equal to the magnitude of the right <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a>; otherwise, false.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Rectangular2D_Vector_1_op_GreaterThanOrEqual_NetFabric_Numerics_Rectangular2D_Vector__0__NetFabric_Numerics_Rectangular2D_Vector__0___remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>
+This operator compares the magnitude of the left <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a> with the magnitude of the right <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a>. 
+It returns true if and only if the magnitude of the left <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a> is greater than or equal to the magnitude of the right <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a>. 
+Otherwise, it returns false. The comparison is based on the magnitudes of the vectors and is independent of their directions.
+</p>
+<p>
+The comparison of magnitudes is performed using the <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector.html#NetFabric_Numerics_Rectangular2D_Vector_Magnitude__1_NetFabric_Numerics_Rectangular2D_Vector___0___">Magnitude&lt;T&gt;(ref readonly Vector&lt;T&gt;)</a> method, which calculates the square root of the magnitude squared. 
+However, to optimize the performance, this operator directly compares the magnitude squared values of the vectors, accessible through the <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector.html#NetFabric_Numerics_Rectangular2D_Vector_MagnitudeSquared__1_NetFabric_Numerics_Rectangular2D_Vector___0___">MagnitudeSquared&lt;T&gt;(ref readonly Vector&lt;T&gt;)</a> method.
+</p>
+</div>
+
+
+
+
+  <a id="NetFabric_Numerics_Rectangular2D_Vector_1_op_LessThan_" data-uid="NetFabric.Numerics.Rectangular2D.Vector`1.op_LessThan*"></a>
+
+  <h3 id="NetFabric_Numerics_Rectangular2D_Vector_1_op_LessThan_NetFabric_Numerics_Rectangular2D_Vector__0__NetFabric_Numerics_Rectangular2D_Vector__0__" data-uid="NetFabric.Numerics.Rectangular2D.Vector`1.op_LessThan(NetFabric.Numerics.Rectangular2D.Vector{`0},NetFabric.Numerics.Rectangular2D.Vector{`0})">
+  operator &lt;(Vector&lt;T&gt;, Vector&lt;T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Rectangular2D/Vector.cs/#L143"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Determines whether the magnitude of the left <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a> is less than the magnitude of the right <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator &lt;(Vector&lt;T&gt; left, Vector&lt;T&gt; right)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>left</code> <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector</a>&lt;T&gt;</dt>
+    <dd><p>The left <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a> to compare.</p>
+</dd>
+    <dt><code>right</code> <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector</a>&lt;T&gt;</dt>
+    <dd><p>The right <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a> to compare.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>True if the magnitude of the left <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a> is less than the magnitude of the right <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a>; otherwise, false.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Rectangular2D_Vector_1_op_LessThan_NetFabric_Numerics_Rectangular2D_Vector__0__NetFabric_Numerics_Rectangular2D_Vector__0___remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>
+This operator compares the magnitude of the left <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a> with the magnitude of the right <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a>. 
+It returns true if and only if the magnitude of the left <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a> is less than the magnitude of the right <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a>. 
+Otherwise, it returns false. The comparison is based on the magnitudes of the vectors and is independent of their directions.
+</p>
+<p>
+The comparison of magnitudes is performed using the <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector.html#NetFabric_Numerics_Rectangular2D_Vector_Magnitude__1_NetFabric_Numerics_Rectangular2D_Vector___0___">Magnitude&lt;T&gt;(ref readonly Vector&lt;T&gt;)</a> method, which calculates the square root of the magnitude squared. 
+However, to optimize the performance, this operator directly compares the magnitude squared values of the vectors, accessible through the <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector.html#NetFabric_Numerics_Rectangular2D_Vector_MagnitudeSquared__1_NetFabric_Numerics_Rectangular2D_Vector___0___">MagnitudeSquared&lt;T&gt;(ref readonly Vector&lt;T&gt;)</a> method.
+</p>
+</div>
+
+
+
+
+  <a id="NetFabric_Numerics_Rectangular2D_Vector_1_op_LessThanOrEqual_" data-uid="NetFabric.Numerics.Rectangular2D.Vector`1.op_LessThanOrEqual*"></a>
+
+  <h3 id="NetFabric_Numerics_Rectangular2D_Vector_1_op_LessThanOrEqual_NetFabric_Numerics_Rectangular2D_Vector__0__NetFabric_Numerics_Rectangular2D_Vector__0__" data-uid="NetFabric.Numerics.Rectangular2D.Vector`1.op_LessThanOrEqual(NetFabric.Numerics.Rectangular2D.Vector{`0},NetFabric.Numerics.Rectangular2D.Vector{`0})">
+  operator &lt;=(Vector&lt;T&gt;, Vector&lt;T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Rectangular2D/Vector.cs/#L164"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Determines whether the magnitude of the left <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a> is less than or equal to the magnitude of the right <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator &lt;=(Vector&lt;T&gt; left, Vector&lt;T&gt; right)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>left</code> <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector</a>&lt;T&gt;</dt>
+    <dd><p>The left <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a> to compare.</p>
+</dd>
+    <dt><code>right</code> <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector</a>&lt;T&gt;</dt>
+    <dd><p>The right <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a> to compare.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>True if the magnitude of the left <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a> is less than or equal to the magnitude of the right <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a>; otherwise, false.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Rectangular2D_Vector_1_op_LessThanOrEqual_NetFabric_Numerics_Rectangular2D_Vector__0__NetFabric_Numerics_Rectangular2D_Vector__0___remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>
+This operator compares the magnitude of the left <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a> with the magnitude of the right <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a>. 
+It returns true if and only if the magnitude of the left <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a> is less than or equal to the magnitude of the right <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a>. 
+Otherwise, it returns false. The comparison is based on the magnitudes of the vectors and is independent of their directions.
+</p>
+<p>
+The comparison of magnitudes is performed using the <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector.html#NetFabric_Numerics_Rectangular2D_Vector_Magnitude__1_NetFabric_Numerics_Rectangular2D_Vector___0___">Magnitude&lt;T&gt;(ref readonly Vector&lt;T&gt;)</a> method, which calculates the square root of the magnitude squared. 
+However, to optimize the performance, this operator directly compares the magnitude squared values of the vectors, accessible through the <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector.html#NetFabric_Numerics_Rectangular2D_Vector_MagnitudeSquared__1_NetFabric_Numerics_Rectangular2D_Vector___0___">MagnitudeSquared&lt;T&gt;(ref readonly Vector&lt;T&gt;)</a> method.
+</p>
+</div>
+
+
+
+
+  <a id="NetFabric_Numerics_Rectangular2D_Vector_1_op_Multiply_" data-uid="NetFabric.Numerics.Rectangular2D.Vector`1.op_Multiply*"></a>
+
+  <h3 id="NetFabric_Numerics_Rectangular2D_Vector_1_op_Multiply_NetFabric_Numerics_Rectangular2D_Vector__0___0_" data-uid="NetFabric.Numerics.Rectangular2D.Vector`1.op_Multiply(NetFabric.Numerics.Rectangular2D.Vector{`0},`0)">
+  operator *(Vector&lt;T&gt;, T)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Rectangular2D/Vector.cs/#L293"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Multiplies each component of the <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a> by the specified scalar value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Vector&lt;T&gt; operator *(Vector&lt;T&gt; left, T right)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>left</code> <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector</a>&lt;T&gt;</dt>
+    <dd><p>The <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a> to multiply.</p>
+</dd>
+    <dt><code>right</code> <span class="xref">T</span></dt>
+    <dd><p>The scalar value to multiply by.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector</a>&lt;T&gt;</dt>
+    <dd><p>A new <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a> with each component multiplied by the scalar value.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Rectangular2D_Vector_1_op_Multiply_NetFabric_Numerics_Rectangular2D_Vector__0___0__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>This operator multiplies each component of the vector by the specified scalar value,
+resulting in a new vector with the scaled values.</p>
+</div>
+
+
+
+
+  <a id="NetFabric_Numerics_Rectangular2D_Vector_1_op_Multiply_" data-uid="NetFabric.Numerics.Rectangular2D.Vector`1.op_Multiply*"></a>
+
+  <h3 id="NetFabric_Numerics_Rectangular2D_Vector_1_op_Multiply__0_NetFabric_Numerics_Rectangular2D_Vector__0__" data-uid="NetFabric.Numerics.Rectangular2D.Vector`1.op_Multiply(`0,NetFabric.Numerics.Rectangular2D.Vector{`0})">
+  operator *(T, Vector&lt;T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Rectangular2D/Vector.cs/#L307"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Multiplies the specified scalar value by each component of the <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Vector&lt;T&gt; operator *(T left, Vector&lt;T&gt; right)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>left</code> <span class="xref">T</span></dt>
+    <dd><p>The scalar value to multiply.</p>
+</dd>
+    <dt><code>right</code> <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector</a>&lt;T&gt;</dt>
+    <dd><p>The <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a> to multiply.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector</a>&lt;T&gt;</dt>
+    <dd><p>A new <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a> with each component multiplied by the scalar value.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Rectangular2D_Vector_1_op_Multiply__0_NetFabric_Numerics_Rectangular2D_Vector__0___remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>This operator multiplies the specified scalar value by each component of the vector,
+resulting in a new vector with the scaled values.</p>
+</div>
+
+
+
+
+  <a id="NetFabric_Numerics_Rectangular2D_Vector_1_op_Subtraction_" data-uid="NetFabric.Numerics.Rectangular2D.Vector`1.op_Subtraction*"></a>
+
+  <h3 id="NetFabric_Numerics_Rectangular2D_Vector_1_op_Subtraction_NetFabric_Numerics_Rectangular2D_Vector__0__NetFabric_Numerics_Rectangular2D_Vector__0__" data-uid="NetFabric.Numerics.Rectangular2D.Vector`1.op_Subtraction(NetFabric.Numerics.Rectangular2D.Vector{`0},NetFabric.Numerics.Rectangular2D.Vector{`0})">
+  operator -(Vector&lt;T&gt;, Vector&lt;T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Rectangular2D/Vector.cs/#L279"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Subtracts the components of the second <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a> from the corresponding components of the first <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Vector&lt;T&gt; operator -(Vector&lt;T&gt; left, Vector&lt;T&gt; right)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>left</code> <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector</a>&lt;T&gt;</dt>
+    <dd><p>The first <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a>.</p>
+</dd>
+    <dt><code>right</code> <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector</a>&lt;T&gt;</dt>
+    <dd><p>The second <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a>.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector</a>&lt;T&gt;</dt>
+    <dd><p>A new <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a> representing the element-wise subtraction of the two input vectors.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Rectangular2D_Vector_1_op_Subtraction_NetFabric_Numerics_Rectangular2D_Vector__0__NetFabric_Numerics_Rectangular2D_Vector__0___remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>This operator subtracts the corresponding components of the second vector from the components of the first vector,
+resulting in a new vector with the subtracted values.</p>
+</div>
+
+
+
+
+  <a id="NetFabric_Numerics_Rectangular2D_Vector_1_op_UnaryNegation_" data-uid="NetFabric.Numerics.Rectangular2D.Vector`1.op_UnaryNegation*"></a>
+
+  <h3 id="NetFabric_Numerics_Rectangular2D_Vector_1_op_UnaryNegation_NetFabric_Numerics_Rectangular2D_Vector__0__" data-uid="NetFabric.Numerics.Rectangular2D.Vector`1.op_UnaryNegation(NetFabric.Numerics.Rectangular2D.Vector{`0})">
+  operator -(Vector&lt;T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Rectangular2D/Vector.cs/#L265"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Negates the specified <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a> by reversing the sign of each component.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Vector&lt;T&gt; operator -(Vector&lt;T&gt; right)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>right</code> <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector</a>&lt;T&gt;</dt>
+    <dd><p>The <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a> to negate.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector</a>&lt;T&gt;</dt>
+    <dd><p>A new <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a> with the negated values.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Rectangular2D_Vector_1_op_UnaryNegation_NetFabric_Numerics_Rectangular2D_Vector__0___remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>This operator reverses the sign of each component of the input vector, resulting in a new vector with the opposite direction.</p>
+</div>
+
+
+
+
+  <a id="NetFabric_Numerics_Rectangular2D_Vector_1_op_UnaryPlus_" data-uid="NetFabric.Numerics.Rectangular2D.Vector`1.op_UnaryPlus*"></a>
+
+  <h3 id="NetFabric_Numerics_Rectangular2D_Vector_1_op_UnaryPlus_NetFabric_Numerics_Rectangular2D_Vector__0__" data-uid="NetFabric.Numerics.Rectangular2D.Vector`1.op_UnaryPlus(NetFabric.Numerics.Rectangular2D.Vector{`0})">
+  operator +(Vector&lt;T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Rectangular2D/Vector.cs/#L240"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns the input <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a> unchanged.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Vector&lt;T&gt; operator +(Vector&lt;T&gt; right)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>right</code> <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector</a>&lt;T&gt;</dt>
+    <dd><p>The input <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a>.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector</a>&lt;T&gt;</dt>
+    <dd><p>The input <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a> unchanged.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Rectangular2D_Vector_1_op_UnaryPlus_NetFabric_Numerics_Rectangular2D_Vector__0___remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>
+This operator returns the input <a class="xref" href="NetFabric.Numerics.Rectangular2D.Vector-1.html">Vector&lt;T&gt;</a> unchanged. 
+It effectively represents the identity operation, where the same vector is returned without any modification.
+</p>
+<p>
+This operator is useful in scenarios where a unary plus sign is needed to explicitly indicate that the vector remains the same.
+</p>
+</div>
+
+
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Rectangular2D/Vector.cs/#L17" class="edit-link">Edit this page</a>
+        </div>
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          Copyright (c) 2023 Antão Almada
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

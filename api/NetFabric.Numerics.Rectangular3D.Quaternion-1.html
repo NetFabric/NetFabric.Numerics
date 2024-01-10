@@ -1,0 +1,1042 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Struct Quaternion&lt;T&gt;
+ | NetFabric.Numerics </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Struct Quaternion&lt;T&gt;
+ | NetFabric.Numerics ">
+      
+      <link rel="icon" href="../images/Logo.png">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/NetFabric/NetFabric.Numerics/new/main/apiSpec/new?filename=NetFabric_Numerics_Rectangular3D_Quaternion_1.md&amp;value=---%0Auid%3A%20NetFabric.Numerics.Rectangular3D.Quaternion%601%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+  </head>
+
+  <script type="module" src="./../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/Logo.png" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="NetFabric.Numerics.Rectangular3D.Quaternion`1">
+
+
+
+  <h1 id="NetFabric_Numerics_Rectangular3D_Quaternion_1" data-uid="NetFabric.Numerics.Rectangular3D.Quaternion`1" class="text-break">
+    Struct Quaternion&lt;T&gt;
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Rectangular3D/Quaternion.cs/#L16"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="NetFabric.html">NetFabric</a>.<a class="xref" href="NetFabric.Numerics.html">Numerics</a>.<a class="xref" href="NetFabric.Numerics.Rectangular3D.html">Rectangular3D</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>NetFabric.Numerics.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Represents a quaternion, a mathematical construct used to represent rotations in 3D space.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly record struct Quaternion&lt;T&gt; : IEquatable&lt;Quaternion&lt;T&gt;&gt;, IEqualityOperators&lt;Quaternion&lt;T&gt;, Quaternion&lt;T&gt;, bool&gt;, IUnaryPlusOperators&lt;Quaternion&lt;T&gt;, Quaternion&lt;T&gt;&gt;, IAdditiveIdentity&lt;Quaternion&lt;T&gt;, Quaternion&lt;T&gt;&gt;, IUnaryNegationOperators&lt;Quaternion&lt;T&gt;, Quaternion&lt;T&gt;&gt;, ISubtractionOperators&lt;Quaternion&lt;T&gt;, Quaternion&lt;T&gt;, Quaternion&lt;T&gt;&gt;, IMultiplicativeIdentity&lt;Quaternion&lt;T&gt;, Quaternion&lt;T&gt;&gt;, IDivisionOperators&lt;Quaternion&lt;T&gt;, Quaternion&lt;T&gt;, Quaternion&lt;T&gt;&gt;, IMinMaxValue&lt;Quaternion&lt;T&gt;&gt; where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The numeric type used for the quaternion's components.</p>
+</dd>
+  </dl>
+
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iequatable-1">IEquatable</a>&lt;<a class="xref" href="NetFabric.Numerics.Rectangular3D.Quaternion-1.html">Quaternion</a>&lt;T&gt;&gt;</div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.numerics.iequalityoperators-3">IEqualityOperators</a>&lt;<a class="xref" href="NetFabric.Numerics.Rectangular3D.Quaternion-1.html">Quaternion</a>&lt;T&gt;, <a class="xref" href="NetFabric.Numerics.Rectangular3D.Quaternion-1.html">Quaternion</a>&lt;T&gt;, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>&gt;</div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.numerics.iunaryplusoperators-2">IUnaryPlusOperators</a>&lt;<a class="xref" href="NetFabric.Numerics.Rectangular3D.Quaternion-1.html">Quaternion</a>&lt;T&gt;, <a class="xref" href="NetFabric.Numerics.Rectangular3D.Quaternion-1.html">Quaternion</a>&lt;T&gt;&gt;</div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.numerics.iadditiveidentity-2">IAdditiveIdentity</a>&lt;<a class="xref" href="NetFabric.Numerics.Rectangular3D.Quaternion-1.html">Quaternion</a>&lt;T&gt;, <a class="xref" href="NetFabric.Numerics.Rectangular3D.Quaternion-1.html">Quaternion</a>&lt;T&gt;&gt;</div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.numerics.iunarynegationoperators-2">IUnaryNegationOperators</a>&lt;<a class="xref" href="NetFabric.Numerics.Rectangular3D.Quaternion-1.html">Quaternion</a>&lt;T&gt;, <a class="xref" href="NetFabric.Numerics.Rectangular3D.Quaternion-1.html">Quaternion</a>&lt;T&gt;&gt;</div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.numerics.isubtractionoperators-3">ISubtractionOperators</a>&lt;<a class="xref" href="NetFabric.Numerics.Rectangular3D.Quaternion-1.html">Quaternion</a>&lt;T&gt;, <a class="xref" href="NetFabric.Numerics.Rectangular3D.Quaternion-1.html">Quaternion</a>&lt;T&gt;, <a class="xref" href="NetFabric.Numerics.Rectangular3D.Quaternion-1.html">Quaternion</a>&lt;T&gt;&gt;</div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.numerics.imultiplicativeidentity-2">IMultiplicativeIdentity</a>&lt;<a class="xref" href="NetFabric.Numerics.Rectangular3D.Quaternion-1.html">Quaternion</a>&lt;T&gt;, <a class="xref" href="NetFabric.Numerics.Rectangular3D.Quaternion-1.html">Quaternion</a>&lt;T&gt;&gt;</div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.numerics.idivisionoperators-3">IDivisionOperators</a>&lt;<a class="xref" href="NetFabric.Numerics.Rectangular3D.Quaternion-1.html">Quaternion</a>&lt;T&gt;, <a class="xref" href="NetFabric.Numerics.Rectangular3D.Quaternion-1.html">Quaternion</a>&lt;T&gt;, <a class="xref" href="NetFabric.Numerics.Rectangular3D.Quaternion-1.html">Quaternion</a>&lt;T&gt;&gt;</div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.numerics.iminmaxvalue-1">IMinMaxValue</a>&lt;<a class="xref" href="NetFabric.Numerics.Rectangular3D.Quaternion-1.html">Quaternion</a>&lt;T&gt;&gt;</div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist derived">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.equals">ValueType.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode">ValueType.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.tostring">ValueType.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </dd></dl>
+
+
+
+
+  <h2 id="NetFabric_Numerics_Rectangular3D_Quaternion_1_remarks">Remarks</h2>
+  <div class="markdown level0 remarks"><p>A quaternion is used to describe rotations in 3D space. It consists of four components (W, X, Y, Z), where W
+represents the real part, and (X, Y, Z) represent the imaginary part. Quaternions are particularly useful for
+smooth and efficient interpolation of rotations.</p>
+</div>
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="NetFabric_Numerics_Rectangular3D_Quaternion_1__ctor_" data-uid="NetFabric.Numerics.Rectangular3D.Quaternion`1.#ctor*"></a>
+
+  <h3 id="NetFabric_Numerics_Rectangular3D_Quaternion_1__ctor__0__0__0__0_" data-uid="NetFabric.Numerics.Rectangular3D.Quaternion`1.#ctor(`0,`0,`0,`0)">
+  Quaternion(T, T, T, T)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Rectangular3D/Quaternion.cs/#L16"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Represents a quaternion, a mathematical construct used to represent rotations in 3D space.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Quaternion(T X, T Y, T Z, T W)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>X</code> <span class="xref">T</span></dt>
+    <dd><p>The X component.</p>
+</dd>
+    <dt><code>Y</code> <span class="xref">T</span></dt>
+    <dd><p>The Y component.</p>
+</dd>
+    <dt><code>Z</code> <span class="xref">T</span></dt>
+    <dd><p>The Z component.</p>
+</dd>
+    <dt><code>W</code> <span class="xref">T</span></dt>
+    <dd><p>The W component.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Rectangular3D_Quaternion_1__ctor__0__0__0__0__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>A quaternion is used to describe rotations in 3D space. It consists of four components (W, X, Y, Z), where W
+represents the real part, and (X, Y, Z) represent the imaginary part. Quaternions are particularly useful for
+smooth and efficient interpolation of rotations.</p>
+</div>
+
+
+
+
+  <h2 class="section" id="fields">Fields
+</h2>
+
+
+
+  <h3 id="NetFabric_Numerics_Rectangular3D_Quaternion_1_Identity" data-uid="NetFabric.Numerics.Rectangular3D.Quaternion`1.Identity">
+  Identity
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Rectangular3D/Quaternion.cs/#L50"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Represents the identity quaternion.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly Quaternion&lt;T&gt; Identity</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Rectangular3D.Quaternion-1.html">Quaternion</a>&lt;T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Rectangular3D_Quaternion_1_Identity_remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>
+The <a class="xref" href="NetFabric.Numerics.Rectangular3D.Quaternion-1.html#NetFabric_Numerics_Rectangular3D_Quaternion_1_Identity">Identity</a> quaternion is a special quaternion that has a real part equal to 1 and an imaginary part equal to (0, 0, 0).
+Multiplying any quaternion by the <a class="xref" href="NetFabric.Numerics.Rectangular3D.Quaternion-1.html#NetFabric_Numerics_Rectangular3D_Quaternion_1_Identity">Identity</a> quaternion results in the same quaternion, and multiplying a quaternion by the conjugate of the <a class="xref" href="NetFabric.Numerics.Rectangular3D.Quaternion-1.html#NetFabric_Numerics_Rectangular3D_Quaternion_1_Identity">Identity</a> quaternion
+will give the original quaternion.
+</p>
+<p>
+The <a class="xref" href="NetFabric.Numerics.Rectangular3D.Quaternion-1.html#NetFabric_Numerics_Rectangular3D_Quaternion_1_Identity">Identity</a> quaternion serves as the multiplicative identity in quaternion algebra, similar to how the number 1 serves as the multiplicative identity in real number arithmetic.
+</p>
+</div>
+
+
+
+
+
+  <h3 id="NetFabric_Numerics_Rectangular3D_Quaternion_1_MaxValue" data-uid="NetFabric.Numerics.Rectangular3D.Quaternion`1.MaxValue">
+  MaxValue
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Rectangular3D/Quaternion.cs/#L65"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Represents the maximum quaternion value. This field is read-only.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly Quaternion&lt;T&gt; MaxValue</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Rectangular3D.Quaternion-1.html">Quaternion</a>&lt;T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="NetFabric_Numerics_Rectangular3D_Quaternion_1_MinValue" data-uid="NetFabric.Numerics.Rectangular3D.Quaternion`1.MinValue">
+  MinValue
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Rectangular3D/Quaternion.cs/#L60"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Represents the minimum quaternion value. This field is read-only.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly Quaternion&lt;T&gt; MinValue</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Rectangular3D.Quaternion-1.html">Quaternion</a>&lt;T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="NetFabric_Numerics_Rectangular3D_Quaternion_1_Zero" data-uid="NetFabric.Numerics.Rectangular3D.Quaternion`1.Zero">
+  Zero
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Rectangular3D/Quaternion.cs/#L35"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Represents a quaternion whose 4 coordinates are equal to zero. This field is read-only.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly Quaternion&lt;T&gt; Zero</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Rectangular3D.Quaternion-1.html">Quaternion</a>&lt;T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="NetFabric_Numerics_Rectangular3D_Quaternion_1_W_" data-uid="NetFabric.Numerics.Rectangular3D.Quaternion`1.W*"></a>
+
+  <h3 id="NetFabric_Numerics_Rectangular3D_Quaternion_1_W" data-uid="NetFabric.Numerics.Rectangular3D.Quaternion`1.W">
+  W
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Rectangular3D/Quaternion.cs/#L18"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>The W component.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public T W { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><span class="xref">T</span></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="NetFabric_Numerics_Rectangular3D_Quaternion_1_X_" data-uid="NetFabric.Numerics.Rectangular3D.Quaternion`1.X*"></a>
+
+  <h3 id="NetFabric_Numerics_Rectangular3D_Quaternion_1_X" data-uid="NetFabric.Numerics.Rectangular3D.Quaternion`1.X">
+  X
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Rectangular3D/Quaternion.cs/#L18"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>The X component.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public T X { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><span class="xref">T</span></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="NetFabric_Numerics_Rectangular3D_Quaternion_1_Y_" data-uid="NetFabric.Numerics.Rectangular3D.Quaternion`1.Y*"></a>
+
+  <h3 id="NetFabric_Numerics_Rectangular3D_Quaternion_1_Y" data-uid="NetFabric.Numerics.Rectangular3D.Quaternion`1.Y">
+  Y
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Rectangular3D/Quaternion.cs/#L18"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>The Y component.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public T Y { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><span class="xref">T</span></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="NetFabric_Numerics_Rectangular3D_Quaternion_1_Z_" data-uid="NetFabric.Numerics.Rectangular3D.Quaternion`1.Z*"></a>
+
+  <h3 id="NetFabric_Numerics_Rectangular3D_Quaternion_1_Z" data-uid="NetFabric.Numerics.Rectangular3D.Quaternion`1.Z">
+  Z
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Rectangular3D/Quaternion.cs/#L18"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>The Z component.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public T Z { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><span class="xref">T</span></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="NetFabric_Numerics_Rectangular3D_Quaternion_1_CreateChecked_" data-uid="NetFabric.Numerics.Rectangular3D.Quaternion`1.CreateChecked*"></a>
+
+  <h3 id="NetFabric_Numerics_Rectangular3D_Quaternion_1_CreateChecked__1_NetFabric_Numerics_Rectangular3D_Quaternion___0___" data-uid="NetFabric.Numerics.Rectangular3D.Quaternion`1.CreateChecked``1(NetFabric.Numerics.Rectangular3D.Quaternion{``0}@)">
+  CreateChecked&lt;TOther&gt;(ref readonly Quaternion&lt;TOther&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Rectangular3D/Quaternion.cs/#L85"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates an instance of the current type from a value,
+throwing an overflow exception for any values that fall outside the representable range of the current type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Quaternion&lt;T&gt; CreateChecked&lt;TOther&gt;(ref readonly Quaternion&lt;TOther&gt; quaternion) where TOther : struct, IFloatingPoint&lt;TOther&gt;, IMinMaxValue&lt;TOther&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>quaternion</code> <a class="xref" href="NetFabric.Numerics.Rectangular3D.Quaternion-1.html">Quaternion</a>&lt;TOther&gt;</dt>
+    <dd><p>The value which is used to create the instance of <a class="xref" href="NetFabric.Numerics.Rectangular3D.Quaternion-1.html">Quaternion&lt;T&gt;</a></p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Rectangular3D.Quaternion-1.html">Quaternion</a>&lt;T&gt;</dt>
+    <dd><p>An instance of <a class="xref" href="NetFabric.Numerics.Rectangular3D.Quaternion-1.html">Quaternion&lt;T&gt;</a> created from <code class="paramref">quaternion</code>.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TOther</code></dt>
+    <dd><p>The type of the components of <code class="paramref">quaternion</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.notsupportedexception">NotSupportedException</a></dt>
+    <dd><p><code class="typeparamref">TOther</code> is not supported.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.overflowexception">OverflowException</a></dt>
+    <dd><p><code class="paramref">quaternion</code> is not representable by <a class="xref" href="NetFabric.Numerics.Rectangular3D.Quaternion-1.html">Quaternion&lt;T&gt;</a>.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="NetFabric_Numerics_Rectangular3D_Quaternion_1_CreateSaturating_" data-uid="NetFabric.Numerics.Rectangular3D.Quaternion`1.CreateSaturating*"></a>
+
+  <h3 id="NetFabric_Numerics_Rectangular3D_Quaternion_1_CreateSaturating__1_NetFabric_Numerics_Rectangular3D_Quaternion___0___" data-uid="NetFabric.Numerics.Rectangular3D.Quaternion`1.CreateSaturating``1(NetFabric.Numerics.Rectangular3D.Quaternion{``0}@)">
+  CreateSaturating&lt;TOther&gt;(ref readonly Quaternion&lt;TOther&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Rectangular3D/Quaternion.cs/#L103"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates an instance of the current type from a value,
+saturating any values that fall outside the representable range of the current type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Quaternion&lt;T&gt; CreateSaturating&lt;TOther&gt;(ref readonly Quaternion&lt;TOther&gt; quaternion) where TOther : struct, IFloatingPoint&lt;TOther&gt;, IMinMaxValue&lt;TOther&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>quaternion</code> <a class="xref" href="NetFabric.Numerics.Rectangular3D.Quaternion-1.html">Quaternion</a>&lt;TOther&gt;</dt>
+    <dd><p>The value which is used to create the instance of <a class="xref" href="NetFabric.Numerics.Rectangular3D.Quaternion-1.html">Quaternion&lt;T&gt;</a></p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Rectangular3D.Quaternion-1.html">Quaternion</a>&lt;T&gt;</dt>
+    <dd><p>An instance of <a class="xref" href="NetFabric.Numerics.Rectangular3D.Quaternion-1.html">Quaternion&lt;T&gt;</a> created from <code class="paramref">quaternion</code>.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TOther</code></dt>
+    <dd><p>The type of the components of <code class="paramref">quaternion</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.notsupportedexception">NotSupportedException</a></dt>
+    <dd><p><code class="typeparamref">TOther</code> is not supported.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.overflowexception">OverflowException</a></dt>
+    <dd><p><code class="paramref">quaternion</code> is not representable by <a class="xref" href="NetFabric.Numerics.Rectangular3D.Quaternion-1.html">Quaternion&lt;T&gt;</a>.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="NetFabric_Numerics_Rectangular3D_Quaternion_1_CreateTruncating_" data-uid="NetFabric.Numerics.Rectangular3D.Quaternion`1.CreateTruncating*"></a>
+
+  <h3 id="NetFabric_Numerics_Rectangular3D_Quaternion_1_CreateTruncating__1_NetFabric_Numerics_Rectangular3D_Quaternion___0___" data-uid="NetFabric.Numerics.Rectangular3D.Quaternion`1.CreateTruncating``1(NetFabric.Numerics.Rectangular3D.Quaternion{``0}@)">
+  CreateTruncating&lt;TOther&gt;(ref readonly Quaternion&lt;TOther&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Rectangular3D/Quaternion.cs/#L121"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates an instance of the current type from a value,
+truncating any values that fall outside the representable range of the current type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Quaternion&lt;T&gt; CreateTruncating&lt;TOther&gt;(ref readonly Quaternion&lt;TOther&gt; quaternion) where TOther : struct, IFloatingPoint&lt;TOther&gt;, IMinMaxValue&lt;TOther&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>quaternion</code> <a class="xref" href="NetFabric.Numerics.Rectangular3D.Quaternion-1.html">Quaternion</a>&lt;TOther&gt;</dt>
+    <dd><p>The value which is used to create the instance of <a class="xref" href="NetFabric.Numerics.Rectangular3D.Quaternion-1.html">Quaternion&lt;T&gt;</a></p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Rectangular3D.Quaternion-1.html">Quaternion</a>&lt;T&gt;</dt>
+    <dd><p>An instance of <a class="xref" href="NetFabric.Numerics.Rectangular3D.Quaternion-1.html">Quaternion&lt;T&gt;</a> created from <code class="paramref">quaternion</code>.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TOther</code></dt>
+    <dd><p>The type of the components of <code class="paramref">quaternion</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.notsupportedexception">NotSupportedException</a></dt>
+    <dd><p><code class="typeparamref">TOther</code> is not supported.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.overflowexception">OverflowException</a></dt>
+    <dd><p><code class="paramref">quaternion</code> is not representable by <a class="xref" href="NetFabric.Numerics.Rectangular3D.Quaternion-1.html">Quaternion&lt;T&gt;</a>.</p>
+</dd>
+  </dl>
+
+
+
+  <h2 class="section" id="operators">Operators
+</h2>
+
+
+  <a id="NetFabric_Numerics_Rectangular3D_Quaternion_1_op_Addition_" data-uid="NetFabric.Numerics.Rectangular3D.Quaternion`1.op_Addition*"></a>
+
+  <h3 id="NetFabric_Numerics_Rectangular3D_Quaternion_1_op_Addition_NetFabric_Numerics_Rectangular3D_Quaternion__0__NetFabric_Numerics_Rectangular3D_Quaternion__0__" data-uid="NetFabric.Numerics.Rectangular3D.Quaternion`1.op_Addition(NetFabric.Numerics.Rectangular3D.Quaternion{`0},NetFabric.Numerics.Rectangular3D.Quaternion{`0})">
+  operator +(Quaternion&lt;T&gt;, Quaternion&lt;T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Rectangular3D/Quaternion.cs/#L169"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Adds two quaternions together.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Quaternion&lt;T&gt; operator +(Quaternion&lt;T&gt; left, Quaternion&lt;T&gt; right)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>left</code> <a class="xref" href="NetFabric.Numerics.Rectangular3D.Quaternion-1.html">Quaternion</a>&lt;T&gt;</dt>
+    <dd><p>The first quaternion.</p>
+</dd>
+    <dt><code>right</code> <a class="xref" href="NetFabric.Numerics.Rectangular3D.Quaternion-1.html">Quaternion</a>&lt;T&gt;</dt>
+    <dd><p>The second quaternion.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Rectangular3D.Quaternion-1.html">Quaternion</a>&lt;T&gt;</dt>
+    <dd><p>The sum of the two quaternions.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Rectangular3D_Quaternion_1_op_Addition_NetFabric_Numerics_Rectangular3D_Quaternion__0__NetFabric_Numerics_Rectangular3D_Quaternion__0___remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>
+The operator adds the corresponding components of the quaternions <code class="paramref">left</code> and <code class="paramref">right</code>
+in an aggressively inlined manner, resulting in improved performance for quaternion arithmetic operations.
+</p>
+<p>
+This operator calculates the sum of the x, y, z, and w components of the quaternions,
+resulting in a new quaternion with the summed components.
+</p>
+</div>
+
+
+
+
+  <a id="NetFabric_Numerics_Rectangular3D_Quaternion_1_op_Division_" data-uid="NetFabric.Numerics.Rectangular3D.Quaternion`1.op_Division*"></a>
+
+  <h3 id="NetFabric_Numerics_Rectangular3D_Quaternion_1_op_Division_NetFabric_Numerics_Rectangular3D_Quaternion__0__NetFabric_Numerics_Rectangular3D_Quaternion__0__" data-uid="NetFabric.Numerics.Rectangular3D.Quaternion`1.op_Division(NetFabric.Numerics.Rectangular3D.Quaternion{`0},NetFabric.Numerics.Rectangular3D.Quaternion{`0})">
+  operator /(Quaternion&lt;T&gt;, Quaternion&lt;T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Rectangular3D/Quaternion.cs/#L281"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Divides a quaternion by another quaternion.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Quaternion&lt;T&gt; operator /(Quaternion&lt;T&gt; left, Quaternion&lt;T&gt; right)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>left</code> <a class="xref" href="NetFabric.Numerics.Rectangular3D.Quaternion-1.html">Quaternion</a>&lt;T&gt;</dt>
+    <dd><p>The numerator quaternion.</p>
+</dd>
+    <dt><code>right</code> <a class="xref" href="NetFabric.Numerics.Rectangular3D.Quaternion-1.html">Quaternion</a>&lt;T&gt;</dt>
+    <dd><p>The denominator quaternion.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Rectangular3D.Quaternion-1.html">Quaternion</a>&lt;T&gt;</dt>
+    <dd><p>The result of dividing the numerator quaternion by the denominator quaternion.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Rectangular3D_Quaternion_1_op_Division_NetFabric_Numerics_Rectangular3D_Quaternion__0__NetFabric_Numerics_Rectangular3D_Quaternion__0___remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>
+The operator divides a quaternion <code class="paramref">left</code> by another quaternion <code class="paramref">right</code>
+to produce a new quaternion where each component of the numerator quaternion is divided by the corresponding component of the denominator quaternion.
+</p>
+<p>
+Note that quaternion division is not a commutative operation, meaning that the order of the quaternions matters.
+</p>
+</div>
+
+
+
+
+  <a id="NetFabric_Numerics_Rectangular3D_Quaternion_1_op_Multiply_" data-uid="NetFabric.Numerics.Rectangular3D.Quaternion`1.op_Multiply*"></a>
+
+  <h3 id="NetFabric_Numerics_Rectangular3D_Quaternion_1_op_Multiply_NetFabric_Numerics_Rectangular3D_Quaternion__0__NetFabric_Numerics_Rectangular3D_Quaternion__0__" data-uid="NetFabric.Numerics.Rectangular3D.Quaternion`1.op_Multiply(NetFabric.Numerics.Rectangular3D.Quaternion{`0},NetFabric.Numerics.Rectangular3D.Quaternion{`0})">
+  operator *(Quaternion&lt;T&gt;, Quaternion&lt;T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Rectangular3D/Quaternion.cs/#L235"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Multiplies two quaternions together.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Quaternion&lt;T&gt; operator *(Quaternion&lt;T&gt; left, Quaternion&lt;T&gt; right)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>left</code> <a class="xref" href="NetFabric.Numerics.Rectangular3D.Quaternion-1.html">Quaternion</a>&lt;T&gt;</dt>
+    <dd><p>The left quaternion operand.</p>
+</dd>
+    <dt><code>right</code> <a class="xref" href="NetFabric.Numerics.Rectangular3D.Quaternion-1.html">Quaternion</a>&lt;T&gt;</dt>
+    <dd><p>The right quaternion operand.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Rectangular3D.Quaternion-1.html">Quaternion</a>&lt;T&gt;</dt>
+    <dd><p>The result of multiplying the two quaternions together.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Rectangular3D_Quaternion_1_op_Multiply_NetFabric_Numerics_Rectangular3D_Quaternion__0__NetFabric_Numerics_Rectangular3D_Quaternion__0___remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>
+The operator multiplies the two input quaternions <code class="paramref">left</code> and <code class="paramref">right</code> together
+to produce a new quaternion that represents their combined rotation.
+</p>
+<p>
+The multiplication of quaternions follows the Hamilton product rule, which combines their rotation and scaling properties.
+</p>
+<p>
+This operator is implemented using aggressive inlining to optimize performance.
+</p>
+</div>
+
+
+
+
+  <a id="NetFabric_Numerics_Rectangular3D_Quaternion_1_op_Multiply_" data-uid="NetFabric.Numerics.Rectangular3D.Quaternion`1.op_Multiply*"></a>
+
+  <h3 id="NetFabric_Numerics_Rectangular3D_Quaternion_1_op_Multiply_NetFabric_Numerics_Rectangular3D_Quaternion__0___0_" data-uid="NetFabric.Numerics.Rectangular3D.Quaternion`1.op_Multiply(NetFabric.Numerics.Rectangular3D.Quaternion{`0},`0)">
+  operator *(Quaternion&lt;T&gt;, T)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Rectangular3D/Quaternion.cs/#L258"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Multiplies a quaternion by a numeric value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Quaternion&lt;T&gt; operator *(Quaternion&lt;T&gt; left, T right)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>left</code> <a class="xref" href="NetFabric.Numerics.Rectangular3D.Quaternion-1.html">Quaternion</a>&lt;T&gt;</dt>
+    <dd><p>The quaternion operand.</p>
+</dd>
+    <dt><code>right</code> <span class="xref">T</span></dt>
+    <dd><p>The numeric value to multiply the quaternion by.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Rectangular3D.Quaternion-1.html">Quaternion</a>&lt;T&gt;</dt>
+    <dd><p>The result of multiplying the quaternion by the numeric value.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Rectangular3D_Quaternion_1_op_Multiply_NetFabric_Numerics_Rectangular3D_Quaternion__0___0__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>
+The operator multiplies a quaternion <code class="paramref">left</code> by a numeric value <code class="paramref">right</code>
+to produce a new quaternion where each component of the quaternion is multiplied by the scalar value.
+</p>
+<p>
+This operator is implemented using aggressive inlining to optimize performance.
+</p>
+</div>
+
+
+
+
+  <a id="NetFabric_Numerics_Rectangular3D_Quaternion_1_op_Subtraction_" data-uid="NetFabric.Numerics.Rectangular3D.Quaternion`1.op_Subtraction*"></a>
+
+  <h3 id="NetFabric_Numerics_Rectangular3D_Quaternion_1_op_Subtraction_NetFabric_Numerics_Rectangular3D_Quaternion__0__NetFabric_Numerics_Rectangular3D_Quaternion__0__" data-uid="NetFabric.Numerics.Rectangular3D.Quaternion`1.op_Subtraction(NetFabric.Numerics.Rectangular3D.Quaternion{`0},NetFabric.Numerics.Rectangular3D.Quaternion{`0})">
+  operator -(Quaternion&lt;T&gt;, Quaternion&lt;T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Rectangular3D/Quaternion.cs/#L213"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Subtracts the second quaternion from the first quaternion.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Quaternion&lt;T&gt; operator -(Quaternion&lt;T&gt; left, Quaternion&lt;T&gt; right)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>left</code> <a class="xref" href="NetFabric.Numerics.Rectangular3D.Quaternion-1.html">Quaternion</a>&lt;T&gt;</dt>
+    <dd><p>The first quaternion.</p>
+</dd>
+    <dt><code>right</code> <a class="xref" href="NetFabric.Numerics.Rectangular3D.Quaternion-1.html">Quaternion</a>&lt;T&gt;</dt>
+    <dd><p>The second quaternion.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Rectangular3D.Quaternion-1.html">Quaternion</a>&lt;T&gt;</dt>
+    <dd><p>The difference between the first and second quaternion.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Rectangular3D_Quaternion_1_op_Subtraction_NetFabric_Numerics_Rectangular3D_Quaternion__0__NetFabric_Numerics_Rectangular3D_Quaternion__0___remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>
+The operator subtracts each component of the second quaternion <code class="paramref">right</code>
+from the corresponding component of the first quaternion <code class="paramref">left</code> in an aggressively inlined manner,
+resulting in improved performance for arithmetic operations involving quaternions.
+</p>
+<p>
+This operator calculates the difference between the x, y, z, and w components of the quaternions,
+resulting in a new quaternion with the difference between their respective components.
+</p>
+</div>
+
+
+
+
+  <a id="NetFabric_Numerics_Rectangular3D_Quaternion_1_op_UnaryNegation_" data-uid="NetFabric.Numerics.Rectangular3D.Quaternion`1.op_UnaryNegation*"></a>
+
+  <h3 id="NetFabric_Numerics_Rectangular3D_Quaternion_1_op_UnaryNegation_NetFabric_Numerics_Rectangular3D_Quaternion__0__" data-uid="NetFabric.Numerics.Rectangular3D.Quaternion`1.op_UnaryNegation(NetFabric.Numerics.Rectangular3D.Quaternion{`0})">
+  operator -(Quaternion&lt;T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Rectangular3D/Quaternion.cs/#L192"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Negates the specified quaternion.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Quaternion&lt;T&gt; operator -(Quaternion&lt;T&gt; right)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>right</code> <a class="xref" href="NetFabric.Numerics.Rectangular3D.Quaternion-1.html">Quaternion</a>&lt;T&gt;</dt>
+    <dd><p>The quaternion to negate.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Rectangular3D.Quaternion-1.html">Quaternion</a>&lt;T&gt;</dt>
+    <dd><p>The negated quaternion.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Rectangular3D_Quaternion_1_op_UnaryNegation_NetFabric_Numerics_Rectangular3D_Quaternion__0___remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>
+The operator negates each component of the specified quaternion <code class="paramref">right</code>
+in an aggressively inlined manner, resulting in improved performance for arithmetic operations involving quaternions.
+</p>
+<p>
+This operator calculates the negation of the x, y, z, and w components of the quaternion,
+resulting in a new quaternion with the negated components.
+</p>
+</div>
+
+
+
+
+  <a id="NetFabric_Numerics_Rectangular3D_Quaternion_1_op_UnaryPlus_" data-uid="NetFabric.Numerics.Rectangular3D.Quaternion`1.op_UnaryPlus*"></a>
+
+  <h3 id="NetFabric_Numerics_Rectangular3D_Quaternion_1_op_UnaryPlus_NetFabric_Numerics_Rectangular3D_Quaternion__0__" data-uid="NetFabric.Numerics.Rectangular3D.Quaternion`1.op_UnaryPlus(NetFabric.Numerics.Rectangular3D.Quaternion{`0})">
+  operator +(Quaternion&lt;T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Rectangular3D/Quaternion.cs/#L149"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns the input quaternion unchanged.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Quaternion&lt;T&gt; operator +(Quaternion&lt;T&gt; right)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>right</code> <a class="xref" href="NetFabric.Numerics.Rectangular3D.Quaternion-1.html">Quaternion</a>&lt;T&gt;</dt>
+    <dd><p>The input quaternion.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Rectangular3D.Quaternion-1.html">Quaternion</a>&lt;T&gt;</dt>
+    <dd><p>The input quaternion.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Rectangular3D_Quaternion_1_op_UnaryPlus_NetFabric_Numerics_Rectangular3D_Quaternion__0___remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>
+The operator returns the input quaternion <code class="paramref">right</code> unchanged.
+This operator is implemented using aggressive inlining to optimize performance.
+</p>
+<p>
+The unary plus operator is primarily useful for consistency and readability in quaternion expressions
+where a positive sign is explicitly specified before a quaternion.
+</p>
+</div>
+
+
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Rectangular3D/Quaternion.cs/#L16" class="edit-link">Edit this page</a>
+        </div>
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          Copyright (c) 2023 Antão Almada
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

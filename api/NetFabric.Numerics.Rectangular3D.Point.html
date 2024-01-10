@@ -1,0 +1,464 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class Point
+ | NetFabric.Numerics </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class Point
+ | NetFabric.Numerics ">
+      
+      <link rel="icon" href="../images/Logo.png">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/NetFabric/NetFabric.Numerics/new/main/apiSpec/new?filename=NetFabric_Numerics_Rectangular3D_Point.md&amp;value=---%0Auid%3A%20NetFabric.Numerics.Rectangular3D.Point%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+  </head>
+
+  <script type="module" src="./../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/Logo.png" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="NetFabric.Numerics.Rectangular3D.Point">
+
+
+
+  <h1 id="NetFabric_Numerics_Rectangular3D_Point" data-uid="NetFabric.Numerics.Rectangular3D.Point" class="text-break">
+    Class Point
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Rectangular3D/Point.cs/#L129"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="NetFabric.html">NetFabric</a>.<a class="xref" href="NetFabric.Numerics.html">Numerics</a>.<a class="xref" href="NetFabric.Numerics.Rectangular3D.html">Rectangular3D</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>NetFabric.Numerics.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Provides static methods for point operations.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static class Point</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">Point</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist derived">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="NetFabric_Numerics_Rectangular3D_Point_Apply_" data-uid="NetFabric.Numerics.Rectangular3D.Point.Apply*"></a>
+
+  <h3 id="NetFabric_Numerics_Rectangular3D_Point_Apply__1_NetFabric_Numerics_Rectangular3D_Quaternion___0__NetFabric_Numerics_Rectangular3D_Point___0__" data-uid="NetFabric.Numerics.Rectangular3D.Point.Apply``1(NetFabric.Numerics.Rectangular3D.Quaternion{``0},NetFabric.Numerics.Rectangular3D.Point{``0})">
+  Apply&lt;T&gt;(Quaternion&lt;T&gt;, Point&lt;T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Rectangular3D/Point.cs/#L152"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Applies a quaternion to a 3-dimensional point.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Point&lt;T&gt; Apply&lt;T&gt;(Quaternion&lt;T&gt; quaternion, Point&lt;T&gt; point) where T : struct, IFloatingPoint&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>quaternion</code> <a class="xref" href="NetFabric.Numerics.Rectangular3D.Quaternion-1.html">Quaternion</a>&lt;T&gt;</dt>
+    <dd><p>The quaternion to apply.</p>
+</dd>
+    <dt><code>point</code> <a class="xref" href="NetFabric.Numerics.Rectangular3D.Point-1.html">Point</a>&lt;T&gt;</dt>
+    <dd><p>The 3-dimensional point to transform.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Rectangular3D.Point-1.html">Point</a>&lt;T&gt;</dt>
+    <dd><p>The transformed 3-dimensional point.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The underlying numeric type of the quaternion and point coordinates.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Rectangular3D_Point_Apply__1_NetFabric_Numerics_Rectangular3D_Quaternion___0__NetFabric_Numerics_Rectangular3D_Point___0___remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>
+The <code class="paramref">quaternion</code> is not required to be a unit quaternion.
+</p>
+<p>
+The point coordinates type must be a floating point.
+</p>
+<p>
+The transformation is applied by multiplying the point with the quaternion,
+resulting in a new 3-dimensional point that represents the original point
+after being transformed by the quaternion.
+</p>
+</div>
+
+
+
+
+  <a id="NetFabric_Numerics_Rectangular3D_Point_DistanceSquared_" data-uid="NetFabric.Numerics.Rectangular3D.Point.DistanceSquared*"></a>
+
+  <h3 id="NetFabric_Numerics_Rectangular3D_Point_DistanceSquared__1_NetFabric_Numerics_Rectangular3D_Point___0___NetFabric_Numerics_Rectangular3D_Point___0___" data-uid="NetFabric.Numerics.Rectangular3D.Point.DistanceSquared``1(NetFabric.Numerics.Rectangular3D.Point{``0}@,NetFabric.Numerics.Rectangular3D.Point{``0}@)">
+  DistanceSquared&lt;T&gt;(ref readonly Point&lt;T&gt;, ref readonly Point&lt;T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Rectangular3D/Point.cs/#L197"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Calculates the square of the distance between two points.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static T DistanceSquared&lt;T&gt;(ref readonly Point&lt;T&gt; from, ref readonly Point&lt;T&gt; to) where T : struct, INumber&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>from</code> <a class="xref" href="NetFabric.Numerics.Rectangular3D.Point-1.html">Point</a>&lt;T&gt;</dt>
+    <dd><p>The starting point.</p>
+</dd>
+    <dt><code>to</code> <a class="xref" href="NetFabric.Numerics.Rectangular3D.Point-1.html">Point</a>&lt;T&gt;</dt>
+    <dd><p>The target point.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">T</span></dt>
+    <dd><p>The square of the distance between the two points.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Rectangular3D_Point_DistanceSquared__1_NetFabric_Numerics_Rectangular3D_Point___0___NetFabric_Numerics_Rectangular3D_Point___0____remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>
+The <a class="xref" href="NetFabric.Numerics.Rectangular3D.Point.html#NetFabric_Numerics_Rectangular3D_Point_DistanceSquared__1_NetFabric_Numerics_Rectangular3D_Point___0___NetFabric_Numerics_Rectangular3D_Point___0___">DistanceSquared&lt;T&gt;(ref readonly Point&lt;T&gt;, ref readonly Point&lt;T&gt;)</a> method calculates the square of the distance between two points
+specified by the <code class="paramref">from</code> and <code class="paramref">to</code> parameters.
+</p>
+<p>
+The distance is calculated as the Euclidean distance in the 3D Rectangular coordinate system.
+</p>
+<p>
+Note that the square of the distance is returned instead of the actual distance to avoid the need for
+taking the square root, which can be a computationally expensive operation.
+</p>
+</div>
+
+
+
+
+  <a id="NetFabric_Numerics_Rectangular3D_Point_Distance_" data-uid="NetFabric.Numerics.Rectangular3D.Point.Distance*"></a>
+
+  <h3 id="NetFabric_Numerics_Rectangular3D_Point_Distance__1_NetFabric_Numerics_Rectangular3D_Point___0___NetFabric_Numerics_Rectangular3D_Point___0___" data-uid="NetFabric.Numerics.Rectangular3D.Point.Distance``1(NetFabric.Numerics.Rectangular3D.Point{``0}@,NetFabric.Numerics.Rectangular3D.Point{``0}@)">
+  Distance&lt;T&gt;(ref readonly Point&lt;T&gt;, ref readonly Point&lt;T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Rectangular3D/Point.cs/#L174"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Calculates the distance between two points.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static T Distance&lt;T&gt;(ref readonly Point&lt;T&gt; from, ref readonly Point&lt;T&gt; to) where T : struct, INumber&lt;T&gt;, IMinMaxValue&lt;T&gt;, IRootFunctions&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>from</code> <a class="xref" href="NetFabric.Numerics.Rectangular3D.Point-1.html">Point</a>&lt;T&gt;</dt>
+    <dd><p>The starting point.</p>
+</dd>
+    <dt><code>to</code> <a class="xref" href="NetFabric.Numerics.Rectangular3D.Point-1.html">Point</a>&lt;T&gt;</dt>
+    <dd><p>The target point.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">T</span></dt>
+    <dd><p>The distance between the two points.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Rectangular3D_Point_Distance__1_NetFabric_Numerics_Rectangular3D_Point___0___NetFabric_Numerics_Rectangular3D_Point___0____remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>
+The <a class="xref" href="NetFabric.Numerics.Rectangular3D.Point.html#NetFabric_Numerics_Rectangular3D_Point_Distance__1_NetFabric_Numerics_Rectangular3D_Point___0___NetFabric_Numerics_Rectangular3D_Point___0___">Distance&lt;T&gt;(ref readonly Point&lt;T&gt;, ref readonly Point&lt;T&gt;)</a> method calculates the distance between two points specified by the <code class="paramref">from</code> and <code class="paramref">to</code> parameters.
+</p>
+<p>
+The distance is calculated as the Euclidean distance in the 3D Rectangular coordinate system.
+</p>
+</div>
+
+
+
+
+  <a id="NetFabric_Numerics_Rectangular3D_Point_ManhattanDistance_" data-uid="NetFabric.Numerics.Rectangular3D.Point.ManhattanDistance*"></a>
+
+  <h3 id="NetFabric_Numerics_Rectangular3D_Point_ManhattanDistance__1_NetFabric_Numerics_Rectangular3D_Point___0___NetFabric_Numerics_Rectangular3D_Point___0___" data-uid="NetFabric.Numerics.Rectangular3D.Point.ManhattanDistance``1(NetFabric.Numerics.Rectangular3D.Point{``0}@,NetFabric.Numerics.Rectangular3D.Point{``0}@)">
+  ManhattanDistance&lt;T&gt;(ref readonly Point&lt;T&gt;, ref readonly Point&lt;T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Rectangular3D/Point.cs/#L220"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the Manhattan distance between two points.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static T ManhattanDistance&lt;T&gt;(ref readonly Point&lt;T&gt; from, ref readonly Point&lt;T&gt; to) where T : struct, INumber&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>from</code> <a class="xref" href="NetFabric.Numerics.Rectangular3D.Point-1.html">Point</a>&lt;T&gt;</dt>
+    <dd></dd>
+    <dt><code>to</code> <a class="xref" href="NetFabric.Numerics.Rectangular3D.Point-1.html">Point</a>&lt;T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">T</span></dt>
+    <dd><p>The Manhattan distance between two points.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Rectangular3D_Point_ManhattanDistance__1_NetFabric_Numerics_Rectangular3D_Point___0___NetFabric_Numerics_Rectangular3D_Point___0____remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>
+The term "Manhattan Distance" comes from the idea of measuring the distance a taxi 
+would have to travel along a grid of city blocks (which are typically arranged in 
+a rectangular or square grid pattern) to reach the destination point from the 
+starting point. 
+</p>
+<p>
+The Manhattan distance between two points, (x1, y1) and (x2, y2), is defined as the 
+sum of the absolute differences of their coordinates along each dimension.
+</p>
+</div>
+
+
+
+
+  <a id="NetFabric_Numerics_Rectangular3D_Point_ToSpherical_" data-uid="NetFabric.Numerics.Rectangular3D.Point.ToSpherical*"></a>
+
+  <h3 id="NetFabric_Numerics_Rectangular3D_Point_ToSpherical__1_NetFabric_Numerics_Rectangular3D_Point___0__" data-uid="NetFabric.Numerics.Rectangular3D.Point.ToSpherical``1(NetFabric.Numerics.Rectangular3D.Point{``0})">
+  ToSpherical&lt;T&gt;(Point&lt;T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Rectangular3D/Point.cs/#L236"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Converts a Rectangular 3D point to spherical coordinates.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Point&lt;Radians, T&gt; ToSpherical&lt;T&gt;(Point&lt;T&gt; point) where T : struct, IFloatingPointIeee754&lt;T&gt;, IMinMaxValue&lt;T&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>point</code> <a class="xref" href="NetFabric.Numerics.Rectangular3D.Point-1.html">Point</a>&lt;T&gt;</dt>
+    <dd><p>The Rectangular 3D point to convert.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="NetFabric.Numerics.Spherical.Point-2.html">Point</a>&lt;<a class="xref" href="NetFabric.Numerics.Radians.html">Radians</a>, T&gt;</dt>
+    <dd><p>The spherical coordinates representing the point.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The type of the point coordinates, which must adhere to IEEE 754 standards and provide min/max values.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="NetFabric_Numerics_Rectangular3D_Point_ToSpherical__1_NetFabric_Numerics_Rectangular3D_Point___0___remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>If the type of point to convert doesn't meet the constraints, please convert it first to a suitable type using one of the conversion methods:</p>
+<ul>
+<li><a class="xref" href="NetFabric.Numerics.Rectangular3D.Point-1.html#NetFabric_Numerics_Rectangular3D_Point_1_CreateChecked__1_NetFabric_Numerics_Rectangular3D_Point___0___">CreateChecked&lt;TOther&gt;(ref readonly Point&lt;TOther&gt;)</a></li>
+<li><a class="xref" href="NetFabric.Numerics.Rectangular3D.Point-1.html#NetFabric_Numerics_Rectangular3D_Point_1_CreateSaturating__1_NetFabric_Numerics_Rectangular3D_Point___0___">CreateSaturating&lt;TOther&gt;(ref readonly Point&lt;TOther&gt;)</a></li>
+<li><a class="xref" href="NetFabric.Numerics.Rectangular3D.Point-1.html#NetFabric_Numerics_Rectangular3D_Point_1_CreateTruncating__1_NetFabric_Numerics_Rectangular3D_Point___0___">CreateTruncating&lt;TOther&gt;(ref readonly Point&lt;TOther&gt;)</a></li>
+</ul>
+</div>
+
+
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/src/NetFabric.Numerics/Rectangular3D/Point.cs/#L129" class="edit-link">Edit this page</a>
+        </div>
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          Copyright (c) 2023 Antão Almada
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

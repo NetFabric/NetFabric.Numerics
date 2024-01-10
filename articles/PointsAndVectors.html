@@ -1,0 +1,152 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>The Advantages of Using Point and Vector Mathematical Concepts | NetFabric.Numerics </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="The Advantages of Using Point and Vector Mathematical Concepts | NetFabric.Numerics ">
+      
+      <link rel="icon" href="../images/Logo.png">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/NetFabric/NetFabric.Numerics/blob/main/docs/articles/PointsAndVectors.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+  </head>
+
+  <script type="module" src="./../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/Logo.png" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="the-advantages-of-using-point-and-vector-mathematical-concepts">The Advantages of Using Point and Vector Mathematical Concepts</h1>
+
+<p>When it comes to working with numerical computations and geometry in software development, the choice between using mathematical concepts of &quot;point&quot; and &quot;vector&quot; can have a significant impact on the clarity, efficiency, and maintainability of your code. In this article, we'll explore the advantages of using both the &quot;point&quot; and &quot;vector&quot; concepts and how they differ from libraries that use only vectors.</p>
+<h2 id="understanding-points-and-vectors">Understanding Points and Vectors</h2>
+<p>Before delving into the advantages, let's clarify what &quot;point&quot; and &quot;vector&quot; mean in the context of mathematical concepts.</p>
+<ul>
+<li><p><strong>Point</strong>: A point represents a location in space and is typically defined by its coordinates in a specific coordinate system. In a 2D Cartesian coordinate system, a point is often represented as <code>(x, y)</code>, while in 3D space, it's represented as <code>(x, y, z)</code>. Points are used to denote specific positions or locations in space.</p>
+</li>
+<li><p><strong>Vector</strong>: A vector, on the other hand, represents both magnitude and direction. Vectors can be thought of as arrows pointing from one point to another. They can be used to describe movements, forces, or translations in space. Vectors are often represented as <code>(x, y)</code> in 2D and <code>(x, y, z)</code> in 3D.</p>
+</li>
+</ul>
+<h2 id="advantages-of-using-points">Advantages of Using Points</h2>
+<h3 id="1-clarity-in-spatial-representation">1. Clarity in Spatial Representation</h3>
+<p>Points provide a clear representation of spatial locations. When you need to denote a specific position on a canvas or in 3D space, using a point makes your intention explicit. This clarity is beneficial for developers who are reading and maintaining the code.</p>
+<h3 id="2-easy-conversion-to-vectors">2. Easy Conversion to Vectors</h3>
+<p>Points can be easily converted to vectors by calculating the difference between two points. This is particularly useful when you want to represent movements or directions. Converting from point A to point B results in a vector that indicates how to get from A to B.</p>
+<h2 id="advantages-of-using-vectors">Advantages of Using Vectors</h2>
+<h3 id="1-mathematical-consistency">1. Mathematical Consistency</h3>
+<p>Vectors adhere to the principles of vector mathematics, making them suitable for various geometric operations, such as addition, subtraction, and scalar multiplication. These operations are essential for tasks like transformations and physics simulations.</p>
+<h3 id="2-efficient-for-operations">2. Efficient for Operations</h3>
+<p>When performing operations that involve translating, rotating, or scaling objects in space, vectors are more efficient. They allow for easy manipulation of objects without converting back and forth between points and vectors.</p>
+<h3 id="3-compact-representation">3. Compact Representation</h3>
+<p>In many cases, vectors can provide a more compact representation of spatial data. For example, representing the direction of a line or the normal of a plane is often more concise and intuitive with vectors.</p>
+<h2 id="when-to-use-which-concept">When to Use Which Concept</h2>
+<p>The choice between points and vectors depends on the specific requirements of your application:</p>
+<ul>
+<li><p><strong>Use Points When</strong>:</p>
+<ul>
+<li>You want to represent a specific location in space.</li>
+<li>Clarity and readability are a priority.</li>
+<li>You need to convert between points and vectors for certain operations.</li>
+</ul>
+</li>
+<li><p><strong>Use Vectors When</strong>:</p>
+<ul>
+<li>You are working with geometric transformations or physics simulations.</li>
+<li>Mathematical consistency and efficiency are critical.</li>
+<li>Compact representation of directions and magnitudes is preferred.</li>
+</ul>
+</li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<p>Both points and vectors have their advantages, and the choice between them depends on the nature of the problem you are solving. The use of mathematical concepts like points and vectors, as exemplified by libraries like NetFabric.Numerics, provides developers with the flexibility to work with spatial data more effectively, leading to more efficient and readable code.</p>
+<p>In summary, understanding when to use points and vectors in your code can greatly enhance the clarity, efficiency, and maintainability of your software. By making the right choice, you can achieve better results in tasks involving spatial data and geometry.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/NetFabric/NetFabric.Numerics/blob/main/docs/articles/PointsAndVectors.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          Copyright (c) 2023 Antão Almada
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

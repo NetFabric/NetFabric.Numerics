@@ -1,0 +1,900 @@
+{
+  "source_base_path": "/home/runner/work/NetFabric.Numerics/NetFabric.Numerics/docs",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.Angle-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.Angle-2.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.Angle.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.Angle.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.AngleReduced-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.AngleReduced-2.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.Coordinate.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.Coordinate.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.CoordinateSystem-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.CoordinateSystem-1.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.CoordinateSystem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.CoordinateSystem.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.Degrees.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.Degrees.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.Geodesy.Datum-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.Geodesy.Datum-1.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.Geodesy.Datum-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.Geodesy.Datum-2.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.Geodesy.Ellipsoid-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.Geodesy.Ellipsoid-1.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.Geodesy.Ellipsoid.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.Geodesy.Ellipsoid.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.Geodesy.Geodetic2.CoordinateSystem-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.Geodesy.Geodetic2.CoordinateSystem-2.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.Geodesy.Geodetic2.Point-3.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.Geodesy.Geodetic2.Point-3.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.Geodesy.Geodetic2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.Geodesy.Geodetic2.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.Geodesy.Geodetic3.CoordinateSystem-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.Geodesy.Geodetic3.CoordinateSystem-2.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.Geodesy.Geodetic3.Point-3.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.Geodesy.Geodetic3.Point-3.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.Geodesy.Geodetic3.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.Geodesy.Geodetic3.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.Geodesy.GeodeticCoordinateSystem-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.Geodesy.GeodeticCoordinateSystem-1.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.Geodesy.GeodeticCoordinateSystem-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.Geodesy.GeodeticCoordinateSystem-2.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.Geodesy.IDatum-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.Geodesy.IDatum-1.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.Geodesy.IDatum.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.Geodesy.IDatum.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.Geodesy.IGeodeticBase-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.Geodesy.IGeodeticBase-1.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.Geodesy.IGeodeticBase-3.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.Geodesy.IGeodeticBase-3.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.Geodesy.IGeodeticCoordinateSystem-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.Geodesy.IGeodeticCoordinateSystem-1.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.Geodesy.IGeodeticCoordinateSystem-3.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.Geodesy.IGeodeticCoordinateSystem-3.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.Geodesy.IGeodeticPoint-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.Geodesy.IGeodeticPoint-1.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.Geodesy.IGeodeticPoint-4.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.Geodesy.IGeodeticPoint-4.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.Geodesy.NAD1927CONUS-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.Geodesy.NAD1927CONUS-1.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.Geodesy.NAD83-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.Geodesy.NAD83-1.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.Geodesy.Offset-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.Geodesy.Offset-1.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.Geodesy.WGS1972-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.Geodesy.WGS1972-1.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.Geodesy.WGS84-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.Geodesy.WGS84-1.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.Geodesy.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.Geodesy.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.Gradians.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.Gradians.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.IAngle-4.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.IAngle-4.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.IAngle.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.IAngle.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.IAngleUnits.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.IAngleUnits.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.ICoordinateSystem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.ICoordinateSystem.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.IGeometricBase-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.IGeometricBase-1.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.IGeometricBase-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.IGeometricBase-2.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.IGeometricBase.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.IGeometricBase.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.IMatrix-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.IMatrix-2.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.IPoint-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.IPoint-2.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.IPoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.IPoint.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.IVector-3.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.IVector-3.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.IVector.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.IVector.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.Polar.CoordinateSystem-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.Polar.CoordinateSystem-2.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.Polar.Point-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.Polar.Point-2.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.Polar.Point.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.Polar.Point.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.Polar.PointReduced-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.Polar.PointReduced-2.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.Polar.Vector-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.Polar.Vector-2.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.Polar.Vector.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.Polar.Vector.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.Polar.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.Polar.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.Quadrant.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.Quadrant.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.Radians.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.Radians.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.Rectangular2D.CoordinateSystem-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.Rectangular2D.CoordinateSystem-1.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.Rectangular2D.Point-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.Rectangular2D.Point-1.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.Rectangular2D.Point.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.Rectangular2D.Point.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.Rectangular2D.Vector-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.Rectangular2D.Vector-1.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.Rectangular2D.Vector.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.Rectangular2D.Vector.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.Rectangular2D.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.Rectangular2D.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.Rectangular3D.CoordinateSystem-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.Rectangular3D.CoordinateSystem-1.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.Rectangular3D.Point-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.Rectangular3D.Point-1.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.Rectangular3D.Point.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.Rectangular3D.Point.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.Rectangular3D.Quaternion-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.Rectangular3D.Quaternion-1.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.Rectangular3D.Quaternion.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.Rectangular3D.Quaternion.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.Rectangular3D.Vector-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.Rectangular3D.Vector-1.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.Rectangular3D.Vector.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.Rectangular3D.Vector.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.Rectangular3D.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.Rectangular3D.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.Revolutions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.Revolutions.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.Spherical.CoordinateSystem-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.Spherical.CoordinateSystem-2.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.Spherical.Point-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.Spherical.Point-2.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.Spherical.Point.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.Spherical.Point.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.Spherical.PointReduced-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.Spherical.PointReduced-2.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.Spherical.Vector-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.Spherical.Vector-2.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.Spherical.Vector.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.Spherical.Vector.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.Spherical.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.Spherical.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NetFabric.Numerics.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NetFabric.Numerics.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "api/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "api/index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".json": {
+          "relative_path": "api/toc.json"
+        },
+        ".html": {
+          "relative_path": "api/toc.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/Angles.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/Angles.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/GenericMath.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/GenericMath.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/PointsAndVectors.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/PointsAndVectors.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/intro.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/intro.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "articles/toc.yml",
+      "output": {
+        ".json": {
+          "relative_path": "articles/toc.json"
+        },
+        ".html": {
+          "relative_path": "articles/toc.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/Logo.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/Logo.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".json": {
+          "relative_path": "toc.json"
+        },
+        ".html": {
+          "relative_path": "toc.html"
+        }
+      },
+      "version": ""
+    }
+  ],
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}
