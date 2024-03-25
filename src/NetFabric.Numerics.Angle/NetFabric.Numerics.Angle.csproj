@@ -40,7 +40,7 @@
 
   <ItemGroup>
     <PackageReference Include="NetFabric" Version="1.5.0" />
-    <PackageReference Include="NetFabric.Numerics.Tensors" Version="1.1.0" />
+    <PackageReference Include="NetFabric.Numerics.Tensors" Version="3.1.0" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
