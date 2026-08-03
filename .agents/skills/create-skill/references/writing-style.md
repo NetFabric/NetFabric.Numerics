@@ -10,6 +10,7 @@
 | No restatement | Comments only when code hides intent | Restating what headers say |
 | Compress lists | Semicolons between items | Bulleted single-word items |
 | Symbols | `→`, `&`, `vs`, `≤`, `≥` | Spelled-out equivalents |
+| Mermaid diagrams | Flow/sequence/graph when structure is clearer than prose or tables | Diagrams for data that fits in a table |
 
 ## Token Budget Targets
 

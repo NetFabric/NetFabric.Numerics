@@ -9,7 +9,7 @@ description: Create or update VS Code Copilot agent skills (SKILL.md + reference
 
 | File | Purpose | Target Size |
 |------|---------|-------------|
-| `SKILL.md` | Entry point — facts, quick-ref, reference table | <60 lines |
+| `SKILL.md` | Entry point — facts, quick-ref, reference table | <100 lines |
 | `references/*.md` | Deep detail, examples, edge cases | <200 lines each |
 | `scripts/` | Runnable helpers invoked by skill instructions | — |
 | `assets/` | Templates, data files, images referenced by skill | — |

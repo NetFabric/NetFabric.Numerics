@@ -56,6 +56,41 @@ public readonly record struct Vec2<T>(T X, T Y)
 }
 ```
 
+## Prefer Type Members Over Math / MathF
+
+**Never use `Math` or `MathF`.** Since .NET 7, all constants and methods are available as static members on the numeric types themselves, which also work in generic contexts.
+
+| Instead of | Use |
+|------------|-----|
+| `Math.PI` | `double.Pi` |
+| `MathF.PI` | `float.Pi` |
+| `Math.Floor(x)` | `double.Floor(x)` |
+| `MathF.Floor(x)` | `float.Floor(x)` |
+| `Math.Abs(x)` | `T.Abs(x)` (generic) |
+| `Math.Sin(x)` | `T.Sin(x)` (generic) |
+| `Math.Sqrt(x)` | `T.Sqrt(x)` (generic) |
+| `Math.Max(a, b)` | `T.Max(a, b)` (generic) |
+
+In generic code, call the method on `T` (e.g., `T.Sin(x)`); for concrete `double`/`float` code, call on the type (`double.Sin(x)`).
+
+**Always match the constant or method to the type of the value being computed.** Mixing types causes silent implicit conversions.
+
+| `double` | `float` | `int` / `long` / … |
+|----------|---------|---------------------|
+| `double.Pi` | `float.Pi` | — |
+| `double.Tau` | `float.Tau` | — |
+| `double.E` | `float.E` | — |
+| `double.MinValue` | `float.MinValue` | `int.MinValue`, `long.MinValue` |
+| `double.MaxValue` | `float.MaxValue` | `int.MaxValue`, `long.MaxValue` |
+| `double.Pow(x, y)` | `float.Pow(x, y)` | — |
+| `double.Sqrt(x)` | `float.Sqrt(x)` | — |
+| `double.Log(x)` | `float.Log(x)` | — |
+| `double.Abs(x)` | `float.Abs(x)` | `int.Abs(x)`, `long.Abs(x)` |
+| `double.Max(a, b)` | `float.Max(a, b)` | `int.Max(a, b)`, `long.Max(a, b)` |
+| `double.Clamp(v,min,max)` | `float.Clamp(…)` | `int.Clamp(…)`, `long.Clamp(…)` |
+
+In generic code use `T.Pi`, `T.Abs(x)`, `T.Max(a, b)`, etc. — the compiler resolves to the correct type automatically.
+
 ## Reference Files
 
 | File | Load When |
