@@ -8,8 +8,10 @@ Before scaffolding a single file, ask the user which harness the generated squad
 
 | Question to ask | Why it matters |
 | --- | --- |
-| Which harness will run this squad? (Copilot CLI, Claude Code, Strands Agents SDK, LangGraph, ...) | Determines native-graph vs. orchestrator+delegation (below) and which agent-authoring skill to invoke |
+| Which harness will run this squad? (Copilot CLI, Claude Code, VS Code custom agents, Strands Agents SDK, LangGraph, ...) | Determines native-graph vs. orchestrator+delegation (below) and which agent-authoring skill to invoke |
 | Is there an existing agent-authoring skill installed for that harness? | If none exists, say so instead of guessing at a file format |
+
+Never conflate two harnesses just because they share a file extension: VS Code custom agents also use `.agent.md`, but with `target: vscode` frontmatter and different capabilities (e.g. a `model:` fallback array — see the `model-selection` skill's `harness-mapping.md`) than Copilot CLI's `.agent.md` (`target: github-copilot`). `copilot-cli-custom-agents`' own description explicitly excludes VS Code-only fields, and no dedicated agent-authoring skill for VS Code custom agents exists in this marketplace yet — if the user targets VS Code custom agents, say that gap out loud rather than silently reusing `copilot-cli-custom-agents`.
 
 ## Native-graph harnesses
 
@@ -70,8 +72,9 @@ For each node, delegate authoring by harness — never hand-write frontmatter/pr
 
 | Target harness | Agent-authoring skill to invoke per node |
 | --- | --- |
-| GitHub Copilot CLI | `copilot-cli-custom-agents` — produces `.agent.md` files |
+| GitHub Copilot CLI | `copilot-cli-custom-agents` — produces `.agent.md` files (`target: github-copilot`) |
 | Claude Code | `claude-code-custom-agents` — produces `.claude/agents/*.md` subagent files |
+| VS Code custom agents | None installed in this marketplace yet — say so explicitly; don't reuse `copilot-cli-custom-agents` even though both produce a file named `.agent.md`, since that skill's own frontmatter excludes VS Code-only fields |
 | Any harness with its own agent-file format | That harness's equivalent agent-authoring skill, if one exists in the installed marketplace |
 
 Never hand-write a node's frontmatter/prompt body directly in this skill's workflow — always call the target skill so its frontmatter rules, tool restrictions, and writing-style guidance are applied consistently.

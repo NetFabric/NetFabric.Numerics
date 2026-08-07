@@ -6,7 +6,7 @@ author: Antão Almada
 # Resolution order: --target flag > this field > auto-detect from filesystem.
 # Accepted values: agent-skills, antigravity, claude, codex, copilot, cursor, gemini, kiro, opencode, windsurf
 targets:
-- copilot
+  - copilot
 dependencies:
   apm:
     - netfabric/intelligentium/plugins/agent-authoring
@@ -14,6 +14,7 @@ dependencies:
     - netfabric/intelligentium/plugins/math-foundations
     - netfabric/intelligentium/plugins/math-rotation
     - netfabric/intelligentium/plugins/math-geodesy
+    - netfabric/intelligentium/plugins/codebase-memory
   mcp: []
 includes: auto
 scripts: {}

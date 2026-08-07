@@ -58,7 +58,7 @@ task(agent_type="squad-implementer", prompt="Implement the plan in
 /memories/session/squad-plan.md. Run tests after each file change.")
 ```
 
-This is the same discipline VS Code enforces with `vscode/memory` writes before a handoff — the CLI has no equivalent shared-memory tool, so the orchestrator's `prompt` composition is the entire hand-off mechanism.
+This is the same discipline VS Code's own `handoffs` frontmatter enforces via its `prompt` field before switching to the next agent. The CLI's own `memory` feature (`--enable-memory`, the `memory` permission kind, `/memory`) is a persistent fact store scoped to the user or repo *across* sessions — it isn't a channel for one subagent to hand data or files to another *within* a session, so it doesn't substitute for `prompt` composition here.
 
 ## Agent-to-agent communication
 

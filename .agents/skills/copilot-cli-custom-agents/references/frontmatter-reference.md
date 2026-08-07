@@ -7,6 +7,7 @@ Source: [CLI command reference §Custom agents reference](https://docs.github.co
 | Field | Type | Default | Notes |
 | --- | --- | --- | --- |
 | `description` | string | — (required) | Shown in the agent list and to the `task` tool; the CLI routes auto-delegation on this text alone — be specific about scope/triggers, not vague ("Backend developer" won't trigger). |
+| `target` | string | — (always set to `github-copilot`) | VS Code-only field, ignored by the standalone CLI. Always include it anyway: if this `.github/agents/*.agent.md` file is ever opened in VS Code, `target: github-copilot` makes VS Code honor its `mcp-servers` key instead of defaulting to a native `vscode`-target agent (source: [VS Code custom agent file structure](https://code.visualstudio.com/docs/agent-customization/custom-agents#_custom-agent-file-structure)). |
 | `name` | string | filename | Display label shown in the `/agent` picker and agent list — doesn't need to match the filename (which is still the agent's ID for `task(agent_type=...)`/`@mention`). Keep it short but meaningful; spaces are allowed (e.g. `name: Security Review`). |
 | `model` | string | inherits parent | Single model string. Accepts short IDs (`claude-sonnet-4.6`) or display names with vendor suffix (`"GPT-5.4 (copilot)"`). When the session model is `Auto`, subagents always use the resolved session model regardless of this field. |
 | `tools` | string[] | `["*"]` (all) | See [Tools](#tools) below. |
@@ -44,7 +45,7 @@ sidekick:
 | `behavior` | `restart` (cancel + relaunch fresh each trigger, for stateless gatherers) or `persistent` (one long-lived loop, state accumulates) |
 | `maxSendsPerTurn` | Max inbox sends per trigger (default `1`); resets each delivered message in `persistent` mode |
 
-> The CLI has no `target:`, `agents:` allowlist, `handoffs:`, or model fallback-chain array — don't add them to a CLI agent file, they're silently ignored. Enforce a specialist hierarchy by convention instead (naming prefix + `user-invocable: false`). For per-agent model resilience use `~/.copilot/settings.json` → `subagents.agents.<name>.model` rather than an inline fallback list.
+> The CLI also has no `agents:` allowlist, `handoffs:`, or model fallback-chain array — don't add them, they're silently ignored (unknown fields warn, not error). Enforce a specialist hierarchy by convention instead (naming prefix + `user-invocable: false`). For per-agent model resilience use `~/.copilot/settings.json` → `subagents.agents.<name>.model` rather than an inline fallback list.
 
 ## Tools
 

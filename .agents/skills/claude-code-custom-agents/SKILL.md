@@ -51,10 +51,11 @@ Full frontmatter field table, tool-availability filters, and location priority �
 1. Scope one focused role per subagent; pick a scope (`.claude/agents/` project vs `~/.claude/agents/` user) → [references/authoring-workflow.md](references/authoring-workflow.md)
 2. Write a specific `description` (add "use proactively" where delegation should be eager) and a numbered-workflow prompt body → [references/writing-style.md](references/writing-style.md)
 3. Restrict `tools`/`disallowedTools` to the minimum the role needs; on a coordinator, allowlist spawnable subagent types with `tools: Agent(worker, researcher)` → [references/delegation-and-squads.md](references/delegation-and-squads.md)
-4. New agent files in an *existing* `.claude/agents/`/`~/.claude/agents/` load within seconds, no restart — restart only when that scope's `agents/` directory didn't exist when the session started
-5. Check [references/authoring-workflow.md](references/authoring-workflow.md) if a subagent doesn't load or never gets invoked
-6. Check [references/undocumented-and-gotchas.md](references/undocumented-and-gotchas.md) for version-specific behavior (background-by-default execution, model resolution order, output scanning) missing from a quick skim of the docs
-7. Run `markdown-best-practices` over the finished subagent file — it's still Markdown (heading/list hygiene in the prompt body, no bare fences)
+4. Choose `model:` (and `effort:`) using the `model-selection` skill before finalizing frontmatter — never leave it on the `inherit` default without a deliberate reason
+5. New agent files in an *existing* `.claude/agents/`/`~/.claude/agents/` load within seconds, no restart — restart only when that scope's `agents/` directory didn't exist when the session started
+6. Check [references/authoring-workflow.md](references/authoring-workflow.md) if a subagent doesn't load or never gets invoked
+7. Check [references/undocumented-and-gotchas.md](references/undocumented-and-gotchas.md) for version-specific behavior (background-by-default execution, model resolution order, output scanning) missing from a quick skim of the docs
+8. Run `markdown-best-practices` over the finished subagent file — it's still Markdown (heading/list hygiene in the prompt body, no bare fences)
 
 ## Reference Files
 
