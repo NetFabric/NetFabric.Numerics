@@ -1,6 +1,6 @@
 ---
 name: csharp-best-practices
-description: Modern .NET and C# best practices for code quality, performance, and correctness. USE FOR: choosing struct/class/record/readonly-record-struct; nullable reference types; pattern matching; primary constructors; collection expressions; required members; init-only properties; file-scoped namespaces; global usings; async/await patterns; ConfigureAwait; ValueTask vs Task; CancellationToken propagation; IAsyncEnumerable; Span<T>/Memory<T> usage; avoiding boxing; readonly struct; ArrayPool<T>; FrozenDictionary/FrozenSet; LINQ vs loops in hot paths; ArgumentNullException.ThrowIfNull; ThrowIfNegative; ThrowIfZero; IReadOnlyList return types; error handling patterns. DO NOT USE FOR: generic math interfaces (use dotnet-generic-math); ASP.NET Core middleware; EF Core modeling.
+description: "Modern .NET and C# best practices for code quality, performance, and correctness. USE FOR: choosing struct/class/record/readonly-record-struct; nullable reference types; pattern matching; primary constructors; collection expressions; required members; init-only properties; file-scoped namespaces; global usings; async/await patterns; ConfigureAwait; ValueTask vs Task; CancellationToken propagation; IAsyncEnumerable; Span<T>/Memory<T> usage; avoiding boxing; readonly struct; ArrayPool<T>; FrozenDictionary/FrozenSet; LINQ vs loops in hot paths; ArgumentNullException.ThrowIfNull; ThrowIfNegative; ThrowIfZero; IReadOnlyList return types; error handling patterns; GeneratedRegex; LoggerMessage; source generators for regex and logging; avoiding Math/MathF in favor of static methods on the numeric type. DO NOT USE FOR: generic math interfaces (use dotnet-generic-math); ASP.NET Core middleware; EF Core modeling."
 ---
 
 # C# Best Practices
@@ -51,12 +51,27 @@ Full examples → [references/language-features.md](references/language-features
 | `ArgumentOutOfRangeException.ThrowIfGreaterThan(x, max)` | .NET 8 |
 | `ObjectDisposedException.ThrowIf(condition, this)` | .NET 7 |
 
+## Source Generators
+
+| Pattern | Attribute | Benefit |
+|---------|-----------|--------|
+| Regex | `[GeneratedRegex("...")]` on `static partial` method | Compile-time; no runtime compilation; faster |
+| Logging | `[LoggerMessage(...)]` on `static partial` method | Zero-alloc structured logging; no boxing |
+
+Full examples → [references/source-generators.md](references/source-generators.md)
+
 ## API Design
 
 - Return `IReadOnlyList<T>` / `IReadOnlyDictionary<K,V>` for collections
 - Accept `IEnumerable<T>` for input (widest contract)
 - Accept `ReadOnlySpan<T>` overloads for hot paths
 - Use `CancellationToken` as **last** parameter; default to `default`
+
+## Math APIs
+
+- Never call `Math.*` or `MathF.*` — use the equivalent static method on the operand's own type instead (`double.Sqrt(x)`, `float.Pow(x, y)`, `int.Abs(x)`), available since .NET 7 via `INumber<T>`/`IFloatingPointIeee754<T>`
+- Same rule applies generically: `T.Sqrt(x)` when `T : IRootFunctions<T>` — avoids picking the wrong precision and works uniformly across `float`/`double`/custom numeric types
+- Full generic-math interface usage (`INumber<T>`, `IFloatingPointIeee754<T>`, etc.) → use the `dotnet-generic-math` skill
 
 ## Reference Files
 
@@ -65,3 +80,4 @@ Full examples → [references/language-features.md](references/language-features
 | [references/language-features.md](references/language-features.md) | Records, pattern matching, primary constructors, collection expressions, raw strings |
 | [references/performance.md](references/performance.md) | Span, Memory, ArrayPool, stackalloc, boxing, FrozenDictionary, LINQ vs loops |
 | [references/async.md](references/async.md) | async/await, ValueTask, ConfigureAwait, IAsyncEnumerable, CancellationToken |
+| [references/source-generators.md](references/source-generators.md) | GeneratedRegex, LoggerMessage |

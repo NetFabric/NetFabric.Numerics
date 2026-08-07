@@ -1,6 +1,6 @@
 ---
 name: trigonometric-functions
-description: Abstract math for trigonometric functions: definitions, domains, ranges, key identities, and inverse functions. USE FOR: implementing sin/cos/tan/cot/sec/csc; implementing arcsin/arccos/arctan/atan2/acot/asec/acsc; validating input domains for inverse trig; applying Pythagorean and angle-sum identities; choosing atan vs atan2; precision near domain boundaries. DO NOT USE FOR: angle unit conversions (use angles-and-circular-arithmetic); coordinate system conversions (use coordinate-system-conversions); rotation representations (use 3d-rotation-theory).
+description: "Abstract math for trigonometric functions: definitions, domains, ranges, key identities, and inverse functions. USE FOR: implementing sin/cos/tan/cot/sec/csc; implementing arcsin/arccos/arctan/atan2/acot/asec/acsc; validating input domains for inverse trig; applying Pythagorean and angle-sum identities; choosing atan vs atan2; precision near domain boundaries. DO NOT USE FOR: angle unit conversions (use angles-and-circular-arithmetic); coordinate system conversions (use coordinate-system-conversions); rotation representations (use 3d-rotation-theory)."
 ---
 
 # Trigonometric Functions

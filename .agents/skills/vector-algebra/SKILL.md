@@ -1,6 +1,6 @@
 ---
 name: vector-algebra
-description: Abstract math for vector algebra in 2D and 3D Euclidean space. USE FOR: implementing vector operations (add, subtract, negate, scalar multiply/divide); dot product and geometric interpretation; 3D cross product; 2D pseudo-cross product (scalar z-component); vector magnitude and normalization; angle between two vectors; linear interpolation; checking zero/unit/finite vectors. 2D is a special case of 3D with z=0. DO NOT USE FOR: quaternion operations (use quaternion-algebra); rotation representations (use 3d-rotation-theory); coordinate system conversions (use coordinate-system-conversions).
+description: "Abstract math for vector algebra in 2D and 3D Euclidean space. USE FOR: implementing vector operations (add, subtract, negate, scalar multiply/divide); dot product and geometric interpretation; 3D cross product; 2D pseudo-cross product (scalar z-component); vector magnitude and normalization; angle between two vectors; linear interpolation; checking zero/unit/finite vectors. 2D is a special case of 3D with z=0. DO NOT USE FOR: quaternion operations (use quaternion-algebra); rotation representations (use 3d-rotation-theory); coordinate system conversions (use coordinate-system-conversions)."
 ---
 
 # Vector Algebra

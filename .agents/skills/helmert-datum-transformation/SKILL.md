@@ -1,6 +1,6 @@
 ---
 name: helmert-datum-transformation
-description: Abstract math for the 7-parameter (Helmert) similarity transformation used to convert coordinates between geodetic datums. USE FOR: implementing datum-to-datum 3D coordinate transformations; understanding the 7 Helmert parameters (3 translations, 3 rotations, 1 scale); applying the linearized vs. full rotation matrix form; composing transformations; transforming to/from WGS84. DO NOT USE FOR: geodetic coordinate validation (use geodetic-coordinate-bounds); reference ellipsoid parameters (use reference-ellipsoids); map projections.
+description: "Abstract math for the 7-parameter (Helmert) similarity transformation used to convert coordinates between geodetic datums. USE FOR: implementing datum-to-datum 3D coordinate transformations; understanding the 7 Helmert parameters (3 translations, 3 rotations, 1 scale); applying the linearized vs. full rotation matrix form; composing transformations; transforming to/from WGS84. DO NOT USE FOR: geodetic coordinate validation (use geodetic-coordinate-bounds); reference ellipsoid parameters (use reference-ellipsoids); map projections."
 ---
 
 # Helmert Datum Transformation

@@ -1,6 +1,6 @@
 ---
 name: reference-ellipsoids
-description: Abstract math for reference ellipsoids used in geodesy. USE FOR: computing semi-minor axis from flattening; eccentricity and eccentricity squared; first and second eccentricity; arithmetic mean radius; radii of curvature in the meridian and prime vertical; ellipsoid surface area; ellipsoid volume; understanding WGS84/GRS80 parameters; implementing Ellipsoid<T> types. DO NOT USE FOR: geodetic coordinate bounds (use geodetic-coordinate-bounds); datum transformations (use helmert-datum-transformation); map projections.
+description: "Abstract math for reference ellipsoids used in geodesy. USE FOR: computing semi-minor axis from flattening; eccentricity and eccentricity squared; first and second eccentricity; arithmetic mean radius; radii of curvature in the meridian and prime vertical; ellipsoid surface area; ellipsoid volume; understanding WGS84/GRS80 parameters; implementing Ellipsoid<T> types. DO NOT USE FOR: geodetic coordinate bounds (use geodetic-coordinate-bounds); datum transformations (use helmert-datum-transformation); map projections."
 ---
 
 # Reference Ellipsoids

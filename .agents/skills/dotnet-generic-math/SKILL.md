@@ -1,6 +1,6 @@
 ---
 name: dotnet-generic-math
-description: C# 11+ generic math with static abstract interface members in System.Numerics. USE FOR: writing generic numeric algorithms; constraining type parameters to INumber<T>/IFloatingPoint<T>/ITrigonometricFunctions<T>; implementing custom numeric types with operator overloads; defining static abstract interfaces (IAngleUnits pattern); CreateChecked/Saturating/Truncating cross-type conversions; AdditiveIdentity/MultiplicativeIdentity; singleton bridge pattern for static abstract at runtime; ISpanFormattable/ISpanParsable; generic Sum/Average/Lerp methods; Half/float/double/decimal compatibility. DO NOT USE FOR: Unity math; pre-.NET 7 System.Math/MathF workarounds; Python/JavaScript numerics.
+description: "C# 11+ generic math with static abstract interface members in System.Numerics. USE FOR: writing generic numeric algorithms; constraining type parameters to INumber<T>/IFloatingPoint<T>/ITrigonometricFunctions<T>; implementing custom numeric types with operator overloads; defining static abstract interfaces (IAngleUnits pattern); CreateChecked/Saturating/Truncating cross-type conversions; AdditiveIdentity/MultiplicativeIdentity; singleton bridge pattern for static abstract at runtime; ISpanFormattable/ISpanParsable; generic Sum/Average/Lerp methods; Half/float/double/decimal compatibility. DO NOT USE FOR: Unity math; pre-.NET 7 System.Math/MathF workarounds; Python/JavaScript numerics."
 ---
 
 # .NET Generic Math

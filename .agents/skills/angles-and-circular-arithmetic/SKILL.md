@@ -1,6 +1,6 @@
 ---
 name: angles-and-circular-arithmetic
-description: Abstract math for angle measurement, unit systems, and circular arithmetic. USE FOR: implementing angle types; converting between degrees/radians/gradians/revolutions; reducing angles to canonical range [0, Full); computing reference angles and quadrants; implementing safe modular arithmetic with negative inputs; angle addition and subtraction; classifying angles by sign and size. DO NOT USE FOR: trigonometric functions (use trigonometric-functions); coordinate conversions (use coordinate-system-conversions); interpolation (use interpolation-on-manifolds).
+description: "Abstract math for angle measurement, unit systems, and circular arithmetic. USE FOR: implementing angle types; converting between degrees/radians/gradians/revolutions; reducing angles to canonical range [0, Full); computing reference angles and quadrants; implementing safe modular arithmetic with negative inputs; angle addition and subtraction; classifying angles by sign and size. DO NOT USE FOR: trigonometric functions (use trigonometric-functions); coordinate conversions (use coordinate-system-conversions); interpolation (use interpolation-on-manifolds)."
 ---
 
 # Angles & Circular Arithmetic

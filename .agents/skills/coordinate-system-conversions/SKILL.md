@@ -1,6 +1,6 @@
 ---
 name: coordinate-system-conversions
-description: Abstract math for converting between 2D and 3D coordinate systems. USE FOR: Cartesian to/from polar (r, θ); Cartesian to/from spherical (r, azimuth, polar/colatitude); azimuth vs. elevation vs. colatitude conventions; canonical range enforcement after conversion; precision near the origin and poles; choosing azimuth reference direction. DO NOT USE FOR: angle unit conversions (use angles-and-circular-arithmetic); geodetic (lat/lon) coordinates (use geodetic-coordinate-bounds); rotation representations (use 3d-rotation-theory).
+description: "Abstract math for converting between 2D and 3D coordinate systems. USE FOR: Cartesian to/from polar (r, θ); Cartesian to/from spherical (r, azimuth, polar/colatitude); azimuth vs. elevation vs. colatitude conventions; canonical range enforcement after conversion; precision near the origin and poles; choosing azimuth reference direction. DO NOT USE FOR: angle unit conversions (use angles-and-circular-arithmetic); geodetic (lat/lon) coordinates (use geodetic-coordinate-bounds); rotation representations (use 3d-rotation-theory)."
 ---
 
 # Coordinate System Conversions

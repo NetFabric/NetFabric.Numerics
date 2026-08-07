@@ -1,6 +1,6 @@
 ---
 name: quaternion-algebra
-description: Abstract math for quaternion algebra (hypercomplex numbers ℍ). USE FOR: implementing quaternion multiplication (Hamilton product, non-commutative); conjugate, norm, and inverse; unit quaternions on S³ as double cover of SO(3); rotating 3D vectors with quaternions; understanding why q and −q represent the same rotation; normalizing after operations; constructing rotation quaternions from axis-angle. DO NOT USE FOR: converting between rotation representations (use 3d-rotation-theory); slerp/lerp interpolation (use interpolation-on-manifolds); basic vector cross/dot products (use vector-algebra).
+description: "Abstract math for quaternion algebra (hypercomplex numbers ℍ). USE FOR: implementing quaternion multiplication (Hamilton product, non-commutative); conjugate, norm, and inverse; unit quaternions on S³ as double cover of SO(3); rotating 3D vectors with quaternions; understanding why q and −q represent the same rotation; normalizing after operations; constructing rotation quaternions from axis-angle. DO NOT USE FOR: converting between rotation representations (use 3d-rotation-theory); slerp/lerp interpolation (use interpolation-on-manifolds); basic vector cross/dot products (use vector-algebra)."
 ---
 
 # Quaternion Algebra

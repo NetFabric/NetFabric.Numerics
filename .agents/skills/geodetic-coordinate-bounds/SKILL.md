@@ -1,6 +1,6 @@
 ---
 name: geodetic-coordinate-bounds
-description: Abstract math for geodetic coordinate constraints: valid ranges, wrap semantics, and coordinate type distinctions. USE FOR: validating latitude ∈ [−90°, +90°] and longitude ∈ (−180°, +180°]; understanding why latitude is clamped but longitude wraps; difference between geodetic and geocentric latitude; ellipsoidal height vs. orthometric (MSL) height; antimeridian handling; normalizing out-of-range coordinates. DO NOT USE FOR: reference ellipsoid parameters (use reference-ellipsoids); datum transformations (use helmert-datum-transformation); coordinate system conversions (use coordinate-system-conversions).
+description: "Abstract math for geodetic coordinate constraints: valid ranges, wrap semantics, and coordinate type distinctions. USE FOR: validating latitude ∈ [−90°, +90°] and longitude ∈ (−180°, +180°]; understanding why latitude is clamped but longitude wraps; difference between geodetic and geocentric latitude; ellipsoidal height vs. orthometric (MSL) height; antimeridian handling; normalizing out-of-range coordinates. DO NOT USE FOR: reference ellipsoid parameters (use reference-ellipsoids); datum transformations (use helmert-datum-transformation); coordinate system conversions (use coordinate-system-conversions)."
 ---
 
 # Geodetic Coordinate Bounds

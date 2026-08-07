@@ -1,0 +1,19 @@
+name: NetFabric.Numerics
+version: 1.0.0
+description: APM project for NetFabric.Numerics
+author: Antão Almada
+# Which agent platforms to deploy to.
+# Resolution order: --target flag > this field > auto-detect from filesystem.
+# Accepted values: agent-skills, antigravity, claude, codex, copilot, cursor, gemini, kiro, opencode, windsurf
+targets:
+- copilot
+dependencies:
+  apm:
+    - netfabric/intelligentium/plugins/agent-authoring
+    - netfabric/intelligentium/plugins/dotnet
+    - netfabric/intelligentium/plugins/math-foundations
+    - netfabric/intelligentium/plugins/math-rotation
+    - netfabric/intelligentium/plugins/math-geodesy
+  mcp: []
+includes: auto
+scripts: {}

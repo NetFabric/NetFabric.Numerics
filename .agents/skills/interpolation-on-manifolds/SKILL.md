@@ -1,6 +1,6 @@
 ---
 name: interpolation-on-manifolds
-description: Abstract math for interpolating angles, vectors, and quaternions on curved manifolds. USE FOR: implementing Lerp (linear interpolation) for vectors; Nlerp (normalized lerp) for directions; Slerp (spherical linear interpolation) for quaternions and unit vectors; shortest-path sign flip when dot product is negative; choosing between Lerp/Nlerp/Slerp; angular lerp with wrap-around. DO NOT USE FOR: quaternion arithmetic (use quaternion-algebra); rotation representation conversions (use 3d-rotation-theory); angle unit conversions (use angles-and-circular-arithmetic).
+description: "Abstract math for interpolating angles, vectors, and quaternions on curved manifolds. USE FOR: implementing Lerp (linear interpolation) for vectors; Nlerp (normalized lerp) for directions; Slerp (spherical linear interpolation) for quaternions and unit vectors; shortest-path sign flip when dot product is negative; choosing between Lerp/Nlerp/Slerp; angular lerp with wrap-around. DO NOT USE FOR: quaternion arithmetic (use quaternion-algebra); rotation representation conversions (use 3d-rotation-theory); angle unit conversions (use angles-and-circular-arithmetic)."
 ---
 
 # Interpolation on Manifolds
