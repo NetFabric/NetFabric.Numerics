@@ -3,21 +3,6 @@ namespace NetFabric.Numerics.Spherical;
 public static partial class Vector
 {
     /// <summary>
-    /// Adds a scalar <paramref name="value"/> to each element in <paramref name="source"/> and stores the result in <paramref name="result"/>.
-    /// </summary>
-    /// <param name="source">The source span of vectors.</param>
-    /// <param name="value">The vector value to add.</param>
-    /// <param name="result">The destination span for the results.</param>
-    public static void Add<TAngleUnits, T>(ReadOnlySpan<Vector<TAngleUnits, T>> source, Vector<TAngleUnits, T> value, Span<Vector<TAngleUnits, T>> result)
-        where TAngleUnits : IAngleUnits
-        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-    {
-        if (result.Length < source.Length)
-            throw new ArgumentException("Destination span is too short.", nameof(result));
-        TensorPrimitives.Add<Vector<TAngleUnits, T>>(source, value, result);
-    }
-
-    /// <summary>
     /// Adds corresponding elements from <paramref name="left"/> and <paramref name="right"/> and stores the result in <paramref name="result"/>.
     /// </summary>
     /// <param name="left">The left span of vectors.</param>
@@ -30,21 +15,6 @@ public static partial class Vector
         if (result.Length < left.Length)
             throw new ArgumentException("Destination span is too short.", nameof(result));
         TensorPrimitives.Add<Vector<TAngleUnits, T>>(left, right, result);
-    }
-
-    /// <summary>
-    /// Subtracts a scalar <paramref name="value"/> from each element in <paramref name="source"/> and stores the result in <paramref name="result"/>.
-    /// </summary>
-    /// <param name="source">The source span of vectors.</param>
-    /// <param name="value">The vector value to subtract.</param>
-    /// <param name="result">The destination span for the results.</param>
-    public static void Subtract<TAngleUnits, T>(ReadOnlySpan<Vector<TAngleUnits, T>> source, Vector<TAngleUnits, T> value, Span<Vector<TAngleUnits, T>> result)
-        where TAngleUnits : IAngleUnits
-        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-    {
-        if (result.Length < source.Length)
-            throw new ArgumentException("Destination span is too short.", nameof(result));
-        TensorPrimitives.Subtract<Vector<TAngleUnits, T>>(source, value, result);
     }
 
     /// <summary>
@@ -62,41 +32,4 @@ public static partial class Vector
         TensorPrimitives.Subtract<Vector<TAngleUnits, T>>(left, right, result);
     }
 
-    /// <summary>
-    /// Multiplies each element in <paramref name="source"/> by a scalar <paramref name="value"/> and stores the result in <paramref name="result"/>.
-    /// </summary>
-    /// <param name="source">The source span of vectors.</param>
-    /// <param name="value">The vector value to multiply by.</param>
-    /// <param name="result">The destination span for the results.</param>
-    public static void Multiply<TAngleUnits, T>(ReadOnlySpan<Vector<TAngleUnits, T>> source, Vector<TAngleUnits, T> value, Span<Vector<TAngleUnits, T>> result)
-        where TAngleUnits : IAngleUnits
-        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-    {
-        if (result.Length < source.Length)
-            throw new ArgumentException("Destination span is too short.", nameof(result));
-        for (var i = 0; i < source.Length; i++)
-            result[i] = new Vector<TAngleUnits, T>(
-                source[i].Radius * value.Radius,
-                new Angle<TAngleUnits, T>(source[i].Azimuth.Value * value.Azimuth.Value),
-                new Angle<TAngleUnits, T>(source[i].Polar.Value * value.Polar.Value));
-    }
-
-    /// <summary>
-    /// Divides each element in <paramref name="source"/> by a scalar <paramref name="value"/> and stores the result in <paramref name="result"/>.
-    /// </summary>
-    /// <param name="source">The source span of vectors.</param>
-    /// <param name="value">The vector value to divide by.</param>
-    /// <param name="result">The destination span for the results.</param>
-    public static void Divide<TAngleUnits, T>(ReadOnlySpan<Vector<TAngleUnits, T>> source, Vector<TAngleUnits, T> value, Span<Vector<TAngleUnits, T>> result)
-        where TAngleUnits : IAngleUnits
-        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-    {
-        if (result.Length < source.Length)
-            throw new ArgumentException("Destination span is too short.", nameof(result));
-        for (var i = 0; i < source.Length; i++)
-            result[i] = new Vector<TAngleUnits, T>(
-                source[i].Radius / value.Radius,
-                new Angle<TAngleUnits, T>(source[i].Azimuth.Value / value.Azimuth.Value),
-                new Angle<TAngleUnits, T>(source[i].Polar.Value / value.Polar.Value));
-    }
 }
