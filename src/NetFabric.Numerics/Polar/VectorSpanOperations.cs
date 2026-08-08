@@ -23,10 +23,14 @@ public static partial class Vector
     public static void Add<TAngleUnits, T>(ReadOnlySpan<Vector<TAngleUnits, T>> left, ReadOnlySpan<Vector<TAngleUnits, T>> right, Span<Vector<TAngleUnits, T>> result)
         where TAngleUnits : IAngleUnits
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => TensorPrimitives.Add(
+    {
+        if (result.Length < left.Length)
+            throw new ArgumentException("Destination span is too short.", nameof(result));
+        TensorPrimitives.Add(
             MemoryMarshal.Cast<Vector<TAngleUnits, T>, T>(left),
             MemoryMarshal.Cast<Vector<TAngleUnits, T>, T>(right),
             MemoryMarshal.Cast<Vector<TAngleUnits, T>, T>(result));
+    }
 
     /// <summary>
     /// Subtracts a <paramref name="value"/> vector from each element in <paramref name="angles"/> and stores the result in <paramref name="result"/>.
@@ -49,10 +53,14 @@ public static partial class Vector
     public static void Subtract<TAngleUnits, T>(ReadOnlySpan<Vector<TAngleUnits, T>> left, ReadOnlySpan<Vector<TAngleUnits, T>> right, Span<Vector<TAngleUnits, T>> result)
         where TAngleUnits : IAngleUnits
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => TensorPrimitives.Subtract(
+    {
+        if (result.Length < left.Length)
+            throw new ArgumentException("Destination span is too short.", nameof(result));
+        TensorPrimitives.Subtract(
             MemoryMarshal.Cast<Vector<TAngleUnits, T>, T>(left),
             MemoryMarshal.Cast<Vector<TAngleUnits, T>, T>(right),
             MemoryMarshal.Cast<Vector<TAngleUnits, T>, T>(result));
+    }
 
     /// <summary>
     /// Multiplies each element in <paramref name="angles"/> by the <paramref name="value"/> vector and stores the result in <paramref name="result"/>.
