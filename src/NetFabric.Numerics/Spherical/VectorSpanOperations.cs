@@ -14,11 +14,7 @@ public static partial class Vector
     {
         if (result.Length < source.Length)
             throw new ArgumentException("Destination span is too short.", nameof(result));
-        for (var i = 0; i < source.Length; i++)
-            result[i] = new Vector<TAngleUnits, T>(
-                source[i].Radius + value.Radius,
-                new Angle<TAngleUnits, T>(source[i].Azimuth.Value + value.Azimuth.Value),
-                new Angle<TAngleUnits, T>(source[i].Polar.Value + value.Polar.Value));
+        TensorPrimitives.Add<Vector<TAngleUnits, T>>(source, value, result);
     }
 
     /// <summary>
@@ -33,10 +29,7 @@ public static partial class Vector
     {
         if (result.Length < left.Length)
             throw new ArgumentException("Destination span is too short.", nameof(result));
-        TensorPrimitives.Add(
-            MemoryMarshal.Cast<Vector<TAngleUnits, T>, T>(left),
-            MemoryMarshal.Cast<Vector<TAngleUnits, T>, T>(right),
-            MemoryMarshal.Cast<Vector<TAngleUnits, T>, T>(result));
+        TensorPrimitives.Add<Vector<TAngleUnits, T>>(left, right, result);
     }
 
     /// <summary>
@@ -51,11 +44,7 @@ public static partial class Vector
     {
         if (result.Length < source.Length)
             throw new ArgumentException("Destination span is too short.", nameof(result));
-        for (var i = 0; i < source.Length; i++)
-            result[i] = new Vector<TAngleUnits, T>(
-                source[i].Radius - value.Radius,
-                new Angle<TAngleUnits, T>(source[i].Azimuth.Value - value.Azimuth.Value),
-                new Angle<TAngleUnits, T>(source[i].Polar.Value - value.Polar.Value));
+        TensorPrimitives.Subtract<Vector<TAngleUnits, T>>(source, value, result);
     }
 
     /// <summary>
@@ -70,10 +59,7 @@ public static partial class Vector
     {
         if (result.Length < left.Length)
             throw new ArgumentException("Destination span is too short.", nameof(result));
-        TensorPrimitives.Subtract(
-            MemoryMarshal.Cast<Vector<TAngleUnits, T>, T>(left),
-            MemoryMarshal.Cast<Vector<TAngleUnits, T>, T>(right),
-            MemoryMarshal.Cast<Vector<TAngleUnits, T>, T>(result));
+        TensorPrimitives.Subtract<Vector<TAngleUnits, T>>(left, right, result);
     }
 
     /// <summary>
