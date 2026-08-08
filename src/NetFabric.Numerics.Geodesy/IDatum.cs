@@ -46,7 +46,7 @@ public interface IDatum<T>
 /// This class represents the World Geodetic System 1984 (WGS 84) datum, which is widely used in
 /// GPS and global mapping systems.
 /// </remarks>
-public abstract class WGS84<T> 
+public abstract class WGS84<T>
     : IDatum<T>
     where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
 {
@@ -67,7 +67,7 @@ public abstract class WGS84<T>
 /// This class represents the World Geodetic System 1972 (WGS 1972) datum, which was used in
 /// earlier GPS systems and geospatial applications.
 /// </remarks>
-public abstract class WGS1972<T> 
+public abstract class WGS1972<T>
     : IDatum<T>
     where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
 {
@@ -88,7 +88,7 @@ public abstract class WGS1972<T>
 /// This class represents the North American Datum 1983 (NAD 83), a widely used datum in North
 /// America for mapping and geospatial applications.
 /// </remarks>
-public abstract class NAD83<T> 
+public abstract class NAD83<T>
     : IDatum<T>
     where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
 {
@@ -109,7 +109,7 @@ public abstract class NAD83<T>
 /// This class represents the North American Datum 1927 (NAD 27) for the contiguous United States (CONUS).
 /// It uses the Clarke 1866 ellipsoid and has a non-zero offset.
 /// </remarks>
-public abstract class NAD1927CONUS<T> 
+public abstract class NAD1927CONUS<T>
     : IDatum<T>
     where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
 {
@@ -118,7 +118,7 @@ public abstract class NAD1927CONUS<T>
 
     /// <inheritdoc/>
     public static Offset<T> Offset => new(
-        new(T.CreateChecked(-8.0), T.CreateChecked(160.0), T.CreateChecked(176.0)), 
+        new(T.CreateChecked(-8.0), T.CreateChecked(160.0), T.CreateChecked(176.0)),
         T.Zero, T.Zero, T.Zero, T.Zero);
 
     /// <inheritdoc/>

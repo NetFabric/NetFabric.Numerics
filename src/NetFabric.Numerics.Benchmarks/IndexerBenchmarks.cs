@@ -1,5 +1,6 @@
 ﻿using System.Numerics;
 using System.Runtime.CompilerServices;
+
 using BenchmarkDotNet.Attributes;
 
 namespace NetFabric.Numerics.Benchmarks;
@@ -89,9 +90,9 @@ public class IndexerBenchmarks
             W = w;
         }
 
-        public T this[int index] 
-            => (uint)index >= 4 
-                ? throw new ArgumentOutOfRangeException(nameof(index)) 
+        public T this[int index]
+            => (uint)index >= 4
+                ? throw new ArgumentOutOfRangeException(nameof(index))
                 : Unsafe.Add(ref Unsafe.AsRef(in X), index);
     }
 

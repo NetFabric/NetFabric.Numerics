@@ -1,6 +1,7 @@
+using System.Numerics;
+
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Configs;
-using System.Numerics;
 
 namespace NetFabric.Numerics.Benchmarks;
 
@@ -14,7 +15,7 @@ public class AdditionBenchmarks
     Rectangular2D.Vector<long>[]? rectangular2_long;
     Rectangular2D.Vector<float>[]? rectangular2_float;
     Rectangular2D.Vector<double>[]? rectangular2_double;
-  
+
     Polar.Vector<Degrees, float>[]? polar_float;
     Polar.Vector<Degrees, double>[]? polar_double;
 

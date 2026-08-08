@@ -130,7 +130,7 @@ public readonly struct Point<TAngleUnits, T>
             Angle<TAngleUnits, T>.CreateTruncating(point.Azimuth),
             Angle<TAngleUnits, T>.CreateTruncating(point.Polar));
 
-    object IGeometricBase.this[int index] 
+    object IGeometricBase.this[int index]
         => index switch
         {
             0 => Radius,

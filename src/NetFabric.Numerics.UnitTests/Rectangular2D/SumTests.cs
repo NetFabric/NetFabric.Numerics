@@ -2,23 +2,23 @@
 
 public class SumTests
 {
-    public static TheoryData<Vector<double>[], Vector<double>> SumData 
+    public static TheoryData<Vector<double>[], Vector<double>> SumData
         => new()
         {
             {
-                Array.Empty<Vector<double>>(), 
+                Array.Empty<Vector<double>>(),
                 new Vector<double>(0, 0)
             },
             {
-                new Vector<double>[] { new(1.0, 2.0) }, 
+                new Vector<double>[] { new(1.0, 2.0) },
                 new Vector<double>(1.0, 2.0)
             },
             {
-                new Vector<double>[] { new(1.0, 2.0), new(11.0, 12.0) }, 
+                new Vector<double>[] { new(1.0, 2.0), new(11.0, 12.0) },
                 new Vector<double>(12.0, 14.0)
             },
-            { 
-                Enumerable.Range(0, 97).Select(value => new Vector<double>(value, value + 1)).ToArray(), 
+            {
+                Enumerable.Range(0, 97).Select(value => new Vector<double>(value, value + 1)).ToArray(),
                 new Vector<double>(Enumerable.Range(0, 97).Sum(), Enumerable.Range(0, 97).Select(value => value + 1).Sum())
             },
         };

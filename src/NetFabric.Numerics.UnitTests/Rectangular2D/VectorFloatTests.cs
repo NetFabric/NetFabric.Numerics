@@ -33,7 +33,7 @@ public class VectorTests
     {
         // arrange
         var expected = System.Numerics.Vector2.Add(
-            new System.Numerics.Vector2(left.X, left.Y), 
+            new System.Numerics.Vector2(left.X, left.Y),
             new System.Numerics.Vector2(right.X, right.Y));
 
         // act

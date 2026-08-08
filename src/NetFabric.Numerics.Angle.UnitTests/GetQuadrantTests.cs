@@ -4,7 +4,7 @@ public class GetQuadrantTests
 {
     static readonly double AcuteDegrees = Angle<Degrees, double>.Right.Value / 4.0;
 
-    public static TheoryData<AngleReduced<Degrees, double>, Quadrant> GetQuadrantDegreesData 
+    public static TheoryData<AngleReduced<Degrees, double>, Quadrant> GetQuadrantDegreesData
         => new()
         {
             {new AngleReduced<Degrees, double>(0.0), Quadrant.PositiveX},

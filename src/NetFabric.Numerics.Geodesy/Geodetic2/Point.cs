@@ -5,18 +5,18 @@ namespace NetFabric.Numerics.Geodesy.Geodetic2;
 
 [System.Diagnostics.DebuggerDisplay("Latitude = {Latitude}, Longitude = {Longitude}")]
 [SkipLocalsInit]
-public readonly record struct Point<TDatum, TAngleUnits, T>(Angle<TAngleUnits, T> Latitude, Angle<TAngleUnits, T> Longitude) 
+public readonly record struct Point<TDatum, TAngleUnits, T>(Angle<TAngleUnits, T> Latitude, Angle<TAngleUnits, T> Longitude)
     : IGeodeticPoint<Point<TDatum, TAngleUnits, T>, CoordinateSystem<TDatum, T>, TDatum, T>
     where TDatum : IDatum<T>
     where TAngleUnits : IAngleUnits
     where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
 {
-    public Angle<TAngleUnits, T> Latitude { get; } 
+    public Angle<TAngleUnits, T> Latitude { get; }
         = Latitude < -Angle<TAngleUnits, T>.Right || Latitude > Angle<TAngleUnits, T>.Right
             ? Throw.ArgumentOutOfRangeException<Angle<TAngleUnits, T>>(nameof(Latitude), Latitude, "Latitude must be in [-90.0º, 90.0º]")
             : Latitude;
 
-    public Angle<TAngleUnits, T> Longitude { get; } 
+    public Angle<TAngleUnits, T> Longitude { get; }
         = Longitude.Value <= -T.CreateChecked(TAngleUnits.Straight) || Longitude.Value > T.CreateChecked(TAngleUnits.Straight)
             ? Throw.ArgumentOutOfRangeException<Angle<TAngleUnits, T>>(nameof(Longitude), Longitude, "Longitude must be in ]-180.0º, 180.0º]")
             : Longitude;
@@ -90,7 +90,7 @@ public readonly record struct Point<TDatum, TAngleUnits, T>(Angle<TAngleUnits, T
     /// Represents the maximum value. This field is read-only.
     /// </summary>
     public static readonly Point<TDatum, TAngleUnits, T> MaxValue
-        = new(Angle<TAngleUnits, T>.Right, Angle<TAngleUnits, T>.Straight); 
+        = new(Angle<TAngleUnits, T>.Right, Angle<TAngleUnits, T>.Straight);
 
     static Point<TDatum, TAngleUnits, T> IMinMaxValue<Point<TDatum, TAngleUnits, T>>.MinValue
         => MinValue;
@@ -99,7 +99,7 @@ public readonly record struct Point<TDatum, TAngleUnits, T>(Angle<TAngleUnits, T
 
     #endregion
 
-    object IGeometricBase.this[int index] 
+    object IGeometricBase.this[int index]
         => index switch
         {
             0 => Latitude,

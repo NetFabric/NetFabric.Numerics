@@ -25,7 +25,7 @@ public static partial class Angle
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static AngleReduced<Radians, T> Acos<T>(T cos)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>, ITrigonometricFunctions<T>
-        =>  cos < -T.One || cos > T.One
+        => cos < -T.One || cos > T.One
             ? Throw.ArgumentOutOfRangeException<AngleReduced<Radians, T>>(nameof(cos), cos, "The cosine value must be in the range [-1, 1].")
             : new(T.Acos(cos));
 

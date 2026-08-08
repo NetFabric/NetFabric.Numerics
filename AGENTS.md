@@ -2,55 +2,75 @@
 
 ## Project overview
 
-NetFabric.Numerics is a multi-package .NET 8 library providing strongly-typed geometric primitives — angles, points, vectors, and geodetic coordinates — built on C# 11+ generic math (`System.Numerics` static abstract interface members). Each type is parameterized by both a unit type and a numeric type, enabling zero-allocation, type-safe math across `float`, `double`, `decimal`, and other numeric primitives. See [README.md](README.md) and the [docs/](docs/) site for full feature descriptions.
+NetFabric.Numerics is a multi-package .NET 8 library providing strongly typed angles, points, vectors, quaternions, and geodetic coordinates. It uses C# generic math (`System.Numerics` static abstract interface members) for type-safe, allocation-conscious algorithms across numeric types. See [README.md](README.md) and [docs/](docs/) for user-facing documentation.
 
 ## Solution structure
 
 | Project | Purpose |
-|---------|---------|
+| --- | --- |
 | `src/NetFabric.Numerics.Angle/` | Strongly-typed angles (`Angle<TUnits, T>`) with degrees, radians, gradians, revolutions |
 | `src/NetFabric.Numerics/` | Rectangular 2D/3D, polar, and spherical point/vector primitives |
 | `src/NetFabric.Numerics.Geodesy/` | Geodetic coordinates with datum and ellipsoid support |
 | `src/NetFabric.Numerics.Angle.UnitTests/` | xUnit tests for the angle package |
 | `src/NetFabric.Numerics.UnitTests/` | xUnit tests for the core package |
 | `src/NetFabric.Numerics.Geodesy.UnitTests/` | xUnit tests for the geodesy package |
-| `src/NetFabric.Numerics.Benchmarks/` | BenchmarkDotNet micro-benchmarks — run separately in Release only |
+| `src/NetFabric.Numerics.Benchmarks/` | BenchmarkDotNet microbenchmarks; run separately in Release only |
 | `docs/` | DocFX documentation source |
-| `.agents/skills/` | Domain-specific APM skills for AI agents; do not edit |
+| `.agents/skills/` | Domain skills for coding agents; edit only when the task explicitly targets agent skills |
 
-## Build & test commands
+Nested `AGENTS.md` files contain package-specific guidance and override this file for their subtrees.
 
-```sh
-dotnet restore
-dotnet build --no-restore -c Release
-dotnet test --no-build --verbosity normal -c Release
+## Setup and quality commands
+
+Run commands from the repository root in this order:
+
+```bash
+dotnet restore NetFabric.Numerics.slnx
+dotnet format NetFabric.Numerics.slnx --verify-no-changes
+dotnet build NetFabric.Numerics.slnx --no-restore -c Release
+dotnet test NetFabric.Numerics.slnx --no-build --verbosity normal -c Release
 ```
 
 Run benchmarks separately (never via `dotnet test`):
 
-```sh
+```bash
 dotnet run -c Release --project src/NetFabric.Numerics.Benchmarks
 ```
 
 ## Code style
 
-- **Language**: C# 12 / .NET 8; target framework `net8.0` for all projects
-- **Generic math**: implement and constrain to `System.Numerics` interfaces (`INumber<T>`, `IFloatingPoint<T>`, etc.) — prefer static abstract interface members over overloads
-- **Nullable**: enabled; `WarningsAsErrors` for nullable diagnostics — resolve, never suppress
-- **Usings**: implicit usings on; add shared project-wide types as `<Using>` entries in the `.csproj`
-- **Analyzers**: `ErrorProne.NET.Structs` (mutable struct safety) and `NetFabric.Hyperlinq.Analyzer` (LINQ allocations) — fix, never suppress
-- **XML docs**: required on all `public` and `protected` API members (`GenerateDocumentationFile` is enabled)
-- **Unsafe blocks**: allowed in library projects only for performance-critical SIMD paths; keep unsafe surface minimal
+- Follow the root [.editorconfig](.editorconfig); apply fixes with `dotnet format NetFabric.Numerics.slnx`.
+- Use C# 12 and target `net8.0`; nullable reference types and implicit usings are enabled.
+- Nullable warnings are errors. Resolve diagnostics rather than suppressing them.
+- Constrain generic numeric algorithms with `System.Numerics` interfaces such as `INumber<T>` and `IFloatingPoint<T>`.
+- Prefer static abstract interface members and the numeric type's static methods over type-specific overloads or `Math`/`MathF`.
+- Add shared project-wide namespaces as `<Using>` items in the owning project file.
+- Add XML documentation to new or changed public and protected APIs; library projects generate documentation files.
+- Keep unsafe code limited to measured, performance-critical SIMD paths.
+- Respect project analyzers, including `ErrorProne.NET.Structs` and `NetFabric.Hyperlinq.Analyzer` where referenced.
 
 ## Testing
 
-- **Framework**: xUnit + FluentAssertions
-- **Coverage**: add a test for every new or changed public API; prefer `[Theory]` + `[InlineData]` / `[MemberData]` over multiple `[Fact]`s
-- All tests must pass: `dotnet test --no-build --verbosity normal -c Release`
+- Tests use xUnit and FluentAssertions.
+- Add or update tests for every changed behavior and public API.
+- Prefer `[Theory]` with `[InlineData]` or `[MemberData]` for related cases.
+- Run a focused project or test while iterating, for example:
+
+```bash
+dotnet test src/NetFabric.Numerics.UnitTests/NetFabric.Numerics.UnitTests.csproj -c Release --filter "FullyQualifiedName~VectorTests"
+```
+
+- Finish with the full format, build, and test sequence above.
 
 ## Security
 
-- Pure-math computation library — no credentials, network calls, or connection strings belong here
-- Never commit secrets, API keys, or tokens in any file
-- Do not hand-edit generated artifacts: `obj/`, `bin/`, `*.nupkg`, `*.snupkg`
-- `apm.lock.yaml` is a generated lockfile — do not edit manually
+- This is a pure-computation library. Do not add credentials, network calls, or connection strings.
+- Never commit secrets, API keys, or tokens.
+- Do not hand-edit generated artifacts under `obj/` or `bin/`, or package outputs (`*.nupkg`, `*.snupkg`).
+- Do not hand-edit `apm.lock.yaml`; regenerate it through APM tooling.
+- Do not run destructive Git commands, publish packages, or deploy documentation without explicit user approval.
+
+## Maintenance
+
+- Update this file in the same change as build, test, formatter, or repository-layout changes.
+- Keep root guidance shared; put package-specific exceptions in the nearest nested `AGENTS.md`.

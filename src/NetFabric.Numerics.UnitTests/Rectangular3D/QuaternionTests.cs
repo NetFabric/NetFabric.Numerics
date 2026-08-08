@@ -254,7 +254,7 @@ public class QuaternionTests
     public void Normalize_Should_Succeed(Quaternion<float> quaternion)
     {
         // arrange
-        if(quaternion == Quaternion<float>.Zero)
+        if (quaternion == Quaternion<float>.Zero)
             return;
         var expected = System.Numerics.Quaternion.Normalize(new System.Numerics.Quaternion(quaternion.X, quaternion.Y, quaternion.Z, quaternion.W));
 

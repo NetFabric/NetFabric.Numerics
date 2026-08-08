@@ -27,7 +27,7 @@ public abstract class GeodeticCoordinateSystem<T>
 /// <remarks>
 /// This class is meant to be used as a singleton to represent a specific geodetic coordinate system.
 /// </remarks>
-public class GeodeticCoordinateSystem<TCoordinateSystem, T> 
+public class GeodeticCoordinateSystem<TCoordinateSystem, T>
     : GeodeticCoordinateSystem<T>
     where TCoordinateSystem : IGeodeticCoordinateSystem<T>
     where T : struct, IFloatingPoint<T>, IMinMaxValue<T>

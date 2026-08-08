@@ -10,7 +10,7 @@ namespace NetFabric.Numerics.Rectangular2D;
 /// </remarks>
 public abstract class CoordinateSystem<T>
     : ICoordinateSystem
-    where T: struct, INumber<T>
+    where T : struct, INumber<T>
 {
     /// <summary>
     /// Gets the list of coordinates in the polar coordinate system.
@@ -18,7 +18,7 @@ public abstract class CoordinateSystem<T>
     /// <remarks>
     /// Each coordinate contains information about its name and type.
     /// </remarks>
-    public static IReadOnlyList<Coordinate> Coordinates { get; } 
+    public static IReadOnlyList<Coordinate> Coordinates { get; }
         = new[] {
             new Coordinate("X", typeof(T)),
             new Coordinate("Y", typeof(T)),

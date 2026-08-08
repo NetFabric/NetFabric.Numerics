@@ -20,7 +20,7 @@ Stop with `UNRESOLVED` if required input is missing.
 In either mode, run all three commands in order from the repository root even
 when an earlier command fails:
 
-1. `dotnet format NetFabric.Numerics.sln --verify-no-changes` — coding style.
+1. `dotnet format NetFabric.Numerics.slnx --verify-no-changes` — coding style.
 2. `dotnet restore && dotnet build --no-restore -c Release` — this also runs
    the Roslyn analyzers (`ErrorProne.NET.Structs`,
    `NetFabric.Hyperlinq.Analyzer`) and nullable diagnostics, all configured

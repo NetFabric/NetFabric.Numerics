@@ -5,7 +5,7 @@ namespace NetFabric.Numerics;
 /// </summary>
 public interface IVector
   : IGeometricBase
-{ 
+{
 }
 
 

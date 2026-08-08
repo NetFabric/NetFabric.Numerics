@@ -39,13 +39,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="NetFabric" Version="1.5.0" />
-    <PackageReference Include="NetFabric.Numerics.Tensors" Version="1.1.0" />
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0">
+    <PackageReference Include="NetFabric" />
+    <PackageReference Include="NetFabric.Numerics.Tensors" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="NetFabric.Hyperlinq.Analyzer" Version="2.3.0">
+    <PackageReference Include="NetFabric.Hyperlinq.Analyzer">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>

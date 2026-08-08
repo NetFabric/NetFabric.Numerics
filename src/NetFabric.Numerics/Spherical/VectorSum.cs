@@ -15,7 +15,7 @@ public static partial class Vector
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
     {
         if (source.TryGetSpan(out var span))
-            return span.Sum();
+            return Sum(span);
 
         var sumRadius = T.Zero;
         var sumAzimuth = T.Zero;
@@ -43,7 +43,7 @@ public static partial class Vector
     public static Vector<TAngleUnits, T> Sum<TAngleUnits, T>(this Vector<TAngleUnits, T>[] source)
         where TAngleUnits : IAngleUnits
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => source.AsSpan().Sum();
+        => Sum(source.AsSpan());
 
     /// <summary>
     /// Calculates the sum of a span of vectors.
@@ -56,7 +56,7 @@ public static partial class Vector
     public static Vector<TAngleUnits, T> Sum<TAngleUnits, T>(this Span<Vector<TAngleUnits, T>> source)
         where TAngleUnits : IAngleUnits
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => ((ReadOnlySpan<Vector<TAngleUnits, T>>)source).Sum();
+        => Sum((ReadOnlySpan<Vector<TAngleUnits, T>>)source);
 
     /// <summary>
     /// Calculates the sum of a read-only span of vectors.

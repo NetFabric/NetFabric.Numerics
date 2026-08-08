@@ -1,9 +1,10 @@
-﻿using BenchmarkDotNet.Columns;
+﻿using System.Runtime.Intrinsics;
+
+using BenchmarkDotNet.Columns;
 using BenchmarkDotNet.Configs;
 using BenchmarkDotNet.Jobs;
 using BenchmarkDotNet.Reports;
 using BenchmarkDotNet.Running;
-using System.Runtime.Intrinsics;
 
 var config = DefaultConfig.Instance
     .WithSummaryStyle(SummaryStyle.Default.WithRatioStyle(RatioStyle.Trend))

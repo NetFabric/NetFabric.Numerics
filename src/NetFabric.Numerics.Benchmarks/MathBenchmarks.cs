@@ -14,7 +14,7 @@ public class MathBenchmarks
     [GlobalSetup]
     public void GlobalSetup()
     {
-        doubles= new double[Count];
+        doubles = new double[Count];
         angles = new Angle<Radians, double>[Count];
 
         for (var index = 0; index < Count; index++)
