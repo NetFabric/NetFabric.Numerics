@@ -5,7 +5,7 @@ namespace NetFabric.Numerics.Benchmarks;
 public class SumBenchmarks
 {
     Angle<Degrees, double>[]? array;
-    ReadOnlyCollection<Angle<Degrees, double>>? collection; 
+    ReadOnlyCollection<Angle<Degrees, double>>? collection;
 
     [Params(10_000)]
     public int Count { get; set; }
@@ -26,7 +26,7 @@ public class SumBenchmarks
         foreach (var angle in array!)
             sum += angle;
         return sum;
-    }   
+    }
 
     [Benchmark]
     public Angle<Degrees, double> Linq()

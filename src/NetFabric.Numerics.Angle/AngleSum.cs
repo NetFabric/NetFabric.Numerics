@@ -16,7 +16,7 @@ public static partial class Angle
         where TUnits : IAngleUnits
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
     {
-        if(source.TryGetSpan(out var span))
+        if (source.TryGetSpan(out var span))
             return span.Sum();
 
         var sum = T.Zero;

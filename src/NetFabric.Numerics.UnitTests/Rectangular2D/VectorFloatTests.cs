@@ -33,14 +33,14 @@ public class VectorTests
     {
         // arrange
         var expected = System.Numerics.Vector2.Add(
-            new System.Numerics.Vector2(left.X, left.Y), 
+            new System.Numerics.Vector2(left.X, left.Y),
             new System.Numerics.Vector2(right.X, right.Y));
 
         // act
         var result = left + right;
 
         // assert
-        result.GetType().Should().Be(typeof(Vector<float>));
+        result.GetType().Should().Be<Vector<float>>();
         result.X.Should().Be(expected.X);
         result.Y.Should().Be(expected.Y);
     }

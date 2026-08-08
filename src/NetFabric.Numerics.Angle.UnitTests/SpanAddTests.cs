@@ -2,26 +2,26 @@
 
 public class SpanAddTests
 {
-    public static TheoryData<Angle<Degrees, double>[], Angle<Degrees, double>, Angle<Degrees, double>[]> AddValueData 
+    public static TheoryData<Angle<Degrees, double>[], Angle<Degrees, double>, Angle<Degrees, double>[]> AddValueData
         => new()
         {
             {
-                Array.Empty<Angle<Degrees, double>>(), 
+                Array.Empty<Angle<Degrees, double>>(),
                 new Angle<Degrees, double>(1),
                 Array.Empty<Angle<Degrees, double>>()
             },
             {
-                new Angle<Degrees, double>[] { new(1.0) }, 
+                new Angle<Degrees, double>[] { new(1.0) },
                 new Angle<Degrees, double>(2.0),
                 new Angle<Degrees, double>[] { new(3.0) }
             },
             {
-                new Angle<Degrees, double>[] { new(1.0), new(11.0) }, 
+                new Angle<Degrees, double>[] { new(1.0), new(11.0) },
                 new Angle<Degrees, double>(12.0),
                 new Angle<Degrees, double>[] { new(13.0), new(23.0) }
             },
-            { 
-                Enumerable.Range(0, 97).Select(value => new Angle<Degrees, double>(value)).ToArray(), 
+            {
+                Enumerable.Range(0, 97).Select(value => new Angle<Degrees, double>(value)).ToArray(),
                 new Angle<Degrees, double>(3.0),
                 Enumerable.Range(0, 97).Select(value => new Angle<Degrees, double>(value + 3.0)).ToArray()
             },
@@ -53,27 +53,27 @@ public class SpanAddTests
         // assert
         source.Should().Equal(expected);
     }
-    
-    public static TheoryData<Angle<Degrees, double>[], Angle<Degrees, double>[], Angle<Degrees, double>[]> AddData 
+
+    public static TheoryData<Angle<Degrees, double>[], Angle<Degrees, double>[], Angle<Degrees, double>[]> AddData
         => new()
         {
             {
-                Array.Empty<Angle<Degrees, double>>(), 
+                Array.Empty<Angle<Degrees, double>>(),
                 Array.Empty<Angle<Degrees, double>>(),
                 Array.Empty<Angle<Degrees, double>>()
             },
             {
-                new Angle<Degrees, double>[] { new(1.0) }, 
+                new Angle<Degrees, double>[] { new(1.0) },
                 new Angle<Degrees, double>[] { new(3.0) },
                 new Angle<Degrees, double>[] { new(4.0) }
             },
             {
-                new Angle<Degrees, double>[] { new(1.0), new(11.0) }, 
-                new Angle<Degrees, double>[] { new(12.0), new(13.0) }, 
+                new Angle<Degrees, double>[] { new(1.0), new(11.0) },
+                new Angle<Degrees, double>[] { new(12.0), new(13.0) },
                 new Angle<Degrees, double>[] { new(13.0), new(24.0) }
             },
-            { 
-                Enumerable.Range(0, 97).Select(value => new Angle<Degrees, double>(value)).ToArray(), 
+            {
+                Enumerable.Range(0, 97).Select(value => new Angle<Degrees, double>(value)).ToArray(),
                 Enumerable.Range(0, 97).Select(value => new Angle<Degrees, double>(value + 1.0)).ToArray(),
                 Enumerable.Range(0, 97).Select(value => new Angle<Degrees, double>(value * 2.0 + 1.0)).ToArray()
             },

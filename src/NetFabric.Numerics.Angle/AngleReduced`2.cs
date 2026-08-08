@@ -12,7 +12,7 @@ namespace NetFabric.Numerics;
 /// <para>
 /// The <see cref="AngleReduced{TUnits,T}"/> struct provides a generic representation of a reduced angle value with a specific numeric type and measurement units.
 /// Unlike the <see cref="Angle{TUnits,T}"/> struct, which allows any angle value, the <see cref="AngleReduced{TUnits,T}"/> struct represents angles in their reduced form.
-/// This means that the angle value is always within a specific range, between <see cref="TUnits.Zero"/> and <see cref="TUnits.Full"/>.
+/// This means that the angle value is always within a specific range, between <c>TUnits.Zero</c> and <c>TUnits.Full</c>.
 /// </para>
 /// <para>
 /// The struct supports various mathematical operations such as addition, subtraction, multiplication, division, and trigonometric functions,
@@ -40,7 +40,7 @@ public readonly record struct AngleReduced<TUnits, T>(T Value)
     where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
 {
 
-    object IAngle.Value 
+    object IAngle.Value
         => Value;
 
     /// <summary>
@@ -111,9 +111,9 @@ public readonly record struct AngleReduced<TUnits, T>(T Value)
     static AngleReduced<TUnits, T> IMultiplicativeIdentity<AngleReduced<TUnits, T>, AngleReduced<TUnits, T>>.MultiplicativeIdentity
         => new(T.MultiplicativeIdentity);
 
-    static AngleReduced<TUnits, T> IMinMaxValue<AngleReduced<TUnits, T>>.MinValue 
+    static AngleReduced<TUnits, T> IMinMaxValue<AngleReduced<TUnits, T>>.MinValue
         => MinValue;
-    static AngleReduced<TUnits, T> IMinMaxValue<AngleReduced<TUnits, T>>.MaxValue 
+    static AngleReduced<TUnits, T> IMinMaxValue<AngleReduced<TUnits, T>>.MaxValue
         => MaxValue;
 
     #endregion
@@ -419,7 +419,8 @@ public readonly record struct AngleReduced<TUnits, T>(T Value)
     /// <returns> true if <paramref name="s"/> was successfully parsed; otherwise, false.</returns>
     public static bool TryParse(ReadOnlySpan<char> s, IFormatProvider? provider, [MaybeNullWhen(false)] out AngleReduced<TUnits, T> result)
     {
-        if(T.TryParse(s, provider, out var value)) {             
+        if (T.TryParse(s, provider, out var value))
+        {
             result = new(value);
             return true;
         }

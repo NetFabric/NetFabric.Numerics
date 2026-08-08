@@ -2,7 +2,7 @@
 
 public class ToDegreesTests
 {
-    public static TheoryData<Angle<Radians, double>, Angle<Degrees, double>> RadiansToDegreesData 
+    public static TheoryData<Angle<Radians, double>, Angle<Degrees, double>> RadiansToDegreesData
         => new()
         {
             { Angle<Radians, double>.Zero, Angle<Degrees, double>.Zero },
@@ -13,7 +13,7 @@ public class ToDegreesTests
     [Theory]
     [MemberData(nameof(RadiansToDegreesData))]
     public void ToDegrees_From_Radians_Should_Succeed(
-        Angle<Radians, double> angle, 
+        Angle<Radians, double> angle,
         Angle<Degrees, double> expected)
     {
         // arrange
@@ -25,7 +25,7 @@ public class ToDegreesTests
         result.Should().Be(expected);
     }
 
-    public static TheoryData<Angle<Gradians, double>, Angle<Degrees, double>> GradiansToDegreesData 
+    public static TheoryData<Angle<Gradians, double>, Angle<Degrees, double>> GradiansToDegreesData
         => new()
         {
             { Angle<Gradians, double>.Zero, Angle<Degrees, double>.Zero },
@@ -48,7 +48,7 @@ public class ToDegreesTests
         result.Should().Be(expected);
     }
 
-    public static TheoryData<Angle<Revolutions, double>, Angle<Degrees, double>> RevolutionsToDegreesData 
+    public static TheoryData<Angle<Revolutions, double>, Angle<Degrees, double>> RevolutionsToDegreesData
         => new()
         {
             { Angle<Revolutions, double>.Zero, Angle<Degrees, double>.Zero },
@@ -59,7 +59,7 @@ public class ToDegreesTests
     [Theory]
     [MemberData(nameof(RevolutionsToDegreesData))]
     public void ToDegrees_From_Revolutions_Should_Succeed(
-        Angle<Revolutions, double> angle, 
+        Angle<Revolutions, double> angle,
         Angle<Degrees, double> expected)
     {
         // arrange

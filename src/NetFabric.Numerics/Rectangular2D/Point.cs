@@ -12,9 +12,9 @@ namespace NetFabric.Numerics.Rectangular2D;
 /// <param name="Y">The Y coordinate.</param>
 [System.Diagnostics.DebuggerDisplay("X = {X}, Y = {Y}")]
 [SkipLocalsInit]
-public readonly record struct Point<T>(T X, T Y) 
+public readonly record struct Point<T>(T X, T Y)
     : IPoint<Point<T>, CoordinateSystem<T>>
-    where T: struct, INumber<T>, IMinMaxValue<T>
+    where T : struct, INumber<T>, IMinMaxValue<T>
 {
     #region constants
 
@@ -108,7 +108,7 @@ public readonly record struct Point<T>(T X, T Y)
 
     #endregion
 
-    object IGeometricBase.this[int index] 
+    object IGeometricBase.this[int index]
         => index switch
         {
             0 => X,

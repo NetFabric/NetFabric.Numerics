@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NetFabric.Numerics.Benchmarks
 {
-    internal class BaselineVector2
+    internal sealed class BaselineVector2
     {
     }
 }

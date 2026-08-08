@@ -2,7 +2,7 @@
 
 public class ToRadiansReducedTests
 {
-    public static TheoryData<AngleReduced<Degrees, double>, AngleReduced<Radians, double>> DegreesToRadiansData 
+    public static TheoryData<AngleReduced<Degrees, double>, AngleReduced<Radians, double>> DegreesToRadiansData
         => new()
         {
             { Angle<Degrees, double>.Zero, Angle<Radians, double>.Zero },
@@ -13,7 +13,7 @@ public class ToRadiansReducedTests
     [Theory]
     [MemberData(nameof(DegreesToRadiansData))]
     public void ToRadians_From_Degrees_Should_Succeed(
-        AngleReduced<Degrees, double> angle, 
+        AngleReduced<Degrees, double> angle,
         AngleReduced<Radians, double> expected)
     {
         // arrange
@@ -25,7 +25,7 @@ public class ToRadiansReducedTests
         result.Should().Be(expected);
     }
 
-    public static TheoryData<AngleReduced<Gradians, double>, AngleReduced<Radians, double>> GradiansToRadiansData 
+    public static TheoryData<AngleReduced<Gradians, double>, AngleReduced<Radians, double>> GradiansToRadiansData
         => new()
         {
             { Angle<Gradians, double>.Zero, Angle<Radians, double>.Zero },
@@ -36,7 +36,7 @@ public class ToRadiansReducedTests
     [Theory]
     [MemberData(nameof(GradiansToRadiansData))]
     public void ToRadians_From_Gradians_Should_Succeed(
-        AngleReduced<Gradians, double> angle, 
+        AngleReduced<Gradians, double> angle,
         AngleReduced<Radians, double> expected)
     {
         // arrange
@@ -48,7 +48,7 @@ public class ToRadiansReducedTests
         result.Value.Should().BeApproximately(expected.Value, 0.000000001);
     }
 
-    public static TheoryData<AngleReduced<Revolutions, double>, AngleReduced<Radians, double>> RevolutionsToRadiansData 
+    public static TheoryData<AngleReduced<Revolutions, double>, AngleReduced<Radians, double>> RevolutionsToRadiansData
         => new()
         {
             { Angle<Revolutions, double>.Zero, Angle<Radians, double>.Zero },
@@ -59,7 +59,7 @@ public class ToRadiansReducedTests
     [Theory]
     [MemberData(nameof(RevolutionsToRadiansData))]
     public void ToRadians_From_Revolutions_Should_Succeed(
-        AngleReduced<Revolutions, double> angle, 
+        AngleReduced<Revolutions, double> angle,
         AngleReduced<Radians, double> expected)
     {
         // arrange

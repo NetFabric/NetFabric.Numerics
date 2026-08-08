@@ -4,7 +4,7 @@
 /// Represents a geometric type.
 /// </summary>
 public interface IGeometricBase
-{        
+{
     /// <summary>
     /// Gets the value for a given coordinate of the geometric object.
     /// </summary>
@@ -33,18 +33,18 @@ public interface IGeometricBase
 public interface IGeometricBase<TCoordinateSystem>
     : IGeometricBase
     where TCoordinateSystem : ICoordinateSystem
-{    
+{
     /// <summary>
     /// Gets the coordinate system of the geometric object.
     /// </summary>
     /// <value>The coordinate system of the geometric object.</value>
-    new CoordinateSystem<TCoordinateSystem> CoordinateSystem 
+    new CoordinateSystem<TCoordinateSystem> CoordinateSystem
         => CoordinateSystem<TCoordinateSystem>.Instance;
 
     CoordinateSystem IGeometricBase.CoordinateSystem
         => CoordinateSystem;
 }
-    
+
 /// <summary>
 /// Represents a geometric type.
 /// </summary>
@@ -56,7 +56,7 @@ public interface IGeometricBase<TSelf, TCoordinateSystem>
     , IEqualityOperators<TSelf, TSelf, bool>
     where TSelf : struct, IGeometricBase<TSelf, TCoordinateSystem>?
     where TCoordinateSystem : ICoordinateSystem
-{    
+{
     /// <summary>
     /// Gets the zero value for the type.
     /// </summary>
@@ -68,7 +68,6 @@ public interface IGeometricBase<TSelf, TCoordinateSystem>
     /// <param name="value">The value to check.</param>
     /// <returns><c>true</c> if the value is a zero vector; otherwise, <c>false</c>.</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool IsZero(TSelf value) 
+    public static bool IsZero(TSelf value)
         => value.Equals(TSelf.Zero);
 }
-

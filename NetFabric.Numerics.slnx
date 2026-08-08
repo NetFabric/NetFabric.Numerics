@@ -1,0 +1,35 @@
+<Solution>
+  <Folder Name="/Docs/">
+    <File Path="docs/.gitignore" />
+    <File Path="docs/docfx.json" />
+    <File Path="docs/index.md" />
+    <File Path="docs/toc.yml" />
+  </Folder>
+  <Folder Name="/Docs/Api/">
+    <File Path="docs/api/index.md" />
+  </Folder>
+  <Folder Name="/Docs/Articles/">
+    <File Path="docs/articles/intro.md" />
+    <File Path="docs/articles/toc.yml" />
+  </Folder>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path=".gitattributes" />
+    <File Path=".gitignore" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Build.targets" />
+    <File Path="Directory.Packages.props" />
+    <File Path="global.json" />
+    <File Path="Icon.png" />
+    <File Path="LICENSE" />
+    <File Path="NuGet.config" />
+    <File Path="README.md" />
+  </Folder>
+  <Project Path="src/NetFabric.Numerics.Angle.UnitTests/NetFabric.Numerics.Angle.UnitTests.csproj" />
+  <Project Path="src/NetFabric.Numerics.Angle/NetFabric.Numerics.Angle.csproj" />
+  <Project Path="src/NetFabric.Numerics.Benchmarks/NetFabric.Numerics.Benchmarks.csproj" />
+  <Project Path="src/NetFabric.Numerics.Geodesy.UnitTests/NetFabric.Numerics.Geodesy.UnitTests.csproj" />
+  <Project Path="src/NetFabric.Numerics.Geodesy/NetFabric.Numerics.Geodesy.csproj" />
+  <Project Path="src/NetFabric.Numerics.UnitTests/NetFabric.Numerics.UnitTests.csproj" />
+  <Project Path="src/NetFabric.Numerics/NetFabric.Numerics.csproj" />
+</Solution>

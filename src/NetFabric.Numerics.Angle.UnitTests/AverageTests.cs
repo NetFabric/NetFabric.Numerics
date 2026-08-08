@@ -2,7 +2,7 @@
 
 public class AverageTests
 {
-    public static TheoryData<Angle<Degrees, double>[], Angle<Degrees, double>?> AverageData 
+    public static TheoryData<Angle<Degrees, double>[], Angle<Degrees, double>?> AverageData
         => new()
         {
             {Array.Empty<Angle<Degrees, double>>(), null},

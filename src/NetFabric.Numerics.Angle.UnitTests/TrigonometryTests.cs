@@ -2,7 +2,7 @@
 
 public class TrigonometryTests
 {
-    public static TheoryData<Angle<Radians, double>> TrigonometryDoubleData = new()
+    public static TheoryData<Angle<Radians, double>> TrigonometryDoubleData { get; } = new()
     {
         -Angle<Radians, double>.Full,
         -Angle<Radians, double>.Straight,
@@ -42,7 +42,7 @@ public class TrigonometryTests
         result.Should().Be(expected);
     }
 
-    public static TheoryData<Angle<Radians, float>> TrigonometryFloatData = new()
+    public static TheoryData<Angle<Radians, float>> TrigonometryFloatData { get; } = new()
     {
         -Angle<Radians, float>.Full,
         -Angle<Radians, float>.Straight,

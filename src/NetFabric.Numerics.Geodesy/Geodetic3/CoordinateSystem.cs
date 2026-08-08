@@ -7,13 +7,13 @@ public readonly record struct CoordinateSystem<TDatum, T>
     where TDatum : IDatum<T>
     where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
 {
-    static readonly IReadOnlyList<Coordinate> coordinates 
+    static readonly IReadOnlyList<Coordinate> coordinates
         = new[] {
-            new Coordinate("Latitude", typeof(Angle<Degrees, T>)), 
+            new Coordinate("Latitude", typeof(Angle<Degrees, T>)),
             new Coordinate("Longitude", typeof(Angle<Degrees, T>)),
             new Coordinate("Height", typeof(T)),
         };
 
-    public static IReadOnlyList<Coordinate> Coordinates 
+    public static IReadOnlyList<Coordinate> Coordinates
         => coordinates;
 }

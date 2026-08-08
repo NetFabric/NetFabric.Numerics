@@ -18,15 +18,15 @@ public sealed class Datum<TDatum, T>
 {
     static readonly Lazy<Datum<TDatum, T>> lazyInstance = new(() => new());
 
-    private Datum() {}
+    private Datum() { }
 
     internal static Datum<TDatum, T> Instance
         => lazyInstance.Value;
 
-    public override string Name 
+    public override string Name
         => TDatum.Name;
-    public override Offset<T> Offset 
+    public override Offset<T> Offset
         => TDatum.Offset;
-    public override Ellipsoid<T> Ellipsoid 
+    public override Ellipsoid<T> Ellipsoid
         => TDatum.Ellipsoid;
 }

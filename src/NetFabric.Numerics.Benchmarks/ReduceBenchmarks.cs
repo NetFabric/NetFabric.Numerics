@@ -1,6 +1,7 @@
-﻿using BenchmarkDotNet.Attributes;
-using System.Numerics;
+﻿using System.Numerics;
 using System.Runtime.CompilerServices;
+
+using BenchmarkDotNet.Attributes;
 
 namespace NetFabric.Numerics.Benchmarks;
 
@@ -19,7 +20,7 @@ public class ReduceBenchmarks
         static IEnumerable<double> GetValues(int count)
         {
             var random = new Random(42);
-            for(var i = 0; i < count; i++)
+            for (var i = 0; i < count; i++)
                 yield return random.NextDouble();
         }
     }

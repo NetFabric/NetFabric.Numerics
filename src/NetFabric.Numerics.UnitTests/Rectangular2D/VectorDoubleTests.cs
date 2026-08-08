@@ -33,14 +33,14 @@ public class VectorDoubleTests
     {
         // arrange
         var expected = System.Numerics.Vector2.Add(
-            new System.Numerics.Vector2((float)left.X, (float)left.Y), 
+            new System.Numerics.Vector2((float)left.X, (float)left.Y),
             new System.Numerics.Vector2((float)right.X, (float)right.Y));
 
         // act
         var result = left + right;
 
         // assert
-        result.GetType().Should().Be(typeof(Vector<double>));
+        result.GetType().Should().Be<Vector<double>>();
         result.X.Should().Be(expected.X);
         result.Y.Should().Be(expected.Y);
     }

@@ -14,9 +14,9 @@ namespace NetFabric.Numerics.Rectangular3D;
 /// <param name="Z">The Z coordinate.</param>
 [System.Diagnostics.DebuggerDisplay("X = {X}, Y = {Y}, Z = {Z}")]
 [SkipLocalsInit]
-public readonly record struct Point<T>(T X, T Y, T Z) 
+public readonly record struct Point<T>(T X, T Y, T Z)
     : IPoint<Point<T>, CoordinateSystem<T>>
-    where T: struct, INumber<T>, IMinMaxValue<T>
+    where T : struct, INumber<T>, IMinMaxValue<T>
 {
     #region constants
 
@@ -113,7 +113,7 @@ public readonly record struct Point<T>(T X, T Y, T Z)
 
     #endregion
 
-    object IGeometricBase.this[int index] 
+    object IGeometricBase.this[int index]
         => index switch
         {
             0 => X,
@@ -151,7 +151,7 @@ public static class Point
     /// </remarks>
     public static Point<T> Apply<T>(Quaternion<T> quaternion, Point<T> point)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => new (
+        => new(
             (quaternion.W * point.X) + (quaternion.Y * point.Z) - (quaternion.Z * point.Y),
             (quaternion.W * point.Y) + (quaternion.Z * point.X) - (quaternion.X * point.Z),
             (quaternion.W * point.Z) + (quaternion.X * point.Y) - (quaternion.Y * point.X)

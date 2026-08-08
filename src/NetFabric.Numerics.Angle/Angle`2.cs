@@ -47,7 +47,7 @@ public readonly struct Angle<TUnits, T>
     /// <param name="value">The angle measurement in the units specified by <typeparamref name="TUnits"/>.</param>
     public Angle(T value)
     {
-        Value = value; 
+        Value = value;
     }
 
     /// <summary>
@@ -125,10 +125,10 @@ public readonly struct Angle<TUnits, T>
         => new(T.AdditiveIdentity);
     static Angle<TUnits, T> IMultiplicativeIdentity<Angle<TUnits, T>, Angle<TUnits, T>>.MultiplicativeIdentity
         => new(T.MultiplicativeIdentity);
-    
-    static Angle<TUnits, T> IMinMaxValue<Angle<TUnits, T>>.MinValue 
+
+    static Angle<TUnits, T> IMinMaxValue<Angle<TUnits, T>>.MinValue
         => MinValue;
-    static Angle<TUnits, T> IMinMaxValue<Angle<TUnits, T>>.MaxValue 
+    static Angle<TUnits, T> IMinMaxValue<Angle<TUnits, T>>.MaxValue
         => MaxValue;
 
     #endregion
@@ -152,7 +152,7 @@ public readonly struct Angle<TUnits, T>
     /// </summary>
     /// <param name="left">The first angle to compare.</param>
     /// <param name="right">The second angle to compare.</param>
-    /// <returns>true if the two angles are equal, false otherwise.returns>
+    /// <returns>true if the two angles are equal, false otherwise.</returns>
     /// <remarks>
     /// The method compares the numerical values of the <paramref name="left"/> and <paramref name="right"/> angles to determine their equality.
     /// </remarks>
@@ -198,7 +198,7 @@ public readonly struct Angle<TUnits, T>
             _ => false
         };
 
-    object IAngle.Value 
+    object IAngle.Value
         => Value;
 
     #endregion
@@ -211,26 +211,26 @@ public readonly struct Angle<TUnits, T>
     /// <param name="other"></param>
     /// <returns></returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public readonly int CompareTo(Angle<TUnits, T> other) 
+    public readonly int CompareTo(Angle<TUnits, T> other)
         => Value.CompareTo(other.Value);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool operator <(Angle<TUnits, T> left, Angle<TUnits, T> right) 
+    public static bool operator <(Angle<TUnits, T> left, Angle<TUnits, T> right)
         => left.CompareTo(right) < 0;
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool operator <=(Angle<TUnits, T> left, Angle<TUnits, T> right) 
+    public static bool operator <=(Angle<TUnits, T> left, Angle<TUnits, T> right)
         => left.CompareTo(right) <= 0;
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool operator >(Angle<TUnits, T> left, Angle<TUnits, T> right) 
+    public static bool operator >(Angle<TUnits, T> left, Angle<TUnits, T> right)
         => left.CompareTo(right) > 0;
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool operator >=(Angle<TUnits, T> left, Angle<TUnits, T> right) 
-        => left.CompareTo(right) >= 0;        
+    public static bool operator >=(Angle<TUnits, T> left, Angle<TUnits, T> right)
+        => left.CompareTo(right) >= 0;
 
-    readonly int IComparable.CompareTo(object? obj) 
+    readonly int IComparable.CompareTo(object? obj)
         => obj switch
         {
             null => 1,
@@ -256,7 +256,7 @@ public readonly struct Angle<TUnits, T>
     /// doesn't change the direction of rotation.
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Angle<TUnits, T> operator +(Angle<TUnits, T> right) 
+    public static Angle<TUnits, T> operator +(Angle<TUnits, T> right)
         => right;
 
     /// <summary>
@@ -276,8 +276,8 @@ public readonly struct Angle<TUnits, T>
     /// smaller angle from the larger angle, resulting in a new angle that represents the difference in rotation.
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Angle<TUnits, T> operator +(Angle<TUnits, T> left, Angle<TUnits, T> right) 
-        => new (left.Value + right.Value);
+    public static Angle<TUnits, T> operator +(Angle<TUnits, T> left, Angle<TUnits, T> right)
+        => new(left.Value + right.Value);
 
     /// <summary>
     /// Addition operator for two angles.
@@ -318,7 +318,7 @@ public readonly struct Angle<TUnits, T>
     /// in the clockwise direction, the resulting angle would be 90 degrees in the counterclockwise direction.
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Angle<TUnits, T> operator -(Angle<TUnits, T> right) 
+    public static Angle<TUnits, T> operator -(Angle<TUnits, T> right)
         => new(-right.Value);
 
     /// <summary>
@@ -338,8 +338,8 @@ public readonly struct Angle<TUnits, T>
     /// Subtracting angles in the opposite direction will produce a new angle that represents the difference in rotation.
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Angle<TUnits, T> operator -(Angle<TUnits, T> left, Angle<TUnits, T> right) 
-        => new (left.Value - right.Value);
+    public static Angle<TUnits, T> operator -(Angle<TUnits, T> left, Angle<TUnits, T> right)
+        => new(left.Value - right.Value);
 
     /// <summary>
     /// Subtraction operator for two angles.
@@ -508,7 +508,8 @@ public readonly struct Angle<TUnits, T>
     /// <returns> true if <paramref name="s"/> was successfully parsed; otherwise, false.</returns>
     public static bool TryParse(ReadOnlySpan<char> s, IFormatProvider? provider, [MaybeNullWhen(false)] out Angle<TUnits, T> result)
     {
-        if(T.TryParse(s, provider, out var value)) {             
+        if (T.TryParse(s, provider, out var value))
+        {
             result = new(value);
             return true;
         }

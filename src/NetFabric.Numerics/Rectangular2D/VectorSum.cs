@@ -13,16 +13,16 @@ public static partial class Vector
     public static Vector<T> Sum<T>(this IEnumerable<Vector<T>> source)
         where T : struct, INumber<T>, IMinMaxValue<T>
     {
-        if(source.TryGetSpan(out var span))
-            return span.Sum();
+        if (source.TryGetSpan(out var span))
+            return Sum(span);
 
         var sumX = T.Zero;
         var sumY = T.Zero;
         foreach (var vector in source)
         {
-            checked 
-            { 
-                sumX += vector.X; 
+            checked
+            {
+                sumX += vector.X;
                 sumY += vector.Y;
             }
         }
@@ -39,7 +39,7 @@ public static partial class Vector
     /// </remarks>
     public static Vector<T> Sum<T>(this Vector<T>[] source)
         where T : struct, INumber<T>, IMinMaxValue<T>
-        => source.AsSpan().Sum();
+        => Sum(source.AsSpan());
 
     /// <summary>
     /// Calculates the sum of a span of vectors.
@@ -51,7 +51,7 @@ public static partial class Vector
     /// </remarks>
     public static Vector<T> Sum<T>(this Span<Vector<T>> source)
         where T : struct, INumber<T>, IMinMaxValue<T>
-        => ((ReadOnlySpan<Vector<T>>)source).Sum();
+        => Sum((ReadOnlySpan<Vector<T>>)source);
 
     /// <summary>
     /// Calculates the sum of a read-only span of vectors.

@@ -8,7 +8,7 @@ public static partial class Angle
     /// <typeparam name="T">The floating point type used internally by the returned angle.</typeparam>
     /// <param name="cos">The cosine value of the angle.</param>
     /// <exception cref="System.ArgumentOutOfRangeException">
-    /// Thrown when the provided <paramref name="sin"/> value is outside the range [-1, 1].
+    /// Thrown when the provided <paramref name="cos"/> value is outside the range [-1, 1].
     /// </exception>
     /// <returns>The angle in radians whose cosine is equal to the given value.</returns>
     /// <remarks>
@@ -25,7 +25,7 @@ public static partial class Angle
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static AngleReduced<Radians, T> Acos<T>(T cos)
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>, ITrigonometricFunctions<T>
-        =>  cos < -T.One || cos > T.One
+        => cos < -T.One || cos > T.One
             ? Throw.ArgumentOutOfRangeException<AngleReduced<Radians, T>>(nameof(cos), cos, "The cosine value must be in the range [-1, 1].")
             : new(T.Acos(cos));
 

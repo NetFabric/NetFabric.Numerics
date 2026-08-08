@@ -5,8 +5,8 @@ public static partial class Vector
     public static Vector<T>? Average<T>(this IEnumerable<Vector<T>> source)
         where T : struct, INumber<T>, IMinMaxValue<T>
     {
-        if(source.TryGetSpan(out var span))
-            return span.Average();
+        if (source.TryGetSpan(out var span))
+            return Average(span);
 
         var sumX = T.Zero;
         var sumY = T.Zero;
@@ -14,29 +14,29 @@ public static partial class Vector
         var count = T.Zero;
         foreach (var vector in source)
         {
-            checked 
-            { 
+            checked
+            {
                 sumX += vector.X;
                 sumY += vector.Y;
                 sumZ += vector.Z;
                 count++;
             }
         }
-        return T.IsZero(count) 
-            ? null 
+        return T.IsZero(count)
+            ? null
             : new Vector<T>(sumX / count, sumY / count, sumZ / count);
     }
 
     public static Vector<T>? Average<T>(this Vector<T>[] source)
         where T : struct, INumber<T>, IMinMaxValue<T>
-        => source.AsSpan().Average();
+        => Average(source.AsSpan());
 
     public static Vector<T>? Average<T>(this Span<Vector<T>> source)
         where T : struct, INumber<T>, IMinMaxValue<T>
-        => ((ReadOnlySpan<Vector<T>>)source).Average();
+        => Average((ReadOnlySpan<Vector<T>>)source);
 
     public static Vector<T>? Average<T>(this ReadOnlySpan<Vector<T>> source)
-        where T : struct, INumber<T>, IMinMaxValue<T> 
+        where T : struct, INumber<T>, IMinMaxValue<T>
         => source.Length is 0
             ? null
             : Sum(source) / T.CreateChecked(source.Length);

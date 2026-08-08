@@ -167,7 +167,7 @@ public readonly record struct Quaternion<T>(T X, T Y, T Z, T W)
     /// </para>
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Quaternion<T> operator +(Quaternion<T> left, Quaternion<T> right) 
+    public static Quaternion<T> operator +(Quaternion<T> left, Quaternion<T> right)
         => new(
             left.X + right.X,
             left.Y + right.Y,
@@ -190,7 +190,7 @@ public readonly record struct Quaternion<T>(T X, T Y, T Z, T W)
     /// </para>
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Quaternion<T> operator -(Quaternion<T> right) 
+    public static Quaternion<T> operator -(Quaternion<T> right)
         => new(-right.X, -right.Y, -right.Z, -right.W);
 
     /// <summary>
@@ -211,7 +211,7 @@ public readonly record struct Quaternion<T>(T X, T Y, T Z, T W)
     /// </para>
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Quaternion<T> operator -(Quaternion<T> left, Quaternion<T> right) 
+    public static Quaternion<T> operator -(Quaternion<T> left, Quaternion<T> right)
         => new(left.X - right.X, left.Y - right.Y, left.Z - right.Z, left.W - right.W);
 
     /// <summary>
@@ -233,7 +233,7 @@ public readonly record struct Quaternion<T>(T X, T Y, T Z, T W)
     /// </para>
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Quaternion<T> operator *(Quaternion<T> left, Quaternion<T> right) 
+    public static Quaternion<T> operator *(Quaternion<T> left, Quaternion<T> right)
         => new(
             (left.W * right.X) + (left.X * right.W) + (left.Y * right.Z) - (left.Z * right.Y),
             (left.W * right.Y) - (left.X * right.Z) + (left.Y * right.W) + (left.Z * right.X),
@@ -256,7 +256,7 @@ public readonly record struct Quaternion<T>(T X, T Y, T Z, T W)
     /// </para>
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Quaternion<T> operator *(Quaternion<T> left, T right) 
+    public static Quaternion<T> operator *(Quaternion<T> left, T right)
         => new(
             left.X * right,
             left.Y * right,
@@ -278,7 +278,7 @@ public readonly record struct Quaternion<T>(T X, T Y, T Z, T W)
     /// Note that quaternion division is not a commutative operation, meaning that the order of the quaternions matters.
     /// </para>
     /// </remarks>
-    public static Quaternion<T> operator /(Quaternion<T> left, Quaternion<T> right) 
+    public static Quaternion<T> operator /(Quaternion<T> left, Quaternion<T> right)
         => left * Quaternion.Inverse(in right);
 
     #endregion
@@ -527,7 +527,7 @@ public static class Quaternion
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Quaternion<T> Lerp<T>(ref readonly Quaternion<T> start, ref readonly Quaternion<T> end, T factor)
-        where T : struct, IFloatingPoint<T>, IMinMaxValue<T> 
+        where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
         => (start * (T.One - factor)) + (end * factor);
 
     /// <summary>
@@ -640,9 +640,8 @@ public static class Quaternion
         }
 
         return
-            (startNormalized * (T.Sin((T.One - factor) * theta) / sinTheta)) + 
+            (startNormalized * (T.Sin((T.One - factor) * theta) / sinTheta)) +
             (endNormalized * (T.Sin(factor * theta) / sinTheta));
     }
 
 }
-

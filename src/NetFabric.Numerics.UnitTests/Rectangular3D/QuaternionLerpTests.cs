@@ -2,8 +2,14 @@
 
 public class QuaternionLerpTests
 {
-    static readonly Quaternion<float> start = Quaternion.Normalize(new Quaternion<float>(1.0f, 2.0f, 3.0f, 4.0f));
-    static readonly Quaternion<float> end = Quaternion.Normalize(new Quaternion<float>(4.0f, 3.0f, 2.0f, 1.0f));
+    static readonly Quaternion<float> start = CreateNormalized(1.0f, 2.0f, 3.0f, 4.0f);
+    static readonly Quaternion<float> end = CreateNormalized(4.0f, 3.0f, 2.0f, 1.0f);
+
+    static Quaternion<float> CreateNormalized(float x, float y, float z, float w)
+    {
+        var value = new Quaternion<float>(x, y, z, w);
+        return Quaternion.Normalize(in value);
+    }
 
     public static TheoryData<Quaternion<float>, Quaternion<float>, float, Quaternion<float>> Data
         => new()

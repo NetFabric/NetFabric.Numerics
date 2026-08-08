@@ -41,4 +41,3 @@ public class CoordinateSystem<T> : CoordinateSystem
     public override IReadOnlyList<Coordinate> Coordinates
         => T.Coordinates;
 }
-

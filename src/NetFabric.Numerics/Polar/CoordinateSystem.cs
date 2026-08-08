@@ -22,7 +22,7 @@ public abstract class CoordinateSystem<TAngleUnits, T>
     /// <remarks>
     /// Each coordinate contains information about its name and type.
     /// </remarks>
-    public static IReadOnlyList<Coordinate> Coordinates { get; } 
+    public static IReadOnlyList<Coordinate> Coordinates { get; }
         = new[] {
             new Coordinate("Radius", typeof(T)),
             new Coordinate("Azimuth", typeof(Angle<TAngleUnits, T>)),

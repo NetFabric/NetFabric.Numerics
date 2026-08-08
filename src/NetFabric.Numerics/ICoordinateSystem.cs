@@ -10,7 +10,7 @@ public readonly record struct Coordinate(string Name, Type Type);
 /// <summary>
 /// Represents a coordinate system.
 /// </summary>
-public interface ICoordinateSystem 
+public interface ICoordinateSystem
 {
     /// <summary>
     /// Gets information for each coordinate in a coordinate system.
