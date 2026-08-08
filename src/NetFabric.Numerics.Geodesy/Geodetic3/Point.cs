@@ -5,7 +5,7 @@ namespace NetFabric.Numerics.Geodesy.Geodetic3;
 
 [System.Diagnostics.DebuggerDisplay("Latitude = {Latitude}, Longitude = {Longitude}, Height = {Height}")]
 [SkipLocalsInit]
-public readonly record struct Point<TDatum, TAngleUnits, T>(Angle<TAngleUnits, T> Latitude, Angle<TAngleUnits, T> Longitude, T Height) 
+public readonly record struct Point<TDatum, TAngleUnits, T>(Angle<TAngleUnits, T> Latitude, Angle<TAngleUnits, T> Longitude, T Height)
     : IGeodeticPoint<Point<TDatum, TAngleUnits, T>, CoordinateSystem<TDatum, T>, TDatum, T>
     where TDatum : IDatum<T>
     where TAngleUnits : IAngleUnits
@@ -77,7 +77,7 @@ public readonly record struct Point<TDatum, TAngleUnits, T>(Angle<TAngleUnits, T
 
     #region constants
 
-    public static readonly Point<TDatum, TAngleUnits, T> Zero 
+    public static readonly Point<TDatum, TAngleUnits, T> Zero
         = new(Angle<TAngleUnits, T>.Zero, Angle<TAngleUnits, T>.Zero, T.Zero);
 
     static Point<TDatum, TAngleUnits, T> IGeometricBase<Point<TDatum, TAngleUnits, T>, CoordinateSystem<TDatum, T>>.Zero
@@ -93,7 +93,7 @@ public readonly record struct Point<TDatum, TAngleUnits, T>(Angle<TAngleUnits, T
     /// Represents the maximum value. This field is read-only.
     /// </summary>
     public static readonly Point<TDatum, TAngleUnits, T> MaxValue
-        = new(Angle<TAngleUnits, T>.Right, Angle<TAngleUnits, T>.Straight, T.MinValue);
+        = new(Angle<TAngleUnits, T>.Right, Angle<TAngleUnits, T>.Straight, T.MaxValue);
 
     static Point<TDatum, TAngleUnits, T> IMinMaxValue<Point<TDatum, TAngleUnits, T>>.MinValue
         => MinValue;
@@ -102,7 +102,7 @@ public readonly record struct Point<TDatum, TAngleUnits, T>(Angle<TAngleUnits, T
 
     #endregion
 
-    object IGeometricBase.this[int index] 
+    object IGeometricBase.this[int index]
         => index switch
         {
             0 => Latitude,
