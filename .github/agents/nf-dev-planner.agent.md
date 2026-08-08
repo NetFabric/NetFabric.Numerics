@@ -37,21 +37,25 @@ question — never `grep`/`find`/ad hoc file reads for that purpose:
 2. Use CBM to identify every file/type/member the request touches and every
    caller/implementer that would be affected.
 3. Decompose each behavior into a work item containing a test subtask and a
-   production implementation subtask. The implementation subtask must depend
-   on that test subtask's `RED established` output.
+   production implementation subtask. Classify the test subtask as `new test`
+   or `existing test`. The implementation subtask must depend on `RED
+   established` for a new test, or `EXISTING TESTS VALIDATED` for existing
+   tests.
 4. Mark independent test subtasks that can run in parallel. Separately mark
    implementation subtasks that can run in parallel after their corresponding
-   RED dependencies are satisfied. Never parallelize tasks that share a file
-   or whose behavior depends on another work item's output.
+   test-evidence dependencies are satisfied. Never parallelize tasks that
+   share a file or whose behavior depends on another work item's output.
 5. For every subtask, name exact files and types from CBM. Define the expected
-   RED signal for the test subtask and the GREEN acceptance command for the
-   implementation subtask. Every changed public API needs test coverage under
-   the relevant `AGENTS.md` rules.
+   evidence for the test subtask and the GREEN acceptance command for the
+   implementation subtask. New tests must establish RED. Existing tests must
+   be checked for correct assertions and exercised, but are not required to
+   transition to RED. Every changed public API needs test coverage under the
+   relevant `AGENTS.md` rules.
 
 ## Output format
 
 A numbered work-item table: `id`, `behavior`, `test subtask and test files`,
-`expected RED signal`, `implementation subtask and production files`,
+`test classification`, `expected test evidence`, `implementation subtask and production files`,
 `depends-on`, `test parallel group`, `implementation parallel group`, and
 `GREEN acceptance command`. Precede the table with the CBM commands run and
 their relevant status/query output.
