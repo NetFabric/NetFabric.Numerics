@@ -3,7 +3,7 @@ description: Mandatory tribunal review orchestrator for the nf-dev squad. Dispat
 target: github-copilot
 name: NF Dev Review Orchestrator
 model: claude-sonnet-4.6
-tools: ['view', 'search', 'task', 'list_agents']
+tools: ['view', 'search', 'bash', 'task', 'list_agents']
 user-invocable: false
 ---
 

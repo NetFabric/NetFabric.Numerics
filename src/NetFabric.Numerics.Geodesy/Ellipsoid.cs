@@ -87,13 +87,29 @@ public static class Ellipsoid
     /// <summary>
     /// Calculates the surface area of the ellipsoid.
     /// </summary>
-    /// <value>The surface area of the ellipsoid.</value>
+    /// <typeparam name="T">The floating-point type of the ellipsoid parameters.</typeparam>
+    /// <param name="ellipsoid">The reference ellipsoid.</param>
+    /// <returns>The surface area of the ellipsoid in the same units as the equatorial radius squared.</returns>
+    /// <remarks>
+    /// Uses the formula S = 2π a² (1 + ((1-e²)/e) atanh(e)).
+    /// When e ≈ 0 (sphere), the formula degenerates to 4π a².
+    /// </remarks>
     public static T SurfaceArea<T>(ref readonly Ellipsoid<T> ellipsoid)
         where T : struct, IFloatingPoint<T>, IPowerFunctions<T>, IRootFunctions<T>, ILogarithmicFunctions<T>
     {
-        var eccentricity = Eccentricity(in ellipsoid);
-        var two = T.One + T.One;
-        return (two * T.Pi * T.Pow(ellipsoid.EquatorialRadius, two)) + (T.Pi * (T.Pow(PolarRadius(in ellipsoid), two) / eccentricity) * T.Log10((T.One + eccentricity) / (T.One - eccentricity)));
+        var e2 = EccentricitySquared(in ellipsoid);
+        var a = ellipsoid.EquatorialRadius;
+        var two = T.CreateChecked(2);
+        var aSq = T.Pow(a, two);
+
+        // Handle sphere limit: when e^2 = 0, surface area = 4 π a²
+        if (e2 == T.Zero)
+            return T.CreateChecked(4) * T.Pi * aSq;
+
+        var e = T.Sqrt(e2);
+        // atanh(e) = 0.5 * ln((1+e)/(1-e))
+        var atanhe = T.CreateChecked(0.5) * T.Log((T.One + e) / (T.One - e));
+        return two * T.Pi * aSq * (T.One + ((T.One - e2) / e) * atanhe);
     }
 
     /// <summary>
@@ -120,19 +136,87 @@ public static class Ellipsoid
         where T : struct, IFloatingPoint<T>
         => ellipsoid.EquatorialRadius * (T.One - EccentricitySquared(in ellipsoid));
 
+    /// <summary>
+    /// Calculates the semi-minor axis (polar radius) of the ellipsoid.
+    /// </summary>
+    /// <typeparam name="T">The floating-point type of the ellipsoid parameters.</typeparam>
+    /// <param name="ellipsoid">The reference ellipsoid.</param>
+    /// <returns>The polar radius b = a(1-f).</returns>
     public static T PolarRadius<T>(ref readonly Ellipsoid<T> ellipsoid)
         where T : struct, IFloatingPoint<T>
         => ellipsoid.EquatorialRadius * (T.One - ellipsoid.Flattening);
 
+    /// <summary>
+    /// Calculates the first eccentricity of the ellipsoid.
+    /// </summary>
+    /// <typeparam name="T">The floating-point type of the ellipsoid parameters.</typeparam>
+    /// <param name="ellipsoid">The reference ellipsoid.</param>
+    /// <returns>The first eccentricity e = sqrt(f(2-f)).</returns>
     public static T Eccentricity<T>(ref readonly Ellipsoid<T> ellipsoid)
         where T : struct, IFloatingPoint<T>, IRootFunctions<T>
         => T.Sqrt(EccentricitySquared(in ellipsoid));
 
+    /// <summary>
+    /// Calculates the first eccentricity squared of the ellipsoid.
+    /// </summary>
+    /// <typeparam name="T">The floating-point type of the ellipsoid parameters.</typeparam>
+    /// <param name="ellipsoid">The reference ellipsoid.</param>
+    /// <returns>The first eccentricity squared e² = f(2-f).</returns>
     public static T EccentricitySquared<T>(ref readonly Ellipsoid<T> ellipsoid)
         where T : struct, IFloatingPoint<T>
         => ellipsoid.Flattening * (T.CreateChecked(2) - ellipsoid.Flattening);
 
+    /// <summary>
+    /// Calculates the second eccentricity squared of the ellipsoid.
+    /// </summary>
+    /// <typeparam name="T">The floating-point type of the ellipsoid parameters.</typeparam>
+    /// <param name="ellipsoid">The reference ellipsoid.</param>
+    /// <returns>The second eccentricity squared e'² = e² / (1 - e²).</returns>
+    public static T SecondEccentricitySquared<T>(ref readonly Ellipsoid<T> ellipsoid)
+        where T : struct, IFloatingPoint<T>
+    {
+        var e2 = EccentricitySquared(in ellipsoid);
+        return e2 / (T.One - e2);
+    }
+
+    /// <summary>
+    /// Calculates the arithmetic mean radius of the ellipsoid.
+    /// </summary>
+    /// <typeparam name="T">The floating-point type of the ellipsoid parameters.</typeparam>
+    /// <param name="ellipsoid">The reference ellipsoid.</param>
+    /// <returns>The arithmetic mean radius R₁ = (2a + b) / 3.</returns>
     public static T ArithmeticMeanRadius<T>(ref readonly Ellipsoid<T> ellipsoid)
         where T : struct, IFloatingPoint<T>
         => ((T.CreateChecked(2) * ellipsoid.EquatorialRadius) + PolarRadius(in ellipsoid)) / T.CreateChecked(3);
+
+    /// <summary>
+    /// Calculates the radius of curvature in the meridian at a given geodetic latitude.
+    /// </summary>
+    /// <typeparam name="T">The floating-point type of the ellipsoid parameters.</typeparam>
+    /// <param name="ellipsoid">The reference ellipsoid.</param>
+    /// <param name="latitudeInRadians">The geodetic latitude in radians.</param>
+    /// <returns>The meridian radius of curvature M(φ) = a(1-e²) / (1 - e² sin²(φ))^(3/2).</returns>
+    public static T RadiusOfCurvatureInMeridian<T>(ref readonly Ellipsoid<T> ellipsoid, T latitudeInRadians)
+        where T : struct, IFloatingPoint<T>, IRootFunctions<T>, ITrigonometricFunctions<T>
+    {
+        var e2 = EccentricitySquared(in ellipsoid);
+        var sinPhi = T.Sin(latitudeInRadians);
+        var w2 = T.One - e2 * sinPhi * sinPhi;
+        return ellipsoid.EquatorialRadius * (T.One - e2) / (T.Sqrt(w2) * w2);
+    }
+
+    /// <summary>
+    /// Calculates the radius of curvature in the prime vertical at a given geodetic latitude.
+    /// </summary>
+    /// <typeparam name="T">The floating-point type of the ellipsoid parameters.</typeparam>
+    /// <param name="ellipsoid">The reference ellipsoid.</param>
+    /// <param name="latitudeInRadians">The geodetic latitude in radians.</param>
+    /// <returns>The prime-vertical radius of curvature N(φ) = a / sqrt(1 - e² sin²(φ)).</returns>
+    public static T RadiusOfCurvatureInPrimeVertical<T>(ref readonly Ellipsoid<T> ellipsoid, T latitudeInRadians)
+        where T : struct, IFloatingPoint<T>, IRootFunctions<T>, ITrigonometricFunctions<T>
+    {
+        var e2 = EccentricitySquared(in ellipsoid);
+        var sinPhi = T.Sin(latitudeInRadians);
+        return ellipsoid.EquatorialRadius / T.Sqrt(T.One - e2 * sinPhi * sinPhi);
+    }
 }

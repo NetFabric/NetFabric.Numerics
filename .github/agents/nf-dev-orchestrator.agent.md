@@ -1,5 +1,5 @@
 ---
-description: Orchestrates the TDD-first nf-dev squad to implement features and fix bugs in NetFabric.Numerics. Ensures codebase-memory-mcp is installed and indexed, then dispatches planning, tests, implementation, deterministic gates, and mandatory tribunal review; never edits files. Use for "implement a feature", "fix a bug", "add support for X" requests in this repo.
+description: Orchestrates the TDD-first nf-dev squad to implement features and fix bugs in NetFabric.Numerics. Ensures codebase-memory-mcp is installed and indexed, then dispatches planning, tests, implementation, deterministic gates, mandatory tribunal review, and draft-PR publishing; never edits files. Use for "implement a feature", "fix a bug", "add support for X" requests in this repo.
 target: github-copilot
 name: NF Dev Orchestrator
 model: gpt-5.4
@@ -30,7 +30,8 @@ flowchart TD
    QG -->|repair limit reached| RO
    RO -->|test changes, up to 2 rounds| TR
    RO -->|implementation changes, up to 2 rounds| I
-    RO -->|approved| O
+   RO -->|approved| PUB[nf-dev-publisher]
+   PUB --> O
 ```
 
 ## Protocol
@@ -86,9 +87,17 @@ flowchart TD
    `nf-dev-implementer`, tests first when both apply. Re-run step 6 before
    returning to review. After 2 review-fix rounds, stop and report outstanding
    findings instead of looping again.
-8. Only after review, report back to the user: what changed, which files, the
-   quality gate's baseline and final results, and the merged review findings.
-   Never describe the squad task as complete when review was not reached.
+8. If and only if review returns `approved`, dispatch `nf-dev-publisher` with
+   the full user request, every squad-changed file, implementation summaries,
+   the final quality-gate result, and the tribunal verdict and merged findings.
+   It creates a branch, commits only the approved squad-owned changes, pushes
+   it, and opens a draft pull request. Do not publish after `needs changes` or
+   when the two-round review-fix limit ends with outstanding findings.
+9. Only after review and the publishing attempt, report back to the user: what
+   changed, which files, the quality gate's baseline and final results, the
+   merged review findings, and the publisher's branch, commit, push, and draft
+   pull-request result. Never describe the squad task as complete when review
+   was not reached, or as published when the publisher reports `BLOCKED`.
    Any blocker encountered after a squad agent changes a file jumps to step 7
    with the partial artifact and blocker evidence before the final response.
 
@@ -104,3 +113,5 @@ flowchart TD
 - Never skip the quality gate or the review stage, even for a small change.
    A gate failure can block approval, but it cannot suppress tribunal review
    after files have changed.
+- Never dispatch `nf-dev-publisher` before both the final quality gate and the
+   tribunal review approve the artifact.
