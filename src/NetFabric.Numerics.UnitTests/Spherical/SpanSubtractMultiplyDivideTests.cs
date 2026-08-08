@@ -283,4 +283,54 @@ public class SpanVectorSubtractMultiplyDivideTests
         // assert
         source.Should().Equal(expected);
     }
+
+    [Theory]
+    [InlineData(0)]
+    [InlineData(1)]
+    [InlineData(2)]
+    [InlineData(3)]
+    public void Value_Operation_With_Undersized_Destination_Should_Throw_And_Not_Modify_Destination(int operation)
+    {
+        // arrange
+        var source = new[]
+        {
+            new Vector<Degrees, double>(10.0, new Angle<Degrees, double>(20.0), new Angle<Degrees, double>(30.0)),
+            new Vector<Degrees, double>(40.0, new Angle<Degrees, double>(50.0), new Angle<Degrees, double>(60.0)),
+        };
+        var value = new Vector<Degrees, double>(2.0, new Angle<Degrees, double>(3.0), new Angle<Degrees, double>(4.0));
+        var destination = new[] { new Vector<Degrees, double>(1234.0, new Angle<Degrees, double>(5678.0), new Angle<Degrees, double>(9012.0)) };
+        var expected = destination.ToArray();
+
+        // act
+        var act = () => InvokeValueOperation(operation, source, value, destination);
+
+        // assert
+        act.Should().Throw<ArgumentException>();
+        destination.Should().Equal(expected);
+    }
+
+    static void InvokeValueOperation(
+        int operation,
+        Vector<Degrees, double>[] source,
+        Vector<Degrees, double> value,
+        Vector<Degrees, double>[] destination)
+    {
+        switch (operation)
+        {
+            case 0:
+                Vector.Add(source, value, destination);
+                break;
+            case 1:
+                Vector.Subtract(source, value, destination);
+                break;
+            case 2:
+                Vector.Multiply(source, value, destination);
+                break;
+            case 3:
+                Vector.Divide(source, value, destination);
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(operation));
+        }
+    }
 }

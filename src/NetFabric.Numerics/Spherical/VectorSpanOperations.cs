@@ -11,7 +11,15 @@ public static partial class Vector
     public static void Add<TAngleUnits, T>(ReadOnlySpan<Vector<TAngleUnits, T>> source, Vector<TAngleUnits, T> value, Span<Vector<TAngleUnits, T>> result)
         where TAngleUnits : IAngleUnits
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => Tensor.Add(MemoryMarshal.Cast<Vector<TAngleUnits, T>, T>(source), (value.Radius, value.Azimuth.Value, value.Polar.Value), MemoryMarshal.Cast<Vector<TAngleUnits, T>, T>(result));
+    {
+        if (result.Length < source.Length)
+            throw new ArgumentException("Destination span is too short.", nameof(result));
+        for (var i = 0; i < source.Length; i++)
+            result[i] = new Vector<TAngleUnits, T>(
+                source[i].Radius + value.Radius,
+                new Angle<TAngleUnits, T>(source[i].Azimuth.Value + value.Azimuth.Value),
+                new Angle<TAngleUnits, T>(source[i].Polar.Value + value.Polar.Value));
+    }
 
     /// <summary>
     /// Adds corresponding elements from <paramref name="left"/> and <paramref name="right"/> and stores the result in <paramref name="result"/>.
@@ -22,7 +30,10 @@ public static partial class Vector
     public static void Add<TAngleUnits, T>(ReadOnlySpan<Vector<TAngleUnits, T>> left, ReadOnlySpan<Vector<TAngleUnits, T>> right, Span<Vector<TAngleUnits, T>> result)
         where TAngleUnits : IAngleUnits
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => Tensor.Add(MemoryMarshal.Cast<Vector<TAngleUnits, T>, T>(left), MemoryMarshal.Cast<Vector<TAngleUnits, T>, T>(right), MemoryMarshal.Cast<Vector<TAngleUnits, T>, T>(result));
+        => TensorPrimitives.Add(
+            MemoryMarshal.Cast<Vector<TAngleUnits, T>, T>(left),
+            MemoryMarshal.Cast<Vector<TAngleUnits, T>, T>(right),
+            MemoryMarshal.Cast<Vector<TAngleUnits, T>, T>(result));
 
     /// <summary>
     /// Subtracts a scalar <paramref name="value"/> from each element in <paramref name="source"/> and stores the result in <paramref name="result"/>.
@@ -33,7 +44,15 @@ public static partial class Vector
     public static void Subtract<TAngleUnits, T>(ReadOnlySpan<Vector<TAngleUnits, T>> source, Vector<TAngleUnits, T> value, Span<Vector<TAngleUnits, T>> result)
         where TAngleUnits : IAngleUnits
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => Tensor.Subtract(MemoryMarshal.Cast<Vector<TAngleUnits, T>, T>(source), (value.Radius, value.Azimuth.Value, value.Polar.Value), MemoryMarshal.Cast<Vector<TAngleUnits, T>, T>(result));
+    {
+        if (result.Length < source.Length)
+            throw new ArgumentException("Destination span is too short.", nameof(result));
+        for (var i = 0; i < source.Length; i++)
+            result[i] = new Vector<TAngleUnits, T>(
+                source[i].Radius - value.Radius,
+                new Angle<TAngleUnits, T>(source[i].Azimuth.Value - value.Azimuth.Value),
+                new Angle<TAngleUnits, T>(source[i].Polar.Value - value.Polar.Value));
+    }
 
     /// <summary>
     /// Subtracts corresponding elements of <paramref name="right"/> from <paramref name="left"/> and stores the result in <paramref name="result"/>.
@@ -44,7 +63,10 @@ public static partial class Vector
     public static void Subtract<TAngleUnits, T>(ReadOnlySpan<Vector<TAngleUnits, T>> left, ReadOnlySpan<Vector<TAngleUnits, T>> right, Span<Vector<TAngleUnits, T>> result)
         where TAngleUnits : IAngleUnits
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => Tensor.Subtract(MemoryMarshal.Cast<Vector<TAngleUnits, T>, T>(left), MemoryMarshal.Cast<Vector<TAngleUnits, T>, T>(right), MemoryMarshal.Cast<Vector<TAngleUnits, T>, T>(result));
+        => TensorPrimitives.Subtract(
+            MemoryMarshal.Cast<Vector<TAngleUnits, T>, T>(left),
+            MemoryMarshal.Cast<Vector<TAngleUnits, T>, T>(right),
+            MemoryMarshal.Cast<Vector<TAngleUnits, T>, T>(result));
 
     /// <summary>
     /// Multiplies each element in <paramref name="source"/> by a scalar <paramref name="value"/> and stores the result in <paramref name="result"/>.
@@ -55,7 +77,15 @@ public static partial class Vector
     public static void Multiply<TAngleUnits, T>(ReadOnlySpan<Vector<TAngleUnits, T>> source, Vector<TAngleUnits, T> value, Span<Vector<TAngleUnits, T>> result)
         where TAngleUnits : IAngleUnits
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => Tensor.Multiply(MemoryMarshal.Cast<Vector<TAngleUnits, T>, T>(source), (value.Radius, value.Azimuth.Value, value.Polar.Value), MemoryMarshal.Cast<Vector<TAngleUnits, T>, T>(result));
+    {
+        if (result.Length < source.Length)
+            throw new ArgumentException("Destination span is too short.", nameof(result));
+        for (var i = 0; i < source.Length; i++)
+            result[i] = new Vector<TAngleUnits, T>(
+                source[i].Radius * value.Radius,
+                new Angle<TAngleUnits, T>(source[i].Azimuth.Value * value.Azimuth.Value),
+                new Angle<TAngleUnits, T>(source[i].Polar.Value * value.Polar.Value));
+    }
 
     /// <summary>
     /// Divides each element in <paramref name="source"/> by a scalar <paramref name="value"/> and stores the result in <paramref name="result"/>.
@@ -66,5 +96,13 @@ public static partial class Vector
     public static void Divide<TAngleUnits, T>(ReadOnlySpan<Vector<TAngleUnits, T>> source, Vector<TAngleUnits, T> value, Span<Vector<TAngleUnits, T>> result)
         where TAngleUnits : IAngleUnits
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => Tensor.Divide(MemoryMarshal.Cast<Vector<TAngleUnits, T>, T>(source), (value.Radius, value.Azimuth.Value, value.Polar.Value), MemoryMarshal.Cast<Vector<TAngleUnits, T>, T>(result));
+    {
+        if (result.Length < source.Length)
+            throw new ArgumentException("Destination span is too short.", nameof(result));
+        for (var i = 0; i < source.Length; i++)
+            result[i] = new Vector<TAngleUnits, T>(
+                source[i].Radius / value.Radius,
+                new Angle<TAngleUnits, T>(source[i].Azimuth.Value / value.Azimuth.Value),
+                new Angle<TAngleUnits, T>(source[i].Polar.Value / value.Polar.Value));
+    }
 }

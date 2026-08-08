@@ -558,7 +558,7 @@ public static partial class Vector
 
     public static void Multiply<T>(ReadOnlySpan<Vector<T>> source, T value, Span<Vector<T>> result)
         where T : struct, INumber<T>, IMinMaxValue<T>
-        => Tensor.Multiply(MemoryMarshal.Cast<Vector<T>, T>(source), value, MemoryMarshal.Cast<Vector<T>, T>(result));
+        => TensorPrimitives.Multiply(MemoryMarshal.Cast<Vector<T>, T>(source), value, MemoryMarshal.Cast<Vector<T>, T>(result));
 
     /// <summary>
     /// Divides each coordinate of the input Vector by a scalar value and returns the result as a new Vector.
@@ -579,7 +579,7 @@ public static partial class Vector
 
     public static void Divide<T>(ReadOnlySpan<Vector<T>> source, T value, Span<Vector<T>> result)
         where T : struct, INumber<T>, IMinMaxValue<T>
-        => Tensor.Divide(MemoryMarshal.Cast<Vector<T>, T>(source), value, MemoryMarshal.Cast<Vector<T>, T>(result));
+        => TensorPrimitives.Divide(MemoryMarshal.Cast<Vector<T>, T>(source), value, MemoryMarshal.Cast<Vector<T>, T>(result));
 
     #endregion
 

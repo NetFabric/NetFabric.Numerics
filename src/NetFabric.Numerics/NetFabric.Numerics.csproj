@@ -18,6 +18,7 @@
   <ItemGroup>
     <Using Include="System.Collections" />
     <Using Include="System.Numerics" />
+    <Using Include="System.Numerics.Tensors" />
     <Using Include="System.Runtime.CompilerServices" />
     <Using Include="System.Runtime.InteropServices" />
   </ItemGroup>
@@ -33,6 +34,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="System.Numerics.Tensors" />
   </ItemGroup>
 
   <ItemGroup>
