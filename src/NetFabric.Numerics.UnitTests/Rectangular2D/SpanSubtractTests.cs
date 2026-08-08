@@ -1,6 +1,6 @@
-namespace NetFabric.Numerics.Rectangular3D.UnitTests;
+namespace NetFabric.Numerics.Rectangular2D.UnitTests;
 
-public class SpanVectorSubtractMultiplyDivideTests
+public class SpanVectorSubtractTests
 {
     public static TheoryData<Vector<double>[], Vector<double>[], Vector<double>[]> SubtractVectorData
         => new()
@@ -11,19 +11,19 @@ public class SpanVectorSubtractMultiplyDivideTests
                 Array.Empty<Vector<double>>()
             },
             {
-                new[] { new Vector<double>(1.0, 2.0, 3.0) },
-                new[] { new Vector<double>(3.0, 4.0, 5.0) },
-                new[] { new Vector<double>(-2.0, -2.0, -2.0) }
+                new[] { new Vector<double>(1.0, 2.0) },
+                new[] { new Vector<double>(3.0, 4.0) },
+                new[] { new Vector<double>(-2.0, -2.0) }
             },
             {
-                new[] { new Vector<double>(1.0, 2.0, 3.0), new Vector<double>(11.0, 12.0, 13.0) },
-                new[] { new Vector<double>(3.0, 4.0, 5.0), new Vector<double>(2.0, 3.0, 4.0) },
-                new[] { new Vector<double>(-2.0, -2.0, -2.0), new Vector<double>(9.0, 9.0, 9.0) }
+                new[] { new Vector<double>(1.0, 2.0), new Vector<double>(11.0, 12.0) },
+                new[] { new Vector<double>(3.0, 4.0), new Vector<double>(2.0, 3.0) },
+                new[] { new Vector<double>(-2.0, -2.0), new Vector<double>(9.0, 9.0) }
             },
             {
-                Enumerable.Range(0, 97).Select(value => new Vector<double>(value + 10.0, value - 5.0, value + 2.0)).ToArray(),
-                Enumerable.Range(0, 97).Select(value => new Vector<double>(value * 0.5, -value, value - 3.0)).ToArray(),
-                Enumerable.Range(0, 97).Select(value => new Vector<double>((value + 10.0) - (value * 0.5), (value - 5.0) + value, 5.0)).ToArray()
+                Enumerable.Range(0, 97).Select(value => new Vector<double>(value + 10.0, value - 5.0)).ToArray(),
+                Enumerable.Range(0, 97).Select(value => new Vector<double>(value * 0.5, -value)).ToArray(),
+                Enumerable.Range(0, 97).Select(value => new Vector<double>((value + 10.0) - (value * 0.5), (value - 5.0) + value)).ToArray()
             },
         };
 
@@ -46,5 +46,4 @@ public class SpanVectorSubtractMultiplyDivideTests
 
         left.Should().Equal(expected);
     }
-
 }
