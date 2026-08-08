@@ -10,8 +10,7 @@ public static partial class Vector
     {
         if (result.Length < angles.Length)
             throw new ArgumentException("Destination span is too short.", nameof(result));
-        for (var i = 0; i < angles.Length; i++)
-            result[i] = new Vector<T>(angles[i].X + value.X, angles[i].Y + value.Y, angles[i].Z + value.Z);
+        TensorPrimitives.Add<Vector<T>>(angles, value, result);
     }
 
     /// <summary>
@@ -22,10 +21,7 @@ public static partial class Vector
     {
         if (result.Length < left.Length)
             throw new ArgumentException("Destination span is too short.", nameof(result));
-        TensorPrimitives.Add(
-            MemoryMarshal.Cast<Vector<T>, T>(left),
-            MemoryMarshal.Cast<Vector<T>, T>(right),
-            MemoryMarshal.Cast<Vector<T>, T>(result));
+        TensorPrimitives.Add<Vector<T>>(left, right, result);
     }
 
     /// <summary>
@@ -36,8 +32,7 @@ public static partial class Vector
     {
         if (result.Length < angles.Length)
             throw new ArgumentException("Destination span is too short.", nameof(result));
-        for (var i = 0; i < angles.Length; i++)
-            result[i] = new Vector<T>(angles[i].X - value.X, angles[i].Y - value.Y, angles[i].Z - value.Z);
+        TensorPrimitives.Subtract<Vector<T>>(angles, value, result);
     }
 
     /// <summary>
@@ -48,10 +43,7 @@ public static partial class Vector
     {
         if (result.Length < left.Length)
             throw new ArgumentException("Destination span is too short.", nameof(result));
-        TensorPrimitives.Subtract(
-            MemoryMarshal.Cast<Vector<T>, T>(left),
-            MemoryMarshal.Cast<Vector<T>, T>(right),
-            MemoryMarshal.Cast<Vector<T>, T>(result));
+        TensorPrimitives.Subtract<Vector<T>>(left, right, result);
     }
 
     /// <summary>
