@@ -20,8 +20,8 @@ flowchart TD
    C --> BQ[quality-gate baseline snapshot]
    BQ --> P[nf-dev-planner]
    P --> T["nf-dev-test-implementer (parallel per plan, AND join)"]
-   T -->|RED established| I["nf-dev-implementer (parallel per plan, AND join)"]
-    I --> QG[nf-dev-quality-gate]
+   T -->|new: RED; existing: validated| I["nf-dev-implementer (parallel per plan, AND join)"]
+   I --> QG[nf-dev-quality-gate]
    QG -->|test defect, up to 3 attempts| TR["nf-dev-test-implementer (repair mode)"]
    TR -->|tests pass| QG
    TR -->|production defect exposed| I
@@ -62,15 +62,19 @@ flowchart TD
 4. Dispatch `nf-dev-test-implementer` once per ready test subtask. Dispatch
    independent test subtasks in parallel and wait for all of them (AND join).
    Each prompt must contain the full request, full plan, and assigned test
-   subtask. Do not proceed unless every test subtask reports `RED established`.
-   If a test agent reports `RED blocked`, stop before production work. When it
-   changed a file, dispatch mandatory review with the partial artifact and
-   blocker first; when it changed nothing, report the pre-edit blocker.
+   subtask, including its `new test` or `existing test` classification. Use
+   `initial new test` or `initial existing test` mode accordingly. Require `RED
+   established` only for new tests. For existing tests, require `EXISTING TESTS
+   VALIDATED`; their focused run may remain GREEN or naturally be RED. If a
+   test agent reports `RED blocked` or `EXISTING TEST VALIDATION BLOCKED`, stop
+   before production work. When it changed a file, dispatch mandatory review
+   with the partial artifact and blocker first; when it changed nothing,
+   report the pre-edit blocker.
 5. Dispatch `nf-dev-implementer` for each implementation subtask only after
-   its corresponding test subtask established RED. Include the full request,
-   full plan, test-agent output, and assigned implementation subtask. Dispatch
-   independent implementation subtasks in parallel and wait for all of them
-   (AND join).
+   its corresponding new test established RED or its existing tests were
+   validated. Include the full request, full plan, test-agent output, and
+   assigned implementation subtask. Dispatch independent implementation
+   subtasks in parallel and wait for all of them (AND join).
 6. Dispatch `nf-dev-quality-gate` in `final` mode with the baseline snapshot
    and every squad-changed file. A `PASS` or `BASELINE ONLY` result proceeds
    directly to review. For `REGRESSION`, route test-code defects to
@@ -108,8 +112,9 @@ flowchart TD
   exploration to the specialists.
 - Never use `bash` after the CBM readiness preflight; all later commands belong
    to delegated agents.
-- Never dispatch production implementation before its corresponding test
-   subtask has established RED.
+- Never dispatch production implementation before its corresponding new test
+   has established RED or its existing tests have been validated for
+   correctness.
 - Never skip the quality gate or the review stage, even for a small change.
    A gate failure can block approval, but it cannot suppress tribunal review
    after files have changed.
