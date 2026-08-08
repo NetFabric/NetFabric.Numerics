@@ -16,7 +16,7 @@ Strongly-typed angle representation. Core types:
 
 - Both the unit type and the numeric type must always be parameterized — avoid hardcoding either.
 - `AngleReduced<TUnits, T>` is only produced by `Angle.Reduce()`; never construct it directly without calling `Reduce` first.
-- Span operations (`AngleSpanOperations.cs`) use `NetFabric.Numerics.Tensors` for SIMD acceleration — keep tensor operations in that file.
+- Span operations (`AngleSpanOperations.cs`) use `System.Numerics.Tensors.TensorPrimitives` for SIMD acceleration — keep tensor operations in that file.
 - Trigonometry helpers (`AngleTrigonometry.cs`) delegate to the static methods on `T` (e.g., `T.Sin`) — do not add `Math`/`MathF` calls.
 
 ## Test project

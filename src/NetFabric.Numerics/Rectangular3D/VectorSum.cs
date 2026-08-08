@@ -66,7 +66,18 @@ public static partial class Vector
     public static Vector<T> Sum<T>(this ReadOnlySpan<Vector<T>> source)
         where T : struct, INumber<T>, IMinMaxValue<T>
     {
-        (var sumX, var sumY, var sumZ) = Tensor.SumTriplets(MemoryMarshal.Cast<Vector<T>, T>(source));
+        var sumX = T.Zero;
+        var sumY = T.Zero;
+        var sumZ = T.Zero;
+        foreach (var v in source)
+        {
+            checked
+            {
+                sumX += v.X;
+                sumY += v.Y;
+                sumZ += v.Z;
+            }
+        }
         return new Vector<T>(sumX, sumY, sumZ);
     }
 }

@@ -64,5 +64,12 @@ public static partial class Angle
     public static Angle<TUnits, T> Sum<TUnits, T>(this ReadOnlySpan<Angle<TUnits, T>> source)
         where TUnits : IAngleUnits
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
-        => new(Tensor.Sum(MemoryMarshal.Cast<Angle<TUnits, T>, T>(source)));
+    {
+        var sum = T.Zero;
+        foreach (ref readonly var angle in MemoryMarshal.Cast<Angle<TUnits, T>, T>(source))
+        {
+            checked { sum += angle; }
+        }
+        return new(sum);
+    }
 }

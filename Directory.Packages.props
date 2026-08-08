@@ -13,7 +13,7 @@
     <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="8.0.0" />
     <PackageVersion Include="NetFabric" Version="1.5.0" />
     <PackageVersion Include="NetFabric.Hyperlinq.Analyzer" Version="2.3.0" />
-    <PackageVersion Include="NetFabric.Numerics.Tensors" Version="1.1.0" />
+    <PackageVersion Include="System.Numerics.Tensors" Version="9.0.0" />
     <PackageVersion Include="xunit" Version="2.6.5" />
     <PackageVersion Include="xunit.runner.visualstudio" Version="2.5.6" />
   </ItemGroup>

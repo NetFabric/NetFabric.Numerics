@@ -68,7 +68,16 @@ public static partial class Vector
         where TAngleUnits : IAngleUnits
         where T : struct, IFloatingPoint<T>, IMinMaxValue<T>
     {
-        (var sumRadius, var sumAzimuth) = Tensor.SumPairs(MemoryMarshal.Cast<Vector<TAngleUnits, T>, T>(source));
+        var sumRadius = T.Zero;
+        var sumAzimuth = T.Zero;
+        foreach (var v in source)
+        {
+            checked
+            {
+                sumRadius += v.Radius;
+                sumAzimuth += v.Azimuth.Value;
+            }
+        }
         return new Vector<TAngleUnits, T>(sumRadius, new Angle<TAngleUnits, T>(sumAzimuth));
     }
 }
