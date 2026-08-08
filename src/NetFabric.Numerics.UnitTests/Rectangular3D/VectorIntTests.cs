@@ -42,7 +42,7 @@ public class VectorIntTests
         var result = left + right;
 
         // assert
-        result.GetType().Should().Be(typeof(Vector<int>));
+        result.GetType().Should().Be<Vector<int>>();
         result.X.Should().Be((int)expected.X);
         result.Y.Should().Be((int)expected.Y);
         result.Z.Should().Be((int)expected.Z);

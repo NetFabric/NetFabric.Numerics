@@ -40,7 +40,7 @@ public class VectorDoubleTests
         var result = left + right;
 
         // assert
-        result.GetType().Should().Be(typeof(Vector<Degrees, double>));
+        result.GetType().Should().Be<Vector<Degrees, double>>();
         result.Should().Be(expected);
     }
 }

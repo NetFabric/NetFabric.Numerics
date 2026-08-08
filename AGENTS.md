@@ -40,8 +40,8 @@ dotnet run -c Release --project src/NetFabric.Numerics.Benchmarks
 ## Code style
 
 - Follow the root [.editorconfig](.editorconfig); apply fixes with `dotnet format NetFabric.Numerics.slnx`.
-- Use C# 12 and target `net8.0`; nullable reference types and implicit usings are enabled.
-- Nullable warnings are errors. Resolve diagnostics rather than suppressing them.
+- Use the latest C# version supported by the pinned .NET 10 SDK and target `net8.0`; nullable reference types and implicit usings are enabled.
+- All compiler and analyzer warnings are errors. Resolve diagnostics rather than suppressing them.
 - Constrain generic numeric algorithms with `System.Numerics` interfaces such as `INumber<T>` and `IFloatingPoint<T>`.
 - Prefer static abstract interface members and the numeric type's static methods over type-specific overloads or `Math`/`MathF`.
 - Add shared project-wide namespaces as `<Using>` items in the owning project file.

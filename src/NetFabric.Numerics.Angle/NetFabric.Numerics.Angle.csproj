@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <Title>NetFabric.Numerics.Angle</Title>
-    <TargetFrameworks>net8.0</TargetFrameworks>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Description>
       A strongly-typed representation of an angle.
@@ -18,19 +17,12 @@
     <PackageReleaseNotes>
     </PackageReleaseNotes>
     <RootNamespace>NetFabric.Numerics</RootNamespace>
-    <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    <IncludeSymbols>true</IncludeSymbols>
-    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
 
   <ItemGroup>
     <Using Include="System.Numerics" />
     <Using Include="System.Runtime.CompilerServices" />
   </ItemGroup>
-
-  <PropertyGroup>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-  </PropertyGroup>
 
   <ItemGroup>
     <None Include="..\..\Icon.png" Pack="true" PackagePath="" />
@@ -41,10 +33,6 @@
   <ItemGroup>
     <PackageReference Include="NetFabric" />
     <PackageReference Include="NetFabric.Numerics.Tensors" />
-    <PackageReference Include="Microsoft.SourceLink.GitHub">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
     <PackageReference Include="NetFabric.Hyperlinq.Analyzer">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

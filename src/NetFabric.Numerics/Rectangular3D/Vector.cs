@@ -335,7 +335,7 @@ public readonly record struct Vector<T>(T X, T Y, T Z)
     /// </summary>
     /// <returns>A string representation of the vector.</returns>
     public readonly override string ToString()
-        => ToString(null);
+        => ToString(null, CultureInfo.CurrentCulture);
 
     /// <summary>
     /// Converts the vector to its string representation using the specified format and format provider.

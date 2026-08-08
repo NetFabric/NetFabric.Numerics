@@ -40,7 +40,7 @@ public class VectorFloatTests
         var result = left + right;
 
         // assert
-        result.GetType().Should().Be(typeof(Vector<Degrees, float>));
+        result.GetType().Should().Be<Vector<Degrees, float>>();
         result.Radius.Should().Be(expected.Radius);
         result.Azimuth.Should().Be(expected.Azimuth);
     }

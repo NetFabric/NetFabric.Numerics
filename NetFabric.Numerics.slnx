@@ -13,12 +13,17 @@
     <File Path="docs/articles/toc.yml" />
   </Folder>
   <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path=".gitattributes" />
     <File Path=".gitignore" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Build.targets" />
+    <File Path="Directory.Packages.props" />
+    <File Path="global.json" />
     <File Path="Icon.png" />
     <File Path="LICENSE" />
+    <File Path="NuGet.config" />
     <File Path="README.md" />
-    <File Path="src/Directory.Build.props" />
-    <File Path="Directory.Packages.props" />
   </Folder>
   <Project Path="src/NetFabric.Numerics.Angle.UnitTests/NetFabric.Numerics.Angle.UnitTests.csproj" />
   <Project Path="src/NetFabric.Numerics.Angle/NetFabric.Numerics.Angle.csproj" />

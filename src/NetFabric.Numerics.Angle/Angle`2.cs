@@ -152,7 +152,7 @@ public readonly struct Angle<TUnits, T>
     /// </summary>
     /// <param name="left">The first angle to compare.</param>
     /// <param name="right">The second angle to compare.</param>
-    /// <returns>true if the two angles are equal, false otherwise.returns>
+    /// <returns>true if the two angles are equal, false otherwise.</returns>
     /// <remarks>
     /// The method compares the numerical values of the <paramref name="left"/> and <paramref name="right"/> angles to determine their equality.
     /// </remarks>

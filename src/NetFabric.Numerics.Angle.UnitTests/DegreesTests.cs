@@ -21,7 +21,7 @@ public class DegreesTests
         units.Straight.Should().Be(Degrees.Straight);
         units.Full.Should().Be(Degrees.Full);
         value.Should().Be(Degrees.Right);
-        valueType.Should().Be(typeof(float));
+        valueType.Should().Be<float>();
     }
 
     [Fact]

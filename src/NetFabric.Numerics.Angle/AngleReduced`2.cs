@@ -12,7 +12,7 @@ namespace NetFabric.Numerics;
 /// <para>
 /// The <see cref="AngleReduced{TUnits,T}"/> struct provides a generic representation of a reduced angle value with a specific numeric type and measurement units.
 /// Unlike the <see cref="Angle{TUnits,T}"/> struct, which allows any angle value, the <see cref="AngleReduced{TUnits,T}"/> struct represents angles in their reduced form.
-/// This means that the angle value is always within a specific range, between <see cref="TUnits.Zero"/> and <see cref="TUnits.Full"/>.
+/// This means that the angle value is always within a specific range, between <c>TUnits.Zero</c> and <c>TUnits.Full</c>.
 /// </para>
 /// <para>
 /// The struct supports various mathematical operations such as addition, subtraction, multiplication, division, and trigonometric functions,

@@ -25,6 +25,7 @@ public readonly record struct Point<TDatum, TAngleUnits, T>(Angle<TAngleUnits, T
     /// Creates an instance of the current type from a value, 
     /// throwing an overflow exception for any values that fall outside the representable range of the current type.
     /// </summary>
+    /// <typeparam name="TDatumOther">The datum of <paramref name="point"/>.</typeparam>
     /// <typeparam name="TOther">The type of the components of <paramref name="point"/>.</typeparam>
     /// <param name="point">The value which is used to create the instance of <see cref="Point{TDatum, TAngleUnits, TAngle}"/></param>
     /// <returns>An instance of <see cref="Point{TDatum, TAngleUnits, TAngle}"/> created from <paramref name="point" />.</returns>
@@ -42,6 +43,7 @@ public readonly record struct Point<TDatum, TAngleUnits, T>(Angle<TAngleUnits, T
     /// Creates an instance of the current type from a value, 
     /// saturating any values that fall outside the representable range of the current type.
     /// </summary>
+    /// <typeparam name="TDatumOther">The datum of <paramref name="point"/>.</typeparam>
     /// <typeparam name="TOther">The type of the components of <paramref name="point"/>.</typeparam>
     /// <param name="point">The value which is used to create the instance of <see cref="Point{TDatum, TAngleUnits, TAngle}"/></param>
     /// <returns>An instance of <see cref="Point{TDatum, TAngleUnits, TAngle}"/> created from <paramref name="point" />.</returns>
@@ -59,6 +61,7 @@ public readonly record struct Point<TDatum, TAngleUnits, T>(Angle<TAngleUnits, T
     /// Creates an instance of the current type from a value, 
     /// truncating any values that fall outside the representable range of the current type.
     /// </summary>
+    /// <typeparam name="TDatumOther">The datum of <paramref name="point"/>.</typeparam>
     /// <typeparam name="TOther">The type of the components of <paramref name="point"/>.</typeparam>
     /// <param name="point">The value which is used to create the instance of <see cref="Point{TDatum, TAngleUnits, TAngle}"/></param>
     /// <returns>An instance of <see cref="Point{TDatum, TAngleUnits, TAngle}"/> created from <paramref name="point" />.</returns>

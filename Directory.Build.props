@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Company>NetFabric</Company>
+    <Authors>Antao Almada</Authors>
+    <Copyright>Copyright 2023-2024 Antao Almada</Copyright>
+    <LangVersion>latest</LangVersion>
+    <Features>strict</Features>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <Deterministic>true</Deterministic>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <AnalysisLevel>latest</AnalysisLevel>
+    <AnalysisMode>Recommended</AnalysisMode>
+    <RepositoryUrl>https://github.com/NetFabric/NetFabric.Numerics</RepositoryUrl>
+    <DebugType>portable</DebugType>
+    <ContinuousIntegrationBuild Condition="'$(CI)' == 'true' OR '$(TF_BUILD)' == 'true'">true</ContinuousIntegrationBuild>
+  </PropertyGroup>
+</Project>

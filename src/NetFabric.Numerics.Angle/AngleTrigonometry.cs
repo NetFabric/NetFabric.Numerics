@@ -8,7 +8,7 @@ public static partial class Angle
     /// <typeparam name="T">The floating point type used internally by the returned angle.</typeparam>
     /// <param name="cos">The cosine value of the angle.</param>
     /// <exception cref="System.ArgumentOutOfRangeException">
-    /// Thrown when the provided <paramref name="sin"/> value is outside the range [-1, 1].
+    /// Thrown when the provided <paramref name="cos"/> value is outside the range [-1, 1].
     /// </exception>
     /// <returns>The angle in radians whose cosine is equal to the given value.</returns>
     /// <remarks>

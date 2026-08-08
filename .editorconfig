@@ -376,3 +376,46 @@ dotnet_naming_style.s_camelcase.required_suffix =
 dotnet_naming_style.s_camelcase.word_separator = 
 dotnet_naming_style.s_camelcase.capitalization = camel_case
 
+# Static members on generic types are central to the generic-math API design.
+[src/NetFabric.Numerics/**/*.cs]
+dotnet_diagnostic.CA1000.severity = none
+
+[src/NetFabric.Numerics/*.cs]
+dotnet_diagnostic.CA1000.severity = none
+
+# These compatibility types intentionally remain in the global namespace.
+[src/NetFabric.Numerics.Angle/AngleUnits.cs]
+dotnet_diagnostic.CA1050.severity = none
+
+[src/NetFabric.Numerics.Angle/**/*.cs]
+dotnet_diagnostic.CA1000.severity = none
+
+[src/NetFabric.Numerics.Angle/*.cs]
+dotnet_diagnostic.CA1000.severity = none
+
+[src/NetFabric.Numerics.Geodesy/**/*.cs]
+dotnet_diagnostic.CA1000.severity = none
+
+[src/NetFabric.Numerics.Geodesy/*.cs]
+dotnet_diagnostic.CA1000.severity = none
+
+# Test names use underscores to separate the operation, scenario, and outcome.
+[src/NetFabric.Numerics*.UnitTests/**/*.cs]
+dotnet_diagnostic.CA1707.severity = none
+
+[src/NetFabric.Numerics*.UnitTests/*.cs]
+dotnet_diagnostic.CA1707.severity = none
+
+# These tests deliberately exercise members through geometric interfaces.
+[src/NetFabric.Numerics*.UnitTests/**/PointTests.cs]
+dotnet_diagnostic.CA1859.severity = none
+
+# Benchmark names encode the measured type and implementation dimensions.
+[src/NetFabric.Numerics.Benchmarks/**/*.cs]
+dotnet_diagnostic.CA1707.severity = none
+dotnet_diagnostic.CA1720.severity = none
+
+[src/NetFabric.Numerics.Benchmarks/*.cs]
+dotnet_diagnostic.CA1707.severity = none
+dotnet_diagnostic.CA1720.severity = none
+
