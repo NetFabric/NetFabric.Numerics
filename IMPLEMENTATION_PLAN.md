@@ -157,6 +157,82 @@ followed by all new work:
     performance-sensitive generic-math code per this repo's stated design
     goals.
 
+### Core abstraction follow-up
+
+- **`IVector<TSelf, TCoordinateSystem, T>` promises a natural ordering that
+    is inconsistent with vector equality.** The four vector families use
+    component equality but implement `IComparable<TSelf>`, relational
+    operators, and `Vector.Compare` by magnitude. Distinct vectors with the
+    same magnitude, such as `(3, 4)` and `(4, 3)`, therefore compare as zero
+    while `Equals` returns `false`. This can discard values in sorted
+    collections and conflicts with the current XML documentation that says a
+    zero comparison means the vectors are equal. Affected files are
+    `Rectangular2D/Vector.cs`, `Rectangular3D/Vector.cs`, `Polar/Vector.cs`,
+    and `Spherical/Vector.cs`.
+- **Core-interface maintenance is needed.** `CoordinateSystem<T>` has a
+    private constructor and cannot be derived, so it should be `sealed`.
+    `IGeometricBase<TSelf, TCoordinateSystem>.IsZero` incorrectly refers to a
+    "zero vector" even though points implement the interface. The
+    `ICoordinateSystem.Coordinates` XML docs name `IReadOnlyCollection` while
+    the actual contract is `IReadOnlyList<Coordinate>`.
+- **Shared abstraction behavior lacks direct test coverage.** Coordinate
+    metadata tests cover points in every coordinate family, but no equivalent
+    tests exercise vectors through `IGeometricBase`. There are also no tests
+    for vector comparison semantics, including equal-magnitude but distinct
+    values.
+
+## Deferred stage — Core interface contract audit follow-up
+
+Resolve gaps 15–17 after choosing the intended public ordering semantics for
+vectors. This is a breaking public-contract decision and must not be folded
+into an unrelated feature change.
+
+### Decision Required
+
+Choose one of these public contracts before implementation:
+
+| Option | Contract | Recommendation |
+| --- | --- | --- |
+| A | Remove `IComparable`, `IComparable<TSelf>`, `IComparisonOperators`, and relational operators from `IVector`; retain an explicit `Vector.CompareMagnitude` helper. | Preferred: vectors have no natural total order, and magnitude is a distinct operation. |
+| B | Keep ordering, but make `CompareTo(x) == 0` imply `Equals(x)` by applying a documented deterministic component tie-breaker after magnitude. | Only use if sorting vectors is a required public workflow. |
+
+### Acceptance Criteria
+
+- The selected contract is applied consistently to rectangular 2D/3D, polar,
+  and spherical vectors, their static `Vector.Compare` helpers, and XML docs.
+- Tests cover a pair of distinct equal-magnitude vectors and the expected
+  equality, comparison, and relational behavior under the selected contract.
+- Every coordinate family has a vector coordinate-metadata test through
+  `IGeometricBase`, matching the existing point coverage.
+- `CoordinateSystem<T>` is sealed, and the two interface-documentation
+  corrections are applied.
+- Run `dotnet test src/NetFabric.Numerics.UnitTests/NetFabric.Numerics.UnitTests.csproj -c Release` and the repository format/build/test gates.
+
+### Squad Prompt
+
+```text
+Implement the deferred core-interface follow-up in IMPLEMENTATION_PLAN.md.
+
+First, decide and document the vector ordering contract. Prefer removing
+IComparable, IComparable<TSelf>, IComparisonOperators, and relational
+operators from IVector<TSelf, TCoordinateSystem, T>, keeping an explicit
+Vector.CompareMagnitude helper, because vectors do not have a natural total
+order. If preserving ordering is required for compatibility, instead define a
+deterministic component tie-breaker so CompareTo(x) == 0 implies Equals(x).
+
+Apply the chosen contract consistently to Rectangular2D, Rectangular3D,
+Polar, and Spherical vectors, including their static comparison helpers and
+XML documentation. Add tests for distinct vectors with equal magnitude.
+
+Add vector coordinate-metadata tests through IGeometricBase for every
+coordinate family. Seal CoordinateSystem<T>, correct the IsZero XML docs so
+they apply to all geometric values, and make ICoordinateSystem.Coordinates
+documentation consistently describe IReadOnlyList<Coordinate>.
+
+Use the existing xUnit and FluentAssertions conventions. Run the focused core
+test project and the repository format/build/test gates.
+```
+
 ## Stage 0 — Fix the `Geodetic3.MaxValue` bug and close test-coverage gaps
 
 Fixes gap 1 and gaps 2–5. No new production API — safe to run first and in

@@ -20,7 +20,7 @@ codebase-memory-mcp cli <tool_name> --help   # flags are generated from that too
 
 ## When authoring or editing an agent/skill/prompt
 
-If the target operates on a codebase (reads code, answers "what calls X", maps a diff's blast radius, summarizes architecture, finds dead code, etc.), it must call CBM's CLI instead of `grep`/`ripgrep`/glob-and-read loops. See [references/integration-guide.md](references/integration-guide.md) for which tool to wire in at which stage, and why.
+If the target operates on a codebase (reads code, answers "what calls X", maps a diff's blast radius, summarizes architecture, finds dead code, etc.), it must call CBM's CLI instead of `grep`/`ripgrep`/glob-and-read loops. It must first verify that CBM is installed and that the current project's index is `ready`; if the target is a squad, the orchestrator owns this preflight before delegating any codebase task. See [references/integration-guide.md](references/integration-guide.md) for the required readiness protocol, which tool to wire in at each stage, and why.
 
 ## Quick Reference
 

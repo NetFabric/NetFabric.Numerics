@@ -2,7 +2,7 @@
 
 ## Project overview
 
-NetFabric.Numerics is a multi-package .NET 8 library providing strongly typed angles, points, vectors, quaternions, and geodetic coordinates. It uses C# generic math (`System.Numerics` static abstract interface members) for type-safe, allocation-conscious algorithms across numeric types. See [README.md](README.md) and [docs/](docs/) for user-facing documentation.
+NetFabric.Numerics is a multi-package .NET 8 library for generic, strongly typed coordinate systems. It implements immutable angle, point, vector, quaternion, and geodetic entities; the basic operations for each entity; and conversions between rectangular, polar, spherical, and angle-unit representations. It uses C# generic math (`System.Numerics` static abstract interface members) for type-safe, allocation-conscious algorithms across numeric types. See [README.md](README.md) and [docs/](docs/) for user-facing documentation.
 
 ## Solution structure
 
@@ -19,6 +19,19 @@ NetFabric.Numerics is a multi-package .NET 8 library providing strongly typed an
 | `.agents/skills/` | Domain skills for coding agents; edit only when the task explicitly targets agent skills |
 
 Nested `AGENTS.md` files contain package-specific guidance and override this file for their subtrees.
+
+## Geometry architecture
+
+| Layer | Responsibility |
+| --- | --- |
+| `NetFabric.Numerics.Angle` | Unit-tagged angles, reduction, trigonometry, and degree/radian/gradian/revolution conversion |
+| `NetFabric.Numerics` | Rectangular 2D/3D, polar, and spherical points and vectors; coordinate-system metadata; quaternion operations; numeric and coordinate-system conversions |
+| `NetFabric.Numerics.Geodesy` | Datum- and ellipsoid-aware geodetic coordinates built on the core and angle packages |
+
+- Preserve coordinate-system and angle-unit generic parameters through APIs; do not replace them with untyped numeric values.
+- Model point/vector arithmetic consistently: point minus point produces a vector, while point plus or minus vector produces a point.
+- Keep cross-system conversions in the static helpers for the source coordinate family. Use radians for trigonometric conversions and preserve documented component and angle conventions.
+- Add or update focused tests for every public operation, conversion direction, and generic numeric conversion mode (`CreateChecked`, `CreateSaturating`, and `CreateTruncating`) changed by a task.
 
 ## Setup and quality commands
 
@@ -74,3 +87,16 @@ dotnet test src/NetFabric.Numerics.UnitTests/NetFabric.Numerics.UnitTests.csproj
 
 - Update this file in the same change as build, test, formatter, or repository-layout changes.
 - Keep root guidance shared; put package-specific exceptions in the nearest nested `AGENTS.md`.
+
+<!-- OPENWIKI:START -->
+
+## OpenWiki
+
+This repository has a generated `openwiki/` evidence index. It is optional just-in-time context, not required startup reading.
+
+- Treat source code and tests as authoritative. A brief's unknowns and review items are verification gaps, not automatic requirements.
+- Prefer the narrowest quiet validation that proves the changed behavior. Preserve complete failure output.
+
+The scheduled OpenWiki GitHub Actions workflow refreshes the repository wiki. Do not hand-edit generated OpenWiki pages unless explicitly asked; prefer updating source code/docs and letting OpenWiki regenerate.
+
+<!-- OPENWIKI:END -->

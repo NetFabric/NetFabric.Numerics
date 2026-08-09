@@ -49,7 +49,7 @@ Do NOT modify files.
 
 1. Scope one focused role per agent — read [references/frontmatter-reference.md](references/frontmatter-reference.md) for every field
 2. Write a specific, keyword-dense `description` and a constraint-driven prompt body → [references/writing-style.md](references/writing-style.md) — vague descriptions never get auto-invoked
-3. Restrict `tools:` to the minimum the role needs; strip `edit`/`shell` from orchestrators so they delegate instead of doing the work
+3. Restrict `tools:` to the minimum the role needs; strip `edit` from orchestrators and normally strip `shell` so they delegate. Retain narrowly scoped shell access only for an explicit orchestrator-owned dependency readiness preflight (for example, CBM installation/index verification), and forbid all other shell work in the prompt body
 4. Choose `model:` (and `reasoning-effort:`) using the `model-selection` skill before finalizing frontmatter — never leave it unset on the assumption an inherited default is adequate
 5. For multi-agent squads, adopt a naming prefix and use `user-invocable: false` on internal specialists → [references/delegation-and-squads.md](references/delegation-and-squads.md)
 6. Always set `target: github-copilot` in the frontmatter — the CLI ignores it, but it's needed if the same file is ever opened in VS Code → [references/frontmatter-reference.md](references/frontmatter-reference.md)

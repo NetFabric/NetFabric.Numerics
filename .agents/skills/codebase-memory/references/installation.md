@@ -65,6 +65,19 @@ codebase-memory-mcp cli index_status --project <name>
 
 Reports whether the index is current or stale. A background watcher (`auto_watch`, default `true`) re-indexes incrementally on git-based change detection once a project is registered, so most sessions never need a manual reindex — `index_status` is how you confirm that instead of assuming it. For a fresh clone with no local index yet but a committed team-shared graph artifact (`.codebase-memory/graph.db.zst`), `index_repository` imports that artifact first and only incrementally indexes the local diff — check `index_status` afterward, not before, to see the result.
 
+If the project is absent, stale, or not `ready`, index the current repository
+and then confirm status again:
+
+```bash
+codebase-memory-mcp cli index_repository --repo-path "$PWD" --name <name>
+codebase-memory-mcp cli index_status --project <name>
+```
+
+In a squad, the orchestrator must complete installation and this initial index
+check before dispatching codebase work. Child agents still recheck freshness
+after upstream edits, but they must not be the first line of defense for a
+missing installation.
+
 Before citing "no results found" as evidence of absence (e.g. dead code, no callers), call `check_index_coverage` for the paths in scope — a clean result means only "no recorded gap in the index," not full verification; read any flagged/skipped ranges directly from source before making a negative claim.
 
 ```bash

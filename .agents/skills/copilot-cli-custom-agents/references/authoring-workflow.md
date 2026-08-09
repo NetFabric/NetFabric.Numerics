@@ -53,4 +53,4 @@ Naming: lowercase, hyphenated; filename → agent ID (`react-reviewer.agent.md` 
 - Restart the CLI after any edit.
 - Ask a question that should trigger auto-delegation and confirm the right agent name appears in the timeline/statusline (agent name is visible in the footer and toggleable via `/statusline`).
 - Ask a question that should *not* trigger it, to catch an over-broad description.
-- For orchestrators, confirm they dispatch via `task` rather than doing the work inline — if they don't, strip `edit`/`shell`/`bash` from their `tools:`.
+- For orchestrators, confirm they dispatch implementation via `task` rather than doing the work inline. Always strip `edit`; strip `shell`/`bash` unless the prompt defines a narrow orchestrator-owned dependency readiness preflight, in which case verify shell use is explicitly forbidden after that preflight.

@@ -6,7 +6,38 @@ When you create or edit an agent, subagent, skill, or prompt that operates on a 
 
 A single graph query answers what would otherwise take a cascade of `grep → read file → grep again → read more files`. `search_graph`/`query_graph` return structured, pre-resolved relationships (import-aware, type-inferred call edges) that a text search cannot reconstruct — e.g. "who calls this function across packages" or "what does this route handler call" is one `trace_path`/`query_graph` call versus dozens of file reads.
 
-Before wiring in CBM, confirm it applies: [references/installation.md](references/installation.md) covers checking install state and index freshness. A stale or absent index still requires `index_repository` first — CBM cannot answer structural questions about code it hasn't parsed.
+Before wiring in CBM, confirm it applies: [installation.md](installation.md) covers checking install state and index freshness. A stale or absent index still requires `index_repository` first — CBM cannot answer structural questions about code it hasn't parsed.
+
+## Mandatory readiness owner and preflight
+
+The integrated agent must prove CBM readiness before its first codebase query.
+For a multi-agent squad, the orchestrator owns this preflight and completes it
+before dispatching the planner or any specialist; do not assume each child will
+independently notice a missing binary. Give that orchestrator narrowly scoped
+shell access for this preflight even when it delegates every other command.
+
+1. Run `command -v codebase-memory-mcp && codebase-memory-mcp --version`.
+2. If absent, install it using the platform command in
+   [installation.md](installation.md), update `PATH` when needed, and rerun the
+   version check. Do not continue if installation fails.
+3. Run `codebase-memory-mcp cli index_status --project <project-name>`.
+4. If the project is absent, stale, or not `ready`, run:
+
+   ```bash
+   codebase-memory-mcp cli index_repository \
+     --repo-path "$PWD" \
+     --name <project-name>
+   ```
+
+5. Run `index_status` again and continue only after it reports `ready`.
+6. Pass the successful version and status output into child dispatches. Require
+   actual CBM command output from agents that claim to have used CBM; prompt
+   text mentioning CBM is not usage evidence.
+
+Specialists should recheck `index_status` before structural work because edits
+made by an earlier node can stale the graph. They use the same index-and-recheck
+sequence when needed, but installation remains the orchestrator's responsibility
+in a squad.
 
 ## Per-stage tool selection
 
@@ -29,7 +60,8 @@ Before wiring in CBM, confirm it applies: [references/installation.md](reference
 When an agent/skill/prompt you're writing or editing touches a codebase:
 
 1. State explicitly that CBM's CLI is the required exploration path, not `grep`/`find`/reading files ad hoc.
-2. Have it check `index_status` (and `index_repository` if absent/stale) before querying.
-3. Match the tool to the stage using the table above, narrowest call first (schema/architecture before deep traversal).
-4. Require `check_index_coverage` before any negative claim ("no callers", "dead code", "nothing uses this").
-5. Only fall back to a raw file read/grep for content CBM does not index as a graph relationship (e.g. reading a config value, a comment, or a non-code text file).
+2. Assign the install/index readiness preflight to the integrated agent, or to the orchestrator before delegation when the target is a squad.
+3. Require a successful version check and a final `index_status: ready`; after indexing, always check status again.
+4. Match the tool to the stage using the table above, narrowest call first (schema/architecture before deep traversal).
+5. Require `check_index_coverage` before any negative claim ("no callers", "dead code", "nothing uses this").
+6. Only fall back to a raw file read/grep for content CBM does not index as a graph relationship (e.g. reading a config value, a comment, or a non-code text file).

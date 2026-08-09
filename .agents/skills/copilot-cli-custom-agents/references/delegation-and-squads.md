@@ -13,7 +13,7 @@ flowchart LR
 
 Same routing discipline as skills → write `description` with concrete trigger phrases ("Use for security audits, `seccheck`, vulnerability review requests"), not job titles.
 
-Since v1.0.42 the CLI is more selective about delegating at all — it weighs whether a task is genuinely separable/parallelizable before spinning up a subagent, vs. delegating eagerly. Effect: an orchestrator that still has `edit`/`bash` in its `tools:` will often just do the work itself. **Strip `edit`/`shell`/`bash` from an orchestrator's `tools:`** so it has no option but to delegate.
+Since v1.0.42 the CLI is more selective about delegating at all — it weighs whether a task is genuinely separable/parallelizable before spinning up a subagent, vs. delegating eagerly. Effect: an orchestrator that still has `edit`/`bash` in its `tools:` will often just do the work itself. **Always strip `edit`; normally strip `shell`/`bash` too.** The narrow exception is an orchestrator-owned dependency readiness preflight that must happen before delegation, such as installing CBM and verifying the project index. In that case retain `bash`, enumerate the permitted preflight commands in the prompt, and explicitly forbid shell use afterward.
 
 ## Built-in agents
 

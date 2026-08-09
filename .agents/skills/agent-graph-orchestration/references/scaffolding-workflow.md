@@ -65,10 +65,10 @@ When a node in the design is a review step, treat it as a nested tribunal (see [
 
 A quality gate is not an LLM agent — do not invoke the target harness's agent-authoring skill (`copilot-cli-custom-agents`, `claude-code-custom-agents`, or another harness's equivalent) to author reasoning/prompt content for it. It validates deterministically: it runs existing tools (test runner, linter, type-checker, schema validator, build) and reports pass/fail plus the raw tool output, with no model reasoning about the result. Realize it one of two ways:
 
-1. **Orchestrator-inline step** (preferred): the orchestrator's own prompt body includes an instruction to run the tool directly (e.g. "run `<test command>`; if it exits non-zero, dispatch back to `<squad>-implementer` with the failure output instead of proceeding to the reviewer") — no separate agent file at all.
+1. **Orchestrator-inline step** (preferred): the orchestrator's own prompt body includes an instruction to run the tool directly (e.g. "run `<test command>`; if it introduces a regression, dispatch back to `<squad>-implementer` with the failure output") — no separate agent file at all.
 2. **Minimal wrapper agent** (only when the harness needs every dispatch target to be an agent): author `<squad>-quality-gate` via the harness's agent-authoring skill with `tools:` restricted to exactly the deterministic check tool(s) — no `edit`, and a prompt body limited to "run the tool(s), report pass/fail and the raw output verbatim, do not editorialize or judge quality subjectively."
 
-Either way, wire it between the last implementation node and the adversarial review stage: route a failing quality gate back to the implementer (or planner) rather than forward to the reviewer, and only dispatch to the reviewer once the quality gate passes.
+Either way, wire it between the last implementation node and the adversarial review stage. Capture a pre-edit baseline when repository-wide checks can already fail, distinguish new failure signatures from unchanged baseline failures, and route regressions through a bounded repair loop. After the bound is exhausted, dispatch the mandatory reviewer with the unresolved gate evidence; a quality gate may block approval or publishing, but must not suppress review after implementation.
 
 ## 7. Scaffold a publisher node (if the design calls for one)
 
@@ -93,7 +93,7 @@ Every subagent dispatch starts with empty context — the orchestrator's own con
 5. If the design has multiple implementer nodes, confirm independent ones are actually dispatched in parallel (not serialized by default) and that the quality gate/reviewer dispatch waits on all of them (AND join)
 6. For cyclic graphs, confirm the iteration bound actually terminates the loop
 7. For tribunal review nodes, confirm the two reviewers' `model:` values resolve to genuinely different providers, not just different model names on the same provider
-8. For a quality gate, confirm it spends no reasoning/tokens (tool-execution only) and runs before the adversarial reviewer, not instead of it
+8. For a quality gate, confirm it spends no reasoning/tokens (tool-execution only), runs before the adversarial reviewer, uses a baseline when incoming failures are possible, and cannot terminate an implementation run before mandatory review
 9. If a publisher is present, confirm it only dispatches after the quality gate (if any) and the adversarial review both pass, and that its `tools:` are scoped to its concrete post-review actions (PR, ticket update, deploy) with no dispatch tool unless it genuinely delegates
 10. Confirm every node has an explicit `model:` ([model-selection.md](model-selection.md)); no node's cost tier exceeds the orchestrator's, unless a tribunal-diversity exception was deliberately surfaced to the user
 11. Check the target harness's agent picker (e.g. Copilot CLI's `/agent`) and confirm only the orchestrator appears there — every other node must be absent, to whatever degree the harness supports that distinction (see [harness-implementation.md](harness-implementation.md#copilot-cli-vs-claude-code-what-doesnt-carry-over) for harnesses like Claude Code with no enforced equivalent)
